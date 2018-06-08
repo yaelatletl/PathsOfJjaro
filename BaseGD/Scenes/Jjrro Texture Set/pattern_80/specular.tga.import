@@ -1,0 +1,33 @@
+[remap]
+
+importer="texture"
+type="StreamTexture"
+path.s3tc="res://.import/specular.tga-ae52ea6c160af21b555c222973a26473.s3tc.stex"
+path.etc2="res://.import/specular.tga-ae52ea6c160af21b555c222973a26473.etc2.stex"
+
+[deps]
+
+source_file="res://BaseGD/Scenes/Jjrro Texture Set/pattern_80/specular.tga"
+source_md5="40f7a7ae16762b9bd96f7b4bafae9aa6"
+
+dest_files=[ "res://.import/specular.tga-ae52ea6c160af21b555c222973a26473.s3tc.stex", "res://.import/specular.tga-ae52ea6c160af21b555c222973a26473.etc2.stex" ]
+dest_md5="c84beddec17e84acfd4ac223d447a37d"
+
+[params]
+
+compress/mode=2
+compress/lossy_quality=0.7
+compress/hdr_mode=0
+compress/normal_map=0
+flags/repeat=true
+flags/filter=true
+flags/mipmaps=true
+flags/anisotropic=false
+flags/srgb=2
+process/fix_alpha_border=true
+process/premult_alpha=false
+process/HDR_as_SRGB=false
+stream=false
+size_limit=0
+detect_3d=false
+svg/scale=1.0

@@ -1,0 +1,33 @@
+[remap]
+
+importer="texture"
+type="StreamTexture"
+path.s3tc="res://.import/Metalness(Specular).png-f075cfc412bcf2a5574468e565c259db.s3tc.stex"
+path.etc2="res://.import/Metalness(Specular).png-f075cfc412bcf2a5574468e565c259db.etc2.stex"
+
+[deps]
+
+source_file="res://BaseGD/Scenes/Jjrro Texture Set/007/Metalness(Specular).png"
+source_md5="cde0d11d369d4b01ef10a75f64daebd2"
+
+dest_files=[ "res://.import/Metalness(Specular).png-f075cfc412bcf2a5574468e565c259db.s3tc.stex", "res://.import/Metalness(Specular).png-f075cfc412bcf2a5574468e565c259db.etc2.stex" ]
+dest_md5="606e54f5d8a0a24b2fdec11e30c99c75"
+
+[params]
+
+compress/mode=2
+compress/lossy_quality=0.7
+compress/hdr_mode=0
+compress/normal_map=0
+flags/repeat=true
+flags/filter=true
+flags/mipmaps=true
+flags/anisotropic=false
+flags/srgb=2
+process/fix_alpha_border=true
+process/premult_alpha=false
+process/HDR_as_SRGB=false
+stream=false
+size_limit=0
+detect_3d=false
+svg/scale=1.0
