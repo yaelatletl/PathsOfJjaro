@@ -58,6 +58,7 @@ export(float) var view_sensitivity = 5
 ##Physics
 export(float) var grav = 9.8
 var gravity = Vector3(0,-grav,0)
+export var weight = 1
 
 var max_speed = 0.0
 var velocity = Vector3()
@@ -102,7 +103,7 @@ func _physics_process(delta):
 		max_speed=WALKSPEED
 
 
-	linear_velocity += gravity*delta # Apply gravity
+	linear_velocity += gravity*delta/weight # Apply gravity
 
 	var anim = ANIM_FLOOR
 	var up = -gravity.normalized() # (up is against gravity)
