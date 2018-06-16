@@ -1,0 +1,5 @@
+
+*.exe
+*.pck
+*.zip
+export_presets.cfg

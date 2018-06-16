@@ -1,0 +1,33 @@
+[remap]
+
+importer="texture"
+type="StreamTexture"
+path.s3tc="res://.import/TrooperNormal.png-e237e71ccd539beec2e78dbab1557bf6.s3tc.stex"
+path.etc2="res://.import/TrooperNormal.png-e237e71ccd539beec2e78dbab1557bf6.etc2.stex"
+
+[deps]
+
+source_file="res://BaseGD/Characters/Pfhor Trooper/textures/TrooperNormal.png"
+source_md5="ac89b54db6acf42ef1eb05331086ffb7"
+
+dest_files=[ "res://.import/TrooperNormal.png-e237e71ccd539beec2e78dbab1557bf6.s3tc.stex", "res://.import/TrooperNormal.png-e237e71ccd539beec2e78dbab1557bf6.etc2.stex" ]
+dest_md5="e0bcc0d9fe030c84b59d29f01684a254"
+
+[params]
+
+compress/mode=2
+compress/lossy_quality=0.7
+compress/hdr_mode=0
+compress/normal_map=1
+flags/repeat=true
+flags/filter=true
+flags/mipmaps=true
+flags/anisotropic=false
+flags/srgb=2
+process/fix_alpha_border=true
+process/premult_alpha=false
+process/HDR_as_SRGB=false
+stream=false
+size_limit=0
+detect_3d=false
+svg/scale=1.0
