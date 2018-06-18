@@ -42,7 +42,7 @@ func set_rotary_min_angle(value):
 func draw_circle_arc(center, radius, angle_from, angle_to, width, color, post_line_color=fill_post_line_color):
 	var total_degrees = angle_to-angle_from
 	var post_line = indicator_line
-	var nb_points = int((total_degrees/270)*80) # Subdivision of the Circular Arc
+	var nb_points = int((total_degrees/270)*1000) # Subdivision of the Circular Arc / Lowest Decimal point for below 0.02 for health and oxygen
 	var points_arc = PoolVector2Array()
 	var post_line_points = PoolVector2Array()
 	if nb_points > 0:
