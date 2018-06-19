@@ -8,13 +8,15 @@ export(int) var Team = 0
 export(bool) var is_worker = false
 export(int) var indifference = 10
 export(float) var smellarea = 5
-
+export(float) var health = 100
+export(float) var speedfactor = 0.4
 #time for timers
 export(int) var timewaiting = 2
 
 
 #Movement Values
 export(bool) var flies = false 
+export(float) var weight = 1
 export(float) var max_speed = 10
 export(int) var turn_speed = 40
 export(float) var accel = 19.0
@@ -22,25 +24,31 @@ export(float) var deaccel = 14.0
 export(bool) var keep_jump_inertia = true
 export(bool) var air_idle_deaccel = false
 export(float) var JumpHeight = 7.0
+export(float) var grav = 9.8
 
 #Globals
+var initialized = false
+var externalinteraction = preload("res://addons/WorldManagement/AI_External_Variables.gd") 
 var on_workstation = false
 var workstation_near = false
 var player_near = false
 var is_on_sight = false
 var visible
+
 var position =Vector3(0,0,0)
 var randposition =Vector3(0,0,0)
 var linear_velocity = Vector3()
-var gravity = Vector3(0,-9.8,0)
+var gravity = Vector3(0,-grav,0)
 var sharp_turn_threshold = 140
 var jump_attempt = false
 var jumping = false
 var globaldelta = 0.0
-const CHAR_SCALE = Vector3(0.3, 0.3, 0.3)
+const CHAR_SCALE = Vector3(1, 1, 1)
 var is_moving = false
 
 func _ready():
+	get_parent().set_script(externalinteraction) #Sets Gravity, Health and other interaction variables
+	get_parent().gravity = gravity
 	$Wait.wait_time = timewaiting
 	$Senses/SmellandHear/CollisionShape.shape.radius = smellarea
 	var parent = get_parent()
@@ -50,11 +58,8 @@ func _ready():
 	
 	if parent is KinematicBody:
 		Spatial_Routine()
-		pass
-	if parent is KinematicBody2D:
-		#Flat_routine()
-		pass
-	pass
+	
+	initialized = true
 
 
 func Spatial_Routine():
@@ -110,23 +115,24 @@ func check_body(object):
 	
 func wander():
 	if workstation_near:
-		Spatial_move_to(position, globaldelta)
+		var vectorpos = (position-get_parent().translation).normalized()
+		Spatial_move_to(vectorpos, globaldelta)
 	else:
 		Spatial_move_to(randposition, globaldelta)
 
 func Spatial_move_to(vector,delta):
 	if not flies:
-		linear_velocity += gravity*delta
+		linear_velocity += gravity*delta/weight
 	
 	var up = -gravity.normalized() # (up is against gravity)
 	var vertical_velocity = up.dot(linear_velocity) # Vertical velocity
 	var horizontal_velocity = linear_velocity - up*vertical_velocity # Horizontal velocity
 	var hdir = horizontal_velocity.normalized() # Horizontal direction
-	var hspeed = horizontal_velocity.length() 
+	var hspeed = horizontal_velocity.length()*speedfactor
 	
 	#get_parent().look_at(vector, Vector3(0,1,0)) #Change to something that turns to the player or something they have to see
 	
-	var target_dir = (vector - vector*vector.dot(up)).normalized()
+	var target_dir = (vector - up*vector.dot(up)).normalized()
 
 	if (get_parent().is_on_floor()):
 		var sharp_turn = hspeed > 0.1 and rad2deg(acos(target_dir.dot(hdir))) > sharp_turn_threshold
@@ -160,9 +166,9 @@ func Spatial_move_to(vector,delta):
 
 		if (hspeed>0):
 			facing_mesh = RAD.adjust_facing(facing_mesh, target_dir, delta, 1.0/hspeed*turn_speed, up)
-		#var m3 = Basis(-facing_mesh, up, -facing_mesh.cross(up).normalized()).scaled(CHAR_SCALE)
+		var m3 = Basis(-facing_mesh, up, -facing_mesh.cross(up).normalized()).scaled(CHAR_SCALE)
 
-		#get_parent().set_transform(Transform(m3, mesh_xform.origin))
+		get_parent().set_transform(Transform(m3, mesh_xform.origin))
 
 		if (not jumping and jump_attempt):
 			vertical_velocity = JumpHeight
@@ -197,6 +203,8 @@ func _process(delta):
 	globaldelta = delta
 	if is_moving:
 		wander()
+	if initialized:
+		gravity = get_parent().gravity
 	
 func new_position():
 	randposition = Vector3(rand_range(-10,10),rand_range(-10,10),rand_range(-10,10))
@@ -208,7 +216,7 @@ func AI_is_seeing():
 			if x == "Workstation" and is_worker:
 				Spatial_move_to(visible.get_collider()._get("global_transform"),globaldelta)
 			else:
-				var WorkPos = visible.get_collider().transform
+				var WorkPos = get_parent().to_global(visible.get_collider().transform)
 				Spatial_move_to(WorkPos, globaldelta)
 				break
 	

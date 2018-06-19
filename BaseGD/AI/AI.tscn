@@ -14,8 +14,11 @@ Team = 0
 is_worker = false
 indifference = 10
 smellarea = 5
+health = 100
+speedfactor = 0.4
 timewaiting = 2
 flies = false
+weight = 1
 max_speed = 10.0
 turn_speed = 40
 accel = 19.0
@@ -23,6 +26,7 @@ deaccel = 14.0
 keep_jump_inertia = true
 air_idle_deaccel = false
 JumpHeight = 7.0
+grav = 9.8
 
 [node name="Wait" type="Timer" parent="." index="0"]
 
