@@ -1,0 +1,33 @@
+[remap]
+
+importer="texture"
+type="StreamTexture"
+path.s3tc="res://.import/glow.png-e17247818d9bafee152c01dfa2fa4ff0.s3tc.stex"
+path.etc2="res://.import/glow.png-e17247818d9bafee152c01dfa2fa4ff0.etc2.stex"
+
+[deps]
+
+source_file="res://BaseGD/Scenes/Main Menu/Terminal/00/glow.png"
+source_md5="861b5b6f7657768956857a22ac040207"
+
+dest_files=[ "res://.import/glow.png-e17247818d9bafee152c01dfa2fa4ff0.s3tc.stex", "res://.import/glow.png-e17247818d9bafee152c01dfa2fa4ff0.etc2.stex" ]
+dest_md5="aed1720d5bea2c7c7429969d1ffb34d0"
+
+[params]
+
+compress/mode=2
+compress/lossy_quality=0.7
+compress/hdr_mode=0
+compress/normal_map=0
+flags/repeat=true
+flags/filter=true
+flags/mipmaps=true
+flags/anisotropic=false
+flags/srgb=1
+process/fix_alpha_border=true
+process/premult_alpha=false
+process/HDR_as_SRGB=false
+stream=false
+size_limit=0
+detect_3d=false
+svg/scale=1.0

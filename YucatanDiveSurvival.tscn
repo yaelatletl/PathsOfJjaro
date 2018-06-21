@@ -1,12 +1,14 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://BaseGD/Scenes/YucatanDive.tscn" type="PackedScene" id=1]
 [ext_resource path="res://BaseGD/Props/palms/palm_bend.mesh" type="ArrayMesh" id=2]
 [ext_resource path="res://BaseGD/Props/palms/palm_trio.mesh" type="ArrayMesh" id=3]
 [ext_resource path="res://BaseGD/Props/palms/palm_dual.mesh" type="ArrayMesh" id=4]
-[ext_resource path="res://BaseGD/pl3d/Player3d.tscn" type="PackedScene" id=5]
-[ext_resource path="res://BaseGD/Characters/SphtKr/SphtKR.tscn" type="PackedScene" id=6]
-[ext_resource path="res://BaseGD/Characters/SphtSlave/SphtSlave.tscn" type="PackedScene" id=7]
+[ext_resource path="res://addons/WorldManagement/GravityArea.gd" type="Script" id=5]
+[ext_resource path="res://addons/WorldManagement/Gravicon.png" type="Texture" id=6]
+[ext_resource path="res://BaseGD/pl3d/Player3d.tscn" type="PackedScene" id=7]
+[ext_resource path="res://BaseGD/Characters/SphtKr/SphtKR.tscn" type="PackedScene" id=8]
+[ext_resource path="res://BaseGD/Characters/SphtSlave/SphtSlave.tscn" type="PackedScene" id=9]
 
 [sub_resource type="MultiMesh" id=1]
 
@@ -44,6 +46,46 @@ mesh = ExtResource( 4 )
 transform_array = PoolVector3Array( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 color_array = PoolColorArray( 0, 0, 0, 1 )
 
+[sub_resource type="BoxShape" id=7]
+
+extents = Vector3( 3.19449, 7.57166, 0.604642 )
+
+[sub_resource type="BoxShape" id=12]
+
+extents = Vector3( 2.38541, 8.00707, 0.713324 )
+
+[sub_resource type="BoxShape" id=13]
+
+extents = Vector3( 1, 10.414, 1.45691 )
+
+[sub_resource type="BoxShape" id=15]
+
+extents = Vector3( 2.55492, 3.66331, 1 )
+
+[sub_resource type="BoxShape" id=8]
+
+extents = Vector3( 2.25214, 3.42708, 0.67682 )
+
+[sub_resource type="BoxShape" id=9]
+
+extents = Vector3( 1, 8.12155, 0.559014 )
+
+[sub_resource type="BoxShape" id=10]
+
+extents = Vector3( 2.02843, 8.31925, 1 )
+
+[sub_resource type="BoxShape" id=6]
+
+extents = Vector3( 1.99412, 5.46081, 0.715214 )
+
+[sub_resource type="BoxShape" id=11]
+
+extents = Vector3( 2.94062, 3.33961, 1 )
+
+[sub_resource type="BoxShape" id=14]
+
+extents = Vector3( 2.22609, 4.84858, 0.493891 )
+
 [sub_resource type="GIProbeData" id=5]
 
 bounds = AABB( -59.4233, -24.0498, -60.4442, 118.847, 48.0996, 120.888 )
@@ -67,6 +109,8 @@ compress = true
 transform = Transform( 0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, 0 )
 
 [node name="Palms" type="Spatial" parent="Scenario" index="1"]
+
+editor/display_folded = true
 
 [node name="MeshInstance" type="MultiMeshInstance" parent="Scenario/Palms" index="0"]
 
@@ -351,6 +395,397 @@ lod_max_hysteresis = 0.0
 multimesh = SubResource( 2 )
 _sections_unfolded = [ "Geometry" ]
 
+[node name="Gravity Area" type="Area" parent="Scenario" index="2"]
+
+editor/display_folded = true
+transform = Transform( 0.896694, 0, -0.442651, 0, 1, 0, 0.442651, 0, 0.896694, -17.8031, -7.26746, -41.68 )
+input_ray_pickable = false
+input_capture_on_drag = false
+space_override = 0
+gravity_point = false
+gravity_distance_scale = 0.0
+gravity_vec = Vector3( 0, -1, 0 )
+gravity = -2.0
+linear_damp = 0.1
+angular_damp = 1.0
+priority = 0.0
+monitoring = true
+monitorable = true
+collision_layer = 1
+collision_mask = 1
+audio_bus_override = false
+audio_bus_name = "Master"
+reverb_bus_enable = false
+reverb_bus_name = "Master"
+reverb_bus_amount = 0.0
+reverb_bus_uniformity = 0.0
+script = ExtResource( 5 )
+__meta__ = {
+"_editor_icon": ExtResource( 6 )
+}
+
+[node name="CollisionShape" type="CollisionShape" parent="Scenario/Gravity Area" index="0"]
+
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.110954, 6.95549, -0.391703 )
+shape = SubResource( 7 )
+disabled = false
+
+[node name="Gravity Area8" type="Area" parent="Scenario" index="3"]
+
+editor/display_folded = true
+transform = Transform( 0.542852, 0, -0.839828, 0, 1, 0, 0.839828, 0, 0.542852, -64.4049, -7.26746, -29.2975 )
+input_ray_pickable = false
+input_capture_on_drag = false
+space_override = 0
+gravity_point = false
+gravity_distance_scale = 0.0
+gravity_vec = Vector3( 0, -1, 0 )
+gravity = -2.0
+linear_damp = 0.1
+angular_damp = 1.0
+priority = 0.0
+monitoring = true
+monitorable = true
+collision_layer = 1
+collision_mask = 1
+audio_bus_override = false
+audio_bus_name = "Master"
+reverb_bus_enable = false
+reverb_bus_name = "Master"
+reverb_bus_amount = 0.0
+reverb_bus_uniformity = 0.0
+script = ExtResource( 5 )
+__meta__ = {
+"_editor_icon": ExtResource( 6 )
+}
+
+[node name="CollisionShape" type="CollisionShape" parent="Scenario/Gravity Area8" index="0"]
+
+transform = Transform( 0.999542, 0, 0.0303062, 0, 1, 0, -0.0303062, 0, 0.999542, 0.714657, 7.56128, -0.43124 )
+shape = SubResource( 12 )
+disabled = false
+
+[node name="Gravity Area9" type="Area" parent="Scenario" index="4"]
+
+editor/display_folded = true
+transform = Transform( 0.999997, 0, 0.00238692, 0, 1, 0, -0.00238692, 0, 0.999997, -55.5114, -7.26746, -3.29245 )
+input_ray_pickable = false
+input_capture_on_drag = false
+space_override = 0
+gravity_point = false
+gravity_distance_scale = 0.0
+gravity_vec = Vector3( 0, -1, 0 )
+gravity = -2.0
+linear_damp = 0.1
+angular_damp = 1.0
+priority = 0.0
+monitoring = true
+monitorable = true
+collision_layer = 1
+collision_mask = 1
+audio_bus_override = false
+audio_bus_name = "Master"
+reverb_bus_enable = false
+reverb_bus_name = "Master"
+reverb_bus_amount = 0.0
+reverb_bus_uniformity = 0.0
+script = ExtResource( 5 )
+__meta__ = {
+"_editor_icon": ExtResource( 6 )
+}
+
+[node name="CollisionShape" type="CollisionShape" parent="Scenario/Gravity Area9" index="0"]
+
+transform = Transform( 0.999541, 0, 0.0303062, 0, 1, 0, -0.0303062, 0, 0.999541, 0.0591698, 7.56128, 0.561201 )
+shape = SubResource( 13 )
+disabled = false
+
+[node name="Gravity Area11" type="Area" parent="Scenario" index="5"]
+
+editor/display_folded = true
+transform = Transform( 0.999997, 0, 0.00238692, 0, 1, 0, -0.00238692, 0, 0.999997, -70.3011, -7.26746, 4.67693 )
+input_ray_pickable = false
+input_capture_on_drag = false
+space_override = 0
+gravity_point = false
+gravity_distance_scale = 0.0
+gravity_vec = Vector3( 0, -1, 0 )
+gravity = -2.0
+linear_damp = 0.1
+angular_damp = 1.0
+priority = 0.0
+monitoring = true
+monitorable = true
+collision_layer = 1
+collision_mask = 1
+audio_bus_override = false
+audio_bus_name = "Master"
+reverb_bus_enable = false
+reverb_bus_name = "Master"
+reverb_bus_amount = 0.0
+reverb_bus_uniformity = 0.0
+script = ExtResource( 5 )
+__meta__ = {
+"_editor_icon": ExtResource( 6 )
+}
+
+[node name="CollisionShape" type="CollisionShape" parent="Scenario/Gravity Area11" index="0"]
+
+transform = Transform( 0.99954, 0, 0.0303062, 0, 1, 0, -0.0303062, 0, 0.99954, 0.0550766, 1.18716, 0.616659 )
+shape = SubResource( 15 )
+disabled = false
+
+[node name="CollisionShape2" type="CollisionShape" parent="Scenario/Gravity Area11" index="1"]
+
+transform = Transform( 0.00162799, 0, 0.999998, 0, 1, 0, -0.999998, 0, 0.00162799, 35.0155, 7.22271, 26.0435 )
+shape = SubResource( 15 )
+disabled = false
+
+[node name="Gravity Area10" type="Area" parent="Scenario" index="6"]
+
+editor/display_folded = true
+transform = Transform( 0.999997, 0, 0.00238692, 0, 1, 0, -0.00238692, 0, 0.999997, -48.7724, -7.26746, 11.3171 )
+input_ray_pickable = false
+input_capture_on_drag = false
+space_override = 0
+gravity_point = false
+gravity_distance_scale = 0.0
+gravity_vec = Vector3( 0, -1, 0 )
+gravity = -2.0
+linear_damp = 0.1
+angular_damp = 1.0
+priority = 0.0
+monitoring = true
+monitorable = true
+collision_layer = 1
+collision_mask = 1
+audio_bus_override = false
+audio_bus_name = "Master"
+reverb_bus_enable = false
+reverb_bus_name = "Master"
+reverb_bus_amount = 0.0
+reverb_bus_uniformity = 0.0
+script = ExtResource( 5 )
+__meta__ = {
+"_editor_icon": ExtResource( 6 )
+}
+
+[node name="CollisionShape" type="CollisionShape" parent="Scenario/Gravity Area10" index="0"]
+
+transform = Transform( 0.999541, 0, 0.0303062, 0, 1, 0, -0.0303062, 0, 0.999541, 0.0591698, 7.56128, 0.561201 )
+shape = SubResource( 13 )
+disabled = false
+
+[node name="Gravity Area3" type="Area" parent="Scenario" index="7"]
+
+editor/display_folded = true
+transform = Transform( 0.963543, 0, -0.267552, 0, 1, 0, 0.267552, 0, 0.963543, -33.5914, -7.26746, -12.8265 )
+input_ray_pickable = false
+input_capture_on_drag = false
+space_override = 0
+gravity_point = false
+gravity_distance_scale = 0.0
+gravity_vec = Vector3( 0, -1, 0 )
+gravity = -2.0
+linear_damp = 0.1
+angular_damp = 1.0
+priority = 0.0
+monitoring = true
+monitorable = true
+collision_layer = 1
+collision_mask = 1
+audio_bus_override = false
+audio_bus_name = "Master"
+reverb_bus_enable = false
+reverb_bus_name = "Master"
+reverb_bus_amount = 0.0
+reverb_bus_uniformity = 0.0
+script = ExtResource( 5 )
+__meta__ = {
+"_editor_icon": ExtResource( 6 )
+}
+
+[node name="CollisionShape" type="CollisionShape" parent="Scenario/Gravity Area3" index="0"]
+
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.110931, 3.24948, 0.535686 )
+shape = SubResource( 8 )
+disabled = false
+
+[node name="Gravity Area4" type="Area" parent="Scenario" index="8"]
+
+editor/display_folded = true
+transform = Transform( 0.999965, 0, -0.00837775, 0, 1, 0, 0.00837775, 0, 0.999965, -27.6718, -7.26746, -23.5211 )
+input_ray_pickable = false
+input_capture_on_drag = false
+space_override = 0
+gravity_point = false
+gravity_distance_scale = 0.0
+gravity_vec = Vector3( 0, -1, 0 )
+gravity = -2.0
+linear_damp = 0.1
+angular_damp = 1.0
+priority = 0.0
+monitoring = true
+monitorable = true
+collision_layer = 1
+collision_mask = 1
+audio_bus_override = false
+audio_bus_name = "Master"
+reverb_bus_enable = false
+reverb_bus_name = "Master"
+reverb_bus_amount = 0.0
+reverb_bus_uniformity = 0.0
+script = ExtResource( 5 )
+__meta__ = {
+"_editor_icon": ExtResource( 6 )
+}
+
+[node name="CollisionShape" type="CollisionShape" parent="Scenario/Gravity Area4" index="0"]
+
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0850163, 8.16341, -0.0457287 )
+shape = SubResource( 9 )
+disabled = false
+
+[node name="Gravity Area5" type="Area" parent="Scenario" index="9"]
+
+editor/display_folded = true
+transform = Transform( 0.611329, 0, -0.791377, 0, 1, 0, 0.791377, 0, 0.611329, -22.2207, -7.26746, -34.4798 )
+input_ray_pickable = false
+input_capture_on_drag = false
+space_override = 0
+gravity_point = false
+gravity_distance_scale = 0.0
+gravity_vec = Vector3( 0, -1, 0 )
+gravity = -2.0
+linear_damp = 0.1
+angular_damp = 1.0
+priority = 0.0
+monitoring = true
+monitorable = true
+collision_layer = 1
+collision_mask = 1
+audio_bus_override = false
+audio_bus_name = "Master"
+reverb_bus_enable = false
+reverb_bus_name = "Master"
+reverb_bus_amount = 0.0
+reverb_bus_uniformity = 0.0
+script = ExtResource( 5 )
+__meta__ = {
+"_editor_icon": ExtResource( 6 )
+}
+
+[node name="CollisionShape" type="CollisionShape" parent="Scenario/Gravity Area5" index="0"]
+
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.131775, 7.88007, 0.189457 )
+shape = SubResource( 10 )
+disabled = false
+
+[node name="Gravity Area2" type="Area" parent="Scenario" index="10"]
+
+editor/display_folded = true
+transform = Transform( 0.286447, 0, -0.958096, 0, 1, 0, 0.958096, 0, 0.286447, 3.4268, -7.21874, -10.1644 )
+input_ray_pickable = false
+input_capture_on_drag = false
+space_override = 0
+gravity_point = false
+gravity_distance_scale = 0.0
+gravity_vec = Vector3( 0, -1, 0 )
+gravity = -2.0
+linear_damp = 0.1
+angular_damp = 1.0
+priority = 0.0
+monitoring = true
+monitorable = true
+collision_layer = 1
+collision_mask = 1
+audio_bus_override = false
+audio_bus_name = "Master"
+reverb_bus_enable = false
+reverb_bus_name = "Master"
+reverb_bus_amount = 0.0
+reverb_bus_uniformity = 0.0
+script = ExtResource( 5 )
+__meta__ = {
+"_editor_icon": ExtResource( 6 )
+}
+
+[node name="CollisionShape" type="CollisionShape" parent="Scenario/Gravity Area2" index="0"]
+
+transform = Transform( 0.999635, 0, -0.0270096, 0, 1, 0, 0.0270096, 0, 0.999635, -0.136036, 4.97625, -0.195939 )
+shape = SubResource( 6 )
+disabled = false
+
+[node name="Gravity Area6" type="Area" parent="Scenario" index="11"]
+
+editor/display_folded = true
+transform = Transform( -0.124211, 0, -0.992256, 0, 1, 0, 0.992256, 0, -0.124211, -10.6724, -7.21874, -2.22602 )
+input_ray_pickable = false
+input_capture_on_drag = false
+space_override = 0
+gravity_point = false
+gravity_distance_scale = 0.0
+gravity_vec = Vector3( 0, -1, 0 )
+gravity = -2.0
+linear_damp = 0.1
+angular_damp = 1.0
+priority = 0.0
+monitoring = true
+monitorable = true
+collision_layer = 1
+collision_mask = 1
+audio_bus_override = false
+audio_bus_name = "Master"
+reverb_bus_enable = false
+reverb_bus_name = "Master"
+reverb_bus_amount = 0.0
+reverb_bus_uniformity = 0.0
+script = ExtResource( 5 )
+__meta__ = {
+"_editor_icon": ExtResource( 6 )
+}
+
+[node name="CollisionShape" type="CollisionShape" parent="Scenario/Gravity Area6" index="0"]
+
+transform = Transform( 0.999635, 0, -0.0270097, 0, 1, 0, 0.0270097, 0, 0.999635, -0.11534, 3.47112, -0.19538 )
+shape = SubResource( 11 )
+disabled = false
+
+[node name="Gravity Area7" type="Area" parent="Scenario" index="12"]
+
+editor/display_folded = true
+transform = Transform( -0.99875, 0, -0.0499795, 0, 1, 0, 0.0499795, 0, -0.99875, -9.63303, -7.21874, 20.7925 )
+input_ray_pickable = false
+input_capture_on_drag = false
+space_override = 0
+gravity_point = false
+gravity_distance_scale = 0.0
+gravity_vec = Vector3( 0, -1, 0 )
+gravity = -2.0
+linear_damp = 0.1
+angular_damp = 1.0
+priority = 0.0
+monitoring = true
+monitorable = true
+collision_layer = 1
+collision_mask = 1
+audio_bus_override = false
+audio_bus_name = "Master"
+reverb_bus_enable = false
+reverb_bus_name = "Master"
+reverb_bus_amount = 0.0
+reverb_bus_uniformity = 0.0
+script = ExtResource( 5 )
+__meta__ = {
+"_editor_icon": ExtResource( 6 )
+}
+
+[node name="CollisionShape" type="CollisionShape" parent="Scenario/Gravity Area7" index="0"]
+
+transform = Transform( 0.999161, 0, -0.0410066, 0, 1, 0, 0.0410066, 0, 0.999161, 0.612225, 3.99861, -0.109404 )
+shape = SubResource( 14 )
+disabled = false
+
 [node name="Lighting" type="Spatial" parent="." index="1"]
 
 [node name="GIProbe" type="GIProbe" parent="Lighting" index="0"]
@@ -421,7 +856,283 @@ omni_shadow_mode = 1
 omni_shadow_detail = 1
 _sections_unfolded = [ "Light", "Shadow" ]
 
-[node name="OmniLight2" type="OmniLight" parent="Lighting/OmniLights" index="1"]
+[node name="OmniLight13" type="OmniLight" parent="Lighting/OmniLights" index="1"]
+
+transform = Transform( 0.844124, 0, 0.536148, 0, 1, 0, -0.536148, 0, 0.844124, -63.7069, -2.47655, -28.8457 )
+layers = 1
+light_color = Color( 1, 1, 1, 1 )
+light_energy = 1.0
+light_indirect_energy = 1.0
+light_negative = false
+light_specular = 0.0
+light_bake_mode = 1
+light_cull_mask = -1
+shadow_enabled = true
+shadow_color = Color( 0, 0, 0, 1 )
+shadow_bias = 0.15
+shadow_contact = 0.0
+shadow_reverse_cull_face = false
+editor_only = false
+omni_range = 11.0839
+omni_attenuation = 1.0
+omni_shadow_mode = 1
+omni_shadow_detail = 1
+_sections_unfolded = [ "Light", "Shadow" ]
+
+[node name="OmniLight14" type="OmniLight" parent="Lighting/OmniLights" index="2"]
+
+transform = Transform( 0.844124, 0, 0.536148, 0, 1, 0, -0.536148, 0, 0.844124, -63.7069, 3.07269, -28.8457 )
+layers = 1
+light_color = Color( 1, 1, 1, 1 )
+light_energy = 1.0
+light_indirect_energy = 1.0
+light_negative = false
+light_specular = 0.0
+light_bake_mode = 1
+light_cull_mask = -1
+shadow_enabled = true
+shadow_color = Color( 0, 0, 0, 1 )
+shadow_bias = 0.15
+shadow_contact = 0.0
+shadow_reverse_cull_face = false
+editor_only = false
+omni_range = 11.0839
+omni_attenuation = 1.0
+omni_shadow_mode = 1
+omni_shadow_detail = 1
+_sections_unfolded = [ "Light", "Shadow" ]
+
+[node name="OmniLight15" type="OmniLight" parent="Lighting/OmniLights" index="3"]
+
+transform = Transform( 0.844124, 0, 0.536148, 0, 1, 0, -0.536148, 0, 0.844124, -63.7069, 10.864, -28.8457 )
+layers = 1
+light_color = Color( 1, 1, 1, 1 )
+light_energy = 1.0
+light_indirect_energy = 1.0
+light_negative = false
+light_specular = 0.0
+light_bake_mode = 1
+light_cull_mask = -1
+shadow_enabled = true
+shadow_color = Color( 0, 0, 0, 1 )
+shadow_bias = 0.15
+shadow_contact = 0.0
+shadow_reverse_cull_face = false
+editor_only = false
+omni_range = 11.0839
+omni_attenuation = 1.0
+omni_shadow_mode = 1
+omni_shadow_detail = 1
+_sections_unfolded = [ "Light", "Shadow" ]
+
+[node name="OmniLight16" type="OmniLight" parent="Lighting/OmniLights" index="4"]
+
+transform = Transform( 0.844124, 0, 0.536148, 0, 1, 0, -0.536148, 0, 0.844124, -57.3153, 10.864, -35.6958 )
+layers = 1
+light_color = Color( 1, 1, 1, 1 )
+light_energy = 1.0
+light_indirect_energy = 1.0
+light_negative = false
+light_specular = 0.0
+light_bake_mode = 1
+light_cull_mask = -1
+shadow_enabled = true
+shadow_color = Color( 0, 0, 0, 1 )
+shadow_bias = 0.15
+shadow_contact = 0.0
+shadow_reverse_cull_face = false
+editor_only = false
+omni_range = 4.38449
+omni_attenuation = 1.0
+omni_shadow_mode = 1
+omni_shadow_detail = 1
+_sections_unfolded = [ "Light", "Shadow" ]
+
+[node name="OmniLight17" type="OmniLight" parent="Lighting/OmniLights" index="5"]
+
+transform = Transform( 0.844124, 0, 0.536148, 0, 1, 0, -0.536148, 0, 0.844124, -55.1733, 10.864, -32.3201 )
+layers = 1
+light_color = Color( 1, 1, 1, 1 )
+light_energy = 1.0
+light_indirect_energy = 1.0
+light_negative = false
+light_specular = 0.0
+light_bake_mode = 1
+light_cull_mask = -1
+shadow_enabled = true
+shadow_color = Color( 0, 0, 0, 1 )
+shadow_bias = 0.15
+shadow_contact = 0.0
+shadow_reverse_cull_face = false
+editor_only = false
+omni_range = 4.38449
+omni_attenuation = 1.0
+omni_shadow_mode = 1
+omni_shadow_detail = 1
+_sections_unfolded = [ "Light", "Shadow" ]
+
+[node name="OmniLight22" type="OmniLight" parent="Lighting/OmniLights" index="6"]
+
+transform = Transform( 0.844124, 0, 0.536148, 0, 1, 0, -0.536148, 0, 0.844124, -58.0986, 11.065, -23.2984 )
+layers = 1
+light_color = Color( 1, 1, 1, 1 )
+light_energy = 1.0
+light_indirect_energy = 1.0
+light_negative = false
+light_specular = 0.0
+light_bake_mode = 1
+light_cull_mask = -1
+shadow_enabled = true
+shadow_color = Color( 0, 0, 0, 1 )
+shadow_bias = 0.15
+shadow_contact = 0.0
+shadow_reverse_cull_face = false
+editor_only = false
+omni_range = 4.38449
+omni_attenuation = 1.0
+omni_shadow_mode = 1
+omni_shadow_detail = 1
+_sections_unfolded = [ "Light", "Shadow" ]
+
+[node name="OmniLight23" type="OmniLight" parent="Lighting/OmniLights" index="7"]
+
+transform = Transform( 0.844124, 0, 0.536148, 0, 1, 0, -0.536148, 0, 0.844124, -53.2038, 11.065, -26.0247 )
+layers = 1
+light_color = Color( 1, 1, 1, 1 )
+light_energy = 1.0
+light_indirect_energy = 1.0
+light_negative = false
+light_specular = 0.0
+light_bake_mode = 1
+light_cull_mask = -1
+shadow_enabled = true
+shadow_color = Color( 0, 0, 0, 1 )
+shadow_bias = 0.15
+shadow_contact = 0.0
+shadow_reverse_cull_face = false
+editor_only = false
+omni_range = 4.38449
+omni_attenuation = 1.0
+omni_shadow_mode = 1
+omni_shadow_detail = 1
+_sections_unfolded = [ "Light", "Shadow" ]
+
+[node name="OmniLight24" type="OmniLight" parent="Lighting/OmniLights" index="8"]
+
+transform = Transform( 0.0809153, 0, 0.996721, 0, 1, 0, -0.996721, 0, 0.0809153, -46.4469, 12.8527, -18.5094 )
+layers = 1
+light_color = Color( 1, 1, 1, 1 )
+light_energy = 1.0
+light_indirect_energy = 1.0
+light_negative = false
+light_specular = 0.0
+light_bake_mode = 1
+light_cull_mask = -1
+shadow_enabled = true
+shadow_color = Color( 0, 0, 0, 1 )
+shadow_bias = 0.15
+shadow_contact = 0.0
+shadow_reverse_cull_face = false
+editor_only = false
+omni_range = 4.38449
+omni_attenuation = 1.0
+omni_shadow_mode = 1
+omni_shadow_detail = 1
+_sections_unfolded = [ "Light", "Shadow" ]
+
+[node name="OmniLight27" type="OmniLight" parent="Lighting/OmniLights" index="9"]
+
+transform = Transform( 0.79137, 0, 0.611338, 0, 1, 0, -0.611338, 0, 0.79137, -42.7141, 10.3589, -21.8216 )
+layers = 1
+light_color = Color( 1, 1, 1, 1 )
+light_energy = 1.0
+light_indirect_energy = 1.0
+light_negative = false
+light_specular = 0.0
+light_bake_mode = 1
+light_cull_mask = -1
+shadow_enabled = true
+shadow_color = Color( 0, 0, 0, 1 )
+shadow_bias = 0.15
+shadow_contact = 0.0
+shadow_reverse_cull_face = false
+editor_only = false
+omni_range = 2.65708
+omni_attenuation = 1.0
+omni_shadow_mode = 1
+omni_shadow_detail = 1
+_sections_unfolded = [ "Light", "Shadow" ]
+
+[node name="OmniLight28" type="OmniLight" parent="Lighting/OmniLights" index="10"]
+
+transform = Transform( 0.79137, 0, 0.611338, 0, 1, 0, -0.611338, 0, 0.79137, -45.1748, 10.3775, -25.2052 )
+layers = 1
+light_color = Color( 1, 1, 1, 1 )
+light_energy = 1.0
+light_indirect_energy = 1.0
+light_negative = false
+light_specular = 0.0
+light_bake_mode = 1
+light_cull_mask = -1
+shadow_enabled = true
+shadow_color = Color( 0, 0, 0, 1 )
+shadow_bias = 0.15
+shadow_contact = 0.0
+shadow_reverse_cull_face = false
+editor_only = false
+omni_range = 2.65708
+omni_attenuation = 1.0
+omni_shadow_mode = 1
+omni_shadow_detail = 1
+_sections_unfolded = [ "Light", "Shadow" ]
+
+[node name="OmniLight26" type="OmniLight" parent="Lighting/OmniLights" index="11"]
+
+transform = Transform( -0.636475, 0, 0.771297, 0, 1, 0, -0.771297, 0, -0.636475, -41.4895, 14.2524, -25.4644 )
+layers = 1
+light_color = Color( 1, 1, 1, 1 )
+light_energy = 1.0
+light_indirect_energy = 1.0
+light_negative = false
+light_specular = 0.0
+light_bake_mode = 1
+light_cull_mask = -1
+shadow_enabled = true
+shadow_color = Color( 0, 0, 0, 1 )
+shadow_bias = 0.15
+shadow_contact = 0.0
+shadow_reverse_cull_face = false
+editor_only = false
+omni_range = 5.36123
+omni_attenuation = 1.0
+omni_shadow_mode = 1
+omni_shadow_detail = 1
+_sections_unfolded = [ "Light", "Shadow" ]
+
+[node name="OmniLight25" type="OmniLight" parent="Lighting/OmniLights" index="12"]
+
+transform = Transform( 0.0809153, 0, 0.996721, 0, 1, 0, -0.996721, 0, 0.0809153, -47.373, 12.8527, -16.2451 )
+layers = 1
+light_color = Color( 1, 1, 1, 1 )
+light_energy = 1.0
+light_indirect_energy = 1.0
+light_negative = false
+light_specular = 0.0
+light_bake_mode = 1
+light_cull_mask = -1
+shadow_enabled = true
+shadow_color = Color( 0, 0, 0, 1 )
+shadow_bias = 0.15
+shadow_contact = 0.0
+shadow_reverse_cull_face = false
+editor_only = false
+omni_range = 4.38449
+omni_attenuation = 1.0
+omni_shadow_mode = 1
+omni_shadow_detail = 1
+_sections_unfolded = [ "Light", "Shadow" ]
+
+[node name="OmniLight2" type="OmniLight" parent="Lighting/OmniLights" index="13"]
 
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -70.2326, -3.98439, 5.08231 )
 layers = 1
@@ -444,9 +1155,78 @@ omni_shadow_mode = 1
 omni_shadow_detail = 1
 _sections_unfolded = [ "Light", "Shadow" ]
 
-[node name="OmniLight3" type="OmniLight" parent="Lighting/OmniLights" index="2"]
+[node name="OmniLight18" type="OmniLight" parent="Lighting/OmniLights" index="14"]
 
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -59.9126, -5.54177, 4.2694 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -66.6214, -6.32254, -3.60432 )
+layers = 1
+light_color = Color( 1, 1, 1, 1 )
+light_energy = 1.0
+light_indirect_energy = 1.0
+light_negative = false
+light_specular = 0.0
+light_bake_mode = 1
+light_cull_mask = -1
+shadow_enabled = true
+shadow_color = Color( 0, 0, 0, 1 )
+shadow_bias = 0.15
+shadow_contact = 0.0
+shadow_reverse_cull_face = false
+editor_only = false
+omni_range = 2.45829
+omni_attenuation = 1.0
+omni_shadow_mode = 1
+omni_shadow_detail = 1
+_sections_unfolded = [ "Light", "Shadow" ]
+
+[node name="OmniLight19" type="OmniLight" parent="Lighting/OmniLights" index="15"]
+
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -66.6214, -6.32254, -9.61189 )
+layers = 1
+light_color = Color( 1, 1, 1, 1 )
+light_energy = 1.0
+light_indirect_energy = 1.0
+light_negative = false
+light_specular = 0.0
+light_bake_mode = 1
+light_cull_mask = -1
+shadow_enabled = true
+shadow_color = Color( 0, 0, 0, 1 )
+shadow_bias = 0.15
+shadow_contact = 0.0
+shadow_reverse_cull_face = false
+editor_only = false
+omni_range = 2.45829
+omni_attenuation = 1.0
+omni_shadow_mode = 1
+omni_shadow_detail = 1
+_sections_unfolded = [ "Light", "Shadow" ]
+
+[node name="OmniLight20" type="OmniLight" parent="Lighting/OmniLights" index="16"]
+
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -66.6214, -6.32254, -15.5744 )
+layers = 1
+light_color = Color( 1, 1, 1, 1 )
+light_energy = 1.0
+light_indirect_energy = 1.0
+light_negative = false
+light_specular = 0.0
+light_bake_mode = 1
+light_cull_mask = -1
+shadow_enabled = true
+shadow_color = Color( 0, 0, 0, 1 )
+shadow_bias = 0.15
+shadow_contact = 0.0
+shadow_reverse_cull_face = false
+editor_only = false
+omni_range = 2.45829
+omni_attenuation = 1.0
+omni_shadow_mode = 1
+omni_shadow_detail = 1
+_sections_unfolded = [ "Light", "Shadow" ]
+
+[node name="OmniLight3" type="OmniLight" parent="Lighting/OmniLights" index="17"]
+
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -59.8497, -5.54177, 4.94453 )
 layers = 1
 light_color = Color( 1, 1, 1, 1 )
 light_energy = 1.0
@@ -467,9 +1247,9 @@ omni_shadow_mode = 1
 omni_shadow_detail = 1
 _sections_unfolded = [ "Light", "Shadow" ]
 
-[node name="OmniLight4" type="OmniLight" parent="Lighting/OmniLights" index="3"]
+[node name="OmniLight4" type="OmniLight" parent="Lighting/OmniLights" index="18"]
 
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -59.9126, -5.06346, 5.60406 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -59.8342, -5.06346, 6.42386 )
 layers = 1
 light_color = Color( 1, 1, 1, 1 )
 light_energy = 1.0
@@ -490,9 +1270,9 @@ omni_shadow_mode = 1
 omni_shadow_detail = 1
 _sections_unfolded = [ "Light", "Shadow" ]
 
-[node name="OmniLight5" type="OmniLight" parent="Lighting/OmniLights" index="4"]
+[node name="OmniLight5" type="OmniLight" parent="Lighting/OmniLights" index="19"]
 
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -59.4827, -4.27752, 8.44348 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -59.1934, -4.34503, 8.44348 )
 layers = 1
 light_color = Color( 1, 1, 1, 1 )
 light_energy = 1.0
@@ -513,9 +1293,9 @@ omni_shadow_mode = 1
 omni_shadow_detail = 1
 _sections_unfolded = [ "Light", "Shadow" ]
 
-[node name="OmniLight6" type="OmniLight" parent="Lighting/OmniLights" index="5"]
+[node name="OmniLight6" type="OmniLight" parent="Lighting/OmniLights" index="20"]
 
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -58.2491, -3.81047, 9.68006 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -58.1392, -3.81047, 9.70142 )
 layers = 1
 light_color = Color( 1, 1, 1, 1 )
 light_energy = 1.0
@@ -536,9 +1316,9 @@ omni_shadow_mode = 1
 omni_shadow_detail = 1
 _sections_unfolded = [ "Light", "Shadow" ]
 
-[node name="OmniLight7" type="OmniLight" parent="Lighting/OmniLights" index="6"]
+[node name="OmniLight7" type="OmniLight" parent="Lighting/OmniLights" index="21"]
 
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -57.0881, -3.32661, 10.8293 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -56.8536, -3.32661, 10.8658 )
 layers = 1
 light_color = Color( 1, 1, 1, 1 )
 light_energy = 1.0
@@ -559,9 +1339,9 @@ omni_shadow_mode = 1
 omni_shadow_detail = 1
 _sections_unfolded = [ "Light", "Shadow" ]
 
-[node name="OmniLight8" type="OmniLight" parent="Lighting/OmniLights" index="7"]
+[node name="OmniLight8" type="OmniLight" parent="Lighting/OmniLights" index="22"]
 
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -55.8053, -2.93418, 12.1085 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -55.6562, -2.93418, 12.032 )
 layers = 1
 light_color = Color( 1, 1, 1, 1 )
 light_energy = 1.0
@@ -582,9 +1362,9 @@ omni_shadow_mode = 1
 omni_shadow_detail = 1
 _sections_unfolded = [ "Light", "Shadow" ]
 
-[node name="OmniLight9" type="OmniLight" parent="Lighting/OmniLights" index="8"]
+[node name="OmniLight9" type="OmniLight" parent="Lighting/OmniLights" index="23"]
 
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -54.4885, -2.58835, 13.36 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -54.4632, -2.58835, 13.3754 )
 layers = 1
 light_color = Color( 1, 1, 1, 1 )
 light_energy = 1.0
@@ -605,7 +1385,7 @@ omni_shadow_mode = 1
 omni_shadow_detail = 1
 _sections_unfolded = [ "Light", "Shadow" ]
 
-[node name="OmniLight10" type="OmniLight" parent="Lighting/OmniLights" index="9"]
+[node name="OmniLight10" type="OmniLight" parent="Lighting/OmniLights" index="24"]
 
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -49.8393, -1.81934, 14.2068 )
 layers = 1
@@ -628,7 +1408,7 @@ omni_shadow_mode = 1
 omni_shadow_detail = 1
 _sections_unfolded = [ "Light", "Shadow" ]
 
-[node name="OmniLight11" type="OmniLight" parent="Lighting/OmniLights" index="10"]
+[node name="OmniLight11" type="OmniLight" parent="Lighting/OmniLights" index="25"]
 
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -35.596, 4.34759, 30.4609 )
 layers = 1
@@ -651,7 +1431,30 @@ omni_shadow_mode = 1
 omni_shadow_detail = 1
 _sections_unfolded = [ "Light", "Shadow" ]
 
-[node name="OmniLight12" type="OmniLight" parent="Lighting/OmniLights" index="11"]
+[node name="OmniLight21" type="OmniLight" parent="Lighting/OmniLights" index="26"]
+
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -23.9617, 8.84587, 26.9159 )
+layers = 1
+light_color = Color( 1, 1, 1, 1 )
+light_energy = 1.0
+light_indirect_energy = 1.0
+light_negative = false
+light_specular = 0.0
+light_bake_mode = 1
+light_cull_mask = -1
+shadow_enabled = true
+shadow_color = Color( 0, 0, 0, 1 )
+shadow_bias = 0.15
+shadow_contact = 0.0
+shadow_reverse_cull_face = false
+editor_only = false
+omni_range = 9.23562
+omni_attenuation = 1.0
+omni_shadow_mode = 1
+omni_shadow_detail = 1
+_sections_unfolded = [ "Light", "Shadow" ]
+
+[node name="OmniLight12" type="OmniLight" parent="Lighting/OmniLights" index="27"]
 
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -42.9561, 1.45762, 11.7304 )
 layers = 1
@@ -675,6 +1478,8 @@ omni_shadow_detail = 1
 _sections_unfolded = [ "Light", "Shadow" ]
 
 [node name="Reflections" type="Spatial" parent="." index="2"]
+
+editor/display_folded = true
 
 [node name="OuternReflection probe" type="ReflectionProbe" parent="Reflections" index="0"]
 
@@ -712,16 +1517,17 @@ interior_ambient_energy = 1.0
 interior_ambient_contrib = 0.0
 _sections_unfolded = [ "Interior" ]
 
-[node name="Player" parent="." index="3" instance=ExtResource( 5 )]
+[node name="Player" parent="." index="3" instance=ExtResource( 7 )]
 
 WALKSPEED = 5.0
 RUNSPEED = 9.0
+weight = 2
 
-[node name="Scene Root2" parent="." index="4" instance=ExtResource( 6 )]
+[node name="Scene Root2" parent="." index="4" instance=ExtResource( 8 )]
 
 transform = Transform( 0.192222, 0, -0.230327, 0, 0.3, 0, 0.230327, 0, 0.192222, -30.7334, 10.947, -30.1172 )
 
-[node name="Scene Root" parent="." index="5" instance=ExtResource( 7 )]
+[node name="Scene Root" parent="." index="5" instance=ExtResource( 9 )]
 
 transform = Transform( 0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -12.2288, -6.96786, -19.4166 )
 _sections_unfolded = [ "Transform" ]

@@ -1,0 +1,33 @@
+[remap]
+
+importer="texture"
+type="StreamTexture"
+path.s3tc="res://.import/Normal.png-151b65916613943dc9ac4e0105ffe0d8.s3tc.stex"
+path.etc2="res://.import/Normal.png-151b65916613943dc9ac4e0105ffe0d8.etc2.stex"
+
+[deps]
+
+source_file="res://BaseGD/Scenes/Main Menu/Terminal/00/Normal.png"
+source_md5="1393006efe616505743990bdd0df0e1b"
+
+dest_files=[ "res://.import/Normal.png-151b65916613943dc9ac4e0105ffe0d8.s3tc.stex", "res://.import/Normal.png-151b65916613943dc9ac4e0105ffe0d8.etc2.stex" ]
+dest_md5="e368f53f4738e5a1af550fd2942ae232"
+
+[params]
+
+compress/mode=2
+compress/lossy_quality=0.7
+compress/hdr_mode=0
+compress/normal_map=1
+flags/repeat=true
+flags/filter=true
+flags/mipmaps=true
+flags/anisotropic=false
+flags/srgb=2
+process/fix_alpha_border=true
+process/premult_alpha=false
+process/HDR_as_SRGB=false
+stream=false
+size_limit=0
+detect_3d=false
+svg/scale=1.0
