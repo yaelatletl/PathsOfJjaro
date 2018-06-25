@@ -11,7 +11,7 @@ config_version=3
 [application]
 
 config/name="Paths of Jjro"
-run/main_scene="res://BaseGD/Scenes/Main Menu/MainMenu.tscn"
+run/main_scene="res://BaseGD/Scenes/menu/MainMenu.tscn"
 config/icon="res://icon.png"
 
 [autoload]
@@ -27,6 +27,11 @@ window/dpi/allow_hidpi=true
 [editor_plugins]
 
 enabled=PoolStringArray( "WorldManagement" )
+
+[env]
+
+s_s_ambient_occlusion=0
+s_s_reflections=0
 
 [input]
 
