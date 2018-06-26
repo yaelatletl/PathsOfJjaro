@@ -13,19 +13,28 @@ func _ready():
 	
 	
 func _process(delta):
-	if actual_menu == 0:
-		if Input.is_action_pressed("ui_up"):
+	if Input.is_action_pressed("ui_up"):
 			counter +=1
-		if Input.is_action_pressed("ui_down"):
+	if Input.is_action_pressed("ui_down"):
 			counter -=1
+	if Input.is_action_pressed("ui_accept"):
+		_Accept()
+		
+	if actual_menu == 0:
 		if counter > 3:
 			counter = 0
 		if counter < 0: 
 			counter = 3
-		
+			
+	if actual_menu == 1:
+		if counter > 3:
+			counter = 0
+			
 func _Accept():
 	if actual_menu == 0 and counter == 0:
 		start_game()
+	if actual_menu == 0 and counter == 1: 
+		hehehe()
 		
 func _done():
 	ProjectSettings.save()

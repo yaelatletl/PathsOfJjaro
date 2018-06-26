@@ -10,7 +10,7 @@ config_version=3
 
 [application]
 
-config/name="Paths of Jjro"
+config/name="Paths of Jjaro"
 run/main_scene="res://BaseGD/Scenes/menu/MainMenu.tscn"
 config/icon="res://icon.png"
 

@@ -8,10 +8,10 @@ path.etc2="res://.import/ScreenNormal.png-9e81dc6b32487ccb9a8b5fa2e8c0b556.etc2.
 [deps]
 
 source_file="res://BaseGD/Scenes/menu/Terminal/ScreenNormal.png"
-source_md5="c640f498461ad1e4f6f1ef1ef404868e"
+source_md5="638d8cba1ea9bf612f8a3200eda56c57"
 
 dest_files=[ "res://.import/ScreenNormal.png-9e81dc6b32487ccb9a8b5fa2e8c0b556.s3tc.stex", "res://.import/ScreenNormal.png-9e81dc6b32487ccb9a8b5fa2e8c0b556.etc2.stex" ]
-dest_md5="85f7ede6c81004b74806d4d74bf139b7"
+dest_md5="7a664b1076f8e647dd864872fcd2c69b"
 
 [params]
 

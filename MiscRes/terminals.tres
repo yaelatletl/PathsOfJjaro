@@ -4,7 +4,7 @@
 
 [resource]
 
-size = 30
+size = 13
 use_mipmaps = true
 use_filter = true
 font_data = ExtResource( 1 )
