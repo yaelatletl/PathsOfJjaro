@@ -1,6 +1,6 @@
 [gd_scene load_steps=26 format=2]
 
-[ext_resource path="res://BaseGD/Scenes/YucatanDive.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Scenes/YucatanDive.tscn" type="PackedScene" id=1]
 [ext_resource path="res://BaseGD/Props/palms/palm_bend.mesh" type="ArrayMesh" id=2]
 [ext_resource path="res://BaseGD/Props/palms/palm_trio.mesh" type="ArrayMesh" id=3]
 [ext_resource path="res://BaseGD/Props/palms/palm_dual.mesh" type="ArrayMesh" id=4]
@@ -101,9 +101,11 @@ propagation = 0.7
 interior = false
 compress = true
 
-[node name="Main" type="Spatial"]
+[node name="Main" type="Spatial" index="0"]
 
 [node name="Scenario" type="Spatial" parent="." index="0"]
+
+editor/display_folded = true
 
 [node name="Scene Root" parent="Scenario" index="0" instance=ExtResource( 1 )]
 
@@ -794,6 +796,7 @@ disabled = false
 [node name="OmniLights" type="Spatial" parent="Lighting/SimpleLights" index="0"]
 
 editor/display_folded = true
+visible = false
 
 [node name="OmniLight" type="OmniLight" parent="Lighting/SimpleLights/OmniLights" index="0"]
 
@@ -3409,8 +3412,6 @@ _sections_unfolded = [ "Directional Shadow", "Light", "Shadow" ]
 
 [node name="AdvancedLights" type="Spatial" parent="Lighting" index="1"]
 
-visible = false
-
 [node name="GIProbe" type="GIProbe" parent="Lighting/AdvancedLights" index="0"]
 
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -29.7041, 0, -4.70568 )
@@ -3490,6 +3491,8 @@ size_flags_vertical = 1
 [node name="Scene Root2" parent="." index="4" instance=ExtResource( 9 )]
 
 transform = Transform( 0.192222, 0, -0.230327, 0, 0.3, 0, 0.230327, 0, 0.192222, -30.7334, 10.947, -30.1172 )
+speedfactor = 0.6
+flies = true
 
 [node name="Scene Root" parent="." index="5" instance=ExtResource( 10 )]
 

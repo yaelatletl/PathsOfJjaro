@@ -1,0 +1,33 @@
+[remap]
+
+importer="texture"
+type="StreamTexture"
+path.s3tc="res://.import/021.png-46642066a9641d28735d35f539d9034c.s3tc.stex"
+path.etc2="res://.import/021.png-46642066a9641d28735d35f539d9034c.etc2.stex"
+
+[deps]
+
+source_file="res://Scenes/Jjrro Texture Set/021/021.png"
+source_md5="99455eb5d7ea79e50e118574576c6435"
+
+dest_files=[ "res://.import/021.png-46642066a9641d28735d35f539d9034c.s3tc.stex", "res://.import/021.png-46642066a9641d28735d35f539d9034c.etc2.stex" ]
+dest_md5="4d6089aa303f6d21de120e3a21961f0a"
+
+[params]
+
+compress/mode=2
+compress/lossy_quality=0.7
+compress/hdr_mode=0
+compress/normal_map=0
+flags/repeat=true
+flags/filter=true
+flags/mipmaps=true
+flags/anisotropic=false
+flags/srgb=1
+process/fix_alpha_border=true
+process/premult_alpha=false
+process/HDR_as_SRGB=false
+stream=false
+size_limit=0
+detect_3d=false
+svg/scale=1.0

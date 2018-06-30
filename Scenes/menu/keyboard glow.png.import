@@ -1,0 +1,33 @@
+[remap]
+
+importer="texture"
+type="StreamTexture"
+path.s3tc="res://.import/keyboard glow.png-981aae9d2385664372221ef29b7c536d.s3tc.stex"
+path.etc2="res://.import/keyboard glow.png-981aae9d2385664372221ef29b7c536d.etc2.stex"
+
+[deps]
+
+source_file="res://Scenes/menu/keyboard glow.png"
+source_md5="794346c41e0d205bed586c247a1f017b"
+
+dest_files=[ "res://.import/keyboard glow.png-981aae9d2385664372221ef29b7c536d.s3tc.stex", "res://.import/keyboard glow.png-981aae9d2385664372221ef29b7c536d.etc2.stex" ]
+dest_md5="af06ba57d8a60b1ff1c5f232266de611"
+
+[params]
+
+compress/mode=2
+compress/lossy_quality=0.7
+compress/hdr_mode=0
+compress/normal_map=0
+flags/repeat=true
+flags/filter=true
+flags/mipmaps=true
+flags/anisotropic=false
+flags/srgb=1
+process/fix_alpha_border=true
+process/premult_alpha=false
+process/HDR_as_SRGB=false
+stream=false
+size_limit=0
+detect_3d=false
+svg/scale=1.0

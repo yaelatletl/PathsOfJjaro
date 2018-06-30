@@ -1,0 +1,33 @@
+[remap]
+
+importer="texture"
+type="StreamTexture"
+path.s3tc="res://.import/Roughness.png-2f66cd64a385cdfb9f155b7e68259cd8.s3tc.stex"
+path.etc2="res://.import/Roughness.png-2f66cd64a385cdfb9f155b7e68259cd8.etc2.stex"
+
+[deps]
+
+source_file="res://Scenes/Jjrro Texture Set/026/Roughness.png"
+source_md5="d6b0b6c9dfbced297aa905a469ebc811"
+
+dest_files=[ "res://.import/Roughness.png-2f66cd64a385cdfb9f155b7e68259cd8.s3tc.stex", "res://.import/Roughness.png-2f66cd64a385cdfb9f155b7e68259cd8.etc2.stex" ]
+dest_md5="0d56d7958841ef6ee4e5dcabf3317ce0"
+
+[params]
+
+compress/mode=2
+compress/lossy_quality=0.7
+compress/hdr_mode=0
+compress/normal_map=0
+flags/repeat=true
+flags/filter=true
+flags/mipmaps=true
+flags/anisotropic=false
+flags/srgb=2
+process/fix_alpha_border=true
+process/premult_alpha=false
+process/HDR_as_SRGB=false
+stream=false
+size_limit=0
+detect_3d=false
+svg/scale=1.0
