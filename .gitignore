@@ -3,3 +3,7 @@
 *.pck
 *.zip
 export_presets.cfg
+*.md5
+*.import
+*.import
+*.import
