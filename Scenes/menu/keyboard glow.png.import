@@ -8,10 +8,7 @@ path.etc2="res://.import/keyboard glow.png-981aae9d2385664372221ef29b7c536d.etc2
 [deps]
 
 source_file="res://Scenes/menu/keyboard glow.png"
-source_md5="794346c41e0d205bed586c247a1f017b"
-
 dest_files=[ "res://.import/keyboard glow.png-981aae9d2385664372221ef29b7c536d.s3tc.stex", "res://.import/keyboard glow.png-981aae9d2385664372221ef29b7c536d.etc2.stex" ]
-dest_md5="af06ba57d8a60b1ff1c5f232266de611"
 
 [params]
 

@@ -8,10 +8,7 @@ path.etc2="res://.import/armor_DIFF.png-de0ff9220add6bd2ddd17f8afc7cbb04.etc2.st
 [deps]
 
 source_file="res://BaseGD/Characters/Pfhor/PfhorTXT/armor_DIFF.png"
-source_md5="788168b32aae7907b8c9d118c858cac6"
-
 dest_files=[ "res://.import/armor_DIFF.png-de0ff9220add6bd2ddd17f8afc7cbb04.s3tc.stex", "res://.import/armor_DIFF.png-de0ff9220add6bd2ddd17f8afc7cbb04.etc2.stex" ]
-dest_md5="217f8f23dd96a36317ffd98e321798ae"
 
 [params]
 

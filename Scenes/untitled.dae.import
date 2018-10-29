@@ -7,10 +7,7 @@ path="res://.import/untitled.dae-7c922db775419923d47c55ba488a005f.scn"
 [deps]
 
 source_file="res://Scenes/untitled.dae"
-source_md5="c2a66b42134ae33d3261443e91825cba"
-
 dest_files=[ "res://.import/untitled.dae-7c922db775419923d47c55ba488a005f.scn" ]
-dest_md5="36bac1b721f77c0f060fee9ccc91ddc0"
 
 [params]
 

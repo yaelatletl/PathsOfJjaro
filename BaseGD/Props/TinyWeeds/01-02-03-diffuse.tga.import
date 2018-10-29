@@ -8,10 +8,7 @@ path.etc2="res://.import/01-02-03-diffuse.tga-f290bc2b440182f4bbd3c27cdb4e9c2e.e
 [deps]
 
 source_file="res://BaseGD/Props/TinyWeeds/01-02-03-diffuse.tga"
-source_md5="9d120ea554ce182c85ddbb810ddce5ac"
-
 dest_files=[ "res://.import/01-02-03-diffuse.tga-f290bc2b440182f4bbd3c27cdb4e9c2e.s3tc.stex", "res://.import/01-02-03-diffuse.tga-f290bc2b440182f4bbd3c27cdb4e9c2e.etc2.stex" ]
-dest_md5="ba3e2fd3a5f72b2b5b98fe8ee96a81c1"
 
 [params]
 

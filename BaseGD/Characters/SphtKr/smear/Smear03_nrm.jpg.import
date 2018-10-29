@@ -8,10 +8,7 @@ path.etc2="res://.import/Smear03_nrm.jpg-089d921b27f8ecf4158eb5b91516df58.etc2.s
 [deps]
 
 source_file="res://BaseGD/Characters/SphtKr/smear/Smear03_nrm.jpg"
-source_md5="ae9f65044f65fcac4fea56be981e0e4a"
-
 dest_files=[ "res://.import/Smear03_nrm.jpg-089d921b27f8ecf4158eb5b91516df58.s3tc.stex", "res://.import/Smear03_nrm.jpg-089d921b27f8ecf4158eb5b91516df58.etc2.stex" ]
-dest_md5="059c9b0c38d380241042157348ff5c49"
 
 [params]
 

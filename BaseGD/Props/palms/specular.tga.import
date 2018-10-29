@@ -8,10 +8,7 @@ path.etc2="res://.import/specular.tga-44805422da3daf4fcdc34b2cdd884998.etc2.stex
 [deps]
 
 source_file="res://BaseGD/Props/palms/specular.tga"
-source_md5="a076cdcdbb9cf9c5e4604d1048b935a9"
-
 dest_files=[ "res://.import/specular.tga-44805422da3daf4fcdc34b2cdd884998.s3tc.stex", "res://.import/specular.tga-44805422da3daf4fcdc34b2cdd884998.etc2.stex" ]
-dest_md5="087b5d782e0f764896b09b2a04c89561"
 
 [params]
 

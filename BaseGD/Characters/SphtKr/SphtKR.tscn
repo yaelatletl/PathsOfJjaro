@@ -1,11 +1,14 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://addons/WorldManagement/Basic_3D_AI_Behavior.gd" type="Script" id=1]
 [ext_resource path="res://addons/WorldManagement/IA_icon.png" type="Texture" id=2]
-[ext_resource path="res://BaseGD/Characters/SphtKr/Material_004.material" type="Material" id=3]
-[ext_resource path="res://BaseGD/Characters/SphtKr/Material_001.material" type="Material" id=4]
-[ext_resource path="res://BaseGD/Characters/SphtKr/Material_002.material" type="Material" id=5]
-[ext_resource path="res://BaseGD/Characters/SphtKr/Material_003.material" type="Material" id=6]
+[ext_resource path="res://BaseGD/Guns/Staff.tscn" type="PackedScene" id=3]
+[ext_resource path="res://BaseGD/Characters/SphtKr/Material_004.material" type="Material" id=4]
+[ext_resource path="res://BaseGD/Characters/SphtKr/Material_001.material" type="Material" id=5]
+[ext_resource path="res://BaseGD/Characters/SphtKr/Material_002.material" type="Material" id=6]
+[ext_resource path="res://BaseGD/Characters/SphtKr/Material_003.material" type="Material" id=7]
+[ext_resource path="res://BaseGD/Guns/Staff.gd" type="Script" id=8]
+[ext_resource path="res://BaseGD/Bullets/EnergyBullet.tscn" type="PackedScene" id=9]
 
 [sub_resource type="ArrayMesh" id=1]
 
@@ -19,7 +22,7 @@ surfaces/0 = {
 "blend_shape_data": [  ],
 "format": 98263,
 "index_count": 16206,
-"material": ExtResource( 3 ),
+"material": ExtResource( 4 ),
 "name": "Material.004",
 "primitive": 4,
 "skeleton_aabb": [  ],
@@ -38,7 +41,7 @@ surfaces/0 = {
 "blend_shape_data": [  ],
 "format": 98263,
 "index_count": 9666,
-"material": ExtResource( 4 ),
+"material": ExtResource( 5 ),
 "name": "Material.001",
 "primitive": 4,
 "skeleton_aabb": [  ],
@@ -51,7 +54,7 @@ surfaces/1 = {
 "blend_shape_data": [  ],
 "format": 98263,
 "index_count": 56745,
-"material": ExtResource( 5 ),
+"material": ExtResource( 6 ),
 "name": "Material.002",
 "primitive": 4,
 "skeleton_aabb": [  ],
@@ -71,7 +74,7 @@ surfaces/0 = {
 "blend_shape_data": [  ],
 "format": 98263,
 "index_count": 2880,
-"material": ExtResource( 6 ),
+"material": ExtResource( 7 ),
 "name": "Material.003",
 "primitive": 4,
 "skeleton_aabb": [  ],
@@ -80,9 +83,9 @@ surfaces/0 = {
 
 [sub_resource type="SphereShape" id=4]
 
-radius = 3.5
+radius = 3.42302
 
-[node name="Scene Root" type="KinematicBody"]
+[node name="SphtKr" type="KinematicBody"]
 
 input_ray_pickable = true
 input_capture_on_drag = false
@@ -96,18 +99,32 @@ axis_lock_angular_y = false
 axis_lock_angular_z = false
 collision/safe_margin = 0.001
 script = ExtResource( 1 )
+_sections_unfolded = [ "Transform" ]
 __meta__ = {
 "_editor_icon": ExtResource( 2 )
 }
+AI_active = true
 static_AI = false
 Team = 0
 is_worker = false
 indifference = 10
+walk_n_shoot = false
+NavMeshMovement = true
+DumbMovement = false
+AstarMovement = false
 smellarea = 5
+heararea = 10
 health = 100
 speedfactor = 0.4
+hearing_precision = 2
+smelling_precision = 2
+can_hear_workstations = true
+can_smell_workstations = false
+gun = ExtResource( 3 )
+AstarPath = null
 timewaiting = 2
 flies = false
+fixed_up = true
 weight = 1
 max_speed = 10
 turn_speed = 40
@@ -117,66 +134,67 @@ keep_jump_inertia = true
 air_idle_deaccel = false
 JumpHeight = 7.0
 grav = 9.8
+is_jugg = false
 
 [node name="SphtKR" type="Spatial" parent="." index="0"]
 
-transform = Transform( 0.67491, 0, 0, 0, 0.67491, 0, 0, 0, 0.67491, -0.767715, 5.13443, 2.02287 )
+transform = Transform( -2.95013e-008, 0, -0.67491, 0, 0.67491, 0, 0.67491, 0, -2.95013e-008, 0.369443, 5.13443, -0.977886 )
 
 [node name="Skeleton" type="Skeleton" parent="SphtKR" index="0"]
 
 bones/0/name = "Bone.003"
 bones/0/parent = -1
-bones/0/rest = Transform( -1, -2.6191e-07, 8.02947e-08, -4.07529e-08, 0.432078, 0.901836, -2.70893e-07, 0.901836, -0.432078, 0, -0.150817, -0.898667 )
+bones/0/rest = Transform( -1, -2.6191e-007, 8.02947e-008, -4.07529e-008, 0.432078, 0.901836, -2.70893e-007, 0.901836, -0.432078, 0, -0.150817, -0.898667 )
 bones/0/enabled = true
 bones/0/bound_children = [  ]
 bones/1/name = "Bone"
 bones/1/parent = -1
-bones/1/rest = Transform( 1, -2.06292e-07, 1.35648e-08, -1.34145e-07, -0.697391, -0.716691, 1.57308e-07, 0.716691, -0.697391, 0, 0.1878, -0.790328 )
+bones/1/rest = Transform( 1, -2.06292e-007, 1.35648e-008, -1.34145e-007, -0.697391, -0.716691, 1.57308e-007, 0.716691, -0.697391, 0, 0.1878, -0.790328 )
 bones/1/enabled = true
 bones/1/bound_children = [  ]
 bones/2/name = "Bone.001"
 bones/2/parent = 1
-bones/2/rest = Transform( -1, -3.86754e-07, -8.17731e-08, 3.91251e-07, -0.997886, -0.0649846, -5.64671e-08, -0.0649847, 0.997886, 9.69047e-07, -1.13249e-06, -1.13326 )
+bones/2/rest = Transform( -1, -3.86754e-007, -8.17731e-008, 3.91251e-007, -0.997886, -0.0649846, -5.64671e-008, -0.0649847, 0.997886, 9.69047e-007, -1.13249e-006, -1.13326 )
 bones/2/enabled = true
 bones/2/bound_children = [  ]
 bones/3/name = "Bone.002"
 bones/3/parent = 2
-bones/3/rest = Transform( 1, 1.87689e-07, -2.10867e-07, 9.05632e-08, 0.494194, 0.869352, 2.67377e-07, -0.869352, 0.494194, 5.3163e-08, 1.19209e-07, -0.969577 )
+bones/3/rest = Transform( 1, 1.87689e-007, -2.10867e-007, 9.05632e-008, 0.494194, 0.869352, 2.67377e-007, -0.869352, 0.494194, 5.3163e-008, 1.19209e-007, -0.969577 )
 bones/3/enabled = true
 bones/3/bound_children = [  ]
 bones/4/name = "Bone.004"
 bones/4/parent = 2
-bones/4/rest = Transform( 1, -1.37637e-06, 8.59876e-07, -1.12551e-06, -0.206452, 0.978457, -1.16919e-06, -0.978457, -0.206452, 1.00684e-06, -1.07288e-06, -0.969577 )
+bones/4/rest = Transform( 1, -1.37637e-006, 8.59876e-007, -1.12551e-006, -0.206452, 0.978457, -1.16919e-006, -0.978457, -0.206452, 1.00684e-006, -1.07288e-006, -0.969577 )
 bones/4/enabled = true
 bones/4/bound_children = [  ]
 bones/5/name = "Bone.005"
 bones/5/parent = 4
-bones/5/rest = Transform( 1.56742e-06, -0.141422, 0.98995, 0.864788, 0.49709, 0.0710117, -0.502136, 0.856097, 0.122301, -1.13415e-07, -8.34465e-07, -0.818632 )
+bones/5/rest = Transform( 1.56742e-006, -0.141422, 0.98995, 0.864788, 0.49709, 0.0710117, -0.502136, 0.856097, 0.122301, -1.13415e-007, -8.34465e-007, -0.818632 )
 bones/5/enabled = true
 bones/5/bound_children = [  ]
 bones/6/name = "Bone.006"
 bones/6/parent = 5
-bones/6/rest = Transform( 1, -1.29645e-05, 2.23707e-06, 1.82585e-06, 0.305158, 0.952302, -1.30288e-05, -0.952302, 0.305157, 5.96046e-07, -1.43051e-06, -0.572923 )
+bones/6/rest = Transform( 1, -1.29645e-005, 2.23707e-006, 1.82585e-006, 0.305158, 0.952302, -1.30288e-005, -0.952302, 0.305157, 5.96046e-007, -1.43051e-006, -0.572923 )
 bones/6/enabled = true
 bones/6/bound_children = [  ]
 bones/7/name = "Bone.009"
 bones/7/parent = 6
-bones/7/rest = Transform( 0.0524311, -0.807589, 0.58741, 0.997474, 0.0705835, 0.00800778, -0.0479284, 0.585506, 0.80925, -7.15256e-07, -5.96046e-07, -0.544463 )
+bones/7/rest = Transform( 0.0524311, -0.807589, 0.58741, 0.997474, 0.0705835, 0.00800778, -0.0479284, 0.585506, 0.80925, -7.15256e-007, -5.96046e-007, -0.544463 )
 bones/7/enabled = true
 bones/7/bound_children = [  ]
 bones/8/name = "Bone.007"
 bones/8/parent = 4
-bones/8/rest = Transform( -2.15159e-06, 0.124035, -0.992278, -0.864789, 0.498258, 0.0622842, 0.502136, 0.858111, 0.107263, -1.06709e-06, 1.07288e-06, -0.81863 )
+bones/8/rest = Transform( -2.15159e-006, 0.124035, -0.992278, -0.864789, 0.498258, 0.0622842, 0.502136, 0.858111, 0.107263, -1.06709e-006, 1.07288e-006, -0.81863 )
 bones/8/enabled = true
 bones/8/bound_children = [  ]
 bones/9/name = "Bone.008"
 bones/9/parent = 8
-bones/9/rest = Transform( 1, 9.09074e-06, -2.29083e-06, -7.95864e-07, 0.325794, 0.945441, 9.3411e-06, -0.945441, 0.325794, 3.57628e-07, -4.58956e-06, -0.571576 )
+bones/9/rest = Transform( 1, 9.09074e-006, -2.29083e-006, -7.95864e-007, 0.325794, 0.945441, 9.3411e-006, -0.945441, 0.325794, 3.57628e-007, -4.58956e-006, -0.571576 )
 bones/9/enabled = true
 bones/9/bound_children = [  ]
 bones/10/name = "Bone.010"
 bones/10/parent = 9
-bones/10/rest = Transform( 0.121747, 0.804933, -0.580741, -0.988708, 0.149855, 0.000431001, 0.0873736, 0.574131, 0.814088, 2.38419e-07, 3.27826e-06, -0.589947 )
+bones/10/rest = Transform( 0.121747, 0.804933, -0.580741, -0.988708, 0.149855, 0.000431001, 0.0873736, 0.574131, 0.814088, 2.38419e-007, 3.27826e-006, -0.589947 )
 bones/10/enabled = true
 bones/10/bound_children = [  ]
 
@@ -237,8 +255,26 @@ blend_times = [  ]
 
 [node name="CollisionShape" type="CollisionShape" parent="." index="2"]
 
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.425992, 4.43375, 1.91445 )
+transform = Transform( 1, 0, 3.55271e-015, 0, 1, 0, -3.55271e-015, 0, 1, 0.338791, 4.43375, 0.0720692 )
 shape = SubResource( 4 )
 disabled = false
+
+[node name="gun" type="Position3D" parent="." index="3"]
+
+transform = Transform( -4.37115e-008, 0, -1, 0, 1, 0, 1, 0, -4.37115e-008, -1.30545, 5.41008, 3.10838 )
+script = ExtResource( 8 )
+type = 1
+Projectile = ExtResource( 9 )
+
+[node name="Reload" type="Timer" parent="gun" index="0"]
+
+process_mode = 1
+wait_time = 1.0
+one_shot = false
+autostart = true
+
+[node name="BulletSpawn" type="Position3D" parent="gun" index="1"]
+
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.581769 )
 
 

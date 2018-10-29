@@ -8,10 +8,7 @@ path.etc2="res://.import/Can_norm.png-0d99984fac43f6f33e62e1bf96c03b4e.etc2.stex
 [deps]
 
 source_file="res://BaseGD/Characters/MADD/Textures/Can_norm.png"
-source_md5="b2c3e03d6f084c6ff90050a31209fae1"
-
 dest_files=[ "res://.import/Can_norm.png-0d99984fac43f6f33e62e1bf96c03b4e.s3tc.stex", "res://.import/Can_norm.png-0d99984fac43f6f33e62e1bf96c03b4e.etc2.stex" ]
-dest_md5="462dcb77c62ca28cd03ecebb079d9233"
 
 [params]
 

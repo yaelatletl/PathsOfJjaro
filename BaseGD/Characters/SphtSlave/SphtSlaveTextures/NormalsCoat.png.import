@@ -8,10 +8,7 @@ path.etc2="res://.import/NormalsCoat.png-ef3d738c6432d991a9e42aa565f5bb2e.etc2.s
 [deps]
 
 source_file="res://BaseGD/Characters/SphtSlave/SphtSlaveTextures/NormalsCoat.png"
-source_md5="835822320975544d305342c7cd2de200"
-
 dest_files=[ "res://.import/NormalsCoat.png-ef3d738c6432d991a9e42aa565f5bb2e.s3tc.stex", "res://.import/NormalsCoat.png-ef3d738c6432d991a9e42aa565f5bb2e.etc2.stex" ]
-dest_md5="955b204ed8cc3d14f153b65074d03364"
 
 [params]
 

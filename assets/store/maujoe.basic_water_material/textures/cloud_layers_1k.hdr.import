@@ -7,10 +7,7 @@ path="res://.import/cloud_layers_1k.hdr-b18eb79a37511ec34c13bfe7577627c4.stex"
 [deps]
 
 source_file="res://assets/store/maujoe.basic_water_material/textures/cloud_layers_1k.hdr"
-source_md5="fcff84024e4cc92692620d3c77440d52"
-
 dest_files=[ "res://.import/cloud_layers_1k.hdr-b18eb79a37511ec34c13bfe7577627c4.stex" ]
-dest_md5="7a37b072c3746268c04c21f9e1a05600"
 
 [params]
 

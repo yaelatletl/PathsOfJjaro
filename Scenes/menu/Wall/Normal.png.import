@@ -8,10 +8,7 @@ path.etc2="res://.import/Normal.png-a7f21c18086cd2966066438b1ad992f1.etc2.stex"
 [deps]
 
 source_file="res://Scenes/menu/Wall/Normal.png"
-source_md5="4235171a61dd3488fd03e176bb27b460"
-
 dest_files=[ "res://.import/Normal.png-a7f21c18086cd2966066438b1ad992f1.s3tc.stex", "res://.import/Normal.png-a7f21c18086cd2966066438b1ad992f1.etc2.stex" ]
-dest_md5="838833ba9ab4c4a348cfa1eab4d5d171"
 
 [params]
 

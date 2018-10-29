@@ -7,10 +7,7 @@ path="res://.import/SphtSlave.dae-9a417ab948de180b83851e9628c04a9c.scn"
 [deps]
 
 source_file="res://BaseGD/Characters/SphtSlave/Shapes/SphtSlave.dae"
-source_md5="e8e06d45cf49c18aa60e2aa3abdf2260"
-
 dest_files=[ "res://.import/SphtSlave.dae-9a417ab948de180b83851e9628c04a9c.scn" ]
-dest_md5="582b9922cb8d5cd980c1f4cf72448296"
 
 [params]
 

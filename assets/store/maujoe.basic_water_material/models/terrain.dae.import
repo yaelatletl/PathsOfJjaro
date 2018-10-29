@@ -7,10 +7,7 @@ path="res://.import/terrain.dae-7d680937c64f640d4e0b7a82ea71925d.scn"
 [deps]
 
 source_file="res://assets/store/maujoe.basic_water_material/models/terrain.dae"
-source_md5="d696e1e4bede9053e61db05daf7b8ede"
-
 dest_files=[ "res://.import/terrain.dae-7d680937c64f640d4e0b7a82ea71925d.scn" ]
-dest_md5="f62ec23aec6dc7518a973aa5ea461973"
 
 [params]
 

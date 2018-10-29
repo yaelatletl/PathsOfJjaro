@@ -8,10 +8,7 @@ path.etc2="res://.import/diffuse.tga-91711bf30d679ed59ee207ff75070b82.etc2.stex"
 [deps]
 
 source_file="res://BaseGD/Props/palms/diffuse.tga"
-source_md5="c3eb9a1f030f4c51940165a9cc645d55"
-
 dest_files=[ "res://.import/diffuse.tga-91711bf30d679ed59ee207ff75070b82.s3tc.stex", "res://.import/diffuse.tga-91711bf30d679ed59ee207ff75070b82.etc2.stex" ]
-dest_md5="12e981152a13bc8700a39f1de6159671"
 
 [params]
 

@@ -7,10 +7,7 @@ path="res://.import/MADD.dae-61a97118d5030f3f487520c4b4efb12f.scn"
 [deps]
 
 source_file="res://BaseGD/Characters/MADD/MADD.dae"
-source_md5="9967329eba05d6fa68431d59bfb9f144"
-
 dest_files=[ "res://.import/MADD.dae-61a97118d5030f3f487520c4b4efb12f.scn" ]
-dest_md5="ae662e3643672938b4583bc96487abc9"
 
 [params]
 

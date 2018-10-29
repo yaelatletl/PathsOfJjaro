@@ -7,10 +7,7 @@ path="res://.import/lel.png-5960fabe88a92080c26dbda2c17ad4f5.stex"
 [deps]
 
 source_file="res://lel.png"
-source_md5="9ffbab10d40c8b4936ca5614c095f22c"
-
 dest_files=[ "res://.import/lel.png-5960fabe88a92080c26dbda2c17ad4f5.stex" ]
-dest_md5="ae6c770badc07f0810389a8f7964d752"
 
 [params]
 

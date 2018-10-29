@@ -8,10 +8,7 @@ path.etc2="res://.import/BodyDownSpecular.png-41f9f97aa866799dba33da68d58ff365.e
 [deps]
 
 source_file="res://BaseGD/Characters/SphtSlave/SphtSlaveTextures/BodyDownSpecular.png"
-source_md5="e97c1cef9d58fd46ad1247c19616d6c5"
-
 dest_files=[ "res://.import/BodyDownSpecular.png-41f9f97aa866799dba33da68d58ff365.s3tc.stex", "res://.import/BodyDownSpecular.png-41f9f97aa866799dba33da68d58ff365.etc2.stex" ]
-dest_md5="af6bb491693382c3ca360513155d4509"
 
 [params]
 

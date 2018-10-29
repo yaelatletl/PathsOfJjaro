@@ -8,10 +8,7 @@ path.etc2="res://.import/pfhor_NRM.png-32365bc044dc6f7eb466eaa8a8290310.etc2.ste
 [deps]
 
 source_file="res://BaseGD/Characters/Pfhor/PfhorTXT/pfhor_NRM.png"
-source_md5="79ed821b49c40750a3808dbe55c57041"
-
 dest_files=[ "res://.import/pfhor_NRM.png-32365bc044dc6f7eb466eaa8a8290310.s3tc.stex", "res://.import/pfhor_NRM.png-32365bc044dc6f7eb466eaa8a8290310.etc2.stex" ]
-dest_md5="d938ac694b548723122e6f2503897f02"
 
 [params]
 

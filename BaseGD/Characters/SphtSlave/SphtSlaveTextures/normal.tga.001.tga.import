@@ -8,10 +8,7 @@ path.etc2="res://.import/normal.tga.001.tga-b7698fc52b06d37664f4aa212bc75352.etc
 [deps]
 
 source_file="res://BaseGD/Characters/SphtSlave/SphtSlaveTextures/normal.tga.001.tga"
-source_md5="c1d4411453534f554ac03ace75d67aef"
-
 dest_files=[ "res://.import/normal.tga.001.tga-b7698fc52b06d37664f4aa212bc75352.s3tc.stex", "res://.import/normal.tga.001.tga-b7698fc52b06d37664f4aa212bc75352.etc2.stex" ]
-dest_md5="2c27addefacdf773afc46d94b6af29c6"
 
 [params]
 

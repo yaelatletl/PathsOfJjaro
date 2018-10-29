@@ -8,10 +8,7 @@ path.etc2="res://.import/normal.tga-79b0c4e2f982c25b97029ba740f63024.etc2.stex"
 [deps]
 
 source_file="res://BaseGD/Props/Tinyweeds3/Ivy/normal.tga"
-source_md5="4817b0b047b05cdcf3bb478f4fd2d320"
-
 dest_files=[ "res://.import/normal.tga-79b0c4e2f982c25b97029ba740f63024.s3tc.stex", "res://.import/normal.tga-79b0c4e2f982c25b97029ba740f63024.etc2.stex" ]
-dest_md5="8644fb724b1270a6ce299024ea6731ca"
 
 [params]
 

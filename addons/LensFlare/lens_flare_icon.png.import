@@ -7,10 +7,7 @@ path="res://.import/lens_flare_icon.png-04cecc65b45dbc1dcc6d5dfb3641114e.stex"
 [deps]
 
 source_file="res://addons/LensFlare/lens_flare_icon.png"
-source_md5="50491da54fed7425c389e7f344dcc3dd"
-
 dest_files=[ "res://.import/lens_flare_icon.png-04cecc65b45dbc1dcc6d5dfb3641114e.stex" ]
-dest_md5="a9608a2d288141d46345ed31c596355c"
 
 [params]
 

@@ -8,10 +8,7 @@ path.etc2="res://.import/diffus.tga-c17b79ead2a76c6e6eef97441c72bac1.etc2.stex"
 [deps]
 
 source_file="res://Scenes/Jjrro Texture Set/pattern_80/diffus.tga"
-source_md5="4fbced6009aad218133dfe8a95c7d441"
-
 dest_files=[ "res://.import/diffus.tga-c17b79ead2a76c6e6eef97441c72bac1.s3tc.stex", "res://.import/diffus.tga-c17b79ead2a76c6e6eef97441c72bac1.etc2.stex" ]
-dest_md5="445beabd3653eaeb751b856ae1f0eeb3"
 
 [params]
 

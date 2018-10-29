@@ -8,10 +8,7 @@ path.etc2="res://.import/pfhor_diffuse.png-e449e81f56e1bf1e1dd503fe9b5cc134.etc2
 [deps]
 
 source_file="res://BaseGD/Characters/Pfhor/PfhorTXT/pfhor_diffuse.png"
-source_md5="cad7945fc0fb6bad24e78b0b243a26ef"
-
 dest_files=[ "res://.import/pfhor_diffuse.png-e449e81f56e1bf1e1dd503fe9b5cc134.s3tc.stex", "res://.import/pfhor_diffuse.png-e449e81f56e1bf1e1dd503fe9b5cc134.etc2.stex" ]
-dest_md5="15a9eba5aae05dd3d5c69acb85b47b1c"
 
 [params]
 

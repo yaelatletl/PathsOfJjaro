@@ -8,10 +8,7 @@ path.etc2="res://.import/LwB_Diff.png-ebc5e2c83829a3c71360fbfc85d8a72c.etc2.stex
 [deps]
 
 source_file="res://BaseGD/Characters/MADD/Textures/LwB_Diff.png"
-source_md5="b0cc106f21119907c310fdeafb337ace"
-
 dest_files=[ "res://.import/LwB_Diff.png-ebc5e2c83829a3c71360fbfc85d8a72c.s3tc.stex", "res://.import/LwB_Diff.png-ebc5e2c83829a3c71360fbfc85d8a72c.etc2.stex" ]
-dest_md5="76790f7d859a32fb4132a3b3d071b889"
 
 [params]
 

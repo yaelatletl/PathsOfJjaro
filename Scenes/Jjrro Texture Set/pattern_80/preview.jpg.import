@@ -7,10 +7,7 @@ path="res://.import/preview.jpg-202709069b3203c9b59fcfe3a88b8d6d.stex"
 [deps]
 
 source_file="res://Scenes/Jjrro Texture Set/pattern_80/preview.jpg"
-source_md5="2ee48f8b09fcfeb8a30bba4a29c6e4dc"
-
 dest_files=[ "res://.import/preview.jpg-202709069b3203c9b59fcfe3a88b8d6d.stex" ]
-dest_md5="f59d2909d0bf5ed28088f74d2e3e8777"
 
 [params]
 

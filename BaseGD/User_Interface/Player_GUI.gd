@@ -63,10 +63,12 @@ func draw_circle_arc(center, radius, angle_from, angle_to, width, color, post_li
 			#final_post_line_array.append(Vector2(0,0))
 			final_post_line_array.append_array(post_line_points)
 			points_arc.push_back(common_point)
-			
+			points_arc.push_back(common_point)
+			points_arc.push_back(common_point)
 			draw_polyline(final_post_line_array, post_line_color, width, true)
-		
+			
 		draw_polyline(points_arc, color, width, true)
+		print(points_arc.size())
 		
 func anglepoint2pos(center, angle_point, radius):
 	return center + Vector2(cos(deg2rad(angle_point)), sin(deg2rad(angle_point))) * radius

@@ -8,10 +8,7 @@ path.etc2="res://.import/_occlusion(5).tga-81eca9e06440fc93c2c4a1e5130d93dc.etc2
 [deps]
 
 source_file="res://Scenes/somgrass/_occlusion(5).tga"
-source_md5="8770ea15276cbb4cdf215d3b0563b742"
-
 dest_files=[ "res://.import/_occlusion(5).tga-81eca9e06440fc93c2c4a1e5130d93dc.s3tc.stex", "res://.import/_occlusion(5).tga-81eca9e06440fc93c2c4a1e5130d93dc.etc2.stex" ]
-dest_md5="1d5787dda63bfe01d6230f7ea64e37a1"
 
 [params]
 

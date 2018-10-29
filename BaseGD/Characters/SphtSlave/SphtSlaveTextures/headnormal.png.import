@@ -8,10 +8,7 @@ path.etc2="res://.import/headnormal.png-d88e34b5c4959d403cd33b61142eb875.etc2.st
 [deps]
 
 source_file="res://BaseGD/Characters/SphtSlave/SphtSlaveTextures/headnormal.png"
-source_md5="e176747451d3e782e26552ad17a269bc"
-
 dest_files=[ "res://.import/headnormal.png-d88e34b5c4959d403cd33b61142eb875.s3tc.stex", "res://.import/headnormal.png-d88e34b5c4959d403cd33b61142eb875.etc2.stex" ]
-dest_md5="9d87a58ce8a7608046026054d5bc1967"
 
 [params]
 

@@ -8,10 +8,7 @@ path.etc2="res://.import/specular.tga.000.tga-0aaea9bbe6077fe5039a81d92af04080.e
 [deps]
 
 source_file="res://BaseGD/Characters/SphtSlave/SphtSlaveTextures/specular.tga.000.tga"
-source_md5="174b96345b24fb1dac9c9d2c43a21b96"
-
 dest_files=[ "res://.import/specular.tga.000.tga-0aaea9bbe6077fe5039a81d92af04080.s3tc.stex", "res://.import/specular.tga.000.tga-0aaea9bbe6077fe5039a81d92af04080.etc2.stex" ]
-dest_md5="dbedf476f8274ef2bc7527e6819b59f0"
 
 [params]
 

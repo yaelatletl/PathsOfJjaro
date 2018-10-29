@@ -8,10 +8,7 @@ path.etc2="res://.import/Can_diff.png-3316b02bcb957c6d269dd72697ab175d.etc2.stex
 [deps]
 
 source_file="res://BaseGD/Characters/MADD/Textures/Can_diff.png"
-source_md5="43c4820d3b5b33ef53c50b79de06b57c"
-
 dest_files=[ "res://.import/Can_diff.png-3316b02bcb957c6d269dd72697ab175d.s3tc.stex", "res://.import/Can_diff.png-3316b02bcb957c6d269dd72697ab175d.etc2.stex" ]
-dest_md5="f8bf6a3ac6d4c7b15b9dbeb1404f148e"
 
 [params]
 

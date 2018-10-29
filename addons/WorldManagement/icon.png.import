@@ -7,10 +7,7 @@ path="res://.import/icon.png-453a6b142a64f469565fa7b5b08efa1d.stex"
 [deps]
 
 source_file="res://addons/WorldManagement/icon.png"
-source_md5="0799290c90894282e2235c94d0175d1b"
-
 dest_files=[ "res://.import/icon.png-453a6b142a64f469565fa7b5b08efa1d.stex" ]
-dest_md5="6bd2fd8864c6daa4efb2dd7f9366482e"
 
 [params]
 

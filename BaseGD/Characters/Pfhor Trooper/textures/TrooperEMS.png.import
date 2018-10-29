@@ -8,10 +8,7 @@ path.etc2="res://.import/TrooperEMS.png-7f8a98071b30ab90c2295d32d5850504.etc2.st
 [deps]
 
 source_file="res://BaseGD/Characters/Pfhor Trooper/textures/TrooperEMS.png"
-source_md5="7e5af40d56b1ccd803e5f9f7fada357b"
-
 dest_files=[ "res://.import/TrooperEMS.png-7f8a98071b30ab90c2295d32d5850504.s3tc.stex", "res://.import/TrooperEMS.png-7f8a98071b30ab90c2295d32d5850504.etc2.stex" ]
-dest_md5="276f11d08890b044af0c1f8908e083b3"
 
 [params]
 

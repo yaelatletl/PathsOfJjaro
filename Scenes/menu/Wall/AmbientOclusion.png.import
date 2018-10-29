@@ -8,10 +8,7 @@ path.etc2="res://.import/AmbientOclusion.png-baae24176c7f319bee5740ce46b278e3.et
 [deps]
 
 source_file="res://Scenes/menu/Wall/AmbientOclusion.png"
-source_md5="04de6faf762b1d0f566d3c5997bdb16a"
-
 dest_files=[ "res://.import/AmbientOclusion.png-baae24176c7f319bee5740ce46b278e3.s3tc.stex", "res://.import/AmbientOclusion.png-baae24176c7f319bee5740ce46b278e3.etc2.stex" ]
-dest_md5="d7f15a4d2cbe29db3d0fa38f6bb22d56"
 
 [params]
 

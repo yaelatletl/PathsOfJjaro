@@ -1,22 +1,25 @@
+#This script automatically generates navigation meshes for every MeshInstance 
+# child and subchild 
+
+
 extends Navigation
-var Areas = []
-var Meshes = {}
-# class member variables go here, for example:
-# var a = 2
-# var b = "textvar"
 
-func _enter_tree():
-	for nodes in get_children(): 
-		var node = nodes
-		
-		if node.is_class("Area"):
-			Areas.insert (Areas.size()+1, node)
-			
-		if node.is_class("MeshInstance"):
-			Meshes.insert(Meshes.size()+1,node)
-			
+func _ready():
+	
+	yield(get_tree(), "idle_frame")
+	yield(get_tree(), "idle_frame")
+	TraceAllMeshes(self)
 
-#func _process(delta):
-#	# Called every frame. Delta is time since last frame.
-#	# Update game logic here.
-#	pass
+
+func TraceAllMeshes(node):
+	for N in node.get_children():
+		if N.is_class("MeshInstance"):
+			var a = NavigationMeshInstance.new()
+			N.add_child(a)
+			print(a)
+			a.navmesh = NavigationMesh.new()
+			a.navmesh.create_from_mesh(N.mesh)
+			navmesh_add(a, Transform())
+#			navmesh_add(a, N.transform)
+		if N.get_child_count() > 0:
+			TraceAllMeshes(N)

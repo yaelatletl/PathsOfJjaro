@@ -9,10 +9,11 @@ export(int, 0.01, 100) var ghostCount = 7 setget set_ghost_count
 export(float, 0, 1) var ghostSpacing = 0.3 setget set_ghost_spacing
 export(float, 0, 1) var haloWidth = 0.25 setget set_halo_width
 
-export(Texture) var lensDirt = load("res://addons/LensFlare/lens-dirt-default.jpeg") setget set_lens_dirt
+export(Texture) var lensDirt = preload("res://addons/LensFlare/lens-dirt-default.jpeg") setget set_lens_dirt
 
 var screen;
 var material;
+onready var customshader = preload("res://addons/LensFlare/lens_shader.tres")
 
 func _init():
 	screen = MeshInstance.new()
@@ -20,11 +21,11 @@ func _init():
 	screen.scale = Vector3(1,1,1) * pow(2.0,30);
 	add_child(screen)
 	
-	screen.material_override = preload("res://addons/LensFlare/lens_shader.tres")
+	screen.material_override = customshader
 	material = screen.material_override
 
-#func _ready():
-#	print(get_node('/root').get_hdr())
+func _ready():
+	_init()
 
 func set_flare_strength(strength):
 	flareStrength = strength

@@ -7,10 +7,7 @@ path="res://.import/icon.png-e50c29e04fadd80dff0ad39b35dc2b7e.stex"
 [deps]
 
 source_file="res://assets/store/maujoe.basic_water_material/icon.png"
-source_md5="fa015dcbd9f263a02b104f8edbdd2b7e"
-
 dest_files=[ "res://.import/icon.png-e50c29e04fadd80dff0ad39b35dc2b7e.stex" ]
-dest_md5="c30cf54aee674d990ef4aaa17d1f01c8"
 
 [params]
 

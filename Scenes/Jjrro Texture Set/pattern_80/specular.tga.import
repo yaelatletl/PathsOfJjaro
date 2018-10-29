@@ -8,10 +8,7 @@ path.etc2="res://.import/specular.tga-cef45987f1d565144c77fbdf219b3241.etc2.stex
 [deps]
 
 source_file="res://Scenes/Jjrro Texture Set/pattern_80/specular.tga"
-source_md5="40f7a7ae16762b9bd96f7b4bafae9aa6"
-
 dest_files=[ "res://.import/specular.tga-cef45987f1d565144c77fbdf219b3241.s3tc.stex", "res://.import/specular.tga-cef45987f1d565144c77fbdf219b3241.etc2.stex" ]
-dest_md5="c84beddec17e84acfd4ac223d447a37d"
 
 [params]
 

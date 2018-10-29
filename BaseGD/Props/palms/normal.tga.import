@@ -8,10 +8,7 @@ path.etc2="res://.import/normal.tga-0563f4ccda453d4721e6c580c4d70020.etc2.stex"
 [deps]
 
 source_file="res://BaseGD/Props/palms/normal.tga"
-source_md5="cbd84bc8ee30d89bc58a88ef558fade8"
-
 dest_files=[ "res://.import/normal.tga-0563f4ccda453d4721e6c580c4d70020.s3tc.stex", "res://.import/normal.tga-0563f4ccda453d4721e6c580c4d70020.etc2.stex" ]
-dest_md5="add6e531c40db946e2ba3cf7737c820f"
 
 [params]
 

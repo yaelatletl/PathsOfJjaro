@@ -8,10 +8,7 @@ path.etc2="res://.import/headspecular.png-ec396727f9037c5f3e9a9cae59db2f61.etc2.
 [deps]
 
 source_file="res://BaseGD/Characters/SphtSlave/SphtSlaveTextures/headspecular.png"
-source_md5="cc5dd22836b5df3e37faf74dd8f9c6c6"
-
 dest_files=[ "res://.import/headspecular.png-ec396727f9037c5f3e9a9cae59db2f61.s3tc.stex", "res://.import/headspecular.png-ec396727f9037c5f3e9a9cae59db2f61.etc2.stex" ]
-dest_md5="646a6d26b180fe4f8e985e89a723b632"
 
 [params]
 

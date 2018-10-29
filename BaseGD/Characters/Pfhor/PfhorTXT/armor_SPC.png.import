@@ -8,10 +8,7 @@ path.etc2="res://.import/armor_SPC.png-0cc98590da1934d7b868fc711f876b0a.etc2.ste
 [deps]
 
 source_file="res://BaseGD/Characters/Pfhor/PfhorTXT/armor_SPC.png"
-source_md5="279e6b0b7a5b19d163c9c3f4a1250e9e"
-
 dest_files=[ "res://.import/armor_SPC.png-0cc98590da1934d7b868fc711f876b0a.s3tc.stex", "res://.import/armor_SPC.png-0cc98590da1934d7b868fc711f876b0a.etc2.stex" ]
-dest_md5="636f27e3ae0808a93d604948b472ec2d"
 
 [params]
 

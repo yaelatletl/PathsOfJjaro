@@ -8,10 +8,7 @@ path.etc2="res://.import/cyborgheadnormal.png-810088833f6b96237e19ee09c4fa10e8.e
 [deps]
 
 source_file="res://BaseGD/Characters/SphtSlave/SphtSlaveTextures/cyborgheadnormal.png"
-source_md5="b035281b5b7c888bfe81cd91304e08a7"
-
 dest_files=[ "res://.import/cyborgheadnormal.png-810088833f6b96237e19ee09c4fa10e8.s3tc.stex", "res://.import/cyborgheadnormal.png-810088833f6b96237e19ee09c4fa10e8.etc2.stex" ]
-dest_md5="6da86a53b2ddbf2d65c7dc12478f9796"
 
 [params]
 

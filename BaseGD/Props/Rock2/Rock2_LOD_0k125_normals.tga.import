@@ -8,10 +8,7 @@ path.etc2="res://.import/Rock2_LOD_0k125_normals.tga-8ec96bed6d5d293c192650e4902
 [deps]
 
 source_file="res://BaseGD/Props/Rock2/Rock2_LOD_0k125_normals.tga"
-source_md5="7843e7832eb9dd106369d4d784d09b1c"
-
 dest_files=[ "res://.import/Rock2_LOD_0k125_normals.tga-8ec96bed6d5d293c192650e490284683.s3tc.stex", "res://.import/Rock2_LOD_0k125_normals.tga-8ec96bed6d5d293c192650e490284683.etc2.stex" ]
-dest_md5="3842a810405346a8b62d561ae13e947c"
 
 [params]
 

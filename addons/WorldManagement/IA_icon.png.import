@@ -7,10 +7,7 @@ path="res://.import/IA_icon.png-de30de8cad7920f6036e804ec94d18f2.stex"
 [deps]
 
 source_file="res://addons/WorldManagement/IA_icon.png"
-source_md5="811e1cff9efdb7390023c411ae2bbe55"
-
 dest_files=[ "res://.import/IA_icon.png-de30de8cad7920f6036e804ec94d18f2.stex" ]
-dest_md5="002587900576dfbdb73d89a643ee6ace"
 
 [params]
 

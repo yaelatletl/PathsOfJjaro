@@ -8,10 +8,7 @@ path.etc2="res://.import/LwL-Norm.png-143a07030a8519129d1cd30e6ae51f28.etc2.stex
 [deps]
 
 source_file="res://BaseGD/Characters/MADD/Textures/LwL-Norm.png"
-source_md5="5778787da475cdf2ba2fb0cb583617f5"
-
 dest_files=[ "res://.import/LwL-Norm.png-143a07030a8519129d1cd30e6ae51f28.s3tc.stex", "res://.import/LwL-Norm.png-143a07030a8519129d1cd30e6ae51f28.etc2.stex" ]
-dest_md5="8f0e6ae7429369b4deb6b78bcd92713c"
 
 [params]
 

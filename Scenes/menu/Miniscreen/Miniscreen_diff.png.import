@@ -8,10 +8,7 @@ path.etc2="res://.import/Miniscreen_diff.png-d49aa3768c3fc83e446e274f52322e6b.et
 [deps]
 
 source_file="res://Scenes/menu/Miniscreen/Miniscreen_diff.png"
-source_md5="35dc634fe31c4381450ad80acd174355"
-
 dest_files=[ "res://.import/Miniscreen_diff.png-d49aa3768c3fc83e446e274f52322e6b.s3tc.stex", "res://.import/Miniscreen_diff.png-d49aa3768c3fc83e446e274f52322e6b.etc2.stex" ]
-dest_md5="e946c0aada056552d1c497740e241239"
 
 [params]
 

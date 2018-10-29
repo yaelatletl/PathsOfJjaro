@@ -7,10 +7,7 @@ path="res://.import/Terminal.dae-b54f95842c5feb2dd657ce7d15df6bbb.scn"
 [deps]
 
 source_file="res://Scenes/menu/Terminal.dae"
-source_md5="c16a7e62175b3ee69df85b20508a0b51"
-
 dest_files=[ "res://.import/Terminal.dae-b54f95842c5feb2dd657ce7d15df6bbb.scn" ]
-dest_md5="c3a1c91b7dca8253712c95320f20c3fa"
 
 [params]
 
@@ -25,7 +22,7 @@ materials/keep_on_reimport=true
 meshes/compress=true
 meshes/ensure_tangents=true
 meshes/storage=0
-meshes/light_baking=0
+meshes/light_baking=2
 meshes/lightmap_texel_size=0.1
 external_files/store_in_subdir=false
 animation/import=true

@@ -7,10 +7,7 @@ path="res://.import/SphtKR.dae-a38a1d4dba9ced6adb4827eeabe664cb.scn"
 [deps]
 
 source_file="res://BaseGD/Characters/SphtKr/SphtKR.dae"
-source_md5="b2043cb798577dae75c4b57b90359a0d"
-
 dest_files=[ "res://.import/SphtKR.dae-a38a1d4dba9ced6adb4827eeabe664cb.scn" ]
-dest_md5="26df0e80f462c1213234982ab041eafa"
 
 [params]
 

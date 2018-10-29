@@ -8,10 +8,7 @@ path.etc2="res://.import/034.png-1cd56149f8de13ee4fd8b36efba4193b.etc2.stex"
 [deps]
 
 source_file="res://Scenes/Jjrro Texture Set/034/034.png"
-source_md5="d0c5d44ff48122cd360d68dc4070dc1c"
-
 dest_files=[ "res://.import/034.png-1cd56149f8de13ee4fd8b36efba4193b.s3tc.stex", "res://.import/034.png-1cd56149f8de13ee4fd8b36efba4193b.etc2.stex" ]
-dest_md5="7090b1132544903f1a07f8693be1ab70"
 
 [params]
 

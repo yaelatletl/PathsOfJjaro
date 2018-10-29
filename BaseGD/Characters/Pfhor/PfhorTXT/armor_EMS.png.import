@@ -8,10 +8,7 @@ path.etc2="res://.import/armor_EMS.png-f38d0db8661f1218de8969e84306c0de.etc2.ste
 [deps]
 
 source_file="res://BaseGD/Characters/Pfhor/PfhorTXT/armor_EMS.png"
-source_md5="428d798caf34d7e9b1e155bb39ea40b9"
-
 dest_files=[ "res://.import/armor_EMS.png-f38d0db8661f1218de8969e84306c0de.s3tc.stex", "res://.import/armor_EMS.png-f38d0db8661f1218de8969e84306c0de.etc2.stex" ]
-dest_md5="c0e72d6c0bfb448d991198ad9c0ef35b"
 
 [params]
 

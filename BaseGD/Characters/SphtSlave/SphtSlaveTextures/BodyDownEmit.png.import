@@ -8,10 +8,7 @@ path.etc2="res://.import/BodyDownEmit.png-4c75855946b8dfdcd1ed6de7d1555149.etc2.
 [deps]
 
 source_file="res://BaseGD/Characters/SphtSlave/SphtSlaveTextures/BodyDownEmit.png"
-source_md5="d8d0ec6b49d3993514e93083d7e71f52"
-
 dest_files=[ "res://.import/BodyDownEmit.png-4c75855946b8dfdcd1ed6de7d1555149.s3tc.stex", "res://.import/BodyDownEmit.png-4c75855946b8dfdcd1ed6de7d1555149.etc2.stex" ]
-dest_md5="6508b83ed33aa5ca889c1b7376614048"
 
 [params]
 

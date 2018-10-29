@@ -8,10 +8,7 @@ path.etc2="res://.import/UppDiff.png-b43c7d47ca5e2165f2c72145890e42ab.etc2.stex"
 [deps]
 
 source_file="res://BaseGD/Characters/MADD/Textures/UppDiff.png"
-source_md5="92ca10819c7c9c4e154486b8fc1cbb01"
-
 dest_files=[ "res://.import/UppDiff.png-b43c7d47ca5e2165f2c72145890e42ab.s3tc.stex", "res://.import/UppDiff.png-b43c7d47ca5e2165f2c72145890e42ab.etc2.stex" ]
-dest_md5="e7ab2d9474f3ff4d2eaa3747524d30e7"
 
 [params]
 

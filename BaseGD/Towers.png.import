@@ -7,10 +7,7 @@ path="res://.import/Towers.png-ad98b412c4c6c66d3da6ca4683890796.stex"
 [deps]
 
 source_file="res://BaseGD/Towers.png"
-source_md5="4d211649acad6afa986424a6a44bc679"
-
 dest_files=[ "res://.import/Towers.png-ad98b412c4c6c66d3da6ca4683890796.stex" ]
-dest_md5="d82adf8b272b43e36e9ddc7e1ac00d04"
 
 [params]
 

@@ -8,10 +8,7 @@ path.etc2="res://.import/Emit.png-e6faf753d23c0daa2d69c25c2851d5cb.etc2.stex"
 [deps]
 
 source_file="res://BaseGD/Characters/SphtKr/textures/Emit.png"
-source_md5="5201cc234b2c68309489a7ac3e1cc5e2"
-
 dest_files=[ "res://.import/Emit.png-e6faf753d23c0daa2d69c25c2851d5cb.s3tc.stex", "res://.import/Emit.png-e6faf753d23c0daa2d69c25c2851d5cb.etc2.stex" ]
-dest_md5="0b1fd6047bb7a066f101044bad67d2c8"
 
 [params]
 

@@ -8,10 +8,7 @@ path.etc2="res://.import/diff.png-8d3e702bd264096ca315237c43818950.etc2.stex"
 [deps]
 
 source_file="res://Scenes/menu/Terminal/diff.png"
-source_md5="2d035ea6905c17250fb1e97a8cb4eb17"
-
 dest_files=[ "res://.import/diff.png-8d3e702bd264096ca315237c43818950.s3tc.stex", "res://.import/diff.png-8d3e702bd264096ca315237c43818950.etc2.stex" ]
-dest_md5="37d63d0acd06975d9a21acc976551bf6"
 
 [params]
 

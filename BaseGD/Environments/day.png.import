@@ -7,10 +7,7 @@ path="res://.import/day.png-40943003f87ab71c474dab67de3d9370.stex"
 [deps]
 
 source_file="res://BaseGD/Environments/day.png"
-source_md5="7202814cf8802c5827ab5ce3a1d11fa0"
-
 dest_files=[ "res://.import/day.png-40943003f87ab71c474dab67de3d9370.stex" ]
-dest_md5="413ce9e15d46506372ce39fe2ef4b1b2"
 
 [params]
 

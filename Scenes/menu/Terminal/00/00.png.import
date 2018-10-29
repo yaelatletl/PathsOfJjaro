@@ -8,10 +8,7 @@ path.etc2="res://.import/00.png-49390e5ab4efd19c631e8d4622dc89b6.etc2.stex"
 [deps]
 
 source_file="res://Scenes/menu/Terminal/00/00.png"
-source_md5="6fa5c438b79d14d091dc798972bda07a"
-
 dest_files=[ "res://.import/00.png-49390e5ab4efd19c631e8d4622dc89b6.s3tc.stex", "res://.import/00.png-49390e5ab4efd19c631e8d4622dc89b6.etc2.stex" ]
-dest_md5="3225e48b4157682ad8cf875cdf999470"
 
 [params]
 

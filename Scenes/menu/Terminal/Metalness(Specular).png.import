@@ -8,10 +8,7 @@ path.etc2="res://.import/Metalness(Specular).png-0fa84af72dc4a57b020006789ed361c
 [deps]
 
 source_file="res://Scenes/menu/Terminal/Metalness(Specular).png"
-source_md5="b8027b608539498029fdd1536a523cee"
-
 dest_files=[ "res://.import/Metalness(Specular).png-0fa84af72dc4a57b020006789ed361c6.s3tc.stex", "res://.import/Metalness(Specular).png-0fa84af72dc4a57b020006789ed361c6.etc2.stex" ]
-dest_md5="880ff6881be3035ba5f844888b38bb12"
 
 [params]
 

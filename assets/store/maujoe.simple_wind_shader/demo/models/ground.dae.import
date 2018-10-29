@@ -7,10 +7,7 @@ path="res://.import/ground.dae-1e7f2140f53dcede40919840a1ce9487.scn"
 [deps]
 
 source_file="res://assets/store/maujoe.simple_wind_shader/demo/models/ground.dae"
-source_md5="7f7dcd52f0fb767cb34a62e774bdd2b4"
-
 dest_files=[ "res://.import/ground.dae-1e7f2140f53dcede40919840a1ce9487.scn" ]
-dest_md5="3d51623ca2a766d4887c91fa9369bc94"
 
 [params]
 

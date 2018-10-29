@@ -8,10 +8,7 @@ path.etc2="res://.import/Gun-D.png-fcf698fe3688ef8ef6b810ea2fadbac4.etc2.stex"
 [deps]
 
 source_file="res://BaseGD/Characters/MADD/Textures/Gun-D.png"
-source_md5="71fbb59c00fdd7569000dd90d174e1ed"
-
 dest_files=[ "res://.import/Gun-D.png-fcf698fe3688ef8ef6b810ea2fadbac4.s3tc.stex", "res://.import/Gun-D.png-fcf698fe3688ef8ef6b810ea2fadbac4.etc2.stex" ]
-dest_md5="9d54f403cebcada0e727d9d6ea6a259d"
 
 [params]
 

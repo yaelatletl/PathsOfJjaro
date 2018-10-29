@@ -8,10 +8,7 @@ path.etc2="res://.import/SphtBody.png-3c9016110037e2903becb2a5c77567fb.etc2.stex
 [deps]
 
 source_file="res://BaseGD/Characters/SphtKr/textures/SphtBody.png"
-source_md5="3cc1e1d7034113738eaff051545a07fc"
-
 dest_files=[ "res://.import/SphtBody.png-3c9016110037e2903becb2a5c77567fb.s3tc.stex", "res://.import/SphtBody.png-3c9016110037e2903becb2a5c77567fb.etc2.stex" ]
-dest_md5="9f62f1363af84605fb141452634e3c7e"
 
 [params]
 

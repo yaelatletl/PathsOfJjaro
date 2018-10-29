@@ -7,10 +7,7 @@ path="res://.import/MarathonLogo.png-8370566a094e70ad5fab9e9fb0cd5f9e.stex"
 [deps]
 
 source_file="res://MiscRes/MarathonLogo.png"
-source_md5="20722622f46b22ff9a168a542d005074"
-
 dest_files=[ "res://.import/MarathonLogo.png-8370566a094e70ad5fab9e9fb0cd5f9e.stex" ]
-dest_md5="761585c5993f2da8de8f6009a2620ac3"
 
 [params]
 

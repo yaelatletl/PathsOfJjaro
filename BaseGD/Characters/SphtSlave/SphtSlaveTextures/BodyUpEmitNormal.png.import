@@ -7,10 +7,7 @@ path="res://.import/BodyUpEmitNormal.png-2be3f0b7052df4693c93e7bc30c7d4a4.stex"
 [deps]
 
 source_file="res://BaseGD/Characters/SphtSlave/SphtSlaveTextures/BodyUpEmitNormal.png"
-source_md5="fd955f6cce840a189c9b8f82fb662e21"
-
 dest_files=[ "res://.import/BodyUpEmitNormal.png-2be3f0b7052df4693c93e7bc30c7d4a4.stex" ]
-dest_md5="9cbc4d64f81dde3ed8a73d6864bc818a"
 
 [params]
 

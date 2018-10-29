@@ -8,10 +8,7 @@ path.etc2="res://.import/05-normal.tga-e2209b5e3493cb4cfc3e91cde774a753.etc2.ste
 [deps]
 
 source_file="res://BaseGD/Props/TinyWeeds/05-normal.tga"
-source_md5="a4b405dfd1e8e01da35217c2a9020900"
-
 dest_files=[ "res://.import/05-normal.tga-e2209b5e3493cb4cfc3e91cde774a753.s3tc.stex", "res://.import/05-normal.tga-e2209b5e3493cb4cfc3e91cde774a753.etc2.stex" ]
-dest_md5="80e4c2352ec231922f587df50b622146"
 
 [params]
 

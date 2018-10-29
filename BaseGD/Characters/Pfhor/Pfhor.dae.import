@@ -7,10 +7,7 @@ path="res://.import/Pfhor.dae-a40d9a949f95ce351951d953d17d56ee.scn"
 [deps]
 
 source_file="res://BaseGD/Characters/Pfhor/Pfhor.dae"
-source_md5="f5e00006ac5410dc22879b93e71cec1b"
-
 dest_files=[ "res://.import/Pfhor.dae-a40d9a949f95ce351951d953d17d56ee.scn" ]
-dest_md5="165c8181f6a6de898e56a469488c8e96"
 
 [params]
 

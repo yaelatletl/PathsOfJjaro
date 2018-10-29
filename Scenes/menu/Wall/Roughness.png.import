@@ -8,10 +8,7 @@ path.etc2="res://.import/Roughness.png-f9a866965e5e508c17b0beac40fedba9.etc2.ste
 [deps]
 
 source_file="res://Scenes/menu/Wall/Roughness.png"
-source_md5="4c1f725dcbcf61a30104468b5464dbc0"
-
 dest_files=[ "res://.import/Roughness.png-f9a866965e5e508c17b0beac40fedba9.s3tc.stex", "res://.import/Roughness.png-f9a866965e5e508c17b0beac40fedba9.etc2.stex" ]
-dest_md5="97e016d03b42467b5bd06ea27c4ace84"
 
 [params]
 

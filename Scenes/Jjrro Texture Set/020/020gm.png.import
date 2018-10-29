@@ -8,10 +8,7 @@ path.etc2="res://.import/020gm.png-2e5d19642a337b405b8b7b5655567f95.etc2.stex"
 [deps]
 
 source_file="res://Scenes/Jjrro Texture Set/020/020gm.png"
-source_md5="3a3bfbc6490e30c8dca87bad90fecd35"
-
 dest_files=[ "res://.import/020gm.png-2e5d19642a337b405b8b7b5655567f95.s3tc.stex", "res://.import/020gm.png-2e5d19642a337b405b8b7b5655567f95.etc2.stex" ]
-dest_md5="1d634d396728ede19669441f7095946c"
 
 [params]
 

@@ -8,10 +8,7 @@ path.etc2="res://.import/ground_normal.png-d23f47f288e60ab49f6184dd95bdd2ba.etc2
 [deps]
 
 source_file="res://assets/store/maujoe.simple_wind_shader/demo/textures/ground_normal.png"
-source_md5="3a9681441715d0eecf1336c02361e2b0"
-
 dest_files=[ "res://.import/ground_normal.png-d23f47f288e60ab49f6184dd95bdd2ba.s3tc.stex", "res://.import/ground_normal.png-d23f47f288e60ab49f6184dd95bdd2ba.etc2.stex" ]
-dest_md5="d0a03b5526c556dcd9f880761932734c"
 
 [params]
 

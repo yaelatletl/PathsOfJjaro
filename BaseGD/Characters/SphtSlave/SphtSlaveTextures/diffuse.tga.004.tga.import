@@ -8,10 +8,7 @@ path.etc2="res://.import/diffuse.tga.004.tga-79c1cbf663d5226a1cc5265f4f4dbb95.et
 [deps]
 
 source_file="res://BaseGD/Characters/SphtSlave/SphtSlaveTextures/diffuse.tga.004.tga"
-source_md5="2d49813bbabe5bc852eebbdb92f49df6"
-
 dest_files=[ "res://.import/diffuse.tga.004.tga-79c1cbf663d5226a1cc5265f4f4dbb95.s3tc.stex", "res://.import/diffuse.tga.004.tga-79c1cbf663d5226a1cc5265f4f4dbb95.etc2.stex" ]
-dest_md5="3e080ee79b7911cc5d4d9e6ef1d5c453"
 
 [params]
 

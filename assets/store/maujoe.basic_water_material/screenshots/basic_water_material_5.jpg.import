@@ -7,10 +7,7 @@ path="res://.import/basic_water_material_5.jpg-abbea0c7151c272f69387353fdf7f733.
 [deps]
 
 source_file="res://assets/store/maujoe.basic_water_material/screenshots/basic_water_material_5.jpg"
-source_md5="94a84504102da55388766a4f1afd3b63"
-
 dest_files=[ "res://.import/basic_water_material_5.jpg-abbea0c7151c272f69387353fdf7f733.stex" ]
-dest_md5="0321f5fab8750cfeb9480e7a88701ec1"
 
 [params]
 

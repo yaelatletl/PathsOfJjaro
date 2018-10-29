@@ -7,10 +7,7 @@ path="res://.import/water_normal_1.png-3984133da22db923cdcf40dc18d05980.stex"
 [deps]
 
 source_file="res://assets/store/maujoe.basic_water_material/textures/water_normal_1.png"
-source_md5="3fba2c5407bc720ba09299aa25c22120"
-
 dest_files=[ "res://.import/water_normal_1.png-3984133da22db923cdcf40dc18d05980.stex" ]
-dest_md5="14d41eaa89f67f823cfc4a50a6934a42"
 
 [params]
 

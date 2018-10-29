@@ -1,12 +1,13 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
-[ext_resource path="res://BaseGD/Characters/MADD/Lowerbody_001.material" type="Material" id=1]
-[ext_resource path="res://BaseGD/Characters/MADD/Lowerbody.material" type="Material" id=2]
-[ext_resource path="res://BaseGD/Characters/MADD/Legs.material" type="Material" id=3]
-[ext_resource path="res://BaseGD/Characters/MADD/Material_001.material" type="Material" id=4]
-[ext_resource path="res://BaseGD/Characters/MADD/Upperbody.material" type="Material" id=5]
-[ext_resource path="res://BaseGD/Characters/MADD/Upperlegs.material" type="Material" id=6]
-[ext_resource path="res://BaseGD/AI/AI.tscn" type="PackedScene" id=7]
+[ext_resource path="res://addons/WorldManagement/Basic_3D_AI_Behavior.gd" type="Script" id=1]
+[ext_resource path="res://addons/WorldManagement/IA_icon.png" type="Texture" id=2]
+[ext_resource path="res://BaseGD/Characters/MADD/Lowerbody_001.material" type="Material" id=3]
+[ext_resource path="res://BaseGD/Characters/MADD/Lowerbody.material" type="Material" id=4]
+[ext_resource path="res://BaseGD/Characters/MADD/Legs.material" type="Material" id=5]
+[ext_resource path="res://BaseGD/Characters/MADD/Material_001.material" type="Material" id=6]
+[ext_resource path="res://BaseGD/Characters/MADD/Upperbody.material" type="Material" id=7]
+[ext_resource path="res://BaseGD/Characters/MADD/Upperlegs.material" type="Material" id=8]
 
 [sub_resource type="ArrayMesh" id=1]
 
@@ -20,7 +21,7 @@ surfaces/0 = {
 "blend_shape_data": [  ],
 "format": 98263,
 "index_count": 13632,
-"material": ExtResource( 1 ),
+"material": ExtResource( 3 ),
 "name": "Lowerbody.001",
 "primitive": 4,
 "skeleton_aabb": [  ],
@@ -39,7 +40,7 @@ surfaces/0 = {
 "blend_shape_data": [  ],
 "format": 98263,
 "index_count": 4998,
-"material": ExtResource( 2 ),
+"material": ExtResource( 4 ),
 "name": "Lowerbody",
 "primitive": 4,
 "skeleton_aabb": [  ],
@@ -58,7 +59,7 @@ surfaces/0 = {
 "blend_shape_data": [  ],
 "format": 98271,
 "index_count": 11256,
-"material": ExtResource( 3 ),
+"material": ExtResource( 5 ),
 "name": "Legs",
 "primitive": 4,
 "skeleton_aabb": [  ],
@@ -77,7 +78,7 @@ surfaces/0 = {
 "blend_shape_data": [  ],
 "format": 98263,
 "index_count": 3072,
-"material": ExtResource( 4 ),
+"material": ExtResource( 6 ),
 "name": "Material.001",
 "primitive": 4,
 "skeleton_aabb": [  ],
@@ -96,7 +97,7 @@ surfaces/0 = {
 "blend_shape_data": [  ],
 "format": 98295,
 "index_count": 13494,
-"material": ExtResource( 5 ),
+"material": ExtResource( 7 ),
 "name": "Upperbody",
 "primitive": 4,
 "skeleton_aabb": [  ],
@@ -115,7 +116,7 @@ surfaces/0 = {
 "blend_shape_data": [  ],
 "format": 98263,
 "index_count": 14544,
-"material": ExtResource( 6 ),
+"material": ExtResource( 8 ),
 "name": "Upperlegs",
 "primitive": 4,
 "skeleton_aabb": [  ],
@@ -139,6 +140,28 @@ axis_lock_angular_x = false
 axis_lock_angular_y = false
 axis_lock_angular_z = false
 collision/safe_margin = 0.001
+script = ExtResource( 1 )
+__meta__ = {
+"_editor_icon": ExtResource( 2 )
+}
+static_AI = false
+Team = 1
+is_worker = false
+indifference = 10
+smellarea = 5
+health = 100
+speedfactor = 2.0
+timewaiting = 2
+flies = true
+weight = 1
+max_speed = 10
+turn_speed = 40
+accel = 19.0
+deaccel = 14.0
+keep_jump_inertia = true
+air_idle_deaccel = false
+JumpHeight = 7.0
+grav = 9.8
 
 [node name="M.A.D.D." type="Spatial" parent="." index="0"]
 
@@ -316,11 +339,7 @@ playback_default_blend_time = 0.0
 playback_speed = 1.0
 blend_times = [  ]
 
-[node name="AI" parent="." index="2" instance=ExtResource( 7 )]
-
-flies = true
-
-[node name="CollisionShape" type="CollisionShape" parent="." index="3"]
+[node name="CollisionShape" type="CollisionShape" parent="." index="2"]
 
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.7328, 0 )
 shape = SubResource( 7 )

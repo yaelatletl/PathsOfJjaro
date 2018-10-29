@@ -7,6 +7,10 @@
 
 [node name="Scene Root" index="0" instance=ExtResource( 1 )]
 
+[node name="Skeleton" parent="metarig" index="0"]
+
+_sections_unfolded = [ "bones", "bones/0", "bones/23", "bones/38" ]
+
 [node name="Eggshell" parent="metarig/Skeleton" index="1"]
 
 material/0 = ExtResource( 2 )

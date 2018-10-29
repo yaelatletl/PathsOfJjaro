@@ -7,10 +7,7 @@ path="res://.import/editor_settings.png-30a55a174f4f52b865d585a9420db400.stex"
 [deps]
 
 source_file="res://assets/store/maujoe.simple_wind_shader/screenshots/editor_settings.png"
-source_md5="9de1483808f5a257023b46498dcb51b3"
-
 dest_files=[ "res://.import/editor_settings.png-30a55a174f4f52b865d585a9420db400.stex" ]
-dest_md5="dfadda728f99ce92bd9cfc31247e1389"
 
 [params]
 

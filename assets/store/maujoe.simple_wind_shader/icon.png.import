@@ -7,10 +7,7 @@ path="res://.import/icon.png-802d9c9ae580107b6c367fedda2df3a2.stex"
 [deps]
 
 source_file="res://assets/store/maujoe.simple_wind_shader/icon.png"
-source_md5="45b507bcc07f7bdca419701e0b2f0973"
-
 dest_files=[ "res://.import/icon.png-802d9c9ae580107b6c367fedda2df3a2.stex" ]
-dest_md5="ff2febcad57f2d09a26d9d1861ca8289"
 
 [params]
 

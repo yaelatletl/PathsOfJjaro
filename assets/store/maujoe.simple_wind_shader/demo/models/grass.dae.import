@@ -7,10 +7,7 @@ path="res://.import/grass.dae-2ab6fe323488d73746afe17d495bc3f6.scn"
 [deps]
 
 source_file="res://assets/store/maujoe.simple_wind_shader/demo/models/grass.dae"
-source_md5="d3d634c5c85feefdc7bc0ab670275110"
-
 dest_files=[ "res://.import/grass.dae-2ab6fe323488d73746afe17d495bc3f6.scn" ]
-dest_md5="1d61d225ba70a4b5512023aebacd75a8"
 
 [params]
 

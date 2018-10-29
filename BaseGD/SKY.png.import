@@ -7,10 +7,7 @@ path="res://.import/SKY.png-ceae91ba3c445f8305b4c3abd60206a7.stex"
 [deps]
 
 source_file="res://BaseGD/SKY.png"
-source_md5="cd2fe4f2cec11c95b96848f4454d62eb"
-
 dest_files=[ "res://.import/SKY.png-ceae91ba3c445f8305b4c3abd60206a7.stex" ]
-dest_md5="998b038353892a8c167d06fdca784e84"
 
 [params]
 

@@ -8,10 +8,7 @@ path.etc2="res://.import/water_normal_2.png-f954449f4d859a107b94caf8babce144.etc
 [deps]
 
 source_file="res://assets/store/maujoe.basic_water_material/textures/water_normal_2.png"
-source_md5="4de3299536d04e5f77092a8c06e024bd"
-
 dest_files=[ "res://.import/water_normal_2.png-f954449f4d859a107b94caf8babce144.s3tc.stex", "res://.import/water_normal_2.png-f954449f4d859a107b94caf8babce144.etc2.stex" ]
-dest_md5="7d953a406e3302613fa2582288789794"
 
 [params]
 

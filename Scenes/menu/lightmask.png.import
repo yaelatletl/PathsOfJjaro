@@ -8,10 +8,7 @@ path.etc2="res://.import/lightmask.png-945f0b6b223bbfc2b1b6e45516b4d26d.etc2.ste
 [deps]
 
 source_file="res://Scenes/menu/lightmask.png"
-source_md5="079acee336d13182f93c66befcf49084"
-
 dest_files=[ "res://.import/lightmask.png-945f0b6b223bbfc2b1b6e45516b4d26d.s3tc.stex", "res://.import/lightmask.png-945f0b6b223bbfc2b1b6e45516b4d26d.etc2.stex" ]
-dest_md5="b35d535d46b7329ce0066890bdb0f2f8"
 
 [params]
 
@@ -23,7 +20,7 @@ flags/repeat=true
 flags/filter=true
 flags/mipmaps=true
 flags/anisotropic=false
-flags/srgb=2
+flags/srgb=1
 process/fix_alpha_border=true
 process/premult_alpha=false
 process/HDR_as_SRGB=false

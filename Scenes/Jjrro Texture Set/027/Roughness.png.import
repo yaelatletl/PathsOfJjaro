@@ -8,10 +8,7 @@ path.etc2="res://.import/Roughness.png-06503142f59da7d1948c22ea72a03536.etc2.ste
 [deps]
 
 source_file="res://Scenes/Jjrro Texture Set/027/Roughness.png"
-source_md5="b2fab8b451269f36dc369a652d89f627"
-
 dest_files=[ "res://.import/Roughness.png-06503142f59da7d1948c22ea72a03536.s3tc.stex", "res://.import/Roughness.png-06503142f59da7d1948c22ea72a03536.etc2.stex" ]
-dest_md5="dd63dfc25b3e0d48859f0880a97d799e"
 
 [params]
 

@@ -8,10 +8,7 @@ path.etc2="res://.import/Metalness(Specular).png-74826e629b260c51be56b3d73606a66
 [deps]
 
 source_file="res://Scenes/Jjrro Texture Set/024/Metalness(Specular).png"
-source_md5="4c7befae0beb6047bda77347d2466c36"
-
 dest_files=[ "res://.import/Metalness(Specular).png-74826e629b260c51be56b3d73606a663.s3tc.stex", "res://.import/Metalness(Specular).png-74826e629b260c51be56b3d73606a663.etc2.stex" ]
-dest_md5="87a00f034292cc1ad0651425ada9c068"
 
 [params]
 

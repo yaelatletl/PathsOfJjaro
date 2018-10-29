@@ -7,10 +7,7 @@ path="res://.import/Gravicon.png-ef38ae312d1fe3632278879ff5cee758.stex"
 [deps]
 
 source_file="res://addons/WorldManagement/Gravicon.png"
-source_md5="4f0ebf8ef154ff56d67ce4be63296d85"
-
 dest_files=[ "res://.import/Gravicon.png-ef38ae312d1fe3632278879ff5cee758.stex" ]
-dest_md5="2e9ee83932d295d7c97278ff3ffa6c0f"
 
 [params]
 

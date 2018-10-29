@@ -8,10 +8,7 @@ path.etc2="res://.import/UpL-Norm.png-625869b5023b6ea457b0470a4296b12c.etc2.stex
 [deps]
 
 source_file="res://BaseGD/Characters/MADD/Textures/UpL-Norm.png"
-source_md5="25fa2d015d129b10babecf4bb3e71de4"
-
 dest_files=[ "res://.import/UpL-Norm.png-625869b5023b6ea457b0470a4296b12c.s3tc.stex", "res://.import/UpL-Norm.png-625869b5023b6ea457b0470a4296b12c.etc2.stex" ]
-dest_md5="c59faaf597ab6209b8bf616016d1a5eb"
 
 [params]
 

@@ -8,10 +8,7 @@ path.etc2="res://.import/pfhor_SPC.png-cbf8a0acfbcd73d593fd1894fbaa3b1f.etc2.ste
 [deps]
 
 source_file="res://BaseGD/Characters/Pfhor/PfhorTXT/pfhor_SPC.png"
-source_md5="e3d0cd1cb4d94c4d4d26c785ab5747bc"
-
 dest_files=[ "res://.import/pfhor_SPC.png-cbf8a0acfbcd73d593fd1894fbaa3b1f.s3tc.stex", "res://.import/pfhor_SPC.png-cbf8a0acfbcd73d593fd1894fbaa3b1f.etc2.stex" ]
-dest_md5="c53447064abd5034832ff76d9134c5b7"
 
 [params]
 

@@ -8,10 +8,7 @@ path.etc2="res://.import/dirt.png-477aa3f11d5e03e08209c3c1bdbfecf8.etc2.stex"
 [deps]
 
 source_file="res://assets/store/maujoe.basic_water_material/textures/dirt.png"
-source_md5="137da2cdf819d56751a05559721ae329"
-
 dest_files=[ "res://.import/dirt.png-477aa3f11d5e03e08209c3c1bdbfecf8.s3tc.stex", "res://.import/dirt.png-477aa3f11d5e03e08209c3c1bdbfecf8.etc2.stex" ]
-dest_md5="afacd74182844ae98ca56040b96143d2"
 
 [params]
 

@@ -8,10 +8,7 @@ path.etc2="res://.import/height.tga-59d6c447b430cef9d3f2df8eaa290917.etc2.stex"
 [deps]
 
 source_file="res://Scenes/Jjrro Texture Set/pattern_80/height.tga"
-source_md5="55a6a91343c8f9719de21145b6b22923"
-
 dest_files=[ "res://.import/height.tga-59d6c447b430cef9d3f2df8eaa290917.s3tc.stex", "res://.import/height.tga-59d6c447b430cef9d3f2df8eaa290917.etc2.stex" ]
-dest_md5="0c4954dc82c70373095f657b7808360d"
 
 [params]
 
