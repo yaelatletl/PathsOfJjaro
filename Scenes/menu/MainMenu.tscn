@@ -176,7 +176,73 @@ size = Vector2( 2, 2 )
 subdivide_width = 0
 subdivide_depth = 0
 
-[sub_resource type="Environment" id=10]
+[sub_resource type="Animation" id=10]
+
+length = 5.0
+loop = false
+step = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimationPlayer/Camera:transform")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 2, 2.5, 3.9, 4.5, 5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Transform( 0.991187, 0, -0.132472, 0, 1, 0, 0.132472, 0, 0.991187, 0.607071, 2.46145, 11.2532 ), Transform( 0.9999, 0, 0.0141645, 0, 1, 0, -0.0141645, 0, 0.9999, 0.902702, 2.46145, 9.04121 ), Transform( 0.991135, 0, 0.132855, 0, 1, 0, -0.132855, 0, 0.991135, 0.816111, 2.46145, 2.92856 ), Transform( 0.955517, 0, 0.294935, 0, 1, 0, -0.294935, 0, 0.955517, 0.492377, 2.46145, 1.34422 ), Transform( 0.999726, 0.00357758, -0.0231329, 0, 0.988252, 0.152836, 0.0234079, -0.152794, 0.987981, -0.0310913, 2.46145, 0.625116 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AnimationPlayer/Camera2:current")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("AnimationPlayer/Camera2:transform")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Transform( 0.991187, 0, -0.132472, 0, 1, 0, 0.132472, 0, 0.991187, 0.607071, 2.46145, 11.2532 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("AnimationPlayer/Camera:current")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("AnimationPlayer/WorldEnvironment:environment:dof_blur_far_amount")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 2, 5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0.22, 0.22, 0.14 ]
+}
+
+[sub_resource type="Environment" id=11]
 
 background_mode = 0
 background_sky_custom_fov = 0.0
@@ -227,8 +293,8 @@ ssao_edge_sharpness = 4.0
 dof_blur_far_enabled = true
 dof_blur_far_distance = 1.38
 dof_blur_far_transition = 4.18
-dof_blur_far_amount = 0.07
-dof_blur_far_quality = 1
+dof_blur_far_amount = 0.14
+dof_blur_far_quality = 2
 dof_blur_near_enabled = false
 dof_blur_near_distance = 1.67
 dof_blur_near_transition = 2.06
@@ -253,27 +319,9 @@ adjustment_enabled = true
 adjustment_brightness = 1.0
 adjustment_contrast = 0.92
 adjustment_saturation = 1.0
-_sections_unfolded = [ "Adjustments", "Ambient Light", "Auto Exposure", "Background", "DOF Near Blur", "Glow/levels", "SS Reflections", "SSAO" ]
+_sections_unfolded = [ "Adjustments", "Ambient Light", "Auto Exposure", "Background", "DOF Far Blur", "DOF Near Blur", "Glow/levels", "SS Reflections", "SSAO" ]
 
-[sub_resource type="Animation" id=11]
-
-length = 3.0
-loop = false
-step = 0.1
-tracks/0/type = "value"
-tracks/0/path = NodePath("AnimationPlayer/Camera:transform")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.5, 1.9, 2.5, 3 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
-"update": 0,
-"values": [ Transform( 0.991187, 0, -0.132472, 0, 1, 0, 0.132472, 0, 0.991187, 0.607071, 2.46145, 11.2532 ), Transform( 0.9999, 0, 0.0141645, 0, 1, 0, -0.0141645, 0, 0.9999, 0.902702, 2.46145, 9.04121 ), Transform( 0.991135, 0, 0.132855, 0, 1, 0, -0.132855, 0, 0.991135, 0.816111, 2.46145, 2.92856 ), Transform( 0.955517, 0, 0.294935, 0, 1, 0, -0.294935, 0, 0.955517, 0.492377, 2.46145, 1.34422 ), Transform( 0.999726, 0.00357758, -0.0231329, 0, 0.988252, 0.152836, 0.0234079, -0.152794, 0.987981, -0.0310913, 2.46145, 0.625116 ) ]
-}
-
-[node name="Scene Root" type="Spatial"]
+[node name="Scene Root" type="Spatial" index="0"]
 
 script = ExtResource( 1 )
 
@@ -377,7 +425,7 @@ _sections_unfolded = [ "material" ]
 
 [node name="Keyboard" type="MeshInstance" parent="Terminal" index="4"]
 
-transform = Transform( 1, 0, 0, 0, 0.94654, -0.322588, 0, 0.322588, 0.94654, -0.240384, 1.73962, 0.448236 )
+transform = Transform( 1, 0, 0, 0, 0.94654, -0.322588, 0, 0.322588, 0.94654, 7.61445, 4.26551, 0.677832 )
 layers = 1
 material_override = null
 cast_shadow = 1
@@ -393,7 +441,7 @@ material/0 = null
 
 [node name="Point" type="OmniLight" parent="." index="1"]
 
-transform = Transform( 1, 0, 0, 0, -4.37114e-008, 1, 0, -1, -4.37114e-008, 3.52338, 4.15353, 3.22571 )
+transform = Transform( 1, 0, 0, 0, -4.37114e-008, 1, 0, -1, -4.37114e-008, 4.66334, 2.24304, 4.98638 )
 layers = 1
 light_color = Color( 1, 1, 1, 1 )
 light_energy = 1.0
@@ -1289,6 +1337,7 @@ _sections_unfolded = [ "custom_colors", "custom_fonts" ]
 
 [node name="Settings" type="Node2D" parent="Viewport/2D_world" index="5"]
 
+editor/display_folded = true
 visible = false
 
 [node name="Video" type="Label" parent="Viewport/2D_world/Settings" index="0"]
@@ -1412,6 +1461,8 @@ max_lines_visible = -1
 _sections_unfolded = [ "custom_colors", "custom_fonts" ]
 
 [node name="Walls" type="Spatial" parent="." index="3"]
+
+editor/display_folded = true
 
 [node name="Wall" type="MeshInstance" parent="Walls" index="0"]
 
@@ -2620,11 +2671,7 @@ skeleton = NodePath("..")
 material/0 = ExtResource( 13 )
 _sections_unfolded = [ "material" ]
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="." index="5"]
-
-environment = SubResource( 10 )
-
-[node name="GIProbe" type="GIProbe" parent="." index="6"]
+[node name="GIProbe" type="GIProbe" parent="." index="5"]
 
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.898539, 0.0259705, 5.18673 )
 layers = 1
@@ -2643,20 +2690,43 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="7"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="6"]
 
 root_node = NodePath("..")
 autoplay = ""
 playback_process_mode = 1
 playback_default_blend_time = 0.0
 playback_speed = 1.0
-anims/Walk = SubResource( 11 )
+anims/Walk = SubResource( 10 )
 blend_times = [  ]
 _sections_unfolded = [ "Playback Options" ]
 
-[node name="Camera" type="Camera" parent="AnimationPlayer" index="0"]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="AnimationPlayer" index="0"]
+
+environment = SubResource( 11 )
+
+[node name="Camera" type="Camera" parent="AnimationPlayer" index="1"]
 
 transform = Transform( 0.999726, 0.00357758, -0.0231329, 0, 0.988252, 0.152836, 0.0234079, -0.152794, 0.987981, -0.0310913, 2.46145, 0.625116 )
+keep_aspect = 1
+cull_mask = 1048575
+environment = null
+h_offset = 0.0
+v_offset = 0.0
+doppler_tracking = 0
+projection = 0
+current = true
+fov = 70.0
+size = 1.0
+near = 0.05
+far = 100.0
+_sections_unfolded = [ "Transform" ]
+
+[node name="motion_blur" parent="AnimationPlayer/Camera" index="0" instance=ExtResource( 14 )]
+
+[node name="Camera2" type="Camera" parent="AnimationPlayer" index="2"]
+
+transform = Transform( 0.991187, 0, -0.132472, 0, 1, 0, 0.132472, 0, 0.991187, 0.607071, 2.46145, 11.2532 )
 keep_aspect = 1
 cull_mask = 1048575
 environment = null
@@ -2671,9 +2741,9 @@ near = 0.05
 far = 100.0
 _sections_unfolded = [ "Transform" ]
 
-[node name="motion_blur" parent="AnimationPlayer/Camera" index="0" instance=ExtResource( 14 )]
+[node name="motion_blur" parent="AnimationPlayer/Camera2" index="0" instance=ExtResource( 14 )]
 
-[node name="LensFlare" type="Node" parent="." index="8"]
+[node name="LensFlare" type="Node" parent="." index="7"]
 
 script = ExtResource( 15 )
 __meta__ = {

@@ -1,0 +1,136 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://MiscRes/Terminals/Background.tscn" type="PackedScene" id=1]
+[ext_resource path="res://MiscRes/terminals.tres" type="DynamicFont" id=2]
+
+[node name="CanvasLayer" type="CanvasLayer" index="0"]
+
+layer = 1
+offset = Vector2( 0, 0 )
+rotation = 0.0
+scale = Vector2( 1, 1 )
+transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+
+[node name="Scene Root" parent="." index="0" instance=ExtResource( 1 )]
+
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+
+[node name="Page1" type="RichTextLabel" parent="Scene Root" index="1"]
+
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -224.0
+margin_top = -90.5
+margin_right = 224.0
+margin_bottom = 90.5
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = true
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+custom_fonts/mono_font = ExtResource( 2 )
+custom_fonts/bold_italics_font = ExtResource( 2 )
+custom_fonts/italics_font = ExtResource( 2 )
+custom_fonts/bold_font = ExtResource( 2 )
+custom_fonts/normal_font = ExtResource( 2 )
+custom_colors/default_color = Color( 0, 1, 0, 1 )
+bbcode_enabled = true
+bbcode_text = "<Message to All Marathon Terminals>
+
+Marathon Emergency Systems Broadcast
+
+Today at 0820 hours, the Marathon came under surprise attack
+from unknown hostile forces.  The Marathon has sustained
+serious damage.
+
+At 0830 hours, alien forces boarded the Marathon.  The current
+situation is dire.  All personnel are required to arm
+themselves and fight for their lives.
+<Posted 2794.7.3.14.08.39>"
+visible_characters = -1
+percent_visible = 1.0
+meta_underlined = true
+tab_size = 4
+text = "<Message to All Marathon Terminals>
+
+Marathon Emergency Systems Broadcast
+
+Today at 0820 hours, the Marathon came under surprise attack
+from unknown hostile forces.  The Marathon has sustained
+serious damage.
+
+At 0830 hours, alien forces boarded the Marathon.  The current
+situation is dire.  All personnel are required to arm
+themselves and fight for their lives.
+<Posted 2794.7.3.14.08.39>"
+scroll_active = true
+scroll_following = false
+selection_enabled = false
+override_selected_font_color = false
+_sections_unfolded = [ "BBCode", "custom_colors", "custom_fonts" ]
+
+[node name="Page2" type="RichTextLabel" parent="Scene Root" index="2"]
+
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -222.5
+margin_top = -92.0
+margin_right = 222.5
+margin_bottom = 92.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = true
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+custom_fonts/mono_font = ExtResource( 2 )
+custom_fonts/bold_italics_font = ExtResource( 2 )
+custom_fonts/italics_font = ExtResource( 2 )
+custom_fonts/bold_font = ExtResource( 2 )
+custom_fonts/normal_font = ExtResource( 2 )
+custom_colors/default_color = Color( 0, 1, 0, 1 )
+bbcode_enabled = true
+bbcode_text = "***INCOMING MESSAGE FROM LEELA***
+
+Welcome to the Marathon.  I am Leela, one of the two surviving
+Artificial Intelligences aboard the Marathon.  I have been
+severely damaged, and am working to understand the current
+situation.
+
+Find the teleport terminal located in the Hangar's control
+room.  By that time, I should have a better idea of what is
+going on.
+
+***END MESSAGE***"
+visible_characters = -1
+percent_visible = 1.0
+meta_underlined = true
+tab_size = 4
+text = "***INCOMING MESSAGE FROM LEELA***
+
+Welcome to the Marathon.  I am Leela, one of the two surviving
+Artificial Intelligences aboard the Marathon.  I have been
+severely damaged, and am working to understand the current
+situation.
+
+Find the teleport terminal located in the Hangar's control
+room.  By that time, I should have a better idea of what is
+going on.
+
+***END MESSAGE***"
+scroll_active = true
+scroll_following = false
+selection_enabled = false
+override_selected_font_color = false
+_sections_unfolded = [ "BBCode", "custom_colors", "custom_fonts" ]
+
+
