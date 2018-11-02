@@ -290,7 +290,7 @@ ssao_color = Color( 0, 0, 0, 1 )
 ssao_quality = 0
 ssao_blur = 3
 ssao_edge_sharpness = 4.0
-dof_blur_far_enabled = true
+dof_blur_far_enabled = false
 dof_blur_far_distance = 1.38
 dof_blur_far_transition = 4.18
 dof_blur_far_amount = 0.14
@@ -321,7 +321,7 @@ adjustment_contrast = 0.92
 adjustment_saturation = 1.0
 _sections_unfolded = [ "Adjustments", "Ambient Light", "Auto Exposure", "Background", "DOF Far Blur", "DOF Near Blur", "Glow/levels", "SS Reflections", "SSAO" ]
 
-[node name="Scene Root" type="Spatial" index="0"]
+[node name="Scene Root" type="Spatial"]
 
 script = ExtResource( 1 )
 

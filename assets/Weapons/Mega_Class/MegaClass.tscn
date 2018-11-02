@@ -1,0 +1,65 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://assets/Weapons/Mega_Class/MegaClass_Final.mesh" type="ArrayMesh" id=1]
+
+[node name="MegaClass" type="Spatial"]
+
+[node name="MeshInstance" type="MeshInstance" parent="." index="0"]
+
+layers = 1
+material_override = null
+cast_shadow = 1
+extra_cull_margin = 0.0
+use_in_baked_light = false
+lod_min_distance = 0.0
+lod_min_hysteresis = 0.0
+lod_max_distance = 0.0
+lod_max_hysteresis = 0.0
+mesh = ExtResource( 1 )
+skeleton = NodePath("..")
+material/0 = null
+material/1 = null
+material/2 = null
+material/3 = null
+material/4 = null
+material/5 = null
+material/6 = null
+material/7 = null
+material/8 = null
+material/9 = null
+material/10 = null
+_sections_unfolded = [ "Transform", "material" ]
+
+[node name="Camera" type="Camera" parent="." index="1"]
+
+transform = Transform( -0.196184, 0, -0.980567, 0, 1, 0, 0.980567, 0, -0.196184, -2.89471, 0, 0.218999 )
+keep_aspect = 1
+cull_mask = 1048575
+environment = null
+h_offset = 0.0
+v_offset = 0.0
+doppler_tracking = 0
+projection = 0
+current = false
+fov = 70.0
+size = 1.0
+near = 0.05
+far = 100.0
+
+[node name="Camera2" type="Camera" parent="." index="2"]
+
+transform = Transform( -0.996195, 0, 0.0871558, 0.0499905, 0.819152, 0.571394, -0.0713939, 0.573576, -0.816035, -0.0176172, 1.66303, -3.12029 )
+keep_aspect = 1
+cull_mask = 1048575
+environment = null
+h_offset = 0.0
+v_offset = 0.0
+doppler_tracking = 0
+projection = 0
+current = false
+fov = 70.0
+size = 1.0
+near = 0.05
+far = 100.0
+
+
