@@ -130,6 +130,7 @@ surfaces/0 = {
 "skeleton_aabb": [  ],
 "vertex_count": 6
 }
+_sections_unfolded = [ "surface_1" ]
 
 [sub_resource type="ArrayMesh" id=1]
 
@@ -370,6 +371,7 @@ _sections_unfolded = [ "Geometry", "LOD" ]
 
 [node name="Miniscreen" type="MeshInstance" parent="." index="2"]
 
+editor/display_folded = true
 layers = 1
 material_override = null
 cast_shadow = 1
@@ -474,6 +476,7 @@ _sections_unfolded = [ "Light", "Omni", "Shadow" ]
 
 [node name="Viewport" type="Viewport" parent="." index="5"]
 
+editor/display_folded = true
 arvr = false
 size = Vector2( 512, 256 )
 own_world = false
