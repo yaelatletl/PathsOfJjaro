@@ -1,15 +1,15 @@
-[gd_scene load_steps=29 format=2]
+[gd_scene load_steps=31 format=2]
 
 [ext_resource path="res://Scenes/menu/MainMenu.gd" type="Script" id=1]
-[ext_resource path="res://Scenes/menu/MenuStream.material" type="Material" id=2]
-[ext_resource path="res://Scenes/menu/Material.material" type="Material" id=3]
-[ext_resource path="res://Scenes/menu/Metal.material" type="Material" id=4]
-[ext_resource path="res://Scenes/menu/Metal2.material" type="Material" id=5]
-[ext_resource path="res://Scenes/menu/Refraction.material" type="Material" id=6]
-[ext_resource path="res://Scenes/menu/Keyboard.material" type="Material" id=7]
+[ext_resource path="res://Scenes/menu/Material.material" type="Material" id=2]
+[ext_resource path="res://Scenes/menu/Metal.material" type="Material" id=3]
+[ext_resource path="res://Scenes/menu/Metal2.material" type="Material" id=4]
+[ext_resource path="res://Scenes/menu/Refraction.material" type="Material" id=5]
+[ext_resource path="res://Scenes/menu/Keyboard.material" type="Material" id=6]
+[ext_resource path="res://Scenes/menu/MenuStream.material" type="Material" id=7]
 [ext_resource path="res://Scenes/menu/menu.gd" type="Script" id=8]
 [ext_resource path="res://MiscRes/terminals.tres" type="DynamicFont" id=9]
-[ext_resource path="res://MiscRes/Pointer.png" type="Texture" id=10]
+[ext_resource path="res://MiscRes/Themes/Terminal.tres" type="Theme" id=10]
 [ext_resource path="res://MiscRes/MarathonLogo.png" type="Texture" id=11]
 [ext_resource path="res://Scenes/menu/M1WALL.material" type="Material" id=12]
 [ext_resource path="res://Scenes/007.material" type="Material" id=13]
@@ -17,26 +17,6 @@
 [ext_resource path="res://addons/SIsilicon.vfx.lens flare/lens-flare.gd" type="Script" id=15]
 [ext_resource path="res://addons/SIsilicon.vfx.lens flare/lens_flare_icon.png" type="Texture" id=16]
 [ext_resource path="res://addons/SIsilicon.vfx.lens flare/lens-dirt-default.jpeg" type="Texture" id=17]
-
-[sub_resource type="ArrayMesh" id=1]
-
-resource_name = "Cube.005"
-lightmap_size_hint = Vector2( 32, 44 )
-blend_shape_mode = 1
-custom_aabb = AABB( 0, 0, 0, 0, 0, 0 )
-surfaces/0 = {
-"aabb": AABB( -0.693848, 1.87891, -0.086792, 1.37062, 0.957031, 0.0828042 ),
-"array_data": PoolByteArray( 106, 57, 132, 63, 24, 156, 0, 60, 0, 10, 126, 0, 127, 0, 0, 127, 255, 59, 27, 60, 232, 59, 223, 59, 141, 185, 132, 63, 24, 156, 0, 60, 0, 10, 126, 0, 127, 0, 0, 127, 126, 5, 27, 60, 232, 59, 0, 36, 141, 185, 172, 65, 142, 173, 0, 60, 0, 10, 126, 0, 127, 0, 0, 127, 125, 5, 168, 30, 116, 55, 0, 36, 106, 57, 132, 63, 24, 156, 0, 60, 0, 10, 126, 0, 127, 0, 0, 127, 255, 59, 27, 60, 209, 33, 0, 36, 141, 185, 172, 65, 142, 173, 0, 60, 0, 10, 126, 0, 127, 0, 0, 127, 125, 5, 168, 30, 186, 57, 223, 57, 106, 57, 172, 65, 142, 173, 0, 60, 0, 10, 126, 0, 127, 0, 0, 127, 255, 59, 168, 30, 209, 33, 223, 57 ),
-"array_index_data": PoolByteArray( 0, 0, 1, 0, 2, 0, 3, 0, 4, 0, 5, 0 ),
-"blend_shape_data": [  ],
-"format": 98103,
-"index_count": 6,
-"material": ExtResource( 2 ),
-"primitive": 4,
-"skeleton_aabb": [  ],
-"vertex_count": 6
-}
-_sections_unfolded = [ "Resource", "surface_1" ]
 
 [sub_resource type="ArrayMesh" id=2]
 
@@ -51,7 +31,7 @@ surfaces/0 = {
 "blend_shape_data": [  ],
 "format": 98103,
 "index_count": 102,
-"material": ExtResource( 3 ),
+"material": ExtResource( 2 ),
 "primitive": 4,
 "skeleton_aabb": [  ],
 "vertex_count": 94
@@ -70,11 +50,12 @@ surfaces/0 = {
 "blend_shape_data": [  ],
 "format": 98103,
 "index_count": 3987,
-"material": ExtResource( 4 ),
+"material": ExtResource( 3 ),
 "primitive": 4,
 "skeleton_aabb": [  ],
 "vertex_count": 3941
 }
+_sections_unfolded = [ "surface_1" ]
 
 [sub_resource type="ArrayMesh" id=4]
 
@@ -88,7 +69,7 @@ surfaces/0 = {
 "blend_shape_data": [  ],
 "format": 98103,
 "index_count": 2472,
-"material": ExtResource( 5 ),
+"material": ExtResource( 4 ),
 "primitive": 4,
 "skeleton_aabb": [  ],
 "vertex_count": 2460
@@ -106,7 +87,7 @@ surfaces/0 = {
 "blend_shape_data": [  ],
 "format": 98103,
 "index_count": 24,
-"material": ExtResource( 3 ),
+"material": ExtResource( 2 ),
 "primitive": 4,
 "skeleton_aabb": [  ],
 "vertex_count": 24
@@ -124,7 +105,7 @@ surfaces/0 = {
 "blend_shape_data": [  ],
 "format": 98103,
 "index_count": 6,
-"material": ExtResource( 6 ),
+"material": ExtResource( 5 ),
 "primitive": 4,
 "skeleton_aabb": [  ],
 "vertex_count": 6
@@ -144,13 +125,42 @@ surfaces/0 = {
 "blend_shape_data": [  ],
 "format": 98103,
 "index_count": 6,
-"material": ExtResource( 7 ),
+"material": ExtResource( 6 ),
 "primitive": 4,
 "skeleton_aabb": [  ],
 "vertex_count": 6
 }
 
-[sub_resource type="ArrayMesh" id=8]
+[sub_resource type="ArrayMesh" id=1]
+
+resource_name = "Cube.005"
+lightmap_size_hint = Vector2( 32, 44 )
+blend_shape_mode = 1
+custom_aabb = AABB( 0, 0, 0, 0, 0, 0 )
+surfaces/0 = {
+"aabb": AABB( -0.693848, 1.87891, -0.086792, 1.37062, 0.957031, 0.0828042 ),
+"array_data": PoolByteArray( 106, 57, 132, 63, 24, 156, 0, 60, 0, 10, 126, 0, 127, 0, 0, 127, 255, 59, 27, 60, 232, 59, 223, 59, 141, 185, 132, 63, 24, 156, 0, 60, 0, 10, 126, 0, 127, 0, 0, 127, 126, 5, 27, 60, 232, 59, 0, 36, 141, 185, 172, 65, 142, 173, 0, 60, 0, 10, 126, 0, 127, 0, 0, 127, 125, 5, 168, 30, 116, 55, 0, 36, 106, 57, 132, 63, 24, 156, 0, 60, 0, 10, 126, 0, 127, 0, 0, 127, 255, 59, 27, 60, 209, 33, 0, 36, 141, 185, 172, 65, 142, 173, 0, 60, 0, 10, 126, 0, 127, 0, 0, 127, 125, 5, 168, 30, 186, 57, 223, 57, 106, 57, 172, 65, 142, 173, 0, 60, 0, 10, 126, 0, 127, 0, 0, 127, 255, 59, 168, 30, 209, 33, 223, 57 ),
+"array_index_data": PoolByteArray( 0, 0, 1, 0, 2, 0, 3, 0, 4, 0, 5, 0 ),
+"blend_shape_data": [  ],
+"format": 98103,
+"index_count": 6,
+"material": ExtResource( 7 ),
+"primitive": 4,
+"skeleton_aabb": [  ],
+"vertex_count": 6
+}
+_sections_unfolded = [ "Resource", "surface_1" ]
+
+[sub_resource type="BoxShape" id=13]
+
+extents = Vector3( 1, 1, 0.01 )
+
+[sub_resource type="QuadMesh" id=14]
+
+custom_aabb = AABB( 0, 0, 0, 0, 0, 0 )
+size = Vector2( 2, 2 )
+
+[sub_resource type="ArrayMesh" id=9]
 
 lightmap_size_hint = Vector2( 512, 512 )
 blend_shape_mode = 1
@@ -168,7 +178,7 @@ surfaces/0 = {
 "vertex_count": 374
 }
 
-[sub_resource type="PlaneMesh" id=9]
+[sub_resource type="PlaneMesh" id=10]
 
 lightmap_size_hint = Vector2( 258, 258 )
 custom_aabb = AABB( 0, 0, 0, 0, 0, 0 )
@@ -176,7 +186,7 @@ size = Vector2( 2, 2 )
 subdivide_width = 0
 subdivide_depth = 0
 
-[sub_resource type="Animation" id=10]
+[sub_resource type="Animation" id=11]
 
 length = 5.0
 loop = false
@@ -188,10 +198,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 2, 2.5, 3.9, 4.5, 5 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 2, 2.5, 3.9, 4.5, 5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
 "update": 0,
-"values": [ Transform( 0.991187, 0, -0.132472, 0, 1, 0, 0.132472, 0, 0.991187, 0.607071, 2.46145, 11.2532 ), Transform( 0.9999, 0, 0.0141645, 0, 1, 0, -0.0141645, 0, 0.9999, 0.902702, 2.46145, 9.04121 ), Transform( 0.991135, 0, 0.132855, 0, 1, 0, -0.132855, 0, 0.991135, 0.816111, 2.46145, 2.92856 ), Transform( 0.955517, 0, 0.294935, 0, 1, 0, -0.294935, 0, 0.955517, 0.492377, 2.46145, 1.34422 ), Transform( 0.999726, 0.00357758, -0.0231329, 0, 0.988252, 0.152836, 0.0234079, -0.152794, 0.987981, -0.0310913, 2.46145, 0.625116 ) ]
+"values": [ Transform( 0.991187, 0, -0.132472, 0, 1, 0, 0.132472, 0, 0.991187, 0.607071, 2.46145, 11.2532 ), Transform( 0.991187, 0, -0.132472, 0, 1, 0, 0.132472, 0, 0.991187, 0.607071, 2.46145, 11.2532 ), Transform( 0.9999, 0, 0.0141645, 0, 1, 0, -0.0141645, 0, 0.9999, 0.902702, 2.46145, 9.04121 ), Transform( 0.991135, 0, 0.132855, 0, 1, 0, -0.132855, 0, 0.991135, 0.816111, 2.46145, 2.92856 ), Transform( 0.955517, 0, 0.294935, 0, 1, 0, -0.294935, 0, 0.955517, 0.492377, 2.46145, 1.34422 ), Transform( 0.99987, 0, -0.0161095, 0.00119671, 0.997237, 0.074276, 0.016065, -0.0742857, 0.997107, -0.00650054, 2.46145, 0.733237 ) ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("AnimationPlayer/Camera2:current")
@@ -242,7 +252,7 @@ tracks/4/keys = {
 "values": [ 0.22, 0.22, 0.14 ]
 }
 
-[sub_resource type="Environment" id=11]
+[sub_resource type="Environment" id=12]
 
 background_mode = 0
 background_sky_custom_fov = 0.0
@@ -321,30 +331,13 @@ adjustment_contrast = 0.92
 adjustment_saturation = 1.0
 _sections_unfolded = [ "Adjustments", "Ambient Light", "Auto Exposure", "Background", "DOF Far Blur", "DOF Near Blur", "Glow/levels", "SS Reflections", "SSAO" ]
 
-[node name="Scene Root" type="Spatial"]
+[node name="Scene Root" type="Spatial" index="0"]
 
 script = ExtResource( 1 )
 
-[node name="Terminal" type="MeshInstance" parent="." index="0"]
+[node name="Details2" type="MeshInstance" parent="." index="0"]
 
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00461435, 0.00761191 )
-layers = 1
-material_override = ExtResource( 2 )
-cast_shadow = 1
-extra_cull_margin = 0.0
-use_in_baked_light = true
-lod_min_distance = 0.0
-lod_min_hysteresis = 0.0
-lod_max_distance = 0.0
-lod_max_hysteresis = 0.0
-mesh = SubResource( 1 )
-skeleton = NodePath("..")
-material/0 = null
-_sections_unfolded = [ "Geometry", "material" ]
-
-[node name="Details2" type="MeshInstance" parent="Terminal" index="0"]
-
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.00461435, -0.00761191 )
+transform = Transform( 1.17504, 0, 0, 0, 1, 0, 0, 0, 1, -0.000130155, 0, 0 )
 layers = 1
 material_override = null
 cast_shadow = 1
@@ -358,9 +351,9 @@ mesh = SubResource( 2 )
 skeleton = NodePath("..")
 material/0 = null
 
-[node name="Details" type="MeshInstance" parent="Terminal" index="1"]
+[node name="Details" type="MeshInstance" parent="." index="1"]
 
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.00461435, -0.00761191 )
+transform = Transform( 1.17504, 0, 0, 0, 1, 0, 0, 0, 1, -0.000130155, 0, 0 )
 layers = 1
 material_override = null
 cast_shadow = 1
@@ -375,9 +368,8 @@ skeleton = NodePath("..")
 material/0 = null
 _sections_unfolded = [ "Geometry", "LOD" ]
 
-[node name="Miniscreen" type="MeshInstance" parent="Terminal" index="2"]
+[node name="Miniscreen" type="MeshInstance" parent="." index="2"]
 
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.00461435, -0.00761191 )
 layers = 1
 material_override = null
 cast_shadow = 1
@@ -391,7 +383,7 @@ mesh = SubResource( 4 )
 skeleton = NodePath("..")
 material/0 = null
 
-[node name="Cube" type="MeshInstance" parent="Terminal/Miniscreen" index="0"]
+[node name="Cube" type="MeshInstance" parent="Miniscreen" index="0"]
 
 layers = 1
 material_override = null
@@ -406,9 +398,9 @@ mesh = SubResource( 5 )
 skeleton = NodePath("..")
 material/0 = null
 
-[node name="Screen" type="MeshInstance" parent="Terminal" index="3"]
+[node name="Screen" type="MeshInstance" parent="Miniscreen" index="1"]
 
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.00461435, -0.00761191 )
+transform = Transform( 1.17504, 0, 0, 0, 1, 0, 0, 0, 1, -0.000130155, 0, 0 )
 layers = 1
 material_override = null
 cast_shadow = 1
@@ -423,9 +415,9 @@ skeleton = NodePath("..")
 material/0 = null
 _sections_unfolded = [ "material" ]
 
-[node name="Keyboard" type="MeshInstance" parent="Terminal" index="4"]
+[node name="Keyboard" type="MeshInstance" parent="Miniscreen" index="2"]
 
-transform = Transform( 1, 0, 0, 0, 0.94654, -0.322588, 0, 0.322588, 0.94654, 7.61445, 4.26551, 0.677832 )
+transform = Transform( 1, 0, 0, 0, 0.998727, 0.050444, 0, -0.050444, 0.998727, -0.237944, 1.73824, 0.395367 )
 layers = 1
 material_override = null
 cast_shadow = 1
@@ -439,7 +431,25 @@ mesh = SubResource( 7 )
 skeleton = NodePath("..")
 material/0 = null
 
-[node name="Point" type="OmniLight" parent="." index="1"]
+[node name="Terminal" type="MeshInstance" parent="." index="3"]
+
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00461435, 0.00761191 )
+visible = false
+layers = 1
+material_override = ExtResource( 7 )
+cast_shadow = 1
+extra_cull_margin = 0.0
+use_in_baked_light = true
+lod_min_distance = 0.0
+lod_min_hysteresis = 0.0
+lod_max_distance = 0.0
+lod_max_hysteresis = 0.0
+mesh = SubResource( 1 )
+skeleton = NodePath("..")
+material/0 = null
+_sections_unfolded = [ "Geometry", "material" ]
+
+[node name="Point" type="OmniLight" parent="." index="4"]
 
 transform = Transform( 1, 0, 0, 0, -4.37114e-008, 1, 0, -1, -4.37114e-008, 4.66334, 2.24304, 4.98638 )
 layers = 1
@@ -462,11 +472,10 @@ omni_shadow_mode = 1
 omni_shadow_detail = 1
 _sections_unfolded = [ "Light", "Omni", "Shadow" ]
 
-[node name="Viewport" type="Viewport" parent="." index="2"]
+[node name="Viewport" type="Viewport" parent="." index="5"]
 
-editor/display_folded = true
 arvr = false
-size = Vector2( 0, 0 )
+size = Vector2( 512, 256 )
 own_world = false
 world = null
 transparent_bg = false
@@ -475,7 +484,7 @@ hdr = true
 disable_3d = false
 usage = 2
 debug_draw = 0
-render_target_v_flip = false
+render_target_v_flip = true
 render_target_clear_mode = 0
 render_target_update_mode = 2
 audio_listener_enable_2d = false
@@ -491,19 +500,32 @@ shadow_atlas_quad_3 = 4
 script = ExtResource( 8 )
 _sections_unfolded = [ "Audio Listener", "GUI", "Physics", "Render Target", "Rendering", "Shadow Atlas" ]
 
-[node name="2D_world" type="Node2D" parent="Viewport" index="0"]
+[node name="Control" type="Control" parent="Viewport" index="0"]
 
-[node name="Bkg" type="ColorRect" parent="Viewport/2D_world" index="0"]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 40.0
+margin_bottom = 40.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+
+[node name="Bkg" type="ColorRect" parent="Viewport/Control" index="0"]
 
 editor/display_folded = true
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -32.0
-margin_top = -32.0
-margin_right = 480.0
-margin_bottom = 224.0
+margin_left = -20.0
+margin_top = -20.0
+margin_right = 492.0
+margin_bottom = 236.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 0
@@ -513,14 +535,14 @@ size_flags_vertical = 1
 color = Color( 0, 0, 0, 1 )
 _sections_unfolded = [ "Margin" ]
 
-[node name="Red1" type="ColorRect" parent="Viewport/2D_world/Bkg" index="0"]
+[node name="Red1" type="ColorRect" parent="Viewport/Control/Bkg" index="0"]
 
 anchor_left = 0.5
 anchor_top = 0.0
 anchor_right = 0.5
 anchor_bottom = 0.0
 margin_left = -255.0
-margin_right = 254.0
+margin_right = 256.0
 margin_bottom = 20.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
@@ -531,7 +553,7 @@ size_flags_vertical = 1
 color = Color( 0.285156, 0, 0, 1 )
 _sections_unfolded = [ "Anchor", "Margin" ]
 
-[node name="Red2" type="ColorRect" parent="Viewport/2D_world/Bkg" index="1"]
+[node name="Red2" type="ColorRect" parent="Viewport/Control/Bkg" index="1"]
 
 anchor_left = 0.5
 anchor_top = 1.0
@@ -539,7 +561,7 @@ anchor_right = 0.5
 anchor_bottom = 1.0
 margin_left = -255.0
 margin_top = -16.0
-margin_right = 254.0
+margin_right = 256.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 0
@@ -549,7 +571,7 @@ size_flags_vertical = 1
 color = Color( 0.286275, 0, 0, 1 )
 _sections_unfolded = [ "Margin" ]
 
-[node name="Label" type="Label" parent="Viewport/2D_world/Bkg" index="2"]
+[node name="Label" type="Label" parent="Viewport/Control/Bkg" index="2"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -573,7 +595,7 @@ lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "custom_colors", "custom_fonts" ]
 
-[node name="Label3" type="Label" parent="Viewport/2D_world/Bkg" index="3"]
+[node name="Label3" type="Label" parent="Viewport/Control/Bkg" index="3"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -597,7 +619,7 @@ lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "custom_colors", "custom_fonts" ]
 
-[node name="Label4" type="Label" parent="Viewport/2D_world/Bkg" index="4"]
+[node name="Label4" type="Label" parent="Viewport/Control/Bkg" index="4"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -621,7 +643,7 @@ lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "custom_colors", "custom_fonts" ]
 
-[node name="Label2" type="Label" parent="Viewport/2D_world/Bkg" index="5"]
+[node name="Label2" type="Label" parent="Viewport/Control/Bkg" index="5"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -645,37 +667,107 @@ lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "custom_colors", "custom_fonts" ]
 
-[node name="Pointer" type="Sprite" parent="Viewport/2D_world" index="1"]
+[node name="Controls" type="Control" parent="Viewport/Control" index="1"]
 
 editor/display_folded = true
 visible = false
-position = Vector2( 20, 200 )
-scale = Vector2( 0.22973, 0.22973 )
-texture = ExtResource( 10 )
-__meta__ = {
-"_edit_group_": true
-}
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 40.0
+margin_bottom = 40.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
 
-[node name="Pointer2" type="Sprite" parent="Viewport/2D_world/Pointer" index="0"]
+[node name="Done" type="Button" parent="Viewport/Control/Controls" index="0"]
 
-rotation = 1.5708
-texture = ExtResource( 10 )
-_sections_unfolded = [ "Transform" ]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 298.0
+margin_top = 219.0
+margin_right = 326.0
+margin_bottom = 233.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+theme = ExtResource( 10 )
+custom_fonts/font = ExtResource( 9 )
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
+text = "Done"
+flat = false
+align = 1
+_sections_unfolded = [ "Theme", "custom_colors", "custom_fonts" ]
 
-[node name="Main" type="Node2D" parent="Viewport/2D_world" index="2"]
+[node name="Cancel" type="Button" parent="Viewport/Control/Controls" index="1"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 427.0
+margin_top = 219.0
+margin_right = 429.0
+margin_bottom = 193.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+theme = ExtResource( 10 )
+custom_fonts/font = ExtResource( 9 )
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
+text = "Cancel"
+flat = false
+align = 1
+_sections_unfolded = [ "custom_colors", "custom_fonts" ]
+
+[node name="Main" type="Tabs" parent="Viewport/Control" index="2"]
 
 editor/display_folded = true
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 41.0
+margin_bottom = 22.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+tab_align = 1
+scrolling_enabled = true
 
-[node name="Play" type="Label" parent="Viewport/2D_world/Main" index="0"]
+[node name="Play" type="Button" parent="Viewport/Control/Main" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 40.0
-margin_top = 80.0
+margin_top = 47.0
 margin_right = 138.0
-margin_bottom = 94.0
+margin_bottom = 61.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 focus_mode = 2
@@ -683,25 +775,27 @@ mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
+theme = ExtResource( 10 )
 custom_fonts/font = ExtResource( 9 )
-custom_colors/font_color = Color( 0, 1, 0, 1 )
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
 text = "Start New Game"
+flat = false
 align = 1
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
-_sections_unfolded = [ "Anchor", "Grow Direction", "Margin", "Size Flags", "Theme", "custom_colors", "custom_fonts" ]
+_sections_unfolded = [ "Anchor", "Grow Direction", "Margin", "Size Flags", "Theme", "custom_colors", "custom_fonts", "custom_styles" ]
 
-[node name="Play2" type="Label" parent="Viewport/2D_world/Main" index="1"]
+[node name="Play2" type="Button" parent="Viewport/Control/Main" index="1"]
 
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 40.0
-margin_top = 100.0
+margin_top = 67.0
 margin_right = 159.0
-margin_bottom = 114.0
+margin_bottom = 81.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 focus_mode = 2
@@ -709,25 +803,29 @@ mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
+theme = ExtResource( 10 )
 custom_fonts/font = ExtResource( 9 )
 custom_colors/font_color = Color( 0.578125, 0, 0, 1 )
+disabled = true
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
 text = "Host Network Game"
+flat = false
 align = 1
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
 _sections_unfolded = [ "Anchor", "Grow Direction", "Margin", "Size Flags", "Theme", "custom_colors", "custom_fonts" ]
 
-[node name="Play3" type="Label" parent="Viewport/2D_world/Main" index="2"]
+[node name="Play3" type="Button" parent="Viewport/Control/Main" index="2"]
 
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 40.0
-margin_top = 120.0
+margin_top = 87.0
 margin_right = 159.0
-margin_bottom = 134.0
+margin_bottom = 101.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 focus_mode = 2
@@ -735,25 +833,29 @@ mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
+theme = ExtResource( 10 )
 custom_fonts/font = ExtResource( 9 )
 custom_colors/font_color = Color( 0.617188, 0, 0, 1 )
+disabled = true
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
 text = "Join Network Game"
+flat = false
 align = 1
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
 _sections_unfolded = [ "Anchor", "Grow Direction", "Margin", "Size Flags", "Theme", "custom_colors", "custom_fonts" ]
 
-[node name="Settings" type="Label" parent="Viewport/2D_world/Main" index="3"]
+[node name="Settings" type="Button" parent="Viewport/Control/Main" index="3"]
 
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 40.0
-margin_top = 140.0
+margin_top = 107.0
 margin_right = 96.0
-margin_bottom = 154.0
+margin_bottom = 121.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 focus_mode = 2
@@ -761,25 +863,27 @@ mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
+theme = ExtResource( 10 )
 custom_fonts/font = ExtResource( 9 )
-custom_colors/font_color = Color( 0, 1, 0, 1 )
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
 text = "Settings"
+flat = false
 align = 1
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
 _sections_unfolded = [ "Anchor", "Grow Direction", "Margin", "Size Flags", "Theme", "custom_colors", "custom_fonts" ]
 
-[node name="Quit" type="Label" parent="Viewport/2D_world/Main" index="4"]
+[node name="Quit" type="Button" parent="Viewport/Control/Main" index="4"]
 
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 40.0
-margin_top = 160.0
+margin_top = 127.0
 margin_right = 68.0
-margin_bottom = 174.0
+margin_bottom = 141.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 focus_mode = 2
@@ -787,38 +891,75 @@ mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
+theme = ExtResource( 10 )
 custom_fonts/font = ExtResource( 9 )
-custom_colors/font_color = Color( 0, 1, 0, 1 )
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
 text = "Quit"
+flat = false
 align = 1
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
 _sections_unfolded = [ "Anchor", "Grow Direction", "Margin", "Size Flags", "Theme", "custom_colors", "custom_fonts" ]
 
-[node name="MarathonLogo" type="Sprite" parent="Viewport/2D_world/Main" index="5"]
+[node name="MarathonLogo" type="Sprite" parent="Viewport/Control/Main" index="5"]
 
-position = Vector2( 390, 120 )
+position = Vector2( 390, 86.9209 )
 scale = Vector2( 0.637597, 0.637597 )
 texture = ExtResource( 11 )
 _sections_unfolded = [ "Animation", "Region" ]
 
-[node name="Graphics" type="Node2D" parent="Viewport/2D_world" index="3"]
+[node name="TabContainer" type="TabContainer" parent="Viewport/Control" index="3"]
 
 editor/display_folded = true
 visible = false
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 21.0
+margin_right = 511.0
+margin_bottom = 258.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+theme = ExtResource( 10 )
+tab_align = 1
+tabs_visible = true
+_sections_unfolded = [ "Theme" ]
+
+[node name="Graphics" type="Tabs" parent="Viewport/Control/TabContainer" index="0"]
+
+editor/display_folded = true
+visible = false
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 20.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+tab_align = 1
+scrolling_enabled = true
 _sections_unfolded = [ "Transform" ]
 
-[node name="SSAO" type="Label" parent="Viewport/2D_world/Graphics" index="0"]
+[node name="SSAO" type="Label" parent="Viewport/Control/TabContainer/Graphics" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 30.0
-margin_top = 40.0
-margin_right = 270.0
-margin_bottom = 71.0
+margin_left = 40.0
+margin_top = 20.0
+margin_right = 280.0
+margin_bottom = 51.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 2
@@ -833,39 +974,42 @@ lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "custom_colors", "custom_fonts" ]
 
-[node name="value" type="Label" parent="Viewport/2D_world/Graphics/SSAO" index="0"]
+[node name="value" type="Button" parent="Viewport/Control/TabContainer/Graphics/SSAO" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 330.0
-margin_right = 394.0
-margin_bottom = 31.0
+margin_right = 351.0
+margin_bottom = 14.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
-mouse_filter = 2
+focus_mode = 2
+mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
-size_flags_vertical = 4
-custom_fonts/font = ExtResource( 9 )
-custom_colors/font_color = Color( 0.0078125, 1, 0, 1 )
+size_flags_vertical = 1
+theme = ExtResource( 10 )
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
 text = "Off"
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
+flat = false
+align = 1
 _sections_unfolded = [ "custom_colors", "custom_fonts" ]
 
-[node name="Screen Space Relfections" type="Label" parent="Viewport/2D_world/Graphics" index="1"]
+[node name="Screen Space Relfections" type="Label" parent="Viewport/Control/TabContainer/Graphics" index="1"]
 
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 30.0
-margin_top = 70.0
-margin_right = 414.0
-margin_bottom = 101.0
+margin_left = 40.0
+margin_top = 50.0
+margin_right = 424.0
+margin_bottom = 81.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 2
@@ -880,39 +1024,42 @@ lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "custom_colors", "custom_fonts" ]
 
-[node name="value" type="Label" parent="Viewport/2D_world/Graphics/Screen Space Relfections" index="0"]
+[node name="value" type="Button" parent="Viewport/Control/TabContainer/Graphics/Screen Space Relfections" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 330.0
-margin_right = 394.0
-margin_bottom = 31.0
+margin_right = 351.0
+margin_bottom = 14.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
-mouse_filter = 2
+focus_mode = 2
+mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
-size_flags_vertical = 4
-custom_fonts/font = ExtResource( 9 )
-custom_colors/font_color = Color( 0.0078125, 1, 0, 1 )
+size_flags_vertical = 1
+theme = ExtResource( 10 )
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
 text = "Off"
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
+flat = false
+align = 1
 _sections_unfolded = [ "custom_colors", "custom_fonts" ]
 
-[node name="MSAA Filter" type="Label" parent="Viewport/2D_world/Graphics" index="2"]
+[node name="MSAA Filter" type="Label" parent="Viewport/Control/TabContainer/Graphics" index="2"]
 
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 30.0
-margin_top = 100.0
-margin_right = 414.0
-margin_bottom = 131.0
+margin_left = 40.0
+margin_top = 80.0
+margin_right = 424.0
+margin_bottom = 111.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 2
@@ -927,39 +1074,42 @@ lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "custom_colors", "custom_fonts" ]
 
-[node name="value" type="Label" parent="Viewport/2D_world/Graphics/MSAA Filter" index="0"]
+[node name="value" type="Button" parent="Viewport/Control/TabContainer/Graphics/MSAA Filter" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 330.0
-margin_right = 458.0
-margin_bottom = 31.0
+margin_right = 386.0
+margin_bottom = 14.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
-mouse_filter = 2
+focus_mode = 2
+mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
-size_flags_vertical = 4
-custom_fonts/font = ExtResource( 9 )
-custom_colors/font_color = Color( 0.0078125, 1, 0, 1 )
+size_flags_vertical = 1
+theme = ExtResource( 10 )
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
 text = "Disabled"
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
+flat = false
+align = 1
 _sections_unfolded = [ "custom_colors", "custom_fonts" ]
 
-[node name="AnsFilter" type="Label" parent="Viewport/2D_world/Graphics" index="3"]
+[node name="AnsFilter" type="Label" parent="Viewport/Control/TabContainer/Graphics" index="3"]
 
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 30.0
-margin_top = 130.0
-margin_right = 414.0
-margin_bottom = 161.0
+margin_left = 40.0
+margin_top = 110.0
+margin_right = 424.0
+margin_bottom = 141.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 2
@@ -974,117 +1124,148 @@ lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "custom_colors", "custom_fonts" ]
 
-[node name="value" type="Label" parent="Viewport/2D_world/Graphics/AnsFilter" index="0"]
+[node name="value" type="Button" parent="Viewport/Control/TabContainer/Graphics/AnsFilter" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 330.0
-margin_right = 458.0
-margin_bottom = 31.0
+margin_right = 386.0
+margin_bottom = 14.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
-mouse_filter = 2
+focus_mode = 2
+mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
-size_flags_vertical = 4
-custom_fonts/font = ExtResource( 9 )
-custom_colors/font_color = Color( 0.0078125, 1, 0, 1 )
+size_flags_vertical = 1
+theme = ExtResource( 10 )
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
 text = "Disabled"
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
+flat = false
+align = 1
 _sections_unfolded = [ "custom_colors", "custom_fonts" ]
 
-[node name="More" type="Label" parent="Viewport/2D_world/Graphics" index="4"]
+[node name="More" type="Button" parent="Viewport/Control/TabContainer/Graphics" index="4"]
 
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 50.0
-margin_top = 190.0
-margin_right = 114.0
-margin_bottom = 221.0
+margin_left = 60.0
+margin_top = 170.0
+margin_right = 124.0
+margin_bottom = 201.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
-mouse_filter = 2
+focus_mode = 2
+mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
-size_flags_vertical = 4
+size_flags_vertical = 1
+theme = ExtResource( 10 )
 custom_fonts/font = ExtResource( 9 )
-custom_colors/font_color = Color( 0.0078125, 1, 0, 1 )
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
 text = "More"
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
+flat = false
+align = 1
 _sections_unfolded = [ "custom_colors", "custom_fonts" ]
 
-[node name="Cancel" type="Label" parent="Viewport/2D_world/Graphics" index="5"]
+[node name="Cancel" type="Button" parent="Viewport/Control/TabContainer/Graphics" index="5"]
 
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 390.0
-margin_top = 190.0
-margin_right = 486.0
-margin_bottom = 221.0
+margin_left = 400.0
+margin_top = 170.0
+margin_right = 496.0
+margin_bottom = 201.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
-mouse_filter = 2
+focus_mode = 2
+mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
-size_flags_vertical = 4
+size_flags_vertical = 1
+theme = ExtResource( 10 )
 custom_fonts/font = ExtResource( 9 )
-custom_colors/font_color = Color( 0.0078125, 1, 0, 1 )
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
 text = "Cancel"
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
+flat = false
+align = 1
 _sections_unfolded = [ "custom_colors", "custom_fonts" ]
 
-[node name="Done" type="Label" parent="Viewport/2D_world/Graphics" index="6"]
+[node name="Done" type="Button" parent="Viewport/Control/TabContainer/Graphics" index="6"]
 
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 270.0
-margin_top = 190.0
-margin_right = 334.0
-margin_bottom = 221.0
+margin_left = 280.0
+margin_top = 170.0
+margin_right = 344.0
+margin_bottom = 201.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
-mouse_filter = 2
+focus_mode = 2
+mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
-size_flags_vertical = 4
+size_flags_vertical = 1
+theme = ExtResource( 10 )
 custom_fonts/font = ExtResource( 9 )
-custom_colors/font_color = Color( 0.0078125, 1, 0, 1 )
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
 text = "Done"
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
+flat = false
+align = 1
 _sections_unfolded = [ "custom_colors", "custom_fonts" ]
 
-[node name="Video" type="Node2D" parent="Viewport/2D_world" index="4"]
+[node name="Video" type="Tabs" parent="Viewport/Control/TabContainer" index="1"]
 
 editor/display_folded = true
 visible = false
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 10.0
+margin_top = 6.0
+margin_right = 2.0
+margin_bottom = -9.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+tab_align = 1
+scrolling_enabled = true
 _sections_unfolded = [ "Transform" ]
 
-[node name="Resolution" type="Label" parent="Viewport/2D_world/Video" index="0"]
+[node name="Resolution" type="Label" parent="Viewport/Control/TabContainer/Video" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 30.0
-margin_top = 40.0
+margin_top = 34.0
 margin_right = 100.0
-margin_bottom = 54.0
+margin_bottom = 48.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 2
@@ -1099,7 +1280,7 @@ lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "custom_colors", "custom_fonts" ]
 
-[node name="value" type="Label" parent="Viewport/2D_world/Video/Resolution" index="0"]
+[node name="value" type="Label" parent="Viewport/Control/TabContainer/Video/Resolution" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -1122,16 +1303,16 @@ lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "custom_colors", "custom_fonts" ]
 
-[node name="Screen Space Relfections" type="Label" parent="Viewport/2D_world/Video" index="1"]
+[node name="Screen Space Relfections" type="Label" parent="Viewport/Control/TabContainer/Video" index="1"]
 
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 30.0
-margin_top = 70.0
+margin_top = 64.0
 margin_right = 100.0
-margin_bottom = 84.0
+margin_bottom = 78.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 2
@@ -1146,7 +1327,7 @@ lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "custom_colors", "custom_fonts" ]
 
-[node name="value" type="Label" parent="Viewport/2D_world/Video/Screen Space Relfections" index="0"]
+[node name="value" type="Label" parent="Viewport/Control/TabContainer/Video/Screen Space Relfections" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -1169,16 +1350,16 @@ lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "custom_colors", "custom_fonts" ]
 
-[node name="Gamma Corection" type="Label" parent="Viewport/2D_world/Video" index="2"]
+[node name="Gamma Corection" type="Label" parent="Viewport/Control/TabContainer/Video" index="2"]
 
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 30.0
-margin_top = 100.0
+margin_top = 94.0
 margin_right = 142.0
-margin_bottom = 114.0
+margin_bottom = 108.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 2
@@ -1193,7 +1374,7 @@ lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "custom_colors", "custom_fonts" ]
 
-[node name="value" type="Label" parent="Viewport/2D_world/Video/Gamma Corection" index="0"]
+[node name="value" type="Label" parent="Viewport/Control/TabContainer/Video/Gamma Corection" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -1216,16 +1397,16 @@ lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "custom_colors", "custom_fonts" ]
 
-[node name="Brightness" type="Label" parent="Viewport/2D_world/Video" index="3"]
+[node name="Brightness" type="Label" parent="Viewport/Control/TabContainer/Video" index="3"]
 
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 30.0
-margin_top = 130.0
+margin_top = 124.0
 margin_right = 100.0
-margin_bottom = 144.0
+margin_bottom = 138.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 2
@@ -1240,7 +1421,7 @@ lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "custom_colors", "custom_fonts" ]
 
-[node name="value" type="Label" parent="Viewport/2D_world/Video/Brightness" index="0"]
+[node name="value" type="Label" parent="Viewport/Control/TabContainer/Video/Brightness" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -1263,204 +1444,305 @@ lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "custom_colors", "custom_fonts" ]
 
-[node name="More" type="Label" parent="Viewport/2D_world/Video" index="4"]
+[node name="More" type="Button" parent="Viewport/Control/TabContainer/Video" index="4"]
 
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 50.0
-margin_top = 190.0
-margin_right = 78.0
-margin_bottom = 204.0
+margin_left = 68.0
+margin_top = 192.0
+margin_right = 96.0
+margin_bottom = 206.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
-mouse_filter = 2
+focus_mode = 2
+mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
-size_flags_vertical = 4
+size_flags_vertical = 1
+theme = ExtResource( 10 )
 custom_fonts/font = ExtResource( 9 )
-custom_colors/font_color = Color( 0, 1, 0, 1 )
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
 text = "More"
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
+flat = false
+align = 1
 _sections_unfolded = [ "custom_colors", "custom_fonts" ]
 
-[node name="Cancel" type="Label" parent="Viewport/2D_world/Video" index="5"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 390.0
-margin_top = 190.0
-margin_right = 432.0
-margin_bottom = 204.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 2
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 4
-custom_fonts/font = ExtResource( 9 )
-custom_colors/font_color = Color( 0, 1, 0, 1 )
-text = "Cancel"
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
-_sections_unfolded = [ "custom_colors", "custom_fonts" ]
-
-[node name="Done" type="Label" parent="Viewport/2D_world/Video" index="6"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 270.0
-margin_top = 190.0
-margin_right = 298.0
-margin_bottom = 204.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 2
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 4
-custom_fonts/font = ExtResource( 9 )
-custom_colors/font_color = Color( 0, 1, 0, 1 )
-text = "Done"
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
-_sections_unfolded = [ "custom_colors", "custom_fonts" ]
-
-[node name="Settings" type="Node2D" parent="Viewport/2D_world" index="5"]
+[node name="Controls" type="Tabs" parent="Viewport/Control/TabContainer" index="2"]
 
 editor/display_folded = true
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 10.0
+margin_right = 2.0
+margin_bottom = -15.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+tab_align = 1
+scrolling_enabled = true
+
+[node name="TabContainer" type="TabContainer" parent="Viewport/Control/TabContainer/Controls" index="0"]
+
+anchor_left = 0.5
+anchor_top = 0.0
+anchor_right = 0.5
+anchor_bottom = 0.0
+margin_left = -168.5
+margin_top = 21.0
+margin_right = 168.5
+margin_bottom = 62.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+tab_align = 1
+tabs_visible = true
+_sections_unfolded = [ "Grow Direction" ]
+
+[node name="Movement" type="Tabs" parent="Viewport/Control/TabContainer/Controls/TabContainer" index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 20.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+tab_align = 1
+scrolling_enabled = true
+
+[node name="Right" type="Button" parent="Viewport/Control/TabContainer/Controls/TabContainer/Movement" index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = -53.0
+margin_top = 89.0
+margin_right = 24.0
+margin_bottom = 103.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+theme = ExtResource( 10 )
+custom_fonts/font = ExtResource( 9 )
+custom_colors/font_color = Color( 0.0078125, 1, 0, 1 )
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
+text = "Strafe Right:"
+flat = false
+align = 1
+_sections_unfolded = [ "custom_colors", "custom_fonts" ]
+
+[node name="Left" type="Button" parent="Viewport/Control/TabContainer/Controls/TabContainer/Movement" index="1"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = -53.0
+margin_top = 73.0
+margin_right = 24.0
+margin_bottom = 87.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+theme = ExtResource( 10 )
+custom_fonts/font = ExtResource( 9 )
+custom_colors/font_color = Color( 0.0078125, 1, 0, 1 )
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
+text = "Strafe Left:"
+flat = false
+align = 1
+_sections_unfolded = [ "custom_colors", "custom_fonts" ]
+
+[node name="Backwards" type="Button" parent="Viewport/Control/TabContainer/Controls/TabContainer/Movement" index="2"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = -53.0
+margin_top = 56.0
+margin_right = 17.0
+margin_bottom = 70.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+theme = ExtResource( 10 )
+custom_fonts/font = ExtResource( 9 )
+custom_colors/font_color = Color( 0.0078125, 1, 0, 1 )
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
+text = "Backwards:"
+flat = false
+align = 1
+_sections_unfolded = [ "custom_colors", "custom_fonts" ]
+
+[node name="Forwards" type="Button" parent="Viewport/Control/TabContainer/Controls/TabContainer/Movement" index="3"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = -53.0
+margin_top = 39.0
+margin_right = 3.0
+margin_bottom = 53.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+theme = ExtResource( 10 )
+custom_fonts/font = ExtResource( 9 )
+custom_colors/font_color = Color( 0.0078125, 1, 0, 1 )
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
+text = "Forwards:"
+flat = false
+align = 1
+_sections_unfolded = [ "custom_colors", "custom_fonts" ]
+
+[node name="Combat" type="Tabs" parent="Viewport/Control/TabContainer/Controls/TabContainer" index="1"]
+
 visible = false
-
-[node name="Video" type="Label" parent="Viewport/2D_world/Settings" index="0"]
-
 anchor_left = 0.0
 anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 30.0
-margin_top = 40.0
-margin_right = 65.0
-margin_bottom = 54.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 20.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
-mouse_filter = 2
+mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
-size_flags_vertical = 4
-custom_fonts/font = ExtResource( 9 )
-custom_colors/font_color = Color( 0.0078125, 1, 0, 1 )
-text = "Video"
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
-_sections_unfolded = [ "custom_colors", "custom_fonts" ]
+size_flags_vertical = 1
+tab_align = 1
+scrolling_enabled = true
 
-[node name="Sound" type="Label" parent="Viewport/2D_world/Settings" index="1"]
+[node name="Comm" type="Tabs" parent="Viewport/Control/TabContainer/Controls/TabContainer" index="2"]
 
+visible = false
 anchor_left = 0.0
 anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 30.0
-margin_top = 120.0
-margin_right = 65.0
-margin_bottom = 134.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 20.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
-mouse_filter = 2
+mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
-size_flags_vertical = 4
-custom_fonts/font = ExtResource( 9 )
-custom_colors/font_color = Color( 0.0078125, 1, 0, 1 )
-text = "Sound"
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
-_sections_unfolded = [ "custom_colors", "custom_fonts" ]
+size_flags_vertical = 1
+tab_align = 1
+scrolling_enabled = true
 
-[node name="Controls" type="Label" parent="Viewport/2D_world/Settings" index="2"]
+[node name="Misc" type="Tabs" parent="Viewport/Control/TabContainer/Controls/TabContainer" index="3"]
 
+visible = false
 anchor_left = 0.0
 anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 30.0
-margin_top = 160.0
-margin_right = 86.0
-margin_bottom = 174.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 20.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
-mouse_filter = 2
+mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
-size_flags_vertical = 4
-custom_fonts/font = ExtResource( 9 )
-custom_colors/font_color = Color( 0.0078125, 1, 0, 1 )
-text = "Controls"
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
-_sections_unfolded = [ "custom_colors", "custom_fonts" ]
+size_flags_vertical = 1
+tab_align = 1
+scrolling_enabled = true
 
-[node name="Back" type="Label" parent="Viewport/2D_world/Settings" index="3"]
+[node name="Area" type="Area" parent="." index="6"]
 
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 370.0
-margin_top = 160.0
-margin_right = 412.0
-margin_bottom = 174.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 2
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 4
-custom_fonts/font = ExtResource( 9 )
-custom_colors/font_color = Color( 0.0078125, 1, 0, 1 )
-text = "Return"
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
-_sections_unfolded = [ "custom_colors", "custom_fonts" ]
+transform = Transform( 0.825077, 0, 0, 0, 0.500144, 0, 0, 0, 0.537495, -0.0116379, 2.34244, -0.0833091 )
+input_ray_pickable = false
+input_capture_on_drag = false
+space_override = 0
+gravity_point = false
+gravity_distance_scale = 0.0
+gravity_vec = Vector3( 0, -1, 0 )
+gravity = 9.8
+linear_damp = 0.1
+angular_damp = 1.0
+priority = 0.0
+monitoring = true
+monitorable = true
+collision_layer = 1
+collision_mask = 1
+audio_bus_override = false
+audio_bus_name = "Master"
+reverb_bus_enable = false
+reverb_bus_name = "Master"
+reverb_bus_amount = 0.0
+reverb_bus_uniformity = 0.0
+_sections_unfolded = [ "Transform" ]
 
-[node name="Graphics" type="Label" parent="Viewport/2D_world/Settings" index="4"]
+[node name="CollisionShape" type="CollisionShape" parent="Area" index="0"]
 
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 30.0
-margin_top = 80.0
-margin_right = 86.0
-margin_bottom = 94.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 2
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 4
-custom_fonts/font = ExtResource( 9 )
-custom_colors/font_color = Color( 0.0078125, 1, 0, 1 )
-text = "Graphics"
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
-_sections_unfolded = [ "custom_colors", "custom_fonts" ]
+shape = SubResource( 13 )
+disabled = false
+_sections_unfolded = [ "Transform" ]
 
-[node name="Walls" type="Spatial" parent="." index="3"]
+[node name="MeshInstance" type="MeshInstance" parent="Area" index="1"]
+
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+layers = 1
+material_override = null
+cast_shadow = 1
+extra_cull_margin = 0.0
+use_in_baked_light = false
+lod_min_distance = 0.0
+lod_min_hysteresis = 0.0
+lod_max_distance = 0.0
+lod_max_hysteresis = 0.0
+mesh = SubResource( 14 )
+skeleton = NodePath("..")
+material/0 = ExtResource( 7 )
+_sections_unfolded = [ "Transform", "material" ]
+
+[node name="Walls" type="Spatial" parent="." index="7"]
 
 editor/display_folded = true
 
@@ -1476,7 +1758,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 8 )
+mesh = SubResource( 9 )
 skeleton = NodePath("..")
 material/0 = null
 
@@ -1492,7 +1774,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 8 )
+mesh = SubResource( 9 )
 skeleton = NodePath("..")
 material/0 = null
 
@@ -1508,7 +1790,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 8 )
+mesh = SubResource( 9 )
 skeleton = NodePath("..")
 material/0 = null
 
@@ -1524,7 +1806,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 8 )
+mesh = SubResource( 9 )
 skeleton = NodePath("..")
 material/0 = null
 
@@ -1540,7 +1822,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 8 )
+mesh = SubResource( 9 )
 skeleton = NodePath("..")
 material/0 = null
 
@@ -1556,7 +1838,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 8 )
+mesh = SubResource( 9 )
 skeleton = NodePath("..")
 material/0 = null
 
@@ -1572,7 +1854,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 8 )
+mesh = SubResource( 9 )
 skeleton = NodePath("..")
 material/0 = null
 
@@ -1588,7 +1870,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 8 )
+mesh = SubResource( 9 )
 skeleton = NodePath("..")
 material/0 = null
 
@@ -1604,7 +1886,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 8 )
+mesh = SubResource( 9 )
 skeleton = NodePath("..")
 material/0 = null
 
@@ -1620,7 +1902,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 8 )
+mesh = SubResource( 9 )
 skeleton = NodePath("..")
 material/0 = null
 
@@ -1636,7 +1918,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 8 )
+mesh = SubResource( 9 )
 skeleton = NodePath("..")
 material/0 = null
 
@@ -1652,7 +1934,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 8 )
+mesh = SubResource( 9 )
 skeleton = NodePath("..")
 material/0 = null
 
@@ -1668,7 +1950,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 8 )
+mesh = SubResource( 9 )
 skeleton = NodePath("..")
 material/0 = null
 
@@ -1684,7 +1966,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 8 )
+mesh = SubResource( 9 )
 skeleton = NodePath("..")
 material/0 = null
 
@@ -1700,7 +1982,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 8 )
+mesh = SubResource( 9 )
 skeleton = NodePath("..")
 material/0 = null
 
@@ -1716,7 +1998,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 8 )
+mesh = SubResource( 9 )
 skeleton = NodePath("..")
 material/0 = null
 
@@ -1732,7 +2014,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 8 )
+mesh = SubResource( 9 )
 skeleton = NodePath("..")
 material/0 = null
 
@@ -1748,7 +2030,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 8 )
+mesh = SubResource( 9 )
 skeleton = NodePath("..")
 material/0 = null
 
@@ -1764,7 +2046,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 8 )
+mesh = SubResource( 9 )
 skeleton = NodePath("..")
 material/0 = null
 
@@ -1780,7 +2062,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 8 )
+mesh = SubResource( 9 )
 skeleton = NodePath("..")
 material/0 = null
 
@@ -1796,7 +2078,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 8 )
+mesh = SubResource( 9 )
 skeleton = NodePath("..")
 material/0 = null
 
@@ -1812,7 +2094,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 8 )
+mesh = SubResource( 9 )
 skeleton = NodePath("..")
 material/0 = null
 
@@ -1828,7 +2110,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 8 )
+mesh = SubResource( 9 )
 skeleton = NodePath("..")
 material/0 = null
 
@@ -1844,7 +2126,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 8 )
+mesh = SubResource( 9 )
 skeleton = NodePath("..")
 material/0 = null
 
@@ -1860,7 +2142,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 8 )
+mesh = SubResource( 9 )
 skeleton = NodePath("..")
 material/0 = null
 
@@ -1876,7 +2158,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 8 )
+mesh = SubResource( 9 )
 skeleton = NodePath("..")
 material/0 = null
 
@@ -1892,7 +2174,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 8 )
+mesh = SubResource( 9 )
 skeleton = NodePath("..")
 material/0 = null
 
@@ -1908,7 +2190,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 8 )
+mesh = SubResource( 9 )
 skeleton = NodePath("..")
 material/0 = null
 
@@ -1924,7 +2206,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 8 )
+mesh = SubResource( 9 )
 skeleton = NodePath("..")
 material/0 = null
 
@@ -1940,7 +2222,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 8 )
+mesh = SubResource( 9 )
 skeleton = NodePath("..")
 material/0 = null
 
@@ -1956,7 +2238,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 8 )
+mesh = SubResource( 9 )
 skeleton = NodePath("..")
 material/0 = null
 
@@ -1972,7 +2254,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 8 )
+mesh = SubResource( 9 )
 skeleton = NodePath("..")
 material/0 = null
 
@@ -1988,7 +2270,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 8 )
+mesh = SubResource( 9 )
 skeleton = NodePath("..")
 material/0 = null
 
@@ -2004,7 +2286,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 8 )
+mesh = SubResource( 9 )
 skeleton = NodePath("..")
 material/0 = null
 
@@ -2020,7 +2302,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 8 )
+mesh = SubResource( 9 )
 skeleton = NodePath("..")
 material/0 = null
 
@@ -2036,7 +2318,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 8 )
+mesh = SubResource( 9 )
 skeleton = NodePath("..")
 material/0 = null
 
@@ -2052,7 +2334,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 8 )
+mesh = SubResource( 9 )
 skeleton = NodePath("..")
 material/0 = null
 
@@ -2068,7 +2350,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 8 )
+mesh = SubResource( 9 )
 skeleton = NodePath("..")
 material/0 = null
 
@@ -2084,7 +2366,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 8 )
+mesh = SubResource( 9 )
 skeleton = NodePath("..")
 material/0 = null
 
@@ -2100,7 +2382,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 8 )
+mesh = SubResource( 9 )
 skeleton = NodePath("..")
 material/0 = null
 
@@ -2116,7 +2398,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 8 )
+mesh = SubResource( 9 )
 skeleton = NodePath("..")
 material/0 = null
 
@@ -2132,7 +2414,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 8 )
+mesh = SubResource( 9 )
 skeleton = NodePath("..")
 material/0 = null
 
@@ -2148,7 +2430,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 8 )
+mesh = SubResource( 9 )
 skeleton = NodePath("..")
 material/0 = null
 
@@ -2164,7 +2446,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 8 )
+mesh = SubResource( 9 )
 skeleton = NodePath("..")
 material/0 = null
 
@@ -2180,7 +2462,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 8 )
+mesh = SubResource( 9 )
 skeleton = NodePath("..")
 material/0 = null
 
@@ -2196,7 +2478,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 8 )
+mesh = SubResource( 9 )
 skeleton = NodePath("..")
 material/0 = null
 
@@ -2212,7 +2494,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 8 )
+mesh = SubResource( 9 )
 skeleton = NodePath("..")
 material/0 = null
 
@@ -2228,7 +2510,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 8 )
+mesh = SubResource( 9 )
 skeleton = NodePath("..")
 material/0 = null
 
@@ -2244,7 +2526,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 8 )
+mesh = SubResource( 9 )
 skeleton = NodePath("..")
 material/0 = null
 
@@ -2260,7 +2542,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 8 )
+mesh = SubResource( 9 )
 skeleton = NodePath("..")
 material/0 = null
 
@@ -2276,7 +2558,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 8 )
+mesh = SubResource( 9 )
 skeleton = NodePath("..")
 material/0 = null
 
@@ -2292,7 +2574,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 8 )
+mesh = SubResource( 9 )
 skeleton = NodePath("..")
 material/0 = null
 
@@ -2308,7 +2590,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 8 )
+mesh = SubResource( 9 )
 skeleton = NodePath("..")
 material/0 = null
 
@@ -2324,7 +2606,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 8 )
+mesh = SubResource( 9 )
 skeleton = NodePath("..")
 material/0 = null
 
@@ -2340,7 +2622,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 8 )
+mesh = SubResource( 9 )
 skeleton = NodePath("..")
 material/0 = null
 
@@ -2356,7 +2638,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 8 )
+mesh = SubResource( 9 )
 skeleton = NodePath("..")
 material/0 = null
 
@@ -2372,7 +2654,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 8 )
+mesh = SubResource( 9 )
 skeleton = NodePath("..")
 material/0 = null
 
@@ -2388,7 +2670,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 8 )
+mesh = SubResource( 9 )
 skeleton = NodePath("..")
 material/0 = null
 
@@ -2404,7 +2686,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 8 )
+mesh = SubResource( 9 )
 skeleton = NodePath("..")
 material/0 = null
 
@@ -2420,7 +2702,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 8 )
+mesh = SubResource( 9 )
 skeleton = NodePath("..")
 material/0 = null
 
@@ -2436,7 +2718,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 8 )
+mesh = SubResource( 9 )
 skeleton = NodePath("..")
 material/0 = null
 
@@ -2452,7 +2734,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 8 )
+mesh = SubResource( 9 )
 skeleton = NodePath("..")
 material/0 = null
 
@@ -2468,11 +2750,11 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 8 )
+mesh = SubResource( 9 )
 skeleton = NodePath("..")
 material/0 = null
 
-[node name="Limits" type="Spatial" parent="." index="4"]
+[node name="Limits" type="Spatial" parent="." index="8"]
 
 __meta__ = {
 "_edit_lock_": true
@@ -2490,7 +2772,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 9 )
+mesh = SubResource( 10 )
 skeleton = NodePath("..")
 material/0 = ExtResource( 13 )
 _sections_unfolded = [ "material" ]
@@ -2510,7 +2792,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 9 )
+mesh = SubResource( 10 )
 skeleton = NodePath("..")
 material/0 = ExtResource( 13 )
 _sections_unfolded = [ "material" ]
@@ -2527,7 +2809,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 9 )
+mesh = SubResource( 10 )
 skeleton = NodePath("..")
 material/0 = ExtResource( 13 )
 _sections_unfolded = [ "material" ]
@@ -2544,7 +2826,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 9 )
+mesh = SubResource( 10 )
 skeleton = NodePath("..")
 material/0 = ExtResource( 13 )
 _sections_unfolded = [ "material" ]
@@ -2561,7 +2843,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 9 )
+mesh = SubResource( 10 )
 skeleton = NodePath("..")
 material/0 = ExtResource( 13 )
 _sections_unfolded = [ "material" ]
@@ -2578,7 +2860,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 9 )
+mesh = SubResource( 10 )
 skeleton = NodePath("..")
 material/0 = ExtResource( 13 )
 _sections_unfolded = [ "material" ]
@@ -2598,7 +2880,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 9 )
+mesh = SubResource( 10 )
 skeleton = NodePath("..")
 material/0 = ExtResource( 13 )
 _sections_unfolded = [ "material" ]
@@ -2615,7 +2897,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 9 )
+mesh = SubResource( 10 )
 skeleton = NodePath("..")
 material/0 = ExtResource( 13 )
 _sections_unfolded = [ "material" ]
@@ -2632,7 +2914,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 9 )
+mesh = SubResource( 10 )
 skeleton = NodePath("..")
 material/0 = ExtResource( 13 )
 _sections_unfolded = [ "Geometry", "material" ]
@@ -2649,7 +2931,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 9 )
+mesh = SubResource( 10 )
 skeleton = NodePath("..")
 material/0 = ExtResource( 13 )
 _sections_unfolded = [ "Geometry", "material" ]
@@ -2666,12 +2948,12 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 9 )
+mesh = SubResource( 10 )
 skeleton = NodePath("..")
 material/0 = ExtResource( 13 )
 _sections_unfolded = [ "material" ]
 
-[node name="GIProbe" type="GIProbe" parent="." index="5"]
+[node name="GIProbe" type="GIProbe" parent="." index="9"]
 
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.898539, 0.0259705, 5.18673 )
 layers = 1
@@ -2690,24 +2972,24 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="6"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="10"]
 
 root_node = NodePath("..")
 autoplay = ""
 playback_process_mode = 1
 playback_default_blend_time = 0.0
 playback_speed = 1.0
-anims/Walk = SubResource( 10 )
+anims/Walk = SubResource( 11 )
 blend_times = [  ]
 _sections_unfolded = [ "Playback Options" ]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="AnimationPlayer" index="0"]
 
-environment = SubResource( 11 )
+environment = SubResource( 12 )
 
 [node name="Camera" type="Camera" parent="AnimationPlayer" index="1"]
 
-transform = Transform( 0.999726, 0.00357758, -0.0231329, 0, 0.988252, 0.152836, 0.0234079, -0.152794, 0.987981, -0.0310913, 2.46145, 0.625116 )
+transform = Transform( 0.99987, 0, -0.0161095, 0.00119671, 0.997237, 0.074276, 0.016065, -0.0742857, 0.997107, -0.00650054, 2.46145, 0.733237 )
 keep_aspect = 1
 cull_mask = 1048575
 environment = null
@@ -2743,7 +3025,7 @@ _sections_unfolded = [ "Transform" ]
 
 [node name="motion_blur" parent="AnimationPlayer/Camera2" index="0" instance=ExtResource( 14 )]
 
-[node name="LensFlare" type="Node" parent="." index="7"]
+[node name="LensFlare" type="Node" parent="." index="11"]
 
 script = ExtResource( 15 )
 __meta__ = {
