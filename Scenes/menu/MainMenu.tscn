@@ -18,7 +18,7 @@
 [ext_resource path="res://addons/SIsilicon.vfx.lens flare/lens_flare_icon.png" type="Texture" id=16]
 [ext_resource path="res://addons/SIsilicon.vfx.lens flare/lens-dirt-default.jpeg" type="Texture" id=17]
 
-[sub_resource type="ArrayMesh" id=2]
+[sub_resource type="ArrayMesh" id=1]
 
 resource_name = "Cube.004"
 lightmap_size_hint = Vector2( 36, 40 )
@@ -37,7 +37,7 @@ surfaces/0 = {
 "vertex_count": 94
 }
 
-[sub_resource type="ArrayMesh" id=3]
+[sub_resource type="ArrayMesh" id=2]
 
 resource_name = "Cube.003"
 lightmap_size_hint = Vector2( 232, 232 )
@@ -57,7 +57,7 @@ surfaces/0 = {
 }
 _sections_unfolded = [ "surface_1" ]
 
-[sub_resource type="ArrayMesh" id=4]
+[sub_resource type="ArrayMesh" id=3]
 
 lightmap_size_hint = Vector2( 140, 140 )
 blend_shape_mode = 1
@@ -75,7 +75,7 @@ surfaces/0 = {
 "vertex_count": 2460
 }
 
-[sub_resource type="ArrayMesh" id=5]
+[sub_resource type="ArrayMesh" id=4]
 
 lightmap_size_hint = Vector2( 20, 20 )
 blend_shape_mode = 1
@@ -93,7 +93,7 @@ surfaces/0 = {
 "vertex_count": 24
 }
 
-[sub_resource type="ArrayMesh" id=6]
+[sub_resource type="ArrayMesh" id=5]
 
 lightmap_size_hint = Vector2( 44, 36 )
 blend_shape_mode = 1
@@ -112,7 +112,7 @@ surfaces/0 = {
 }
 _sections_unfolded = [ "surface_1" ]
 
-[sub_resource type="ArrayMesh" id=7]
+[sub_resource type="ArrayMesh" id=6]
 
 resource_name = "Plane.006"
 lightmap_size_hint = Vector2( 24, 24 )
@@ -132,9 +132,8 @@ surfaces/0 = {
 }
 _sections_unfolded = [ "surface_1" ]
 
-[sub_resource type="ArrayMesh" id=1]
+[sub_resource type="ArrayMesh" id=7]
 
-resource_name = "Cube.005"
 lightmap_size_hint = Vector2( 32, 44 )
 blend_shape_mode = 1
 custom_aabb = AABB( 0, 0, 0, 0, 0, 0 )
@@ -152,16 +151,16 @@ surfaces/0 = {
 }
 _sections_unfolded = [ "Resource", "surface_1" ]
 
-[sub_resource type="BoxShape" id=13]
+[sub_resource type="BoxShape" id=8]
 
 extents = Vector3( 1, 1, 0.01 )
 
-[sub_resource type="QuadMesh" id=14]
+[sub_resource type="QuadMesh" id=9]
 
 custom_aabb = AABB( 0, 0, 0, 0, 0, 0 )
 size = Vector2( 2, 2 )
 
-[sub_resource type="ArrayMesh" id=9]
+[sub_resource type="ArrayMesh" id=10]
 
 lightmap_size_hint = Vector2( 512, 512 )
 blend_shape_mode = 1
@@ -179,7 +178,7 @@ surfaces/0 = {
 "vertex_count": 374
 }
 
-[sub_resource type="PlaneMesh" id=10]
+[sub_resource type="PlaneMesh" id=11]
 
 lightmap_size_hint = Vector2( 258, 258 )
 custom_aabb = AABB( 0, 0, 0, 0, 0, 0 )
@@ -187,7 +186,7 @@ size = Vector2( 2, 2 )
 subdivide_width = 0
 subdivide_depth = 0
 
-[sub_resource type="Animation" id=11]
+[sub_resource type="Animation" id=12]
 
 length = 5.0
 loop = false
@@ -253,7 +252,7 @@ tracks/4/keys = {
 "values": [ 0.22, 0.22, 0.14 ]
 }
 
-[sub_resource type="Environment" id=12]
+[sub_resource type="Environment" id=13]
 
 background_mode = 0
 background_sky_custom_fov = 0.0
@@ -348,7 +347,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 2 )
+mesh = SubResource( 1 )
 skeleton = NodePath("..")
 material/0 = null
 
@@ -364,7 +363,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 3 )
+mesh = SubResource( 2 )
 skeleton = NodePath("..")
 material/0 = null
 _sections_unfolded = [ "Geometry", "LOD" ]
@@ -381,7 +380,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 4 )
+mesh = SubResource( 3 )
 skeleton = NodePath("..")
 material/0 = null
 
@@ -396,7 +395,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 5 )
+mesh = SubResource( 4 )
 skeleton = NodePath("..")
 material/0 = null
 
@@ -412,7 +411,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 6 )
+mesh = SubResource( 5 )
 skeleton = NodePath("..")
 material/0 = null
 _sections_unfolded = [ "material" ]
@@ -429,7 +428,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 7 )
+mesh = SubResource( 6 )
 skeleton = NodePath("..")
 material/0 = null
 
@@ -446,7 +445,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 1 )
+mesh = SubResource( 7 )
 skeleton = NodePath("..")
 material/0 = null
 _sections_unfolded = [ "Geometry", "material" ]
@@ -937,7 +936,6 @@ _sections_unfolded = [ "Theme" ]
 [node name="Graphics" type="Tabs" parent="Viewport/Control/TabContainer" index="0"]
 
 editor/display_folded = true
-visible = false
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 1.0
@@ -1245,10 +1243,7 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 10.0
-margin_top = 6.0
-margin_right = 2.0
-margin_bottom = -9.0
+margin_top = 20.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 0
@@ -1478,13 +1473,12 @@ _sections_unfolded = [ "custom_colors", "custom_fonts" ]
 [node name="Controls" type="Tabs" parent="Viewport/Control/TabContainer" index="2"]
 
 editor/display_folded = true
+visible = false
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 10.0
-margin_right = 2.0
-margin_bottom = -15.0
+margin_top = 20.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 0
@@ -1724,13 +1718,12 @@ _sections_unfolded = [ "Transform" ]
 
 [node name="CollisionShape" type="CollisionShape" parent="Area" index="0"]
 
-shape = SubResource( 13 )
+shape = SubResource( 8 )
 disabled = false
 _sections_unfolded = [ "Transform" ]
 
 [node name="MeshInstance" type="MeshInstance" parent="Area" index="1"]
 
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 layers = 1
 material_override = null
 cast_shadow = 1
@@ -1740,7 +1733,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 14 )
+mesh = SubResource( 9 )
 skeleton = NodePath("..")
 material/0 = ExtResource( 7 )
 _sections_unfolded = [ "Transform", "material" ]
@@ -1761,7 +1754,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 9 )
+mesh = SubResource( 10 )
 skeleton = NodePath("..")
 material/0 = null
 
@@ -1777,7 +1770,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 9 )
+mesh = SubResource( 10 )
 skeleton = NodePath("..")
 material/0 = null
 
@@ -1793,7 +1786,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 9 )
+mesh = SubResource( 10 )
 skeleton = NodePath("..")
 material/0 = null
 
@@ -1809,7 +1802,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 9 )
+mesh = SubResource( 10 )
 skeleton = NodePath("..")
 material/0 = null
 
@@ -1825,7 +1818,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 9 )
+mesh = SubResource( 10 )
 skeleton = NodePath("..")
 material/0 = null
 
@@ -1841,7 +1834,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 9 )
+mesh = SubResource( 10 )
 skeleton = NodePath("..")
 material/0 = null
 
@@ -1857,7 +1850,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 9 )
+mesh = SubResource( 10 )
 skeleton = NodePath("..")
 material/0 = null
 
@@ -1873,7 +1866,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 9 )
+mesh = SubResource( 10 )
 skeleton = NodePath("..")
 material/0 = null
 
@@ -1889,7 +1882,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 9 )
+mesh = SubResource( 10 )
 skeleton = NodePath("..")
 material/0 = null
 
@@ -1905,7 +1898,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 9 )
+mesh = SubResource( 10 )
 skeleton = NodePath("..")
 material/0 = null
 
@@ -1921,7 +1914,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 9 )
+mesh = SubResource( 10 )
 skeleton = NodePath("..")
 material/0 = null
 
@@ -1937,7 +1930,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 9 )
+mesh = SubResource( 10 )
 skeleton = NodePath("..")
 material/0 = null
 
@@ -1953,7 +1946,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 9 )
+mesh = SubResource( 10 )
 skeleton = NodePath("..")
 material/0 = null
 
@@ -1969,7 +1962,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 9 )
+mesh = SubResource( 10 )
 skeleton = NodePath("..")
 material/0 = null
 
@@ -1985,7 +1978,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 9 )
+mesh = SubResource( 10 )
 skeleton = NodePath("..")
 material/0 = null
 
@@ -2001,7 +1994,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 9 )
+mesh = SubResource( 10 )
 skeleton = NodePath("..")
 material/0 = null
 
@@ -2017,7 +2010,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 9 )
+mesh = SubResource( 10 )
 skeleton = NodePath("..")
 material/0 = null
 
@@ -2033,7 +2026,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 9 )
+mesh = SubResource( 10 )
 skeleton = NodePath("..")
 material/0 = null
 
@@ -2049,7 +2042,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 9 )
+mesh = SubResource( 10 )
 skeleton = NodePath("..")
 material/0 = null
 
@@ -2065,7 +2058,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 9 )
+mesh = SubResource( 10 )
 skeleton = NodePath("..")
 material/0 = null
 
@@ -2081,7 +2074,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 9 )
+mesh = SubResource( 10 )
 skeleton = NodePath("..")
 material/0 = null
 
@@ -2097,7 +2090,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 9 )
+mesh = SubResource( 10 )
 skeleton = NodePath("..")
 material/0 = null
 
@@ -2113,7 +2106,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 9 )
+mesh = SubResource( 10 )
 skeleton = NodePath("..")
 material/0 = null
 
@@ -2129,7 +2122,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 9 )
+mesh = SubResource( 10 )
 skeleton = NodePath("..")
 material/0 = null
 
@@ -2145,7 +2138,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 9 )
+mesh = SubResource( 10 )
 skeleton = NodePath("..")
 material/0 = null
 
@@ -2161,7 +2154,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 9 )
+mesh = SubResource( 10 )
 skeleton = NodePath("..")
 material/0 = null
 
@@ -2177,7 +2170,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 9 )
+mesh = SubResource( 10 )
 skeleton = NodePath("..")
 material/0 = null
 
@@ -2193,7 +2186,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 9 )
+mesh = SubResource( 10 )
 skeleton = NodePath("..")
 material/0 = null
 
@@ -2209,7 +2202,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 9 )
+mesh = SubResource( 10 )
 skeleton = NodePath("..")
 material/0 = null
 
@@ -2225,7 +2218,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 9 )
+mesh = SubResource( 10 )
 skeleton = NodePath("..")
 material/0 = null
 
@@ -2241,7 +2234,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 9 )
+mesh = SubResource( 10 )
 skeleton = NodePath("..")
 material/0 = null
 
@@ -2257,7 +2250,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 9 )
+mesh = SubResource( 10 )
 skeleton = NodePath("..")
 material/0 = null
 
@@ -2273,7 +2266,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 9 )
+mesh = SubResource( 10 )
 skeleton = NodePath("..")
 material/0 = null
 
@@ -2289,7 +2282,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 9 )
+mesh = SubResource( 10 )
 skeleton = NodePath("..")
 material/0 = null
 
@@ -2305,7 +2298,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 9 )
+mesh = SubResource( 10 )
 skeleton = NodePath("..")
 material/0 = null
 
@@ -2321,7 +2314,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 9 )
+mesh = SubResource( 10 )
 skeleton = NodePath("..")
 material/0 = null
 
@@ -2337,7 +2330,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 9 )
+mesh = SubResource( 10 )
 skeleton = NodePath("..")
 material/0 = null
 
@@ -2353,7 +2346,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 9 )
+mesh = SubResource( 10 )
 skeleton = NodePath("..")
 material/0 = null
 
@@ -2369,7 +2362,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 9 )
+mesh = SubResource( 10 )
 skeleton = NodePath("..")
 material/0 = null
 
@@ -2385,7 +2378,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 9 )
+mesh = SubResource( 10 )
 skeleton = NodePath("..")
 material/0 = null
 
@@ -2401,7 +2394,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 9 )
+mesh = SubResource( 10 )
 skeleton = NodePath("..")
 material/0 = null
 
@@ -2417,7 +2410,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 9 )
+mesh = SubResource( 10 )
 skeleton = NodePath("..")
 material/0 = null
 
@@ -2433,7 +2426,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 9 )
+mesh = SubResource( 10 )
 skeleton = NodePath("..")
 material/0 = null
 
@@ -2449,7 +2442,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 9 )
+mesh = SubResource( 10 )
 skeleton = NodePath("..")
 material/0 = null
 
@@ -2465,7 +2458,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 9 )
+mesh = SubResource( 10 )
 skeleton = NodePath("..")
 material/0 = null
 
@@ -2481,7 +2474,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 9 )
+mesh = SubResource( 10 )
 skeleton = NodePath("..")
 material/0 = null
 
@@ -2497,7 +2490,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 9 )
+mesh = SubResource( 10 )
 skeleton = NodePath("..")
 material/0 = null
 
@@ -2513,7 +2506,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 9 )
+mesh = SubResource( 10 )
 skeleton = NodePath("..")
 material/0 = null
 
@@ -2529,7 +2522,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 9 )
+mesh = SubResource( 10 )
 skeleton = NodePath("..")
 material/0 = null
 
@@ -2545,7 +2538,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 9 )
+mesh = SubResource( 10 )
 skeleton = NodePath("..")
 material/0 = null
 
@@ -2561,7 +2554,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 9 )
+mesh = SubResource( 10 )
 skeleton = NodePath("..")
 material/0 = null
 
@@ -2577,7 +2570,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 9 )
+mesh = SubResource( 10 )
 skeleton = NodePath("..")
 material/0 = null
 
@@ -2593,7 +2586,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 9 )
+mesh = SubResource( 10 )
 skeleton = NodePath("..")
 material/0 = null
 
@@ -2609,7 +2602,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 9 )
+mesh = SubResource( 10 )
 skeleton = NodePath("..")
 material/0 = null
 
@@ -2625,7 +2618,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 9 )
+mesh = SubResource( 10 )
 skeleton = NodePath("..")
 material/0 = null
 
@@ -2641,7 +2634,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 9 )
+mesh = SubResource( 10 )
 skeleton = NodePath("..")
 material/0 = null
 
@@ -2657,7 +2650,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 9 )
+mesh = SubResource( 10 )
 skeleton = NodePath("..")
 material/0 = null
 
@@ -2673,7 +2666,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 9 )
+mesh = SubResource( 10 )
 skeleton = NodePath("..")
 material/0 = null
 
@@ -2689,7 +2682,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 9 )
+mesh = SubResource( 10 )
 skeleton = NodePath("..")
 material/0 = null
 
@@ -2705,7 +2698,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 9 )
+mesh = SubResource( 10 )
 skeleton = NodePath("..")
 material/0 = null
 
@@ -2721,7 +2714,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 9 )
+mesh = SubResource( 10 )
 skeleton = NodePath("..")
 material/0 = null
 
@@ -2737,7 +2730,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 9 )
+mesh = SubResource( 10 )
 skeleton = NodePath("..")
 material/0 = null
 
@@ -2753,12 +2746,13 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 9 )
+mesh = SubResource( 10 )
 skeleton = NodePath("..")
 material/0 = null
 
 [node name="Limits" type="Spatial" parent="." index="8"]
 
+editor/display_folded = true
 __meta__ = {
 "_edit_lock_": true
 }
@@ -2775,7 +2769,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 10 )
+mesh = SubResource( 11 )
 skeleton = NodePath("..")
 material/0 = ExtResource( 13 )
 _sections_unfolded = [ "material" ]
@@ -2795,7 +2789,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 10 )
+mesh = SubResource( 11 )
 skeleton = NodePath("..")
 material/0 = ExtResource( 13 )
 _sections_unfolded = [ "material" ]
@@ -2812,7 +2806,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 10 )
+mesh = SubResource( 11 )
 skeleton = NodePath("..")
 material/0 = ExtResource( 13 )
 _sections_unfolded = [ "material" ]
@@ -2829,7 +2823,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 10 )
+mesh = SubResource( 11 )
 skeleton = NodePath("..")
 material/0 = ExtResource( 13 )
 _sections_unfolded = [ "material" ]
@@ -2846,7 +2840,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 10 )
+mesh = SubResource( 11 )
 skeleton = NodePath("..")
 material/0 = ExtResource( 13 )
 _sections_unfolded = [ "material" ]
@@ -2863,7 +2857,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 10 )
+mesh = SubResource( 11 )
 skeleton = NodePath("..")
 material/0 = ExtResource( 13 )
 _sections_unfolded = [ "material" ]
@@ -2883,7 +2877,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 10 )
+mesh = SubResource( 11 )
 skeleton = NodePath("..")
 material/0 = ExtResource( 13 )
 _sections_unfolded = [ "material" ]
@@ -2900,7 +2894,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 10 )
+mesh = SubResource( 11 )
 skeleton = NodePath("..")
 material/0 = ExtResource( 13 )
 _sections_unfolded = [ "material" ]
@@ -2917,7 +2911,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 10 )
+mesh = SubResource( 11 )
 skeleton = NodePath("..")
 material/0 = ExtResource( 13 )
 _sections_unfolded = [ "Geometry", "material" ]
@@ -2934,7 +2928,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 10 )
+mesh = SubResource( 11 )
 skeleton = NodePath("..")
 material/0 = ExtResource( 13 )
 _sections_unfolded = [ "Geometry", "material" ]
@@ -2951,7 +2945,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 10 )
+mesh = SubResource( 11 )
 skeleton = NodePath("..")
 material/0 = ExtResource( 13 )
 _sections_unfolded = [ "material" ]
@@ -2982,13 +2976,13 @@ autoplay = ""
 playback_process_mode = 1
 playback_default_blend_time = 0.0
 playback_speed = 1.0
-anims/Walk = SubResource( 11 )
+anims/Walk = SubResource( 12 )
 blend_times = [  ]
 _sections_unfolded = [ "Playback Options" ]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="AnimationPlayer" index="0"]
 
-environment = SubResource( 12 )
+environment = SubResource( 13 )
 
 [node name="Camera" type="Camera" parent="AnimationPlayer" index="1"]
 
@@ -3035,8 +3029,8 @@ __meta__ = {
 "_editor_icon": ExtResource( 16 )
 }
 flareStrength = 10.0
-flareBias = 1.93
-distortion = 2
+flareBias = 1.43
+distortion = 0.86
 ghostCount = 7
 ghostSpacing = 0.3
 haloWidth = 0.25
