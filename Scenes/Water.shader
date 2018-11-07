@@ -27,7 +27,10 @@ uniform vec3 uv2_offset;
 
 
 void vertex() {
-	UV=UV*uv1_scale.xy-	uv1_offset.xy*TIME;
+	UV=UV*uv1_scale.xy-fract(uv1_offset.xy*TIME);
+	
+	
+	
 }
 
 
