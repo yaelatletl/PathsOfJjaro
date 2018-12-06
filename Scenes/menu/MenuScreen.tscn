@@ -1191,6 +1191,7 @@ group = null
 text = "Record Match"
 flat = false
 align = 0
+_sections_unfolded = [ "custom_colors" ]
 
 [node name="HTTPRequest" type="HTTPRequest" parent="." index="5"]
 

@@ -291,7 +291,7 @@ Button/styles/normal = SubResource( 1 )
 Button/styles/pressed = SubResource( 1 )
 ButtonGroup/styles/panel = null
 CheckBox/colors/font_color = Color( 0, 0.666667, 0, 1 )
-CheckBox/colors/font_color_disabled = Color( 0, 0, 0, 1 )
+CheckBox/colors/font_color_disabled = Color( 0.261719, 0, 0, 1 )
 CheckBox/colors/font_color_hover = Color( 0, 1, 0, 1 )
 CheckBox/colors/font_color_pressed = Color( 0, 1, 0, 1 )
 CheckBox/constants/check_vadjust = 0
@@ -668,5 +668,5 @@ WindowDialog/fonts/title_font = null
 WindowDialog/icons/close = null
 WindowDialog/icons/close_highlight = null
 WindowDialog/styles/panel = null
-_sections_unfolded = [ "Button/colors", "Button/constants", "ButtonGroup/styles", "CheckBox", "CheckBox/colors", "CheckBox/icons", "CheckButton/colors", "CheckButton/constants", "CheckButton/fonts", "CheckButton/icons", "CheckButton/styles", "HScrollBar", "HScrollBar/styles", "Label/colors", "OptionButton/colors", "Panel/styles", "PanelContainer/styles", "ProgressBar/colors", "ProgressBar/styles", "ReferenceRect/styles", "RichTextLabel/colors", "RichTextLabel/constants", "TabContainer/styles" ]
+_sections_unfolded = [ "Button/colors", "Button/constants", "ButtonGroup/styles", "CheckBox", "CheckBox/colors", "CheckBox/fonts", "CheckBox/icons", "CheckButton", "CheckButton/colors", "CheckButton/constants", "CheckButton/fonts", "CheckButton/icons", "CheckButton/styles", "HScrollBar", "HScrollBar/styles", "Label/colors", "OptionButton/colors", "Panel/styles", "PanelContainer/styles", "ProgressBar/colors", "ProgressBar/styles", "ReferenceRect/styles", "RichTextLabel/colors", "RichTextLabel/constants", "TabContainer/styles" ]
 
