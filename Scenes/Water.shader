@@ -24,11 +24,11 @@ uniform vec3 uv1_scale;
 uniform vec3 uv1_offset;
 uniform vec3 uv2_scale;
 uniform vec3 uv2_offset;
-
+varying vec3 worldnormal;
 
 void vertex() {
 	UV=UV*uv1_scale.xy-fract(uv1_offset.xy*TIME);
-	
+	worldnormal = NORMAL;
 	
 	
 }
@@ -51,7 +51,7 @@ void fragment() {
 	vec2 ref_ofs = SCREEN_UV - ref_normal.xy * dot(texture(texture_refraction,base_uv),refraction_texture_channel) * refraction;
 	float ref_amount = 1.0 - albedo.a * albedo_tex.a;
 	EMISSION += textureLod(SCREEN_TEXTURE,ref_ofs,ROUGHNESS * 8.0).rgb * ref_amount;
-	ALBEDO *= 1.0 - ref_amount;
+	
 	ALPHA = 1.0;
 	float depth_tex = textureLod(DEPTH_TEXTURE,SCREEN_UV,0.0).r;
 	vec4 world_pos = INV_PROJECTION_MATRIX * vec4(SCREEN_UV*2.0-1.0,depth_tex*2.0-1.0,1.0);
@@ -60,4 +60,6 @@ void fragment() {
 	ALPHA*=clamp(smoothstep(distance_fade_min,distance_fade_max,-VERTEX.z),0.0,1.0);
 	vec3 transmission_tex = texture(texture_transmission,base_uv).rgb;
 	TRANSMISSION = (transmission.rgb+transmission_tex);
+
+	ALBEDO *= 0.9 - ref_amount;
 }

@@ -39,7 +39,7 @@ enabled=PoolStringArray( "SIsilicon.vfx.lens flare", "WorldManagement" )
 
 [env]
 
-s_s_ambient_occlusion=0
+s_s_ambient_occlusion=1
 s_s_reflections=0
 
 [input]
@@ -72,6 +72,7 @@ limits/message_queue/max_size_kb=4096
 
 [physics]
 
+common/physics_fps=1
 3d/physics_engine="Bullet"
 
 [rendering]

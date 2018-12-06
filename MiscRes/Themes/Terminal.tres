@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=10 format=2]
+[gd_resource type="Theme" load_steps=13 format=2]
 
 [ext_resource path="res://MiscRes/terminals.tres" type="DynamicFont" id=1]
 
@@ -15,27 +15,28 @@ content_margin_left = -1.0
 content_margin_right = -1.0
 content_margin_top = -1.0
 content_margin_bottom = -1.0
-bg_color = Color( 0.6, 0.6, 0.6, 1 )
+bg_color = Color( 0, 0.666667, 0, 1 )
 draw_center = true
-border_width_left = 0
-border_width_top = 0
-border_width_right = 0
-border_width_bottom = 0
-border_color = Color( 0.8, 0.8, 0.8, 1 )
-border_blend = false
-corner_radius_top_left = 0
-corner_radius_top_right = 0
-corner_radius_bottom_right = 0
-corner_radius_bottom_left = 0
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color( 0, 0.554688, 0, 1 )
+border_blend = true
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
 corner_detail = 8
-expand_margin_left = 0.0
-expand_margin_right = 0.0
+expand_margin_left = 2.0
+expand_margin_right = 2.0
 expand_margin_top = 0.0
 expand_margin_bottom = 0.0
 shadow_color = Color( 0, 0, 0, 0.6 )
 shadow_size = 0
 anti_aliasing = true
 anti_aliasing_size = 1
+_sections_unfolded = [ "Border", "Border Width", "Corner Radius", "Expand Margin" ]
 
 [sub_resource type="StyleBoxFlat" id=3]
 
@@ -43,6 +44,64 @@ content_margin_left = -1.0
 content_margin_right = -1.0
 content_margin_top = -1.0
 content_margin_bottom = -1.0
+bg_color = Color( 0, 1, 0, 1 )
+draw_center = true
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color( 0, 0.878906, 0, 1 )
+border_blend = true
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+corner_detail = 8
+expand_margin_left = 4.0
+expand_margin_right = 4.0
+expand_margin_top = 1.0
+expand_margin_bottom = 1.0
+shadow_color = Color( 0, 0, 0, 0.6 )
+shadow_size = 0
+anti_aliasing = true
+anti_aliasing_size = 1
+_sections_unfolded = [ "Border", "Border Width", "Corner Radius", "Expand Margin" ]
+
+[sub_resource type="StyleBoxFlat" id=4]
+
+content_margin_left = 1.0
+content_margin_right = 1.0
+content_margin_top = 1.0
+content_margin_bottom = 1.0
+bg_color = Color( 0.511719, 0.511719, 0.511719, 1 )
+draw_center = true
+border_width_left = 1
+border_width_top = 4
+border_width_right = 1
+border_width_bottom = 4
+border_color = Color( 1, 1, 1, 1 )
+border_blend = true
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+corner_detail = 8
+expand_margin_left = 1.0
+expand_margin_right = 1.0
+expand_margin_top = 6.0
+expand_margin_bottom = 6.0
+shadow_color = Color( 0, 0, 0, 0.6 )
+shadow_size = 0
+anti_aliasing = true
+anti_aliasing_size = 1
+_sections_unfolded = [ "Anti Aliasing", "Border", "Border Width", "Content Margin", "Corner Radius", "Expand Margin", "Shadow" ]
+
+[sub_resource type="StyleBoxFlat" id=5]
+
+content_margin_left = -1.0
+content_margin_right = -1.0
+content_margin_top = -1.0
+content_margin_bottom = -1.0
 bg_color = Color( 0.6, 0.6, 0.6, 1 )
 draw_center = true
 border_width_left = 0
@@ -65,13 +124,41 @@ shadow_size = 0
 anti_aliasing = true
 anti_aliasing_size = 1
 
-[sub_resource type="StyleBoxFlat" id=4]
+[sub_resource type="StyleBoxFlat" id=6]
 
 content_margin_left = -1.0
 content_margin_right = -1.0
 content_margin_top = -1.0
 content_margin_bottom = -1.0
-bg_color = Color( 0.269531, 0.269531, 0.269531, 1 )
+bg_color = Color( 0.6, 0.6, 0.6, 1 )
+draw_center = true
+border_width_left = 0
+border_width_top = 0
+border_width_right = 0
+border_width_bottom = 0
+border_color = Color( 0.8, 0.8, 0.8, 1 )
+border_blend = false
+corner_radius_top_left = 0
+corner_radius_top_right = 0
+corner_radius_bottom_right = 0
+corner_radius_bottom_left = 0
+corner_detail = 8
+expand_margin_left = 0.0
+expand_margin_right = 0.0
+expand_margin_top = 0.0
+expand_margin_bottom = 0.0
+shadow_color = Color( 0, 0, 0, 0.6 )
+shadow_size = 0
+anti_aliasing = true
+anti_aliasing_size = 1
+
+[sub_resource type="StyleBoxFlat" id=7]
+
+content_margin_left = -1.0
+content_margin_right = -1.0
+content_margin_top = -1.0
+content_margin_bottom = -1.0
+bg_color = Color( 0.195313, 0.195313, 0.195313, 1 )
 draw_center = true
 border_width_left = 2
 border_width_top = 2
@@ -79,10 +166,10 @@ border_width_right = 2
 border_width_bottom = 2
 border_color = Color( 1, 1, 1, 1 )
 border_blend = true
-corner_radius_top_left = 9
-corner_radius_top_right = 9
-corner_radius_bottom_right = 9
-corner_radius_bottom_left = 9
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
 corner_detail = 8
 expand_margin_left = 2.0
 expand_margin_right = 2.0
@@ -94,7 +181,7 @@ anti_aliasing = true
 anti_aliasing_size = 1
 _sections_unfolded = [ "Anti Aliasing", "Border", "Border Width", "Corner Radius", "Expand Margin", "Shadow" ]
 
-[sub_resource type="StyleBoxFlat" id=5]
+[sub_resource type="StyleBoxFlat" id=8]
 
 content_margin_left = -1.0
 content_margin_right = -1.0
@@ -108,10 +195,10 @@ border_width_right = 0
 border_width_bottom = 0
 border_color = Color( 0.8, 0.8, 0.8, 1 )
 border_blend = false
-corner_radius_top_left = 9
-corner_radius_top_right = 9
-corner_radius_bottom_right = 9
-corner_radius_bottom_left = 9
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
 corner_detail = 8
 expand_margin_left = 0.0
 expand_margin_right = 0.0
@@ -123,14 +210,14 @@ anti_aliasing = true
 anti_aliasing_size = 1
 _sections_unfolded = [ "Corner Radius" ]
 
-[sub_resource type="StyleBoxEmpty" id=6]
+[sub_resource type="StyleBoxEmpty" id=9]
 
 content_margin_left = -1.0
 content_margin_right = -1.0
 content_margin_top = -1.0
 content_margin_bottom = -1.0
 
-[sub_resource type="StyleBoxFlat" id=7]
+[sub_resource type="StyleBoxFlat" id=10]
 
 content_margin_left = -1.0
 content_margin_right = -1.0
@@ -159,7 +246,7 @@ anti_aliasing = true
 anti_aliasing_size = 1
 _sections_unfolded = [ "Border", "Border Width", "Corner Radius", "Expand Margin" ]
 
-[sub_resource type="StyleBoxFlat" id=8]
+[sub_resource type="StyleBoxFlat" id=11]
 
 content_margin_left = -1.0
 content_margin_right = -1.0
@@ -203,10 +290,10 @@ Button/styles/hover = SubResource( 1 )
 Button/styles/normal = SubResource( 1 )
 Button/styles/pressed = SubResource( 1 )
 ButtonGroup/styles/panel = null
-CheckBox/colors/font_color = Color( 0, 0, 0, 1 )
+CheckBox/colors/font_color = Color( 0, 0.666667, 0, 1 )
 CheckBox/colors/font_color_disabled = Color( 0, 0, 0, 1 )
-CheckBox/colors/font_color_hover = Color( 0, 0, 0, 1 )
-CheckBox/colors/font_color_pressed = Color( 0, 0, 0, 1 )
+CheckBox/colors/font_color_hover = Color( 0, 1, 0, 1 )
+CheckBox/colors/font_color_pressed = Color( 0, 1, 0, 1 )
 CheckBox/constants/check_vadjust = 0
 CheckBox/constants/hseparation = 4
 CheckBox/fonts/font = null
@@ -219,13 +306,13 @@ CheckBox/styles/focus = null
 CheckBox/styles/hover = null
 CheckBox/styles/normal = null
 CheckBox/styles/pressed = null
-CheckButton/colors/font_color = Color( 0, 0, 0, 1 )
-CheckButton/colors/font_color_disabled = Color( 0, 0, 0, 1 )
-CheckButton/colors/font_color_hover = Color( 0, 0, 0, 1 )
-CheckButton/colors/font_color_pressed = Color( 0, 0, 0, 1 )
+CheckButton/colors/font_color = Color( 0, 0.666667, 0, 1 )
+CheckButton/colors/font_color_disabled = Color( 1, 0, 0, 1 )
+CheckButton/colors/font_color_hover = Color( 0, 1, 0, 1 )
+CheckButton/colors/font_color_pressed = Color( 0, 0.666667, 0, 1 )
 CheckButton/constants/check_vadjust = 0
 CheckButton/constants/hseparation = 4
-CheckButton/fonts/font = null
+CheckButton/fonts/font = ExtResource( 1 )
 CheckButton/icons/off = null
 CheckButton/icons/on = null
 CheckButton/styles/disabled = null
@@ -296,10 +383,10 @@ HScrollBar/icons/decrement = null
 HScrollBar/icons/decrement_highlight = null
 HScrollBar/icons/increment = null
 HScrollBar/icons/increment_highlight = null
-HScrollBar/styles/grabber = null
-HScrollBar/styles/grabber_highlight = null
-HScrollBar/styles/grabber_pressed = null
-HScrollBar/styles/scroll = null
+HScrollBar/styles/grabber = SubResource( 2 )
+HScrollBar/styles/grabber_highlight = SubResource( 3 )
+HScrollBar/styles/grabber_pressed = SubResource( 3 )
+HScrollBar/styles/scroll = SubResource( 4 )
 HScrollBar/styles/scroll_focus = null
 HSeparator/constants/separation = 4
 HSeparator/styles/separator = null
@@ -332,7 +419,7 @@ ItemList/styles/cursor = null
 ItemList/styles/cursor_unfocused = null
 ItemList/styles/selected = null
 ItemList/styles/selected_focus = null
-Label/colors/font_color = Color( 0, 0, 0, 1 )
+Label/colors/font_color = Color( 0, 1, 0, 1 )
 Label/colors/font_color_shadow = Color( 0, 0, 0, 1 )
 Label/constants/line_spacing = 3
 Label/constants/shadow_as_outline = 0
@@ -370,9 +457,9 @@ MenuButton/styles/focus = null
 MenuButton/styles/hover = null
 MenuButton/styles/normal = null
 MenuButton/styles/pressed = null
-OptionButton/colors/font_color = Color( 0, 0, 0, 1 )
+OptionButton/colors/font_color = Color( 0, 0.666667, 0, 1 )
 OptionButton/colors/font_color_disabled = Color( 0, 0, 0, 1 )
-OptionButton/colors/font_color_hover = Color( 0, 0, 0, 1 )
+OptionButton/colors/font_color_hover = Color( 0, 1, 0, 1 )
 OptionButton/colors/font_color_pressed = Color( 0, 0, 0, 1 )
 OptionButton/constants/arrow_margin = 2
 OptionButton/constants/hseparation = 2
@@ -383,10 +470,10 @@ OptionButton/styles/focus = null
 OptionButton/styles/hover = null
 OptionButton/styles/normal = null
 OptionButton/styles/pressed = null
-Panel/styles/panel = SubResource( 2 )
+Panel/styles/panel = SubResource( 5 )
 Panel/styles/panelf = null
 Panel/styles/panelnc = null
-PanelContainer/styles/panel = SubResource( 3 )
+PanelContainer/styles/panel = SubResource( 6 )
 PopupMenu/colors/font_color = Color( 0, 0, 0, 1 )
 PopupMenu/colors/font_color_accel = Color( 0, 0, 0, 1 )
 PopupMenu/colors/font_color_disabled = Color( 0, 0, 0, 1 )
@@ -407,8 +494,8 @@ PopupPanel/styles/panel = null
 ProgressBar/colors/font_color = Color( 0, 0, 0, 1 )
 ProgressBar/colors/font_color_shadow = Color( 0, 0, 0, 1 )
 ProgressBar/fonts/font = null
-ProgressBar/styles/bg = SubResource( 4 )
-ProgressBar/styles/fg = SubResource( 5 )
+ProgressBar/styles/bg = SubResource( 7 )
+ProgressBar/styles/fg = SubResource( 8 )
 ReferenceRect/styles/border = null
 RichTextLabel/colors/default_color = Color( 0, 1, 0, 1 )
 RichTextLabel/colors/font_color_selected = Color( 0, 0, 0, 1 )
@@ -439,9 +526,9 @@ TabContainer/icons/increment = null
 TabContainer/icons/increment_highlight = null
 TabContainer/icons/menu = null
 TabContainer/icons/menu_highlight = null
-TabContainer/styles/panel = SubResource( 6 )
-TabContainer/styles/tab_bg = SubResource( 7 )
-TabContainer/styles/tab_fg = SubResource( 8 )
+TabContainer/styles/panel = SubResource( 9 )
+TabContainer/styles/tab_bg = SubResource( 10 )
+TabContainer/styles/tab_fg = SubResource( 11 )
 Tabs/colors/font_color_bg = Color( 0, 0, 0, 1 )
 Tabs/colors/font_color_disabled = Color( 0, 0, 0, 1 )
 Tabs/colors/font_color_fg = Color( 0, 0, 0, 1 )
@@ -581,5 +668,5 @@ WindowDialog/fonts/title_font = null
 WindowDialog/icons/close = null
 WindowDialog/icons/close_highlight = null
 WindowDialog/styles/panel = null
-_sections_unfolded = [ "Button/colors", "Button/constants", "ButtonGroup/styles", "Panel", "Panel/styles", "PanelContainer", "PanelContainer/styles", "ProgressBar", "ProgressBar/colors", "ProgressBar/styles", "ReferenceRect", "ReferenceRect/styles", "RichTextLabel", "RichTextLabel/colors", "RichTextLabel/constants", "TabContainer/styles", "VScrollBar" ]
+_sections_unfolded = [ "Button/colors", "Button/constants", "ButtonGroup/styles", "CheckBox", "CheckBox/colors", "CheckBox/icons", "CheckButton/colors", "CheckButton/constants", "CheckButton/fonts", "CheckButton/icons", "CheckButton/styles", "HScrollBar", "HScrollBar/styles", "Label/colors", "OptionButton/colors", "Panel/styles", "PanelContainer/styles", "ProgressBar/colors", "ProgressBar/styles", "ReferenceRect/styles", "RichTextLabel/colors", "RichTextLabel/constants", "TabContainer/styles" ]
 

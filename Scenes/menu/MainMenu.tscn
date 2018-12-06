@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://Scenes/menu/MainMenu.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/menu/Material.material" type="Material" id=2]
@@ -8,15 +8,10 @@
 [ext_resource path="res://Scenes/menu/Keyboard.material" type="Material" id=6]
 [ext_resource path="res://Scenes/menu/MenuStream.material" type="Material" id=7]
 [ext_resource path="res://Scenes/menu/menu.gd" type="Script" id=8]
-[ext_resource path="res://MiscRes/terminals.tres" type="DynamicFont" id=9]
-[ext_resource path="res://MiscRes/Themes/Terminal.tres" type="Theme" id=10]
-[ext_resource path="res://MiscRes/MarathonLogo.png" type="Texture" id=11]
-[ext_resource path="res://Scenes/menu/M1WALL.material" type="Material" id=12]
-[ext_resource path="res://Scenes/007.material" type="Material" id=13]
-[ext_resource path="res://addons/motion_blur/motion_blur.tscn" type="PackedScene" id=14]
-[ext_resource path="res://addons/SIsilicon.vfx.lens flare/lens-flare.gd" type="Script" id=15]
-[ext_resource path="res://addons/SIsilicon.vfx.lens flare/lens_flare_icon.png" type="Texture" id=16]
-[ext_resource path="res://addons/SIsilicon.vfx.lens flare/lens-dirt-default.jpeg" type="Texture" id=17]
+[ext_resource path="res://Scenes/menu/MenuScreen.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Scenes/menu/M1WALL.material" type="Material" id=10]
+[ext_resource path="res://Scenes/007.material" type="Material" id=11]
+[ext_resource path="res://addons/motion_blur/motion_blur.tscn" type="PackedScene" id=12]
 
 [sub_resource type="ArrayMesh" id=1]
 
@@ -172,7 +167,7 @@ surfaces/0 = {
 "blend_shape_data": [  ],
 "format": 98103,
 "index_count": 402,
-"material": ExtResource( 12 ),
+"material": ExtResource( 10 ),
 "primitive": 4,
 "skeleton_aabb": [  ],
 "vertex_count": 374
@@ -331,7 +326,7 @@ adjustment_contrast = 0.92
 adjustment_saturation = 1.0
 _sections_unfolded = [ "Adjustments", "Ambient Light", "Auto Exposure", "Background", "DOF Far Blur", "DOF Near Blur", "Glow/levels", "SS Reflections", "SSAO" ]
 
-[node name="Scene Root" type="Spatial" index="0"]
+[node name="Scene Root" type="Spatial"]
 
 script = ExtResource( 1 )
 
@@ -370,7 +365,6 @@ _sections_unfolded = [ "Geometry", "LOD" ]
 
 [node name="Miniscreen" type="MeshInstance" parent="." index="2"]
 
-editor/display_folded = true
 layers = 1
 material_override = null
 cast_shadow = 1
@@ -475,7 +469,6 @@ _sections_unfolded = [ "Light", "Omni", "Shadow" ]
 
 [node name="Viewport" type="Viewport" parent="." index="5"]
 
-editor/display_folded = true
 arvr = false
 size = Vector2( 512, 256 )
 own_world = false
@@ -502,1194 +495,7 @@ shadow_atlas_quad_3 = 4
 script = ExtResource( 8 )
 _sections_unfolded = [ "Audio Listener", "GUI", "Physics", "Render Target", "Rendering", "Shadow Atlas" ]
 
-[node name="Control" type="Control" parent="Viewport" index="0"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_right = 40.0
-margin_bottom = 40.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-
-[node name="Bkg" type="ColorRect" parent="Viewport/Control" index="0"]
-
-editor/display_folded = true
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -20.0
-margin_top = -20.0
-margin_right = 492.0
-margin_bottom = 236.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-color = Color( 0, 0, 0, 1 )
-_sections_unfolded = [ "Margin" ]
-
-[node name="Red1" type="ColorRect" parent="Viewport/Control/Bkg" index="0"]
-
-anchor_left = 0.5
-anchor_top = 0.0
-anchor_right = 0.5
-anchor_bottom = 0.0
-margin_left = -255.0
-margin_right = 256.0
-margin_bottom = 20.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-color = Color( 0.285156, 0, 0, 1 )
-_sections_unfolded = [ "Anchor", "Margin" ]
-
-[node name="Red2" type="ColorRect" parent="Viewport/Control/Bkg" index="1"]
-
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-margin_left = -255.0
-margin_top = -16.0
-margin_right = 256.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-color = Color( 0.286275, 0, 0, 1 )
-_sections_unfolded = [ "Margin" ]
-
-[node name="Label" type="Label" parent="Viewport/Control/Bkg" index="2"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 9.0
-margin_top = 3.0
-margin_right = 233.0
-margin_bottom = 17.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 2
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 4
-custom_fonts/font = ExtResource( 9 )
-custom_colors/font_color = Color( 1, 0, 0, 1 )
-text = "Opening Connection to ß.4.5-23 	 "
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
-_sections_unfolded = [ "custom_colors", "custom_fonts" ]
-
-[node name="Label3" type="Label" parent="Viewport/Control/Bkg" index="3"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 10.0
-margin_top = 240.0
-margin_right = 248.0
-margin_bottom = 254.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 2
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 4
-custom_fonts/font = ExtResource( 9 )
-custom_colors/font_color = Color( 1, 0, 0, 1 )
-text = "CAS.qterm//CyberAcme Systems, Inc."
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
-_sections_unfolded = [ "custom_colors", "custom_fonts" ]
-
-[node name="Label4" type="Label" parent="Viewport/Control/Bkg" index="4"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 340.0
-margin_top = 240.0
-margin_right = 508.0
-margin_bottom = 254.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 2
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 4
-custom_fonts/font = ExtResource( 9 )
-custom_colors/font_color = Color( 1, 0, 0, 1 )
-text = "<931.461.60231.14.vt920>"
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
-_sections_unfolded = [ "custom_colors", "custom_fonts" ]
-
-[node name="Label2" type="Label" parent="Viewport/Control/Bkg" index="5"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 400.0
-margin_top = 3.0
-margin_right = 505.0
-margin_bottom = 17.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 2
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 4
-custom_fonts/font = ExtResource( 9 )
-custom_colors/font_color = Color( 1, 0, 0, 1 )
-text = "2207 08.25.2337"
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
-_sections_unfolded = [ "custom_colors", "custom_fonts" ]
-
-[node name="Controls" type="Control" parent="Viewport/Control" index="1"]
-
-editor/display_folded = true
-visible = false
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_right = 40.0
-margin_bottom = 40.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-
-[node name="Done" type="Button" parent="Viewport/Control/Controls" index="0"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 298.0
-margin_top = 219.0
-margin_right = 326.0
-margin_bottom = 233.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-focus_mode = 2
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-theme = ExtResource( 10 )
-custom_fonts/font = ExtResource( 9 )
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
-group = null
-text = "Done"
-flat = false
-align = 1
-_sections_unfolded = [ "Theme", "custom_colors", "custom_fonts" ]
-
-[node name="Cancel" type="Button" parent="Viewport/Control/Controls" index="1"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 427.0
-margin_top = 219.0
-margin_right = 429.0
-margin_bottom = 193.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-focus_mode = 2
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-theme = ExtResource( 10 )
-custom_fonts/font = ExtResource( 9 )
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
-group = null
-text = "Cancel"
-flat = false
-align = 1
-_sections_unfolded = [ "custom_colors", "custom_fonts" ]
-
-[node name="Main" type="Tabs" parent="Viewport/Control" index="2"]
-
-editor/display_folded = true
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_top = 41.0
-margin_bottom = 22.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-tab_align = 1
-scrolling_enabled = true
-
-[node name="Play" type="Button" parent="Viewport/Control/Main" index="0"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 40.0
-margin_top = 47.0
-margin_right = 138.0
-margin_bottom = 61.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-focus_mode = 2
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-theme = ExtResource( 10 )
-custom_fonts/font = ExtResource( 9 )
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
-group = null
-text = "Start New Game"
-flat = false
-align = 1
-_sections_unfolded = [ "Anchor", "Grow Direction", "Margin", "Size Flags", "Theme", "custom_colors", "custom_fonts", "custom_styles" ]
-
-[node name="Play2" type="Button" parent="Viewport/Control/Main" index="1"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 40.0
-margin_top = 67.0
-margin_right = 159.0
-margin_bottom = 81.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-focus_mode = 2
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-theme = ExtResource( 10 )
-custom_fonts/font = ExtResource( 9 )
-custom_colors/font_color = Color( 0.578125, 0, 0, 1 )
-disabled = true
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
-group = null
-text = "Host Network Game"
-flat = false
-align = 1
-_sections_unfolded = [ "Anchor", "Grow Direction", "Margin", "Size Flags", "Theme", "custom_colors", "custom_fonts" ]
-
-[node name="Play3" type="Button" parent="Viewport/Control/Main" index="2"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 40.0
-margin_top = 87.0
-margin_right = 159.0
-margin_bottom = 101.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-focus_mode = 2
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-theme = ExtResource( 10 )
-custom_fonts/font = ExtResource( 9 )
-custom_colors/font_color = Color( 0.617188, 0, 0, 1 )
-disabled = true
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
-group = null
-text = "Join Network Game"
-flat = false
-align = 1
-_sections_unfolded = [ "Anchor", "Grow Direction", "Margin", "Size Flags", "Theme", "custom_colors", "custom_fonts" ]
-
-[node name="Settings" type="Button" parent="Viewport/Control/Main" index="3"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 40.0
-margin_top = 107.0
-margin_right = 96.0
-margin_bottom = 121.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-focus_mode = 2
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-theme = ExtResource( 10 )
-custom_fonts/font = ExtResource( 9 )
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
-group = null
-text = "Settings"
-flat = false
-align = 1
-_sections_unfolded = [ "Anchor", "Grow Direction", "Margin", "Size Flags", "Theme", "custom_colors", "custom_fonts" ]
-
-[node name="Quit" type="Button" parent="Viewport/Control/Main" index="4"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 40.0
-margin_top = 127.0
-margin_right = 68.0
-margin_bottom = 141.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-focus_mode = 2
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-theme = ExtResource( 10 )
-custom_fonts/font = ExtResource( 9 )
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
-group = null
-text = "Quit"
-flat = false
-align = 1
-_sections_unfolded = [ "Anchor", "Grow Direction", "Margin", "Size Flags", "Theme", "custom_colors", "custom_fonts" ]
-
-[node name="MarathonLogo" type="Sprite" parent="Viewport/Control/Main" index="5"]
-
-position = Vector2( 390, 86.9209 )
-scale = Vector2( 0.637597, 0.637597 )
-texture = ExtResource( 11 )
-_sections_unfolded = [ "Animation", "Region" ]
-
-[node name="TabContainer" type="TabContainer" parent="Viewport/Control" index="3"]
-
-editor/display_folded = true
-visible = false
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_top = 21.0
-margin_right = 511.0
-margin_bottom = 258.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-theme = ExtResource( 10 )
-tab_align = 1
-tabs_visible = true
-_sections_unfolded = [ "Theme" ]
-
-[node name="Graphics" type="Tabs" parent="Viewport/Control/TabContainer" index="0"]
-
-editor/display_folded = true
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_top = 20.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-tab_align = 1
-scrolling_enabled = true
-_sections_unfolded = [ "Transform" ]
-
-[node name="SSAO" type="Label" parent="Viewport/Control/TabContainer/Graphics" index="0"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 40.0
-margin_top = 20.0
-margin_right = 280.0
-margin_bottom = 51.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 2
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 4
-custom_fonts/font = ExtResource( 9 )
-custom_colors/font_color = Color( 0.0078125, 1, 0, 1 )
-text = "SS A. Occlusion"
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
-_sections_unfolded = [ "custom_colors", "custom_fonts" ]
-
-[node name="value" type="Button" parent="Viewport/Control/TabContainer/Graphics/SSAO" index="0"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 330.0
-margin_right = 351.0
-margin_bottom = 14.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-focus_mode = 2
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-theme = ExtResource( 10 )
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
-group = null
-text = "Off"
-flat = false
-align = 1
-_sections_unfolded = [ "custom_colors", "custom_fonts" ]
-
-[node name="Screen Space Relfections" type="Label" parent="Viewport/Control/TabContainer/Graphics" index="1"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 40.0
-margin_top = 50.0
-margin_right = 424.0
-margin_bottom = 81.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 2
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 4
-custom_fonts/font = ExtResource( 9 )
-custom_colors/font_color = Color( 0.0078125, 1, 0, 1 )
-text = "SS Reflections"
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
-_sections_unfolded = [ "custom_colors", "custom_fonts" ]
-
-[node name="value" type="Button" parent="Viewport/Control/TabContainer/Graphics/Screen Space Relfections" index="0"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 330.0
-margin_right = 351.0
-margin_bottom = 14.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-focus_mode = 2
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-theme = ExtResource( 10 )
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
-group = null
-text = "Off"
-flat = false
-align = 1
-_sections_unfolded = [ "custom_colors", "custom_fonts" ]
-
-[node name="MSAA Filter" type="Label" parent="Viewport/Control/TabContainer/Graphics" index="2"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 40.0
-margin_top = 80.0
-margin_right = 424.0
-margin_bottom = 111.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 2
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 4
-custom_fonts/font = ExtResource( 9 )
-custom_colors/font_color = Color( 0.0078125, 1, 0, 1 )
-text = "MSAA Filter:"
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
-_sections_unfolded = [ "custom_colors", "custom_fonts" ]
-
-[node name="value" type="Button" parent="Viewport/Control/TabContainer/Graphics/MSAA Filter" index="0"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 330.0
-margin_right = 386.0
-margin_bottom = 14.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-focus_mode = 2
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-theme = ExtResource( 10 )
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
-group = null
-text = "Disabled"
-flat = false
-align = 1
-_sections_unfolded = [ "custom_colors", "custom_fonts" ]
-
-[node name="AnsFilter" type="Label" parent="Viewport/Control/TabContainer/Graphics" index="3"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 40.0
-margin_top = 110.0
-margin_right = 424.0
-margin_bottom = 141.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 2
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 4
-custom_fonts/font = ExtResource( 9 )
-custom_colors/font_color = Color( 0.0078125, 1, 0, 1 )
-text = "Ansiotropic filter: "
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
-_sections_unfolded = [ "custom_colors", "custom_fonts" ]
-
-[node name="value" type="Button" parent="Viewport/Control/TabContainer/Graphics/AnsFilter" index="0"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 330.0
-margin_right = 386.0
-margin_bottom = 14.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-focus_mode = 2
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-theme = ExtResource( 10 )
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
-group = null
-text = "Disabled"
-flat = false
-align = 1
-_sections_unfolded = [ "custom_colors", "custom_fonts" ]
-
-[node name="More" type="Button" parent="Viewport/Control/TabContainer/Graphics" index="4"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 60.0
-margin_top = 170.0
-margin_right = 124.0
-margin_bottom = 201.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-focus_mode = 2
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-theme = ExtResource( 10 )
-custom_fonts/font = ExtResource( 9 )
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
-group = null
-text = "More"
-flat = false
-align = 1
-_sections_unfolded = [ "custom_colors", "custom_fonts" ]
-
-[node name="Cancel" type="Button" parent="Viewport/Control/TabContainer/Graphics" index="5"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 400.0
-margin_top = 170.0
-margin_right = 496.0
-margin_bottom = 201.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-focus_mode = 2
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-theme = ExtResource( 10 )
-custom_fonts/font = ExtResource( 9 )
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
-group = null
-text = "Cancel"
-flat = false
-align = 1
-_sections_unfolded = [ "custom_colors", "custom_fonts" ]
-
-[node name="Done" type="Button" parent="Viewport/Control/TabContainer/Graphics" index="6"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 280.0
-margin_top = 170.0
-margin_right = 344.0
-margin_bottom = 201.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-focus_mode = 2
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-theme = ExtResource( 10 )
-custom_fonts/font = ExtResource( 9 )
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
-group = null
-text = "Done"
-flat = false
-align = 1
-_sections_unfolded = [ "custom_colors", "custom_fonts" ]
-
-[node name="Video" type="Tabs" parent="Viewport/Control/TabContainer" index="1"]
-
-editor/display_folded = true
-visible = false
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_top = 20.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-tab_align = 1
-scrolling_enabled = true
-_sections_unfolded = [ "Transform" ]
-
-[node name="Resolution" type="Label" parent="Viewport/Control/TabContainer/Video" index="0"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 30.0
-margin_top = 34.0
-margin_right = 100.0
-margin_bottom = 48.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 2
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 4
-custom_fonts/font = ExtResource( 9 )
-custom_colors/font_color = Color( 0, 1, 0, 1 )
-text = "Resolution"
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
-_sections_unfolded = [ "custom_colors", "custom_fonts" ]
-
-[node name="value" type="Label" parent="Viewport/Control/TabContainer/Video/Resolution" index="0"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 330.0
-margin_right = 351.0
-margin_bottom = 14.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 2
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 4
-custom_fonts/font = ExtResource( 9 )
-custom_colors/font_color = Color( 0, 1, 0, 1 )
-text = "Off"
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
-_sections_unfolded = [ "custom_colors", "custom_fonts" ]
-
-[node name="Screen Space Relfections" type="Label" parent="Viewport/Control/TabContainer/Video" index="1"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 30.0
-margin_top = 64.0
-margin_right = 100.0
-margin_bottom = 78.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 2
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 4
-custom_fonts/font = ExtResource( 9 )
-custom_colors/font_color = Color( 0, 1, 0, 1 )
-text = "Fullscreen"
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
-_sections_unfolded = [ "custom_colors", "custom_fonts" ]
-
-[node name="value" type="Label" parent="Viewport/Control/TabContainer/Video/Screen Space Relfections" index="0"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 330.0
-margin_right = 351.0
-margin_bottom = 14.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 2
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 4
-custom_fonts/font = ExtResource( 9 )
-custom_colors/font_color = Color( 0, 1, 0, 1 )
-text = "Off"
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
-_sections_unfolded = [ "custom_colors", "custom_fonts" ]
-
-[node name="Gamma Corection" type="Label" parent="Viewport/Control/TabContainer/Video" index="2"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 30.0
-margin_top = 94.0
-margin_right = 142.0
-margin_bottom = 108.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 2
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 4
-custom_fonts/font = ExtResource( 9 )
-custom_colors/font_color = Color( 0, 1, 0, 1 )
-text = "Gamma Correction"
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
-_sections_unfolded = [ "custom_colors", "custom_fonts" ]
-
-[node name="value" type="Label" parent="Viewport/Control/TabContainer/Video/Gamma Corection" index="0"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 330.0
-margin_right = 386.0
-margin_bottom = 14.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 2
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 4
-custom_fonts/font = ExtResource( 9 )
-custom_colors/font_color = Color( 0, 1, 0, 1 )
-text = "Disabled"
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
-_sections_unfolded = [ "custom_colors", "custom_fonts" ]
-
-[node name="Brightness" type="Label" parent="Viewport/Control/TabContainer/Video" index="3"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 30.0
-margin_top = 124.0
-margin_right = 100.0
-margin_bottom = 138.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 2
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 4
-custom_fonts/font = ExtResource( 9 )
-custom_colors/font_color = Color( 0, 1, 0, 1 )
-text = "Brightness"
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
-_sections_unfolded = [ "custom_colors", "custom_fonts" ]
-
-[node name="value" type="Label" parent="Viewport/Control/TabContainer/Video/Brightness" index="0"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 330.0
-margin_right = 386.0
-margin_bottom = 14.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 2
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 4
-custom_fonts/font = ExtResource( 9 )
-custom_colors/font_color = Color( 0, 1, 0, 1 )
-text = "Disabled"
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
-_sections_unfolded = [ "custom_colors", "custom_fonts" ]
-
-[node name="More" type="Button" parent="Viewport/Control/TabContainer/Video" index="4"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 68.0
-margin_top = 192.0
-margin_right = 96.0
-margin_bottom = 206.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-focus_mode = 2
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-theme = ExtResource( 10 )
-custom_fonts/font = ExtResource( 9 )
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
-group = null
-text = "More"
-flat = false
-align = 1
-_sections_unfolded = [ "custom_colors", "custom_fonts" ]
-
-[node name="Controls" type="Tabs" parent="Viewport/Control/TabContainer" index="2"]
-
-editor/display_folded = true
-visible = false
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_top = 20.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-tab_align = 1
-scrolling_enabled = true
-
-[node name="TabContainer" type="TabContainer" parent="Viewport/Control/TabContainer/Controls" index="0"]
-
-anchor_left = 0.5
-anchor_top = 0.0
-anchor_right = 0.5
-anchor_bottom = 0.0
-margin_left = -168.5
-margin_top = 21.0
-margin_right = 168.5
-margin_bottom = 62.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-tab_align = 1
-tabs_visible = true
-_sections_unfolded = [ "Grow Direction" ]
-
-[node name="Movement" type="Tabs" parent="Viewport/Control/TabContainer/Controls/TabContainer" index="0"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_top = 20.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-tab_align = 1
-scrolling_enabled = true
-
-[node name="Right" type="Button" parent="Viewport/Control/TabContainer/Controls/TabContainer/Movement" index="0"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = -53.0
-margin_top = 89.0
-margin_right = 24.0
-margin_bottom = 103.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-focus_mode = 2
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-theme = ExtResource( 10 )
-custom_fonts/font = ExtResource( 9 )
-custom_colors/font_color = Color( 0.0078125, 1, 0, 1 )
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
-group = null
-text = "Strafe Right:"
-flat = false
-align = 1
-_sections_unfolded = [ "custom_colors", "custom_fonts" ]
-
-[node name="Left" type="Button" parent="Viewport/Control/TabContainer/Controls/TabContainer/Movement" index="1"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = -53.0
-margin_top = 73.0
-margin_right = 24.0
-margin_bottom = 87.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-focus_mode = 2
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-theme = ExtResource( 10 )
-custom_fonts/font = ExtResource( 9 )
-custom_colors/font_color = Color( 0.0078125, 1, 0, 1 )
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
-group = null
-text = "Strafe Left:"
-flat = false
-align = 1
-_sections_unfolded = [ "custom_colors", "custom_fonts" ]
-
-[node name="Backwards" type="Button" parent="Viewport/Control/TabContainer/Controls/TabContainer/Movement" index="2"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = -53.0
-margin_top = 56.0
-margin_right = 17.0
-margin_bottom = 70.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-focus_mode = 2
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-theme = ExtResource( 10 )
-custom_fonts/font = ExtResource( 9 )
-custom_colors/font_color = Color( 0.0078125, 1, 0, 1 )
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
-group = null
-text = "Backwards:"
-flat = false
-align = 1
-_sections_unfolded = [ "custom_colors", "custom_fonts" ]
-
-[node name="Forwards" type="Button" parent="Viewport/Control/TabContainer/Controls/TabContainer/Movement" index="3"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = -53.0
-margin_top = 39.0
-margin_right = 3.0
-margin_bottom = 53.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-focus_mode = 2
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-theme = ExtResource( 10 )
-custom_fonts/font = ExtResource( 9 )
-custom_colors/font_color = Color( 0.0078125, 1, 0, 1 )
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
-group = null
-text = "Forwards:"
-flat = false
-align = 1
-_sections_unfolded = [ "custom_colors", "custom_fonts" ]
-
-[node name="Combat" type="Tabs" parent="Viewport/Control/TabContainer/Controls/TabContainer" index="1"]
-
-visible = false
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_top = 20.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-tab_align = 1
-scrolling_enabled = true
-
-[node name="Comm" type="Tabs" parent="Viewport/Control/TabContainer/Controls/TabContainer" index="2"]
-
-visible = false
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_top = 20.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-tab_align = 1
-scrolling_enabled = true
-
-[node name="Misc" type="Tabs" parent="Viewport/Control/TabContainer/Controls/TabContainer" index="3"]
-
-visible = false
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_top = 20.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-tab_align = 1
-scrolling_enabled = true
+[node name="Control" parent="Viewport" index="0" instance=ExtResource( 9 )]
 
 [node name="Area" type="Area" parent="." index="6"]
 
@@ -2771,7 +1577,7 @@ lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
 mesh = SubResource( 11 )
 skeleton = NodePath("..")
-material/0 = ExtResource( 13 )
+material/0 = ExtResource( 11 )
 _sections_unfolded = [ "material" ]
 __meta__ = {
 "_edit_lock_": true
@@ -2791,7 +1597,7 @@ lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
 mesh = SubResource( 11 )
 skeleton = NodePath("..")
-material/0 = ExtResource( 13 )
+material/0 = ExtResource( 11 )
 _sections_unfolded = [ "material" ]
 
 [node name="MeshInstance8" type="MeshInstance" parent="Limits" index="2"]
@@ -2808,7 +1614,7 @@ lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
 mesh = SubResource( 11 )
 skeleton = NodePath("..")
-material/0 = ExtResource( 13 )
+material/0 = ExtResource( 11 )
 _sections_unfolded = [ "material" ]
 
 [node name="MeshInstance9" type="MeshInstance" parent="Limits" index="3"]
@@ -2825,7 +1631,7 @@ lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
 mesh = SubResource( 11 )
 skeleton = NodePath("..")
-material/0 = ExtResource( 13 )
+material/0 = ExtResource( 11 )
 _sections_unfolded = [ "material" ]
 
 [node name="MeshInstance10" type="MeshInstance" parent="Limits" index="4"]
@@ -2842,7 +1648,7 @@ lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
 mesh = SubResource( 11 )
 skeleton = NodePath("..")
-material/0 = ExtResource( 13 )
+material/0 = ExtResource( 11 )
 _sections_unfolded = [ "material" ]
 
 [node name="MeshInstance11" type="MeshInstance" parent="Limits" index="5"]
@@ -2859,7 +1665,7 @@ lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
 mesh = SubResource( 11 )
 skeleton = NodePath("..")
-material/0 = ExtResource( 13 )
+material/0 = ExtResource( 11 )
 _sections_unfolded = [ "material" ]
 __meta__ = {
 "_edit_lock_": true
@@ -2879,7 +1685,7 @@ lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
 mesh = SubResource( 11 )
 skeleton = NodePath("..")
-material/0 = ExtResource( 13 )
+material/0 = ExtResource( 11 )
 _sections_unfolded = [ "material" ]
 
 [node name="MeshInstance4" type="MeshInstance" parent="Limits" index="7"]
@@ -2896,7 +1702,7 @@ lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
 mesh = SubResource( 11 )
 skeleton = NodePath("..")
-material/0 = ExtResource( 13 )
+material/0 = ExtResource( 11 )
 _sections_unfolded = [ "material" ]
 
 [node name="MeshInstance6" type="MeshInstance" parent="Limits" index="8"]
@@ -2913,7 +1719,7 @@ lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
 mesh = SubResource( 11 )
 skeleton = NodePath("..")
-material/0 = ExtResource( 13 )
+material/0 = ExtResource( 11 )
 _sections_unfolded = [ "Geometry", "material" ]
 
 [node name="MeshInstance5" type="MeshInstance" parent="Limits" index="9"]
@@ -2930,7 +1736,7 @@ lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
 mesh = SubResource( 11 )
 skeleton = NodePath("..")
-material/0 = ExtResource( 13 )
+material/0 = ExtResource( 11 )
 _sections_unfolded = [ "Geometry", "material" ]
 
 [node name="MeshInstance7" type="MeshInstance" parent="Limits" index="10"]
@@ -2947,7 +1753,7 @@ lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
 mesh = SubResource( 11 )
 skeleton = NodePath("..")
-material/0 = ExtResource( 13 )
+material/0 = ExtResource( 11 )
 _sections_unfolded = [ "material" ]
 
 [node name="GIProbe" type="GIProbe" parent="." index="9"]
@@ -3001,7 +1807,7 @@ near = 0.05
 far = 100.0
 _sections_unfolded = [ "Transform" ]
 
-[node name="motion_blur" parent="AnimationPlayer/Camera" index="0" instance=ExtResource( 14 )]
+[node name="motion_blur" parent="AnimationPlayer/Camera" index="0" instance=ExtResource( 12 )]
 
 [node name="Camera2" type="Camera" parent="AnimationPlayer" index="2"]
 
@@ -3020,20 +1826,8 @@ near = 0.05
 far = 100.0
 _sections_unfolded = [ "Transform" ]
 
-[node name="motion_blur" parent="AnimationPlayer/Camera2" index="0" instance=ExtResource( 14 )]
+[node name="motion_blur" parent="AnimationPlayer/Camera2" index="0" instance=ExtResource( 12 )]
 
-[node name="LensFlare" type="Node" parent="." index="11"]
-
-script = ExtResource( 15 )
-__meta__ = {
-"_editor_icon": ExtResource( 16 )
-}
-flareStrength = 10.0
-flareBias = 1.43
-distortion = 0.86
-ghostCount = 7
-ghostSpacing = 0.3
-haloWidth = 0.25
-lensDirt = ExtResource( 17 )
+[connection signal="input_event" from="Area" to="." method="_on_Area_input_event"]
 
 

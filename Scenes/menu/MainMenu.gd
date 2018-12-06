@@ -17,7 +17,26 @@ func _input(event):
 	if (is_mouse_event == false):
 		viewport.input(event)
 		
-func _on_area_input_event(camera, event, click_pos, click_normal, shape_idx):
+
+func _ready():
+	# Get the viewport and clear it
+	get_node("Area").connect("input_event", self, "_on_area_input_event")
+	viewport = $Viewport
+	viewport.set_clear_mode(Viewport.CLEAR_MODE_ONLY_NEXT_FRAME)
+	viewport.size = Vector2(512,256)
+	viewport.usage = Viewport.USAGE_2D_NO_SAMPLING
+	viewport.render_target_v_flip = true
+
+	# Let two frames pass to make sure the vieport's is captured
+	yield(get_tree(), "idle_frame")
+	yield(get_tree(), "idle_frame")
+
+	# Retrieve the texture and set it to the viewport quad
+	$Terminal.material_override.albedo_texture = viewport.get_texture()
+	$Terminal.material_override.emission_texture = viewport.get_texture()
+	$AnimationPlayer.play("Walk")
+
+func _on_Area_input_event(camera, event, click_pos, click_normal, shape_idx):
 	# Use click pos (click in 3d space, convert to area space)
 	var pos = get_node("Area").get_global_transform().affine_inverse()
 	# the click pos is not zero, then use it to convert from 3D space to area space
@@ -58,21 +77,3 @@ func _on_area_input_event(camera, event, click_pos, click_normal, shape_idx):
 	
 	# Send the event to the viewport
 	viewport.input(event)
-	
-func _ready():
-	# Get the viewport and clear it
-	get_node("Area").connect("input_event", self, "_on_area_input_event")
-	viewport = $Viewport
-	viewport.set_clear_mode(Viewport.CLEAR_MODE_ONLY_NEXT_FRAME)
-	viewport.size = Vector2(512,256)
-	viewport.usage = Viewport.USAGE_2D_NO_SAMPLING
-	viewport.render_target_v_flip = true
-
-	# Let two frames pass to make sure the vieport's is captured
-	yield(get_tree(), "idle_frame")
-	yield(get_tree(), "idle_frame")
-
-	# Retrieve the texture and set it to the viewport quad
-	$Terminal.material_override.albedo_texture = viewport.get_texture()
-	$Terminal.material_override.emission_texture = viewport.get_texture()
-	$AnimationPlayer.play("Walk")

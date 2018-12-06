@@ -2,6 +2,8 @@
 
 [ext_resource path="res://MiscRes/terminals.tres" type="DynamicFont" id=1]
 
+
+
 [node name="Scene Root" type="Control" index="0"]
 
 anchor_left = 0.0
