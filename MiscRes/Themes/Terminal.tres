@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=13 format=2]
+[gd_resource type="Theme" load_steps=14 format=2]
 
 [ext_resource path="res://MiscRes/terminals.tres" type="DynamicFont" id=1]
 
@@ -274,6 +274,35 @@ shadow_size = 0
 anti_aliasing = true
 anti_aliasing_size = 1
 _sections_unfolded = [ "Border", "Border Width", "Corner Radius", "Expand Margin" ]
+
+[sub_resource type="StyleBoxFlat" id=12]
+
+content_margin_left = -1.0
+content_margin_right = -1.0
+content_margin_top = -1.0
+content_margin_bottom = -1.0
+bg_color = Color( 0.6, 0.6, 0.6, 1 )
+draw_center = true
+border_width_left = 0
+border_width_top = 0
+border_width_right = 0
+border_width_bottom = 0
+border_color = Color( 0.0335777, 0.960938, 0.0262756, 1 )
+border_blend = false
+corner_radius_top_left = 0
+corner_radius_top_right = 0
+corner_radius_bottom_right = 0
+corner_radius_bottom_left = 0
+corner_detail = 8
+expand_margin_left = 0.0
+expand_margin_right = 0.0
+expand_margin_top = 0.0
+expand_margin_bottom = 0.0
+shadow_color = Color( 0, 0, 0, 0.6 )
+shadow_size = 0
+anti_aliasing = true
+anti_aliasing_size = 1
+_sections_unfolded = [ "Border", "Border Width", "Corner Radius", "Expand Margin", "Shadow" ]
 
 [resource]
 
@@ -659,7 +688,7 @@ VSplitContainer/constants/autohide = 1
 VSplitContainer/constants/separation = 12
 VSplitContainer/icons/grabber = null
 VSplitContainer/styles/bg = null
-WindowDialog/colors/title_color = Color( 0, 0, 0, 1 )
+WindowDialog/colors/title_color = Color( 0.862698, 0.980469, 0.0382996, 1 )
 WindowDialog/constants/close_h_ofs = 18
 WindowDialog/constants/close_v_ofs = 18
 WindowDialog/constants/scaleborder_size = 4
@@ -667,6 +696,6 @@ WindowDialog/constants/title_height = 20
 WindowDialog/fonts/title_font = null
 WindowDialog/icons/close = null
 WindowDialog/icons/close_highlight = null
-WindowDialog/styles/panel = null
-_sections_unfolded = [ "Button/colors", "Button/constants", "ButtonGroup/styles", "CheckBox", "CheckBox/colors", "CheckBox/fonts", "CheckBox/icons", "CheckButton", "CheckButton/colors", "CheckButton/constants", "CheckButton/fonts", "CheckButton/icons", "CheckButton/styles", "HScrollBar", "HScrollBar/styles", "Label/colors", "OptionButton/colors", "Panel/styles", "PanelContainer/styles", "ProgressBar/colors", "ProgressBar/styles", "ReferenceRect/styles", "RichTextLabel/colors", "RichTextLabel/constants", "TabContainer/styles" ]
+WindowDialog/styles/panel = SubResource( 12 )
+_sections_unfolded = [ "Button/colors", "Button/constants", "ButtonGroup/styles", "CheckBox", "CheckBox/colors", "CheckBox/fonts", "CheckBox/icons", "CheckButton/colors", "CheckButton/constants", "CheckButton/fonts", "CheckButton/icons", "CheckButton/styles", "Dialogs", "Fonts", "HScrollBar/styles", "Label/colors", "OptionButton/colors", "Panel/styles", "PanelContainer/styles", "PopupMenu/styles", "PopupPanel/styles", "ProgressBar/colors", "ProgressBar/styles", "ReferenceRect/styles", "RichTextLabel/colors", "RichTextLabel/constants", "TabContainer/styles", "WindowDialog", "WindowDialog/colors", "WindowDialog/constants", "WindowDialog/styles" ]
 

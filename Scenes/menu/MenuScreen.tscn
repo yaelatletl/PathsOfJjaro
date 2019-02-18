@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://MiscRes/Themes/Terminal.tres" type="Theme" id=1]
 [ext_resource path="res://Scenes/menu/MenuScreen.gd" type="Script" id=2]
 [ext_resource path="res://MiscRes/terminals.tres" type="DynamicFont" id=3]
 [ext_resource path="res://MiscRes/MarathonLogo.png" type="Texture" id=4]
+[ext_resource path="res://assets/ui/Menu/control_option_component.tscn" type="PackedScene" id=5]
 
 [sub_resource type="ButtonGroup" id=1]
 
@@ -16,8 +17,8 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_right = 40.0
-margin_bottom = 40.0
+margin_right = 511.0
+margin_bottom = 256.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 0
@@ -26,7 +27,7 @@ size_flags_horizontal = 1
 size_flags_vertical = 1
 theme = ExtResource( 1 )
 script = ExtResource( 2 )
-_sections_unfolded = [ "Theme" ]
+_sections_unfolded = [ "Rect", "Theme" ]
 
 [node name="Bkg" type="ColorRect" parent="." index="0"]
 
@@ -35,10 +36,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -20.0
-margin_top = -20.0
-margin_right = 492.0
-margin_bottom = 236.0
+margin_left = -255.5
+margin_top = -128.0
+margin_right = 256.5
+margin_bottom = 128.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 0
@@ -182,7 +183,6 @@ _sections_unfolded = [ "custom_colors", "custom_fonts" ]
 
 [node name="Main" type="Tabs" parent="." index="1"]
 
-visible = false
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 1.0
@@ -794,121 +794,61 @@ size_flags_vertical = 1
 tab_align = 1
 scrolling_enabled = true
 
-[node name="Right" type="Button" parent="TabContainer/Controls/TabContainer/Movement" index="0"]
+[node name="move_left" parent="TabContainer/Controls/TabContainer/Movement" index="0" instance=ExtResource( 5 )]
 
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = -53.0
-margin_top = 89.0
-margin_right = 24.0
-margin_bottom = 103.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-focus_mode = 2
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-theme = ExtResource( 1 )
-custom_fonts/font = ExtResource( 3 )
-custom_colors/font_color = Color( 0.0078125, 1, 0, 1 )
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
-group = null
-text = "Strafe Right:"
-flat = false
-align = 1
-_sections_unfolded = [ "custom_colors", "custom_fonts" ]
+margin_left = -47.0
+margin_top = 48.0
+margin_right = 210.0
+margin_bottom = 68.0
+Label_text = "Strafe Left"
 
-[node name="Left" type="Button" parent="TabContainer/Controls/TabContainer/Movement" index="1"]
+[node name="move_right" parent="TabContainer/Controls/TabContainer/Movement" index="1" instance=ExtResource( 5 )]
 
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = -53.0
-margin_top = 73.0
-margin_right = 24.0
-margin_bottom = 87.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-focus_mode = 2
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-theme = ExtResource( 1 )
-custom_fonts/font = ExtResource( 3 )
-custom_colors/font_color = Color( 0.0078125, 1, 0, 1 )
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
-group = null
-text = "Strafe Left:"
-flat = false
-align = 1
-_sections_unfolded = [ "custom_colors", "custom_fonts" ]
+margin_left = -47.0
+margin_top = 28.0
+margin_right = 210.0
+margin_bottom = 48.0
+Label_text = "Strafe right"
 
-[node name="Backwards" type="Button" parent="TabContainer/Controls/TabContainer/Movement" index="2"]
+[node name="move_forwards" parent="TabContainer/Controls/TabContainer/Movement" index="2" instance=ExtResource( 5 )]
 
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = -53.0
-margin_top = 56.0
-margin_right = 17.0
-margin_bottom = 70.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-focus_mode = 2
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-theme = ExtResource( 1 )
-custom_fonts/font = ExtResource( 3 )
-custom_colors/font_color = Color( 0.0078125, 1, 0, 1 )
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
-group = null
-text = "Backwards:"
-flat = false
-align = 1
-_sections_unfolded = [ "custom_colors", "custom_fonts" ]
+margin_left = -47.0
+margin_top = 68.0
+margin_right = 210.0
+margin_bottom = 88.0
+Label_text = "Move Forwards"
 
-[node name="Forwards" type="Button" parent="TabContainer/Controls/TabContainer/Movement" index="3"]
+[node name="move_backwards" parent="TabContainer/Controls/TabContainer/Movement" index="3" instance=ExtResource( 5 )]
 
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = -53.0
-margin_top = 39.0
-margin_right = 3.0
-margin_bottom = 53.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-focus_mode = 2
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-theme = ExtResource( 1 )
-custom_fonts/font = ExtResource( 3 )
-custom_colors/font_color = Color( 0.0078125, 1, 0, 1 )
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
-group = null
-text = "Forwards:"
-flat = false
-align = 1
-_sections_unfolded = [ "custom_colors", "custom_fonts" ]
+margin_left = -47.0
+margin_top = 88.0
+margin_right = 210.0
+margin_bottom = 108.0
+Label_text = "Move Backwards"
+
+[node name="jump" parent="TabContainer/Controls/TabContainer/Movement" index="4" instance=ExtResource( 5 )]
+
+margin_left = -47.0
+margin_top = 108.0
+margin_right = 210.0
+margin_bottom = 128.0
+Label_text = "Jump"
+
+[node name="run" parent="TabContainer/Controls/TabContainer/Movement" index="5" instance=ExtResource( 5 )]
+
+margin_left = -47.0
+margin_top = 128.0
+margin_right = 284.0
+margin_bottom = 148.0
+Label_text = "Run/Walk"
+
+[node name="swim" parent="TabContainer/Controls/TabContainer/Movement" index="6" instance=ExtResource( 5 )]
+
+margin_left = -47.0
+margin_top = 8.0
+margin_right = 210.0
+margin_bottom = 28.0
+Label_text = "Swim toggle"
 
 [node name="Combat" type="Tabs" parent="TabContainer/Controls/TabContainer" index="1"]
 
@@ -927,6 +867,38 @@ size_flags_vertical = 1
 tab_align = 1
 scrolling_enabled = true
 
+[node name="second_fire" parent="TabContainer/Controls/TabContainer/Combat" index="0" instance=ExtResource( 5 )]
+
+margin_left = -47.0
+margin_top = 68.0
+margin_right = 210.0
+margin_bottom = 88.0
+Label_text = "Secondary Fire"
+
+[node name="first_fire" parent="TabContainer/Controls/TabContainer/Combat" index="1" instance=ExtResource( 5 )]
+
+margin_left = -47.0
+margin_top = 48.0
+margin_right = 210.0
+margin_bottom = 68.0
+Label_text = "Primary fire"
+
+[node name="next_gun" parent="TabContainer/Controls/TabContainer/Combat" index="2" instance=ExtResource( 5 )]
+
+margin_left = -47.0
+margin_top = 88.0
+margin_right = 213.0
+margin_bottom = 108.0
+Label_text = "Next gun"
+
+[node name="prev_gun" parent="TabContainer/Controls/TabContainer/Combat" index="3" instance=ExtResource( 5 )]
+
+margin_left = -47.0
+margin_top = 108.0
+margin_right = 210.0
+margin_bottom = 128.0
+Label_text = "Previous gun"
+
 [node name="Comm" type="Tabs" parent="TabContainer/Controls/TabContainer" index="2"]
 
 visible = false
@@ -943,6 +915,22 @@ size_flags_horizontal = 1
 size_flags_vertical = 1
 tab_align = 1
 scrolling_enabled = true
+
+[node name="ui_right" parent="TabContainer/Controls/TabContainer/Comm" index="0" instance=ExtResource( 5 )]
+
+margin_left = -47.0
+margin_top = 28.0
+margin_right = 284.0
+margin_bottom = 48.0
+Label_text = "Chat"
+
+[node name="ui_right2" parent="TabContainer/Controls/TabContainer/Comm" index="1" instance=ExtResource( 5 )]
+
+margin_left = -47.0
+margin_top = 48.0
+margin_right = 210.0
+margin_bottom = 68.0
+Label_text = "Push-to-talk"
 
 [node name="Misc" type="Tabs" parent="TabContainer/Controls/TabContainer" index="3"]
 
@@ -961,8 +949,39 @@ size_flags_vertical = 1
 tab_align = 1
 scrolling_enabled = true
 
+[node name="open_map" parent="TabContainer/Controls/TabContainer/Misc" index="0" instance=ExtResource( 5 )]
+
+margin_left = -7.0
+margin_top = 28.0
+margin_right = 324.0
+margin_bottom = 48.0
+Label_text = "Open Minimap"
+
+[node name="gun_center" parent="TabContainer/Controls/TabContainer/Misc" index="1" instance=ExtResource( 5 )]
+
+margin_left = -7.0
+margin_top = 68.0
+margin_right = 324.0
+margin_bottom = 88.0
+Label_text = "Toggle gun position"
+
+[node name="ui_right3" parent="TabContainer/Controls/TabContainer/Misc" index="2" instance=ExtResource( 5 )]
+
+margin_left = -7.0
+margin_top = 8.0
+margin_right = 324.0
+margin_bottom = 28.0
+
+[node name="ui_right4" parent="TabContainer/Controls/TabContainer/Misc" index="3" instance=ExtResource( 5 )]
+
+margin_left = -7.0
+margin_top = 48.0
+margin_right = 324.0
+margin_bottom = 68.0
+
 [node name="Controls" type="Control" parent="." index="3"]
 
+visible = false
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
@@ -1034,6 +1053,8 @@ _sections_unfolded = [ "custom_colors", "custom_fonts" ]
 
 [node name="Net_Host" type="Tabs" parent="." index="4"]
 
+editor/display_folded = true
+visible = false
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0

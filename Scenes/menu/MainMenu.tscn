@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://Scenes/menu/MainMenu.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/menu/Material.material" type="Material" id=2]
@@ -12,6 +12,9 @@
 [ext_resource path="res://Scenes/menu/M1WALL.material" type="Material" id=10]
 [ext_resource path="res://Scenes/007.material" type="Material" id=11]
 [ext_resource path="res://addons/motion_blur/motion_blur.tscn" type="PackedScene" id=12]
+[ext_resource path="res://addons/SIsilicon.vfx.lens flare/lens-flare.gd" type="Script" id=13]
+[ext_resource path="res://addons/SIsilicon.vfx.lens flare/lens_flare_icon.png" type="Texture" id=14]
+[ext_resource path="res://addons/SIsilicon.vfx.lens flare/lens-dirt-default.jpeg" type="Texture" id=15]
 
 [sub_resource type="ArrayMesh" id=1]
 
@@ -1827,6 +1830,20 @@ far = 100.0
 _sections_unfolded = [ "Transform" ]
 
 [node name="motion_blur" parent="AnimationPlayer/Camera2" index="0" instance=ExtResource( 12 )]
+
+[node name="LensFlare" type="Node" parent="." index="11"]
+
+script = ExtResource( 13 )
+__meta__ = {
+"_editor_icon": ExtResource( 14 )
+}
+flareStrength = 10.0
+flareBias = 1.05
+distortion = 2
+ghostCount = 7
+ghostSpacing = 0.3
+haloWidth = 0.25
+lensDirt = ExtResource( 15 )
 
 [connection signal="input_event" from="Area" to="." method="_on_Area_input_event"]
 

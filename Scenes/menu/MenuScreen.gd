@@ -3,10 +3,13 @@ var AO
 
 
 func _ready():
-	
-	pass
+	_on_size_changed()
+	get_viewport().connect("size_changed",self,"_on_size_changed")
 
 
+func _on_size_changed():
+	var Newsize = get_viewport().get_visible_rect().size
+	rect_scale = Vector2(1,1)*(Newsize.x/rect_size.x)
 
 
 func _on_Settings_pressed():
@@ -39,3 +42,5 @@ func _on_HTTPRequest_request_completed(result, response_code, headers, body):
 	var json = body.get_string_from_utf8()
 	if $Net_Host/IP.visible == true:
 		$Net_Host/IP.text = "Public IP: " + str(json)
+
+
