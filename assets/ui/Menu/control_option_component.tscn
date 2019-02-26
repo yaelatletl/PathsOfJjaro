@@ -16,7 +16,7 @@ func _on_size_changed():
 	var Newsize = get_viewport().get_visible_rect().size
 	rect_scale = Vector2(1,1)*(0.5*Newsize.x/rect_size.x)"
 
-[node name="ui_right" type="HBoxContainer"]
+[node name="ui_right" type="HBoxContainer" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -100,6 +100,7 @@ align = 1
 
 [node name="Confirm" type="ConfirmationDialog" parent="." index="3"]
 
+visible = false
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
@@ -130,7 +131,7 @@ anchor_bottom = 0.0
 margin_left = 8.0
 margin_top = 8.0
 margin_right = 192.0
-margin_bottom = 34.0
+margin_bottom = 40.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 0
@@ -146,9 +147,9 @@ anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 74.0
-margin_top = 6.0
+margin_top = 9.0
 margin_right = 109.0
-margin_bottom = 20.0
+margin_bottom = 23.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 2

@@ -2,7 +2,7 @@
 
 [ext_resource path="res://assets/Weapons/Mega_Class/MegaClass_Final.mesh" type="ArrayMesh" id=1]
 
-[node name="MegaClass" type="Spatial"]
+[node name="MegaClass" type="Spatial" index="0"]
 
 [node name="MeshInstance" type="MeshInstance" parent="." index="0"]
 

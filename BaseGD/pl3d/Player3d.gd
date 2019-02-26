@@ -97,7 +97,7 @@ func _process(delta):
 		$HUD.health = health
 		$HUD.change_health()
 	
-func _physics_process(delta):
+
 	#	var d = 1.0 - delta*state.get_total_density()
 #	if (d < 0):
 #		d = 0

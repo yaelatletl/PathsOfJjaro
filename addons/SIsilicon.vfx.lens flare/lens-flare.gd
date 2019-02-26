@@ -9,6 +9,8 @@ export(int, 0.01, 100) var ghostCount = 7 setget set_ghost_count
 export(float, 0, 1) var ghostSpacing = 0.3 setget set_ghost_spacing
 export(float, 0, 1) var haloWidth = 0.25 setget set_halo_width
 
+
+
 export(Texture) var lensDirt = preload("lens-dirt-default.jpeg") setget set_lens_dirt
 
 var screen;
@@ -49,3 +51,4 @@ func set_halo_width(width):
 func set_lens_dirt(tex):
 	lensDirt = tex
 	material.set_shader_param('lens_dirt', tex)
+	

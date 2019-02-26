@@ -2,6 +2,7 @@ extends Spatial
 var viewport = null
 var prev_pos = null
 var last_click_pos = null
+export(int) var MenuType = 0
 
 	
 func _input(event):
@@ -20,7 +21,7 @@ func _input(event):
 
 func _ready():
 	# Get the viewport and clear it
-	get_node("Area").connect("input_event", self, "_on_area_input_event")
+	get_node("Spatial/Area").connect("input_event", self, "_on_area_input_event")
 	viewport = $Viewport
 	viewport.set_clear_mode(Viewport.CLEAR_MODE_ONLY_NEXT_FRAME)
 	viewport.size = Vector2(512,256)
@@ -32,13 +33,18 @@ func _ready():
 	yield(get_tree(), "idle_frame")
 
 	# Retrieve the texture and set it to the viewport quad
-	$Terminal.material_override.albedo_texture = viewport.get_texture()
-	$Terminal.material_override.emission_texture = viewport.get_texture()
-	$AnimationPlayer.play("Walk")
+	#$Terminal.material_override.albedo_texture = viewport.get_texture()
+	#$Terminal.material_override.emission_texture = viewport.get_texture()
+	if MenuType == 0:
+		$AnimationPlayer.play("Walk")
+	elif MenuType == 1:
+		$Camera3.make_current()
+		$AnimationPlayer.play("Idle")
+		
 
 func _on_Area_input_event(camera, event, click_pos, click_normal, shape_idx):
 	# Use click pos (click in 3d space, convert to area space)
-	var pos = get_node("Area").get_global_transform().affine_inverse()
+	var pos = get_node("Spatial/Area").get_global_transform().affine_inverse()
 	# the click pos is not zero, then use it to convert from 3D space to area space
 	if (click_pos.x != 0 or click_pos.y != 0 or click_pos.z != 0):
 		pos *= click_pos

@@ -20,7 +20,7 @@ RAD="*res://Helpers.gd"
 
 [debug]
 
-settings/fps/force_fps=90
+settings/fps/force_fps=60
 
 [display]
 

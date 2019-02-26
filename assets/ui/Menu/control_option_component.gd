@@ -1,6 +1,6 @@
 tool
 extends HBoxContainer
-export(String) var Label_text = "Default control name" #setget update_title
+export(String) var Label_text = "Default control name" setget update_title
 var reading = false
 var current_scancode = null
 
@@ -10,14 +10,15 @@ func update_labels():
 	get_node("Confirm/CenterContainer/Label2").text = OS.get_scancode_string(current_scancode)
 	
 
-func update_title():
-	$Label.text = Label_text
+func update_title(text):
+	
+	Label_text = text
+	#$Label.text = text
 
 func _enter_tree():
 	$Confirm.get_cancel().connect("pressed",self,"_on_Cancel") 
 	#Get the popup cancel button and connect it to _on_cancel
 	
-	update_title()
 	
 	if InputMap.has_action(str(name)):
 		current_scancode = InputMap.get_action_list(str(name))[0].scancode
