@@ -56,7 +56,7 @@ for(int i = 0; i < ghosts; ++i) {
 	vec2 offset = fract(texcoord + ghostVec * float(i));
 	result += textureDistorted(SCREEN_TEXTURE, offset, direction, distortion).rgb * weight(offset);
 	}
-result *= texture(lens_color, vec2(length(vec2(0.5) - texcoord) / length(vec2(0.5)), 0)).rgb;
+result *= texture(lens_color, vec2(length(vec2(0.5) - texcoord) / length(vec2(0.5)), 0.0)).rgb;
 
 
 vec2 haloVec = normalize(ghostVec) * halo_width;
@@ -67,9 +67,9 @@ vec4 disp = texture(displace, SCREEN_UV * dispSize);
 vec2 newUV = SCREEN_UV + disp.xy * dispAmt;
 //abberation
 vec3 DISP;
-DISP.r = max(vec4(0.0), texture(SCREEN_TEXTURE, newUV - vec2(abberationAmtX,abberationAmtY), 1)).r; 
-DISP.g = max(vec4(0.0), texture(SCREEN_TEXTURE, newUV, 1)).g; 
-DISP.b = max(vec4(0.0), texture(SCREEN_TEXTURE, newUV + vec2(abberationAmtX,abberationAmtY), 1)).b;
+DISP.r = max(vec4(0.0), texture(SCREEN_TEXTURE, newUV - vec2(abberationAmtX,abberationAmtY), 1.0)).r; 
+DISP.g = max(vec4(0.0), texture(SCREEN_TEXTURE, newUV, 1.0)).g; 
+DISP.b = max(vec4(0.0), texture(SCREEN_TEXTURE, newUV + vec2(abberationAmtX,abberationAmtY), 1.0)).b;
 
 //ALBEDO = textureLod(DEPTH_TEXTURE,SCREEN_UV, 1).rgb;
 ALBEDO = RESULTATTO+DISP;
