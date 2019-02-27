@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://BaseGD/Guns/Staff.gd" type="Script" id=1]
 [ext_resource path="res://BaseGD/Bullets/EnergyBullet.tscn" type="PackedScene" id=2]
 [ext_resource path="res://BaseGD/Guns/Staff.obj" type="ArrayMesh" id=3]
+[ext_resource path="res://assets/water_normal_2.png" type="Texture" id=4]
 
 [sub_resource type="SpatialMaterial" id=1]
 
@@ -41,6 +42,7 @@ emission_operator = 0
 emission_on_uv2 = false
 normal_enabled = true
 normal_scale = 1.0
+normal_texture = ExtResource( 4 )
 rim_enabled = false
 clearcoat_enabled = false
 anisotropy_enabled = false
@@ -50,6 +52,7 @@ subsurf_scatter_enabled = false
 transmission_enabled = false
 refraction_enabled = true
 refraction_scale = 0.05
+refraction_texture = ExtResource( 4 )
 refraction_texture_channel = 0
 detail_enabled = false
 uv1_scale = Vector3( 2, 2, 2 )
@@ -101,6 +104,7 @@ emission_operator = 0
 emission_on_uv2 = false
 normal_enabled = true
 normal_scale = 1.0
+normal_texture = ExtResource( 4 )
 rim_enabled = false
 clearcoat_enabled = false
 anisotropy_enabled = false
@@ -111,6 +115,7 @@ transmission_enabled = true
 transmission = Color( 0.480469, 0.480469, 0.480469, 1 )
 refraction_enabled = true
 refraction_scale = 0.05
+refraction_texture = ExtResource( 4 )
 refraction_texture_channel = 0
 detail_enabled = false
 uv1_scale = Vector3( 2, 2, 2 )
@@ -280,7 +285,7 @@ autostart = true
 
 [node name="CollisionShape" type="CollisionShape" parent="." index="4"]
 
-transform = Transform( 1, 0, 0, 0, -4.37114e-008, 1, 0, -1, -4.37114e-008, 0, 0.488752, 0 )
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.488752, 0 )
 shape = SubResource( 5 )
 disabled = false
 
