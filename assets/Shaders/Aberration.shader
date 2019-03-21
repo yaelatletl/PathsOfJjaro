@@ -12,8 +12,8 @@ void fragment(){
 	vec3 refractVecB = refract(view, NORMAL, iorRatioB);
      
     
-    COLOR.r = texture(SCREEN_TEXTURE, SCREEN_UV + refractVecR.xy).r;
-    COLOR.g = texture(SCREEN_TEXTURE, SCREEN_UV + refractVecG.xy).g;
-    COLOR.b = texture(SCREEN_TEXTURE, SCREEN_UV + refractVecB.xy).b;
-    COLOR.a = 1.0;
+   // COLOR.r = texture(SCREEN_TEXTURE, SCREEN_UV + refractVecR.xy).r;
+    //COLOR.g = texture(SCREEN_TEXTURE, SCREEN_UV + refractVecG.xy).g;
+    //COLOR.b = texture(SCREEN_TEXTURE, SCREEN_UV + refractVecB.xy).b;
+    //COLOR.a = 1.0;
 	}

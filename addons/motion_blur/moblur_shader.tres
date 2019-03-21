@@ -3,12 +3,10 @@
 [ext_resource path="res://addons/motion_blur/moblur_shader.shader" type="Shader" id=1]
 
 [resource]
-
 render_priority = -1
 shader = ExtResource( 1 )
 shader_param/linear_velocity = Vector3( 0, 0, 0 )
 shader_param/angular_velocity = Vector3( 0, 0, 0 )
 shader_param/iteration_count = 30
 shader_param/intensity = 0.25
-_sections_unfolded = [ "shader_param" ]
 

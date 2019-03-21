@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://BaseGD/pl3d/Player3d.gd" type="Script" id=1]
 [ext_resource path="res://BaseGD/pl3d/TopDownCamera.gd" type="Script" id=2]
@@ -7,8 +7,6 @@
 [ext_resource path="res://addons/motion_blur/motion_blur.tscn" type="PackedScene" id=5]
 [ext_resource path="res://BaseGD/pl3d/3RDPersCamera.gd" type="Script" id=6]
 [ext_resource path="res://BaseGD/pl3d/3RDPersonCamera.gd" type="Script" id=7]
-[ext_resource path="res://addons/SIsilicon.vfx.lens flare/lens-flare.gd" type="Script" id=8]
-[ext_resource path="res://addons/SIsilicon.vfx.lens flare/lens_flare_icon.png" type="Texture" id=9]
 
 [sub_resource type="CapsuleShape" id=1]
 radius = 0.507683
@@ -24,6 +22,8 @@ radius = 0.245702
 
 [node name="Player" type="KinematicBody"]
 script = ExtResource( 1 )
+AllowChangeCamera = true
+thRDPersCamera = true
 view_sensitivity = 0.3
 
 [node name="Collision" type="CollisionShape" parent="."]
@@ -58,7 +58,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.27367, 0 )
 [node name="FPSCamera" type="Camera" parent="Pivot"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0436552, -0.14649 )
 current = true
-far = 50.0
 script = ExtResource( 4 )
 
 [node name="motion_blur" parent="Pivot/FPSCamera" instance=ExtResource( 5 )]
@@ -66,13 +65,11 @@ visible = false
 
 [node name="3RDPersCamera" type="Camera" parent="Pivot"]
 transform = Transform( 0.997858, -0.0247958, 0.0605398, 0.0132274, 0.982746, 0.184489, -0.0640698, -0.183292, 0.980968, 0.497637, 0.54344, 1.31724 )
-visible = false
 fov = 90.0
 script = ExtResource( 6 )
 
 [node name="CameraCollision" type="KinematicBody" parent="Pivot"]
 transform = Transform( 0.999903, -1.86265e-009, -0.0139474, -0.00282001, 0.979347, -0.202169, 0.0136593, 0.202189, 0.979251, -0.00137392, 0.472392, 1.50019 )
-visible = false
 input_ray_pickable = false
 script = ExtResource( 7 )
 
@@ -86,10 +83,4 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
 visible = false
 mesh = SubResource( 4 )
 material/0 = null
-
-[node name="LensFlare" type="Node" parent="."]
-script = ExtResource( 8 )
-__meta__ = {
-"_editor_icon": ExtResource( 9 )
-}
 
