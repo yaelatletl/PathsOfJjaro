@@ -4,19 +4,8 @@
 
 [sub_resource type="StyleBoxEmpty" id=1]
 
-content_margin_left = -1.0
-content_margin_right = -1.0
-content_margin_top = -1.0
-content_margin_bottom = -1.0
-
 [sub_resource type="StyleBoxFlat" id=2]
-
-content_margin_left = -1.0
-content_margin_right = -1.0
-content_margin_top = -1.0
-content_margin_bottom = -1.0
 bg_color = Color( 0, 0.666667, 0, 1 )
-draw_center = true
 border_width_left = 1
 border_width_top = 1
 border_width_right = 1
@@ -27,25 +16,11 @@ corner_radius_top_left = 12
 corner_radius_top_right = 12
 corner_radius_bottom_right = 12
 corner_radius_bottom_left = 12
-corner_detail = 8
 expand_margin_left = 2.0
 expand_margin_right = 2.0
-expand_margin_top = 0.0
-expand_margin_bottom = 0.0
-shadow_color = Color( 0, 0, 0, 0.6 )
-shadow_size = 0
-anti_aliasing = true
-anti_aliasing_size = 1
-_sections_unfolded = [ "Border", "Border Width", "Corner Radius", "Expand Margin" ]
 
 [sub_resource type="StyleBoxFlat" id=3]
-
-content_margin_left = -1.0
-content_margin_right = -1.0
-content_margin_top = -1.0
-content_margin_bottom = -1.0
 bg_color = Color( 0, 1, 0, 1 )
-draw_center = true
 border_width_left = 1
 border_width_top = 1
 border_width_right = 1
@@ -56,25 +31,17 @@ corner_radius_top_left = 12
 corner_radius_top_right = 12
 corner_radius_bottom_right = 12
 corner_radius_bottom_left = 12
-corner_detail = 8
 expand_margin_left = 4.0
 expand_margin_right = 4.0
 expand_margin_top = 1.0
 expand_margin_bottom = 1.0
-shadow_color = Color( 0, 0, 0, 0.6 )
-shadow_size = 0
-anti_aliasing = true
-anti_aliasing_size = 1
-_sections_unfolded = [ "Border", "Border Width", "Corner Radius", "Expand Margin" ]
 
 [sub_resource type="StyleBoxFlat" id=4]
-
 content_margin_left = 1.0
 content_margin_right = 1.0
 content_margin_top = 1.0
 content_margin_bottom = 1.0
 bg_color = Color( 0.511719, 0.511719, 0.511719, 1 )
-draw_center = true
 border_width_left = 1
 border_width_top = 4
 border_width_right = 1
@@ -85,81 +52,17 @@ corner_radius_top_left = 4
 corner_radius_top_right = 4
 corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
-corner_detail = 8
 expand_margin_left = 1.0
 expand_margin_right = 1.0
 expand_margin_top = 6.0
 expand_margin_bottom = 6.0
-shadow_color = Color( 0, 0, 0, 0.6 )
-shadow_size = 0
-anti_aliasing = true
-anti_aliasing_size = 1
-_sections_unfolded = [ "Anti Aliasing", "Border", "Border Width", "Content Margin", "Corner Radius", "Expand Margin", "Shadow" ]
 
 [sub_resource type="StyleBoxFlat" id=5]
 
-content_margin_left = -1.0
-content_margin_right = -1.0
-content_margin_top = -1.0
-content_margin_bottom = -1.0
-bg_color = Color( 0.6, 0.6, 0.6, 1 )
-draw_center = true
-border_width_left = 0
-border_width_top = 0
-border_width_right = 0
-border_width_bottom = 0
-border_color = Color( 0.8, 0.8, 0.8, 1 )
-border_blend = false
-corner_radius_top_left = 0
-corner_radius_top_right = 0
-corner_radius_bottom_right = 0
-corner_radius_bottom_left = 0
-corner_detail = 8
-expand_margin_left = 0.0
-expand_margin_right = 0.0
-expand_margin_top = 0.0
-expand_margin_bottom = 0.0
-shadow_color = Color( 0, 0, 0, 0.6 )
-shadow_size = 0
-anti_aliasing = true
-anti_aliasing_size = 1
-
 [sub_resource type="StyleBoxFlat" id=6]
 
-content_margin_left = -1.0
-content_margin_right = -1.0
-content_margin_top = -1.0
-content_margin_bottom = -1.0
-bg_color = Color( 0.6, 0.6, 0.6, 1 )
-draw_center = true
-border_width_left = 0
-border_width_top = 0
-border_width_right = 0
-border_width_bottom = 0
-border_color = Color( 0.8, 0.8, 0.8, 1 )
-border_blend = false
-corner_radius_top_left = 0
-corner_radius_top_right = 0
-corner_radius_bottom_right = 0
-corner_radius_bottom_left = 0
-corner_detail = 8
-expand_margin_left = 0.0
-expand_margin_right = 0.0
-expand_margin_top = 0.0
-expand_margin_bottom = 0.0
-shadow_color = Color( 0, 0, 0, 0.6 )
-shadow_size = 0
-anti_aliasing = true
-anti_aliasing_size = 1
-
 [sub_resource type="StyleBoxFlat" id=7]
-
-content_margin_left = -1.0
-content_margin_right = -1.0
-content_margin_top = -1.0
-content_margin_bottom = -1.0
 bg_color = Color( 0.195313, 0.195313, 0.195313, 1 )
-draw_center = true
 border_width_left = 2
 border_width_top = 2
 border_width_right = 2
@@ -170,142 +73,50 @@ corner_radius_top_left = 4
 corner_radius_top_right = 4
 corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
-corner_detail = 8
 expand_margin_left = 2.0
 expand_margin_right = 2.0
 expand_margin_top = 2.0
 expand_margin_bottom = 2.0
-shadow_color = Color( 0, 0, 0, 0.6 )
-shadow_size = 0
-anti_aliasing = true
-anti_aliasing_size = 1
-_sections_unfolded = [ "Anti Aliasing", "Border", "Border Width", "Corner Radius", "Expand Margin", "Shadow" ]
 
 [sub_resource type="StyleBoxFlat" id=8]
-
-content_margin_left = -1.0
-content_margin_right = -1.0
-content_margin_top = -1.0
-content_margin_bottom = -1.0
 bg_color = Color( 1, 1, 1, 1 )
-draw_center = true
-border_width_left = 0
-border_width_top = 0
-border_width_right = 0
-border_width_bottom = 0
-border_color = Color( 0.8, 0.8, 0.8, 1 )
-border_blend = false
 corner_radius_top_left = 4
 corner_radius_top_right = 4
 corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
-corner_detail = 8
-expand_margin_left = 0.0
-expand_margin_right = 0.0
-expand_margin_top = 0.0
-expand_margin_bottom = 0.0
-shadow_color = Color( 0, 0, 0, 0.6 )
-shadow_size = 0
-anti_aliasing = true
-anti_aliasing_size = 1
-_sections_unfolded = [ "Corner Radius" ]
 
 [sub_resource type="StyleBoxEmpty" id=9]
 
-content_margin_left = -1.0
-content_margin_right = -1.0
-content_margin_top = -1.0
-content_margin_bottom = -1.0
-
 [sub_resource type="StyleBoxFlat" id=10]
-
-content_margin_left = -1.0
-content_margin_right = -1.0
-content_margin_top = -1.0
-content_margin_bottom = -1.0
 bg_color = Color( 0.507813, 0.507813, 0.507813, 1 )
-draw_center = true
 border_width_left = 3
 border_width_top = 3
 border_width_right = 3
 border_width_bottom = 3
 border_color = Color( 0, 0, 0, 1 )
 border_blend = true
-corner_radius_top_left = 0
-corner_radius_top_right = 0
-corner_radius_bottom_right = 0
-corner_radius_bottom_left = 0
-corner_detail = 8
 expand_margin_left = 3.0
 expand_margin_right = 3.0
 expand_margin_top = 1.0
 expand_margin_bottom = 1.0
-shadow_color = Color( 0, 0, 0, 0.6 )
-shadow_size = 0
-anti_aliasing = true
-anti_aliasing_size = 1
-_sections_unfolded = [ "Border", "Border Width", "Corner Radius", "Expand Margin" ]
 
 [sub_resource type="StyleBoxFlat" id=11]
-
-content_margin_left = -1.0
-content_margin_right = -1.0
-content_margin_top = -1.0
-content_margin_bottom = -1.0
 bg_color = Color( 0.078125, 1, 0, 1 )
-draw_center = true
 border_width_left = 3
 border_width_top = 3
 border_width_right = 3
 border_width_bottom = 3
 border_color = Color( 0, 0, 0, 1 )
 border_blend = true
-corner_radius_top_left = 0
-corner_radius_top_right = 0
-corner_radius_bottom_right = 0
-corner_radius_bottom_left = 0
-corner_detail = 8
 expand_margin_left = 3.0
 expand_margin_right = 3.0
 expand_margin_top = 1.0
 expand_margin_bottom = 1.0
-shadow_color = Color( 0, 0, 0, 0.6 )
-shadow_size = 0
-anti_aliasing = true
-anti_aliasing_size = 1
-_sections_unfolded = [ "Border", "Border Width", "Corner Radius", "Expand Margin" ]
 
 [sub_resource type="StyleBoxFlat" id=12]
-
-content_margin_left = -1.0
-content_margin_right = -1.0
-content_margin_top = -1.0
-content_margin_bottom = -1.0
-bg_color = Color( 0.6, 0.6, 0.6, 1 )
-draw_center = true
-border_width_left = 0
-border_width_top = 0
-border_width_right = 0
-border_width_bottom = 0
 border_color = Color( 0.0335777, 0.960938, 0.0262756, 1 )
-border_blend = false
-corner_radius_top_left = 0
-corner_radius_top_right = 0
-corner_radius_bottom_right = 0
-corner_radius_bottom_left = 0
-corner_detail = 8
-expand_margin_left = 0.0
-expand_margin_right = 0.0
-expand_margin_top = 0.0
-expand_margin_bottom = 0.0
-shadow_color = Color( 0, 0, 0, 0.6 )
-shadow_size = 0
-anti_aliasing = true
-anti_aliasing_size = 1
-_sections_unfolded = [ "Border", "Border Width", "Corner Radius", "Expand Margin", "Shadow" ]
 
 [resource]
-
 default_font = ExtResource( 1 )
 Button/colors/font_color = Color( 0, 0.65, 0, 1 )
 Button/colors/font_color_disabled = Color( 1, 0, 0, 1 )
@@ -697,5 +508,4 @@ WindowDialog/fonts/title_font = null
 WindowDialog/icons/close = null
 WindowDialog/icons/close_highlight = null
 WindowDialog/styles/panel = SubResource( 12 )
-_sections_unfolded = [ "Button/colors", "Button/constants", "ButtonGroup/styles", "CheckBox", "CheckBox/colors", "CheckBox/fonts", "CheckBox/icons", "CheckButton/colors", "CheckButton/constants", "CheckButton/fonts", "CheckButton/icons", "CheckButton/styles", "Dialogs", "Fonts", "HScrollBar/styles", "Label/colors", "OptionButton/colors", "Panel/styles", "PanelContainer/styles", "PopupMenu/styles", "PopupPanel/styles", "ProgressBar/colors", "ProgressBar/styles", "ReferenceRect/styles", "RichTextLabel/colors", "RichTextLabel/constants", "TabContainer/styles", "WindowDialog", "WindowDialog/colors", "WindowDialog/constants", "WindowDialog/styles" ]
 

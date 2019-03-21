@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://BaseGD/pl3d/Player3d.gd" type="Script" id=1]
 [ext_resource path="res://BaseGD/pl3d/TopDownCamera.gd" type="Script" id=2]
@@ -7,220 +7,89 @@
 [ext_resource path="res://addons/motion_blur/motion_blur.tscn" type="PackedScene" id=5]
 [ext_resource path="res://BaseGD/pl3d/3RDPersCamera.gd" type="Script" id=6]
 [ext_resource path="res://BaseGD/pl3d/3RDPersonCamera.gd" type="Script" id=7]
+[ext_resource path="res://addons/SIsilicon.vfx.lens flare/lens-flare.gd" type="Script" id=8]
+[ext_resource path="res://addons/SIsilicon.vfx.lens flare/lens_flare_icon.png" type="Texture" id=9]
 
 [sub_resource type="CapsuleShape" id=1]
-
 radius = 0.507683
 height = 0.816345
 
 [sub_resource type="BoxShape" id=2]
-
 extents = Vector3( 0.194782, 0.18276, 0.18002 )
 
 [sub_resource type="SphereShape" id=3]
-
 radius = 0.245702
 
 [sub_resource type="CubeMesh" id=4]
 
-custom_aabb = AABB( 0, 0, 0, 0, 0, 0 )
-size = Vector3( 2, 2, 2 )
-subdivide_width = 0
-subdivide_height = 0
-subdivide_depth = 0
-
 [node name="Player" type="KinematicBody"]
-
-input_ray_pickable = true
-input_capture_on_drag = false
-collision_layer = 1
-collision_mask = 1
-axis_lock_linear_x = false
-axis_lock_linear_y = false
-axis_lock_linear_z = false
-axis_lock_angular_x = false
-axis_lock_angular_y = false
-axis_lock_angular_z = false
-collision/safe_margin = 0.001
 script = ExtResource( 1 )
-_sections_unfolded = [ "Collision", "Transform" ]
-health = 100
-turn_speed = 40
-keep_jump_inertia = true
-air_idle_deaccel = false
-fixed_up = true
-accel = 19.0
-deaccel = 14.0
-sharp_turn_threshold = 140
-JumpHeight = 7.0
-Team = 1
-AllowChangeCamera = false
-FPSCamera = true
-thRDPersCamera = false
-fixpos = 0.5
-RPGCamera = false
-TopDownCamera = false
-WALKSPEED = 3.1
-RUNSPEED = 4.5
-Playermodel = null
-active = true
 view_sensitivity = 0.3
-weight = 1
-grav = 9.8
 
-[node name="Collision" type="CollisionShape" parent="." index="0"]
-
+[node name="Collision" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, -4.37114e-008, -1, 0, 1, -4.37114e-008, 0, 1.52971, 2.31546e-008 )
 shape = SubResource( 1 )
-disabled = false
-_sections_unfolded = [ "Transform" ]
 
-[node name="Collision2" type="CollisionShape" parent="." index="1"]
-
+[node name="Collision2" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, -4.37114e-008, -1, 0, 1, -4.37114e-008, 0.0349212, 0.973815, 0.0123702 )
 shape = SubResource( 2 )
-disabled = false
 
-[node name="Yaw" type="Spatial" parent="." index="2"]
-
+[node name="Yaw" type="Spatial" parent="."]
 transform = Transform( 0.405829, 0, 0, 0, 0.336027, -0.0042619, 0, 0.00461637, 0.310227, 0, 0.657452, -0.0413046 )
-_sections_unfolded = [ "Transform" ]
 
-[node name="TopDownCamera" type="Camera" parent="." index="3"]
-
+[node name="TopDownCamera" type="Camera" parent="."]
 transform = Transform( 1, 0, 0, 0, -4.37114e-008, 1, 0, -1, -4.37114e-008, 0, 14.246, 0 )
 visible = false
-keep_aspect = 1
-cull_mask = 1048575
-environment = null
-h_offset = 0.0
-v_offset = 0.0
-doppler_tracking = 0
-projection = 0
-current = false
-fov = 70.0
-size = 1.0
-near = 0.05
-far = 100.0
 script = ExtResource( 2 )
-_sections_unfolded = [ "Transform", "Visibility" ]
 
-[node name="target" type="Spatial" parent="." index="4"]
-
+[node name="target" type="Spatial" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.37966, 0 )
-_sections_unfolded = [ "Transform" ]
 
-[node name="camera" type="Camera" parent="target" index="0"]
-
+[node name="camera" type="Camera" parent="target"]
 visible = false
-keep_aspect = 1
-cull_mask = 1048575
-environment = null
-h_offset = 0.0
-v_offset = 0.0
-doppler_tracking = 0
-projection = 0
-current = false
-fov = 70.0
-size = 1.0
-near = 0.05
-far = 100.0
 script = ExtResource( 3 )
-min_distance = 0.5
-max_distance = 4.0
-angle_v_adjust = 0.0
-autoturn_ray_aperture = 25
-autoturn_speed = 50
 
-[node name="CameraOrigin" type="Spatial" parent="." index="5"]
-
+[node name="CameraOrigin" type="Spatial" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.489479, 2.14343, 1.44329 )
 
-[node name="Pivot" type="Position3D" parent="." index="6"]
+[node name="Pivot" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.27367, 0 )
 
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.37261, 0 )
-_sections_unfolded = [ "Transform" ]
-
-[node name="FPSCamera" type="Camera" parent="Pivot" index="0"]
-
+[node name="FPSCamera" type="Camera" parent="Pivot"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0436552, -0.14649 )
-keep_aspect = 1
-cull_mask = 1048575
-environment = null
-h_offset = 0.0
-v_offset = 0.0
-doppler_tracking = 0
-projection = 0
 current = true
-fov = 70.0
-size = 1.0
-near = 0.05
 far = 50.0
 script = ExtResource( 4 )
-_sections_unfolded = [ "Transform", "Visibility" ]
 
-[node name="motion_blur" parent="Pivot/FPSCamera" index="0" instance=ExtResource( 5 )]
+[node name="motion_blur" parent="Pivot/FPSCamera" instance=ExtResource( 5 )]
+visible = false
 
-[node name="3RDPersCamera" type="Camera" parent="Pivot" index="1"]
-
+[node name="3RDPersCamera" type="Camera" parent="Pivot"]
 transform = Transform( 0.997858, -0.0247958, 0.0605398, 0.0132274, 0.982746, 0.184489, -0.0640698, -0.183292, 0.980968, 0.497637, 0.54344, 1.31724 )
 visible = false
-keep_aspect = 1
-cull_mask = 1048575
-environment = null
-h_offset = 0.0
-v_offset = 0.0
-doppler_tracking = 0
-projection = 0
-current = false
 fov = 90.0
-size = 1.0
-near = 0.05
-far = 100.0
 script = ExtResource( 6 )
-_sections_unfolded = [ "Transform" ]
 
-[node name="CameraCollision" type="KinematicBody" parent="Pivot" index="2"]
-
+[node name="CameraCollision" type="KinematicBody" parent="Pivot"]
 transform = Transform( 0.999903, -1.86265e-009, -0.0139474, -0.00282001, 0.979347, -0.202169, 0.0136593, 0.202189, 0.979251, -0.00137392, 0.472392, 1.50019 )
 visible = false
 input_ray_pickable = false
-input_capture_on_drag = false
-collision_layer = 1
-collision_mask = 1
-axis_lock_linear_x = false
-axis_lock_linear_y = false
-axis_lock_linear_z = false
-axis_lock_angular_x = false
-axis_lock_angular_y = false
-axis_lock_angular_z = false
-collision/safe_margin = 0.001
 script = ExtResource( 7 )
-_sections_unfolded = [ "Transform" ]
 
-[node name="CollisionShape" type="CollisionShape" parent="Pivot/CameraCollision" index="0"]
-
+[node name="CollisionShape" type="CollisionShape" parent="Pivot/CameraCollision"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.476892, 0.0157118, -0.0391517 )
 visible = false
 shape = SubResource( 3 )
-disabled = false
-_sections_unfolded = [ "Pause", "Transform", "Visibility" ]
 
-[node name="MeshInstance" type="MeshInstance" parent="." index="7"]
-
+[node name="MeshInstance" type="MeshInstance" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
 visible = false
-layers = 1
-material_override = null
-cast_shadow = 1
-extra_cull_margin = 0.0
-use_in_baked_light = false
-lod_min_distance = 0.0
-lod_min_hysteresis = 0.0
-lod_max_distance = 0.0
-lod_max_hysteresis = 0.0
 mesh = SubResource( 4 )
-skeleton = NodePath("..")
 material/0 = null
 
+[node name="LensFlare" type="Node" parent="."]
+script = ExtResource( 8 )
+__meta__ = {
+"_editor_icon": ExtResource( 9 )
+}
 

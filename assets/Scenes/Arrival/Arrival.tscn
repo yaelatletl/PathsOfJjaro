@@ -1,659 +1,248 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://assets/Scenario/17/17.meshlib" type="MeshLibrary" id=1]
-[ext_resource path="res://assets/Scenario/17/17/Cube_095.mesh" type="ArrayMesh" id=2]
+[ext_resource path="res://assets/Scenario/18.meshlib" type="MeshLibrary" id=2]
+[ext_resource path="res://assets/Scenario/17/17/Cube_095.mesh" type="ArrayMesh" id=3]
+[ext_resource path="res://BaseGD/pl3d/Player3d.tscn" type="PackedScene" id=4]
 
 [sub_resource type="Environment" id=1]
-
-background_mode = 0
-background_sky_custom_fov = 0.0
-background_color = Color( 0, 0, 0, 1 )
-background_energy = 1.0
-background_canvas_max_layer = 0
 ambient_light_color = Color( 0.902344, 0.902344, 0.902344, 1 )
-ambient_light_energy = 1.0
-ambient_light_sky_contribution = 1.0
-fog_enabled = false
-fog_color = Color( 0.5, 0.6, 0.7, 1 )
-fog_sun_color = Color( 1, 0.9, 0.7, 1 )
-fog_sun_amount = 0.0
-fog_depth_enabled = true
-fog_depth_begin = 10.0
-fog_depth_curve = 1.0
-fog_transmit_enabled = false
-fog_transmit_curve = 1.0
-fog_height_enabled = false
-fog_height_min = 0.0
-fog_height_max = 100.0
-fog_height_curve = 1.0
-tonemap_mode = 0
-tonemap_exposure = 1.0
-tonemap_white = 1.0
-auto_exposure_enabled = false
-auto_exposure_scale = 0.4
-auto_exposure_min_luma = 0.05
-auto_exposure_max_luma = 8.0
-auto_exposure_speed = 0.5
-ss_reflections_enabled = false
-ss_reflections_max_steps = 64
-ss_reflections_fade_in = 0.15
-ss_reflections_fade_out = 2.0
-ss_reflections_depth_tolerance = 0.2
-ss_reflections_roughness = true
-ssao_enabled = false
-ssao_radius = 1.0
-ssao_intensity = 1.0
-ssao_radius2 = 0.0
-ssao_intensity2 = 1.0
-ssao_bias = 0.01
-ssao_light_affect = 0.0
-ssao_color = Color( 0, 0, 0, 1 )
-ssao_quality = 0
-ssao_blur = 3
-ssao_edge_sharpness = 4.0
-dof_blur_far_enabled = false
-dof_blur_far_distance = 10.0
-dof_blur_far_transition = 5.0
-dof_blur_far_amount = 0.1
-dof_blur_far_quality = 1
-dof_blur_near_enabled = false
-dof_blur_near_distance = 2.0
-dof_blur_near_transition = 1.0
-dof_blur_near_amount = 0.1
-dof_blur_near_quality = 1
-glow_enabled = false
-glow_levels/1 = false
-glow_levels/2 = false
-glow_levels/3 = true
-glow_levels/4 = false
-glow_levels/5 = true
-glow_levels/6 = false
-glow_levels/7 = false
-glow_intensity = 0.8
-glow_strength = 1.0
-glow_bloom = 0.0
-glow_blend_mode = 2
-glow_hdr_threshold = 1.0
-glow_hdr_scale = 2.0
-glow_bicubic_upscale = false
-adjustment_enabled = false
-adjustment_brightness = 1.0
-adjustment_contrast = 1.0
-adjustment_saturation = 1.0
-_sections_unfolded = [ "Ambient Light", "Background" ]
+glow_enabled = true
+glow_blend_mode = 0
 
-[node name="Spatial" type="Spatial" index="0"]
+[node name="Spatial" type="Spatial"]
 
-[node name="Section1" type="GridMap" parent="." index="0"]
-
-theme = ExtResource( 1 )
-cell_size = Vector3( 2, 2, 2 )
-cell_octant_size = 8
-cell_center_x = true
-cell_center_y = true
-cell_center_z = true
-cell_scale = 1.0
-collision_layer = 1
-collision_mask = 1
+[node name="Section1" type="GridMap" parent="."]
+mesh_library = ExtResource( 1 )
 data = {
-"cells": PoolIntArray(  )
-}
-__meta__ = {
-"_editor_clip_": 0
-}
-
-[node name="Connector" type="GridMap" parent="." index="1"]
-
-theme = ExtResource( 1 )
-cell_size = Vector3( 2, 2, 2 )
-cell_octant_size = 8
-cell_center_x = true
-cell_center_y = true
-cell_center_z = true
-cell_scale = 1.0
-collision_layer = 1
-collision_mask = 1
-data = {
-"cells": PoolIntArray(  )
-}
-__meta__ = {
-"_editor_clip_": 0
-}
-
-[node name="Section2" type="GridMap" parent="." index="2"]
-
-theme = ExtResource( 1 )
-cell_size = Vector3( 2, 2, 2 )
-cell_octant_size = 8
-cell_center_x = true
-cell_center_y = true
-cell_center_z = true
-cell_scale = 1.0
-collision_layer = 1
-collision_mask = 1
-data = {
-"cells": PoolIntArray( 196609, 0, 17, 196610, 0, 37, 196611, 0, -1609564143, 196612, 0, 16, 196613, 0, -1609170924, 196614, 0, -1610612699, 196615, 0, -1609170924, 196616, 0, -1610612720, 196618, 0, 37, 196621, 0, 538312733, 6, 2, 536870949, 9, 2, 37, 12, 2, 35, 196609, 2, 1048593, 196621, 2, -1609170907, 3, 3, 1048611, 196609, 4, 655380, 13, 5, 1441829, 196621, 5, -1609170907, 3, 6, -1609564123, 196609, 6, -1609957356, 13, 8, -1609170907, 196609, 8, 537526292, 196621, 8, 1441829, 3, 9, 1048613, 13, 11, 1441829, 196621, 11, 1441829, 3, 12, -1609564123, 13, 14, 538312735, 196621, 14, 1441823, 0, 17, 31 )
+"cells": PoolIntArray( 262127, 1, 18, 262129, 1, 19, 262131, 1, -536870893, 262133, 1, 1073741843, 262135, 1, -536870893, 262137, 1, 1073741843, 262139, 1, 1073741843, 262127, 3, 1441811, 262127, 5, 1441811, 262127, 7, -535429101, 262127, 9, 1441811, 262127, 11, 1441810, 262129, 11, 1074397203, 262131, 11, 655379, 262133, 11, 655379, 262127, 13, -535429101, 262127, 15, 1441811, 262127, 65535, 1075183635 )
 }
 __meta__ = {
 "_editor_clip_": 0,
 "_editor_floor_": Vector3( 0, 3, 0 )
 }
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="Section2" index="0"]
-
-environment = SubResource( 1 )
-
-[node name="Connector2" type="GridMap" parent="." index="3"]
-
-theme = ExtResource( 1 )
-cell_size = Vector3( 2, 2, 2 )
-cell_octant_size = 8
-cell_center_x = true
-cell_center_y = true
-cell_center_z = true
-cell_scale = 1.0
-collision_layer = 1
-collision_mask = 1
+[node name="Connector" type="GridMap" parent="."]
+mesh_library = ExtResource( 2 )
 data = {
-"cells": PoolIntArray( 196617, 0, 1048596, 196619, 0, 1048596, 196621, 0, -1609564143, 3, 1, 20, 5, 1, 538312723, 7, 1, 1441811, 9, 1, 1441811, 11, 1, 1441811, 13, 1, 20, 196611, 2, -1609957359, 196613, 2, 1048596, 196615, 2, 1048596, 196617, 2, 1048596, 196619, 2, 1048596, 3, 3, 20, 5, 3, 1441810, 7, 3, 1441810, 9, 3, 1441810, 11, 3, 538312722, 13, 3, 20, 196611, 4, 655380, 3, 5, 536870932, 5, 5, 1441811, 7, 5, 1441811, 9, 5, -1609170925, 11, 5, -1609170925, 13, 5, 20, 196611, 6, 655380, 3, 7, 536870932, 5, 7, 1441811, 7, 7, -1609170925, 9, 7, 538312723, 11, 7, 1441811, 13, 7, 536870932, 196611, 8, 655380, 3, 9, 20, 5, 9, 1441811, 7, 9, -1609170925, 9, 9, -1609170925, 11, 9, 538312723, 13, 9, -1610612716, 196609, 10, 655380, 196611, 10, 537526292, 3, 11, 20, 5, 11, -1609170925, 7, 11, 1441811, 9, 11, 1441811, 11, 11, 1441811, 13, 11, 536870932, 196609, 12, 537526292, 196611, 12, 655380, 3, 13, 20, 5, 13, -1609170925, 7, 13, -1609170925, 9, 13, 1441811, 11, 13, -1609170925, 13, 13, 20, 196609, 14, 655377, 196611, 14, 655377, 3, 15, 20, 5, 15, 537919507, 7, 15, 1048595, 9, 15, 1048595, 11, 15, 1048595, 13, 15, 20 )
+"cells": PoolIntArray( 262125, 1, 655366, 262142, 1, 1048581, 458733, 1, 1048585, 458735, 1, 537919497, 458737, 1, 1074790409, 458739, 1, 1048585, 458741, 1, 1048585, 458743, 1, -1609564151, 458745, 1, 1048585, 458747, 1, 1048585, 262125, 3, 1048582, 458733, 3, 1048585, 458735, 3, -1609564151, 262125, 5, 6, 458733, 5, -1609564151, 458735, 5, -1609564151, 262125, 7, 536870918, 458733, 7, 1074790409, 458735, 7, 1611661321, 262125, 9, 1441798, 458733, 9, 1048585, 458735, 9, 1074790409, 196609, 10, 1073741836, 196611, 10, 1074790408, 262141, 10, 12, 262143, 10, -1610612724, 262125, 11, 655366, 262135, 11, -1609170938, 262137, 11, 1441798, 262139, 11, -1609170938, 458733, 11, 1048585, 458735, 11, 1048585, 458737, 11, 1048585, 458739, 11, 1048585, 458741, 11, -1609564151, 458743, 11, 1048585, 458745, 11, 1048585, 458747, 11, 1048585, 196611, 12, 1048584, 262125, 13, 1048582, 458733, 13, 1048585, 458735, 13, 1048585, 196609, 14, 655372, 196611, 14, 1048584, 262141, 14, -1609957364, 262143, 14, -1609957364, 262125, 15, 1048582, 458733, 15, 1048585, 458735, 15, 1048585, 262123, 17, 538312710, 262125, 17, 1441798, 262127, 17, -1609170938, 262129, 17, 1441798, 262131, 17, 1441798, 458731, 17, 1048585, 458733, 17, 1048585, 458735, 17, -1609564151, 458737, 17, 1048585, 458739, 17, 1048585, 262123, 19, 1441798, 262125, 19, 1441798, 262127, 19, 1075183622, 262129, 19, 1441798, 262131, 19, 1441798, 458731, 19, 1048585, 458733, 19, 1048585, 458735, 19, 1048585, 458737, 19, 1048585, 458739, 19, -1609564151, 262123, 21, 1441798, 262125, 21, 1441798, 262127, 21, 1075183622, 262129, 21, 1441798, 262131, 21, 1441798, 458731, 21, 1074790409, 458733, 21, 1074790409, 458735, 21, 1074790409, 458737, 21, 1048585, 458739, 21, 1074790409, 262125, 65535, 1074397190, 458733, 65535, 1048585, 458735, 65535, 1048585 )
 }
 __meta__ = {
 "_editor_clip_": 0,
 "_editor_floor_": Vector3( 0, 3, 0 )
 }
 
-[node name="Others" type="Spatial" parent="." index="4"]
+[node name="Section2" type="GridMap" parent="."]
+mesh_library = ExtResource( 1 )
+data = {
+"cells": PoolIntArray( 196609, 0, 17, 196610, 0, 37, 196611, 0, -1609564143, 196612, 0, 16, 196613, 0, 1441812, 196614, 0, 37, 196615, 0, 1441812, 196616, 0, 16, 196618, 0, -1610612699, 196621, 0, 1441821, 262125, 0, 537919516, 262142, 0, -1610612714, 262143, 0, 37, 262129, 1, 655387, 262131, 1, -1609957348, 262133, 1, 655388, 262135, 1, -1609957348, 262137, 1, 537526300, 6, 2, 37, 9, 2, 37, 12, 2, 35, 196609, 2, 1048593, 196621, 2, 1441829, 262125, 2, 537919516, 3, 3, 1048611, 196609, 4, 655380, 262125, 4, 1048604, 262142, 4, 1048613, 13, 5, -1609170907, 196621, 5, 1441829, 262127, 5, 1441820, 3, 6, 537919525, 196609, 6, 655380, 262125, 6, 1048604, 196609, 7, 537526288, 196610, 7, 655376, 262127, 7, 1441820, 262143, 7, 655395, 13, 8, 1441829, 196609, 8, 655380, 196621, 8, 1441829, 262125, 8, -1609564132, 3, 9, 1048613, 196611, 9, 537919514, 262127, 9, 1441819, 262125, 10, 1048604, 13, 11, 1441829, 196621, 11, 1441829, 262129, 11, 655387, 262131, 11, 536870940, 262133, 11, 28, 262135, 11, 28, 262137, 11, 28, 262139, 11, 27, 3, 12, 1048613, 262125, 13, 537919529, 262141, 13, 1048603, 13, 14, 1441823, 196621, 14, 1441823, 262125, 15, -1609564132, 262127, 15, 1441819, 262130, 15, 1073741846, 262131, 15, 27, 262130, 16, 1074790416, 0, 17, -536870881, 262129, 17, 1073741850, 262127, 65532, -535429079, 262125, 65534, 1074790428, 262127, 65535, 1075183643 )
+}
+__meta__ = {
+"_editor_clip_": 0,
+"_editor_floor_": Vector3( 0, 3, 0 )
+}
 
-[node name="PairOfLights" type="Spatial" parent="Others" index="0"]
+[node name="Connector2" type="GridMap" parent="."]
+mesh_library = ExtResource( 1 )
+data = {
+"cells": PoolIntArray( 196617, 0, 1048596, 196619, 0, 1048596, 196621, 0, 1048593, 262141, 0, 1441809, 262143, 0, 1441809, 3, 1, 20, 5, 1, 1441811, 7, 1, 1441811, 9, 1, 1441811, 11, 1, 1441811, 13, 1, 20, 262131, 1, 28, 262133, 1, 1073741852, 262135, 1, 28, 262137, 1, 28, 262139, 1, 37, 262140, 1, 655397, 196611, 2, 655377, 196613, 2, 1048596, 196615, 2, 1048596, 196617, 2, 1048596, 196619, 2, 1048596, 262141, 2, 1441809, 262143, 2, 1441809, 3, 3, 20, 5, 3, 1441810, 7, 3, 1441810, 9, 3, 1441810, 11, 3, 1441810, 13, 3, 20, 196611, 4, 655380, 262141, 4, 1441809, 262143, 4, 1441809, 3, 5, 20, 5, 5, 1441811, 7, 5, 1441811, 9, 5, 1441811, 11, 5, 1441811, 13, 5, 20, 196611, 6, 655380, 262141, 6, 1441809, 262143, 6, 1441809, 3, 7, 20, 5, 7, 1441811, 7, 7, 1441811, 9, 7, 1441811, 11, 7, 1441811, 13, 7, 20, 196611, 8, 655380, 262141, 8, 1441809, 262143, 8, 1441809, 3, 9, 20, 5, 9, 1441811, 7, 9, 538312723, 9, 9, 1441811, 11, 9, 1441811, 13, 9, 20, 196609, 10, 655380, 196611, 10, 655380, 3, 11, 20, 5, 11, 1441811, 7, 11, 1441811, 9, 11, 1441811, 11, 11, 1441811, 13, 11, 20, 262131, 11, 655388, 262133, 11, 655388, 262135, 11, 655388, 262137, 11, 655388, 196609, 12, 655380, 196611, 12, 655380, 3, 13, 20, 5, 13, 1441811, 7, 13, 1441811, 9, 13, 1441811, 11, 13, 1441811, 13, 13, 20, 196609, 14, 655377, 196611, 14, 655377, 3, 15, -2147483628, 5, 15, 1441811, 7, 15, 1441811, 9, 15, 1441811, 11, 15, 1075183635, 13, 15, 20, 262141, 15, 1048583, 196608, 17, 16, 196609, 17, -536870886, 262143, 17, 1073741840 )
+}
+__meta__ = {
+"_editor_clip_": 0,
+"_editor_floor_": Vector3( 0, 3, 0 )
+}
 
+[node name="Others" type="Spatial" parent="."]
+
+[node name="PairOfLights" type="Spatial" parent="Others"]
 editor/display_folded = true
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 14.006, 12.4163, -0.760283 )
 
-[node name="Cube.096" type="MeshInstance" parent="Others/PairOfLights" index="0"]
-
+[node name="Cube.096" type="MeshInstance" parent="Others/PairOfLights"]
 editor/display_folded = true
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.42588, 0, 0 )
-layers = 1
-material_override = null
-cast_shadow = 1
-extra_cull_margin = 0.0
-use_in_baked_light = false
-lod_min_distance = 0.0
-lod_min_hysteresis = 0.0
-lod_max_distance = 0.0
-lod_max_hysteresis = 0.0
-mesh = ExtResource( 2 )
-skeleton = NodePath("..")
+mesh = ExtResource( 3 )
 material/0 = null
 
-[node name="OmniLight" type="OmniLight" parent="Others/PairOfLights/Cube.096" index="0"]
-
+[node name="OmniLight" type="OmniLight" parent="Others/PairOfLights/Cube.096"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.452536, 0.131828, 0.379844 )
-layers = 1
-light_color = Color( 1, 1, 1, 1 )
 light_energy = 3.0
-light_indirect_energy = 1.0
-light_negative = false
-light_specular = 0.5
-light_bake_mode = 1
-light_cull_mask = -1
-shadow_enabled = false
-shadow_color = Color( 0, 0, 0, 1 )
-shadow_bias = 0.15
-shadow_contact = 0.0
-shadow_reverse_cull_face = false
-editor_only = false
-omni_range = 5.0
-omni_attenuation = 1.0
-omni_shadow_mode = 1
-omni_shadow_detail = 1
 
-[node name="Cube.095" type="MeshInstance" parent="Others/PairOfLights" index="1"]
-
+[node name="Cube.095" type="MeshInstance" parent="Others/PairOfLights"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.434815, 0, 0 )
-layers = 1
-material_override = null
-cast_shadow = 1
-extra_cull_margin = 0.0
-use_in_baked_light = false
-lod_min_distance = 0.0
-lod_min_hysteresis = 0.0
-lod_max_distance = 0.0
-lod_max_hysteresis = 0.0
-mesh = ExtResource( 2 )
-skeleton = NodePath("..")
+mesh = ExtResource( 3 )
 material/0 = null
 
-[node name="OmniLight2" type="OmniLight" parent="Others/PairOfLights/Cube.095" index="0"]
-
+[node name="OmniLight2" type="OmniLight" parent="Others/PairOfLights/Cube.095"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.466028, 0.131828, 0.379844 )
-layers = 1
-light_color = Color( 1, 1, 1, 1 )
 light_energy = 3.0
-light_indirect_energy = 1.0
-light_negative = false
-light_specular = 0.5
-light_bake_mode = 1
-light_cull_mask = -1
-shadow_enabled = false
-shadow_color = Color( 0, 0, 0, 1 )
-shadow_bias = 0.15
-shadow_contact = 0.0
-shadow_reverse_cull_face = false
-editor_only = false
-omni_range = 5.0
-omni_attenuation = 1.0
-omni_shadow_mode = 1
-omni_shadow_detail = 1
 
-[node name="PairOfLights4" type="Spatial" parent="Others" index="1"]
-
+[node name="PairOfLights4" type="Spatial" parent="Others"]
 editor/display_folded = true
 transform = Transform( -4.37114e-008, 0, -1, 0, 1, 0, 1, 0, -4.37114e-008, 28.8641, 6.41634, 12.0276 )
 
-[node name="Cube.096" type="MeshInstance" parent="Others/PairOfLights4" index="0"]
-
+[node name="Cube.096" type="MeshInstance" parent="Others/PairOfLights4"]
 editor/display_folded = true
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.42588, 0, 0 )
-layers = 1
-material_override = null
-cast_shadow = 1
-extra_cull_margin = 0.0
-use_in_baked_light = false
-lod_min_distance = 0.0
-lod_min_hysteresis = 0.0
-lod_max_distance = 0.0
-lod_max_hysteresis = 0.0
-mesh = ExtResource( 2 )
-skeleton = NodePath("..")
+mesh = ExtResource( 3 )
 material/0 = null
 
-[node name="OmniLight" type="OmniLight" parent="Others/PairOfLights4/Cube.096" index="0"]
-
+[node name="OmniLight" type="OmniLight" parent="Others/PairOfLights4/Cube.096"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.452536, 0.131828, 0.379844 )
-layers = 1
-light_color = Color( 1, 1, 1, 1 )
 light_energy = 3.0
-light_indirect_energy = 1.0
-light_negative = false
-light_specular = 0.5
-light_bake_mode = 1
-light_cull_mask = -1
-shadow_enabled = false
-shadow_color = Color( 0, 0, 0, 1 )
-shadow_bias = 0.15
-shadow_contact = 0.0
-shadow_reverse_cull_face = false
-editor_only = false
-omni_range = 5.0
-omni_attenuation = 1.0
-omni_shadow_mode = 1
-omni_shadow_detail = 1
 
-[node name="Cube.095" type="MeshInstance" parent="Others/PairOfLights4" index="1"]
-
+[node name="Cube.095" type="MeshInstance" parent="Others/PairOfLights4"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.434815, 0, 0 )
-layers = 1
-material_override = null
-cast_shadow = 1
-extra_cull_margin = 0.0
-use_in_baked_light = false
-lod_min_distance = 0.0
-lod_min_hysteresis = 0.0
-lod_max_distance = 0.0
-lod_max_hysteresis = 0.0
-mesh = ExtResource( 2 )
-skeleton = NodePath("..")
+mesh = ExtResource( 3 )
 material/0 = null
 
-[node name="OmniLight2" type="OmniLight" parent="Others/PairOfLights4/Cube.095" index="0"]
-
+[node name="OmniLight2" type="OmniLight" parent="Others/PairOfLights4/Cube.095"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.466028, 0.131828, 0.379844 )
-layers = 1
-light_color = Color( 1, 1, 1, 1 )
 light_energy = 3.0
-light_indirect_energy = 1.0
-light_negative = false
-light_specular = 0.5
-light_bake_mode = 1
-light_cull_mask = -1
-shadow_enabled = false
-shadow_color = Color( 0, 0, 0, 1 )
-shadow_bias = 0.15
-shadow_contact = 0.0
-shadow_reverse_cull_face = false
-editor_only = false
-omni_range = 5.0
-omni_attenuation = 1.0
-omni_shadow_mode = 1
-omni_shadow_detail = 1
 
-[node name="PairOfLights2" type="Spatial" parent="Others" index="2"]
-
+[node name="PairOfLights2" type="Spatial" parent="Others"]
 editor/display_folded = true
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 22.006, 12.4163, -0.760283 )
 
-[node name="Cube.096" type="MeshInstance" parent="Others/PairOfLights2" index="0"]
-
+[node name="Cube.096" type="MeshInstance" parent="Others/PairOfLights2"]
 editor/display_folded = true
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.42588, 0, 0 )
-layers = 1
-material_override = null
-cast_shadow = 1
-extra_cull_margin = 0.0
-use_in_baked_light = false
-lod_min_distance = 0.0
-lod_min_hysteresis = 0.0
-lod_max_distance = 0.0
-lod_max_hysteresis = 0.0
-mesh = ExtResource( 2 )
-skeleton = NodePath("..")
+mesh = ExtResource( 3 )
 material/0 = null
 
-[node name="OmniLight" type="OmniLight" parent="Others/PairOfLights2/Cube.096" index="0"]
-
+[node name="OmniLight" type="OmniLight" parent="Others/PairOfLights2/Cube.096"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.452536, 0.131828, 0.379844 )
-layers = 1
-light_color = Color( 1, 1, 1, 1 )
 light_energy = 3.0
-light_indirect_energy = 1.0
-light_negative = false
-light_specular = 0.5
-light_bake_mode = 1
-light_cull_mask = -1
-shadow_enabled = false
-shadow_color = Color( 0, 0, 0, 1 )
-shadow_bias = 0.15
-shadow_contact = 0.0
-shadow_reverse_cull_face = false
-editor_only = false
-omni_range = 5.0
-omni_attenuation = 1.0
-omni_shadow_mode = 1
-omni_shadow_detail = 1
 
-[node name="Cube.095" type="MeshInstance" parent="Others/PairOfLights2" index="1"]
-
+[node name="Cube.095" type="MeshInstance" parent="Others/PairOfLights2"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.434815, 0, 0 )
-layers = 1
-material_override = null
-cast_shadow = 1
-extra_cull_margin = 0.0
-use_in_baked_light = false
-lod_min_distance = 0.0
-lod_min_hysteresis = 0.0
-lod_max_distance = 0.0
-lod_max_hysteresis = 0.0
-mesh = ExtResource( 2 )
-skeleton = NodePath("..")
+mesh = ExtResource( 3 )
 material/0 = null
 
-[node name="OmniLight2" type="OmniLight" parent="Others/PairOfLights2/Cube.095" index="0"]
-
+[node name="OmniLight2" type="OmniLight" parent="Others/PairOfLights2/Cube.095"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.466028, 0.131828, 0.379844 )
-layers = 1
-light_color = Color( 1, 1, 1, 1 )
 light_energy = 3.0
-light_indirect_energy = 1.0
-light_negative = false
-light_specular = 0.5
-light_bake_mode = 1
-light_cull_mask = -1
-shadow_enabled = false
-shadow_color = Color( 0, 0, 0, 1 )
-shadow_bias = 0.15
-shadow_contact = 0.0
-shadow_reverse_cull_face = false
-editor_only = false
-omni_range = 5.0
-omni_attenuation = 1.0
-omni_shadow_mode = 1
-omni_shadow_detail = 1
 
-[node name="PairOfLights3" type="Spatial" parent="Others" index="3"]
-
+[node name="PairOfLights3" type="Spatial" parent="Others"]
 editor/display_folded = true
 transform = Transform( -4.37114e-008, 0, -1, 0, 1, 0, 1, 0, -4.37114e-008, 28.8641, 6.41634, 17.9889 )
 
-[node name="Cube.096" type="MeshInstance" parent="Others/PairOfLights3" index="0"]
-
+[node name="Cube.096" type="MeshInstance" parent="Others/PairOfLights3"]
 editor/display_folded = true
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.42588, 0, 0 )
-layers = 1
-material_override = null
-cast_shadow = 1
-extra_cull_margin = 0.0
-use_in_baked_light = false
-lod_min_distance = 0.0
-lod_min_hysteresis = 0.0
-lod_max_distance = 0.0
-lod_max_hysteresis = 0.0
-mesh = ExtResource( 2 )
-skeleton = NodePath("..")
+mesh = ExtResource( 3 )
 material/0 = null
 
-[node name="OmniLight" type="OmniLight" parent="Others/PairOfLights3/Cube.096" index="0"]
-
+[node name="OmniLight" type="OmniLight" parent="Others/PairOfLights3/Cube.096"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.452536, 0.131828, 0.379844 )
-layers = 1
-light_color = Color( 1, 1, 1, 1 )
 light_energy = 3.0
-light_indirect_energy = 1.0
-light_negative = false
-light_specular = 0.5
-light_bake_mode = 1
-light_cull_mask = -1
-shadow_enabled = false
-shadow_color = Color( 0, 0, 0, 1 )
-shadow_bias = 0.15
-shadow_contact = 0.0
-shadow_reverse_cull_face = false
-editor_only = false
-omni_range = 5.0
-omni_attenuation = 1.0
-omni_shadow_mode = 1
-omni_shadow_detail = 1
 
-[node name="Cube.095" type="MeshInstance" parent="Others/PairOfLights3" index="1"]
-
+[node name="Cube.095" type="MeshInstance" parent="Others/PairOfLights3"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.434815, 0, 0 )
-layers = 1
-material_override = null
-cast_shadow = 1
-extra_cull_margin = 0.0
-use_in_baked_light = false
-lod_min_distance = 0.0
-lod_min_hysteresis = 0.0
-lod_max_distance = 0.0
-lod_max_hysteresis = 0.0
-mesh = ExtResource( 2 )
-skeleton = NodePath("..")
+mesh = ExtResource( 3 )
 material/0 = null
 
-[node name="OmniLight2" type="OmniLight" parent="Others/PairOfLights3/Cube.095" index="0"]
-
+[node name="OmniLight2" type="OmniLight" parent="Others/PairOfLights3/Cube.095"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.466028, 0.131828, 0.379844 )
-layers = 1
-light_color = Color( 1, 1, 1, 1 )
 light_energy = 3.0
-light_indirect_energy = 1.0
-light_negative = false
-light_specular = 0.5
-light_bake_mode = 1
-light_cull_mask = -1
-shadow_enabled = false
-shadow_color = Color( 0, 0, 0, 1 )
-shadow_bias = 0.15
-shadow_contact = 0.0
-shadow_reverse_cull_face = false
-editor_only = false
-omni_range = 5.0
-omni_attenuation = 1.0
-omni_shadow_mode = 1
-omni_shadow_detail = 1
 
-[node name="PairOfLights5" type="Spatial" parent="Others" index="4"]
-
+[node name="PairOfLights5" type="Spatial" parent="Others"]
 editor/display_folded = true
 transform = Transform( -4.37114e-008, 0, -1, 0, 1, 0, 1, 0, -4.37114e-008, 28.8641, 6.41634, 24.0137 )
 
-[node name="Cube.096" type="MeshInstance" parent="Others/PairOfLights5" index="0"]
-
+[node name="Cube.096" type="MeshInstance" parent="Others/PairOfLights5"]
 editor/display_folded = true
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.42588, 0, 0 )
-layers = 1
-material_override = null
-cast_shadow = 1
-extra_cull_margin = 0.0
-use_in_baked_light = false
-lod_min_distance = 0.0
-lod_min_hysteresis = 0.0
-lod_max_distance = 0.0
-lod_max_hysteresis = 0.0
-mesh = ExtResource( 2 )
-skeleton = NodePath("..")
+mesh = ExtResource( 3 )
 material/0 = null
 
-[node name="OmniLight" type="OmniLight" parent="Others/PairOfLights5/Cube.096" index="0"]
-
+[node name="OmniLight" type="OmniLight" parent="Others/PairOfLights5/Cube.096"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.452536, 0.131828, 0.379844 )
-layers = 1
-light_color = Color( 1, 1, 1, 1 )
 light_energy = 3.0
-light_indirect_energy = 1.0
-light_negative = false
-light_specular = 0.5
-light_bake_mode = 1
-light_cull_mask = -1
-shadow_enabled = false
-shadow_color = Color( 0, 0, 0, 1 )
-shadow_bias = 0.15
-shadow_contact = 0.0
-shadow_reverse_cull_face = false
-editor_only = false
-omni_range = 5.0
-omni_attenuation = 1.0
-omni_shadow_mode = 1
-omni_shadow_detail = 1
 
-[node name="Cube.095" type="MeshInstance" parent="Others/PairOfLights5" index="1"]
-
+[node name="Cube.095" type="MeshInstance" parent="Others/PairOfLights5"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.434815, 0, 0 )
-layers = 1
-material_override = null
-cast_shadow = 1
-extra_cull_margin = 0.0
-use_in_baked_light = false
-lod_min_distance = 0.0
-lod_min_hysteresis = 0.0
-lod_max_distance = 0.0
-lod_max_hysteresis = 0.0
-mesh = ExtResource( 2 )
-skeleton = NodePath("..")
+mesh = ExtResource( 3 )
 material/0 = null
 
-[node name="OmniLight2" type="OmniLight" parent="Others/PairOfLights5/Cube.095" index="0"]
-
+[node name="OmniLight2" type="OmniLight" parent="Others/PairOfLights5/Cube.095"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.466028, 0.131828, 0.379844 )
-layers = 1
-light_color = Color( 1, 1, 1, 1 )
 light_energy = 3.0
-light_indirect_energy = 1.0
-light_negative = false
-light_specular = 0.5
-light_bake_mode = 1
-light_cull_mask = -1
-shadow_enabled = false
-shadow_color = Color( 0, 0, 0, 1 )
-shadow_bias = 0.15
-shadow_contact = 0.0
-shadow_reverse_cull_face = false
-editor_only = false
-omni_range = 5.0
-omni_attenuation = 1.0
-omni_shadow_mode = 1
-omni_shadow_detail = 1
 
-[node name="PairOfLights6" type="Spatial" parent="Others" index="5"]
-
+[node name="PairOfLights6" type="Spatial" parent="Others"]
 editor/display_folded = true
 transform = Transform( -4.37114e-008, 0, -1, 0, 1, 0, 1, 0, -4.37114e-008, 28.8641, 6.41634, 30.0137 )
 
-[node name="Cube.096" type="MeshInstance" parent="Others/PairOfLights6" index="0"]
-
+[node name="Cube.096" type="MeshInstance" parent="Others/PairOfLights6"]
 editor/display_folded = true
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.42588, 0, 0 )
-layers = 1
-material_override = null
-cast_shadow = 1
-extra_cull_margin = 0.0
-use_in_baked_light = false
-lod_min_distance = 0.0
-lod_min_hysteresis = 0.0
-lod_max_distance = 0.0
-lod_max_hysteresis = 0.0
-mesh = ExtResource( 2 )
-skeleton = NodePath("..")
+mesh = ExtResource( 3 )
 material/0 = null
 
-[node name="OmniLight" type="OmniLight" parent="Others/PairOfLights6/Cube.096" index="0"]
-
+[node name="OmniLight" type="OmniLight" parent="Others/PairOfLights6/Cube.096"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.452536, 0.131828, 0.379844 )
-layers = 1
-light_color = Color( 1, 1, 1, 1 )
 light_energy = 3.0
-light_indirect_energy = 1.0
-light_negative = false
-light_specular = 0.5
-light_bake_mode = 1
-light_cull_mask = -1
-shadow_enabled = false
-shadow_color = Color( 0, 0, 0, 1 )
-shadow_bias = 0.15
-shadow_contact = 0.0
-shadow_reverse_cull_face = false
-editor_only = false
-omni_range = 5.0
-omni_attenuation = 1.0
-omni_shadow_mode = 1
-omni_shadow_detail = 1
 
-[node name="Cube.095" type="MeshInstance" parent="Others/PairOfLights6" index="1"]
-
+[node name="Cube.095" type="MeshInstance" parent="Others/PairOfLights6"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.434815, 0, 0 )
-layers = 1
-material_override = null
-cast_shadow = 1
-extra_cull_margin = 0.0
-use_in_baked_light = false
-lod_min_distance = 0.0
-lod_min_hysteresis = 0.0
-lod_max_distance = 0.0
-lod_max_hysteresis = 0.0
-mesh = ExtResource( 2 )
-skeleton = NodePath("..")
+mesh = ExtResource( 3 )
 material/0 = null
 
-[node name="OmniLight2" type="OmniLight" parent="Others/PairOfLights6/Cube.095" index="0"]
-
+[node name="OmniLight2" type="OmniLight" parent="Others/PairOfLights6/Cube.095"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.466028, 0.131828, 0.379844 )
-layers = 1
-light_color = Color( 1, 1, 1, 1 )
 light_energy = 3.0
-light_indirect_energy = 1.0
-light_negative = false
-light_specular = 0.5
-light_bake_mode = 1
-light_cull_mask = -1
-shadow_enabled = false
-shadow_color = Color( 0, 0, 0, 1 )
-shadow_bias = 0.15
-shadow_contact = 0.0
-shadow_reverse_cull_face = false
-editor_only = false
-omni_range = 5.0
-omni_attenuation = 1.0
-omni_shadow_mode = 1
-omni_shadow_detail = 1
 
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource( 1 )
+
+[node name="GridMap" type="GridMap" parent="."]
+mesh_library = ExtResource( 2 )
+data = {
+"cells": PoolIntArray( 393217, 0, 1441801, 393219, 0, 1441801, 393221, 0, 1441801, 393223, 0, 1441801, 393225, 0, 1441801, 393227, 0, 1441801, 393229, 0, 1441801, 458749, 0, 1441801, 458751, 0, 1441801, 393217, 2, 1441801, 393219, 2, 1441801, 393221, 2, 1441801, 393223, 2, 1441801, 393225, 2, 1441801, 393227, 2, 1441801, 393229, 2, 1441801, 458749, 2, 1441801, 458751, 2, 1441801, 393217, 4, 1441801, 393219, 4, 1441801, 393221, 4, -1072300023, 393223, 4, 1441801, 393225, 4, 1441801, 393227, 4, 1441801, 393229, 4, -1073741815, 458749, 4, 1441801, 458751, 4, 1441801, 393217, 6, 1048585, 393219, 6, 9, 393221, 6, 1048585, 393223, 6, 655369, 393225, 6, 655369, 393227, 6, -1073086455, 393229, 6, 1441801, 458749, 6, 1048585, 458751, 6, 1048585, 393217, 8, 1048585, 393219, 8, 9, 393221, 8, 1441801, 393223, 8, 655369, 393225, 8, 1048585, 393227, 8, 9, 393229, 8, 9, 458749, 8, 1048585, 458751, 8, 1048585, 262141, 10, 655366, 262143, 10, 655366, 393217, 10, -1073086455, 393219, 10, 1048585, 393221, 10, 1048585, 393223, 10, 1048585, 393225, 10, 1048585, 393227, 10, 1048585, 393229, 10, 1048585, 458749, 10, 655369, 458751, 10, 655369, 262141, 12, 655366, 262143, 12, -1073086458, 393217, 12, 655369, 393219, 12, 1048585, 393221, 12, -1072693239, 393223, 12, 1048585, 393225, 12, 1048585, 393227, 12, 1048585, 393229, 12, 1048585, 458749, 12, 655369, 458751, 12, 655369, 262141, 14, 655366, 262143, 14, 655366, 393217, 14, 655369, 393219, 14, 1048585, 393221, 14, 1048585, 393223, 14, -1072693239, 393225, 14, 1048585, 393227, 14, 1048585, 393229, 14, 1048585, 458749, 14, 655369, 458751, 14, 655369, 393217, 16, 1441801, 393219, 16, 1441801, 393221, 16, 1441801, 393223, 16, -1072300023, 393225, 16, 1441801, 393227, 16, 1441801, 393229, 16, 1441801, 458749, 16, 1441801, 458751, 16, -1072300023, 262123, 17, 12, 262131, 17, 8, 262133, 17, 1048584, 262123, 18, 1074790411, 262133, 19, -535822328, 262123, 21, 1074790411, 262133, 21, -535822328, 262123, 23, 1073741832, 262125, 23, -536870904, 262127, 23, 1073741832, 262129, 23, 1073741832, 262131, 23, 8 )
+}
+__meta__ = {
+"_editor_clip_": 0,
+"_editor_floor_": Vector3( 0, 3, 0 )
+}
+
+[node name="ReflectionProbe" type="ReflectionProbe" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 17.2235, 3.87774, 14.7423 )
+visible = false
+extents = Vector3( 12.1417, 3.05804, 18.2814 )
+box_projection = true
+enable_shadows = true
+interior_enable = true
+interior_ambient_color = Color( 0.32549, 0.32549, 0.32549, 1 )
+
+[node name="ReflectionProbe2" type="ReflectionProbe" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 17.2235, 10.0387, 14.7423 )
+visible = false
+extents = Vector3( 12.1417, 3.05804, 18.2814 )
+box_projection = true
+enable_shadows = true
+interior_enable = true
+interior_ambient_color = Color( 0.32549, 0.32549, 0.32549, 1 )
+
+[node name="ReflectionProbe3" type="ReflectionProbe" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9.88883, 8.02633 )
+visible = false
+extents = Vector3( 5.08256, 3.28168, 9.21322 )
+box_projection = true
+enable_shadows = true
+interior_enable = true
+interior_ambient_color = Color( 0.32549, 0.32549, 0.32549, 1 )
+
+[node name="ReflectionProbe4" type="ReflectionProbe" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.19023, 9.88883, 24.3703 )
+visible = false
+extents = Vector3( 6.0269, 3.28168, 6.49122 )
+box_projection = true
+enable_shadows = true
+interior_enable = true
+interior_ambient_color = Color( 0.32549, 0.32549, 0.32549, 1 )
+
+[node name="Player" parent="." instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.87346, 9.20961, 6.13811 )
+WALKSPEED = 5.0
+RUNSPEED = 8.0
 

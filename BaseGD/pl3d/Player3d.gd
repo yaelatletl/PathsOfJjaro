@@ -8,7 +8,7 @@ const ANIM_AIR_DOWN = 2
 const SHOOT_TIME = 1.5
 const SHOOT_SCALE = 2
 
-const CHAR_SCALE = Vector3(0.3, 0.3, 0.3)
+var CHAR_SCALE = Vector3(0.3, 0.3, 0.3)
 var health2
 var facing_dir = Vector3(1, 0, 0)
 var movement_dir = Vector3()

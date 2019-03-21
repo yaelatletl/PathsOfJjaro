@@ -1,0 +1,460 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://assets/Scenario/18.meshlib" type="MeshLibrary" id=1]
+[ext_resource path="res://assets/Scenario/17/17.meshlib" type="MeshLibrary" id=2]
+[ext_resource path="res://assets/Scenario/Dynamic/Door_small.tscn" type="PackedScene" id=3]
+[ext_resource path="res://lel.png" type="Texture" id=4]
+[ext_resource path="res://addons/SIsilicon.vfx.lens flare/lens-flare.gd" type="Script" id=5]
+[ext_resource path="res://addons/SIsilicon.vfx.lens flare/lens_flare_icon.png" type="Texture" id=6]
+[ext_resource path="res://assets/Scenario/17/17/Cube_139.mesh" type="ArrayMesh" id=7]
+[ext_resource path="res://assets/Scenario/17/17/Plane_059.mesh" type="ArrayMesh" id=8]
+
+[sub_resource type="PanoramaSky" id=1]
+panorama = ExtResource( 4 )
+
+[sub_resource type="Environment" id=2]
+background_mode = 2
+background_sky = SubResource( 1 )
+background_energy = 4.0
+ambient_light_color = Color( 0.521569, 0.521569, 0.521569, 1 )
+ambient_light_energy = 2.34
+tonemap_mode = 2
+tonemap_exposure = 0.4
+tonemap_white = 0.4
+auto_exposure_enabled = true
+auto_exposure_min_luma = 0.2
+ss_reflections_enabled = true
+ss_reflections_max_steps = 16
+glow_enabled = true
+glow_blend_mode = 0
+
+[node name="Arrival" type="Spatial"]
+
+[node name="Room1" type="Spatial" parent="."]
+editor/display_folded = true
+visible = false
+
+[node name="Floor_18" type="GridMap" parent="Room1"]
+mesh_library = ExtResource( 1 )
+data = {
+"cells": PoolIntArray( 393224, 1, 1441801, 458746, 1, 1441801, 393224, 3, 1441801, 458746, 3, 1441801, 393224, 5, 1441801, 458746, 5, 1441801, 458738, 65525, 1441801, 458740, 65525, 1441801, 458742, 65525, 1441801, 458744, 65525, 1441801, 458738, 65527, 1441801, 458740, 65527, 1441801, 458742, 65527, 1441801, 458744, 65527, 1441801, 393224, 65529, 1441801, 458736, 65529, 1441801, 458738, 65529, 1441801, 458740, 65529, 1441801, 458742, 65529, 1441801, 458744, 65529, 1441801, 458746, 65529, 1441801, 393224, 65531, 1441801, 458746, 65531, 1441801, 393224, 65533, 1441801, 458746, 65533, 1441801, 393224, 65535, 1441801, 458746, 65535, 1441801 )
+}
+__meta__ = {
+"_editor_clip_": 0,
+"_editor_floor_": Vector3( 0, 6, 0 )
+}
+
+[node name="Walls_18" type="GridMap" parent="Room1"]
+mesh_library = ExtResource( 1 )
+data = {
+"cells": PoolIntArray( 196616, 0, 1441799, 262136, 0, 1441799, 196616, 2, 1441799, 262136, 2, 538312711, 196616, 4, 1441799, 262136, 4, -1609170937, 196616, 6, 1441799, 262136, 6, 1441799, 262128, 65529, 12, 262130, 65529, 1048581, 262136, 65529, 1441797 )
+}
+__meta__ = {
+"_editor_clip_": 0,
+"_editor_floor_": Vector3( 0, 3, 0 )
+}
+
+[node name="Floor_17" type="GridMap" parent="Room1"]
+mesh_library = ExtResource( 2 )
+data = {
+"cells": PoolIntArray( 0, 1, 1048595, 2, 1, 1048595, 4, 1, 1048595, 6, 1, 20, 65532, 1, 20, 65534, 1, 1048595, 196616, 1, 20, 262138, 1, 655380, 262140, 1, 655380, 393216, 1, 17, 393218, 1, 17, 393220, 1, 17, 393222, 1, 17, 458748, 1, 17, 458750, 1, 17, 0, 3, 1074790419, 2, 3, 1048595, 4, 3, 1048595, 6, 3, 20, 65532, 3, 1073741844, 65534, 3, 537919507, 196616, 3, 536870932, 262138, 3, 655380, 262140, 3, 537526292, 393216, 3, 536870929, 393218, 3, 17, 393220, 3, 536870929, 393222, 3, 536870929, 458748, 3, 17, 458750, 3, 17, 0, 5, 1048595, 2, 5, 1048595, 4, 5, 1048595, 6, 5, -1610612716, 65532, 5, 536870932, 65534, 5, 1048595, 196616, 5, 20, 262138, 5, 537526292, 262140, 5, 655380, 393216, 5, 17, 393218, 5, 17, 393220, 5, 17, 393222, 5, 17, 458748, 5, 17, 458750, 5, 536870929, 0, 7, 1048595, 2, 7, 1048595, 4, 7, 537919507, 6, 7, 20, 65532, 7, 20, 65534, 7, -1609564141, 196616, 7, 17, 262138, 7, 537526289, 262140, 7, 655377, 393216, 7, 536870929, 393218, 7, 536870929, 393220, 7, 17, 393222, 7, 17, 393224, 7, 536870929, 458746, 7, 17, 458748, 7, 17, 458750, 7, -1610612719, 262128, 65525, 19, 262130, 65525, 19, 262132, 65525, 19, 262134, 65525, 19, 262136, 65525, 19, 262128, 65527, 1441812, 262130, 65527, 1441812, 262132, 65527, 1441812, 262134, 65527, 1441812, 262136, 65527, 1441812, 0, 65529, 1048595, 2, 65529, 1048595, 4, 65529, 1048595, 6, 65529, 20, 65532, 65529, 20, 65534, 65529, 1048595, 196608, 65529, 1048596, 196610, 65529, 1048596, 196612, 65529, 1048596, 196614, 65529, 17, 196616, 65529, 17, 262128, 65529, 1441812, 262130, 65529, 1441812, 262132, 65529, 1441812, 262134, 65529, 1441812, 262136, 65529, 1441812, 262138, 65529, 655377, 262140, 65529, 1075183633, 262142, 65529, 1441812, 393216, 65529, 17, 393218, 65529, 17, 393220, 65529, 1073741841, 393222, 65529, 536870929, 458748, 65529, 1441809, 458750, 65529, 1073741841, 0, 65531, 1048595, 2, 65531, 1048595, 4, 65531, 1048595, 6, 65531, 20, 65532, 65531, 20, 65534, 65531, 1048595, 196616, 65531, 20, 262138, 65531, 1074397204, 262140, 65531, 655380, 393216, 65531, 17, 393218, 65531, 17, 393220, 65531, 17, 393222, 65531, 17, 458748, 65531, 17, 458750, 65531, 1073741841, 0, 65533, 1048595, 2, 65533, 1048595, 4, 65533, 1048595, 6, 65533, 20, 65532, 65533, 20, 65534, 65533, 1048595, 196616, 65533, -1610612716, 262138, 65533, 655380, 262140, 65533, 537526292, 393216, 65533, 17, 393218, 65533, 17, 393220, 65533, 17, 393222, 65533, 17, 458748, 65533, 17, 458750, 65533, 17, 0, 65535, 1074790419, 2, 65535, 1048595, 4, 65535, 1048595, 6, 65535, 20, 65532, 65535, -1610612716, 65534, 65535, 1048595, 196616, 65535, 20, 262138, 65535, 655380, 262140, 65535, 655380, 393216, 65535, 17, 393218, 65535, 17, 393220, 65535, 17, 393222, 65535, 17, 458748, 65535, 17, 458750, 65535, 1073741841 )
+}
+__meta__ = {
+"_editor_clip_": 0,
+"_editor_floor_": Vector3( 0, 6, 0 )
+}
+
+[node name="Walls_17" type="GridMap" parent="Room1"]
+mesh_library = ExtResource( 2 )
+data = {
+"cells": PoolIntArray( 65532, 0, 1048613, 6, 2, -1609170907, 65532, 3, 1048613, 6, 5, 1441829, 65532, 6, 1048613, 6, 7, 1441818, 196616, 7, 1441818, 9, 9, 37, 12, 9, 536870949, 15, 9, -1610612699, 18, 9, 37, 65522, 9, 37, 65525, 9, 37, 65528, 9, 37, 65530, 9, 26, 196619, 9, 37, 196622, 9, -1610612699, 196625, 9, 37, 196628, 9, 37, 262131, 9, 37, 262134, 9, 536870949, 262136, 9, 1073741850, 393217, 9, 536870949, 393219, 9, 16, 393221, 9, 37, 393224, 9, 37, 393227, 9, 37, 393230, 9, 37, 393233, 9, 536870949, 393236, 9, 37, 458737, 9, 37, 458740, 9, 37, 458743, 9, 37, 458746, 9, 37, 458749, 9, 37, 458751, 9, 16, -196608, 9, 536870928, -196607, 9, -1610612720, -196605, 9, -1610612699, -196602, 9, 37, -196599, 9, 37, -196596, 9, 37, -196593, 9, 37, -196590, 9, 37, -131086, 9, 37, -131083, 9, 37, -131080, 9, 37, -131077, 9, 37, -131074, 9, 37, 262130, 65526, 37, 262133, 65526, 37, 262136, 65526, 1441821, 262130, 65527, 1048611, 262136, 65527, 1441818, 2, 65529, 37, 5, 65529, 35, 65535, 65529, 37, 196609, 65529, 37, 196612, 65529, 37, 196615, 65529, 35, 262129, 65529, 655397, 262132, 65529, 655397, 262135, 65529, 655397, 262139, 65529, 37, 262142, 65529, 37, 65532, 65530, 1048611, 262138, 65531, 1048602, 6, 65532, 1441829, 196616, 65532, 1441829, 65532, 65533, 1048613, 262138, 65533, 1048613, 196616, 65534, 1441799, 6, 65535, 1441829, 262138, 65535, 1048583 )
+}
+__meta__ = {
+"_editor_clip_": 0,
+"_editor_floor_": Vector3( -3, 6, 0 )
+}
+
+[node name="Door" parent="Room1" instance=ExtResource( 3 )]
+transform = Transform( -4.37114e-008, 0, 1, 0, 1, 0, -1, 0, -4.37114e-008, -13, 8, -13 )
+
+[node name="Door2" parent="Room1" instance=ExtResource( 3 )]
+transform = Transform( -4.37114e-008, 0, 1, 0, 1, 0, -1, 0, -4.37114e-008, -29, 8, -13 )
+
+[node name="ReflectionProbe" type="ReflectionProbe" parent="Room1"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.90961, 3.3357, 0 )
+update_mode = 1
+extents = Vector3( 12.3171, 3.45273, 17.036 )
+box_projection = true
+enable_shadows = true
+interior_enable = true
+
+[node name="ReflectionProbe2" type="ReflectionProbe" parent="Room1"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.90961, 10.4067, 0 )
+extents = Vector3( 16.2192, 4.97886, 17.036 )
+origin_offset = Vector3( 0, -1.33791, 0 )
+box_projection = true
+enable_shadows = true
+interior_enable = true
+
+[node name="ReflectionProbe3" type="ReflectionProbe" parent="Room1"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -21.1584, 10.4067, -16.9481 )
+extents = Vector3( 8.56063, 3.45273, 6.07096 )
+box_projection = true
+enable_shadows = true
+interior_enable = true
+
+[node name="OmniLight" type="OmniLight" parent="Room1"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -12.7995, 10.6002, -2.04069 )
+shadow_enabled = true
+omni_range = 10.9967
+
+[node name="OmniLight2" type="OmniLight" parent="Room1"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 18.826, 10.6002, -2.04069 )
+shadow_enabled = true
+omni_range = 10.9967
+
+[node name="OmniLight3" type="OmniLight" parent="Room1"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -12.6305, 12.5897, -12.9934 )
+shadow_enabled = true
+omni_range = 6.46927
+
+[node name="OmniLight4" type="OmniLight" parent="Room1"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -13.5999, 12.5897, -12.9934 )
+shadow_enabled = true
+omni_range = 6.46927
+
+[node name="Room2" type="Spatial" parent="."]
+editor/display_folded = true
+visible = false
+
+[node name="Floor_17" type="GridMap" parent="Room2"]
+mesh_library = ExtResource( 2 )
+data = {
+"cells": PoolIntArray( -327678, 6, -1610612699, -327675, 6, 536870949, -327672, 6, 1073741861, -327669, 6, 37, -262157, 6, 1073741861, -262154, 6, 37, -262151, 6, 1073741861, -262148, 6, 37, -262145, 6, -1610612699, 589824, 7, 1048593, 589826, 7, -1609564143, 589828, 7, 1048593, 589830, 7, 1048593, 589832, 7, 1048593, 589834, 7, 1048593, 589836, 7, 1048593, 589838, 7, 1048593, 589840, 7, 1048593, 589842, 7, 1048593, 589844, 7, 537919505, 589846, 7, 537919505, 589848, 7, -1609564143, 589850, 7, 1048593, 655340, 7, 1048593, 655342, 7, 1048593, 655344, 7, 1074790417, 655346, 7, 537919505, 655348, 7, 1074790417, 655350, 7, 1048593, 655352, 7, 1048593, 655354, 7, 1048593, 655356, 7, 1048593, 655358, 7, 537919505, 262122, 11, 3, 458730, 11, 1073872906, 458734, 12, 10, -65534, 65535, 1074266125, -65525, 65535, 524301, -15, 65535, -1610088435, -8, 65535, 524301 )
+}
+__meta__ = {
+"_editor_clip_": 0,
+"_editor_floor_": Vector3( 0, 2, 0 )
+}
+
+[node name="Walls_17" type="GridMap" parent="Room2"]
+mesh_library = ExtResource( 2 )
+data = {
+"cells": PoolIntArray( 262122, 0, 28, 262124, 0, 28, 262126, 0, 28, 262128, 0, 28, 262130, 0, 28, 262116, 1, 1048604, 262120, 2, 655387, 262122, 2, 655388, 262124, 2, 655388, 262126, 2, 655388, 262128, 2, 655388, 262116, 3, 1048604, 262132, 4, 1048603, 262116, 5, 1048604, 262118, 5, 1441799, 262132, 6, 1048583, -327666, 6, 37, -327663, 6, 37, -327660, 6, 37, -327657, 6, 37, -262163, 6, 37, -262160, 6, 37, 262132, 7, 1048583, 21, 9, 37, 24, 9, -1610612699, 27, 9, 37, 65513, 9, 37, 65516, 9, 37, 65519, 9, 1073741861, 196631, 9, 1073741861, 196634, 9, 37, 262122, 9, 1073741861, 262125, 9, 1073741861, 262128, 9, 37, 393239, 9, 536870949, 393242, 9, 1073741861, 458731, 9, 37, 458734, 9, 1073741861, -196587, 9, 37, -196584, 9, -1610612699, -196581, 9, 536870949, -131098, 9, 37, -131095, 9, 37, -131092, 9, 37, -131089, 9, 37, 262111, 11, 1073741840, 262112, 11, 1073741840, 262121, 11, -1610612720, 262122, 11, -1610612720, 65516, 13, 31, 262124, 13, -1610612705, 458732, 13, -1610612705, 655340, 13, 536870943, -131092, 13, 31, 262116, 65521, 1048604, 262118, 65521, 1441820, 262116, 65523, -1609564132, 262118, 65523, 1075183644, 262116, 65525, 1048610, 262118, 65525, -1609170916, 262116, 65528, 537919529, 262120, 65529, 537526299, 262122, 65529, 537526300, 262124, 65529, 1074397212, 262126, 65529, 655388, 262116, 65531, 537919529, 262118, 65532, -1609170928, 262116, 65533, 1048604, 262118, 65534, 1441819, 262116, 65535, 1048604 )
+}
+__meta__ = {
+"_editor_clip_": 0,
+"_editor_floor_": Vector3( 0, 3, 0 )
+}
+
+[node name="Floor_18" type="GridMap" parent="Room2"]
+mesh_library = ExtResource( 1 )
+data = {
+"cells": PoolIntArray( 262120, 0, 6, 262122, 0, 6, 262124, 0, 6, 262126, 0, 6, 262128, 0, 6, 262130, 0, 6, 262132, 0, 6, 262134, 0, 6, 262136, 0, 6, 458728, 0, 1441801, 458730, 0, 1441801, 458732, 0, 1441801, 458734, 0, 1441801, 458736, 0, 9, 458738, 0, 1048585, 458740, 0, 1048585, 458742, 0, 1048585, 458744, 0, 1048585, 262116, 1, 6, 262118, 1, 6, 458724, 1, 1441801, 458726, 1, 1441801, 262120, 2, 6, 262122, 2, 6, 262124, 2, 6, 262126, 2, 6, 262128, 2, 6, 262130, 2, 6, 262132, 2, 6, 262134, 2, 6, 262136, 2, 6, 458728, 2, 1441801, 458730, 2, 1441801, 458732, 2, 538312713, 458734, 2, 9, 458736, 2, 9, 458738, 2, 1048585, 458740, 2, 1048585, 458742, 2, 1048585, 458744, 2, 1048585, 262116, 3, 6, 262118, 3, 6, 458724, 3, 1441801, 458726, 3, 1441801, 262132, 4, 6, 262134, 4, 6, 262136, 4, 6, 458740, 4, 1048585, 458742, 4, 1048585, 458744, 4, 1048585, 262116, 5, 6, 262118, 5, 6, 458724, 5, 9, 458726, 5, 9, 262132, 6, 6, 262134, 6, 6, 262136, 6, 6, 458740, 6, 1048585, 458742, 6, 1048585, 458744, 6, 1048585, 262116, 7, 6, 262118, 7, 6, 458724, 7, 9, 458726, 7, 9, 262116, 9, 6, 262118, 9, 6, 458724, 9, 9, 458726, 9, 9, 262112, 11, 6, 262114, 11, 6, 262116, 11, 6, 262118, 11, 6, 262120, 11, 6, 262122, 11, 6, 458720, 11, 1441801, 458722, 11, 1441801, 458724, 11, 1441801, 458726, 11, 1441801, 458728, 11, 1441801, 458730, 11, 1441801, 262112, 13, 6, 262114, 13, 6, 262116, 13, 6, 262118, 13, 6, 262120, 13, 6, 262122, 13, 6, 458720, 13, 1441801, 458722, 13, 1441801, 458724, 13, 1441801, 458726, 13, 1441801, 458728, 13, 1441801, 458730, 13, 1441801, 262112, 15, 6, 262114, 15, 6, 262116, 15, 6, 262118, 15, 6, 262120, 15, 6, 262122, 15, 6, 458720, 15, 1441801, 458722, 15, 1441801, 458724, 15, 1441801, 458726, 15, 1441801, 458728, 15, 1441801, 458730, 15, 1441801, 262112, 17, 6, 262114, 17, 6, 262116, 17, 6, 262118, 17, 6, 262120, 17, 6, 262122, 17, 6, 458720, 17, 1441801, 458722, 17, 1441801, 458724, 17, 1441801, 458726, 17, 1441801, 458728, 17, 1441801, 458730, 17, 1441801, 262112, 19, 6, 262114, 19, 6, 262116, 19, 6, 262118, 19, 6, 262120, 19, 6, 262122, 19, 6, 458720, 19, 1441801, 458722, 19, 1441801, 458724, 19, 1441801, 458726, 19, 1441801, 458728, 19, 1441801, 458730, 19, 1441801, 262116, 65521, 6, 262118, 65521, 6, 262116, 65523, 6, 262118, 65523, 6, 262116, 65525, 6, 262118, 65525, 6, 262116, 65527, 6, 262118, 65527, 6, 262116, 65529, 6, 262118, 65529, 6, 262120, 65529, 6, 262122, 65529, 6, 262124, 65529, 6, 262126, 65529, 6, 458724, 65529, 1048585, 458726, 65529, 1048585, 458728, 65529, 1048585, 458730, 65529, 1048585, 458732, 65529, 1048585, 458734, 65529, 1048585, 262116, 65531, 6, 262118, 65531, 6, 458724, 65531, 1048585, 458726, 65531, 1048585, 262116, 65533, 6, 262118, 65533, 6, 458724, 65533, 1048585, 458726, 65533, 1048585, 262116, 65535, 6, 262118, 65535, 6, 458724, 65535, 1048585, 458726, 65535, 1048585 )
+}
+__meta__ = {
+"_editor_clip_": 0,
+"_editor_floor_": Vector3( 0, 6, 0 )
+}
+
+[node name="Walls_18" type="GridMap" parent="Room2"]
+mesh_library = ExtResource( 1 )
+data = {
+"cells": PoolIntArray( 262132, 0, 12, 262134, 0, 12, 262136, 0, 12, 262132, 6, 655372, 262134, 6, 655372, 262136, 6, 655372, 262116, 7, 537919500, 262118, 7, 1441804, 262116, 9, -1609564148, 262118, 9, 1441804, 262112, 11, 1074790412, 262114, 11, 12, 262120, 11, -1610612724, 262122, 11, 1441804, 262110, 13, 1075183624, 262124, 13, 537919496, 262110, 15, 1441800, 262124, 15, 1048584, 262110, 17, 1441800, 262124, 17, 1048584, 262110, 19, 1441800, 262124, 19, 1048584, 262112, 21, 8, 262114, 21, 536870920, 262116, 21, 536870920, 262118, 21, 536870920, 262120, 21, -1610612728, 262122, 21, -1610612728, 262118, 65527, 1441804, 262120, 65529, 12, 262122, 65529, 12, 262124, 65529, 12, 262126, 65529, 12 )
+}
+__meta__ = {
+"_editor_clip_": 0,
+"_editor_floor_": Vector3( 0, 3, 0 )
+}
+
+[node name="ReflectionProbe" type="ReflectionProbe" parent="Room2"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -19.1718, 10.0035, 7.12047 )
+max_distance = 747.0
+extents = Vector3( 6.18536, 3.06799, 8.60502 )
+box_projection = true
+enable_shadows = true
+interior_enable = true
+
+[node name="ReflectionProbe2" type="ReflectionProbe" parent="Room2"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -37.2904, 10.0035, 2.92152 )
+extents = Vector3( 12.3324, 3.06799, 4.18277 )
+box_projection = true
+enable_shadows = true
+interior_enable = true
+
+[node name="ReflectionProbe4" type="ReflectionProbe" parent="Room2"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -39.0363, 10.0035, -13.0121 )
+extents = Vector3( 10.2472, 3.06799, 2.19377 )
+box_projection = true
+enable_shadows = true
+interior_enable = true
+
+[node name="ReflectionProbe3" type="ReflectionProbe" parent="Room2"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -52.9569, 10.0035, 2.92152 )
+extents = Vector3( 4.06133, 3.06799, 17.9453 )
+origin_offset = Vector3( 0.597656, 0, 0 )
+box_projection = true
+enable_shadows = true
+interior_enable = true
+
+[node name="OmniLight5" type="OmniLight" parent="Room2"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -28.502, 12.5897, -12.9934 )
+shadow_enabled = true
+omni_range = 6.46927
+
+[node name="OmniLight6" type="OmniLight" parent="Room2"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -29.415, 12.5897, -12.9934 )
+shadow_enabled = true
+omni_range = 6.46927
+
+[node name="OmniLight7" type="OmniLight" parent="Room2"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -24.7628, 10.6002, 12.9859 )
+shadow_enabled = true
+omni_range = 12.4858
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource( 2 )
+
+[node name="LensFlare" type="Node" parent="."]
+script = ExtResource( 5 )
+__meta__ = {
+"_editor_icon": ExtResource( 6 )
+}
+flareStrength = 13.54
+flareBias = 1.452
+distortion = 0.0
+
+[node name="Spatial" type="Spatial" parent="."]
+
+[node name="Floor 17" type="GridMap" parent="Spatial"]
+mesh_library = ExtResource( 2 )
+data = {
+"cells": PoolIntArray(  )
+}
+__meta__ = {
+"_editor_clip_": 0
+}
+
+[node name="Walls 17" type="GridMap" parent="Spatial"]
+mesh_library = ExtResource( 2 )
+data = {
+"cells": PoolIntArray(  )
+}
+__meta__ = {
+"_editor_clip_": 0
+}
+
+[node name="Floor 18" type="GridMap" parent="Spatial"]
+mesh_library = ExtResource( 1 )
+data = {
+"cells": PoolIntArray( 262124, 65513, 6, 262126, 65513, 6, 262128, 65513, 1073741830, 262130, 65513, 6, 458732, 65513, 537001990, 458734, 65513, 537001990, 458736, 65513, 131078, 458738, 65513, 1073872902, 262116, 65515, 6, 262118, 65515, -1610612730, 262124, 65515, 6, 262126, 65515, 6, 262128, 65515, 6, 262130, 65515, 6, 458726, 65515, 9, 458732, 65515, 1073872902, 458734, 65515, 131078, 458736, 65515, 131078, 458738, 65515, 537001990, 262116, 65517, 6, 262118, 65517, 6, 262120, 65517, 6, 262122, 65517, 6, 262124, 65517, -1610612730, 262126, 65517, 6, 262128, 65517, 6, 262130, 65517, 6, 458726, 65517, 9, 458728, 65517, 1073741833, 458730, 65517, 9, 458732, 65517, 131078, 458734, 65517, 1073872902, 458736, 65517, 131078, 458738, 65517, 1073872902, 262116, 65519, 6, 262118, 65519, 6, 262124, 65519, -1610612730, 262126, 65519, 536870918, 262128, 65519, 1073741830, 262130, 65519, 6, 458724, 65519, 9, 458726, 65519, 9, 458732, 65519, 537001990, 458734, 65519, 537001990, 458736, 65519, 1073872902, 458738, 65519, 131078, 262124, 65521, 6, 262126, 65521, 6, 262128, 65521, 6, 262130, 65521, 6, 458724, 65521, 9, 458726, 65521, 9, 458732, 65521, 537001990, 458734, 65521, 1073872902, 458736, 65521, 537001990, 458738, 65521, 537001990, 458724, 65523, 9, 458726, 65523, 9, 458724, 65525, 9, 458726, 65525, -1610612727, 458724, 65527, 1073741833, 458726, 65527, 1073741833 )
+}
+__meta__ = {
+"_editor_clip_": 0,
+"_editor_floor_": Vector3( 0, 3, 0 )
+}
+
+[node name="Door" parent="Spatial/Floor 18" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -32.9655, 8.0327, -26.8632 )
+
+[node name="Door3" parent="Spatial/Floor 18" instance=ExtResource( 3 )]
+transform = Transform( -4.37114e-008, 0, -1, 0, 1, 0, 1, 0, -4.37114e-008, -48.9655, 12.8527, -36.8632 )
+
+[node name="Door2" parent="Spatial/Floor 18" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -32.9655, 8.0327, -46.8632 )
+
+[node name="Walls 18" type="GridMap" parent="Spatial"]
+editor/display_folded = true
+mesh_library = ExtResource( 1 )
+data = {
+"cells": PoolIntArray( 262127, 65513, 5, 262118, 65517, 1441797, 262122, 65517, 1441797, 262130, 65517, 1075183628, 262127, 65523, 536870917 )
+}
+__meta__ = {
+"_editor_clip_": 0,
+"_editor_floor_": Vector3( 0, 3, 0 )
+}
+
+[node name="Spatial" type="Spatial" parent="Spatial/Walls 18"]
+editor/display_folded = true
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -32.9144, 8.0327, -26.9505 )
+
+[node name="Cube_139" type="MeshInstance" parent="Spatial/Walls 18/Spatial"]
+transform = Transform( -0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, -0.707107, -2.6723, -0.781831, -1.5991 )
+mesh = ExtResource( 7 )
+material/0 = null
+
+[node name="Cube_141" type="MeshInstance" parent="Spatial/Walls 18/Spatial"]
+transform = Transform( -0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, -0.707107, 5.42883, -0.781831, -4.44357 )
+mesh = ExtResource( 7 )
+material/0 = null
+
+[node name="Cube_140" type="MeshInstance" parent="Spatial/Walls 18/Spatial"]
+transform = Transform( -0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, -0.707107, -4.06933, -0.781831, -2.99922 )
+mesh = ExtResource( 7 )
+material/0 = null
+
+[node name="Cube_142" type="MeshInstance" parent="Spatial/Walls 18/Spatial"]
+transform = Transform( -0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, -0.707107, 4.0287, -0.781831, -3.04655 )
+mesh = ExtResource( 7 )
+material/0 = null
+
+[node name="Plane_059" type="MeshInstance" parent="Spatial/Walls 18/Spatial"]
+transform = Transform( -1, 0, -5.96046e-008, 0, 1, 0, 5.96046e-008, 0, -1, -3.08445, -1.0837, -2.17311 )
+mesh = ExtResource( 8 )
+material/0 = null
+
+[node name="Plane_061" type="MeshInstance" parent="Spatial/Walls 18/Spatial"]
+transform = Transform( -1, 0, -5.96046e-008, 0, 1, 0, 5.96046e-008, 0, -1, 2.91555, -1.0837, -2.17311 )
+mesh = ExtResource( 8 )
+material/0 = null
+
+[node name="Spatial2" type="Spatial" parent="Spatial/Walls 18"]
+editor/display_folded = true
+transform = Transform( -1, 0, -8.74228e-008, 0, 1, 0, 8.74228e-008, 0, -1, -33.0441, 8.0327, -47.0321 )
+
+[node name="Cube_139" type="MeshInstance" parent="Spatial/Walls 18/Spatial2"]
+transform = Transform( -0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, -0.707107, -2.6723, -0.781831, -1.5991 )
+mesh = ExtResource( 7 )
+material/0 = null
+
+[node name="Cube_141" type="MeshInstance" parent="Spatial/Walls 18/Spatial2"]
+transform = Transform( -0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, -0.707107, 5.42883, -0.781831, -4.44357 )
+mesh = ExtResource( 7 )
+material/0 = null
+
+[node name="Cube_143" type="MeshInstance" parent="Spatial/Walls 18/Spatial2"]
+transform = Transform( -0.467852, 0, -0.939693, 0, 1, 0, 1.28541, 0, -0.34202, 6.02122, -0.781831, -8.46571 )
+mesh = ExtResource( 7 )
+material/0 = null
+
+[node name="Cube_145" type="MeshInstance" parent="Spatial/Walls 18/Spatial2"]
+transform = Transform( 0.51303, 0, 0.939693, 0, 1, 0, -1.40954, 0, 0.34202, -6.01405, -0.781831, -11.3833 )
+mesh = ExtResource( 7 )
+material/0 = null
+
+[node name="Cube_144" type="MeshInstance" parent="Spatial/Walls 18/Spatial2"]
+transform = Transform( 0.467852, 0, -0.939693, 0, 1, 0, 1.28541, 0, 0.34202, 5.11447, -0.781831, -14.2683 )
+mesh = ExtResource( 7 )
+material/0 = null
+
+[node name="Cube_146" type="MeshInstance" parent="Spatial/Walls 18/Spatial2"]
+transform = Transform( -0.513031, 0, 0.939693, 0, 1, 0, -1.40954, 0, -0.34202, -5.10729, -0.781831, -5.75473 )
+mesh = ExtResource( 7 )
+material/0 = null
+
+[node name="Cube_140" type="MeshInstance" parent="Spatial/Walls 18/Spatial2"]
+transform = Transform( -0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, -0.707107, -4.06933, -0.781831, -2.99922 )
+mesh = ExtResource( 7 )
+material/0 = null
+
+[node name="Cube_142" type="MeshInstance" parent="Spatial/Walls 18/Spatial2"]
+transform = Transform( -0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, -0.707107, 4.0287, -0.781831, -3.04655 )
+mesh = ExtResource( 7 )
+material/0 = null
+
+[node name="Plane_059" type="MeshInstance" parent="Spatial/Walls 18/Spatial2"]
+transform = Transform( -1, 0, -5.96046e-008, 0, 1, 0, 5.96046e-008, 0, -1, -3.08445, -1.0837, -2.17311 )
+mesh = ExtResource( 8 )
+material/0 = null
+
+[node name="Plane_061" type="MeshInstance" parent="Spatial/Walls 18/Spatial2"]
+transform = Transform( -1, 0, -5.96046e-008, 0, 1, 0, 5.96046e-008, 0, -1, 2.91555, -1.0837, -2.17311 )
+mesh = ExtResource( 8 )
+material/0 = null
+
+[node name="Plane_062" type="MeshInstance" parent="Spatial/Walls 18/Spatial2"]
+transform = Transform( 1.03316e-007, 0, -1, 0, 1, 0, 1, 0, 1.03316e-007, 4.91555, -1.0837, -4.06763 )
+mesh = ExtResource( 8 )
+material/0 = null
+
+[node name="Plane_064" type="MeshInstance" parent="Spatial/Walls 18/Spatial2"]
+transform = Transform( -1.90739e-007, 0, 1, 0, 1, 0, -1, 0, -1.90739e-007, -4.90837, -1.0837, -16.0425 )
+mesh = ExtResource( 8 )
+material/0 = null
+
+[node name="Plane_063" type="MeshInstance" parent="Spatial/Walls 18/Spatial2"]
+transform = Transform( 1.03316e-007, 0, -1, 0, 1, 0, 1, 0, 1.03316e-007, 4.97366, -1.0837, -16.0425 )
+mesh = ExtResource( 8 )
+material/0 = null
+
+[node name="Plane_065" type="MeshInstance" parent="Spatial/Walls 18/Spatial2"]
+transform = Transform( -1.90739e-007, 0, 1, 0, 1, 0, -1, 0, -1.90739e-007, -4.96648, -1.0837, -4.06763 )
+mesh = ExtResource( 8 )
+material/0 = null
+
+[node name="Spatial2" type="Spatial" parent="."]
+
+[node name="Floor 17" type="GridMap" parent="Spatial2"]
+mesh_library = ExtResource( 2 )
+data = {
+"cells": PoolIntArray(  )
+}
+__meta__ = {
+"_editor_clip_": 0
+}
+
+[node name="Walls 17" type="GridMap" parent="Spatial2"]
+mesh_library = ExtResource( 2 )
+data = {
+"cells": PoolIntArray(  )
+}
+__meta__ = {
+"_editor_clip_": 0
+}
+
+[node name="Floor 18" type="GridMap" parent="Spatial2"]
+mesh_library = ExtResource( 1 )
+data = {
+"cells": PoolIntArray(  )
+}
+__meta__ = {
+"_editor_clip_": 0
+}
+
+[node name="Walls 18" type="GridMap" parent="Spatial2"]
+mesh_library = ExtResource( 1 )
+data = {
+"cells": PoolIntArray(  )
+}
+__meta__ = {
+"_editor_clip_": 0
+}
+
+[node name="Spatial3" type="Spatial" parent="."]
+
+[node name="Floor 17" type="GridMap" parent="Spatial3"]
+mesh_library = ExtResource( 2 )
+data = {
+"cells": PoolIntArray(  )
+}
+__meta__ = {
+"_editor_clip_": 0
+}
+
+[node name="Walls 17" type="GridMap" parent="Spatial3"]
+mesh_library = ExtResource( 2 )
+data = {
+"cells": PoolIntArray(  )
+}
+__meta__ = {
+"_editor_clip_": 0
+}
+
+[node name="Floor 18" type="GridMap" parent="Spatial3"]
+mesh_library = ExtResource( 1 )
+data = {
+"cells": PoolIntArray(  )
+}
+__meta__ = {
+"_editor_clip_": 0
+}
+
+[node name="Walls 18" type="GridMap" parent="Spatial3"]
+mesh_library = ExtResource( 1 )
+data = {
+"cells": PoolIntArray(  )
+}
+__meta__ = {
+"_editor_clip_": 0
+}
+
