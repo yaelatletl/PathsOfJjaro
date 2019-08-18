@@ -2,13 +2,12 @@
 Paths of Jjro is a 3D game based on Bungie's Marathon, made by the community for the community. Open sourced.
 Made using Joyeuse Framework for Godot. The code itself is under MIT License. 
 
-As the game assets are based on the original assets, we must include this licensing information:
+As the game assets are based on the original assets, we must include the following licensing information, which is a modified version of the one AlephOne uses for the marathon data
 
 # Marathon game content non-license
 
 Unfortunately, Bungie has not released Marathon game content under a formal, unambiguous content license. To our knowledge, Bungie has not blocked any noncommercial distribution of these assets, but the Marathon series is not considered abandonware and Bungie retains the right to control its distribution and use.
 
-Content in the "Plugins" directory comes from a variety of sources. Please see documentation within each plugin.
 
 ## History
 
