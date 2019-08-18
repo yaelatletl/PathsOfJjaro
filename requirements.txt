@@ -1,1 +1,1 @@
--e git@github.com:RiseRobotRise/Joyeuse.git#joy=joyeuse
+-e git@github.com:RiseRobotRise/Joyeuse.git#egg=Joyeuse
