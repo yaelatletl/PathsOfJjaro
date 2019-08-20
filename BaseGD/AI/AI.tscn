@@ -1,0 +1,116 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://BaseGD/AI/Basic_AI_Behavior.gd" type="Script" id=1]
+
+[sub_resource type="SphereShape" id=1]
+
+radius = 1.0
+
+[node name="AI" type="Node"]
+
+script = ExtResource( 1 )
+static_AI = false
+Team = 0
+is_worker = false
+indifference = 10
+smellarea = 5
+health = 100
+speedfactor = 0.4
+timewaiting = 2
+flies = false
+weight = 1
+max_speed = 10.0
+turn_speed = 40
+accel = 19.0
+deaccel = 14.0
+keep_jump_inertia = true
+air_idle_deaccel = false
+JumpHeight = 7.0
+grav = 9.8
+
+[node name="Wait" type="Timer" parent="." index="0"]
+
+process_mode = 1
+wait_time = 10.0
+one_shot = false
+autostart = true
+
+[node name="Hunt" type="Timer" parent="." index="1"]
+
+process_mode = 1
+wait_time = 1.0
+one_shot = false
+autostart = true
+
+[node name="Work" type="Timer" parent="." index="2"]
+
+process_mode = 1
+wait_time = 1.0
+one_shot = false
+autostart = true
+
+[node name="Wander" type="Timer" parent="." index="3"]
+
+process_mode = 1
+wait_time = 1.0
+one_shot = false
+autostart = true
+
+[node name="Senses" type="Spatial" parent="." index="4"]
+
+[node name="SmellandHear" type="Area" parent="Senses" index="0"]
+
+input_ray_pickable = false
+input_capture_on_drag = false
+space_override = 0
+gravity_point = false
+gravity_distance_scale = 0.0
+gravity_vec = Vector3( 0, -1, 0 )
+gravity = 9.8
+linear_damp = 0.1
+angular_damp = 1.0
+priority = 0.0
+monitoring = true
+monitorable = true
+collision_layer = 1
+collision_mask = 1
+audio_bus_override = false
+audio_bus_name = "Master"
+reverb_bus_enable = false
+reverb_bus_name = "Master"
+reverb_bus_amount = 0.0
+reverb_bus_uniformity = 0.0
+
+[node name="CollisionShape" type="CollisionShape" parent="Senses/SmellandHear" index="0"]
+
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.06333, 0 )
+shape = SubResource( 1 )
+disabled = false
+
+[node name="Eyes" type="RayCast" parent="Senses/SmellandHear" index="1"]
+
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.83143, 0 )
+enabled = true
+exclude_parent = true
+cast_to = Vector3( 0, 0, -5 )
+collision_mask = 1
+
+[node name="Head" type="RayCast" parent="Senses/SmellandHear" index="2"]
+
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.83143, 0 )
+enabled = true
+exclude_parent = true
+cast_to = Vector3( 0, 1, -0.5 )
+collision_mask = 1
+
+[node name="Feet" type="RayCast" parent="Senses/SmellandHear" index="3"]
+
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.715242, 0 )
+enabled = true
+exclude_parent = true
+cast_to = Vector3( 0, -0.5, -1 )
+collision_mask = 1
+
+[node name="Node2D" type="Node2D" parent="." index="5"]
+
+

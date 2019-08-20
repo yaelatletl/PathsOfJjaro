@@ -17,7 +17,6 @@ _global_script_class_icons={
 
 config/name="Paths of Jjaro"
 run/main_scene="res://Scenes/menu/MainMenu.tscn"
-run/low_processor_mode=true
 config/icon="res://icon.png"
 
 [autoload]
@@ -102,14 +101,6 @@ oxygendown={
  ]
 }
 
-[layer_names]
-
-3d_render/layer_1="3rd_person_models"
-3d_physics/layer_1="Structure"
-3d_render/layer_2="1st_person_models"
-3d_physics/layer_2="Ragdoll"
-3d_physics/layer_3="Character"
-
 [memory]
 
 limits/multithreaded_server/rid_pool_prealloc=120
@@ -121,10 +112,11 @@ limits/message_queue/max_size_kb=4096
 
 [rendering]
 
+threads/thread_model=2
 quality/filters/anisotropic_filter_level=16
 quality/shadows/filter_mode=2
 quality/filters/use_nearest_mipmap_filter=true
 quality/reflections/atlas_size=4096
 quality/reflections/atlas_subdiv=16
 quality/filters/msaa=3
-environment/default_environment="res://assets/Environments/Lhowon Day.tres"
+environment/default_environment="res://BaseGD/Environments/Lhowon Day.tres"

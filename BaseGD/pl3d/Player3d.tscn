@@ -1,0 +1,86 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://BaseGD/pl3d/Player3d.gd" type="Script" id=1]
+[ext_resource path="res://BaseGD/pl3d/TopDownCamera.gd" type="Script" id=2]
+[ext_resource path="res://BaseGD/pl3d/Camera.gd" type="Script" id=3]
+[ext_resource path="res://BaseGD/pl3d/FPSCamera.gd" type="Script" id=4]
+[ext_resource path="res://addons/motion_blur/motion_blur.tscn" type="PackedScene" id=5]
+[ext_resource path="res://BaseGD/pl3d/3RDPersCamera.gd" type="Script" id=6]
+[ext_resource path="res://BaseGD/pl3d/3RDPersonCamera.gd" type="Script" id=7]
+
+[sub_resource type="CapsuleShape" id=1]
+radius = 0.507683
+height = 0.816345
+
+[sub_resource type="BoxShape" id=2]
+extents = Vector3( 0.194782, 0.18276, 0.18002 )
+
+[sub_resource type="SphereShape" id=3]
+radius = 0.245702
+
+[sub_resource type="CubeMesh" id=4]
+
+[node name="Player" type="KinematicBody"]
+script = ExtResource( 1 )
+AllowChangeCamera = true
+thRDPersCamera = true
+view_sensitivity = 0.3
+
+[node name="Collision" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, -4.37114e-008, -1, 0, 1, -4.37114e-008, 0, 1.52971, 2.31546e-008 )
+shape = SubResource( 1 )
+
+[node name="Collision2" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, -4.37114e-008, -1, 0, 1, -4.37114e-008, 0.0349212, 0.973815, 0.0123702 )
+shape = SubResource( 2 )
+
+[node name="Yaw" type="Spatial" parent="."]
+transform = Transform( 0.405829, 0, 0, 0, 0.336027, -0.0042619, 0, 0.00461637, 0.310227, 0, 0.657452, -0.0413046 )
+
+[node name="TopDownCamera" type="Camera" parent="."]
+transform = Transform( 1, 0, 0, 0, -4.37114e-008, 1, 0, -1, -4.37114e-008, 0, 14.246, 0 )
+visible = false
+script = ExtResource( 2 )
+
+[node name="target" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.37966, 0 )
+
+[node name="camera" type="Camera" parent="target"]
+visible = false
+script = ExtResource( 3 )
+
+[node name="CameraOrigin" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.489479, 2.14343, 1.44329 )
+
+[node name="Pivot" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.27367, 0 )
+
+[node name="FPSCamera" type="Camera" parent="Pivot"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0436552, -0.14649 )
+current = true
+script = ExtResource( 4 )
+
+[node name="motion_blur" parent="Pivot/FPSCamera" instance=ExtResource( 5 )]
+visible = false
+
+[node name="3RDPersCamera" type="Camera" parent="Pivot"]
+transform = Transform( 0.997858, -0.0247958, 0.0605398, 0.0132274, 0.982746, 0.184489, -0.0640698, -0.183292, 0.980968, 0.497637, 0.54344, 1.31724 )
+fov = 90.0
+script = ExtResource( 6 )
+
+[node name="CameraCollision" type="KinematicBody" parent="Pivot"]
+transform = Transform( 0.999903, -1.86265e-009, -0.0139474, -0.00282001, 0.979347, -0.202169, 0.0136593, 0.202189, 0.979251, -0.00137392, 0.472392, 1.50019 )
+input_ray_pickable = false
+script = ExtResource( 7 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Pivot/CameraCollision"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.476892, 0.0157118, -0.0391517 )
+visible = false
+shape = SubResource( 3 )
+
+[node name="MeshInstance" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
+visible = false
+mesh = SubResource( 4 )
+material/0 = null
+

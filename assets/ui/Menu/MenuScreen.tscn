@@ -8,13 +8,29 @@
 
 [sub_resource type="ButtonGroup" id=1]
 
-[node name="Control" type="Control"]
+resource_local_to_scene = true
+_sections_unfolded = [ "Resource" ]
+
+[node name="Control" type="Control" index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_right = 511.0
 margin_bottom = 256.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
 theme = ExtResource( 1 )
 script = ExtResource( 2 )
+_sections_unfolded = [ "Rect", "Theme" ]
 
-[node name="Bkg" type="ColorRect" parent="."]
+[node name="Bkg" type="ColorRect" parent="." index="0"]
+
 editor/display_folded = true
 anchor_left = 0.5
 anchor_top = 0.5
@@ -24,17 +40,35 @@ margin_left = -255.5
 margin_top = -128.0
 margin_right = 256.5
 margin_bottom = 128.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
 color = Color( 0, 0, 0, 1 )
+_sections_unfolded = [ "Margin" ]
 
-[node name="Red1" type="ColorRect" parent="Bkg"]
+[node name="Red1" type="ColorRect" parent="Bkg" index="0"]
+
 anchor_left = 0.5
+anchor_top = 0.0
 anchor_right = 0.5
+anchor_bottom = 0.0
 margin_left = -255.0
 margin_right = 256.0
 margin_bottom = 20.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
 color = Color( 0.285156, 0, 0, 1 )
+_sections_unfolded = [ "Anchor", "Margin" ]
 
-[node name="Red2" type="ColorRect" parent="Bkg"]
+[node name="Red2" type="ColorRect" parent="Bkg" index="1"]
+
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
@@ -42,463 +76,1179 @@ anchor_bottom = 1.0
 margin_left = -255.0
 margin_top = -16.0
 margin_right = 256.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
 color = Color( 0.286275, 0, 0, 1 )
+_sections_unfolded = [ "Margin" ]
 
-[node name="Label" type="Label" parent="Bkg"]
+[node name="Label" type="Label" parent="Bkg" index="2"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_left = 9.0
 margin_top = 3.0
 margin_right = 233.0
 margin_bottom = 17.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
 custom_fonts/font = ExtResource( 3 )
 custom_colors/font_color = Color( 1, 0, 0, 1 )
 text = "Opening Connection to ß.4.5-23 	 "
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+_sections_unfolded = [ "custom_colors", "custom_fonts" ]
 
-[node name="Label3" type="Label" parent="Bkg"]
+[node name="Label3" type="Label" parent="Bkg" index="3"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_left = 10.0
 margin_top = 240.0
 margin_right = 248.0
 margin_bottom = 254.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
 custom_fonts/font = ExtResource( 3 )
 custom_colors/font_color = Color( 1, 0, 0, 1 )
 text = "CAS.qterm//CyberAcme Systems, Inc."
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+_sections_unfolded = [ "custom_colors", "custom_fonts" ]
 
-[node name="Label4" type="Label" parent="Bkg"]
+[node name="Label4" type="Label" parent="Bkg" index="4"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_left = 340.0
 margin_top = 240.0
 margin_right = 508.0
 margin_bottom = 254.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
 custom_fonts/font = ExtResource( 3 )
 custom_colors/font_color = Color( 1, 0, 0, 1 )
 text = "<931.461.60231.14.vt920>"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+_sections_unfolded = [ "custom_colors", "custom_fonts" ]
 
-[node name="Label2" type="Label" parent="Bkg"]
+[node name="Label2" type="Label" parent="Bkg" index="5"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_left = 400.0
 margin_top = 3.0
 margin_right = 505.0
 margin_bottom = 17.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
 custom_fonts/font = ExtResource( 3 )
 custom_colors/font_color = Color( 1, 0, 0, 1 )
 text = "2207 08.25.2337"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+_sections_unfolded = [ "custom_colors", "custom_fonts" ]
 
-[node name="Main" type="Tabs" parent="."]
+[node name="Main" type="Tabs" parent="." index="1"]
+
+visible = false
+anchor_left = 0.0
+anchor_top = 0.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = 41.0
 margin_bottom = 22.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+tab_align = 1
+scrolling_enabled = true
 
-[node name="Play" type="Button" parent="Main"]
+[node name="Play" type="Button" parent="Main" index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_left = 40.0
 margin_top = 47.0
 margin_right = 138.0
 margin_bottom = 61.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
 theme = ExtResource( 1 )
 custom_fonts/font = ExtResource( 3 )
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
 text = "Start New Game"
+flat = false
+align = 1
+_sections_unfolded = [ "Anchor", "Grow Direction", "Margin", "Size Flags", "Theme", "custom_colors", "custom_fonts", "custom_styles" ]
 
-[node name="Play2" type="Button" parent="Main"]
+[node name="Play2" type="Button" parent="Main" index="1"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_left = 40.0
 margin_top = 67.0
 margin_right = 159.0
 margin_bottom = 81.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
 theme = ExtResource( 1 )
 custom_fonts/font = ExtResource( 3 )
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
 text = "Host Network Game"
+flat = false
+align = 1
+_sections_unfolded = [ "Anchor", "Grow Direction", "Margin", "Size Flags", "Theme", "custom_colors", "custom_fonts" ]
 
-[node name="Play3" type="Button" parent="Main"]
+[node name="Play3" type="Button" parent="Main" index="2"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_left = 40.0
 margin_top = 87.0
 margin_right = 159.0
 margin_bottom = 101.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
 theme = ExtResource( 1 )
 custom_fonts/font = ExtResource( 3 )
 custom_colors/font_color = Color( 0.617188, 0, 0, 1 )
 disabled = true
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
 text = "Join Network Game"
+flat = false
+align = 1
+_sections_unfolded = [ "Anchor", "Grow Direction", "Margin", "Size Flags", "Theme", "custom_colors", "custom_fonts" ]
 
-[node name="Settings" type="Button" parent="Main"]
+[node name="Settings" type="Button" parent="Main" index="3"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_left = 40.0
 margin_top = 107.0
 margin_right = 96.0
 margin_bottom = 121.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
 theme = ExtResource( 1 )
 custom_fonts/font = ExtResource( 3 )
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
 text = "Settings"
+flat = false
+align = 1
+_sections_unfolded = [ "Anchor", "Grow Direction", "Margin", "Size Flags", "Theme", "custom_colors", "custom_fonts" ]
 
-[node name="Quit" type="Button" parent="Main"]
+[node name="Quit" type="Button" parent="Main" index="4"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_left = 40.0
 margin_top = 127.0
 margin_right = 68.0
 margin_bottom = 141.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
 theme = ExtResource( 1 )
 custom_fonts/font = ExtResource( 3 )
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
 text = "Quit"
+flat = false
+align = 1
+_sections_unfolded = [ "Anchor", "Grow Direction", "Margin", "Size Flags", "Theme", "custom_colors", "custom_fonts" ]
 
-[node name="Label5" type="Label" parent="Main"]
+[node name="Label5" type="Label" parent="Main" index="5"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_left = 189.0
 margin_top = 145.0
 margin_right = 483.0
 margin_bottom = 221.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
 custom_fonts/font = ExtResource( 3 )
 custom_colors/font_color = Color( 0, 1, 0, 1 )
 text = "U.E.S.C. Marathon 
 Public Access Terminal 59-e<34.567.19.298>"
 align = 1
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+_sections_unfolded = [ "BBCode", "custom_colors", "custom_fonts" ]
 
-[node name="MarathonLogo" type="TextureRect" parent="Main"]
+[node name="MarathonLogo" type="TextureRect" parent="Main" index="6"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_left = 257.0
 margin_top = -15.0
 margin_right = 414.0
 margin_bottom = 142.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 1
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
 texture = ExtResource( 4 )
 expand = true
+stretch_mode = 0
+_sections_unfolded = [ "Animation", "Region" ]
 
-[node name="TabContainer" type="TabContainer" parent="."]
-visible = false
+[node name="TabContainer" type="TabContainer" parent="." index="2"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_top = 21.0
 margin_right = 511.0
 margin_bottom = 258.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
 theme = ExtResource( 1 )
+tab_align = 1
+tabs_visible = true
+_sections_unfolded = [ "Theme" ]
 
-[node name="Graphics" type="Tabs" parent="TabContainer"]
+[node name="Graphics" type="Tabs" parent="TabContainer" index="0"]
+
+visible = false
+anchor_left = 0.0
+anchor_top = 0.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_top = 24.0
+margin_top = 20.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+tab_align = 1
+scrolling_enabled = true
+_sections_unfolded = [ "Transform" ]
 
-[node name="SSAO" type="CheckBox" parent="TabContainer/Graphics"]
+[node name="SSAO" type="CheckBox" parent="TabContainer/Graphics" index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_left = 40.0
 margin_top = 20.0
 margin_right = 280.0
 margin_bottom = 51.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
 custom_fonts/font = ExtResource( 3 )
 custom_colors/font_color = Color( 0.0078125, 1, 0, 1 )
+toggle_mode = true
+enabled_focus_mode = 2
+shortcut = null
+group = null
 text = "SS A. Occlusion"
+flat = false
+align = 0
+_sections_unfolded = [ "custom_colors", "custom_fonts" ]
 
-[node name="Screen Space Relfections" type="CheckBox" parent="TabContainer/Graphics"]
+[node name="Screen Space Relfections" type="CheckBox" parent="TabContainer/Graphics" index="1"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_left = 40.0
 margin_top = 50.0
 margin_right = 424.0
 margin_bottom = 81.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
 custom_fonts/font = ExtResource( 3 )
 custom_colors/font_color = Color( 0.0078125, 1, 0, 1 )
+toggle_mode = true
+enabled_focus_mode = 2
+shortcut = null
+group = null
 text = "SS Reflections"
+flat = false
+align = 0
+_sections_unfolded = [ "custom_colors", "custom_fonts" ]
 
-[node name="MSAA Filter" type="CheckBox" parent="TabContainer/Graphics"]
+[node name="MSAA Filter" type="CheckBox" parent="TabContainer/Graphics" index="2"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_left = 40.0
 margin_top = 80.0
 margin_right = 424.0
 margin_bottom = 111.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
 custom_fonts/font = ExtResource( 3 )
 custom_colors/font_color = Color( 0.0078125, 1, 0, 1 )
+toggle_mode = true
+enabled_focus_mode = 2
+shortcut = null
+group = null
 text = "MSAA Filter:"
+flat = false
+align = 0
+_sections_unfolded = [ "custom_colors", "custom_fonts" ]
 
-[node name="AnsFilter" type="CheckBox" parent="TabContainer/Graphics"]
+[node name="AnsFilter" type="CheckBox" parent="TabContainer/Graphics" index="3"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_left = 40.0
 margin_top = 110.0
 margin_right = 424.0
 margin_bottom = 141.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
 custom_fonts/font = ExtResource( 3 )
 custom_colors/font_color = Color( 0.0078125, 1, 0, 1 )
+toggle_mode = true
+enabled_focus_mode = 2
+shortcut = null
+group = null
 text = "Ansiotropic filter: "
+flat = false
+align = 0
+_sections_unfolded = [ "custom_colors", "custom_fonts" ]
 
-[node name="Video" type="Tabs" parent="TabContainer"]
+[node name="Video" type="Tabs" parent="TabContainer" index="1"]
+
 visible = false
+anchor_left = 0.0
+anchor_top = 0.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_top = 24.0
+margin_top = 20.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+tab_align = 1
+scrolling_enabled = true
+_sections_unfolded = [ "Transform" ]
 
-[node name="Resolution" type="Label" parent="TabContainer/Video"]
+[node name="Resolution" type="Label" parent="TabContainer/Video" index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_left = 30.0
 margin_top = 29.0
 margin_right = 100.0
 margin_bottom = 43.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
 custom_fonts/font = ExtResource( 3 )
 custom_colors/font_color = Color( 0, 1, 0, 1 )
 text = "Resolution"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+_sections_unfolded = [ "custom_colors", "custom_fonts" ]
 
-[node name="value" type="MenuButton" parent="TabContainer/Video/Resolution"]
+[node name="value" type="MenuButton" parent="TabContainer/Video/Resolution" index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_left = 80.0
 margin_right = 129.0
 margin_bottom = 14.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
 custom_fonts/font = ExtResource( 3 )
 custom_colors/font_color = Color( 0, 1, 0, 1 )
+toggle_mode = false
+action_mode = 0
+enabled_focus_mode = 0
+shortcut = null
 group = SubResource( 1 )
 text = "Default"
+flat = true
+align = 1
+items = [  ]
+_sections_unfolded = [ "custom_colors", "custom_fonts" ]
 
-[node name="Screen Space Relfections" type="CheckBox" parent="TabContainer/Video"]
+[node name="Screen Space Relfections" type="CheckBox" parent="TabContainer/Video" index="1"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_left = 30.0
 margin_top = 59.0
 margin_right = 120.0
 margin_bottom = 75.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
 custom_fonts/font = ExtResource( 3 )
 custom_colors/font_color = Color( 0, 1, 0, 1 )
+toggle_mode = true
+enabled_focus_mode = 2
+shortcut = null
+group = null
 text = "Fullscreen"
+flat = false
+align = 0
+_sections_unfolded = [ "custom_colors", "custom_fonts" ]
 
-[node name="Gamma Corection" type="Label" parent="TabContainer/Video"]
+[node name="Gamma Corection" type="Label" parent="TabContainer/Video" index="2"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_left = 30.0
 margin_top = 94.0
 margin_right = 142.0
 margin_bottom = 108.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
 custom_fonts/font = ExtResource( 3 )
 custom_colors/font_color = Color( 0, 1, 0, 1 )
 text = "Gamma Correction"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+_sections_unfolded = [ "custom_colors", "custom_fonts" ]
 
-[node name="value" type="HSlider" parent="TabContainer/Video/Gamma Corection"]
+[node name="value" type="HSlider" parent="TabContainer/Video/Gamma Corection" index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_left = 130.0
 margin_right = 386.0
 margin_bottom = 16.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 0
+min_value = 0.0
+max_value = 100.0
+step = 1.0
+page = 0.0
+value = 0.0
+exp_edit = false
+rounded = false
+editable = true
+tick_count = 0
+ticks_on_borders = false
+focus_mode = 2
+_sections_unfolded = [ "custom_colors", "custom_fonts" ]
 
-[node name="Brightness" type="Label" parent="TabContainer/Video"]
+[node name="Brightness" type="Label" parent="TabContainer/Video" index="3"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_left = 30.0
 margin_top = 124.0
 margin_right = 100.0
 margin_bottom = 138.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
 custom_fonts/font = ExtResource( 3 )
 custom_colors/font_color = Color( 0, 1, 0, 1 )
 text = "Brightness"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+_sections_unfolded = [ "custom_colors", "custom_fonts" ]
 
-[node name="value" type="HSlider" parent="TabContainer/Video/Brightness"]
+[node name="value" type="HSlider" parent="TabContainer/Video/Brightness" index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_left = 130.0
 margin_right = 386.0
 margin_bottom = 16.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 0
+min_value = 0.0
+max_value = 100.0
+step = 1.0
+page = 0.0
+value = 0.0
+exp_edit = false
+rounded = false
+editable = true
+tick_count = 0
+ticks_on_borders = false
+focus_mode = 2
+_sections_unfolded = [ "custom_colors", "custom_fonts" ]
 
-[node name="Controls" type="Tabs" parent="TabContainer"]
-visible = false
+[node name="Controls" type="Tabs" parent="TabContainer" index="2"]
+
+anchor_left = 0.0
+anchor_top = 0.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_top = 24.0
+margin_top = 20.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+tab_align = 1
+scrolling_enabled = true
 
-[node name="TabContainer" type="TabContainer" parent="TabContainer/Controls"]
+[node name="TabContainer" type="TabContainer" parent="TabContainer/Controls" index="0"]
+
 anchor_left = 0.5
+anchor_top = 0.0
 anchor_right = 0.5
+anchor_bottom = 0.0
 margin_left = -168.5
 margin_top = 21.0
 margin_right = 168.5
 margin_bottom = 62.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+tab_align = 1
+tabs_visible = true
+_sections_unfolded = [ "Grow Direction" ]
 
-[node name="Movement" type="Tabs" parent="TabContainer/Controls/TabContainer"]
+[node name="Movement" type="Tabs" parent="TabContainer/Controls/TabContainer" index="0"]
+
+visible = false
+anchor_left = 0.0
+anchor_top = 0.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_top = 24.0
+margin_top = 20.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+tab_align = 1
+scrolling_enabled = true
 
-[node name="move_left" parent="TabContainer/Controls/TabContainer/Movement" instance=ExtResource( 5 )]
+[node name="move_left" parent="TabContainer/Controls/TabContainer/Movement" index="0" instance=ExtResource( 5 )]
+
 margin_left = -47.0
 margin_top = 48.0
 margin_right = 210.0
 margin_bottom = 68.0
 Label_text = "Strafe Left"
 
-[node name="move_right" parent="TabContainer/Controls/TabContainer/Movement" instance=ExtResource( 5 )]
+[node name="move_right" parent="TabContainer/Controls/TabContainer/Movement" index="1" instance=ExtResource( 5 )]
+
 margin_left = -47.0
 margin_top = 28.0
 margin_right = 210.0
 margin_bottom = 48.0
 Label_text = "Strafe right"
 
-[node name="move_forwards" parent="TabContainer/Controls/TabContainer/Movement" instance=ExtResource( 5 )]
+[node name="move_forwards" parent="TabContainer/Controls/TabContainer/Movement" index="2" instance=ExtResource( 5 )]
+
 margin_left = -47.0
 margin_top = 68.0
 margin_right = 210.0
 margin_bottom = 88.0
 Label_text = "Move Forwards"
 
-[node name="move_backwards" parent="TabContainer/Controls/TabContainer/Movement" instance=ExtResource( 5 )]
+[node name="move_backwards" parent="TabContainer/Controls/TabContainer/Movement" index="3" instance=ExtResource( 5 )]
+
 margin_left = -47.0
 margin_top = 88.0
 margin_right = 210.0
 margin_bottom = 108.0
 Label_text = "Move Backwards"
 
-[node name="jump" parent="TabContainer/Controls/TabContainer/Movement" instance=ExtResource( 5 )]
+[node name="jump" parent="TabContainer/Controls/TabContainer/Movement" index="4" instance=ExtResource( 5 )]
+
 margin_left = -47.0
 margin_top = 108.0
 margin_right = 210.0
 margin_bottom = 128.0
 Label_text = "Jump"
 
-[node name="run" parent="TabContainer/Controls/TabContainer/Movement" instance=ExtResource( 5 )]
+[node name="run" parent="TabContainer/Controls/TabContainer/Movement" index="5" instance=ExtResource( 5 )]
+
 margin_left = -47.0
 margin_top = 128.0
 margin_right = 284.0
 margin_bottom = 148.0
 Label_text = "Run/Walk"
 
-[node name="swim" parent="TabContainer/Controls/TabContainer/Movement" instance=ExtResource( 5 )]
+[node name="swim" parent="TabContainer/Controls/TabContainer/Movement" index="6" instance=ExtResource( 5 )]
+
 margin_left = -47.0
 margin_top = 8.0
 margin_right = 210.0
 margin_bottom = 28.0
 Label_text = "Swim toggle"
 
-[node name="Combat" type="Tabs" parent="TabContainer/Controls/TabContainer"]
+[node name="Combat" type="Tabs" parent="TabContainer/Controls/TabContainer" index="1"]
+
 visible = false
+anchor_left = 0.0
+anchor_top = 0.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_top = 24.0
+margin_top = 20.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+tab_align = 1
+scrolling_enabled = true
 
-[node name="second_fire" parent="TabContainer/Controls/TabContainer/Combat" instance=ExtResource( 5 )]
+[node name="second_fire" parent="TabContainer/Controls/TabContainer/Combat" index="0" instance=ExtResource( 5 )]
+
 margin_left = -47.0
 margin_top = 68.0
 margin_right = 210.0
 margin_bottom = 88.0
 Label_text = "Secondary Fire"
 
-[node name="first_fire" parent="TabContainer/Controls/TabContainer/Combat" instance=ExtResource( 5 )]
+[node name="first_fire" parent="TabContainer/Controls/TabContainer/Combat" index="1" instance=ExtResource( 5 )]
+
 margin_left = -47.0
 margin_top = 48.0
 margin_right = 210.0
 margin_bottom = 68.0
 Label_text = "Primary fire"
 
-[node name="next_gun" parent="TabContainer/Controls/TabContainer/Combat" instance=ExtResource( 5 )]
+[node name="next_gun" parent="TabContainer/Controls/TabContainer/Combat" index="2" instance=ExtResource( 5 )]
+
 margin_left = -47.0
 margin_top = 88.0
 margin_right = 213.0
 margin_bottom = 108.0
 Label_text = "Next gun"
 
-[node name="prev_gun" parent="TabContainer/Controls/TabContainer/Combat" instance=ExtResource( 5 )]
+[node name="prev_gun" parent="TabContainer/Controls/TabContainer/Combat" index="3" instance=ExtResource( 5 )]
+
 margin_left = -47.0
 margin_top = 108.0
 margin_right = 210.0
 margin_bottom = 128.0
 Label_text = "Previous gun"
 
-[node name="Comm" type="Tabs" parent="TabContainer/Controls/TabContainer"]
+[node name="Comm" type="Tabs" parent="TabContainer/Controls/TabContainer" index="2"]
+
 visible = false
+anchor_left = 0.0
+anchor_top = 0.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_top = 24.0
+margin_top = 20.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+tab_align = 1
+scrolling_enabled = true
 
-[node name="ui_right" parent="TabContainer/Controls/TabContainer/Comm" instance=ExtResource( 5 )]
+[node name="ui_right" parent="TabContainer/Controls/TabContainer/Comm" index="0" instance=ExtResource( 5 )]
+
 margin_left = -47.0
 margin_top = 28.0
 margin_right = 284.0
 margin_bottom = 48.0
 Label_text = "Chat"
 
-[node name="ui_right2" parent="TabContainer/Controls/TabContainer/Comm" instance=ExtResource( 5 )]
+[node name="ui_right2" parent="TabContainer/Controls/TabContainer/Comm" index="1" instance=ExtResource( 5 )]
+
 margin_left = -47.0
 margin_top = 48.0
 margin_right = 210.0
 margin_bottom = 68.0
 Label_text = "Push-to-talk"
 
-[node name="Misc" type="Tabs" parent="TabContainer/Controls/TabContainer"]
-visible = false
+[node name="Misc" type="Tabs" parent="TabContainer/Controls/TabContainer" index="3"]
+
+anchor_left = 0.0
+anchor_top = 0.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_top = 24.0
+margin_top = 20.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+tab_align = 1
+scrolling_enabled = true
 
-[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/Controls/TabContainer/Misc"]
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/Controls/TabContainer/Misc" index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_left = 43.0
 margin_top = 28.0
 margin_right = 300.0
 margin_bottom = 96.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 1
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+alignment = 0
 __meta__ = {
 "_edit_group_": true
 }
 
-[node name="vol_plus" parent="TabContainer/Controls/TabContainer/Misc/VBoxContainer" instance=ExtResource( 5 )]
+[node name="vol_plus" parent="TabContainer/Controls/TabContainer/Misc/VBoxContainer" index="0" instance=ExtResource( 5 )]
+
 margin_top = 0.0
 margin_right = 257.0
 margin_bottom = 14.0
 Label_text = "Voulme up"
 
-[node name="vol_minus" parent="TabContainer/Controls/TabContainer/Misc/VBoxContainer" instance=ExtResource( 5 )]
+[node name="vol_minus" parent="TabContainer/Controls/TabContainer/Misc/VBoxContainer" index="1" instance=ExtResource( 5 )]
+
 margin_top = 18.0
 margin_right = 257.0
 margin_bottom = 32.0
 Label_text = "Volume down"
 
-[node name="gun_center" parent="TabContainer/Controls/TabContainer/Misc/VBoxContainer" instance=ExtResource( 5 )]
+[node name="gun_center" parent="TabContainer/Controls/TabContainer/Misc/VBoxContainer" index="2" instance=ExtResource( 5 )]
+
 margin_right = 257.0
 margin_bottom = 50.0
 Label_text = "Toggle gun position"
 
-[node name="open_map" parent="TabContainer/Controls/TabContainer/Misc/VBoxContainer" instance=ExtResource( 5 )]
+[node name="open_map" parent="TabContainer/Controls/TabContainer/Misc/VBoxContainer" index="3" instance=ExtResource( 5 )]
+
 margin_top = 54.0
 margin_right = 257.0
 margin_bottom = 68.0
 Label_text = "Open Minimap"
 
-[node name="Controls" type="Control" parent="."]
+[node name="Controls" type="Control" parent="." index="3"]
+
 visible = false
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_right = 40.0
 margin_bottom = 40.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
 
-[node name="Done" type="Button" parent="Controls"]
+[node name="Done" type="Button" parent="Controls" index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_left = 298.0
 margin_top = 219.0
 margin_right = 326.0
 margin_bottom = 233.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
 theme = ExtResource( 1 )
 custom_fonts/font = ExtResource( 3 )
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
 text = "Done"
+flat = false
+align = 1
+_sections_unfolded = [ "Theme", "custom_colors", "custom_fonts" ]
 
-[node name="Cancel" type="Button" parent="Controls"]
+[node name="Cancel" type="Button" parent="Controls" index="1"]
+
+anchor_left = 0.0
+anchor_top = 0.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 427.0
 margin_top = 219.0
 margin_right = 429.0
 margin_bottom = 193.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
 theme = ExtResource( 1 )
 custom_fonts/font = ExtResource( 3 )
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
 text = "Cancel"
+flat = false
+align = 1
+_sections_unfolded = [ "custom_colors", "custom_fonts" ]
 
-[node name="Net_Host" type="Tabs" parent="."]
+[node name="Net_Host" type="Tabs" parent="." index="4"]
+
 editor/display_folded = true
 visible = false
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_right = 40.0
 margin_bottom = 21.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+tab_align = 1
+scrolling_enabled = true
 
-[node name="IP" type="Label" parent="Net_Host"]
+[node name="IP" type="Label" parent="Net_Host" index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_left = 20.0
 margin_top = 70.0
 margin_right = 216.0
 margin_bottom = 84.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
 text = "Current IP : 345.345.234.345"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
 
-[node name="IP2" type="Label" parent="Net_Host"]
+[node name="IP2" type="Label" parent="Net_Host" index="1"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_left = 20.0
 margin_top = 30.0
 margin_right = 216.0
 margin_bottom = 44.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
 text = "Gathering Network Players"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
 
-[node name="Aliens" type="CheckBox" parent="Net_Host"]
+[node name="Aliens" type="CheckBox" parent="Net_Host" index="2"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_left = 20.0
 margin_top = 100.0
 margin_right = 82.0
 margin_bottom = 116.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+toggle_mode = true
+enabled_focus_mode = 2
+shortcut = null
+group = null
 text = "Aliens"
+flat = false
+align = 0
 
-[node name="PVP" type="CheckBox" parent="Net_Host"]
+[node name="PVP" type="CheckBox" parent="Net_Host" index="3"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_left = 20.0
 margin_top = 120.0
 margin_right = 82.0
 margin_bottom = 136.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+toggle_mode = true
+enabled_focus_mode = 2
+shortcut = null
+group = null
 text = "Player vs Player"
+flat = false
+align = 0
 
-[node name="PVP2" type="CheckBox" parent="Net_Host"]
+[node name="PVP2" type="CheckBox" parent="Net_Host" index="4"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_left = 20.0
 margin_top = 140.0
 margin_right = 152.0
 margin_bottom = 156.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+toggle_mode = true
+enabled_focus_mode = 2
+shortcut = null
+group = null
 text = "Infinite Ammo"
+flat = false
+align = 0
 
-[node name="PVP3" type="CheckBox" parent="Net_Host"]
+[node name="PVP3" type="CheckBox" parent="Net_Host" index="5"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_left = 20.0
 margin_top = 160.0
 margin_right = 152.0
 margin_bottom = 176.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
 disabled = true
+toggle_mode = true
+enabled_focus_mode = 2
+shortcut = null
+group = null
 text = "Record Match"
+flat = false
+align = 0
+_sections_unfolded = [ "custom_colors" ]
 
-[node name="HTTPRequest" type="HTTPRequest" parent="."]
+[node name="HTTPRequest" type="HTTPRequest" parent="." index="5"]
+
+download_file = ""
+use_threads = false
+body_size_limit = -1
+max_redirects = 8
+
 [connection signal="pressed" from="Main/Play2" to="." method="_on_HostNet_pressed"]
+
 [connection signal="pressed" from="Main/Settings" to="." method="_on_Settings_pressed"]
+
 [connection signal="pressed" from="Controls/Cancel" to="." method="_on_Cancel_pressed"]
+
 [connection signal="visibility_changed" from="Net_Host/IP" to="." method="_on_IP_visibility_changed"]
+
 [connection signal="visibility_changed" from="Net_Host/IP2" to="." method="_on_IP_visibility_changed"]
+
 [connection signal="request_completed" from="HTTPRequest" to="." method="_on_HTTPRequest_request_completed"]
+
+
