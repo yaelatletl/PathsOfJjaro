@@ -1,7 +1,0 @@
-[gd_scene format=2]
-
-[node name="Navigation" type="Navigation"]
-
-up_vector = Vector3( 0, 1, 0 )
-
-
