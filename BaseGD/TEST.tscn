@@ -13,14 +13,15 @@
 [ext_resource path="res://BaseGD/RigidBodies/Crate2.tscn" type="PackedScene" id=11]
 [ext_resource path="res://BaseGD/RigidBodies/Pallet.tscn" type="PackedScene" id=12]
 [ext_resource path="res://BaseGD/pl3d/Player3d.tscn" type="PackedScene" id=13]
-[ext_resource path="res://BaseGD/Characters/SphtKr/SphtKR.tscn" type="PackedScene" id=14]
-[ext_resource path="res://BaseGD/Characters/SphtSlave/SphtSlave.tscn" type="PackedScene" id=15]
+[ext_resource path="res://assets/SphtKr/SphtKR.tscn" type="PackedScene" id=14]
+[ext_resource path="res://assets/SphtSlave/SphtSlave.tscn" type="PackedScene" id=15]
 [ext_resource path="res://BaseGD/RigidBodies/Pine_Cross.tscn" type="PackedScene" id=16]
 [ext_resource path="res://BaseGD/RigidBodies/Palm_Cross.tscn" type="PackedScene" id=17]
 [ext_resource path="res://BaseGD/RigidBodies/Bamboo_Cross.tscn" type="PackedScene" id=18]
-[ext_resource path="res://BaseGD/Characters/MADD/MADD.tscn" type="PackedScene" id=19]
+[ext_resource path="res://assets/MADD/MADD.tscn" type="PackedScene" id=19]
 [ext_resource path="res://assets/store/maujoe.basic_water_material/materials/basic_water_material.material" type="Material" id=20]
 [ext_resource path="res://assets/store/maujoe.basic_water_material/materials/huh.tres.gd" type="Script" id=21]
+
 
 
 [sub_resource type="PanoramaSky" id=1]
