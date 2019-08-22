@@ -1,0 +1,326 @@
+[gd_scene load_steps=36 format=2]
+
+[ext_resource path="res://assets/Bullets/EnergyBullet.tres.gd" type="Script" id=1]
+[ext_resource path="res://assets/Sprites/spht/01.png" type="Texture" id=2]
+[ext_resource path="res://assets/Sprites/spht/02.png" type="Texture" id=3]
+[ext_resource path="res://assets/Sprites/spht/03.png" type="Texture" id=4]
+[ext_resource path="res://assets/Sprites/spht/04.png" type="Texture" id=5]
+[ext_resource path="res://assets/Sprites/spht/05.png" type="Texture" id=6]
+[ext_resource path="res://assets/Sprites/spht/06.png" type="Texture" id=7]
+[ext_resource path="res://assets/Sprites/spht/07.png" type="Texture" id=8]
+[ext_resource path="res://assets/Sprites/spht/08.png" type="Texture" id=9]
+[ext_resource path="res://assets/Sprites/spht/09.png" type="Texture" id=10]
+[ext_resource path="res://assets/Sprites/spht/10.png" type="Texture" id=11]
+[ext_resource path="res://assets/Sprites/spht/11.png" type="Texture" id=12]
+[ext_resource path="res://assets/Sprites/spht/12.png" type="Texture" id=13]
+[ext_resource path="res://assets/Sprites/spht/13.png" type="Texture" id=14]
+[ext_resource path="res://assets/Sprites/spht/14.png" type="Texture" id=15]
+[ext_resource path="res://assets/Sprites/spht/15.png" type="Texture" id=16]
+[ext_resource path="res://assets/Sprites/spht/16.png" type="Texture" id=17]
+[ext_resource path="res://assets/Sprites/spht/17.png" type="Texture" id=18]
+[ext_resource path="res://assets/Sprites/spht/18.png" type="Texture" id=19]
+[ext_resource path="res://assets/Sprites/spht/19.png" type="Texture" id=20]
+[ext_resource path="res://assets/Sprites/spht/20.png" type="Texture" id=21]
+[ext_resource path="res://assets/Sprites/spht/21.png" type="Texture" id=22]
+[ext_resource path="res://assets/Sprites/spht/22.png" type="Texture" id=23]
+[ext_resource path="res://assets/Sprites/spht/23.png" type="Texture" id=24]
+
+
+
+[sub_resource type="SphereShape" id=1]
+
+radius = 0.0539998
+
+[sub_resource type="SpriteFrames" id=2]
+
+animations = [ {
+"frames": [ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 10 ), ExtResource( 11 ), ExtResource( 12 ), ExtResource( 13 ), ExtResource( 14 ), ExtResource( 15 ), ExtResource( 16 ), ExtResource( 17 ), ExtResource( 18 ), ExtResource( 19 ), ExtResource( 20 ), ExtResource( 21 ), ExtResource( 22 ), ExtResource( 23 ), ExtResource( 24 ) ],
+"loop": true,
+"name": "default",
+"speed": 90.0
+} ]
+_sections_unfolded = [ "Resource" ]
+
+[sub_resource type="SphereMesh" id=3]
+
+custom_aabb = AABB( 0, 0, 0, 0, 0, 0 )
+radius = 0.25
+height = 0.5
+radial_segments = 64
+rings = 32
+is_hemisphere = false
+
+[sub_resource type="Curve" id=4]
+
+min_value = 0.0
+max_value = 200.0
+bake_resolution = 100
+_data = [ Vector2( 0, 200 ), 0.0, 0.0, 0, 0, Vector2( 0.523212, 127.93 ), -3517.1, -3517.1, 0, 0, Vector2( 1, 200 ), 520.238, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=5]
+
+flags = 4
+width = 2048
+curve = SubResource( 4 )
+
+[sub_resource type="Curve" id=6]
+
+min_value = 0.0
+max_value = 1.0
+bake_resolution = 100
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.879951, 0.74707 ), 2.71356, 2.71356, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=7]
+
+flags = 4
+width = 2048
+curve = SubResource( 6 )
+
+[sub_resource type="ParticlesMaterial" id=8]
+
+render_priority = 0
+trail_divisor = 1
+trail_size_modifier = SubResource( 7 )
+emission_shape = 0
+flag_align_y = false
+flag_rotate_y = false
+flag_disable_z = false
+spread = 0.0
+flatness = 0.0
+gravity = Vector3( 1, 0, 0 )
+initial_velocity = 0.7
+initial_velocity_random = 1.0
+angular_velocity = 4.53
+angular_velocity_random = 0.0
+linear_accel = 0.0
+linear_accel_random = 0.0
+radial_accel = 0.12
+radial_accel_random = 0.0
+tangential_accel = 0.26
+tangential_accel_random = 0.0
+damping = 0.17
+damping_random = 0.0
+angle = 0.5
+angle_random = 0.0
+scale = 1.0
+scale_random = 0.41
+color = Color( 1, 1, 1, 1 )
+hue_variation = 0.0
+hue_variation_random = 0.0
+anim_speed = 0.9
+anim_speed_random = 1.0
+anim_speed_curve = SubResource( 5 )
+anim_offset = 0.0
+anim_offset_random = 0.0
+anim_loop = true
+_sections_unfolded = [ "Angle", "Angular Velocity", "Animation", "Damping", "Emission Shape", "Flags", "Gravity", "Initial Velocity", "Linear Accel", "Radial Accel", "Scale", "Spread", "Tangential Accel", "Trail" ]
+
+[sub_resource type="SpatialMaterial" id=9]
+
+render_priority = 0
+flags_transparent = true
+flags_unshaded = false
+flags_vertex_lighting = false
+flags_no_depth_test = false
+flags_use_point_size = false
+flags_world_triplanar = false
+flags_fixed_size = false
+flags_albedo_tex_force_srgb = false
+vertex_color_use_as_albedo = false
+vertex_color_is_srgb = false
+params_diffuse_mode = 0
+params_specular_mode = 0
+params_blend_mode = 0
+params_cull_mode = 0
+params_depth_draw_mode = 3
+params_line_width = 1.0
+params_point_size = 1.0
+params_billboard_mode = 1
+params_grow = false
+params_use_alpha_scissor = true
+params_alpha_scissor_threshold = 0.98
+albedo_color = Color( 1, 1, 1, 1 )
+albedo_texture = ExtResource( 14 )
+metallic = 0.0
+metallic_specular = 0.5
+metallic_texture_channel = 0
+roughness = 0.0
+roughness_texture_channel = 0
+emission_enabled = true
+emission = Color( 0.242188, 1, 0, 1 )
+emission_energy = 1.07
+emission_operator = 0
+emission_on_uv2 = false
+normal_enabled = false
+rim_enabled = false
+clearcoat_enabled = false
+anisotropy_enabled = false
+ao_enabled = false
+depth_enabled = false
+subsurf_scatter_enabled = false
+transmission_enabled = false
+refraction_enabled = false
+detail_enabled = false
+uv1_scale = Vector3( 1, 1, 1 )
+uv1_offset = Vector3( 0, 0, 0 )
+uv1_triplanar = false
+uv1_triplanar_sharpness = 1.0
+uv2_scale = Vector3( 1, 1, 1 )
+uv2_offset = Vector3( 0, 0, 0 )
+uv2_triplanar = false
+uv2_triplanar_sharpness = 1.0
+proximity_fade_enable = false
+distance_fade_enable = false
+_sections_unfolded = [ "Emission", "Parameters" ]
+
+[sub_resource type="QuadMesh" id=10]
+
+material = SubResource( 9 )
+custom_aabb = AABB( 0, 0, 0, 0, 0, 0 )
+size = Vector2( 1, 1 )
+
+[sub_resource type="SphereShape" id=11]
+
+radius = 0.369174
+
+[node name="EnergyBullet" type="KinematicBody"]
+
+input_ray_pickable = true
+input_capture_on_drag = false
+collision_layer = 1
+collision_mask = 1
+axis_lock_linear_x = false
+axis_lock_linear_y = false
+axis_lock_linear_z = false
+axis_lock_angular_x = false
+axis_lock_angular_y = false
+axis_lock_angular_z = false
+collision/safe_margin = 0.001
+script = ExtResource( 1 )
+_sections_unfolded = [ "Collision", "Transform", "collision" ]
+damage = 5.0
+speed = 20
+follows = false
+smart = false
+
+[node name="CollisionShape" type="CollisionShape" parent="." index="0"]
+
+shape = SubResource( 1 )
+disabled = false
+
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="." index="1"]
+
+transform = Transform( 0.43211, 0.901821, 0, -0.767704, 0.367847, 0.524709, 0.473194, -0.226732, 0.851281, 0, 0, 0 )
+visible = false
+layers = 1
+material_override = null
+cast_shadow = 1
+extra_cull_margin = 0.0
+use_in_baked_light = false
+lod_min_distance = 0.0
+lod_min_hysteresis = 0.0
+lod_max_distance = 0.0
+lod_max_hysteresis = 0.0
+centered = true
+offset = Vector2( 0, 0 )
+flip_h = false
+flip_v = false
+modulate = Color( 0, 1, 0.0390625, 1 )
+opacity = 0.99
+pixel_size = 0.0061
+axis = 0
+transparent = true
+shaded = false
+double_sided = true
+alpha_cut = 1
+frames = SubResource( 2 )
+animation = "default"
+frame = 2
+playing = true
+_sections_unfolded = [ "Flags", "Geometry" ]
+
+[node name="WallCheck" type="RayCast" parent="." index="2"]
+
+transform = Transform( -1, 0, -8.74228e-008, 0, 1, 0, 8.74228e-008, 0, -1, 0, 0, 0 )
+enabled = false
+exclude_parent = true
+cast_to = Vector3( 0.6, 0, 0 )
+collision_mask = 1
+_sections_unfolded = [ "Transform" ]
+
+[node name="MeshInstance" type="MeshInstance" parent="WallCheck" index="0"]
+
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.565407, 0, 0 )
+visible = false
+layers = 1
+material_override = null
+cast_shadow = 1
+extra_cull_margin = 0.0
+use_in_baked_light = false
+lod_min_distance = 0.0
+lod_min_hysteresis = 0.0
+lod_max_distance = 0.0
+lod_max_hysteresis = 0.0
+mesh = SubResource( 3 )
+skeleton = NodePath("..")
+material/0 = null
+
+[node name="Particles" type="Particles" parent="." index="3"]
+
+transform = Transform( 1, 0, 0, 0, -4.37114e-008, -1, 0, 1, -4.37114e-008, -0.0173221, 0.0827846, -0.0138905 )
+layers = 1
+material_override = null
+cast_shadow = 1
+extra_cull_margin = 0.0
+use_in_baked_light = false
+lod_min_distance = 0.0
+lod_min_hysteresis = 0.0
+lod_max_distance = 0.0
+lod_max_hysteresis = 0.0
+emitting = true
+amount = 10
+lifetime = 0.38
+one_shot = false
+preprocess = 0.0
+speed_scale = 1.6
+explosiveness = 0.0
+randomness = 0.0
+fixed_fps = 0
+fract_delta = true
+visibility_aabb = AABB( -1, -1, -1.00911, 2.07789, 2.02023, 2.26177 )
+local_coords = true
+draw_order = 2
+process_material = SubResource( 8 )
+draw_passes = 1
+draw_pass_1 = SubResource( 10 )
+_sections_unfolded = [ "Draw Passes", "Drawing", "Geometry", "Process Material", "Time" ]
+
+[node name="Area" type="Area" parent="." index="4"]
+
+input_ray_pickable = false
+input_capture_on_drag = false
+space_override = 0
+gravity_point = false
+gravity_distance_scale = 0.0
+gravity_vec = Vector3( 0, -1, 0 )
+gravity = 9.8
+linear_damp = 0.1
+angular_damp = 1.0
+priority = 0.0
+monitoring = true
+monitorable = true
+collision_layer = 1
+collision_mask = 1
+audio_bus_override = false
+audio_bus_name = "Master"
+reverb_bus_enable = false
+reverb_bus_name = "Master"
+reverb_bus_amount = 0.0
+reverb_bus_uniformity = 0.0
+
+[node name="CollisionShape2" type="CollisionShape" parent="Area" index="0"]
+
+shape = SubResource( 11 )
+disabled = false
+
+

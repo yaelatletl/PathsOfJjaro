@@ -97,12 +97,18 @@ shader = SubResource( 1 )
 shader_param/ghosts = 7
 shader_param/ghost_dispersal = 0.3
 shader_param/halo_width = 0.25
+<<<<<<< HEAD
 shader_param/distort = 2.0
 shader_param/bloom_scale = 10.0
 shader_param/bloom_bias = 1.05
+=======
+shader_param/distort = 0.757
+shader_param/bloom_scale = 10.0
+shader_param/bloom_bias = 0.933
+>>>>>>> parent of 71576f5... Revert "Large restructure "
 shader_param/dispAmt = null
-shader_param/abberationAmtX = 0.005
-shader_param/abberationAmtY = 0.005
+shader_param/abberationAmtX = 0.001
+shader_param/abberationAmtY = 0.001
 shader_param/dispSize = 0.105
 shader_param/maxAlpha = null
 shader_param/lens_color = SubResource( 3 )

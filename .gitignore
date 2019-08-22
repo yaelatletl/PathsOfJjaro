@@ -12,3 +12,4 @@ export_presets.cfg
 *.import
 *.stex
 *.etc2*
+*.import
