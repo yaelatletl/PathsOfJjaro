@@ -127,7 +127,4 @@ quality/filters/use_nearest_mipmap_filter=true
 quality/reflections/atlas_size=4096
 quality/reflections/atlas_subdiv=16
 quality/filters/msaa=3
-<<<<<<< HEAD
-=======
 environment/default_environment="res://assets/Environments/Lhowon Day.tres"
->>>>>>> parent of 71576f5... Revert "Large restructure "
