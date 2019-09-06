@@ -1,0 +1,44 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://weapons/fusion_pistol.gd" type="Script" id=1]
+[ext_resource path="res://assets/sounds/M1/Fusion_Pistol_Fire.wav" type="AudioStream" id=2]
+
+[sub_resource type="SpatialMaterial" id=1]
+albedo_color = Color( 1, 0.505882, 0.0666667, 1 )
+
+[sub_resource type="CubeMesh" id=2]
+material = SubResource( 1 )
+size = Vector3( 0.5, 2.6, 1.7 )
+
+[node name="fusion_pistol" type="Spatial"]
+script = ExtResource( 1 )
+sd = ExtResource( 2 )
+
+[node name="pCylinder12" type="MeshInstance" parent="."]
+transform = Transform( -0.198527, -1.73558e-008, 7.58646e-016, 0, -8.6779e-009, -0.198527, 1.73558e-008, -0.198527, 8.6779e-009, 0.00100301, 0.118371, -0.445435 )
+use_in_baked_light = true
+mesh = SubResource( 2 )
+material/0 = null
+
+[node name="aperture" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.208036, -0.800239 )
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.3
+one_shot = true
+
+[node name="overload" type="Timer" parent="."]
+wait_time = 10.0
+one_shot = true
+
+[node name="charge" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+volume_db = -6.058
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
+[connection signal="timeout" from="overload" to="." method="_on_overload_timeout"]
+[connection signal="timeout" from="overload" to="." method="_on_Timer_timeout"]
+[connection signal="timeout" from="charge" to="." method="_on_charge_timeout"]
+[connection signal="timeout" from="charge" to="." method="_on_Timer_timeout"]

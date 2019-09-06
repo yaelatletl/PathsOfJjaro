@@ -1,0 +1,81 @@
+[gd_scene load_steps=10 format=2]
+
+[sub_resource type="Curve" id=8]
+min_value = -1.0
+_data = [ Vector2( 0.612948, 0.0153999 ), 0.0, 0.426824, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=9]
+curve = SubResource( 8 )
+
+[sub_resource type="Curve" id=1]
+_data = [ Vector2( 0, 0 ), 0.0, -0.227518, 0, 0, Vector2( 1, 1 ), -0.142507, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=2]
+curve = SubResource( 1 )
+
+[sub_resource type="ParticlesMaterial" id=3]
+trail_divisor = 7
+spread = 0.0
+gravity = Vector3( 0, -2, 0 )
+initial_velocity = 6.0
+initial_velocity_random = 0.12
+angular_velocity = 5.10747
+scale_random = 0.09
+scale_curve = SubResource( 2 )
+hue_variation = 1.0
+hue_variation_random = 0.47
+hue_variation_curve = SubResource( 9 )
+
+[sub_resource type="SpatialMaterial" id=4]
+flags_transparent = true
+params_blend_mode = 1
+albedo_color = Color( 1, 0.796875, 0, 0.552471 )
+roughness = 0.0
+emission_enabled = true
+emission = Color( 1, 0.819092, 0.109375, 1 )
+emission_energy = 1.0
+emission_operator = 0
+emission_on_uv2 = false
+distance_fade_mode = 1
+distance_fade_min_distance = 0.1
+distance_fade_max_distance = 10.0
+
+[sub_resource type="SphereMesh" id=5]
+material = SubResource( 4 )
+radius = 0.5
+height = 1.0
+
+[sub_resource type="SpatialMaterial" id=6]
+params_blend_mode = 1
+params_depth_draw_mode = 2
+params_billboard_mode = 2
+params_billboard_keep_scale = true
+albedo_color = Color( 0.901961, 0.607843, 0.0588235, 1 )
+emission_enabled = true
+emission = Color( 0.490196, 0.223529, 0.0509804, 1 )
+emission_energy = 1.0
+emission_operator = 1
+emission_on_uv2 = false
+transmission_enabled = true
+transmission = Color( 0.74902, 0, 0, 1 )
+
+[sub_resource type="SphereMesh" id=7]
+material = SubResource( 6 )
+
+[node name="Particles" type="Particles"]
+transform = Transform( -1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, 0 )
+emitting = false
+amount = 59
+visibility_aabb = AABB( -1.88233, -1.08616, -1.50091, 3.76466, 2.17233, 3.00181 )
+local_coords = false
+process_material = SubResource( 3 )
+draw_passes = 2
+draw_pass_1 = SubResource( 5 )
+draw_pass_2 = SubResource( 7 )
+
+[node name="OmniLight" type="OmniLight" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.24454e-07, -0.863611, 4.85518 )
+light_specular = 0.63
+shadow_enabled = true
+omni_range = 4.19738
+omni_shadow_mode = 0

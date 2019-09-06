@@ -8,9 +8,74 @@
 
 config_version=4
 
-_global_script_classes=[  ]
+_global_script_classes=[ {
+"base": "Character",
+"class": "AI_Character",
+"language": "GDScript",
+"path": "res://Joyeuse/Basics/Characters/AI.gd"
+}, {
+"base": "KinematicBody",
+"class": "Character",
+"language": "GDScript",
+"path": "res://Joyeuse/Basics/Characters/Character.gd"
+}, {
+"base": "Position3D",
+"class": "NavigationWaypoint",
+"language": "GDScript",
+"path": "res://Joyeuse/Basics/Navigation/Navigation_Waypoint.gd"
+}, {
+"base": "Path",
+"class": "Navigation_Path",
+"language": "GDScript",
+"path": "res://Joyeuse/Basics/Navigation/Navmesh_Path.gd"
+}, {
+"base": "Character",
+"class": "Player",
+"language": "GDScript",
+"path": "res://Joyeuse/Basics/Characters/Player.gd"
+}, {
+"base": "RigidBody",
+"class": "Projectile",
+"language": "GDScript",
+"path": "res://Joyeuse/Basics/Guns/projectile.gd"
+}, {
+"base": "Weapon",
+"class": "RaycastWeapon",
+"language": "GDScript",
+"path": "res://Joyeuse/Basics/Guns/raycast_weapon.gd"
+}, {
+"base": "Spatial",
+"class": "Sound_Smell_Manager",
+"language": "GDScript",
+"path": "res://Joyeuse/Basics/General_systems/Sound_Smell_system.gd"
+}, {
+"base": "Node",
+"class": "Weapon",
+"language": "GDScript",
+"path": "res://Joyeuse/Basics/Guns/weapon.gd"
+}, {
+"base": "KinematicBody",
+"class": "Workstation",
+"language": "GDScript",
+"path": "res://Joyeuse/Basics/Objectives/Workstation.gd"
+}, {
+"base": "Navigation",
+"class": "World_Navigator",
+"language": "GDScript",
+"path": "res://Joyeuse/addons/WorldManagement/WorldNavigation.gd"
+} ]
 _global_script_class_icons={
-
+"AI_Character": "",
+"Character": "",
+"NavigationWaypoint": "",
+"Navigation_Path": "",
+"Player": "res://Joyeuse/icons/player.png",
+"Projectile": "",
+"RaycastWeapon": "",
+"Sound_Smell_Manager": "res://Joyeuse/icons/SH_SYSTEM.png",
+"Weapon": "",
+"Workstation": "res://Joyeuse/icons/workstation.png",
+"World_Navigator": "res://Joyeuse/icons/icon.png"
 }
 
 [application]
@@ -42,7 +107,7 @@ convert_text_resources_to_binary_on_export=true
 
 [editor_plugins]
 
-enabled=PoolStringArray( "SIsilicon.vfx.lens flare", "gamejolt_api_v2" )
+enabled=PoolStringArray( "gamejolt_api_v2" )
 
 [env]
 
@@ -99,6 +164,16 @@ oxygenup={
 oxygendown={
 "deadzone": 0.5,
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":75,"unicode":0,"echo":false,"script":null)
+ ]
+}
+shoot={
+"deadzone": 0.5,
+"events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":1,"pressed":false,"doubleclick":false,"script":null)
+ ]
+}
+shoot_secondary={
+"deadzone": 0.5,
+"events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":2,"pressed":false,"doubleclick":false,"script":null)
  ]
 }
 
