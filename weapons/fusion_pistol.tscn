@@ -21,7 +21,7 @@ mesh = SubResource( 2 )
 material/0 = null
 
 [node name="aperture" type="Position3D" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.208036, -0.800239 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.208036, -0.993302 )
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.3
@@ -35,10 +35,10 @@ one_shot = true
 wait_time = 0.5
 one_shot = true
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-volume_db = -6.058
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.390083 )
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
-[connection signal="timeout" from="overload" to="." method="_on_overload_timeout"]
 [connection signal="timeout" from="overload" to="." method="_on_Timer_timeout"]
-[connection signal="timeout" from="charge" to="." method="_on_charge_timeout"]
+[connection signal="timeout" from="overload" to="." method="_on_overload_timeout"]
 [connection signal="timeout" from="charge" to="." method="_on_Timer_timeout"]
+[connection signal="timeout" from="charge" to="." method="_on_charge_timeout"]

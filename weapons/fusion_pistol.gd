@@ -29,8 +29,8 @@ func primary_fire():
 				#$aperture.add_child(bolt)
 				bolt.set_global_transform($aperture.get_global_transform())
 				get_node("/root/World/AI_SH_SYSTEM").add_child(bolt)
-				$AudioStreamPlayer.stream = sd
-				$AudioStreamPlayer.play()
+				$AudioStreamPlayer3D.stream = sd
+				$AudioStreamPlayer3D.play()
 				# toggle can shoot (to avoid spawning a bolt per cycle)
 				can_shoot=false
 

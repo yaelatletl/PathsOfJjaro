@@ -3,7 +3,7 @@
 extends Projectile
 
 # variables for position and speed
-
+var sound = "res://assets/sounds/M1/Fusion_Pistol_hit.wav"
 
 func setup(wieldee):
 	wielder = wieldee
@@ -26,27 +26,28 @@ func _ready():
 	
 
 # when the hitbox collides with something:
-func _on_Area_body_entered(body):
-
+func collision( body = null):
+	
 	# if its a character or object (wall, etc)
-	if body is StaticBody or body is RigidBody or body is KinematicBody:
+	# so long as the object is NOT the bolt itself (since the bolt is a rigid body)
+	if body == wielder:
+		return
+	if body == null:
+		print("IS NULL")
+		pass
+	elif body.has_method("hit"):
+		body.hit(damage)
 		
-		# so long as the object is NOT the bolt itself (since the bolt is a rigid body)
-		if body == wielder:
-			pass	
-		else:
-			# have some effect (right now it just queues free.
-			get_parent().emit_signal("sound_emitted", translation, 1)
-			$AudioStreamPlayer.play()
-			yield($AudioStreamPlayer, "finished")
-			queue_free()
-			
-
-		if body.has_method("hit"):
-			body.hit(damage)
-			get_parent().emit_signal("sound_emitted", translation, 1)
-			$Area/AudioStreamPlayer.play()
-			yield($Area/AudioStreamPlayer, "finished")
-			queue_free()
-
+		
+	get_parent().add_child(AutoSound3D.new(sound, translation))
+	queue_free()
+	
+func _on_Area_body_entered(body):
+	collision(body)
+		
+func _physics_process(delta):
+	if $RayCast.is_colliding() or $RayCast2.is_colliding() or $RayCast3.is_colliding():
+		print("HIT")
+		collision(null)
+	
 

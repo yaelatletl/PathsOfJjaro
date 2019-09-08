@@ -1,7 +1,6 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://weapons/fusion_bolt.gd" type="Script" id=1]
-[ext_resource path="res://assets/sounds/M1/Fusion_Pistol_hit.wav" type="AudioStream" id=2]
 
 [sub_resource type="SpatialMaterial" id=1]
 roughness = 0.0
@@ -17,7 +16,7 @@ radius = 0.5
 height = 1.0
 
 [sub_resource type="SphereShape" id=3]
-radius = 0.646266
+radius = 0.4
 
 [sub_resource type="Curve" id=4]
 _data = [ Vector2( 0, 0 ), 0.0, 2.16567, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
@@ -26,6 +25,7 @@ _data = [ Vector2( 0, 0 ), 0.0, 2.16567, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
 curve = SubResource( 4 )
 
 [sub_resource type="ParticlesMaterial" id=6]
+trail_divisor = 3
 spread = 180.0
 gravity = Vector3( 0, 0, 0 )
 initial_velocity = 1.0
@@ -65,17 +65,29 @@ input_ray_pickable = false
 [node name="CollisionShape" type="CollisionShape" parent="Area"]
 shape = SubResource( 3 )
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Area"]
-stream = ExtResource( 2 )
-
 [node name="OmniLight" type="OmniLight" parent="."]
 light_color = Color( 0.819892, 0.974672, 1, 1 )
 
 [node name="Particles" type="Particles" parent="."]
 amount = 10
 lifetime = 0.3
+speed_scale = 0.5
+explosiveness = 0.21
+randomness = 0.69
 visibility_aabb = AABB( -4, -4, -5.13486, 8, 8, 10.2697 )
 local_coords = false
 process_material = SubResource( 6 )
 draw_pass_1 = SubResource( 8 )
+
+[node name="RayCast" type="RayCast" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.160702, 0, -0.00068295 )
+cast_to = Vector3( 0.5, 0, 0 )
+
+[node name="RayCast2" type="RayCast" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00652197, 0, -0.242594 )
+cast_to = Vector3( 0, 0, 0.5 )
+
+[node name="RayCast3" type="RayCast" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.278525, 0 )
+cast_to = Vector3( 0, 0.5, 0 )
 [connection signal="body_entered" from="Area" to="." method="_on_Area_body_entered"]
