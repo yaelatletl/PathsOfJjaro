@@ -20,7 +20,7 @@ func _ready():
 	var dir = get_global_transform().basis*Vector3(0,0,-1).normalized()
 
 	# exert impulse on bolt to propel it.
-	set_linear_velocity(Vector3(dir * speed))
+	
 	apply_impulse(Vector3(),dir * speed )
 
 

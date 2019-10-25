@@ -31,6 +31,7 @@ void fragment() {
 	vec2 base_uv = UV;
 	vec4 albedo_tex = texture(texture_albedo,base_uv);
 	ALBEDO = albedo.rgb * albedo_tex.rgb;
+	EMISSION = ALBEDO;
 	float metallic_tex = dot(texture(texture_metallic,base_uv),metallic_texture_channel);
 	METALLIC = metallic_tex * metallic;
 	float roughness_tex = dot(texture(texture_roughness,base_uv),roughness_texture_channel);

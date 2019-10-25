@@ -1,6 +1,6 @@
 # This script determines the behaviour of the fusion bolt (not supercharge)
 extends RigidBody
-var explosion = preload("res://Basics/Guns/explosion.tscn")
+var explosion = preload("res://Joyeuse/Basics/Guns/explosion.tscn")
 # variables for position and speed
 var pos
 export var speed = 10
@@ -20,7 +20,7 @@ func _ready():
 	var dir = get_global_transform().basis*Vector3(0,0,-1).normalized()
 
 	# exert impulse on bolt to propel it.
-	set_linear_velocity(dir * speed)
+	#set_linear_velocity(dir * speed)
 	apply_impulse(Vector3(),dir * speed )
 
 

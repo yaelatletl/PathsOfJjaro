@@ -1,9 +1,10 @@
 [gd_scene load_steps=10 format=2]
 
-[ext_resource path="res://assets/weapons/Staff.gd" type="Script" id=1]
-[ext_resource path="res://BaseGD/Bullets/EnergyBullet.tscn" type="PackedScene" id=2]
-[ext_resource path="res://assets/weapons/Staff.obj" type="ArrayMesh" id=3]
-[ext_resource path="res://assets/water_normal_2.png" type="Texture" id=4]
+[ext_resource path="res://weapons/Staff.gd" type="Script" id=1]
+[ext_resource path="res://assets/Bullets/EnergyBullet.tscn" type="PackedScene" id=2]
+[ext_resource path="res://weapons/Staff.obj" type="ArrayMesh" id=3]
+[ext_resource path="res://assets/store/maujoe.basic_water_material/textures/water_normal_2.png" type="Texture" id=4]
+
 
 
 

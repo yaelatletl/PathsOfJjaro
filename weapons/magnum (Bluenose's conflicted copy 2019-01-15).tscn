@@ -1,10 +1,11 @@
 [gd_scene load_steps=20 format=2]
 
-[ext_resource path="res://assets/weapons/magnum.gd" type="Script" id=1]
-[ext_resource path="res://Basics/Guns/squib.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Material_002.material" type="Material" id=3]
+[ext_resource path="res://weapons/magnum.gd" type="Script" id=1]
+[ext_resource path="res://Joyeuse/Basics/Guns/squib.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scenes/Material_002.material" type="Material" id=3]
 [ext_resource path="res://assets/magnum/magnum.tres" type="Material" id=4]
-[ext_resource path="res://Material_001.material" type="Material" id=5]
+[ext_resource path="res://assets/Scenario/Objects/Material_001.material" type="Material" id=5]
+
 
 
 [sub_resource type="ArrayMesh" id=1]

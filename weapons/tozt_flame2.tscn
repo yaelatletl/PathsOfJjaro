@@ -63,7 +63,7 @@ transmission = Color( 0.74902, 0, 0, 1 )
 material = SubResource( 8 )
 
 [node name="Particles" type="Particles"]
-transform = Transform( -1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, 0 )
+transform = Transform( -1, 0, 8.74228e-008, 0, 1, 0, -8.74228e-008, 0, -1, 0, 0, 0 )
 emitting = false
 amount = 59
 visibility_aabb = AABB( -1.88233, -1.08616, -1.50091, 3.76466, 2.17233, 3.00181 )
@@ -74,7 +74,7 @@ draw_pass_1 = SubResource( 7 )
 draw_pass_2 = SubResource( 9 )
 
 [node name="OmniLight" type="OmniLight" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.24454e-07, -0.863611, 4.85518 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.24454e-007, -0.863611, 4.85518 )
 light_specular = 0.63
 shadow_enabled = true
 omni_range = 4.19738

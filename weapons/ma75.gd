@@ -1,7 +1,7 @@
 extends Weapon
 
-export(PackedScene) var Projectile = preload("res://assets/weapons/grenade.tscn")
-export(PackedScene) var squib = preload("res://Basics/Guns/squib.tscn")
+export(PackedScene) var Projectile = preload("res://weapons/grenade.tscn")
+export(PackedScene) var squib = preload("res://Joyeuse/Basics/Guns/squib.tscn")
 
 export var spread = 20
 

@@ -4,7 +4,7 @@ extends Spatial
 # stores the kind of item it is (to be displayed perhaps?)
 var id = 1
 
-var item_object = preload("res://assets/weapons/ma75.tscn")
+var item_object = preload("res://weapons/magnum.tscn")
 
 # if something collides with the area
 func _on_Area_body_entered(body):
@@ -12,3 +12,4 @@ func _on_Area_body_entered(body):
 	if body.has_method("pick_up"):
 		if body.pick_up(item_object, "weapon", id):
 			queue_free()
+			

@@ -3,7 +3,7 @@ extends Spatial
 
 
 var id = 4
-var item_object = load("res://assets/weapons/tozt.tscn")
+var item_object = preload("res://weapons/tozt.tscn")
 
 # if something collides with the area
 func _on_Area_body_entered(body):

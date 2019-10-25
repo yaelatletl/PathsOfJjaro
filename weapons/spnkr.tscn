@@ -1,9 +1,10 @@
 [gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://assets/weapons/spnkr.gd" type="Script" id=1]
-[ext_resource path="res://assets/weapons/spnkr_missile.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Basics/Guns/squib.tscn" type="PackedScene" id=3]
+[ext_resource path="res://weapons/spnkr.gd" type="Script" id=1]
+[ext_resource path="res://weapons/spnkr_missile.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Joyeuse/Basics/Guns/squib.tscn" type="PackedScene" id=3]
 [ext_resource path="res://assets/PoJ_SPNKR_Rocket_01.obj" type="ArrayMesh" id=4]
+
 
 
 [sub_resource type="CubeMesh" id=1]

@@ -24,15 +24,20 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Joyeuse/Basics/Characters/Character.gd"
 }, {
+"base": "Area",
+"class": "GravityArea",
+"language": "GDScript",
+"path": "res://Joyeuse/Basics/Physics/GravityArea.gd"
+}, {
+"base": "Path",
+"class": "NavigationPath",
+"language": "GDScript",
+"path": "res://Joyeuse/Basics/Navigation/Navmesh_Path.gd"
+}, {
 "base": "Position3D",
 "class": "NavigationWaypoint",
 "language": "GDScript",
 "path": "res://Joyeuse/Basics/Navigation/Navigation_Waypoint.gd"
-}, {
-"base": "Path",
-"class": "Navigation_Path",
-"language": "GDScript",
-"path": "res://Joyeuse/Basics/Navigation/Navmesh_Path.gd"
 }, {
 "base": "Character",
 "class": "Player",
@@ -67,14 +72,15 @@ _global_script_classes=[ {
 "base": "Navigation",
 "class": "World_Navigator",
 "language": "GDScript",
-"path": "res://Joyeuse/addons/WorldManagement/WorldNavigation.gd"
+"path": "res://Joyeuse/Basics/Navigation/WorldNavigation.gd"
 } ]
 _global_script_class_icons={
 "AI_Character": "",
 "AutoSound3D": "",
 "Character": "",
+"GravityArea": "",
+"NavigationPath": "",
 "NavigationWaypoint": "",
-"Navigation_Path": "",
 "Player": "res://Joyeuse/icons/player.png",
 "Projectile": "",
 "RaycastWeapon": "",
@@ -88,7 +94,6 @@ _global_script_class_icons={
 
 config/name="Paths of Jjaro"
 run/main_scene="res://Recycling_plant.tscn"
-run/low_processor_mode=true
 config/icon="res://icon.png"
 
 [autoload]
@@ -113,7 +118,7 @@ convert_text_resources_to_binary_on_export=true
 
 [editor_plugins]
 
-enabled=PoolStringArray( "gamejolt_api_v2" )
+enabled=PoolStringArray( "Screen_Lens" )
 
 [env]
 

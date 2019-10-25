@@ -1,0 +1,25 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://assets/wep_models/Mega_Class/MegaClass_Final.mesh" type="ArrayMesh" id=1]
+
+[node name="MegaClass" type="Spatial"]
+
+[node name="MeshInstance" type="MeshInstance" parent="."]
+mesh = ExtResource( 1 )
+material/0 = null
+material/1 = null
+material/2 = null
+material/3 = null
+material/4 = null
+material/5 = null
+material/6 = null
+material/7 = null
+material/8 = null
+material/9 = null
+material/10 = null
+
+[node name="Camera" type="Camera" parent="."]
+transform = Transform( -0.196184, 0, -0.980567, 0, 1, 0, 0.980567, 0, -0.196184, -2.89471, 0, 0.218999 )
+
+[node name="Camera2" type="Camera" parent="."]
+transform = Transform( -0.996195, 0, 0.0871558, 0.0499905, 0.819152, 0.571394, -0.0713939, 0.573576, -0.816035, -0.0176172, 1.66303, -3.12029 )

@@ -1,5 +1,5 @@
 extends RaycastWeapon
-export(PackedScene) var squib = preload("res://Basics/Guns/squib.tscn")
+export(PackedScene) var squib = preload("res://Joyeuse/Basics/Guns/squib.tscn")
 
 export var spread = 2
 

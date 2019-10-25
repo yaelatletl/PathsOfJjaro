@@ -1,9 +1,10 @@
 [gd_scene load_steps=14 format=2]
 
-[ext_resource path="res://Basics/Guns/projectile.gd" type="Script" id=1]
-[ext_resource path="res://Basics/Guns/large_explosion.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Basics/Guns/explosion.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Joyeuse/Basics/Guns/projectile.gd" type="Script" id=1]
+[ext_resource path="res://Joyeuse/Basics/Guns/large_explosion.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Joyeuse/Basics/Guns/explosion.tscn" type="PackedScene" id=3]
 [ext_resource path="res://assets/PoJ_SPNKR_Rocket_01.obj" type="ArrayMesh" id=4]
+
 
 
 [sub_resource type="SpatialMaterial" id=3]
