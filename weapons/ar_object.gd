@@ -4,7 +4,7 @@ extends Spatial
 # stores the kind of item it is (to be displayed perhaps?)
 var id = 1
 
-var item_object = preload("res://weapons/magnum.tscn")
+var item_object = preload("res://weapons/ma75.tscn")
 
 # if something collides with the area
 func _on_Area_body_entered(body):
