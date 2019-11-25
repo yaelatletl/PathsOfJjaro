@@ -2,7 +2,7 @@
 extends Spatial
 
 # stores the kind of item it is (to be displayed perhaps?)
-var id = 1
+var id = 2
 
 var item_object = preload("res://weapons/ma75.tscn")
 

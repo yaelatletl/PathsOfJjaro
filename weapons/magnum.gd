@@ -2,11 +2,14 @@ extends RaycastWeapon
 export(PackedScene) var squib = preload("res://Joyeuse/Basics/Guns/squib.tscn")
 
 export var spread = 2
-
+onready var AISHS = get_tree().get_root().get_node("World/AI_SH_SYSTEM")
+const sound1 = "res://assets/sounds/M1/Mega45_fire.wav"
+const sound3 = "res://assets/sounds/M1/Ricochet_random.tres"
 
 
 func _ready():
 	$AnimationPlayer.play("standard")
+	id = 1
 	identity = ".45 Magnum Mega Class"
 	in_magazine = 8
 	in_secondary_magazine = 8
@@ -37,7 +40,7 @@ func primary_fire():
 			# if a collision occurs
 			if hit:
 				# if the object is a static or kinematic body
-				if hit is StaticBody or hit is KinematicBody:
+				if not hit is Area:
 
 					# load a squib (a spark or flash to show impact) and place it at the impact point
 					var squibpoint = $aperture/RayCast.get_collision_point()
@@ -47,6 +50,8 @@ func primary_fire():
 					squibpos.origin = squibpoint
 					thissquib.set_global_transform(squibpos)
 					hit.owner.add_child(thissquib)
+					AISHS.add_child(AutoSound3D.new(sound3, squibpoint)) 
+					get_parent().add_child(AutoSound3D.new(sound1, translation)) 
 
 			# weapon set not chambered, start timer for cooldown.
 			$AnimationPlayer.play("fire")

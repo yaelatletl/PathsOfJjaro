@@ -4,14 +4,15 @@ export(PackedScene) var Projectile = preload("res://weapons/grenade.tscn")
 export(PackedScene) var squib = preload("res://Joyeuse/Basics/Guns/squib.tscn")
 
 export var spread = 20
-
-var sound1 = "res://assets/sounds/M1/MA75B_fire_random.res"
-var sound2 = "res://assets/sounds/M1/MA75B_launch.wav"
+onready var AISHS = get_tree().get_root().get_node("World/AI_SH_SYSTEM")
+const sound1 = "res://assets/sounds/M1/MA75B_fire_random.res"
+const sound2 = "res://assets/sounds/M1/MA75B_launch.wav"
+const sound3 = "res://assets/sounds/M1/Ricochet_random.tres"
 
 
 func _ready():
 	identity = "M.75 Assault Rifle/Grenade Launcher"
-	id = 1
+	id = 2
 	in_magazine = 52
 	in_secondary_magazine = 7
 	primary_magazine_size = 52
@@ -46,6 +47,7 @@ func primary_fire():
 					var squibpos = thissquib.get_global_transform()
 					squibpos.origin = squibpoint
 					thissquib.set_global_transform(squibpos)
+					AISHS.add_child(AutoSound3D.new(sound3, squibpoint)) 
 					hit.owner.add_child(thissquib)
 
 			# weapon set not chambered, start timer for cooldown.
@@ -57,7 +59,7 @@ func secondary_fire():
 		if ammo_check_secondary():
 			# load a bolt as an instance
 			var bolt = Projectile.instance()
-			get_parent().add_child(AutoSound3D.new(sound2, translation))
+			AISHS.add_child(AutoSound3D.new(sound2, translation))
 			bolt.setup(wielder)
 			# add the bolt to the aperture of the fusion pistol
 			#$aperture.add_child(bolt)
