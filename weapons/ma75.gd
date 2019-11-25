@@ -5,9 +5,13 @@ export(PackedScene) var squib = preload("res://Joyeuse/Basics/Guns/squib.tscn")
 
 export var spread = 20
 
+var sound1 = "res://assets/sounds/M1/MA75B_fire_random.res"
+var sound2 = "res://assets/sounds/M1/MA75B_launch.wav"
+
 
 func _ready():
 	identity = "M.75 Assault Rifle/Grenade Launcher"
+	id = 1
 	in_magazine = 52
 	in_secondary_magazine = 7
 	primary_magazine_size = 52
@@ -25,6 +29,7 @@ func primary_fire():
 			
 			# adjust ray for random spread
 			randomshoot()
+			get_parent().add_child(AutoSound3D.new(sound1, translation)) 
 			
 			# check for collisions
 			var hit = $aperture/RayCast.get_collider()
@@ -33,8 +38,7 @@ func primary_fire():
 			if hit:
 				
 				# if the object is a static or kinematic body
-				if hit is StaticBody or hit is KinematicBody:
-					
+				if not hit is Area:
 					# load a squib (a spark or flash to show impact) and place it at the impact point
 					var squibpoint = $aperture/RayCast.get_collision_point()
 					var thissquib = squib.instance()
@@ -51,18 +55,19 @@ func primary_fire():
 func secondary_fire():
 	if can_shoot_secondary:
 		if ammo_check_secondary():
-				# load a bolt as an instance
-				var bolt = Projectile.instance()
-				bolt.setup(wielder)
-				# add the bolt to the aperture of the fusion pistol
-				#$aperture.add_child(bolt)
-				bolt.set_global_transform($grenade.get_global_transform())
-				get_node("/root").add_child(bolt)
-				# toggle can shoot (to avoid spawning a bolt per cycle)
-				can_shoot_secondary = false
-				
-				# trigger the cool down timer.
-				$grenade_timer.start()
+			# load a bolt as an instance
+			var bolt = Projectile.instance()
+			get_parent().add_child(AutoSound3D.new(sound2, translation))
+			bolt.setup(wielder)
+			# add the bolt to the aperture of the fusion pistol
+			#$aperture.add_child(bolt)
+			bolt.set_global_transform($grenade.get_global_transform())
+			get_node("/root").add_child(bolt)
+			# toggle can shoot (to avoid spawning a bolt per cycle)
+			can_shoot_secondary = false
+			
+			# trigger the cool down timer.
+			$grenade_timer.start()
 	
 func _on_chamber_timer_timeout():
 	can_shoot = true

@@ -33,7 +33,6 @@ func collision( body = null):
 	if body == wielder:
 		return
 	if body == null:
-		print("IS NULL")
 		pass
 	elif body.has_method("hit"):
 		body.hit(damage)
@@ -47,7 +46,6 @@ func _on_Area_body_entered(body):
 		
 func _physics_process(delta):
 	if $RayCast.is_colliding() or $RayCast2.is_colliding() or $RayCast3.is_colliding():
-		print("HIT")
 		collision(null)
 	
 

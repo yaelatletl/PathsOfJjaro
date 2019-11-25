@@ -16,10 +16,10 @@ script = ExtResource( 1 )
 sd = ExtResource( 2 )
 
 [node name="Scene Root" parent="." instance=ExtResource( 3 )]
-transform = Transform( -0.230003, 0, -2.01075e-008, 0, 0.230003, 0, 2.01075e-008, 0, -0.230003, 0, -0.284804, -0.616454 )
+transform = Transform( -0.230003, 0, -2.01075e-08, 0, 0.230003, 0, 2.01075e-08, 0, -0.230003, 0, -0.284804, -0.616454 )
 
 [node name="pCylinder12" type="MeshInstance" parent="."]
-transform = Transform( -0.198527, -1.73558e-008, 7.58646e-016, 0, -8.6779e-009, -0.198527, 1.73558e-008, -0.198527, 8.6779e-009, 0.00100301, 0.118371, -0.445435 )
+transform = Transform( -0.198527, -1.73558e-08, 7.58646e-16, 0, -8.6779e-09, -0.198527, 1.73558e-08, -0.198527, 8.6779e-09, 0.00100301, 0.118371, -0.445435 )
 visible = false
 use_in_baked_light = true
 mesh = SubResource( 2 )
@@ -43,7 +43,7 @@ one_shot = true
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.390083 )
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
-[connection signal="timeout" from="overload" to="." method="_on_overload_timeout"]
 [connection signal="timeout" from="overload" to="." method="_on_Timer_timeout"]
-[connection signal="timeout" from="charge" to="." method="_on_charge_timeout"]
+[connection signal="timeout" from="overload" to="." method="_on_overload_timeout"]
 [connection signal="timeout" from="charge" to="." method="_on_Timer_timeout"]
+[connection signal="timeout" from="charge" to="." method="_on_charge_timeout"]

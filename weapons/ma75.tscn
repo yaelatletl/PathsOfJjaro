@@ -19,11 +19,12 @@ surfaces/0 = {
 }
 
 [node name="ma75" type="Spatial"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0 )
 script = ExtResource( 1 )
 spread = 12
 
 [node name="Low_Poly" type="MeshInstance" parent="."]
-transform = Transform( -0.110092, 0, -9.62451e-009, 0, 0.110092, 0, 9.62451e-009, 0, -0.110092, 0, 0.0187369, -0.0456478 )
+transform = Transform( -0.110092, 0, -9.62451e-09, 0, 0.110092, 0, 9.62451e-09, 0, -0.110092, 0, 0.0187369, -0.0456478 )
 use_in_baked_light = true
 mesh = SubResource( 1 )
 material/0 = ExtResource( 2 )
@@ -43,6 +44,6 @@ one_shot = true
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0698099, -0.00887543, -0.636671 )
 
 [node name="grenade_timer" type="Timer" parent="."]
-[connection signal="timeout" from="chamber_timer" to="." method="_on_chamber_timer_timeout"]
 [connection signal="timeout" from="chamber_timer" to="." method="_on_Timer_timeout"]
+[connection signal="timeout" from="chamber_timer" to="." method="_on_chamber_timer_timeout"]
 [connection signal="timeout" from="grenade_timer" to="." method="_on_grenade_timer_timeout"]
