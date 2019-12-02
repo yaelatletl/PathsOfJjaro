@@ -59,7 +59,7 @@ func secondary_fire():
 		if ammo_check_secondary():
 			# load a bolt as an instance
 			var bolt = Projectile.instance()
-			AISHS.add_child(AutoSound3D.new(sound2, translation))
+			get_parent().add_child(AutoSound3D.new(sound2, translation))
 			bolt.setup(wielder)
 			# add the bolt to the aperture of the fusion pistol
 			#$aperture.add_child(bolt)
