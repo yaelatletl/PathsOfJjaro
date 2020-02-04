@@ -14,7 +14,6 @@ func _ready():
 	in_magazine = 100
 	primary_magazine_size = 100
 	primary_ammo_id = 3
-	id = 3
 # when primary fire is called
 func primary_fire():
 	

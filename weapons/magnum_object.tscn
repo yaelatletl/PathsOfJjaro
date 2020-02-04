@@ -1,8 +1,7 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://weapons/magnum_object.gd" type="Script" id=1]
-[ext_resource path="res://assets/wep_models/Mega_Class/Glass.tres" type="Material" id=2]
-[ext_resource path="res://assets/wep_models/Mega_Class/magnum.tres" type="Material" id=3]
+
 
 [sub_resource type="ArrayMesh" id=1]
 resource_name = "Circle"
@@ -187,77 +186,66 @@ transform = Transform( -0.137345, 0, -1.20071e-08, 0, 0.137345, 0, 1.20071e-08, 
 
 [node name="Circle" type="MeshInstance" parent="Scene Root"]
 transform = Transform( 0.13278, 0, 0, 0, 1.00246e-08, -0.13278, 0, 0.13278, 1.00246e-08, 0, 1.0212, -0.602412 )
-material_override = ExtResource( 2 )
 use_in_baked_light = true
 mesh = SubResource( 1 )
 material/0 = null
 
 [node name="group1 pCube15" type="MeshInstance" parent="Scene Root"]
 transform = Transform( 1, 0, -1.69407e-21, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0, 0 )
-material_override = ExtResource( 3 )
 use_in_baked_light = true
 mesh = SubResource( 2 )
 material/0 = null
 
 [node name="group2 pCube16" type="MeshInstance" parent="Scene Root"]
 transform = Transform( 1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0, 0 )
-material_override = ExtResource( 3 )
 use_in_baked_light = true
 mesh = SubResource( 3 )
 material/0 = null
 
 [node name="pCube20" type="MeshInstance" parent="Scene Root"]
 transform = Transform( 1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0, 0 )
-material_override = ExtResource( 3 )
 use_in_baked_light = true
 mesh = SubResource( 4 )
 material/0 = null
 
 [node name="pCube22" type="MeshInstance" parent="Scene Root"]
 transform = Transform( 1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0, 0 )
-material_override = ExtResource( 3 )
 use_in_baked_light = true
 mesh = SubResource( 5 )
 material/0 = null
 
 [node name="pCube8" type="MeshInstance" parent="Scene Root"]
 transform = Transform( 1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0, 0 )
-material_override = ExtResource( 3 )
 use_in_baked_light = true
 mesh = SubResource( 6 )
 material/0 = null
 
 [node name="pCube9" type="MeshInstance" parent="Scene Root"]
 transform = Transform( 1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0, 0 )
-material_override = ExtResource( 3 )
 use_in_baked_light = true
 mesh = SubResource( 7 )
 material/0 = null
 
 [node name="pCylinder2" type="MeshInstance" parent="Scene Root"]
 transform = Transform( 1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0, 0 )
-material_override = ExtResource( 3 )
 use_in_baked_light = true
 mesh = SubResource( 8 )
 material/0 = null
 
 [node name="polySurface10" type="MeshInstance" parent="Scene Root"]
 transform = Transform( 1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0, 0 )
-material_override = ExtResource( 3 )
 use_in_baked_light = true
 mesh = SubResource( 9 )
 material/0 = null
 
 [node name="polySurface4" type="MeshInstance" parent="Scene Root"]
 transform = Transform( 1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0, 0 )
-material_override = ExtResource( 3 )
 use_in_baked_light = true
 mesh = SubResource( 10 )
 material/0 = null
 
 [node name="polySurface7" type="MeshInstance" parent="Scene Root"]
 transform = Transform( 1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0, 0 )
-material_override = ExtResource( 3 )
 use_in_baked_light = true
 mesh = SubResource( 11 )
 material/0 = null
