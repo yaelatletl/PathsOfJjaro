@@ -2,12 +2,12 @@
 extends Spatial
 
 
-var id = 0
+var id = 1
 var item_object = preload("res://weapons/magnum.tscn")
 
 # if something collides with the area
 func _on_Area_body_entered(body):
 	# check to see if that object has a method called "pick_up"
 	if body.has_method("pick_up"):
-		if body.pick_up(item_object, "weapon", id):
+		if body.pick_up(item_object, "weapon", id, true):
 			queue_free()

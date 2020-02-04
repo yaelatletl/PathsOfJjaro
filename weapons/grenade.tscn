@@ -24,7 +24,7 @@ emission_on_uv2 = false
 material = SubResource( 3 )
 
 [sub_resource type="SphereShape" id=5]
-radius = 0.646266
+radius = 2.5
 
 [node name="fusion_bolt" type="RigidBody"]
 gravity_scale = 0.8
@@ -54,4 +54,16 @@ light_energy = 0.75
 omni_range = 1.81281
 
 [node name="launch_timer" type="Timer" parent="."]
+
+[node name="RayCast" type="RayCast" parent="."]
+enabled = true
+cast_to = Vector3( 0, 0, 0.2 )
+
+[node name="RayCast2" type="RayCast" parent="."]
+enabled = true
+cast_to = Vector3( 0.2, 0, 0 )
+
+[node name="RayCast3" type="RayCast" parent="."]
+enabled = true
+cast_to = Vector3( 0, 0.2, 0 )
 [connection signal="body_entered" from="Area" to="." method="_on_Area_body_entered"]

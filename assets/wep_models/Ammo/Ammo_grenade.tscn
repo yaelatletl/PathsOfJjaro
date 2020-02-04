@@ -2,7 +2,7 @@
 
 [ext_resource path="res://assets/Scenario/Objects/Material_001.material" type="Material" id=1]
 
-[sub_resource type="ArrayMesh" id=12]
+[sub_resource type="ArrayMesh" id=1]
 resource_name = "Cube.070"
 surfaces/0 = {
 "aabb": AABB( -0.510336, -0.623028, -0.534593, 1.05911, 0.94095, 1.06919 ),
@@ -18,19 +18,18 @@ surfaces/0 = {
 "vertex_count": 987
 }
 
-[sub_resource type="CylinderShape" id=13]
-radius = 0.524672
-height = 0.934044
+[sub_resource type="CylinderShape" id=2]
+radius = 0.284559
+height = 0.462146
 
 [node name="Ammo_grenade" type="RigidBody"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2 )
 mass = 0.108163
 
 [node name="Cube056" type="MeshInstance" parent="."]
-mesh = SubResource( 12 )
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0 )
+mesh = SubResource( 1 )
 material/0 = null
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.158118, 0 )
-shape = SubResource( 13 )
-
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0779749, 0 )
+shape = SubResource( 2 )

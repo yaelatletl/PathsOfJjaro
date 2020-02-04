@@ -51,12 +51,12 @@ surfaces/0 = {
 [node name="Scene Root" type="Spatial"]
 
 [node name="pCube18" type="MeshInstance" parent="."]
-transform = Transform( 1, 0, 0, 0, -1.62921e-007, -1, 0, 1, -1.62921e-007, -0.00927215, 1.93515, 0.651504 )
+transform = Transform( 1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, -0.00927215, 1.93515, 0.651504 )
 mesh = SubResource( 2 )
 material/0 = null
 
 [node name="pCylinder12" type="MeshInstance" parent="."]
-transform = Transform( 1, 0, 0, 0, -1.62921e-007, -1, 0, 1, -1.62921e-007, -0.000230429, 2.01352, -0.415109 )
+transform = Transform( 1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, -0.000230429, 2.01352, -0.415109 )
 mesh = SubResource( 3 )
 material/0 = null
 

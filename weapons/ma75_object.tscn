@@ -42,7 +42,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0310059, -0.341553 )
 shape = SubResource( 4 )
 
 [node name="Low_Poly" type="MeshInstance" parent="."]
-transform = Transform( -0.110092, 0, -1.66234e-008, 0, 0.110092, 0, 1.66234e-008, 0, -0.110092, 0, 0, 0 )
+transform = Transform( -0.110092, 0, -1.66234e-08, 0, 0.110092, 0, 1.66234e-08, 0, -0.110092, 0, 0, 0 )
 use_in_baked_light = true
 mesh = ExtResource( 2 )
 material/0 = ExtResource( 3 )
