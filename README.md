@@ -1,5 +1,5 @@
-# PathsOfJjro
-Paths of Jjro is a 3D game based on Bungie's Marathon, made by the community for the community. Open sourced.
+# Paths Of Jjaro
+Paths of Jjaro is a 3D game based on Bungie's Marathon, made by the community for the community. Open sourced.
 Made using Joyeuse Framework for Godot. The code itself is under MIT License. 
 
 As the game assets are based on the original assets, we must include the following licensing information, which is a modified version of the one AlephOne uses for the marathon data
@@ -12,17 +12,27 @@ This section will teach you how to write code and mantain the project:
 ## Cloning the project
 Currently the project is LFS enabled, so you will have to download Git-LFS. 
 This project also uses a modular apporach to handling code and repos, so you will have to clone the project like this:
+
 `git clone --recursive -j4 git://github.com/RiseRobotRise/PathsOfJjaro.git`
+
 Avoid the -j4 flag if your bandwidth is low. 
 
-Once the game is cloned you must change your branch to the development branch "3.1"
+Once the game is cloned you must change your branch to the development branch "3.1".
 
 ## How the project is structured
 As the game is made in the Godot Engine, we will refer to the root directory as `res://`
 Now you should see the Joyeuse submodule under `res://joyeuse`, the code there corresponds to https://github.com/RiseRobotRise/JoyeuseCodeBase
+
 The codebase contains different classes and subsystems. Heavier development will occur here, with the only content going directly to Paths of Jjaro repo being the quite specific one. 
 
-You should also find another submodule at `res://assets/Characters` that can be found at https://github.com/RiseRobotRise/Characters there are stored the characters for the game as both 3d models that you can import with any editor as well as their in-engine implementations. 
+You should also find another submodule at `res://assets/Characters` that can be found at https://github.com/RiseRobotRise/Characters 
+There, the characters for the game, as both 3d models that you can import with any editor as well as their in-engine implementations, are stored. 
+
+## Opening the project
+
+To open the project, you will need Godot 3.1+ which you can find at https://godotengine.org/download/.
+
+After you open the editor you will notice an "Import" button, you will have to find the directory you cloned the project into and open the project.godot file. Then the main scene will load. 
 
 ## Other relevant projects
 
@@ -30,14 +40,17 @@ There are multiple other project under development to aid the community to creat
 
 ### Character Studio
 The character studio aims to provide easy to use tools to create complex behaviors and AI characters, as well as set their hitboxes, their ragdolls and sounds they may emmit, pack it all into one single file and get re-distributed easily. 
+
 You can find the project here: https://github.com/RiseRobotRise/CharacterStudio
  
-## World Shaper
+### World Shaper
 This is a level editor with a layered approach, so you can easily use the multiple ways that Godot allows for creating game levels. Qodot support is planned. 
+
 The project can be found at: https://github.com/RiseRobotRise/WorldShaper
 
-## Universal Godot Controller
+### Universal Godot Controller
 This is an utility pluggin for any godot game, that allows Couch-gaming with a single PC and multiple android devices. 
+
  https://github.com/RiseRobotRise/UniversalGodotController
 
 # Marathon game content non-license
