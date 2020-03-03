@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/oldpacific.ogg-0271462894ac2f7c7b2ee5073b6552b5.oggstr"
+
+[deps]
+
+source_file="res://assets/sounds/Music/oldpacific.ogg"
+dest_files=[ "res://.import/oldpacific.ogg-0271462894ac2f7c7b2ee5073b6552b5.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

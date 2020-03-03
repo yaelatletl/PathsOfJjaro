@@ -1,0 +1,19 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/PoJ_SPNKR_Rocket_01.obj-219a7fc3278a3356f2f9082f4025a24d.mesh"
+
+[deps]
+
+files=[ "res://.import/PoJ_SPNKR_Rocket_01.obj-219a7fc3278a3356f2f9082f4025a24d.mesh" ]
+
+source_file="res://assets/PoJ_SPNKR_Rocket_01.obj"
+dest_files=[ "res://.import/PoJ_SPNKR_Rocket_01.obj-219a7fc3278a3356f2f9082f4025a24d.mesh", "res://.import/PoJ_SPNKR_Rocket_01.obj-219a7fc3278a3356f2f9082f4025a24d.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+optimize_mesh=true

@@ -1,0 +1,19 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/MIssile.obj-69e96284caaf4b1e29f38ae803d9ff44.mesh"
+
+[deps]
+
+files=[ "res://.import/MIssile.obj-69e96284caaf4b1e29f38ae803d9ff44.mesh" ]
+
+source_file="res://assets/Scenario/Objects/MIssile.obj"
+dest_files=[ "res://.import/MIssile.obj-69e96284caaf4b1e29f38ae803d9ff44.mesh", "res://.import/MIssile.obj-69e96284caaf4b1e29f38ae803d9ff44.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+optimize_mesh=true

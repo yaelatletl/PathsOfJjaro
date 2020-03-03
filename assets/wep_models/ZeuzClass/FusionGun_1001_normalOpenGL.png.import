@@ -1,0 +1,36 @@
+[remap]
+
+importer="texture"
+type="StreamTexture"
+path.s3tc="res://.import/FusionGun_1001_normalOpenGL.png-e7d9122f06bb1f53d48905594b1718aa.s3tc.stex"
+path.etc2="res://.import/FusionGun_1001_normalOpenGL.png-e7d9122f06bb1f53d48905594b1718aa.etc2.stex"
+metadata={
+"imported_formats": [ "s3tc", "etc2" ],
+"vram_texture": true
+}
+
+[deps]
+
+source_file="res://assets/wep_models/ZeuzClass/FusionGun_1001_normalOpenGL.png"
+dest_files=[ "res://.import/FusionGun_1001_normalOpenGL.png-e7d9122f06bb1f53d48905594b1718aa.s3tc.stex", "res://.import/FusionGun_1001_normalOpenGL.png-e7d9122f06bb1f53d48905594b1718aa.etc2.stex" ]
+
+[params]
+
+compress/mode=2
+compress/lossy_quality=0.7
+compress/hdr_mode=0
+compress/bptc_ldr=0
+compress/normal_map=1
+flags/repeat=true
+flags/filter=true
+flags/mipmaps=true
+flags/anisotropic=false
+flags/srgb=2
+process/fix_alpha_border=true
+process/premult_alpha=false
+process/HDR_as_SRGB=false
+process/invert_color=false
+stream=false
+size_limit=0
+detect_3d=false
+svg/scale=1.0
