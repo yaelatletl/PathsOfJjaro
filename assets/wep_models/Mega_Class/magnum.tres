@@ -1,8 +1,9 @@
 [gd_resource type="SpatialMaterial" load_steps=4 format=2]
 
 [ext_resource path="res://assets/wep_models/Mega_Class/Textures/4096/Mega Class_1001_baseColor.png" type="Texture" id=1]
-[ext_resource path="res://assets/wep_models/Mega_Class/Optimized.png" type="Texture" id=2]
+[ext_resource path="res://assets/wep_models/Mega_Class/Textures/4096/Optimized.png" type="Texture" id=2]
 [ext_resource path="res://assets/wep_models/Mega_Class/Textures/4096/Mega Class_1001_Normal_OGL.png" type="Texture" id=4]
+
 
 [resource]
 albedo_color = Color( 0.640625, 0.640625, 0.640625, 1 )
