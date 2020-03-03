@@ -1,0 +1,16 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+
+[deps]
+
+files=[ "res://MiscRes/Terminals/M1.en.translation", "res://MiscRes/Terminals/M1.es.translation" ]
+
+source_file="res://MiscRes/Terminals/M1.csv"
+dest_files=[ "res://MiscRes/Terminals/M1.en.translation", "res://MiscRes/Terminals/M1.es.translation" ]
+
+[params]
+
+compress=true
+delimiter=0

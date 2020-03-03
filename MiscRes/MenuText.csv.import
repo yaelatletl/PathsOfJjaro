@@ -1,0 +1,16 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+
+[deps]
+
+files=[ "res://MiscRes/MenuText.en.translation", "res://MiscRes/MenuText.es.translation" ]
+
+source_file="res://MiscRes/MenuText.csv"
+dest_files=[ "res://MiscRes/MenuText.en.translation", "res://MiscRes/MenuText.es.translation" ]
+
+[params]
+
+compress=true
+delimiter=0
