@@ -7,9 +7,6 @@
 
 export_presets.cfg
 
-*.md5
 
-*.import
-*.stex
-*.etc2*
-*.import
+
+.import/
