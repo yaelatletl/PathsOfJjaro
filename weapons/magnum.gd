@@ -11,10 +11,10 @@ func _ready():
 	$AnimationPlayer.play("standard")
 	id = 1
 	identity = ".45 Magnum Mega Class"
-	in_magazine = 8
-	in_secondary_magazine = 8
-	primary_magazine_size = 8
-	secondary_magazine_size = 8
+	primary_uses = 8
+	secondary_uses = 8
+	primary_initial_ammo = 8
+	secondary_initial_ammo = 8
 	primary_ammo_id = 0
 	secondary_ammo_id = 0
 

@@ -1,5 +1,5 @@
 # This script determines the behaviours of the fusion pistol weapon (not the item laying on the ground)
-extends Weapon
+extends JOYWeapon
 export(PackedScene) var Fusion_Bolt = preload("fusion_bolt.tscn")
 export(PackedScene) var Charged_Fusion_Bolt = preload("charged_fusion_bolt.tscn")
 export(AudioStream) var sd
@@ -11,8 +11,8 @@ func _process(delta):
 
 func _ready():
 	identity = "Zeus Class Fusion Pistol"
-	in_magazine = 100
-	primary_magazine_size = 100
+	primary_uses = 100
+	primary_initial_ammo = 100
 	primary_ammo_id = 3
 	id = 3
 # when primary fire is called

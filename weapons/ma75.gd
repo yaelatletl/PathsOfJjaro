@@ -1,4 +1,4 @@
-extends Weapon
+extends JOYWeapon
 
 export(PackedScene) var Projectile = preload("res://weapons/grenade.tscn")
 export(PackedScene) var squib = preload("res://Joyeuse/Basics/Guns/squib.tscn")
@@ -13,10 +13,10 @@ const sound3 = "res://assets/sounds/M1/Ricochet_random.tres"
 func _ready():
 	identity = "M.75 Assault Rifle/Grenade Launcher"
 	id = 2
-	in_magazine = 52
-	in_secondary_magazine = 7
-	primary_magazine_size = 52
-	secondary_magazine_size = 7
+	primary_uses = 52
+	secondary_uses = 7
+	primary_initial_ammo = 52
+	secondary_initial_ammo = 7
 	primary_ammo_id = 1
 	secondary_ammo_id = 2
 	
