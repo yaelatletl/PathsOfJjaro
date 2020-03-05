@@ -15,7 +15,6 @@ theme = ExtResource( 1 )
 script = ExtResource( 2 )
 
 [node name="Bkg" type="ColorRect" parent="."]
-editor/display_folded = true
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -94,6 +93,9 @@ margin_bottom = 61.0
 theme = ExtResource( 1 )
 custom_fonts/font = ExtResource( 3 )
 text = "Start New Game"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Play2" type="Button" parent="Main"]
 margin_left = 40.0
@@ -447,7 +449,6 @@ custom_fonts/font = ExtResource( 3 )
 text = "Cancel"
 
 [node name="Net_Host" type="Tabs" parent="."]
-editor/display_folded = true
 visible = false
 margin_right = 40.0
 margin_bottom = 21.0
@@ -496,6 +497,7 @@ disabled = true
 text = "Record Match"
 
 [node name="HTTPRequest" type="HTTPRequest" parent="."]
+[connection signal="pressed" from="Main/Play" to="." method="_on_Play_pressed"]
 [connection signal="pressed" from="Main/Play2" to="." method="_on_HostNet_pressed"]
 [connection signal="pressed" from="Main/Settings" to="." method="_on_Settings_pressed"]
 [connection signal="pressed" from="Controls/Cancel" to="." method="_on_Cancel_pressed"]
