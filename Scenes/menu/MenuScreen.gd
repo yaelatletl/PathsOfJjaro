@@ -44,3 +44,8 @@ func _on_HTTPRequest_request_completed(result, response_code, headers, body):
 		$Net_Host/IP.text = "Public IP: " + str(json)
 
 
+
+
+func _on_Play_pressed():
+	get_tree().change_scene("res://Recycling_plant.tscn")
+	pass # Replace with function body.

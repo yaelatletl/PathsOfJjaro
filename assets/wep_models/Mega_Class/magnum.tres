@@ -4,7 +4,6 @@
 [ext_resource path="res://assets/wep_models/Mega_Class/Textures/4096/Optimized.png" type="Texture" id=2]
 [ext_resource path="res://assets/wep_models/Mega_Class/Textures/4096/Mega Class_1001_Normal_OGL.png" type="Texture" id=4]
 
-
 [resource]
 albedo_color = Color( 0.640625, 0.640625, 0.640625, 1 )
 albedo_texture = ExtResource( 1 )

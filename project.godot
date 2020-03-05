@@ -22,7 +22,12 @@ _global_script_classes=[ {
 "base": "Position3D",
 "class": "BoneHandler",
 "language": "GDScript",
-"path": "res://Joyeuse/Basics/AutoIK/BoneHandler.gd"
+"path": "res://Joyeuse/Basics/AutoIK/HandlerCopy.gd"
+}, {
+"base": "BoneAttachment",
+"class": "Changer",
+"language": "GDScript",
+"path": "res://Joyeuse/Basics/AutoIK/Changer.gd"
 }, {
 "base": "Node",
 "class": "Decoder",
@@ -263,6 +268,7 @@ _global_script_class_icons={
 "AutoIK": "",
 "AutoSound3D": "",
 "BoneHandler": "",
+"Changer": "",
 "Decoder": "",
 "GSAIAgentLocation": "",
 "GSAIArrive": "",
@@ -318,10 +324,6 @@ config/name="Paths of Jjaro"
 run/main_scene="res://Recycling_plant.tscn"
 run/low_processor_mode=true
 config/icon="res://icon.png"
-
-[autoload]
-
-RAD="*res://Helpers.gd"
 
 [debug]
 
@@ -424,11 +426,14 @@ prev_weapon={
 
 [layer_names]
 
-3d_render/layer_1="3rd_person_models"
+3d_render/layer_1="Scenario"
 3d_physics/layer_1="Structure"
 3d_render/layer_2="1st_person_models"
 3d_physics/layer_2="Ragdoll"
+3d_render/layer_3="3rd_person_models"
 3d_physics/layer_3="Character"
+3d_render/layer_4="Effects"
+3d_render/layer_5="Lights"
 
 [memory]
 
