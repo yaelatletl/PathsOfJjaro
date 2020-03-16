@@ -31,7 +31,9 @@ one_shot = true
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.390083 )
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
-[connection signal="timeout" from="overload" to="." method="_on_overload_timeout"]
 [connection signal="timeout" from="overload" to="." method="_on_Timer_timeout"]
-[connection signal="timeout" from="charge" to="." method="_on_charge_timeout"]
+[connection signal="timeout" from="overload" to="." method="_on_overload_timeout"]
 [connection signal="timeout" from="charge" to="." method="_on_Timer_timeout"]
+[connection signal="timeout" from="charge" to="." method="_on_charge_timeout"]
+
+[editable path="gun/RHand_Pos"]

@@ -16,7 +16,7 @@ func _ready():
 	primary_ammo_id = 3
 	id = 3
 # when primary fire is called
-func primary_fire():
+func primary_use(_times = 0):
 	
 	# check to see if we have ammo.
 
@@ -28,17 +28,18 @@ func primary_fire():
 				bolt.setup(wielder)
 				# add the bolt to the aperture of the fusion pistol
 				#$aperture.add_child(bolt)
-				bolt.set_global_transform($gun/aperture.get_global_transform())
+				bolt.set_global_transform($gun/RHand_Pos/Model/aperture.get_global_transform())
 				get_node("/root/World/AI_SH_SYSTEM").add_child(bolt)
-				$AudioStreamPlayer3D.stream = sd
-				$AudioStreamPlayer3D.play()
+				wielder.add_child(AutoSound3D.new(sd, translation))
+#				$AudioStreamPlayer3D.stream = sd
+#				$AudioStreamPlayer3D.play()
 				# toggle can shoot (to avoid spawning a bolt per cycle)
 				can_shoot=false
 
 				# trigger the cool down timer.
 				$Timer.start()
 
-func secondary_fire():
+func secondary_use(_times = 0):
 	if charging == false:
 		$charge.start()
 		charging = true
