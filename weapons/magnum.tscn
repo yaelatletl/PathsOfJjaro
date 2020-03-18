@@ -419,7 +419,6 @@ material/0 = null
 [node name="AnimationPlayer" type="AnimationPlayer" parent="left"]
 
 [node name="aperture" type="Position3D" parent="."]
-editor/display_folded = true
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.11898, -0.651772 )
 
 [node name="RayCast" type="RayCast" parent="aperture"]
@@ -436,6 +435,6 @@ one_shot = true
 anims/dual_start = SubResource( 12 )
 anims/fire = SubResource( 13 )
 anims/standard = SubResource( 14 )
-[connection signal="timeout" from="chamber_timer" to="." method="_on_Timer_timeout"]
 [connection signal="timeout" from="chamber_timer" to="." method="_on_chamber_timer_timeout"]
+[connection signal="timeout" from="chamber_timer" to="." method="_on_Timer_timeout"]
 [connection signal="timeout" from="grenade_timer" to="." method="_on_grenade_timer_timeout"]

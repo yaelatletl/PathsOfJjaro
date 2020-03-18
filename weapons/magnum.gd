@@ -3,7 +3,7 @@ export(PackedScene) var squib = preload("res://Joyeuse/Basics/Guns/squib.tscn")
 
 export var spread = 2
 onready var AISHS = get_tree().get_root().get_node("World/AI_SH_SYSTEM")
-const sound1 = "res://assets/sounds/M1/Mega45_fire.wav"
+const sound1 = "res://assets/sounds/M1/Mega45_fire.ogg"
 const sound3 = "res://assets/sounds/M1/Ricochet_random.tres"
 
 
@@ -22,7 +22,7 @@ func dual_wield():
 	dual_wielding = true
 	$AnimationPlayer.play("dual_start")
 
-func primary_fire():
+func primary_use(_uses : int = 0):
 
 	#check if the weapon has cooled
 	if can_shoot:

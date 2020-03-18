@@ -8,8 +8,8 @@ export var spread = 2
 func _ready():
 	$AnimationPlayer.play("standard")
 	identity = "WSTE-M5 Combat Shotgun"
-	in_magazine = 1
-	in_secondary_magazine = 1
+	primary_uses = 1
+	secondary_uses = 1
 	primary_magazine_size = 1
 	secondary_magazine_size = 1
 	primary_ammo_id = 7
