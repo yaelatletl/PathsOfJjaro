@@ -1,0 +1,1 @@
+-e git@github.com:RiseRobotRise/Joyeuse.git#egg=Joyeuse
