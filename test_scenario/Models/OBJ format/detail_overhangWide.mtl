@@ -1,0 +1,8 @@
+# Created by Kenney (www.kenney.nl)
+
+newmtl _defaultMat
+Kd 0.764151 0.764151 0.764151
+
+newmtl door
+Kd 0.3882353 0.4 0.4470588
+

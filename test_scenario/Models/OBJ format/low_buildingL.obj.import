@@ -1,0 +1,20 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/low_buildingL.obj-4e737bbd429e2daf081727f57dec6c22.mesh"
+
+[deps]
+
+files=[ "res://.import/low_buildingL.obj-4e737bbd429e2daf081727f57dec6c22.mesh" ]
+
+source_file="res://test_scenario/Models/OBJ format/low_buildingL.obj"
+dest_files=[ "res://.import/low_buildingL.obj-4e737bbd429e2daf081727f57dec6c22.mesh", "res://.import/low_buildingL.obj-4e737bbd429e2daf081727f57dec6c22.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 15, 15, 15 )
+offset_mesh=Vector3( 0, 0, 0 )
+octahedral_compression=true
+optimize_mesh_flags=4286

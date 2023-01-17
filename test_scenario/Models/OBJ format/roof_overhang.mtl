@@ -1,0 +1,8 @@
+# Created by Kenney (www.kenney.nl)
+
+newmtl border
+Kd 0.5607843 0.5686275 0.6
+
+newmtl door
+Kd 0.3882353 0.4 0.4470588
+

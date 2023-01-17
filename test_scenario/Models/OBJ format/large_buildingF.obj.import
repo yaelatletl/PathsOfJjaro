@@ -1,0 +1,20 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/large_buildingF.obj-604600519034738759a953e7c1833f82.mesh"
+
+[deps]
+
+files=[ "res://.import/large_buildingF.obj-604600519034738759a953e7c1833f82.mesh" ]
+
+source_file="res://test_scenario/Models/OBJ format/large_buildingF.obj"
+dest_files=[ "res://.import/large_buildingF.obj-604600519034738759a953e7c1833f82.mesh", "res://.import/large_buildingF.obj-604600519034738759a953e7c1833f82.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 15, 15, 15 )
+offset_mesh=Vector3( 0, 0, 0 )
+octahedral_compression=true
+optimize_mesh_flags=4286

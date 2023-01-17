@@ -1,0 +1,20 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/roof_side.obj-b2b4c9390d77423035be3f0472f5d06f.mesh"
+
+[deps]
+
+files=[ "res://.import/roof_side.obj-b2b4c9390d77423035be3f0472f5d06f.mesh" ]
+
+source_file="res://test_scenario/Models/OBJ format/roof_side.obj"
+dest_files=[ "res://.import/roof_side.obj-b2b4c9390d77423035be3f0472f5d06f.mesh", "res://.import/roof_side.obj-b2b4c9390d77423035be3f0472f5d06f.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 15, 15, 15 )
+offset_mesh=Vector3( 0, 0, 0 )
+octahedral_compression=true
+optimize_mesh_flags=4286

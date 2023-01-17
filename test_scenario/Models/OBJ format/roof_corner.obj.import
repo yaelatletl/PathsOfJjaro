@@ -1,0 +1,20 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/roof_corner.obj-6bd1616b5a8d59b9f8a6acf6f4079273.mesh"
+
+[deps]
+
+files=[ "res://.import/roof_corner.obj-6bd1616b5a8d59b9f8a6acf6f4079273.mesh" ]
+
+source_file="res://test_scenario/Models/OBJ format/roof_corner.obj"
+dest_files=[ "res://.import/roof_corner.obj-6bd1616b5a8d59b9f8a6acf6f4079273.mesh", "res://.import/roof_corner.obj-6bd1616b5a8d59b9f8a6acf6f4079273.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 15, 15, 15 )
+offset_mesh=Vector3( 0, 0, 0 )
+octahedral_compression=true
+optimize_mesh_flags=4286

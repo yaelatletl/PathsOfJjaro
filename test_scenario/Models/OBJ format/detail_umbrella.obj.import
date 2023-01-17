@@ -1,0 +1,20 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/detail_umbrella.obj-a0b1db68c8a33bf8c89e6248f2fd891c.mesh"
+
+[deps]
+
+files=[ "res://.import/detail_umbrella.obj-a0b1db68c8a33bf8c89e6248f2fd891c.mesh" ]
+
+source_file="res://test_scenario/Models/OBJ format/detail_umbrella.obj"
+dest_files=[ "res://.import/detail_umbrella.obj-a0b1db68c8a33bf8c89e6248f2fd891c.mesh", "res://.import/detail_umbrella.obj-a0b1db68c8a33bf8c89e6248f2fd891c.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 15, 15, 15 )
+offset_mesh=Vector3( 0, 0, 0 )
+octahedral_compression=true
+optimize_mesh_flags=4286
