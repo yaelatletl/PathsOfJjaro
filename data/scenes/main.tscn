@@ -1,0 +1,618 @@
+[gd_scene load_steps=28 format=2]
+
+[ext_resource path="res://test_scenario/Models/Textures/Concrete/Concrete.png" type="Texture" id=1]
+[ext_resource path="res://test_scenario/Test Scene.tscn" type="PackedScene" id=2]
+[ext_resource path="res://assets/shaders/active_camo.material" type="Material" id=3]
+[ext_resource path="res://data/scenes/fade.tscn" type="PackedScene" id=4]
+[ext_resource path="res://data/scenes/barrel.tscn" type="PackedScene" id=5]
+[ext_resource path="res://data/scenes/scenario.gd" type="Script" id=6]
+[ext_resource path="res://assets/models/player/Default_Player_Model.tscn" type="PackedScene" id=7]
+[ext_resource path="res://data/prefabs/Door.tscn" type="PackedScene" id=8]
+[ext_resource path="res://data/player/character.tscn" type="PackedScene" id=9]
+[ext_resource path="res://assets/picakbles/weapons/Kriss.tscn" type="PackedScene" id=10]
+[ext_resource path="res://data/prefabs/ZipLine.gd" type="Script" id=11]
+[ext_resource path="res://addons/portals/scenes/PortalPair.tscn" type="PackedScene" id=12]
+[ext_resource path="res://default_env.tres" type="Environment" id=13]
+[ext_resource path="res://addons/portals/shaders/Portal.shader" type="Shader" id=14]
+[ext_resource path="res://assets/picakbles/ammo/ExampleAmmo.tscn" type="PackedScene" id=15]
+[ext_resource path="res://data/map/world.gd" type="Script" id=16]
+
+[sub_resource type="CubeMesh" id=3]
+size = Vector3( 1, 6, 20 )
+
+[sub_resource type="SpatialMaterial" id=4]
+albedo_texture = ExtResource( 1 )
+uv1_triplanar = true
+
+[sub_resource type="ConvexPolygonShape" id=5]
+points = PoolVector3Array( -0.5, 3, 10, 0.5, 3, -10, 0.5, 3, 10, -0.5, 3, -10, -0.5, -3, 10, 0.5, -3, -10, 0.5, -3, 10, -0.5, -3, -10, 0.5, 3, 10, -0.5, 3, -10, 0.5, 3, -10, -0.5, 3, 10, 0.5, -3, 10, -0.5, -3, -10, 0.5, -3, -10, -0.5, -3, 10, 0.5, 3, 10, -0.5, -3, 10, -0.5, 3, 10, 0.5, -3, 10, 0.5, 3, -10, -0.5, -3, -10, -0.5, 3, -10, 0.5, -3, -10 )
+
+[sub_resource type="SpatialMaterial" id=6]
+albedo_texture = ExtResource( 1 )
+uv1_triplanar = true
+
+[sub_resource type="CubeMesh" id=7]
+material = SubResource( 6 )
+size = Vector3( 500, 2, 500 )
+
+[sub_resource type="BoxShape" id=8]
+extents = Vector3( 250, 1, 250 )
+
+[sub_resource type="BoxShape" id=11]
+extents = Vector3( 0.203265, 1, 0.21215 )
+
+[sub_resource type="CubeMesh" id=12]
+size = Vector3( 0.451, 2.005, 0.633 )
+
+[sub_resource type="ShaderMaterial" id=13]
+resource_local_to_scene = true
+shader = ExtResource( 14 )
+shader_param/view_resolution = null
+shader_param/smoothness = 1.0
+
+[sub_resource type="Shader" id=14]
+resource_local_to_scene = true
+code = "shader_type spatial;
+render_mode unshaded;
+uniform sampler2D viewport : hint_albedo;
+
+// [Godot Super Scaling]
+// created by Andres Hernandez
+
+
+// viewport to sample and its resolution
+uniform vec2 view_resolution;
+varying vec2 view_pixel_size;
+uniform float smoothness;
+
+// texture coords for directional sampling
+varying vec2 center_pixel;
+varying vec2 north_pixel;
+varying vec2 south_pixel;
+varying vec2 east_pixel;
+varying vec2 west_pixel;
+varying vec2 north_east_pixel;
+varying vec2 north_west_pixel;
+varying vec2 south_east_pixel;
+varying vec2 south_west_pixel;
+
+// offset coordinates used for super sampling
+const vec2 offset_uv = vec2(0.36, 0.64);
+
+// finds the absolute distance from two floats
+float float_diff(float float_a, float float_b) {
+	return abs(float_a - float_b);
+}
+
+// maximum difference for all 3 color channels
+float color_diff(vec4 color_a, vec4 color_b) {
+	float diff_r = float_diff(color_a.r, color_b.r);
+	float diff_g = float_diff(color_a.g, color_b.g);
+	float diff_b = float_diff(color_a.b, color_b.b);
+	return max(diff_r, max(diff_g, diff_b));
+}
+
+// simple average of two colors
+vec4 color_average(vec4 color_a, vec4 color_b) {
+	return mix(color_a, color_b, 0.5);
+}
+
+// take 9 samples and perform a directional average
+vec4 directional_average() {
+	// get the colors of all 9 pixels in the 3x3 grid
+	vec4 pixel_0 = textureLod(viewport, center_pixel, 0.0); // center pixel
+	vec4 pixel_1 = textureLod(viewport, north_pixel, 0.0); // north pixel
+	vec4 pixel_2 = textureLod(viewport, south_pixel, 0.0); // south pixel
+	vec4 pixel_3 = textureLod(viewport, east_pixel, 0.0); // east pixel
+	vec4 pixel_4 = textureLod(viewport, west_pixel, 0.0); // west pixel
+	vec4 pixel_5 = textureLod(viewport, north_east_pixel, 0.0); // north-east pixel
+	vec4 pixel_6 = textureLod(viewport, north_west_pixel, 0.0); // north-west pixel
+	vec4 pixel_7 = textureLod(viewport, south_east_pixel, 0.0); // south-east pixel
+	vec4 pixel_8 = textureLod(viewport, south_west_pixel, 0.0); // south-west pixel
+	
+	// find the maximum color difference for each of 12 directions
+	float dir_1 = color_diff(pixel_0, pixel_1); // center to north
+	float dir_2 = color_diff(pixel_0, pixel_2); // center to south
+	float dir_3 = color_diff(pixel_0, pixel_3); // center to east
+	float dir_4 = color_diff(pixel_0, pixel_4); // center to west
+	float dir_5 = color_diff(pixel_0, pixel_5); // center to north-east
+	float dir_6 = color_diff(pixel_0, pixel_6); // center to north-west
+	float dir_7 = color_diff(pixel_0, pixel_7); // center to south-east
+	float dir_8 = color_diff(pixel_0, pixel_8); // center to south-west
+	float dir_9 = color_diff(pixel_1, pixel_4); // north to west
+	float dir_10 = color_diff(pixel_1, pixel_3); // north to east
+	float dir_11 = color_diff(pixel_2, pixel_3); // south to east
+	float dir_12 = color_diff(pixel_2, pixel_4); // south to west
+	
+	// find the minimum distance of each of the 12 directions
+	float min_dist = dir_1;
+	min_dist = min(min_dist, dir_2);
+	min_dist = min(min_dist, dir_3);
+	min_dist = min(min_dist, dir_4);
+	min_dist = min(min_dist, dir_5);
+	min_dist = min(min_dist, dir_6);
+	min_dist = min(min_dist, dir_7);
+	min_dist = min(min_dist, dir_8);
+	min_dist = min(min_dist, dir_9);
+	min_dist = min(min_dist, dir_10);
+	min_dist = min(min_dist, dir_11);
+	min_dist = min(min_dist, dir_12);
+	
+	// get the average color along the minimum direction
+	vec4 result = pixel_0;
+	if (min_dist == dir_1)
+		result = color_average(pixel_0, pixel_1); // center to north
+	else if (min_dist == dir_2) 
+		result = color_average(pixel_0, pixel_2); // center to south
+	else if (min_dist == dir_3) 
+		result = color_average(pixel_0, pixel_3); // center to east
+	else if (min_dist == dir_4) 
+		result = color_average(pixel_0, pixel_4); // center to west
+	else if (min_dist == dir_5) 
+		result = color_average(pixel_0, pixel_5); // center to north-east
+	else if (min_dist == dir_6) 
+		result = color_average(pixel_0, pixel_6); // center to north-west
+	else if (min_dist == dir_7) 
+		result = color_average(pixel_0, pixel_7); // center to south-east
+	else if (min_dist == dir_8) 
+		result = color_average(pixel_0, pixel_8); // center to south-west
+	else if (min_dist == dir_9) 
+		result = color_average(pixel_0, color_average(pixel_1, pixel_4)); // north to west
+	else if (min_dist == dir_10) 
+		result = color_average(pixel_0, color_average(pixel_1, pixel_3)); // north to east
+	else if (min_dist == dir_11) 
+		result = color_average(pixel_0, color_average(pixel_2, pixel_3)); // south to east
+	else if (min_dist == dir_12) 
+		result = color_average(pixel_0, color_average(pixel_2, pixel_4)); // south to west
+	return result;
+}
+
+// partial derivative on x-axis
+vec2 deriv_x(vec2 pos, vec4 frag, vec2 pixel) {
+	vec2 offset = vec2(pixel.x, 0.0);
+	vec2 pos_plus = pos + offset;
+	vec2 pos_minus = pos - offset;
+	int coord = int(frag.x) / 2;
+	bool even = int(coord * 2) == int(frag.x);
+	return even ? (pos_plus - pos) : (pos - pos_minus);
+}
+
+// partial derivative on y-axis
+vec2 deriv_y(vec2 pos, vec4 frag, vec2 pixel) {
+	vec2 offset = vec2(0.0, pixel.y);
+	vec2 pos_plus = pos + offset;
+	vec2 pos_minus = pos - offset;
+	int coord = int(frag.y) / 2;
+	bool even = int(coord * 2) == int(frag.y);
+	return even ? (pos_plus - pos) : (pos - pos_minus);
+}
+
+// take 4 samples in a rotated grid for super sampling
+vec4 super_sample(vec2 base_uv, vec4 frag, vec2 pixel) {
+	vec2 dx = deriv_x(base_uv, frag, pixel);
+	vec2 dy = deriv_y(base_uv, frag, pixel);
+	vec2 uv = vec2(0.0);
+	vec4 color = vec4(0.0);
+	uv = base_uv + offset_uv.x * dx + offset_uv.y * dy;
+	color += textureLod(viewport, uv, 0.0);
+	uv = base_uv - offset_uv.x * dx - offset_uv.y * dy;
+	color += textureLod(viewport, uv, 0.0);
+	uv = base_uv + offset_uv.y * dx - offset_uv.x * dy;
+	color += textureLod(viewport, uv, 0.0);
+	uv = base_uv - offset_uv.y * dx + offset_uv.x * dy;
+	color += textureLod(viewport, uv, 0.0);
+	color *= 0.25;
+	return color;
+}
+
+// precompute the sample direction texture coordinates
+void vertex() {
+	view_pixel_size = 1.0 / view_resolution;
+	
+	vec2 north = vec2(0.0, view_pixel_size.y);
+	vec2 south = vec2(0.0, -view_pixel_size.y);
+	vec2 east = vec2(view_pixel_size.x, 0.0);
+	vec2 west = vec2(-view_pixel_size.x, 0.0);
+	
+	center_pixel = UV;
+	north_pixel = center_pixel + north;
+	south_pixel = center_pixel + south;
+	east_pixel = center_pixel + east;
+	west_pixel = center_pixel + west;
+	north_east_pixel = center_pixel + north + east;
+	north_west_pixel = center_pixel + north + west;
+	south_east_pixel = center_pixel + south + east;
+	south_west_pixel = center_pixel + south + west;
+}
+
+// draw the new color on the screen
+void fragment() {
+	vec4 dir_avg = directional_average();
+	vec4 super = super_sample(SCREEN_UV, FRAGCOORD, view_pixel_size);
+	vec4 result = mix(dir_avg, super, smoothness);
+	result.a = 1.0;
+	ALBEDO = result.rgb;
+}
+
+
+"
+
+[sub_resource type="ShaderMaterial" id=15]
+resource_local_to_scene = true
+shader = SubResource( 14 )
+shader_param/view_resolution = null
+shader_param/smoothness = 1.0
+
+[node name="main" type="Spatial"]
+script = ExtResource( 16 )
+
+[node name="post_processing" type="Spatial" parent="."]
+
+[node name="sun" type="DirectionalLight" parent="post_processing"]
+transform = Transform( 0.707107, 0.612372, -0.353553, 0, 0.5, 0.866025, 0.707107, -0.612373, 0.353553, 0, 0, 0 )
+portal_mode = 4
+layers = 7
+light_color = Color( 0.976471, 0.959804, 0.85098, 1 )
+shadow_enabled = true
+directional_shadow_blend_splits = true
+
+[node name="environment" type="WorldEnvironment" parent="post_processing"]
+environment = ExtResource( 13 )
+
+[node name="fade" parent="." instance=ExtResource( 4 )]
+
+[node name="scenario" type="Spatial" parent="."]
+script = ExtResource( 6 )
+spawn_points_parent_path = NodePath("spawnpoints")
+
+[node name="players" type="Spatial" parent="scenario"]
+
+[node name="props" type="Spatial" parent="scenario"]
+
+[node name="barrel_0" parent="scenario/props" instance=ExtResource( 5 )]
+transform = Transform( 0.727593, 0, -0.686009, 0, 1, 0, 0.686009, 0, 0.727593, -38.5673, 10.6771, -72.4369 )
+
+[node name="barrel_1" parent="scenario/props" instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15.8309, 7.79427, 10.2866 )
+
+[node name="barrel_2" parent="scenario/props" instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -11.2974, 4.7109, 9.93897 )
+
+[node name="barrel_3" parent="scenario/props" instance=ExtResource( 5 )]
+transform = Transform( 0.363365, -0.931647, 0, 0.931647, 0.363365, 0, 0, 0, 1, -8.23876, 2.67564, 17.051 )
+
+[node name="barrel_4" parent="scenario/props" instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -13.0626, 2.26095, 10.2583 )
+
+[node name="objects" type="Spatial" parent="scenario"]
+
+[node name="wall" type="StaticBody" parent="scenario/objects" groups=["wallk"]]
+transform = Transform( 9.52193, 0, 0, 0, 1, 0, 0, 0, 1, 1.82181, 2.01321, 8.02284 )
+collision_layer = 3
+
+[node name="mesh" type="MeshInstance" parent="scenario/objects/wall"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0 )
+layers = 3
+mesh = SubResource( 3 )
+material/0 = SubResource( 4 )
+
+[node name="collision" type="CollisionShape" parent="scenario/objects/wall"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0 )
+shape = SubResource( 5 )
+
+[node name="wall7" type="StaticBody" parent="scenario/objects" groups=["wallk"]]
+transform = Transform( 7.9677, 0, 0, 0, 1, 0, 0, 0, 0.368961, 1.82181, 3.93382, 2.17341 )
+collision_layer = 3
+
+[node name="mesh" type="MeshInstance" parent="scenario/objects/wall7"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0 )
+mesh = SubResource( 3 )
+material/0 = SubResource( 4 )
+
+[node name="collision" type="CollisionShape" parent="scenario/objects/wall7"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0 )
+shape = SubResource( 5 )
+
+[node name="wall5" type="StaticBody" parent="scenario/objects" groups=["wallk"]]
+transform = Transform( 9.52193, 0, 0, 0, 1, 0, 0, 0, 1, 1.82181, 3.77909, 28.0547 )
+collision_layer = 3
+
+[node name="mesh" type="MeshInstance" parent="scenario/objects/wall5"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0 )
+layers = 3
+mesh = SubResource( 3 )
+material/0 = SubResource( 4 )
+
+[node name="collision" type="CollisionShape" parent="scenario/objects/wall5"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0 )
+shape = SubResource( 5 )
+
+[node name="wall11" type="StaticBody" parent="scenario/objects" groups=["wallk"]]
+transform = Transform( 9.52193, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 11.5042, 3.77909, 9.18322 )
+collision_layer = 3
+
+[node name="mesh" type="MeshInstance" parent="scenario/objects/wall11"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0 )
+layers = 3
+mesh = SubResource( 3 )
+material/0 = SubResource( 4 )
+
+[node name="collision" type="CollisionShape" parent="scenario/objects/wall11"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0 )
+shape = SubResource( 5 )
+
+[node name="wall12" type="StaticBody" parent="scenario/objects" groups=["wallk"]]
+transform = Transform( 9.52193, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 15.7901, 3.77909, 3.8468 )
+collision_layer = 3
+
+[node name="mesh" type="MeshInstance" parent="scenario/objects/wall12"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0 )
+layers = 3
+mesh = SubResource( 3 )
+material/0 = SubResource( 4 )
+
+[node name="collision" type="CollisionShape" parent="scenario/objects/wall12"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0 )
+shape = SubResource( 5 )
+
+[node name="wall6" type="StaticBody" parent="scenario/objects" groups=["wallk"]]
+transform = Transform( -0.237304, 1.86938, 0, 0.411023, 1.07929, 0, 0, 0, 1, 1.26171, 2.90546, 28.0547 )
+collision_layer = 3
+
+[node name="mesh" type="MeshInstance" parent="scenario/objects/wall6"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0 )
+mesh = SubResource( 3 )
+material/0 = SubResource( 4 )
+
+[node name="collision" type="CollisionShape" parent="scenario/objects/wall6"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0 )
+shape = SubResource( 5 )
+
+[node name="wall4" type="StaticBody" parent="scenario/objects" groups=["wallk"]]
+transform = Transform( 0.700685, 0.713471, 0, -0.713471, 0.700685, 0, 0, 0, 1, 4.15242, 3.2297, 8.02284 )
+collision_layer = 3
+
+[node name="mesh" type="MeshInstance" parent="scenario/objects/wall4"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0 )
+mesh = SubResource( 3 )
+material/0 = SubResource( 4 )
+
+[node name="collision" type="CollisionShape" parent="scenario/objects/wall4"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0 )
+shape = SubResource( 5 )
+
+[node name="wall2" type="StaticBody" parent="scenario/objects" groups=["wallk"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3.14766, 5.9187, -13.4699 )
+collision_layer = 3
+
+[node name="mesh" type="MeshInstance" parent="scenario/objects/wall2"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0 )
+mesh = SubResource( 3 )
+material/0 = SubResource( 4 )
+
+[node name="collision" type="CollisionShape" parent="scenario/objects/wall2"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0 )
+shape = SubResource( 5 )
+
+[node name="wall3" type="StaticBody" parent="scenario/objects" groups=["wallk"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -9.47245, 9.17323, -13.4699 )
+collision_layer = 3
+
+[node name="mesh" type="MeshInstance" parent="scenario/objects/wall3"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0 )
+mesh = SubResource( 3 )
+material/0 = SubResource( 4 )
+
+[node name="collision" type="CollisionShape" parent="scenario/objects/wall3"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0 )
+shape = SubResource( 5 )
+
+[node name="wall8" type="StaticBody" parent="scenario/objects" groups=["wallk"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.73459, 13.7277, -25.7436 )
+collision_layer = 3
+
+[node name="mesh" type="MeshInstance" parent="scenario/objects/wall8"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0 )
+mesh = SubResource( 3 )
+material/0 = SubResource( 4 )
+
+[node name="collision" type="CollisionShape" parent="scenario/objects/wall8"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0 )
+shape = SubResource( 5 )
+
+[node name="wall9" type="StaticBody" parent="scenario/objects" groups=["wallk"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.73459, 13.7277, -45.7488 )
+collision_layer = 3
+
+[node name="mesh" type="MeshInstance" parent="scenario/objects/wall9"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0 )
+mesh = SubResource( 3 )
+material/0 = SubResource( 4 )
+
+[node name="collision" type="CollisionShape" parent="scenario/objects/wall9"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0 )
+shape = SubResource( 5 )
+
+[node name="wall10" type="StaticBody" parent="scenario/objects" groups=["wallk"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.73459, 13.7277, -65.7488 )
+collision_layer = 3
+
+[node name="mesh" type="MeshInstance" parent="scenario/objects/wall10"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0 )
+mesh = SubResource( 3 )
+material/0 = SubResource( 4 )
+
+[node name="collision" type="CollisionShape" parent="scenario/objects/wall10"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0 )
+shape = SubResource( 5 )
+
+[node name="terrain" type="StaticBody" parent="scenario/objects" groups=["concrete"]]
+collision_layer = 15
+collision_mask = 15
+
+[node name="mesh" type="MeshInstance" parent="scenario/objects/terrain"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0358462, -0.01824, 0.0206671 )
+layers = 7
+mesh = SubResource( 7 )
+
+[node name="collision" type="CollisionShape" parent="scenario/objects/terrain"]
+shape = SubResource( 8 )
+
+[node name="spawnpoints" type="Spatial" parent="scenario"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -10.0265, 12.8912, -21.9867 )
+
+[node name="Position3D" type="Position3D" parent="scenario/spawnpoints"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.39191, 22.0571 )
+
+[node name="Position3D2" type="Position3D" parent="scenario/spawnpoints"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12.6443, 5.57732, 10.524 )
+
+[node name="Position3D3" type="Position3D" parent="scenario/spawnpoints"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12.6443, 7.56124, 26.258 )
+
+[node name="Position3D4" type="Position3D" parent="scenario/spawnpoints"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11.2966, 2.5739, 28.9469 )
+
+[node name="Position3D5" type="Position3D" parent="scenario/spawnpoints"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11.2966, 2.5739, 10.9689 )
+
+[node name="Spatial" parent="scenario" instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8.50586, 0.642089, 0 )
+
+[node name="ZipLine" type="Spatial" parent="scenario"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 39.0403, 2.12947, 29.7072 )
+script = ExtResource( 11 )
+
+[node name="Start" type="StaticBody" parent="scenario/ZipLine"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.08687, 0 )
+
+[node name="CollisionShape" type="CollisionShape" parent="scenario/ZipLine/Start"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.20824, 0 )
+shape = SubResource( 11 )
+disabled = true
+
+[node name="MeshInstance" type="MeshInstance" parent="scenario/ZipLine/Start"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.20824, 0 )
+mesh = SubResource( 12 )
+
+[node name="End" type="StaticBody" parent="scenario/ZipLine"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.1135, 36.7943, -1.99012 )
+
+[node name="MeshInstance2" type="MeshInstance" parent="scenario/ZipLine/End"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.851204, 0 )
+mesh = SubResource( 12 )
+skeleton = NodePath("../../Start")
+
+[node name="CollisionShape" type="CollisionShape" parent="scenario/ZipLine/End"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.851204, 0 )
+shape = SubResource( 11 )
+disabled = true
+
+[node name="PortalPair" parent="scenario" instance=ExtResource( 12 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -11.3893, 3.45568, 8.16805 )
+environment_path = NodePath("../../post_processing/environment")
+
+[node name="PortalA" parent="scenario/PortalPair" index="0"]
+transform = Transform( -1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 5.47252, 0.061038, -4.48506 )
+
+[node name="Back" parent="scenario/PortalPair/PortalA/Screen" index="0"]
+material_override = SubResource( 13 )
+
+[node name="Left" parent="scenario/PortalPair/PortalA/Screen" index="1"]
+material_override = SubResource( 13 )
+
+[node name="Right" parent="scenario/PortalPair/PortalA/Screen" index="2"]
+material_override = SubResource( 13 )
+
+[node name="Bottom" parent="scenario/PortalPair/PortalA/Screen" index="3"]
+material_override = SubResource( 13 )
+
+[node name="Top" parent="scenario/PortalPair/PortalA/Screen" index="4"]
+material_override = SubResource( 13 )
+
+[node name="Viewport" parent="scenario/PortalPair/PortalA" index="2"]
+msaa = 3
+fxaa = true
+debanding = true
+sharpen_intensity = 1.0
+render_target_clear_mode = 2
+
+[node name="PortalB" parent="scenario/PortalPair" index="1"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.28477, -0.46709, 9.53674e-07 )
+
+[node name="Back" parent="scenario/PortalPair/PortalB/Screen" index="0"]
+material_override = SubResource( 15 )
+
+[node name="Left" parent="scenario/PortalPair/PortalB/Screen" index="1"]
+material_override = SubResource( 15 )
+
+[node name="Right" parent="scenario/PortalPair/PortalB/Screen" index="2"]
+material_override = SubResource( 15 )
+
+[node name="Bottom" parent="scenario/PortalPair/PortalB/Screen" index="3"]
+material_override = SubResource( 15 )
+
+[node name="Top" parent="scenario/PortalPair/PortalB/Screen" index="4"]
+material_override = SubResource( 15 )
+
+[node name="Viewport" parent="scenario/PortalPair/PortalB" index="2"]
+msaa = 3
+fxaa = true
+debanding = true
+sharpen_intensity = 1.0
+render_target_clear_mode = 2
+
+[node name="Kriss" parent="." instance=ExtResource( 10 )]
+transform = Transform( 0.841511, 0.54024, 0, -0.54024, 0.841511, 0, 0, 0, 1, -2.23478, 1.00195, 7.72478 )
+
+[node name="Spatial" parent="." instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.72739, 2.31437, 2.47878 )
+
+[node name="character" parent="." instance=ExtResource( 9 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.50289, 6.53228, 8.8432 )
+collision_layer = 11
+collision_mask = 11
+
+[node name="ExampleAmmo" parent="." instance=ExtResource( 15 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.392279, 1.46756, 7.04151 )
+
+[node name="New_default" parent="." instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.955511, 1.00503, 4.51202 )
+script = null
+
+[node name="BaseBody003" parent="New_default/Base/Skeleton" index="0"]
+material_override = ExtResource( 3 )
+script = null
+
+[node name="BaseBody004" parent="New_default/Base/Skeleton" index="1"]
+material_override = ExtResource( 3 )
+script = null
+
+[node name="BaseBody006" parent="New_default/Base/Skeleton" index="2"]
+material_override = ExtResource( 3 )
+script = null
+
+[node name="Cube004" parent="New_default/Base/Skeleton" index="3"]
+material_override = ExtResource( 3 )
+script = null
+
+[node name="Cube015" parent="New_default/Base/Skeleton" index="4"]
+material_override = ExtResource( 3 )
+script = null
+
+[node name="Cube016" parent="New_default/Base/Skeleton" index="5"]
+material_override = ExtResource( 3 )
+script = null
+
+[node name="Cube017" parent="New_default/Base/Skeleton" index="6"]
+material_override = ExtResource( 3 )
+script = null
+
+[node name="Cube020" parent="New_default/Base/Skeleton" index="7"]
+material_override = ExtResource( 3 )
+script = null
+
+[editable path="scenario/PortalPair"]
+[editable path="scenario/PortalPair/PortalA"]
+[editable path="scenario/PortalPair/PortalB"]
+[editable path="New_default"]

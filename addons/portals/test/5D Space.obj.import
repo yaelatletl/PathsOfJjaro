@@ -1,0 +1,20 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/5D Space.obj-6706d600ef344a08f590defdde9b1940.mesh"
+
+[deps]
+
+files=[ "res://.import/5D Space.obj-6706d600ef344a08f590defdde9b1940.mesh" ]
+
+source_file="res://addons/portals/test/5D Space.obj"
+dest_files=[ "res://.import/5D Space.obj-6706d600ef344a08f590defdde9b1940.mesh", "res://.import/5D Space.obj-6706d600ef344a08f590defdde9b1940.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+octahedral_compression=true
+optimize_mesh_flags=4286
