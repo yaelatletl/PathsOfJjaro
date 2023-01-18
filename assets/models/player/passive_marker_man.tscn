@@ -1,0 +1,85 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://addons/sade/ik_look_at.gd" type="Script" id=1]
+[ext_resource path="res://data/player/visual_toggle/ThirdPersonMesh.gd" type="Script" id=2]
+[ext_resource path="res://assets/models/player/passive_marker_man.fbx" type="PackedScene" id=3]
+
+[node name="passive_marker_man" instance=ExtResource( 3 )]
+
+[node name="HeadTop_End" parent="RootNode/Hips/Spine/Spine1/Spine2/Neck/Neck1/Head" index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+
+[node name="LeftHandThumb4" parent="RootNode/Hips/Spine/Spine1/Spine2/LeftShoulder/LeftArm/LeftForeArm/LeftHand/LeftHandThumb1/LeftHandThumb2/LeftHandThumb3" index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+
+[node name="LeftHandMiddle4" parent="RootNode/Hips/Spine/Spine1/Spine2/LeftShoulder/LeftArm/LeftForeArm/LeftHand/LeftHandMiddle1/LeftHandMiddle2/LeftHandMiddle3" index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+
+[node name="LeftHandIndex4" parent="RootNode/Hips/Spine/Spine1/Spine2/LeftShoulder/LeftArm/LeftForeArm/LeftHand/LeftHandIndex1/LeftHandIndex2/LeftHandIndex3" index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+
+[node name="LeftHandRing4" parent="RootNode/Hips/Spine/Spine1/Spine2/LeftShoulder/LeftArm/LeftForeArm/LeftHand/LeftHandRing1/LeftHandRing2/LeftHandRing3" index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+
+[node name="LeftHandPinky4" parent="RootNode/Hips/Spine/Spine1/Spine2/LeftShoulder/LeftArm/LeftForeArm/LeftHand/LeftHandPinky1/LeftHandPinky2/LeftHandPinky3" index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+
+[node name="RightHandThumb4" parent="RootNode/Hips/Spine/Spine1/Spine2/RightShoulder/RightArm/RightForeArm/RightHand/RightHandThumb1/RightHandThumb2/RightHandThumb3" index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+
+[node name="RightHandIndex4" parent="RootNode/Hips/Spine/Spine1/Spine2/RightShoulder/RightArm/RightForeArm/RightHand/RightHandIndex1/RightHandIndex2/RightHandIndex3" index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+
+[node name="RightHandMiddle4" parent="RootNode/Hips/Spine/Spine1/Spine2/RightShoulder/RightArm/RightForeArm/RightHand/RightHandMiddle1/RightHandMiddle2/RightHandMiddle3" index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+
+[node name="RightHandRing4" parent="RootNode/Hips/Spine/Spine1/Spine2/RightShoulder/RightArm/RightForeArm/RightHand/RightHandRing1/RightHandRing2/RightHandRing3" index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+
+[node name="RightHandPinky4" parent="RootNode/Hips/Spine/Spine1/Spine2/RightShoulder/RightArm/RightForeArm/RightHand/RightHandPinky1/RightHandPinky2/RightHandPinky3" index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+
+[node name="LeftFootToeBase_End" parent="RootNode/Hips/LeftUpLeg/LeftLeg/LeftFoot/LeftToeBase" index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+
+[node name="RightFootToeBase_End" parent="RootNode/Hips/RightUpLeg/RightLeg/RightFoot/RightToeBase" index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+
+[node name="MocapGuy_Eyes" parent="RootNode/MocapGuy_HiRes_Meshes" index="0"]
+layers = 2
+script = ExtResource( 2 )
+
+[node name="MocapGuy_EyesSpec" parent="RootNode/MocapGuy_HiRes_Meshes" index="1"]
+layers = 2
+script = ExtResource( 2 )
+
+[node name="MocapGuy_Caruncula" parent="RootNode/MocapGuy_HiRes_Meshes" index="2"]
+layers = 2
+script = ExtResource( 2 )
+
+[node name="MocapGuy_BrowsLashes" parent="RootNode/MocapGuy_HiRes_Meshes" index="3"]
+layers = 2
+script = ExtResource( 2 )
+
+[node name="MocapGuy_Teeth" parent="RootNode/MocapGuy_HiRes_Meshes" index="4"]
+layers = 2
+script = ExtResource( 2 )
+
+[node name="MocapGuy_Hat" parent="RootNode/MocapGuy_HiRes_Meshes" index="5"]
+layers = 2
+script = ExtResource( 2 )
+
+[node name="MocapGuy_Body" parent="RootNode/MocapGuy_HiRes_Meshes" index="6"]
+layers = 2
+script = ExtResource( 2 )
+
+[node name="ViewTarget" type="Position3D" parent="." index="1"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.50004, 1.86148 )
+
+[node name="IK_LookAt" type="Spatial" parent="ViewTarget" index="0"]
+script = ExtResource( 1 )
+skeleton_path = NodePath("../../RootNode/Skeleton")
+bone_name = "Head"
+additional_rotation = Vector3( 0, 180, 0 )
+additional_bone_name = "Neck1"
+additional_bone_length = -0.1
