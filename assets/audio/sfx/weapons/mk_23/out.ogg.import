@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/out.ogg-451d00ccda3f17eadfe0db56f05dfb07.oggstr"
+
+[deps]
+
+source_file="res://assets/audio/sfx/weapons/mk_23/out.ogg"
+dest_files=[ "res://.import/out.ogg-451d00ccda3f17eadfe0db56f05dfb07.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

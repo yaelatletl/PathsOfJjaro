@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/fire.ogg-897284f49254edd3105b35333aee8f8e.oggstr"
+
+[deps]
+
+source_file="res://assets/audio/sfx/weapons/glock_17/fire.ogg"
+dest_files=[ "res://.import/fire.ogg-897284f49254edd3105b35333aee8f8e.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

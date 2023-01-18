@@ -1,0 +1,28 @@
+{
+	"type": 1,
+	"name": "shotgun_squared",
+	"fireRate" : 0.5,
+	"bullets" : 8,
+	"ammo" : 0,
+	"maxBullets" : 8,
+	"damage" : 25,
+	"reloadSpeed" : 0.5,
+	"randomness" : 1,
+	"spreadPattern" : [
+		[0, 0],
+		[1, 0],
+		[0,1],
+		[1, 1],
+		[-1,0],
+		[0,-1],
+		[-1,0],
+		[-1,1]
+	],
+	"spreadMultiplier" : 20,
+	"projectileIndex" : 0,
+	"defaultZoomFOV": 90,
+	"zoomLevels": [ 60, 30 ],
+	"range" : 100,
+	"ammoType" : "SMG",
+	"randomSpread" : [0,0]
+}

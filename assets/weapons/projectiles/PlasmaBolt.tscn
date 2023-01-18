@@ -1,0 +1,36 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://data/scripts/weapon/projectile.gd" type="Script" id=1]
+
+[sub_resource type="SphereMesh" id=2]
+radius = 0.652
+height = 1.312
+
+[sub_resource type="SpatialMaterial" id=3]
+
+[sub_resource type="SphereShape" id=1]
+radius = 0.133356
+
+[node name="PmBt" type="RigidBody"]
+collision_layer = 0
+collision_mask = 5
+mass = 0.107143
+gravity_scale = 0.0
+contacts_reported = 4
+contact_monitor = true
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
+script = ExtResource( 1 )
+type = 1.0
+damage = 25.0
+speed = 120.0
+lifetime = 7.0
+
+[node name="MeshInstance" type="MeshInstance" parent="."]
+transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0 )
+mesh = SubResource( 2 )
+material/0 = SubResource( 3 )
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+shape = SubResource( 1 )
