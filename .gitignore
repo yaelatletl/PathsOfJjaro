@@ -1,0 +1,204 @@
+
+.import/
+
+data/models/player/crouching turn 90 left.fbx
+
+data/models/player/crouching turn 90 left.fbx.import
+
+data/models/player/crouching turn 90 right.fbx
+
+data/models/player/crouching turn 90 right.fbx.import
+
+data/models/player/death crouching headshot front.fbx
+
+data/models/player/death crouching headshot front.fbx.import
+
+data/models/player/death from back headshot.fbx
+
+data/models/player/death from back headshot.fbx.import
+
+data/models/player/death from front headshot.fbx
+
+data/models/player/death from front headshot.fbx.import
+
+data/models/player/death from right.fbx
+
+data/models/player/death from right.fbx.import
+
+data/models/player/death from the back.fbx
+
+data/models/player/death from the back.fbx.import
+
+data/models/player/death from the front.fbx
+
+data/models/player/death from the front.fbx.import
+
+data/models/player/idle aiming.fbx
+
+data/models/player/idle aiming.fbx.import
+
+data/models/player/idle crouching aiming.fbx
+
+data/models/player/idle crouching aiming.fbx.import
+
+data/models/player/idle crouching.fbx
+
+data/models/player/idle crouching.fbx.import
+
+data/models/player/idle.fbx
+
+data/models/player/idle.fbx.import
+
+data/models/player/jump down.fbx
+
+data/models/player/jump down.fbx.import
+
+data/models/player/jump loop.fbx
+
+data/models/player/jump loop.fbx.import
+
+data/models/player/jump up.fbx
+
+data/models/player/jump up.fbx.import
+
+data/models/player/mixamo_com.anim
+
+data/models/player/run backward left.fbx
+
+data/models/player/run backward left.fbx.import
+
+data/models/player/run backward right.fbx
+
+data/models/player/run backward right.fbx.import
+
+data/models/player/run backward.fbx
+
+data/models/player/run backward.fbx.import
+
+data/models/player/run forward left.fbx
+
+data/models/player/run forward left.fbx.import
+
+data/models/player/run forward right.fbx
+
+data/models/player/run forward right.fbx.import
+
+data/models/player/run forward.fbx
+
+data/models/player/run forward.fbx.import
+
+data/models/player/run left.fbx
+
+data/models/player/run left.fbx.import
+
+data/models/player/run right.fbx
+
+data/models/player/run right.fbx.import
+
+data/models/player/sprint backward left.fbx
+
+data/models/player/sprint backward left.fbx.import
+
+data/models/player/sprint backward right.fbx
+
+data/models/player/sprint backward right.fbx.import
+
+data/models/player/sprint backward.fbx
+
+data/models/player/sprint backward.fbx.import
+
+data/models/player/sprint forward left.fbx
+
+data/models/player/sprint forward left.fbx.import
+
+data/models/player/sprint forward right.fbx
+
+data/models/player/sprint forward right.fbx.import
+
+data/models/player/sprint forward.fbx
+
+data/models/player/sprint forward.fbx.import
+
+data/models/player/sprint left.fbx
+
+data/models/player/sprint left.fbx.import
+
+data/models/player/sprint right.fbx
+
+data/models/player/sprint right.fbx.import
+
+data/models/player/turn 90 left.fbx
+
+data/models/player/turn 90 left.fbx.import
+
+data/models/player/turn 90 right.fbx
+
+data/models/player/turn 90 right.fbx.import
+
+data/models/player/walk backward left.fbx
+
+data/models/player/walk backward left.fbx.import
+
+data/models/player/walk backward right.fbx
+
+data/models/player/walk backward right.fbx.import
+
+data/models/player/walk backward.fbx
+
+data/models/player/walk backward.fbx.import
+
+data/models/player/walk crouching backward left.fbx
+
+data/models/player/walk crouching backward left.fbx.import
+
+data/models/player/walk crouching backward right.fbx
+
+data/models/player/walk crouching backward right.fbx.import
+
+data/models/player/walk crouching backward.fbx
+
+data/models/player/walk crouching backward.fbx.import
+
+data/models/player/walk crouching forward left.fbx
+
+data/models/player/walk crouching forward left.fbx.import
+
+data/models/player/walk crouching forward right.fbx
+
+data/models/player/walk crouching forward right.fbx.import
+
+data/models/player/walk crouching forward.fbx
+
+data/models/player/walk crouching forward.fbx.import
+
+data/models/player/walk crouching left.fbx
+
+data/models/player/walk crouching left.fbx.import
+
+data/models/player/walk crouching right.fbx
+
+data/models/player/walk crouching right.fbx.import
+
+data/models/player/walk forward left.fbx
+
+data/models/player/walk forward left.fbx.import
+
+data/models/player/walk forward right.fbx
+
+data/models/player/walk forward right.fbx.import
+
+data/models/player/walk forward.fbx
+
+data/models/player/walk forward.fbx.import
+
+data/models/player/walk left.fbx
+
+data/models/player/walk left.fbx.import
+
+data/models/player/walk right.fbx
+
+data/models/player/walk right.fbx.import
+
+.mono/
+
+.godot/
