@@ -40,4 +40,3 @@ script = ExtResource( 1 )
 skeleton_path = NodePath("../../Base/Skeleton")
 bone_name = "neck02"
 additional_rotation = Vector3( 0, 180, 0 )
-additional_bone_length = 1
