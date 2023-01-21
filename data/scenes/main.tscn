@@ -612,9 +612,6 @@ script = null
 material_override = ExtResource( 3 )
 script = null
 
-[node name="IK_LookAt" parent="New_default/ViewTarget" index="0"]
-additional_bone_length = 1.0
-
 [editable path="scenario/PortalPair"]
 [editable path="scenario/PortalPair/PortalA"]
 [editable path="scenario/PortalPair/PortalB"]

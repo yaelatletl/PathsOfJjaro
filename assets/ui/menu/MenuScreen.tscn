@@ -1,10 +1,25 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=11 format=2]
 
-[ext_resource path="res://assets/ui/menu/Terminal.tres" type="Theme" id=1]
-[ext_resource path="res://assets/ui/Menu/MenuScreen.gd" type="Script" id=2]
-[ext_resource path="res://assets/ui/Menu/terminals.tres" type="DynamicFont" id=3]
-[ext_resource path="res://assets/ui/Menu/MarathonLogo.png" type="Texture" id=4]
-[ext_resource path="res://assets/ui/Menu/control_option_component.tscn" type="PackedScene" id=5]
+[ext_resource path="res://assets/ui/menu/visual_assets/Terminal.tres" type="Theme" id=1]
+[ext_resource path="res://assets/ui/menu/MainMenu.gd" type="Script" id=2]
+[ext_resource path="res://assets/ui/menu/visual_assets/terminals.tres" type="DynamicFont" id=3]
+[ext_resource path="res://assets/ui/menu/visual_assets/MarathonLogo.png" type="Texture" id=4]
+[ext_resource path="res://assets/ui/menu/settings/controls/control_option_component.tscn" type="PackedScene" id=5]
+[ext_resource path="res://assets/ui/menu/network_host/NetworkHost.gd" type="Script" id=6]
+[ext_resource path="res://assets/ui/menu/network_host/NetworkLobby.gd" type="Script" id=7]
+[ext_resource path="res://assets/ui/menu/settings/Settings.gd" type="Script" id=8]
+
+[sub_resource type="GDScript" id=2]
+script/source = "extends LineEdit
+
+func _on_value_text_changed(text_in):
+	var new_text = \"\"
+	for i in range(text_in.length()):
+		var c = text_in[i]
+		if c >= \"0\" and c <= \"9\":
+			new_text += c
+	text = new_text
+"
 
 [sub_resource type="ButtonGroup" id=1]
 
@@ -86,6 +101,7 @@ margin_bottom = 20.0
 rect_pivot_offset = Vector2( -673.901, -176.922 )
 
 [node name="MenuContents" type="TabContainer" parent="Background/VBoxContainer"]
+unique_name_in_owner = true
 margin_top = 24.0
 margin_right = 511.0
 margin_bottom = 231.0
@@ -96,7 +112,6 @@ tabs_visible = false
 use_hidden_tabs_for_min_size = true
 
 [node name="Main" type="Tabs" parent="Background/VBoxContainer/MenuContents"]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 size_flags_horizontal = 3
@@ -123,15 +138,15 @@ alignment = 1
 
 [node name="Spacer4" type="Control" parent="Background/VBoxContainer/MenuContents/Main/HBoxContainer/Options"]
 margin_right = 119.0
-margin_bottom = 17.0
+margin_bottom = 15.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.5
 
-[node name="Play" type="Button" parent="Background/VBoxContainer/MenuContents/Main/HBoxContainer/Options"]
-margin_top = 21.0
+[node name="SinglePlayer" type="Button" parent="Background/VBoxContainer/MenuContents/Main/HBoxContainer/Options"]
+margin_top = 19.0
 margin_right = 119.0
-margin_bottom = 55.0
+margin_bottom = 49.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = ExtResource( 1 )
@@ -139,10 +154,10 @@ custom_fonts/font = ExtResource( 3 )
 text = "Start New Game"
 align = 0
 
-[node name="Play2" type="Button" parent="Background/VBoxContainer/MenuContents/Main/HBoxContainer/Options"]
-margin_top = 59.0
+[node name="GatherNetwork" type="Button" parent="Background/VBoxContainer/MenuContents/Main/HBoxContainer/Options"]
+margin_top = 53.0
 margin_right = 119.0
-margin_bottom = 93.0
+margin_bottom = 84.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = ExtResource( 1 )
@@ -150,10 +165,10 @@ custom_fonts/font = ExtResource( 3 )
 text = "Host Network Game"
 align = 0
 
-[node name="Play3" type="Button" parent="Background/VBoxContainer/MenuContents/Main/HBoxContainer/Options"]
-margin_top = 97.0
+[node name="JoinNetwork" type="Button" parent="Background/VBoxContainer/MenuContents/Main/HBoxContainer/Options"]
+margin_top = 88.0
 margin_right = 119.0
-margin_bottom = 131.0
+margin_bottom = 118.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = ExtResource( 1 )
@@ -164,9 +179,9 @@ text = "Join Network Game"
 align = 0
 
 [node name="Settings" type="Button" parent="Background/VBoxContainer/MenuContents/Main/HBoxContainer/Options"]
-margin_top = 135.0
+margin_top = 122.0
 margin_right = 119.0
-margin_bottom = 169.0
+margin_bottom = 153.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = ExtResource( 1 )
@@ -175,15 +190,23 @@ text = "Settings"
 align = 0
 
 [node name="Quit" type="Button" parent="Background/VBoxContainer/MenuContents/Main/HBoxContainer/Options"]
-margin_top = 173.0
+margin_top = 157.0
 margin_right = 119.0
-margin_bottom = 207.0
+margin_bottom = 187.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = ExtResource( 1 )
 custom_fonts/font = ExtResource( 3 )
 text = "Quit"
 align = 0
+
+[node name="Spacer5" type="Control" parent="Background/VBoxContainer/MenuContents/Main/HBoxContainer/Options"]
+margin_top = 191.0
+margin_right = 119.0
+margin_bottom = 207.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.5
 
 [node name="Spacer3" type="Control" parent="Background/VBoxContainer/MenuContents/Main/HBoxContainer"]
 margin_left = 147.0
@@ -238,353 +261,882 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.5
 
-[node name="Settings" type="Tabs" parent="Background/VBoxContainer/MenuContents"]
+[node name="NetworkHost" type="Tabs" parent="Background/VBoxContainer/MenuContents"]
+unique_name_in_owner = true
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource( 6 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Background/VBoxContainer/MenuContents/NetworkHost"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Title" type="Label" parent="Background/VBoxContainer/MenuContents/NetworkHost/VBoxContainer"]
+margin_right = 511.0
+margin_bottom = 14.0
+text = "Gathering Network Players"
+align = 1
+
+[node name="HSeparator" type="HSeparator" parent="Background/VBoxContainer/MenuContents/NetworkHost/VBoxContainer"]
+margin_top = 18.0
+margin_right = 511.0
+margin_bottom = 22.0
+
+[node name="Label" type="Label" parent="Background/VBoxContainer/MenuContents/NetworkHost/VBoxContainer"]
+margin_top = 26.0
+margin_right = 511.0
+margin_bottom = 40.0
+text = "Options"
+align = 1
+
+[node name="Spacer4" type="Control" parent="Background/VBoxContainer/MenuContents/NetworkHost/VBoxContainer"]
+margin_top = 44.0
+margin_right = 511.0
+margin_bottom = 60.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.2
+
+[node name="Options" type="HBoxContainer" parent="Background/VBoxContainer/MenuContents/NetworkHost/VBoxContainer"]
+margin_top = 64.0
+margin_right = 511.0
+margin_bottom = 188.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 1.5
+
+[node name="Spacer2" type="Control" parent="Background/VBoxContainer/MenuContents/NetworkHost/VBoxContainer/Options"]
+margin_right = 37.0
+margin_bottom = 124.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.2
+
+[node name="NetworkOptions" type="VBoxContainer" parent="Background/VBoxContainer/MenuContents/NetworkHost/VBoxContainer/Options"]
+margin_left = 41.0
+margin_right = 239.0
+margin_bottom = 124.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="MaxPlayers" type="HBoxContainer" parent="Background/VBoxContainer/MenuContents/NetworkHost/VBoxContainer/Options/NetworkOptions"]
+unique_name_in_owner = true
+margin_right = 198.0
+margin_bottom = 24.0
+
+[node name="Label" type="Label" parent="Background/VBoxContainer/MenuContents/NetworkHost/VBoxContainer/Options/NetworkOptions/MaxPlayers"]
+margin_top = 5.0
+margin_right = 84.0
+margin_bottom = 19.0
+size_flags_vertical = 6
+text = "Max Players:"
+
+[node name="value" type="SpinBox" parent="Background/VBoxContainer/MenuContents/NetworkHost/VBoxContainer/Options/NetworkOptions/MaxPlayers"]
+margin_left = 88.0
+margin_right = 198.0
+margin_bottom = 24.0
+min_value = 2.0
+max_value = 16.0
+value = 2.0
+
+[node name="HostPort" type="HBoxContainer" parent="Background/VBoxContainer/MenuContents/NetworkHost/VBoxContainer/Options/NetworkOptions"]
+unique_name_in_owner = true
+margin_top = 28.0
+margin_right = 198.0
+margin_bottom = 52.0
+
+[node name="Label" type="Label" parent="Background/VBoxContainer/MenuContents/NetworkHost/VBoxContainer/Options/NetworkOptions/HostPort"]
+margin_top = 5.0
+margin_right = 35.0
+margin_bottom = 19.0
+size_flags_vertical = 6
+text = "Port:"
+
+[node name="value" type="LineEdit" parent="Background/VBoxContainer/MenuContents/NetworkHost/VBoxContainer/Options/NetworkOptions/HostPort"]
+margin_left = 39.0
+margin_right = 198.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "5000"
+script = SubResource( 2 )
+
+[node name="Spacer3" type="Control" parent="Background/VBoxContainer/MenuContents/NetworkHost/VBoxContainer/Options"]
+margin_left = 243.0
+margin_right = 280.0
+margin_bottom = 124.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.2
+
+[node name="GameplayOptions" type="VBoxContainer" parent="Background/VBoxContainer/MenuContents/NetworkHost/VBoxContainer/Options"]
+margin_left = 284.0
+margin_right = 469.0
+margin_bottom = 124.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Aliens" type="CheckBox" parent="Background/VBoxContainer/MenuContents/NetworkHost/VBoxContainer/Options/GameplayOptions"]
+unique_name_in_owner = true
+margin_right = 185.0
+margin_bottom = 16.0
+text = "Aliens"
+
+[node name="PVP" type="CheckBox" parent="Background/VBoxContainer/MenuContents/NetworkHost/VBoxContainer/Options/GameplayOptions"]
+unique_name_in_owner = true
+margin_top = 20.0
+margin_right = 185.0
+margin_bottom = 36.0
+text = "Player vs Player"
+
+[node name="FriendlyFire" type="CheckBox" parent="Background/VBoxContainer/MenuContents/NetworkHost/VBoxContainer/Options/GameplayOptions"]
+unique_name_in_owner = true
+margin_top = 40.0
+margin_right = 185.0
+margin_bottom = 56.0
+text = "Friendly Fire"
+
+[node name="InfiniteAmmo" type="CheckBox" parent="Background/VBoxContainer/MenuContents/NetworkHost/VBoxContainer/Options/GameplayOptions"]
+unique_name_in_owner = true
+margin_top = 60.0
+margin_right = 185.0
+margin_bottom = 76.0
+text = "Infinite Ammo"
+
+[node name="RecordMatch" type="CheckBox" parent="Background/VBoxContainer/MenuContents/NetworkHost/VBoxContainer/Options/GameplayOptions"]
+unique_name_in_owner = true
+margin_top = 80.0
+margin_right = 185.0
+margin_bottom = 96.0
+disabled = true
+text = "Record Match"
+
+[node name="Spacer" type="Control" parent="Background/VBoxContainer/MenuContents/NetworkHost/VBoxContainer/Options"]
+margin_left = 473.0
+margin_right = 511.0
+margin_bottom = 124.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.2
+
+[node name="NavigationButtons" type="HBoxContainer" parent="Background/VBoxContainer/MenuContents/NetworkHost/VBoxContainer"]
+margin_top = 192.0
+margin_right = 511.0
+margin_bottom = 206.0
+
+[node name="Spacer4" type="Control" parent="Background/VBoxContainer/MenuContents/NetworkHost/VBoxContainer/NavigationButtons"]
+margin_right = 41.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.2
+
+[node name="Cancel" type="Button" parent="Background/VBoxContainer/MenuContents/NetworkHost/VBoxContainer/NavigationButtons"]
+margin_left = 45.0
+margin_right = 253.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+text = "Cancel"
+align = 2
+icon_align = 2
+
+[node name="Next" type="Button" parent="Background/VBoxContainer/MenuContents/NetworkHost/VBoxContainer/NavigationButtons"]
+margin_left = 257.0
+margin_right = 465.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+text = "Next"
+align = 2
+icon_align = 2
+
+[node name="Spacer5" type="Control" parent="Background/VBoxContainer/MenuContents/NetworkHost/VBoxContainer/NavigationButtons"]
+margin_left = 469.0
+margin_right = 511.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.2
+
+[node name="HTTPRequest" type="HTTPRequest" parent="Background/VBoxContainer/MenuContents/NetworkHost"]
+
+[node name="NetworkJoin" type="Tabs" parent="Background/VBoxContainer/MenuContents"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Settings" type="VBoxContainer" parent="Background/VBoxContainer/MenuContents"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource( 8 )
 
 [node name="TabContainer" type="TabContainer" parent="Background/VBoxContainer/MenuContents/Settings"]
-anchor_right = 1.0
-anchor_bottom = 1.0
+margin_right = 511.0
+margin_bottom = 189.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
 theme = ExtResource( 1 )
 
-[node name="Graphics" type="Tabs" parent="Background/VBoxContainer/MenuContents/Settings/TabContainer"]
-visible = false
+[node name="Graphics" type="HBoxContainer" parent="Background/VBoxContainer/MenuContents/Settings/TabContainer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = 24.0
 
-[node name="SSAO" type="CheckBox" parent="Background/VBoxContainer/MenuContents/Settings/TabContainer/Graphics"]
-margin_left = 40.0
-margin_top = 20.0
-margin_right = 280.0
-margin_bottom = 51.0
+[node name="Spacer4" type="Control" parent="Background/VBoxContainer/MenuContents/Settings/TabContainer/Graphics"]
+margin_right = 175.0
+margin_bottom = 165.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Background/VBoxContainer/MenuContents/Settings/TabContainer/Graphics"]
+margin_left = 179.0
+margin_right = 332.0
+margin_bottom = 165.0
+
+[node name="Spacer5" type="Control" parent="Background/VBoxContainer/MenuContents/Settings/TabContainer/Graphics/VBoxContainer"]
+margin_right = 153.0
+margin_bottom = 85.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="SSAO" type="CheckBox" parent="Background/VBoxContainer/MenuContents/Settings/TabContainer/Graphics/VBoxContainer"]
+margin_top = 89.0
+margin_right = 153.0
+margin_bottom = 105.0
 custom_colors/font_color = Color( 0.0078125, 1, 0, 1 )
 custom_fonts/font = ExtResource( 3 )
 text = "SS A. Occlusion"
 
-[node name="Screen Space Relfections" type="CheckBox" parent="Background/VBoxContainer/MenuContents/Settings/TabContainer/Graphics"]
-margin_left = 40.0
-margin_top = 50.0
-margin_right = 424.0
-margin_bottom = 81.0
+[node name="Screen Space Relfections" type="CheckBox" parent="Background/VBoxContainer/MenuContents/Settings/TabContainer/Graphics/VBoxContainer"]
+margin_top = 109.0
+margin_right = 153.0
+margin_bottom = 125.0
 custom_colors/font_color = Color( 0.0078125, 1, 0, 1 )
 custom_fonts/font = ExtResource( 3 )
 text = "SS Reflections"
 
-[node name="MSAA Filter" type="CheckBox" parent="Background/VBoxContainer/MenuContents/Settings/TabContainer/Graphics"]
-margin_left = 40.0
-margin_top = 80.0
-margin_right = 424.0
-margin_bottom = 111.0
+[node name="MSAA Filter" type="CheckBox" parent="Background/VBoxContainer/MenuContents/Settings/TabContainer/Graphics/VBoxContainer"]
+margin_top = 129.0
+margin_right = 153.0
+margin_bottom = 145.0
 custom_colors/font_color = Color( 0.0078125, 1, 0, 1 )
 custom_fonts/font = ExtResource( 3 )
-text = "MSAA Filter:"
+text = "MSAA Filter"
 
-[node name="AnsFilter" type="CheckBox" parent="Background/VBoxContainer/MenuContents/Settings/TabContainer/Graphics"]
-margin_left = 40.0
-margin_top = 110.0
-margin_right = 424.0
-margin_bottom = 141.0
+[node name="AnsFilter" type="CheckBox" parent="Background/VBoxContainer/MenuContents/Settings/TabContainer/Graphics/VBoxContainer"]
+margin_top = 149.0
+margin_right = 153.0
+margin_bottom = 165.0
 custom_colors/font_color = Color( 0.0078125, 1, 0, 1 )
 custom_fonts/font = ExtResource( 3 )
-text = "Ansiotropic filter: "
+text = "Ansiotropic filter "
 
-[node name="Video" type="Tabs" parent="Background/VBoxContainer/MenuContents/Settings/TabContainer"]
+[node name="Spacer3" type="Control" parent="Background/VBoxContainer/MenuContents/Settings/TabContainer/Graphics"]
+margin_left = 336.0
+margin_right = 511.0
+margin_bottom = 165.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Video" type="HBoxContainer" parent="Background/VBoxContainer/MenuContents/Settings/TabContainer"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = 24.0
+size_flags_horizontal = 3
+size_flags_vertical = 7
 
-[node name="Resolution" type="Label" parent="Background/VBoxContainer/MenuContents/Settings/TabContainer/Video"]
-margin_left = 30.0
-margin_top = 29.0
-margin_right = 100.0
-margin_bottom = 43.0
+[node name="Spacer" type="Control" parent="Background/VBoxContainer/MenuContents/Settings/TabContainer/Video"]
+margin_right = 167.0
+margin_bottom = 165.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Background/VBoxContainer/MenuContents/Settings/TabContainer/Video"]
+margin_left = 171.0
+margin_right = 339.0
+margin_bottom = 165.0
+size_flags_horizontal = 3
+size_flags_vertical = 7
+
+[node name="Spacer3" type="Control" parent="Background/VBoxContainer/MenuContents/Settings/TabContainer/Video/VBoxContainer"]
+margin_right = 168.0
+margin_bottom = 29.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Background/VBoxContainer/MenuContents/Settings/TabContainer/Video/VBoxContainer"]
+margin_top = 33.0
+margin_right = 168.0
+margin_bottom = 63.0
+size_flags_horizontal = 3
+size_flags_vertical = 7
+
+[node name="Resolution" type="Label" parent="Background/VBoxContainer/MenuContents/Settings/TabContainer/Video/VBoxContainer/HBoxContainer"]
+margin_right = 82.0
+margin_bottom = 30.0
+size_flags_horizontal = 3
+size_flags_vertical = 7
 custom_colors/font_color = Color( 0, 1, 0, 1 )
 custom_fonts/font = ExtResource( 3 )
 text = "Resolution"
 
-[node name="value" type="MenuButton" parent="Background/VBoxContainer/MenuContents/Settings/TabContainer/Video/Resolution"]
-margin_left = 80.0
-margin_right = 129.0
-margin_bottom = 14.0
+[node name="value" type="MenuButton" parent="Background/VBoxContainer/MenuContents/Settings/TabContainer/Video/VBoxContainer/HBoxContainer"]
+margin_left = 86.0
+margin_right = 168.0
+margin_bottom = 30.0
+size_flags_horizontal = 3
+size_flags_vertical = 7
 custom_colors/font_color = Color( 0, 1, 0, 1 )
 custom_fonts/font = ExtResource( 3 )
 group = SubResource( 1 )
 text = "Default"
 
-[node name="Screen Space Relfections" type="CheckBox" parent="Background/VBoxContainer/MenuContents/Settings/TabContainer/Video"]
-margin_left = 30.0
-margin_top = 59.0
-margin_right = 120.0
-margin_bottom = 75.0
+[node name="Screen Space Relfections" type="CheckBox" parent="Background/VBoxContainer/MenuContents/Settings/TabContainer/Video/VBoxContainer"]
+margin_top = 67.0
+margin_right = 168.0
+margin_bottom = 97.0
+size_flags_horizontal = 3
+size_flags_vertical = 7
 custom_colors/font_color = Color( 0, 1, 0, 1 )
 custom_fonts/font = ExtResource( 3 )
 text = "Fullscreen"
 
-[node name="Gamma Corection" type="Label" parent="Background/VBoxContainer/MenuContents/Settings/TabContainer/Video"]
-margin_left = 30.0
-margin_top = 94.0
-margin_right = 142.0
-margin_bottom = 108.0
+[node name="HBoxContainer2" type="HBoxContainer" parent="Background/VBoxContainer/MenuContents/Settings/TabContainer/Video/VBoxContainer"]
+margin_top = 101.0
+margin_right = 168.0
+margin_bottom = 131.0
+size_flags_horizontal = 3
+size_flags_vertical = 7
+
+[node name="Gamma Corection" type="Label" parent="Background/VBoxContainer/MenuContents/Settings/TabContainer/Video/VBoxContainer/HBoxContainer2"]
+margin_right = 112.0
+margin_bottom = 30.0
+size_flags_horizontal = 3
+size_flags_vertical = 7
 custom_colors/font_color = Color( 0, 1, 0, 1 )
 custom_fonts/font = ExtResource( 3 )
 text = "Gamma Correction"
 
-[node name="value" type="HSlider" parent="Background/VBoxContainer/MenuContents/Settings/TabContainer/Video/Gamma Corection"]
-margin_left = 130.0
-margin_right = 386.0
-margin_bottom = 16.0
+[node name="value" type="HSlider" parent="Background/VBoxContainer/MenuContents/Settings/TabContainer/Video/VBoxContainer/HBoxContainer2"]
+margin_left = 116.0
+margin_right = 168.0
+margin_bottom = 30.0
+size_flags_horizontal = 3
+size_flags_vertical = 7
 
-[node name="Brightness" type="Label" parent="Background/VBoxContainer/MenuContents/Settings/TabContainer/Video"]
-margin_left = 30.0
-margin_top = 124.0
-margin_right = 100.0
-margin_bottom = 138.0
+[node name="HBoxContainer3" type="HBoxContainer" parent="Background/VBoxContainer/MenuContents/Settings/TabContainer/Video/VBoxContainer"]
+margin_top = 135.0
+margin_right = 168.0
+margin_bottom = 165.0
+size_flags_horizontal = 3
+size_flags_vertical = 7
+
+[node name="Brightness" type="Label" parent="Background/VBoxContainer/MenuContents/Settings/TabContainer/Video/VBoxContainer/HBoxContainer3"]
+margin_right = 82.0
+margin_bottom = 30.0
+size_flags_horizontal = 3
+size_flags_vertical = 7
 custom_colors/font_color = Color( 0, 1, 0, 1 )
 custom_fonts/font = ExtResource( 3 )
 text = "Brightness"
 
-[node name="value" type="HSlider" parent="Background/VBoxContainer/MenuContents/Settings/TabContainer/Video/Brightness"]
-margin_left = 130.0
-margin_right = 386.0
-margin_bottom = 16.0
+[node name="value" type="HSlider" parent="Background/VBoxContainer/MenuContents/Settings/TabContainer/Video/VBoxContainer/HBoxContainer3"]
+margin_left = 86.0
+margin_right = 168.0
+margin_bottom = 30.0
+size_flags_horizontal = 3
+size_flags_vertical = 7
 
-[node name="Controls" type="Tabs" parent="Background/VBoxContainer/MenuContents/Settings/TabContainer"]
+[node name="Spacer2" type="Control" parent="Background/VBoxContainer/MenuContents/Settings/TabContainer/Video"]
+margin_left = 343.0
+margin_right = 511.0
+margin_bottom = 165.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Controls" type="VBoxContainer" parent="Background/VBoxContainer/MenuContents/Settings/TabContainer"]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = 24.0
 
 [node name="TabContainer" type="TabContainer" parent="Background/VBoxContainer/MenuContents/Settings/TabContainer/Controls"]
-anchor_left = 0.5
-anchor_right = 0.5
-margin_left = -168.5
-margin_top = 21.0
-margin_right = 168.5
-margin_bottom = 62.0
+margin_right = 511.0
+margin_bottom = 165.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
-[node name="Movement" type="Tabs" parent="Background/VBoxContainer/MenuContents/Settings/TabContainer/Controls/TabContainer"]
+[node name="Movement" type="HBoxContainer" parent="Background/VBoxContainer/MenuContents/Settings/TabContainer/Controls/TabContainer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = 24.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
-[node name="move_left" parent="Background/VBoxContainer/MenuContents/Settings/TabContainer/Controls/TabContainer/Movement" instance=ExtResource( 5 )]
-margin_left = -47.0
-margin_top = 48.0
-margin_right = 210.0
-margin_bottom = 68.0
+[node name="Spacer3" type="Control" parent="Background/VBoxContainer/MenuContents/Settings/TabContainer/Controls/TabContainer/Movement"]
+margin_right = 71.0
+margin_bottom = 141.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Background/VBoxContainer/MenuContents/Settings/TabContainer/Controls/TabContainer/Movement"]
+margin_left = 75.0
+margin_right = 435.0
+margin_bottom = 141.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Background/VBoxContainer/MenuContents/Settings/TabContainer/Controls/TabContainer/Movement/ScrollContainer"]
+margin_right = 360.0
+margin_bottom = 141.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="move_left" parent="Background/VBoxContainer/MenuContents/Settings/TabContainer/Controls/TabContainer/Movement/ScrollContainer/VBoxContainer" instance=ExtResource( 5 )]
+margin_top = 0.0
+margin_right = 360.0
+margin_bottom = 16.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
 Label_text = "Strafe Left"
 
-[node name="move_right" parent="Background/VBoxContainer/MenuContents/Settings/TabContainer/Controls/TabContainer/Movement" instance=ExtResource( 5 )]
-margin_left = -47.0
-margin_top = 28.0
-margin_right = 210.0
-margin_bottom = 48.0
+[node name="move_right" parent="Background/VBoxContainer/MenuContents/Settings/TabContainer/Controls/TabContainer/Movement/ScrollContainer/VBoxContainer" instance=ExtResource( 5 )]
+margin_top = 20.0
+margin_right = 360.0
+margin_bottom = 37.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
 Label_text = "Strafe right"
 
-[node name="move_forwards" parent="Background/VBoxContainer/MenuContents/Settings/TabContainer/Controls/TabContainer/Movement" instance=ExtResource( 5 )]
-margin_left = -47.0
-margin_top = 68.0
-margin_right = 210.0
-margin_bottom = 88.0
+[node name="move_forwards" parent="Background/VBoxContainer/MenuContents/Settings/TabContainer/Controls/TabContainer/Movement/ScrollContainer/VBoxContainer" instance=ExtResource( 5 )]
+margin_top = 41.0
+margin_right = 360.0
+margin_bottom = 58.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
 Label_text = "Move Forwards"
 
-[node name="move_backwards" parent="Background/VBoxContainer/MenuContents/Settings/TabContainer/Controls/TabContainer/Movement" instance=ExtResource( 5 )]
-margin_left = -47.0
-margin_top = 88.0
-margin_right = 210.0
-margin_bottom = 108.0
+[node name="move_backwards" parent="Background/VBoxContainer/MenuContents/Settings/TabContainer/Controls/TabContainer/Movement/ScrollContainer/VBoxContainer" instance=ExtResource( 5 )]
+margin_top = 62.0
+margin_right = 360.0
+margin_bottom = 78.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
 Label_text = "Move Backwards"
 
-[node name="jump" parent="Background/VBoxContainer/MenuContents/Settings/TabContainer/Controls/TabContainer/Movement" instance=ExtResource( 5 )]
-margin_left = -47.0
-margin_top = 108.0
-margin_right = 210.0
-margin_bottom = 128.0
+[node name="jump" parent="Background/VBoxContainer/MenuContents/Settings/TabContainer/Controls/TabContainer/Movement/ScrollContainer/VBoxContainer" instance=ExtResource( 5 )]
+margin_top = 82.0
+margin_right = 360.0
+margin_bottom = 99.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
 Label_text = "Jump"
 
-[node name="run" parent="Background/VBoxContainer/MenuContents/Settings/TabContainer/Controls/TabContainer/Movement" instance=ExtResource( 5 )]
-margin_left = -47.0
-margin_top = 128.0
-margin_right = 284.0
-margin_bottom = 148.0
+[node name="run" parent="Background/VBoxContainer/MenuContents/Settings/TabContainer/Controls/TabContainer/Movement/ScrollContainer/VBoxContainer" instance=ExtResource( 5 )]
+margin_top = 103.0
+margin_right = 360.0
+margin_bottom = 120.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
 Label_text = "Run/Walk"
 
-[node name="swim" parent="Background/VBoxContainer/MenuContents/Settings/TabContainer/Controls/TabContainer/Movement" instance=ExtResource( 5 )]
-margin_left = -47.0
-margin_top = 8.0
-margin_right = 210.0
-margin_bottom = 28.0
+[node name="swim" parent="Background/VBoxContainer/MenuContents/Settings/TabContainer/Controls/TabContainer/Movement/ScrollContainer/VBoxContainer" instance=ExtResource( 5 )]
+margin_top = 124.0
+margin_right = 360.0
+margin_bottom = 141.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
 Label_text = "Swim toggle"
 
-[node name="Combat" type="Tabs" parent="Background/VBoxContainer/MenuContents/Settings/TabContainer/Controls/TabContainer"]
+[node name="Spacer4" type="Control" parent="Background/VBoxContainer/MenuContents/Settings/TabContainer/Controls/TabContainer/Movement"]
+margin_left = 439.0
+margin_right = 511.0
+margin_bottom = 141.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.2
+
+[node name="Combat" type="HBoxContainer" parent="Background/VBoxContainer/MenuContents/Settings/TabContainer/Controls/TabContainer"]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = 24.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
-[node name="second_fire" parent="Background/VBoxContainer/MenuContents/Settings/TabContainer/Controls/TabContainer/Combat" instance=ExtResource( 5 )]
-margin_left = -47.0
-margin_top = 68.0
-margin_right = 210.0
-margin_bottom = 88.0
+[node name="Spacer5" type="Control" parent="Background/VBoxContainer/MenuContents/Settings/TabContainer/Controls/TabContainer/Combat"]
+margin_right = 71.0
+margin_bottom = 141.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.2
+
+[node name="ScrollContainer2" type="ScrollContainer" parent="Background/VBoxContainer/MenuContents/Settings/TabContainer/Controls/TabContainer/Combat"]
+margin_left = 75.0
+margin_right = 435.0
+margin_bottom = 141.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Background/VBoxContainer/MenuContents/Settings/TabContainer/Controls/TabContainer/Combat/ScrollContainer2"]
+margin_right = 257.0
+margin_bottom = 68.0
+
+[node name="second_fire" parent="Background/VBoxContainer/MenuContents/Settings/TabContainer/Controls/TabContainer/Combat/ScrollContainer2/VBoxContainer" instance=ExtResource( 5 )]
+margin_top = 0.0
+margin_right = 257.0
+margin_bottom = 14.0
 Label_text = "Secondary Fire"
 
-[node name="first_fire" parent="Background/VBoxContainer/MenuContents/Settings/TabContainer/Controls/TabContainer/Combat" instance=ExtResource( 5 )]
-margin_left = -47.0
-margin_top = 48.0
-margin_right = 210.0
-margin_bottom = 68.0
+[node name="first_fire" parent="Background/VBoxContainer/MenuContents/Settings/TabContainer/Controls/TabContainer/Combat/ScrollContainer2/VBoxContainer" instance=ExtResource( 5 )]
+margin_top = 18.0
+margin_right = 257.0
+margin_bottom = 32.0
 Label_text = "Primary fire"
 
-[node name="next_gun" parent="Background/VBoxContainer/MenuContents/Settings/TabContainer/Controls/TabContainer/Combat" instance=ExtResource( 5 )]
-margin_left = -47.0
-margin_top = 88.0
-margin_right = 213.0
-margin_bottom = 108.0
+[node name="next_gun" parent="Background/VBoxContainer/MenuContents/Settings/TabContainer/Controls/TabContainer/Combat/ScrollContainer2/VBoxContainer" instance=ExtResource( 5 )]
+margin_right = 257.0
+margin_bottom = 50.0
 Label_text = "Next gun"
 
-[node name="prev_gun" parent="Background/VBoxContainer/MenuContents/Settings/TabContainer/Controls/TabContainer/Combat" instance=ExtResource( 5 )]
-margin_left = -47.0
-margin_top = 108.0
-margin_right = 210.0
-margin_bottom = 128.0
+[node name="prev_gun" parent="Background/VBoxContainer/MenuContents/Settings/TabContainer/Controls/TabContainer/Combat/ScrollContainer2/VBoxContainer" instance=ExtResource( 5 )]
+margin_top = 54.0
+margin_right = 257.0
+margin_bottom = 68.0
 Label_text = "Previous gun"
 
-[node name="Comm" type="Tabs" parent="Background/VBoxContainer/MenuContents/Settings/TabContainer/Controls/TabContainer"]
+[node name="Spacer6" type="Control" parent="Background/VBoxContainer/MenuContents/Settings/TabContainer/Controls/TabContainer/Combat"]
+margin_left = 439.0
+margin_right = 511.0
+margin_bottom = 141.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.2
+
+[node name="Comm" type="HBoxContainer" parent="Background/VBoxContainer/MenuContents/Settings/TabContainer/Controls/TabContainer"]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = 24.0
 
-[node name="ui_right" parent="Background/VBoxContainer/MenuContents/Settings/TabContainer/Controls/TabContainer/Comm" instance=ExtResource( 5 )]
-margin_left = -47.0
-margin_top = 28.0
-margin_right = 284.0
-margin_bottom = 48.0
+[node name="Spacer7" type="Control" parent="Background/VBoxContainer/MenuContents/Settings/TabContainer/Controls/TabContainer/Comm"]
+margin_right = 71.0
+margin_bottom = 141.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Background/VBoxContainer/MenuContents/Settings/TabContainer/Controls/TabContainer/Comm"]
+margin_left = 75.0
+margin_right = 435.0
+margin_bottom = 141.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Background/VBoxContainer/MenuContents/Settings/TabContainer/Controls/TabContainer/Comm/ScrollContainer"]
+margin_right = 257.0
+margin_bottom = 32.0
+
+[node name="ui_right" parent="Background/VBoxContainer/MenuContents/Settings/TabContainer/Controls/TabContainer/Comm/ScrollContainer/VBoxContainer" instance=ExtResource( 5 )]
+margin_top = 0.0
+margin_right = 257.0
+margin_bottom = 14.0
 Label_text = "Chat"
 
-[node name="ui_right2" parent="Background/VBoxContainer/MenuContents/Settings/TabContainer/Controls/TabContainer/Comm" instance=ExtResource( 5 )]
-margin_left = -47.0
-margin_top = 48.0
-margin_right = 210.0
-margin_bottom = 68.0
+[node name="ui_right2" parent="Background/VBoxContainer/MenuContents/Settings/TabContainer/Controls/TabContainer/Comm/ScrollContainer/VBoxContainer" instance=ExtResource( 5 )]
+margin_top = 18.0
+margin_right = 257.0
+margin_bottom = 32.0
 Label_text = "Push-to-talk"
 
-[node name="Misc" type="Tabs" parent="Background/VBoxContainer/MenuContents/Settings/TabContainer/Controls/TabContainer"]
+[node name="Spacer8" type="Control" parent="Background/VBoxContainer/MenuContents/Settings/TabContainer/Controls/TabContainer/Comm"]
+margin_left = 439.0
+margin_right = 511.0
+margin_bottom = 141.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.2
+
+[node name="Misc" type="HBoxContainer" parent="Background/VBoxContainer/MenuContents/Settings/TabContainer/Controls/TabContainer"]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = 24.0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Background/VBoxContainer/MenuContents/Settings/TabContainer/Controls/TabContainer/Misc"]
-margin_left = 43.0
-margin_top = 28.0
-margin_right = 300.0
-margin_bottom = 96.0
+[node name="Spacer7" type="Control" parent="Background/VBoxContainer/MenuContents/Settings/TabContainer/Controls/TabContainer/Misc"]
+margin_right = 123.0
+margin_bottom = 141.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Background/VBoxContainer/MenuContents/Settings/TabContainer/Controls/TabContainer/Misc"]
+margin_left = 127.0
+margin_right = 167.0
+margin_bottom = 40.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Background/VBoxContainer/MenuContents/Settings/TabContainer/Controls/TabContainer/Misc/ScrollContainer"]
+margin_right = 257.0
+margin_bottom = 68.0
 __meta__ = {
 "_edit_group_": true
 }
 
-[node name="vol_plus" parent="Background/VBoxContainer/MenuContents/Settings/TabContainer/Controls/TabContainer/Misc/VBoxContainer" instance=ExtResource( 5 )]
+[node name="vol_plus" parent="Background/VBoxContainer/MenuContents/Settings/TabContainer/Controls/TabContainer/Misc/ScrollContainer/VBoxContainer" instance=ExtResource( 5 )]
 margin_top = 0.0
 margin_right = 257.0
 margin_bottom = 14.0
 Label_text = "Voulme up"
 
-[node name="vol_minus" parent="Background/VBoxContainer/MenuContents/Settings/TabContainer/Controls/TabContainer/Misc/VBoxContainer" instance=ExtResource( 5 )]
+[node name="vol_minus" parent="Background/VBoxContainer/MenuContents/Settings/TabContainer/Controls/TabContainer/Misc/ScrollContainer/VBoxContainer" instance=ExtResource( 5 )]
 margin_top = 18.0
 margin_right = 257.0
 margin_bottom = 32.0
 Label_text = "Volume down"
 
-[node name="gun_center" parent="Background/VBoxContainer/MenuContents/Settings/TabContainer/Controls/TabContainer/Misc/VBoxContainer" instance=ExtResource( 5 )]
+[node name="gun_center" parent="Background/VBoxContainer/MenuContents/Settings/TabContainer/Controls/TabContainer/Misc/ScrollContainer/VBoxContainer" instance=ExtResource( 5 )]
 margin_right = 257.0
 margin_bottom = 50.0
 Label_text = "Toggle gun position"
 
-[node name="open_map" parent="Background/VBoxContainer/MenuContents/Settings/TabContainer/Controls/TabContainer/Misc/VBoxContainer" instance=ExtResource( 5 )]
+[node name="open_map" parent="Background/VBoxContainer/MenuContents/Settings/TabContainer/Controls/TabContainer/Misc/ScrollContainer/VBoxContainer" instance=ExtResource( 5 )]
 margin_top = 54.0
 margin_right = 257.0
 margin_bottom = 68.0
 Label_text = "Open Minimap"
 
-[node name="Controls" type="HBoxContainer" parent="Background/VBoxContainer/MenuContents/Settings"]
-margin_left = 394.0
-margin_top = 186.0
-margin_right = 489.0
-margin_bottom = 200.0
+[node name="Spacer8" type="Control" parent="Background/VBoxContainer/MenuContents/Settings/TabContainer/Controls/TabContainer/Misc"]
+margin_left = 388.0
+margin_right = 511.0
+margin_bottom = 141.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.2
 
-[node name="Done" type="Button" parent="Background/VBoxContainer/MenuContents/Settings/Controls"]
-margin_right = 28.0
-margin_bottom = 14.0
-theme = ExtResource( 1 )
-custom_fonts/font = ExtResource( 3 )
-text = "Done"
+[node name="NavigationButtons2" type="HBoxContainer" parent="Background/VBoxContainer/MenuContents/Settings"]
+margin_top = 193.0
+margin_right = 511.0
+margin_bottom = 207.0
 
-[node name="Control" type="Control" parent="Background/VBoxContainer/MenuContents/Settings/Controls"]
-margin_left = 32.0
-margin_right = 49.0
+[node name="Spacer4" type="Control" parent="Background/VBoxContainer/MenuContents/Settings/NavigationButtons2"]
+margin_right = 41.0
 margin_bottom = 14.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
+size_flags_stretch_ratio = 0.2
 
-[node name="Cancel" type="Button" parent="Background/VBoxContainer/MenuContents/Settings/Controls"]
-margin_left = 53.0
-margin_right = 95.0
+[node name="Cancel" type="Button" parent="Background/VBoxContainer/MenuContents/Settings/NavigationButtons2"]
+margin_left = 45.0
+margin_right = 253.0
 margin_bottom = 14.0
-theme = ExtResource( 1 )
-custom_fonts/font = ExtResource( 3 )
+size_flags_horizontal = 3
 text = "Cancel"
+align = 2
+icon_align = 2
 
-[node name="Net_Host" type="Tabs" parent="Background/VBoxContainer/MenuContents"]
-visible = false
-margin_top = -39.0
+[node name="Save" type="Button" parent="Background/VBoxContainer/MenuContents/Settings/NavigationButtons2"]
+margin_left = 257.0
+margin_right = 465.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+text = "Save"
+align = 2
+icon_align = 2
+
+[node name="Spacer5" type="Control" parent="Background/VBoxContainer/MenuContents/Settings/NavigationButtons2"]
+margin_left = 469.0
 margin_right = 511.0
-margin_bottom = 217.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.2
 
-[node name="IP" type="Label" parent="Background/VBoxContainer/MenuContents/Net_Host"]
-margin_left = 20.0
-margin_top = 70.0
-margin_right = 216.0
-margin_bottom = 84.0
-text = "Current IP : 345.345.234.345"
+[node name="NetworkLobby" type="Control" parent="Background/VBoxContainer/MenuContents"]
+visible = false
+margin_right = 511.0
+margin_bottom = 207.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource( 7 )
 
-[node name="IP2" type="Label" parent="Background/VBoxContainer/MenuContents/Net_Host"]
-margin_left = 20.0
-margin_top = 30.0
-margin_right = 216.0
-margin_bottom = 44.0
+[node name="VBoxContainer" type="VBoxContainer" parent="Background/VBoxContainer/MenuContents/NetworkLobby"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Title" type="Label" parent="Background/VBoxContainer/MenuContents/NetworkLobby/VBoxContainer"]
+margin_right = 511.0
+margin_bottom = 14.0
+size_flags_vertical = 1
+size_flags_stretch_ratio = 0.2
 text = "Gathering Network Players"
+align = 1
+valign = 1
 
-[node name="Aliens" type="CheckBox" parent="Background/VBoxContainer/MenuContents/Net_Host"]
-margin_left = 20.0
-margin_top = 100.0
-margin_right = 82.0
-margin_bottom = 116.0
-text = "Aliens"
+[node name="HSeparator" type="HSeparator" parent="Background/VBoxContainer/MenuContents/NetworkLobby/VBoxContainer"]
+margin_top = 18.0
+margin_right = 511.0
+margin_bottom = 22.0
 
-[node name="PVP" type="CheckBox" parent="Background/VBoxContainer/MenuContents/Net_Host"]
-margin_left = 20.0
-margin_top = 120.0
-margin_right = 82.0
-margin_bottom = 136.0
-text = "Player vs Player"
+[node name="HBoxContainer" type="HBoxContainer" parent="Background/VBoxContainer/MenuContents/NetworkLobby/VBoxContainer"]
+margin_top = 26.0
+margin_right = 511.0
+margin_bottom = 189.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 2.0
 
-[node name="PVP2" type="CheckBox" parent="Background/VBoxContainer/MenuContents/Net_Host"]
-margin_left = 20.0
-margin_top = 140.0
-margin_right = 152.0
-margin_bottom = 156.0
-text = "Infinite Ammo"
+[node name="Spacer3" type="Control" parent="Background/VBoxContainer/MenuContents/NetworkLobby/VBoxContainer/HBoxContainer"]
+margin_right = 38.0
+margin_bottom = 163.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.2
 
-[node name="PVP3" type="CheckBox" parent="Background/VBoxContainer/MenuContents/Net_Host"]
-margin_left = 20.0
-margin_top = 160.0
-margin_right = 152.0
-margin_bottom = 176.0
-disabled = true
-text = "Record Match"
+[node name="Info" type="VBoxContainer" parent="Background/VBoxContainer/MenuContents/NetworkLobby/VBoxContainer/HBoxContainer"]
+margin_left = 42.0
+margin_right = 232.0
+margin_bottom = 163.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Title" type="Label" parent="Background/VBoxContainer/MenuContents/NetworkLobby/VBoxContainer/HBoxContainer/Info"]
+margin_right = 190.0
+margin_bottom = 14.0
+text = "Host Info"
+align = 1
+
+[node name="Info" type="HBoxContainer" parent="Background/VBoxContainer/MenuContents/NetworkLobby/VBoxContainer/HBoxContainer/Info"]
+margin_top = 18.0
+margin_right = 190.0
+margin_bottom = 163.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Spacer" type="Control" parent="Background/VBoxContainer/MenuContents/NetworkLobby/VBoxContainer/HBoxContainer/Info/Info"]
+margin_right = 26.0
+margin_bottom = 145.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.2
+
+[node name="IP" type="Label" parent="Background/VBoxContainer/MenuContents/NetworkLobby/VBoxContainer/HBoxContainer/Info/Info"]
+margin_left = 30.0
+margin_top = 57.0
+margin_right = 159.0
+margin_bottom = 88.0
+size_flags_horizontal = 3
+size_flags_vertical = 6
+text = "Public IP : 345.345.234.345"
+autowrap = true
+
+[node name="Spacer2" type="Control" parent="Background/VBoxContainer/MenuContents/NetworkLobby/VBoxContainer/HBoxContainer/Info/Info"]
+margin_left = 163.0
+margin_right = 190.0
+margin_bottom = 145.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.2
+
+[node name="Spacer4" type="Control" parent="Background/VBoxContainer/MenuContents/NetworkLobby/VBoxContainer/HBoxContainer"]
+margin_left = 236.0
+margin_right = 274.0
+margin_bottom = 163.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.2
+
+[node name="Players2" type="VBoxContainer" parent="Background/VBoxContainer/MenuContents/NetworkLobby/VBoxContainer/HBoxContainer"]
+margin_left = 278.0
+margin_right = 468.0
+margin_bottom = 163.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="!_Label" type="Label" parent="Background/VBoxContainer/MenuContents/NetworkLobby/VBoxContainer/HBoxContainer/Players2"]
+margin_right = 190.0
+margin_bottom = 14.0
+size_flags_vertical = 1
+text = "Players"
+align = 1
+
+[node name="Players" type="ScrollContainer" parent="Background/VBoxContainer/MenuContents/NetworkLobby/VBoxContainer/HBoxContainer/Players2"]
+margin_top = 18.0
+margin_right = 190.0
+margin_bottom = 163.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PanelContainer" type="PanelContainer" parent="Background/VBoxContainer/MenuContents/NetworkLobby/VBoxContainer/HBoxContainer/Players2/Players"]
+margin_right = 190.0
+margin_bottom = 145.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Background/VBoxContainer/MenuContents/NetworkLobby/VBoxContainer/HBoxContainer/Players2/Players/PanelContainer"]
+margin_right = 190.0
+margin_bottom = 145.0
+
+[node name="Spacer5" type="Control" parent="Background/VBoxContainer/MenuContents/NetworkLobby/VBoxContainer/HBoxContainer"]
+margin_left = 472.0
+margin_right = 511.0
+margin_bottom = 163.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.2
+
+[node name="NavigationButtons" type="HBoxContainer" parent="Background/VBoxContainer/MenuContents/NetworkLobby/VBoxContainer"]
+margin_top = 193.0
+margin_right = 511.0
+margin_bottom = 207.0
+
+[node name="Spacer4" type="Control" parent="Background/VBoxContainer/MenuContents/NetworkLobby/VBoxContainer/NavigationButtons"]
+margin_right = 41.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.2
+
+[node name="Cancel" type="Button" parent="Background/VBoxContainer/MenuContents/NetworkLobby/VBoxContainer/NavigationButtons"]
+margin_left = 45.0
+margin_right = 253.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+text = "Cancel"
+align = 2
+icon_align = 2
+
+[node name="Begin" type="Button" parent="Background/VBoxContainer/MenuContents/NetworkLobby/VBoxContainer/NavigationButtons"]
+margin_left = 257.0
+margin_right = 465.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+text = "Begin Match"
+align = 2
+icon_align = 2
+
+[node name="Spacer5" type="Control" parent="Background/VBoxContainer/MenuContents/NetworkLobby/VBoxContainer/NavigationButtons"]
+margin_left = 469.0
+margin_right = 511.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.2
+
+[node name="SinglePlayerMenu" type="Tabs" parent="Background/VBoxContainer/MenuContents"]
+visible = false
+margin_right = 40.0
+margin_bottom = 24.0
 
 [node name="BottomContainer" type="PanelContainer" parent="Background/VBoxContainer"]
 margin_top = 235.0
@@ -642,12 +1194,16 @@ margin_right = 511.0
 margin_bottom = 21.0
 rect_pivot_offset = Vector2( -673.901, -176.922 )
 
-[node name="HTTPRequest" type="HTTPRequest" parent="."]
-
-[connection signal="pressed" from="Background/VBoxContainer/MenuContents/Main/HBoxContainer/Options/Play" to="." method="_on_Play_pressed"]
-[connection signal="pressed" from="Background/VBoxContainer/MenuContents/Main/HBoxContainer/Options/Play2" to="." method="_on_HostNet_pressed"]
+[connection signal="pressed" from="Background/VBoxContainer/MenuContents/Main/HBoxContainer/Options/SinglePlayer" to="." method="_on_SinglePlayer_pressed"]
+[connection signal="pressed" from="Background/VBoxContainer/MenuContents/Main/HBoxContainer/Options/GatherNetwork" to="." method="_on_HostNet_pressed"]
 [connection signal="pressed" from="Background/VBoxContainer/MenuContents/Main/HBoxContainer/Options/Settings" to="." method="_on_Settings_pressed"]
-[connection signal="pressed" from="Background/VBoxContainer/MenuContents/Settings/Controls/Cancel" to="." method="_on_Cancel_pressed"]
-[connection signal="visibility_changed" from="Background/VBoxContainer/MenuContents/Net_Host/IP" to="." method="_on_IP_visibility_changed"]
-[connection signal="visibility_changed" from="Background/VBoxContainer/MenuContents/Net_Host/IP2" to="." method="_on_IP_visibility_changed"]
-[connection signal="request_completed" from="HTTPRequest" to="." method="_on_HTTPRequest_request_completed"]
+[connection signal="pressed" from="Background/VBoxContainer/MenuContents/Main/HBoxContainer/Options/Quit" to="." method="_on_Quit_pressed"]
+[connection signal="text_changed" from="Background/VBoxContainer/MenuContents/NetworkHost/VBoxContainer/Options/NetworkOptions/HostPort/value" to="Background/VBoxContainer/MenuContents/NetworkHost/VBoxContainer/Options/NetworkOptions/HostPort/value" method="_on_value_text_changed"]
+[connection signal="pressed" from="Background/VBoxContainer/MenuContents/NetworkHost/VBoxContainer/NavigationButtons/Cancel" to="Background/VBoxContainer/MenuContents/NetworkHost" method="_on_NavigationCancel_pressed"]
+[connection signal="pressed" from="Background/VBoxContainer/MenuContents/NetworkHost/VBoxContainer/NavigationButtons/Next" to="Background/VBoxContainer/MenuContents/NetworkHost" method="_on_NavigationNext_pressed"]
+[connection signal="request_completed" from="Background/VBoxContainer/MenuContents/NetworkHost/HTTPRequest" to="Background/VBoxContainer/MenuContents/NetworkHost" method="_on_HTTPRequest_request_completed"]
+[connection signal="pressed" from="Background/VBoxContainer/MenuContents/Settings/NavigationButtons2/Cancel" to="Background/VBoxContainer/MenuContents/Settings" method="_on_Cancel_pressed"]
+[connection signal="pressed" from="Background/VBoxContainer/MenuContents/Settings/NavigationButtons2/Save" to="Background/VBoxContainer/MenuContents/Settings" method="_on_Save_pressed"]
+[connection signal="visibility_changed" from="Background/VBoxContainer/MenuContents/NetworkLobby/VBoxContainer/HBoxContainer/Info/Info/IP" to="Background/VBoxContainer/MenuContents/NetworkHost" method="_on_IP_visibility_changed"]
+[connection signal="pressed" from="Background/VBoxContainer/MenuContents/NetworkLobby/VBoxContainer/NavigationButtons/Cancel" to="Background/VBoxContainer/MenuContents/NetworkLobby" method="_on_Cancel_pressed"]
+[connection signal="pressed" from="Background/VBoxContainer/MenuContents/NetworkLobby/VBoxContainer/NavigationButtons/Begin" to="Background/VBoxContainer/MenuContents/NetworkLobby" method="_on_Begin_pressed"]

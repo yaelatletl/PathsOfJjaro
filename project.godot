@@ -120,7 +120,7 @@ window/vsync/use_vsync=false
 
 [editor_plugins]
 
-enabled=PoolStringArray( "res://addons/goap/plugin.cfg", "res://addons/multirun/plugin.cfg" )
+enabled=PoolStringArray( "res://addons/goap/plugin.cfg", "res://addons/multirun/plugin.cfg", "res://addons/sade/plugin.cfg" )
 
 [global]
 
