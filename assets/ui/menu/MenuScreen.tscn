@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://assets/ui/menu/visual_assets/Terminal.tres" type="Theme" id=1]
 [ext_resource path="res://assets/ui/menu/MainMenu.gd" type="Script" id=2]
@@ -10,8 +10,17 @@
 [ext_resource path="res://assets/ui/menu/settings/Settings.gd" type="Script" id=8]
 [ext_resource path="res://assets/ui/menu/network_join/NetworkJoin.gd" type="Script" id=9]
 [ext_resource path="res://assets/ui/menu/do_not_enter_letters.gd" type="Script" id=10]
+[ext_resource path="res://assets/ui/menu/SinglePlayerMenu.gd" type="Script" id=11]
 
 [sub_resource type="ButtonGroup" id=1]
+
+[sub_resource type="InputEventKey" id=2]
+shift = true
+control = true
+command = true
+
+[sub_resource type="ShortCut" id=3]
+shortcut = SubResource( 2 )
 
 [node name="MenuScreen" type="PanelContainer"]
 margin_right = 511.0
@@ -142,7 +151,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = ExtResource( 1 )
 custom_fonts/font = ExtResource( 3 )
-text = "Start New Game"
+text = "Single Player"
 align = 0
 
 [node name="GatherNetwork" type="Button" parent="Background/VBoxContainer/MenuContents/Main/HBoxContainer/Options"]
@@ -454,6 +463,7 @@ size_flags_stretch_ratio = 0.2
 [node name="HTTPRequest" type="HTTPRequest" parent="Background/VBoxContainer/MenuContents/NetworkHost"]
 
 [node name="NetworkJoin" type="Control" parent="Background/VBoxContainer/MenuContents"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 9 )
@@ -1126,8 +1136,8 @@ size_flags_stretch_ratio = 0.2
 [node name="NetworkLobby" type="Control" parent="Background/VBoxContainer/MenuContents"]
 unique_name_in_owner = true
 visible = false
-margin_right = 511.0
-margin_bottom = 207.0
+anchor_right = 1.0
+anchor_bottom = 1.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource( 7 )
@@ -1317,10 +1327,79 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.2
 
-[node name="SinglePlayerMenu" type="Tabs" parent="Background/VBoxContainer/MenuContents"]
+[node name="SinglePlayerMenu" type="Control" parent="Background/VBoxContainer/MenuContents"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 11 )
+
+[node name="Options2" type="VBoxContainer" parent="Background/VBoxContainer/MenuContents/SinglePlayerMenu"]
+margin_left = 24.0
+margin_right = 143.0
+margin_bottom = 207.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+alignment = 1
+
+[node name="Spacer4" type="Control" parent="Background/VBoxContainer/MenuContents/SinglePlayerMenu/Options2"]
+margin_right = 119.0
+margin_bottom = 23.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.5
+
+[node name="newGame" type="Button" parent="Background/VBoxContainer/MenuContents/SinglePlayerMenu/Options2"]
+margin_top = 27.0
+margin_right = 119.0
+margin_bottom = 75.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 1 )
+custom_fonts/font = ExtResource( 3 )
+text = "Begin New Game"
+align = 0
+
+[node name="SavedGame" type="Button" parent="Background/VBoxContainer/MenuContents/SinglePlayerMenu/Options2"]
+margin_top = 79.0
+margin_right = 119.0
+margin_bottom = 127.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 1 )
+custom_fonts/font = ExtResource( 3 )
+text = "Load Saved Game"
+align = 0
+
+[node name="Select" type="Button" parent="Background/VBoxContainer/MenuContents/SinglePlayerMenu/Options2"]
 visible = false
-margin_right = 40.0
-margin_bottom = 24.0
+margin_top = 105.0
+margin_right = 119.0
+margin_bottom = 142.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 1 )
+custom_fonts/font = ExtResource( 3 )
+shortcut = SubResource( 3 )
+text = "Select Mission"
+align = 0
+
+[node name="Recorded" type="Button" parent="Background/VBoxContainer/MenuContents/SinglePlayerMenu/Options2"]
+margin_top = 131.0
+margin_right = 119.0
+margin_bottom = 179.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 1 )
+custom_fonts/font = ExtResource( 3 )
+text = "Play Recorded "
+align = 0
+
+[node name="Spacer5" type="Control" parent="Background/VBoxContainer/MenuContents/SinglePlayerMenu/Options2"]
+margin_top = 183.0
+margin_right = 119.0
+margin_bottom = 207.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.5
 
 [node name="BottomContainer" type="PanelContainer" parent="Background/VBoxContainer"]
 margin_top = 235.0
@@ -1397,3 +1476,7 @@ rect_pivot_offset = Vector2( -673.901, -176.922 )
 [connection signal="visibility_changed" from="Background/VBoxContainer/MenuContents/NetworkLobby/VBoxContainer/HBoxContainer/Info/Port/value" to="Background/VBoxContainer/MenuContents/NetworkLobby" method="_on_value_visibility_changed"]
 [connection signal="pressed" from="Background/VBoxContainer/MenuContents/NetworkLobby/VBoxContainer/NavigationButtons/Cancel" to="Background/VBoxContainer/MenuContents/NetworkLobby" method="_on_Cancel_pressed"]
 [connection signal="pressed" from="Background/VBoxContainer/MenuContents/NetworkLobby/VBoxContainer/NavigationButtons/Begin" to="Background/VBoxContainer/MenuContents/NetworkLobby" method="_on_Begin_pressed"]
+[connection signal="pressed" from="Background/VBoxContainer/MenuContents/SinglePlayerMenu/Options2/newGame" to="Background/VBoxContainer/MenuContents/SinglePlayerMenu" method="_on_newGame_pressed"]
+[connection signal="pressed" from="Background/VBoxContainer/MenuContents/SinglePlayerMenu/Options2/SavedGame" to="Background/VBoxContainer/MenuContents/SinglePlayerMenu" method="_on_SavedGame_pressed"]
+[connection signal="pressed" from="Background/VBoxContainer/MenuContents/SinglePlayerMenu/Options2/Select" to="Background/VBoxContainer/MenuContents/SinglePlayerMenu" method="_on_Select_pressed"]
+[connection signal="pressed" from="Background/VBoxContainer/MenuContents/SinglePlayerMenu/Options2/Recorded" to="Background/VBoxContainer/MenuContents/SinglePlayerMenu" method="_on_Recorded_pressed"]
