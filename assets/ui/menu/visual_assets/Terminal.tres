@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=14 format=2]
+[gd_resource type="Theme" load_steps=15 format=2]
 
 [ext_resource path="res://assets/ui/menu/visual_assets/terminals.tres" type="DynamicFont" id=1]
 
@@ -61,6 +61,8 @@ expand_margin_bottom = 6.0
 
 [sub_resource type="StyleBoxFlat" id=6]
 
+[sub_resource type="StyleBoxFlat" id=13]
+
 [sub_resource type="StyleBoxFlat" id=7]
 bg_color = Color( 0.195313, 0.195313, 0.195313, 1 )
 border_width_left = 2
@@ -113,8 +115,14 @@ expand_margin_right = 3.0
 expand_margin_top = 1.0
 expand_margin_bottom = 1.0
 
-[sub_resource type="StyleBoxFlat" id=12]
-border_color = Color( 0.0335777, 0.960938, 0.0262756, 1 )
+[sub_resource type="StyleBoxFlat" id=14]
+bg_color = Color( 0.482353, 0.482353, 0.482353, 1 )
+border_width_left = 2
+border_width_top = 15
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 0.270588, 0.270588, 0.270588, 1 )
+expand_margin_top = 15.0
 
 [resource]
 default_font = ExtResource( 1 )
@@ -330,7 +338,7 @@ PopupMenu/styles/hover = null
 PopupMenu/styles/panel = null
 PopupMenu/styles/panel_disabled = null
 PopupMenu/styles/separator = null
-PopupPanel/styles/panel = null
+PopupPanel/styles/panel = SubResource( 13 )
 ProgressBar/colors/font_color = Color( 0, 0, 0, 1 )
 ProgressBar/colors/font_color_shadow = Color( 0, 0, 0, 1 )
 ProgressBar/fonts/font = ExtResource( 1 )
@@ -499,12 +507,12 @@ VSplitContainer/constants/autohide = 1
 VSplitContainer/constants/separation = 12
 VSplitContainer/icons/grabber = null
 VSplitContainer/styles/bg = null
-WindowDialog/colors/title_color = Color( 0.862698, 0.980469, 0.0382996, 1 )
+WindowDialog/colors/title_color = Color( 1, 0.772549, 0, 1 )
 WindowDialog/constants/close_h_ofs = 18
-WindowDialog/constants/close_v_ofs = 18
-WindowDialog/constants/scaleborder_size = 4
-WindowDialog/constants/title_height = 20
+WindowDialog/constants/close_v_ofs = 16
+WindowDialog/constants/scaleborder_size = 12
+WindowDialog/constants/title_height = 15
 WindowDialog/fonts/title_font = ExtResource( 1 )
 WindowDialog/icons/close = null
 WindowDialog/icons/close_highlight = null
-WindowDialog/styles/panel = SubResource( 12 )
+WindowDialog/styles/panel = SubResource( 14 )
