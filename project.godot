@@ -94,7 +94,7 @@ _global_script_class_icons={
 
 config/name="Paths Of Jjaro"
 config/description="Open Source remake of Bungie's Marathon"
-run/main_scene="res://data/scenes/main.tscn"
+run/main_scene="res://assets/ui/menu/MainMenu.tscn"
 config/icon="res://icon.png"
 
 [autoload]

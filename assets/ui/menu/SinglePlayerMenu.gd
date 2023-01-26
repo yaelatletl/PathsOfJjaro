@@ -16,3 +16,6 @@ func _on_SavedGame_pressed():
 func _on_Recorded_pressed():
 	#Check recorded games. 
 	pass # Replace with function body.
+
+func _on_Cancel_pressed():
+	get_node("%MenuContents").current_tab = 0 #Return to main menu.
