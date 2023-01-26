@@ -102,6 +102,8 @@ config/icon="res://icon.png"
 Gamestate="*res://data/singletons/gamestate.gd"
 Pooling="*res://data/singletons/pooling.gd"
 GlobalSettings="*res://data/singletons/global_settings.gd"
+MaterialPool="*res://data/singletons/material_pool.gd"
+InputMaping="*res://data/singletons/input_maping.gd"
 
 [debug]
 

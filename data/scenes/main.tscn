@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=2]
+[gd_scene load_steps=31 format=2]
 
 [ext_resource path="res://test_scenario/Models/Textures/Concrete/Concrete.png" type="Texture" id=1]
 [ext_resource path="res://test_scenario/Test Scene.tscn" type="PackedScene" id=2]
@@ -16,6 +16,8 @@
 [ext_resource path="res://addons/portals/shaders/Portal.shader" type="Shader" id=14]
 [ext_resource path="res://assets/picakbles/ammo/ExampleAmmo.tscn" type="PackedScene" id=15]
 [ext_resource path="res://data/map/world.gd" type="Script" id=16]
+[ext_resource path="res://data/scripts/character/player.gd" type="Script" id=17]
+[ext_resource path="res://assets/audio/sfx/teleport/teleportin.wav" type="AudioStream" id=18]
 
 [sub_resource type="CubeMesh" id=3]
 size = Vector3( 1, 6, 20 )
@@ -242,6 +244,9 @@ resource_local_to_scene = true
 shader = SubResource( 14 )
 shader_param/view_resolution = null
 shader_param/smoothness = 1.0
+
+[sub_resource type="BoxShape" id=16]
+extents = Vector3( 0.556489, 0.778384, 0.473011 )
 
 [node name="main" type="Spatial"]
 script = ExtResource( 16 )
@@ -569,7 +574,7 @@ transform = Transform( 0.841511, 0.54024, 0, -0.54024, 0.841511, 0, 0, 0, 1, -2.
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.72739, 2.31437, 2.47878 )
 
 [node name="character" parent="." instance=ExtResource( 9 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.50289, 6.53228, 8.8432 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 87.2927, 5.20351, 140.479 )
 collision_layer = 11
 collision_mask = 11
 
@@ -615,7 +620,49 @@ script = null
 [node name="IK_LookAt" parent="New_default/ViewTarget" index="0"]
 additional_bone_length = 1
 
+[node name="KinematicBody" type="KinematicBody" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 84.9846, 1.41341, 138.249 )
+script = ExtResource( 17 )
+
+[node name="New_default2" parent="KinematicBody" instance=ExtResource( 7 )]
+
+[node name="BaseBody003" parent="KinematicBody/New_default2/Base/Skeleton" index="0"]
+script = null
+
+[node name="BaseBody004" parent="KinematicBody/New_default2/Base/Skeleton" index="1"]
+script = null
+
+[node name="BaseBody006" parent="KinematicBody/New_default2/Base/Skeleton" index="2"]
+script = null
+
+[node name="Cube004" parent="KinematicBody/New_default2/Base/Skeleton" index="3"]
+script = null
+
+[node name="Cube015" parent="KinematicBody/New_default2/Base/Skeleton" index="4"]
+script = null
+
+[node name="Cube016" parent="KinematicBody/New_default2/Base/Skeleton" index="5"]
+script = null
+
+[node name="Cube017" parent="KinematicBody/New_default2/Base/Skeleton" index="6"]
+script = null
+
+[node name="Cube020" parent="KinematicBody/New_default2/Base/Skeleton" index="7"]
+script = null
+
+[node name="IK_LookAt" parent="KinematicBody/New_default2/ViewTarget" index="0"]
+additional_bone_length = 1
+
+[node name="SFX" type="AudioStreamPlayer3D" parent="KinematicBody/New_default2"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.05734, 0 )
+stream = ExtResource( 18 )
+
+[node name="CollisionShape" type="CollisionShape" parent="KinematicBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.868554, 0 )
+shape = SubResource( 16 )
+
 [editable path="scenario/PortalPair"]
 [editable path="scenario/PortalPair/PortalA"]
 [editable path="scenario/PortalPair/PortalB"]
 [editable path="New_default"]
+[editable path="KinematicBody/New_default2"]
