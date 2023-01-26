@@ -662,7 +662,7 @@ theme = ExtResource( 1 )
 [node name="Graphics" type="HBoxContainer" parent="Background/VBoxContainer/MenuContents/Settings/TabContainer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_top = 24.0
+margin_top = 20.0
 
 [node name="Spacer4" type="Control" parent="Background/VBoxContainer/MenuContents/Settings/TabContainer/Graphics"]
 margin_right = 175.0
@@ -852,7 +852,7 @@ size_flags_vertical = 3
 [node name="Movement" type="HBoxContainer" parent="Background/VBoxContainer/MenuContents/Settings/TabContainer/Controls/TabContainer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_top = 24.0
+margin_top = 20.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
@@ -1344,15 +1344,15 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Spacer7" type="Control" parent="Background/VBoxContainer/MenuContents/SinglePlayerMenu/HBoxContainer"]
-margin_right = 40.0
+margin_right = 46.0
 margin_bottom = 189.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.5
 
 [node name="Options2" type="VBoxContainer" parent="Background/VBoxContainer/MenuContents/SinglePlayerMenu/HBoxContainer"]
-margin_left = 44.0
-margin_right = 206.0
+margin_left = 50.0
+margin_right = 234.0
 margin_bottom = 189.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -1360,7 +1360,7 @@ size_flags_stretch_ratio = 2.0
 alignment = 1
 
 [node name="Spacer4" type="Control" parent="Background/VBoxContainer/MenuContents/SinglePlayerMenu/HBoxContainer/Options2"]
-margin_right = 162.0
+margin_right = 184.0
 margin_bottom = 21.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -1368,7 +1368,7 @@ size_flags_stretch_ratio = 0.5
 
 [node name="newGame" type="Button" parent="Background/VBoxContainer/MenuContents/SinglePlayerMenu/HBoxContainer/Options2"]
 margin_top = 25.0
-margin_right = 162.0
+margin_right = 184.0
 margin_bottom = 68.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -1379,7 +1379,7 @@ align = 0
 
 [node name="SavedGame" type="Button" parent="Background/VBoxContainer/MenuContents/SinglePlayerMenu/HBoxContainer/Options2"]
 margin_top = 72.0
-margin_right = 162.0
+margin_right = 184.0
 margin_bottom = 116.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -1403,7 +1403,7 @@ align = 0
 
 [node name="Recorded" type="Button" parent="Background/VBoxContainer/MenuContents/SinglePlayerMenu/HBoxContainer/Options2"]
 margin_top = 120.0
-margin_right = 162.0
+margin_right = 184.0
 margin_bottom = 163.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -1414,43 +1414,55 @@ align = 0
 
 [node name="Spacer5" type="Control" parent="Background/VBoxContainer/MenuContents/SinglePlayerMenu/HBoxContainer/Options2"]
 margin_top = 167.0
-margin_right = 162.0
+margin_right = 184.0
 margin_bottom = 189.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.5
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Background/VBoxContainer/MenuContents/SinglePlayerMenu/HBoxContainer"]
-margin_left = 210.0
-margin_right = 466.0
-margin_bottom = 189.0
-
-[node name="HBoxContainer" type="HBoxContainer" parent="Background/VBoxContainer/MenuContents/SinglePlayerMenu/HBoxContainer/VBoxContainer"]
-margin_right = 256.0
+margin_left = 238.0
+margin_right = 460.0
 margin_bottom = 189.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
+[node name="HBoxContainer" type="HBoxContainer" parent="Background/VBoxContainer/MenuContents/SinglePlayerMenu/HBoxContainer/VBoxContainer"]
+margin_right = 222.0
+margin_bottom = 92.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
 [node name="Label" type="Label" parent="Background/VBoxContainer/MenuContents/SinglePlayerMenu/HBoxContainer/VBoxContainer/HBoxContainer"]
-margin_right = 147.0
-margin_bottom = 189.0
+margin_right = 98.0
+margin_bottom = 92.0
 size_flags_horizontal = 3
 size_flags_vertical = 7
-text = "Select Scenario Pack:"
+text = "Scenario Pack:"
 valign = 1
 
 [node name="MenuButton" type="MenuButton" parent="Background/VBoxContainer/MenuContents/SinglePlayerMenu/HBoxContainer/VBoxContainer/HBoxContainer"]
-margin_left = 151.0
-margin_right = 256.0
-margin_bottom = 189.0
+margin_left = 102.0
+margin_top = 36.0
+margin_right = 222.0
+margin_bottom = 56.0
+rect_min_size = Vector2( 120, 20 )
 size_flags_horizontal = 3
-size_flags_vertical = 7
+size_flags_vertical = 4
 custom_colors/font_color = Color( 0.690196, 0.792157, 0.32549, 1 )
 custom_styles/normal = SubResource( 4 )
-text = "DefaultBetaTest"
+text = " DefaultTest "
+items = [ "DefaultTest", null, 0, false, false, 0, 0, null, "", false ]
+
+[node name="Control" type="Control" parent="Background/VBoxContainer/MenuContents/SinglePlayerMenu/HBoxContainer/VBoxContainer"]
+margin_top = 96.0
+margin_right = 222.0
+margin_bottom = 189.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
 [node name="Spacer6" type="Control" parent="Background/VBoxContainer/MenuContents/SinglePlayerMenu/HBoxContainer"]
-margin_left = 470.0
+margin_left = 464.0
 margin_right = 511.0
 margin_bottom = 189.0
 size_flags_horizontal = 3
@@ -1574,3 +1586,4 @@ rect_pivot_offset = Vector2( -673.901, -176.922 )
 [connection signal="pressed" from="Background/VBoxContainer/MenuContents/SinglePlayerMenu/HBoxContainer/Options2/SavedGame" to="Background/VBoxContainer/MenuContents/SinglePlayerMenu" method="_on_SavedGame_pressed"]
 [connection signal="pressed" from="Background/VBoxContainer/MenuContents/SinglePlayerMenu/HBoxContainer/Options2/Select" to="Background/VBoxContainer/MenuContents/SinglePlayerMenu" method="_on_Select_pressed"]
 [connection signal="pressed" from="Background/VBoxContainer/MenuContents/SinglePlayerMenu/HBoxContainer/Options2/Recorded" to="Background/VBoxContainer/MenuContents/SinglePlayerMenu" method="_on_Recorded_pressed"]
+[connection signal="pressed" from="Background/VBoxContainer/MenuContents/SinglePlayerMenu/NavigationButtons2/Cancel" to="Background/VBoxContainer/MenuContents/SinglePlayerMenu" method="_on_Cancel_pressed"]
