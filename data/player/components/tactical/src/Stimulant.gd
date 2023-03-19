@@ -7,8 +7,8 @@ extends Component
 
 
 var active : bool = false
-export(float) var velocity_constant : float = 0.8
-export(float) var stim_duration : float = 5
+@export var velocity_constant: float : float = 0.8
+@export var stim_duration: float : float = 5
 
 var timer = null
 func _ready():
@@ -19,7 +19,7 @@ func toggle_stim(turn_off = false) -> void:
 	if not active:
 		active = true
 		timer = get_tree().create_timer(stim_duration)
-		timer.connect("timeout", self, "toggle_stim", [true])
+		timer.connect("timeout",Callable(self,"toggle_stim").bind(true))
 	if turn_off:
 		active = false
 

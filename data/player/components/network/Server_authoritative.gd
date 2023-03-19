@@ -6,15 +6,15 @@ remotesync var on_the_net_height : float = 2.0
 remotesync var on_the_net_velocity : Vector3 = Vector3()
 remotesync var local_camera_look : Vector3 = Vector3()
 
-export(NodePath) var head_path
-onready var head = get_node(head_path)
-onready var shape = actor.get_node("collision")
+@export var head_path: NodePath
+@onready var head = get_node(head_path)
+@onready var shape = actor.get_node("collision")
 
 func _physics_process(delta: float) -> void:
-	if not get_tree().has_network_peer():
+	if not get_tree().has_multiplayer_peer():
 		return
 	
-	if get_tree().is_network_server():
+	if get_tree().is_server():
 		rset_unreliable("on_the_net_transform", actor.global_transform.origin)
 		rset_unreliable("on_the_net_camera_look", head.rotation)
 		rset_unreliable("on_the_net_height", shape.shape.height)
@@ -34,19 +34,19 @@ func _physics_process(delta: float) -> void:
 			on_the_net_velocity, 
 			clamp(delta*actor.linear_velocity.distance_to(on_the_net_velocity), delta, 1.0)
 		)
-	if is_network_master():
+	if is_multiplayer_authority():
 		rset_unreliable_id(1, "local_camera_look", head.rotation)
 		
 func _process(delta: float) -> void:
-	if not get_tree().has_network_peer():
+	if not get_tree().has_multiplayer_peer():
 		return
-	if get_tree().is_network_server():
-		if local_camera_look != null and get_network_master() != 1:
+	if get_tree().is_server():
+		if local_camera_look != null and get_multiplayer_authority() != 1:
 			head.rotation =  local_camera_look
-	elif not is_network_master():
+	elif not is_multiplayer_authority():
 		var distance_factor = head.rotation.angle_to(on_the_net_camera_look)
 		if distance_factor != null:
-			head.rotation = lerp_angles(head.rotation, on_the_net_camera_look, rad2deg(abs(distance_factor))*delta+delta)
+			head.rotation = lerp_angles(head.rotation, on_the_net_camera_look, rad_to_deg(abs(distance_factor))*delta+delta)
 		
 
 		

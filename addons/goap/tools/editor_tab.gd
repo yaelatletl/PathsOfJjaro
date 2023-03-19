@@ -1,13 +1,13 @@
-tool
+@tool
 extends HSplitContainer
 
 var action_planner : GOAPActionPlanner = null
 var current_action : TreeItem = null
 var just_selected : bool = false
 
-onready var action_list = $VBoxContainer/ActionList
-onready var preconditions_list = $grid/Preconditions
-onready var effect_list = $grid/Effect
+@onready var action_list = $VBoxContainer/ActionList
+@onready var preconditions_list = $grid/Preconditions
+@onready var effect_list = $grid/Effect
 
 const ATOM_ICONS = [ preload("res://addons/goap/icons/atom_false.png"), preload("res://addons/goap/icons/atom_true.png"), preload("res://addons/goap/icons/atom_dontcare.png") ]
 
@@ -35,7 +35,7 @@ func edit(ap: GOAPActionPlanner):
 
 
 func on_action_list_gui_input(event):
-	if event is InputEventMouseButton and event.button_index == BUTTON_LEFT and !event.pressed and current_action != null and just_selected:
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and !event.pressed and current_action != null and just_selected:
 		current_action.set_editable(0, true)
 		just_selected = false
 

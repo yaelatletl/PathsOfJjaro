@@ -1,7 +1,7 @@
 extends Control
 
 func _on_newGame_pressed():
-	get_tree().change_scene("res://data/scenes/levels/Arrival.tscn")
+	get_tree().change_scene_to_file("res://data/scenes/levels/Arrival.tscn")
 	#Load here Arrival
 	pass
 

@@ -1,4 +1,4 @@
-extends Tabs
+extends TabBar
 
 var match_settings : Dictionary = {}
 var connection_settings : Dictionary = {}
@@ -27,7 +27,7 @@ func get_match_settings():
 func _on_IP_visibility_changed():
 	$HTTPRequest.request("http://ip.42.pl/raw")
 
-func _on_HTTPRequest_request_completed(result:int, response_code:int, headers:PoolStringArray, body:PoolByteArray):
+func _on_HTTPRequest_request_completed(result:int, response_code:int, headers:PackedStringArray, body:PackedByteArray):
 	var json = body.get_string_from_utf8()
 	connection_settings["address"] = str(json)
 

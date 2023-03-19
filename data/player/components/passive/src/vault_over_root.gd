@@ -1,11 +1,11 @@
-extends Spatial
+extends Node3D
 
 
-export(NodePath) var movement_path
-onready var character = get_parent()
-onready var height_cast = $vault_over
-onready var forward_cast = $vault_over2
-onready var movement = get_node(movement_path)
+@export var movement_path: NodePath
+@onready var character = get_parent()
+@onready var height_cast = $vault_over
+@onready var forward_cast = $vault_over2
+@onready var movement = get_node(movement_path)
 
 var on_ledge = false
 var jump_over = false
@@ -19,7 +19,7 @@ func _ready():
 
 func _physics_process(delta):
 	if height_cast.is_colliding() and not on_ledge:
-		if height_cast.get_collider() is StaticBody and character.run_speed < 12:
+		if height_cast.get_collider() is StaticBody3D and character.run_speed < 12:
 			on_ledge = true
 	if on_ledge and character.is_far_from_floor() and not forward_cast.is_colliding():
 		character.linear_velocity = -character.wall_direction*2

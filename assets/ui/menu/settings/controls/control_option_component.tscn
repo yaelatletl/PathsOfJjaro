@@ -1,64 +1,64 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=4 format=3]
 
-[ext_resource path="res://assets/ui/menu/visual_assets/Terminal.tres" type="Theme" id=1]
-[ext_resource path="res://assets/ui/menu/settings/controls/control_option_component.gd" type="Script" id=2]
+[ext_resource type="Theme" uid="uid://deqs1bye02w2l" path="res://assets/ui/menu/visual_assets/Terminal.tres" id="1"]
+[ext_resource type="Script" path="res://assets/ui/menu/settings/controls/control_option_component.gd" id="2"]
 
 [sub_resource type="GDScript" id=1]
 script/source = "extends ConfirmationDialog
 
 func _ready():
 	_on_size_changed()
-	get_viewport().connect(\"size_changed\",self,\"_on_size_changed\")
+	get_viewport().connect(\"size_changed\",Callable(self,\"_on_size_changed\"))
 
 
 func _on_size_changed():
 	var Newsize = get_viewport().get_visible_rect().size
-	rect_scale = Vector2(1,1)*(0.5*Newsize.x/rect_size.x)"
+	scale = Vector2(1,1)*(0.5*Newsize.x/size.x)"
 
 [node name="ui_right" type="HBoxContainer"]
-margin_top = 36.0
-margin_right = 461.0
-margin_bottom = 106.0
+offset_top = 36.0
+offset_right = 461.0
+offset_bottom = 106.0
 theme = ExtResource( 1 )
 script = ExtResource( 2 )
 
 [node name="Label" type="Label" parent="."]
-margin_top = 28.0
-margin_right = 210.0
-margin_bottom = 42.0
-rect_min_size = Vector2( 210, 14 )
+offset_top = 28.0
+offset_right = 210.0
+offset_bottom = 42.0
+custom_minimum_size = Vector2( 210, 14 )
 text = "Default control name"
 
 [node name="VSeparator" type="VSeparator" parent="."]
-margin_left = 214.0
-margin_right = 218.0
-margin_bottom = 70.0
+offset_left = 214.0
+offset_right = 218.0
+offset_bottom = 70.0
 
 [node name="Button" type="Button" parent="."]
-margin_left = 222.0
-margin_right = 257.0
-margin_bottom = 70.0
+offset_left = 222.0
+offset_right = 257.0
+offset_bottom = 70.0
 text = "Right"
 
 [node name="Confirm" type="ConfirmationDialog" parent="."]
-margin_left = 261.0
-margin_right = 461.0
-margin_bottom = 70.0
-popup_exclusive = true
+offset_left = 261.0
+offset_right = 461.0
+offset_bottom = 70.0
+exclusive = true
 window_title = "Please, confirm..."
 script = SubResource( 1 )
 
 [node name="CenterContainer" type="CenterContainer" parent="Confirm"]
-margin_left = 8.0
-margin_top = 8.0
-margin_right = 192.0
-margin_bottom = 40.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 192.0
+offset_bottom = 40.0
 
 [node name="Label2" type="Label" parent="Confirm/CenterContainer"]
-margin_left = 74.0
-margin_top = 9.0
-margin_right = 109.0
-margin_bottom = 23.0
+offset_left = 74.0
+offset_top = 9.0
+offset_right = 109.0
+offset_bottom = 23.0
 text = "Right"
 align = 1
 

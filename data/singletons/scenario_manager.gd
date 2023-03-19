@@ -12,7 +12,7 @@ var current_scenario = 0
 func explore_scenarios():
 	var dir = Directory.new()
 	dir.open("res://maps")
-	dir.list_dir_begin()
+	dir.list_dir_begin() # TODOGODOT4 fill missing arguments https://github.com/godotengine/godot/pull/40547
 	var file = dir.get_next()
 	while file != "":
 		if file.ends_with(".pck"):

@@ -1,7 +1,7 @@
 extends Component
 
-export(Array) var abilities = [] #Add nodes here
-#export(Array) var charge_meters = [] #Must be equal or lesser than abilites
+@export var abilities: Array = [] #Add nodes here
+#export var charge_meters: Array = [] #Must be equal or lesser than abilites
 # We need to get timers for every ultimate, tactical and 
 # passive abilities, whether they use them or not
 
@@ -23,7 +23,7 @@ func _ready():
 
 func register_ability(node : Node, bar : Control):
 	if node.has_method("setup_charge"):
-		node.connect("charging_changed", self, "_on_charging_changed", [node, bar])
+		node.connect("charging_changed",Callable(self,"_on_charging_changed").bind(node, bar))
 	pass
 
 func _on_charging_changed(charge : float, node : Node, bar : Control):

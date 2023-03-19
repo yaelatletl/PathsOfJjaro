@@ -1,8 +1,8 @@
 extends Component
-export(bool) var run_is_toggle : bool = true
-export(bool) var crouch_is_toggle : bool = true
+@export var run_is_toggle: bool : bool = true
+@export var crouch_is_toggle: bool : bool = true
 
-export(bool) var captured : bool = true # Does not let the mouse leave the screen
+@export var captured: bool : bool = true # Does not let the mouse leave the screen
 
 var can_jump = true
 var jump_timer = null
@@ -10,7 +10,7 @@ var input_devices : Dictionary = {}
 var local_input : Dictionary = {}
 func _ready():
 	#Input.set_use_accumulated_input(false)
-	Input.connect("joy_connection_changed", self, "_on_joy_changed")
+	Input.connect("joy_connection_changed",Callable(self,"_on_joy_changed"))
 
 	_component_name = "input"
 	actor.input["look_y"] = 0
@@ -47,7 +47,7 @@ func _ready():
 	local_input["reload"] = 0
 	local_input["zoom"] = 0
 
-	get_tree().create_timer(0.01).connect("timeout", self, "functional_routine")
+	get_tree().create_timer(0.01).connect("timeout",Callable(self,"functional_routine"))
 
 
 
@@ -66,15 +66,15 @@ func _mouse_toggle() -> void:
 	
 
 func functional_routine():
-	if get_tree().has_network_peer():
-		if not is_network_master() or not enabled:
+	if get_tree().has_multiplayer_peer():
+		if not is_multiplayer_authority() or not enabled:
 			return
 		else:
 			get_input()
-			get_tree().create_timer(0.01).connect("timeout", self, "functional_routine")
+			get_tree().create_timer(0.01).connect("timeout",Callable(self,"functional_routine"))
 	else:
 		get_input()
-		get_tree().create_timer(0.01).connect("timeout", self, "functional_routine")
+		get_tree().create_timer(0.01).connect("timeout",Callable(self,"functional_routine"))
 
 		
 func get_input():
@@ -100,25 +100,25 @@ func get_input():
 
 
 func sync_input():
-	if get_tree().has_network_peer():
-		if is_network_master() and not get_tree().is_network_server(): 
+	if get_tree().has_multiplayer_peer():
+		if is_multiplayer_authority() and not get_tree().is_server(): 
 			actor.rset_unreliable_id(1, "input", actor.input)
 			Gamestate.set_in_all_clients(actor, "input", actor.input)
 
 
 func mouse_move(event):
-	Input.get_last_mouse_speed()
+	Input.get_last_mouse_velocity()
 	if event is InputEventMouseMotion:
 		actor.input["look_y"] = event.relative.y 
 		actor.input["look_x"] = event.relative.x 
-		yield(get_tree().create_timer(0.001), "timeout") # Replace timer with a tenth of a frame quantum (From new singleton)
+		await get_tree().create_timer(0.001).timeout # Replace timer with a tenth of a frame quantum (From new singleton)
 		actor.input["look_y"] = 0
 		actor.input["look_x"] = 0
 
 
 func _unhandled_input(event):
-	if get_tree().has_network_peer():
-		if not is_network_master() or not enabled:
+	if get_tree().has_multiplayer_peer():
+		if not is_multiplayer_authority() or not enabled:
 			return
 		else:
 			unhandled(event)
@@ -144,8 +144,8 @@ func unhandled(event):
 			actor.input["crouch"] = int(not bool(actor.input["crouch"]))
 		if Input.is_action_pressed("KEY_SHIFT") or Input.is_action_just_released("KEY_SPACE"):
 			actor.input["crouch"] = 0
-#	if get_tree().has_network_peer():
-#		if is_network_master() and not get_tree().is_network_server(): 
+#	if get_tree().has_multiplayer_peer():
+#		if is_multiplayer_authority() and not get_tree().is_server(): 
 			#Gamestate.set_in_all_clients(self,"input", actor.input)
 #			actor.rset_unreliable_id(1, "input", actor.input)
 

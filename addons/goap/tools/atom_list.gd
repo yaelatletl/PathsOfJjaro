@@ -1,4 +1,4 @@
-tool
+@tool
 extends ItemList
 
 var atom_names = null
@@ -20,14 +20,14 @@ func update_list(atoms, state):
 		set_item_metadata(i, atom_state)
 
 func on_item_selected(index):
-	unselect(index)
+	deselect(index)
 	var atom_value = get_item_metadata(index)
 	atom_value = (atom_value+1) % 3
 	set_item_metadata(index, atom_value)
 	set_item_icon(index, ATOM_ICONS[atom_value])
-	var desc = PoolStringArray()
+	var desc = PackedStringArray()
 	for i in range(atom_names.size()):
 		match get_item_metadata(i):
 			0: desc.append("!"+atom_names[i])
 			1: desc.append(atom_names[i])
-	emit_signal("state_updated", desc.join(" "))
+	emit_signal("state_updated", " ".join(desc))

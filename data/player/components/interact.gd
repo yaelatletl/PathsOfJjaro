@@ -10,7 +10,7 @@ signal time_left_changed(time_left)
 func _ready():
 	_component_name = "interactor"
 
-func request_interact(interactable : Spatial, message : String, time :float= 0.0):
+func request_interact(interactable : Node3D, message : String, time :float= 0.0):
 	#We need to pass the message to the HUD
 	actor._get_component("HUD").interact_board.show_message(message)
 	waiting_for_interaction = interactable
@@ -18,7 +18,7 @@ func request_interact(interactable : Spatial, message : String, time :float= 0.0
 
 func start_interaction():
 	current_timer = get_tree().create_timer(interaction_time)
-	current_timer.connect("timeout", self, "interaction_time_fulfilled")
+	current_timer.connect("timeout",Callable(self,"interaction_time_fulfilled"))
 
 
 func interaction_time_fulfilled():
@@ -26,7 +26,7 @@ func interaction_time_fulfilled():
 
 func stop_interact():
 	if current_timer != null:
-		current_timer.disconnect("timeout", self, "interaction_time_fulfilled")
+		current_timer.disconnect("timeout",Callable(self,"interaction_time_fulfilled"))
 		current_timer = null
 	interaction_time_fulfilled = false
 	emit_signal("time_left_changed", interaction_time)
@@ -36,7 +36,7 @@ func clear_interact():
 	if actor._get_component("HUD"):
 		actor._get_component("HUD").interact_board.hide_message()
 	if current_timer != null:
-		current_timer.disconnect("timeout", self, "interaction_time_fulfilled")
+		current_timer.disconnect("timeout",Callable(self,"interaction_time_fulfilled"))
 		current_timer = null
 	waiting_for_interaction = null
 	interaction_time = 0.0

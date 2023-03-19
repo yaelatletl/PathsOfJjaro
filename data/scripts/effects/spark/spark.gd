@@ -1,8 +1,8 @@
 extends Particles
 
-export(NodePath) var timer
+@export var timer: NodePath
 
 func _ready() -> void:
 	timer = get_node(timer)
 	
-	timer.connect("timeout", self, "queue_free")
+	timer.connect("timeout",Callable(self,"queue_free"))

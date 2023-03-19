@@ -1,8 +1,8 @@
 extends Control
 var seen_from_join = false
 
-onready var ip_label = $VBoxContainer/HBoxContainer/Info/IP/value
-onready var port_label = $VBoxContainer/HBoxContainer/Info/Port/value
+@onready var ip_label = $VBoxContainer/HBoxContainer/Info/IP/value
+@onready var port_label = $VBoxContainer/HBoxContainer/Info/Port/value
 
 func _on_Begin_pressed():
 	var lobby = get_node("%NetworkHost")

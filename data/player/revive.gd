@@ -1,22 +1,22 @@
 extends Component
 
-export(bool) var can_self_res = false
-export(float) var revive_time = 5.0
+@export var can_self_res: bool = false
+@export var revive_time: float = 5.0
 var knocked = false
-export(Array) var enable_exeptions = []
-export(NodePath) var collision : NodePath = ""
+@export var enable_exeptions: Array = []
+@export var collision: NodePath : NodePath = ""
 
 var original_height = 0.0
 var original_width = 0.0
 
-onready var col = get_node(collision)
+@onready var col = get_node(collision)
 
 func _ready():
-	connect("body_entered", self, "_on_body_entered")
-	connect("body_exited", self, "_on_body_exited")
+	connect("body_entered",Callable(self,"_on_body_entered"))
+	connect("body_exited",Callable(self,"_on_body_exited"))
 	original_height = col.shape.height
 	original_width = col.shape.radius
-	actor.connect("died", self, "_on_died")
+	actor.connect("died",Callable(self,"_on_died"))
 
 func _on_body_entered(body):
 	if (actor == body and not can_self_res) or not knocked:
@@ -37,7 +37,7 @@ func _on_died():
 	knocked = true
 	_on_body_entered(actor)
 
-func interaction_triggered(interactor_body : Spatial):
+func interaction_triggered(interactor_body : Node3D):
 	if knocked:
 		revive()
 		knocked = false

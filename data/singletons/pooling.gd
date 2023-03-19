@@ -23,8 +23,8 @@ var projectiles_root
 func setup_projectile_root(root):
 	projectiles_root = get_tree().get_root()
 
-func add_projectile(projectile_type,translation, direction, actor):
-#	print("Position passed to add_projectile: " + translation)
+func add_projectile(projectile_type,position, direction, actor):
+#	print("Position passed to add_projectile: " + position)
 	var found = null
 	var projectile_instance = null
 	for bullet in projectiles_waiting:
@@ -32,9 +32,9 @@ func add_projectile(projectile_type,translation, direction, actor):
 			found = bullet
 			break
 	if found == null:
-		projectile_instance = projectiles[projectile_type].instance()
-		projectile_instance.set_as_toplevel(true)
-		projectile_instance.connect("request_destroy", self, "_on_projectile_request_destroy", [projectile_instance])
+		projectile_instance = projectiles[projectile_type].instantiate()
+		projectile_instance.set_as_top_level(true)
+		projectile_instance.connect("request_destroy",Callable(self,"_on_projectile_request_destroy").bind(projectile_instance))
 	else:
 		projectiles_waiting.erase(found)
 		projectile_instance = found
@@ -42,7 +42,7 @@ func add_projectile(projectile_type,translation, direction, actor):
 	projectile_instance.add_exceptions(actor)
 	projectiles_active.append(projectile_instance)
 	projectiles_root.add_child(projectile_instance)
-	projectile_instance.move(translation, direction)
+	projectile_instance.move(position, direction)
 
 
 func _on_projectile_request_destroy(projectile):
@@ -55,8 +55,8 @@ func _on_projectile_request_destroy(projectile):
 
 #Creates a dummy actor to be used for portal physics
 func duplicate_actor(actor):
-	if not actor is KinematicBody:
-		printerr("Passed node is not a KinematicBody")
+	if not actor is CharacterBody3D:
+		printerr("Passed node is not a CharacterBody3D")
 		return null
 	if not actor in actor_pool:
 		actor_pool[actor] = actor.duplicate(1)
@@ -64,8 +64,8 @@ func duplicate_actor(actor):
 	return actor_pool[actor]
 
 func free_actor_duplicate(actor):
-	if not actor is KinematicBody:
-		printerr("Passed node is not a KinematicBody")
+	if not actor is CharacterBody3D:
+		printerr("Passed node is not a CharacterBody3D")
 		return 
 	if actor in actor_pool:
 		printerr("Passed node is not a duplicate")

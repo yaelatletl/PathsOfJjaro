@@ -2,20 +2,20 @@ extends Component
 # All speed variables
 
 
-export(float) var n_speed : float = 04 # Normal
-export(float) var s_speed : float = 12 # Sprint
-export(float) var w_speed : float = 08 # Walking
-export(float) var c_speed : float = 10 # Crouch
-export(bool) var slide_on_crouch : bool = false
-export(bool) var can_wallrun : bool = false
+@export var n_speed: float : float = 04 # Normal
+@export var s_speed: float : float = 12 # Sprint
+@export var w_speed: float : float = 08 # Walking
+@export var c_speed: float : float = 10 # Crouch
+@export var slide_on_crouch: bool : bool = false
+@export var can_wallrun: bool : bool = false
 # Physics variables
-export(float) var gravity      : float = 40 # Gravity force #45 is okay, don't change it 
-export(float) var friction     : float = 25 # friction
+@export var gravity: float      : float = 40 # Gravity force #45 is okay, don't change it 
+@export var friction: float     : float = 25 # friction
 
 var DEFAULT_GRAVITY = gravity
 
-export(NodePath) var collision : NodePath = ""
-onready var col = get_node(collision)
+@export var collision: NodePath : NodePath = ""
+@onready var col = get_node(collision)
 
 var _delta
 var impulse = Vector3.ZERO
@@ -49,7 +49,7 @@ func _movement(input : Dictionary, _delta : float) -> void:
 		actor.reset_wall_multi()
 		actor.direction.y = 0 
 		actor.direction = actor.direction.normalized()
-		actor.direction = actor.direction.linear_interpolate(Vector3(), friction * _delta)
+		actor.direction = actor.direction.lerp(Vector3(), friction * _delta)
 #		if get_key(input, "crouch"):
 	else:
 		
@@ -65,12 +65,12 @@ func _movement(input : Dictionary, _delta : float) -> void:
 	
 	# Interpolates between the current position and the future position of the character
 	actor.direction.normalized()
-	var inertia = actor.linear_velocity.linear_interpolate(Vector3(), (0.75 * int(actor.is_on_floor()) + 1.25) *friction * _delta)
+	var inertia = actor.linear_velocity.lerp(Vector3(), (0.75 * int(actor.is_on_floor()) + 1.25) *friction * _delta)
 	if inertia.length() < 1:
 		inertia = Vector3()
 	var target = actor.direction * n_speed + inertia 
 	actor.direction.y = 0
-	var temp_velocity = actor.linear_velocity.linear_interpolate(target, n_speed * _delta)
+	var temp_velocity = actor.linear_velocity.lerp(target, n_speed * _delta)
 	
 	# Applies interpolation to the linear_velocity vector
 	actor.linear_velocity.x = temp_velocity.x
@@ -79,10 +79,17 @@ func _movement(input : Dictionary, _delta : float) -> void:
 	_impulse(_delta)
 	
 	# Calls the motion function by passing the linear_velocity vector
-	actor.linear_velocity = actor.move_and_slide(actor.linear_velocity, Vector3(0,1,0), false, 4, PI/4, false)
-	for index in actor.get_slide_count():
+	actor.set_velocity(actor.linear_velocity)
+	actor.set_up_direction(Vector3(0,1,0))
+	actor.set_floor_stop_on_slope_enabled(false)
+	actor.set_max_slides(4)
+	actor.set_floor_max_angle(PI/4)
+	# TODOConverter40 infinite_inertia were removed in Godot 4.0 - previous value `false`
+	actor.move_and_slide()
+	actor.linear_velocity = actor.velocity
+	for index in actor.get_slide_collision_count():
 		var collision = actor.get_slide_collision(index)
-		if collision.collider is RigidBody:
+		if collision.collider is RigidBody3D:
 			if collision.collider == actor.feet.get_collider():
 				return
 			else:
@@ -139,8 +146,8 @@ func _sprint(input : Dictionary, _delta : float) -> void:
 
 func _impulse(delta : float) -> void:
 	if not is_zero_approx(abs(impulse.length())):
-		actor.linear_velocity += impulse.linear_interpolate(Vector3.ZERO, delta) * delta
-		impulse -= impulse.linear_interpolate(Vector3.ZERO, delta) * delta
+		actor.linear_velocity += impulse.lerp(Vector3.ZERO, delta) * delta
+		impulse -= impulse.lerp(Vector3.ZERO, delta) * delta
 
 
 func add_impulse(impulse_in : Vector3) -> void:

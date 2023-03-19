@@ -1,5 +1,5 @@
 extends LineEdit
-export(bool) var allow_points = false
+@export var allow_points: bool = false
 
 func _on_value_text_changed(text_in):
 	var new_text = ""
@@ -9,4 +9,4 @@ func _on_value_text_changed(text_in):
 			new_text += c
 
 	text = new_text
-	caret_position += text_in.length()
+	caret_column += text_in.length()

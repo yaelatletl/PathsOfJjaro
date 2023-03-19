@@ -1,6 +1,6 @@
-extends Spatial
+extends Node3D
 
-export(NodePath) var ray
+@export var ray: NodePath
 
 var ground : bool = false
 

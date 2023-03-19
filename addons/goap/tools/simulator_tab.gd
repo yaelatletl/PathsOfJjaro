@@ -1,4 +1,4 @@
-tool
+@tool
 extends GridContainer
 
 var action_planner : GOAPActionPlanner = null

@@ -1,6 +1,6 @@
 shader_type spatial;
 render_mode unshaded;
-uniform sampler2D viewport : hint_albedo;
+uniform sampler2D viewport : source_color;
 
 // [Godot Super Scaling]
 // created by Andres Hernandez

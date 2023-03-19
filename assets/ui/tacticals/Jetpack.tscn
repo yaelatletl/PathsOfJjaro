@@ -1,13 +1,13 @@
 [gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://data/UI/CircularMeter.gd" type="Script" id=1]
-[ext_resource path="res://assets/placeholder_icons/cross.png" type="Texture" id=2]
+[ext_resource path="res://assets/placeholder_icons/cross.png" type="Texture2D" id=2]
 
 [node name="Jetpack" type="TextureRect"]
-margin_left = 120.208
-margin_top = 208.207
-margin_right = 220.208
-margin_bottom = 308.207
+offset_left = 120.208
+offset_top = 208.207
+offset_right = 220.208
+offset_bottom = 308.207
 size_flags_horizontal = 3
 size_flags_vertical = 3
 texture = ExtResource( 2 )

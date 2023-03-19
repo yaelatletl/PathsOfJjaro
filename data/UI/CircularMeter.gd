@@ -1,17 +1,17 @@
-tool
+@tool
 extends Control
 
-export(Color) var full = Color.aliceblue
-export(Color) var empty = Color.black
-export(int) var border_resolution = 360
-export(int) var border_width = 1
-export(int) var offset = 0
-export(float) var value = 0
-export(float) var value_max = 100
-export(bool) var fills = true
-var current_color = Color.white
+@export var full: Color = Color.ALICE_BLUE
+@export var empty: Color = Color.BLACK
+@export var border_resolution: int = 360
+@export var border_width: int = 1
+@export var offset: int = 0
+@export var value: float = 0
+@export var value_max: float = 100
+@export var fills: bool = true
+var current_color = Color.WHITE
 func _ready():
-	#rect_size = get_parent().rect_size
+	#size = get_parent().size
 	current_color = full
 
 func _process(delta):
@@ -21,9 +21,9 @@ func _process(delta):
 	else:
 		current_color = lerp(full, empty, value / value_max)
 func _draw():
-	#draw_circle(rect_size/2, min(rect_size.x/3, rect_size.y/3), background)
+	#draw_circle(size/2, min(size.x/3, size.y/3), background)
 	var res_end = clamp(4 + (value/value_max * 360), 4, 360)
 	if not fills and value > 0.1:
 		res_end = clamp(4 + (value_max/value * 360), 4, 360)
-	draw_arc (rect_size/2, min(rect_size.x/3, rect_size.y/3)+offset, 0, deg2rad(res_end), res_end, current_color, border_width, true)
+	draw_arc (size/2, min(size.x/3, size.y/3)+offset, 0, deg_to_rad(res_end), res_end, current_color, border_width, true)
 

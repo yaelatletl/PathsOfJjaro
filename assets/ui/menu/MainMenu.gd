@@ -1,7 +1,7 @@
 extends Control
 	
 func _on_SinglePlayer_pressed():
-	#get_tree().change_scene("res://Recycling_plant.tscn")
+	#get_tree().change_scene_to_file("res://Recycling_plant.tscn")
 	get_node("%MenuContents").current_tab = 5
 	pass # Replace with function body.
 

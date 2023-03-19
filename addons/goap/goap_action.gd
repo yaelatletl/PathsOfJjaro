@@ -1,11 +1,11 @@
-tool
+@tool
 extends Node
 class_name GOAPAction
 
-export(String) var action = null setget set_action, get_action
-export(String) var preconditions = ""
-export(String) var effect = ""
-export(float) var cost = 1
+@export var action: String = null : get = get_action, set = set_action
+@export var preconditions: String = ""
+@export var effect: String = ""
+@export var cost: float = 1
 
 func get_action():
 	if action == null || action == "":

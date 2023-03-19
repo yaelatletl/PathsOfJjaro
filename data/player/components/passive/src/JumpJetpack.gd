@@ -1,8 +1,8 @@
 extends Component
 var fuel = 150
-export(float) var fuel_limit = 150
-export(float) var depleation_rate = 1
-export(float) var refill_rate = .75
+@export var fuel_limit: float = 150
+@export var depleation_rate: float = 1
+@export var refill_rate: float = .75
 
 func _ready():
 	setup_charge(fuel_limit)

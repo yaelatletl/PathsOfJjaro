@@ -16,20 +16,20 @@ func load_config():
 	var err = config.load(CONFIG_FILE)
 	if err: # Assuming that file is missing, generate default config
 		for action_name in INPUT_ACTIONS:
-			var action_list = InputMap.get_action_list(action_name)
+			var action_list = InputMap.action_get_events(action_name)
 			# There could be multiple actions in the list, but we save the first one by default
-			var scancode = OS.get_scancode_string(action_list[0].scancode)
-			config.set_value("input", action_name, scancode)
+			var keycode = OS.get_keycode_string(action_list[0].keycode)
+			config.set_value("input", action_name, keycode)
 		config.save(CONFIG_FILE)
 	else: # ConfigFile was properly loaded, initialize InputMap
 		for action_name in config.get_section_keys("input"):
-			# Get the key scancode corresponding to the saved human-readable string
-			var scancode = config.get_value("input", action_name)
-			# Create a new event object based on the saved scancode
+			# Get the key keycode corresponding to the saved human-readable string
+			var keycode = config.get_value("input", action_name)
+			# Create a new event object based on the saved keycode
 			var event = InputEventKey.new()
-			event.scancode = scancode
+			event.keycode = keycode
 			# Replace old action (key) events by the new one
-			for old_event in InputMap.get_action_list(action_name):
+			for old_event in InputMap.action_get_events(action_name):
 				if old_event is InputEventKey:
 					InputMap.action_erase_event(action_name, old_event)
 			InputMap.action_add_event(action_name, event)

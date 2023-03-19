@@ -1,13 +1,13 @@
 extends AnimationPlayer
 
 # Get character's node path
-export(NodePath) var character_path
-export(NodePath) var camera_path
-export(NodePath) var movement_path
+@export var character_path: NodePath
+@export var camera_path: NodePath
+@export var movement_path: NodePath
 
-onready var character = get_node(character_path)
-onready var camera = get_node(camera_path)
-onready var movement = get_node(movement_path)
+@onready var character = get_node(character_path)
+@onready var camera = get_node(camera_path)
+@onready var movement = get_node(movement_path)
 
 
 func _process(_delta):
@@ -54,4 +54,4 @@ func _neck_animation(_delta) -> void:
 	
 
 	# Apply an interpolation to neck rotation based on angle
-	camera.rotation.z = lerp(camera.rotation.z, -deg2rad(character.angle), rotation_speed)
+	camera.rotation.z = lerp(camera.rotation.z, -deg_to_rad(character.angle), rotation_speed)

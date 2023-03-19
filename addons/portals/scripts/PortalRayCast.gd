@@ -1,39 +1,39 @@
-extends RayCast
+extends RayCast3D
 class_name PortalRayCast
 
 # Dictionary storing information about the current collision, in the format
-# returned by PhysicsDirectSpaceState.intersect_ray(). The exception is an
+# returned by PhysicsDirectSpaceState3D.intersect_ray(). The exception is an
 # additional field `through_portal`, a `bool` describing whether the ray
 # teleported through a portal.
 var _collision_info := {}
 
 
-# This basically calls PhysicsDirectSpaceState.intersect_ray(), but using our
+# This basically calls PhysicsDirectSpaceState3D.intersect_ray(), but using our
 # member variables for config. The only exception is it always collides with
 # areas. Note that this function ignores portals. The returned dictionary is
-# of the format returned by PhysicsDirectSpaceState.intersect_ray().
+# of the format returned by PhysicsDirectSpaceState3D.intersect_ray().
 func _basic_cast_ray(from: Vector3, to: Vector3) -> Dictionary:
-	var space_state := get_world().direct_space_state
+	var space_state := get_world_3d().direct_space_state
 	var exclude := []
 	var parent := get_parent()
-	if parent is PhysicsBody and exclude_parent:
+	if parent is PhysicsBody3D and exclude_parent:
 		exclude.append(parent)
 
 	return space_state.intersect_ray(from, to, exclude, collision_mask,
 			collide_with_bodies, true)
 
 
-# Same as _basic_cast_ray(), but it uses the RayCast position and `cast_to` and
+# Same as _basic_cast_ray(), but it uses the RayCast3D position and `target_position` and
 # properly handles portals. If a portal intersects the ray, the raycasting
 # continues at the other portal.
 # TODO: fix this
 func _get_collision_info() -> Dictionary:
 	var start_pos := global_transform.origin
-	var end_pos = global_transform.xform(cast_to)
+	var end_pos = global_transform * target_position
 	var through_portal := false
 	while true:
 		var info := _basic_cast_ray(start_pos, end_pos)
-		if info.empty():
+		if info.is_empty():
 			# No collisions; we are done!
 			break
 
@@ -42,18 +42,18 @@ func _get_collision_info() -> Dictionary:
 			# No collision with portal; we are done!
 			return info
 
-		# RayCast intersected portal, continue raycasting out the other end
+		# RayCast3D intersected portal, continue raycasting out the other end
 		through_portal = true
 		var portal = info.collider.get_parent()
 		var portal_pair = portal.get_parent()
 		var linked = portal_pair.links[portal]
 		var portal_pos = portal.global_transform
-		# Transform from one portal to the other
+		# Transform3D from one portal to the other
 		var dist = portal_pos.inverse() * linked.global_transform
-		start_pos = dist.xform(info.position)
+		start_pos = dist * info.position
 		# TODO: make sure this is right (it probably isn't)
 		var up = portal_pos.basis.y
-		end_pos = dist.xform((end_pos - info.position).rotated(up, PI))
+		end_pos = dist * (end_pos - info.position).rotated(up, PI)
 
 	return {}
 
@@ -69,7 +69,7 @@ func _physics_process(delta: float) -> void:
 # Somewhat-safe dictionary lookup function; if the dict is empty, a default
 # value is returned
 func _dict_or(dict: Dictionary, field: String, default_val):
-	if dict.empty():
+	if dict.is_empty():
 		return default_val
 	else:
 		return dict[field]
@@ -96,7 +96,7 @@ func get_collision_point() -> Vector3:
 
 
 func is_colliding() -> bool:
-	return not _collision_info.empty()
+	return not _collision_info.is_empty()
 
 
 func through_portal() -> bool:

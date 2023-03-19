@@ -4,9 +4,9 @@ extends Component
 # instead of the player's linear_velocity.
 # We let the player use this ability twice
 
-export(float) var impulse_strength : float = 7.0
-export(float) var charge_time : float = 5
-export(int) var charges_max : int = 2
+@export var impulse_strength: float : float = 7.0
+@export var charge_time: float : float = 5
+@export var charges_max: int : int = 2
 var charges : int = 2
 var movement_ref = null
 var timer = null
@@ -21,7 +21,7 @@ func impulse() -> void:
 		actor.linear_velocity += actor.direction.normalized()*impulse_strength
 		charges -= 1
 		timer = get_tree().create_timer(charge_time)
-		timer.connect("timeout", self, "add_charge")
+		timer.connect("timeout",Callable(self,"add_charge"))
 	
 func _physics_process(delta) -> void:
 	if enabled:

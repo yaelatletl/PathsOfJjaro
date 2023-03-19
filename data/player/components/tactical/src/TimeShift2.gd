@@ -1,9 +1,9 @@
 extends Component
 
-export(NodePath) var camera_path
-export(PackedScene) var grapple_point
-export(float) var throw_time = 0.2
-onready var camera : Camera = get_node(camera_path)
+@export var camera_path: NodePath
+@export var grapple_point: PackedScene
+@export var throw_time: float = 0.2
+@onready var camera : Camera3D = get_node(camera_path)
 
 
 
@@ -26,19 +26,19 @@ func _functional_routine(input : Dictionary) -> void:
 
 func _launch_teleporter():
 	var middle = camera.project_ray_normal(_screen_middle())
-	var new_grap : RigidBody = grapple_point.instance()
-	new_grap.connect("body_hit", self, "_on_body_entered", [new_grap])
-	new_grap.set_as_toplevel(true)
-	new_grap.translation = camera.global_transform.origin + 1.5*middle
+	var new_grap : RigidBody3D = grapple_point.instantiate()
+	new_grap.connect("body_hit",Callable(self,"_on_body_entered").bind(new_grap))
+	new_grap.set_as_top_level(true)
+	new_grap.position = camera.global_transform.origin + 1.5*middle
 	add_child(new_grap)
 	new_grap.apply_central_impulse(4*middle)
-	get_tree().create_timer(throw_time).connect("timeout", self, "_move_forward", [new_grap])
+	get_tree().create_timer(throw_time).connect("timeout",Callable(self,"_move_forward").bind(new_grap))
 
 
 func _on_body_entered(_point : Vector3, _body : Node, grapple):
-	if _body is Spatial:
+	if _body is Node3D:
 		static_collision_point = _point
-		if _body is RigidBody or _body is KinematicBody:
+		if _body is RigidBody3D or _body is CharacterBody3D:
 			non_static_collision_point = _body.to_local(_point)
 		grapple_is_activated = true
 		_move_forward(grapple)

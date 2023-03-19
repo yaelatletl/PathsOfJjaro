@@ -4,19 +4,19 @@ enum {
 	MODE_HEAVY
 	MODE_LIGHT
 }
-onready var hinge = $Hinge
-onready var blade : RigidBody = $DoorBlade
+@onready var hinge = $Hinge
+@onready var blade : RigidBody3D = $DoorBlade
 var current_vel = 1
 
 var triggerable = true
 var closing = false
 
-export(float) var push_strenght = 150
+@export var push_strenght: float = 150
 
 func _ready():
 	wake_up()
 
-func interaction_triggered(interactor_body : Spatial):
+func interaction_triggered(interactor_body : Node3D):
 	if not triggerable:
 		return
 	var push_vec = Vector3.ZERO
@@ -43,7 +43,7 @@ func interaction_triggered(interactor_body : Spatial):
 #		blade.apply_central_impulse(push_strenght * push_vec)
 
 
-#	yield(get_tree().create_timer(1.0), "timeout")
+#	await get_tree().create_timer(1.0).timeout
 	#hinge.set_param(hinge.PARAM_LIMIT_UPPER, 90)
 	#hinge.set_param(hinge.PARAM_LIMIT_LOWER, -90)
 	#hinge.set_flag(hinge.FLAG_ENABLE_MOTOR, false)

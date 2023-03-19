@@ -10,17 +10,17 @@ enum BAR_LOCATIONS{
 
 
 
-export(NodePath) var weapon
-export(NodePath) var weapon_hud_ammo
-export(NodePath) var weapon_hud_clip
-export(NodePath) var weapon_hud_text
+@export var weapon: NodePath
+@export var weapon_hud_ammo: NodePath
+@export var weapon_hud_clip: NodePath
+@export var weapon_hud_text: NodePath
 
-export(NodePath) var interact_board_path = "Layout/VerticalSections/Top/InteractionBoard"
-export(NodePath) var message_board_path = "Layout/VerticalSections/Mid/MessageBoard"
+@export var interact_board_path: NodePath = "Layout/VerticalSections/Top/InteractionBoard"
+@export var message_board_path: NodePath = "Layout/VerticalSections/Mid/MessageBoard"
 
-export(NodePath) var crosshair
-onready var interact_board = get_node(interact_board_path)
-onready var message_board = get_node(message_board_path)
+@export var crosshair: NodePath
+@onready var interact_board = get_node(interact_board_path)
+@onready var message_board = get_node(message_board_path)
 
 
 func _ready():
@@ -48,11 +48,11 @@ func _weapon_hud() -> void:
 	
 	# Color
 	if weapon.arsenal.values()[weapon.current].bullets < (weapon.arsenal.values()[weapon.current].max_bullets/4):
-		weapon_hud_ammo.add_color_override("font_color", Color("#ff0000"))
+		weapon_hud_ammo.add_theme_color_override("font_color", Color("#ff0000"))
 	elif weapon.arsenal.values()[weapon.current].bullets < (weapon.arsenal.values()[weapon.current].max_bullets/2):
-		weapon_hud_clip.add_color_override("font_color", Color("#dd761b"))
+		weapon_hud_clip.add_theme_color_override("font_color", Color("#dd761b"))
 	else:
-		weapon_hud_clip.add_color_override("font_color", Color("#ffffff"))
+		weapon_hud_clip.add_theme_color_override("font_color", Color("#ffffff"))
 
 func _crosshair() -> void:
 	crosshair.position = get_viewport().size/2

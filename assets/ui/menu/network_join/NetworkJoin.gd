@@ -1,6 +1,6 @@
 extends Control
-onready var port = $VBC1/HBC/VBC/HostPort/value
-onready var ip = $VBC1/HBC/VBC/HostIP/value
+@onready var port = $VBC1/HBC/VBC/HostPort/value
+@onready var ip = $VBC1/HBC/VBC/HostIP/value
 
 func _on_Cancel_pressed():
 	get_node("%MenuContents").current_tab = 0

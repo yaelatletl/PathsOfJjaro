@@ -4,7 +4,7 @@
 resource_local_to_scene = true
 code = "shader_type spatial;
 render_mode unshaded;
-uniform sampler2D texture_albedo : hint_albedo;
+uniform sampler2D texture_albedo : source_color;
 
 void vertex() {
 }
@@ -23,122 +23,122 @@ shader = SubResource( 1 )
 [sub_resource type="QuadMesh" id=3]
 size = Vector2( 4, 4 )
 
-[sub_resource type="BoxShape" id=4]
-extents = Vector3( 2, 2, 0.793408 )
+[sub_resource type="BoxShape3D" id=4]
+size = Vector3( 2, 2, 0.793408 )
 
-[sub_resource type="CylinderShape" id=5]
+[sub_resource type="CylinderShape3D" id=5]
 height = 4.0
 radius = 0.1
 
-[sub_resource type="BoxShape" id=6]
+[sub_resource type="BoxShape3D" id=6]
 
-[node name="Portal" type="Spatial"]
+[node name="Portal" type="Node3D"]
 
-[node name="CameraHolder" type="Spatial" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.23316 )
+[node name="CameraHolder" type="Node3D" parent="."]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.23316 )
 
-[node name="Screen" type="Spatial" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.321722 )
+[node name="Screen" type="Node3D" parent="."]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.321722 )
 
-[node name="Back" type="MeshInstance" parent="Screen"]
-transform = Transform( -1, 0, -3.25841e-07, 0, 1, 0, 3.25841e-07, 0, -1, 0, 0, 1.16574 )
+[node name="Back" type="MeshInstance3D" parent="Screen"]
+transform = Transform3D( -1, 0, -3.25841e-07, 0, 1, 0, 3.25841e-07, 0, -1, 0, 0, 1.16574 )
 material_override = SubResource( 2 )
 mesh = SubResource( 3 )
 
-[node name="Left" type="MeshInstance" parent="Screen"]
-transform = Transform( -2.18557e-08, 0, -1, 0, 1, 0, 0.217478, 0, -1.90125e-08, 2, 0, 0.756516 )
+[node name="Left" type="MeshInstance3D" parent="Screen"]
+transform = Transform3D( -2.18557e-08, 0, -1, 0, 1, 0, 0.217478, 0, -1.90125e-08, 2, 0, 0.756516 )
 material_override = SubResource( 2 )
 mesh = SubResource( 3 )
 
-[node name="Right" type="MeshInstance" parent="Screen"]
-transform = Transform( -2.18557e-08, 0, 1, 0, 1, 0, -0.217478, 0, -1.90125e-08, -2, 0, 0.756516 )
+[node name="Right" type="MeshInstance3D" parent="Screen"]
+transform = Transform3D( -2.18557e-08, 0, 1, 0, 1, 0, -0.217478, 0, -1.90125e-08, -2, 0, 0.756516 )
 material_override = SubResource( 2 )
 mesh = SubResource( 3 )
 
-[node name="Bottom" type="MeshInstance" parent="Screen"]
-transform = Transform( -2.18557e-08, -1, -4.37114e-08, 0, -4.37114e-08, 1, -0.217478, 1.90125e-08, 8.31065e-16, 0, -2, 0.756516 )
+[node name="Bottom" type="MeshInstance3D" parent="Screen"]
+transform = Transform3D( -2.18557e-08, -1, -4.37114e-08, 0, -4.37114e-08, 1, -0.217478, 1.90125e-08, 8.31065e-16, 0, -2, 0.756516 )
 material_override = SubResource( 2 )
 mesh = SubResource( 3 )
 
-[node name="Top" type="MeshInstance" parent="Screen"]
-transform = Transform( -2.18557e-08, 1, -4.37114e-08, 0, -4.37114e-08, -1, -0.217478, -1.90125e-08, 8.31065e-16, 0, 2, 0.756516 )
+[node name="Top" type="MeshInstance3D" parent="Screen"]
+transform = Transform3D( -2.18557e-08, 1, -4.37114e-08, 0, -4.37114e-08, -1, -0.217478, -1.90125e-08, 8.31065e-16, 0, 2, 0.756516 )
 material_override = SubResource( 2 )
 mesh = SubResource( 3 )
 
-[node name="Viewport" type="Viewport" parent="."]
+[node name="SubViewport" type="SubViewport" parent="."]
 keep_3d_linear = true
 shadow_atlas_size = 256
 
-[node name="Camera" type="Camera" parent="Viewport"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.18113 )
+[node name="Camera3D" type="Camera3D" parent="SubViewport"]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.18113 )
 current = true
 
-[node name="Area" type="Area" parent="." groups=["portal_area"]]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.00524747 )
+[node name="Area3D" type="Area3D" parent="." groups=["portal_area"]]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.00524747 )
 
-[node name="CollisionShape" type="CollisionShape" parent="Area"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.18677 )
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.18677 )
 shape = SubResource( 4 )
 
-[node name="Border" type="StaticBody" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.669177 )
+[node name="Border" type="StaticBody3D" parent="."]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.669177 )
 
-[node name="CollisionShapeLowFront" type="CollisionShape" parent="Border"]
-transform = Transform( -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, -2.1, 0 )
+[node name="CollisionShapeLowFront" type="CollisionShape3D" parent="Border"]
+transform = Transform3D( -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, -2.1, 0 )
 shape = SubResource( 5 )
 disabled = true
 
-[node name="CollisionShapeLowMiddle" type="CollisionShape" parent="Border"]
-transform = Transform( 2, 0, 0, 0, 0.1, 0, 0, 0, 0.25, 0, -2.1, 0.25 )
+[node name="CollisionShapeLowMiddle" type="CollisionShape3D" parent="Border"]
+transform = Transform3D( 2, 0, 0, 0, 0.1, 0, 0, 0, 0.25, 0, -2.1, 0.25 )
 shape = SubResource( 6 )
 disabled = true
 
-[node name="CollisionShapeLowBack" type="CollisionShape" parent="Border"]
-transform = Transform( -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, -2.1, 0.5 )
+[node name="CollisionShapeLowBack" type="CollisionShape3D" parent="Border"]
+transform = Transform3D( -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, -2.1, 0.5 )
 shape = SubResource( 5 )
 disabled = true
 
-[node name="CollisionShapeHighFront" type="CollisionShape" parent="Border"]
-transform = Transform( -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 2.1, 0 )
+[node name="CollisionShapeHighFront" type="CollisionShape3D" parent="Border"]
+transform = Transform3D( -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 2.1, 0 )
 shape = SubResource( 5 )
 disabled = true
 
-[node name="CollisionShapeHighMiddle" type="CollisionShape" parent="Border"]
-transform = Transform( 2, 0, 0, 0, 0.1, 0, 0, 0, 0.25, 0, 2.1, 0.25 )
+[node name="CollisionShapeHighMiddle" type="CollisionShape3D" parent="Border"]
+transform = Transform3D( 2, 0, 0, 0, 0.1, 0, 0, 0, 0.25, 0, 2.1, 0.25 )
 shape = SubResource( 6 )
 disabled = true
 
-[node name="CollisionShapeHighBack" type="CollisionShape" parent="Border"]
-transform = Transform( -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 2.1, 0.5 )
+[node name="CollisionShapeHighBack" type="CollisionShape3D" parent="Border"]
+transform = Transform3D( -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 2.1, 0.5 )
 shape = SubResource( 5 )
 disabled = true
 
-[node name="CollisionShapeLeftFront" type="CollisionShape" parent="Border"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.1, 0, 0 )
+[node name="CollisionShapeLeftFront" type="CollisionShape3D" parent="Border"]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.1, 0, 0 )
 shape = SubResource( 5 )
 disabled = true
 
-[node name="CollisionShapeLeftMiddle" type="CollisionShape" parent="Border"]
-transform = Transform( 0.1, 0, 0, 0, 2, 0, 0, 0, 0.25, 2.1, 0, 0.25 )
+[node name="CollisionShapeLeftMiddle" type="CollisionShape3D" parent="Border"]
+transform = Transform3D( 0.1, 0, 0, 0, 2, 0, 0, 0, 0.25, 2.1, 0, 0.25 )
 shape = SubResource( 6 )
 disabled = true
 
-[node name="CollisionShapeLeftBack" type="CollisionShape" parent="Border"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.1, 0, 0.5 )
+[node name="CollisionShapeLeftBack" type="CollisionShape3D" parent="Border"]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.1, 0, 0.5 )
 shape = SubResource( 5 )
 disabled = true
 
-[node name="CollisionShapeRightFront" type="CollisionShape" parent="Border"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.1, 0, 0 )
+[node name="CollisionShapeRightFront" type="CollisionShape3D" parent="Border"]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.1, 0, 0 )
 shape = SubResource( 5 )
 disabled = true
 
-[node name="CollisionShapeRightMiddle" type="CollisionShape" parent="Border"]
-transform = Transform( 0.1, 0, 0, 0, 2, 0, 0, 0, 0.25, -2.1, 0, 0.25 )
+[node name="CollisionShapeRightMiddle" type="CollisionShape3D" parent="Border"]
+transform = Transform3D( 0.1, 0, 0, 0, 2, 0, 0, 0, 0.25, -2.1, 0, 0.25 )
 shape = SubResource( 6 )
 disabled = true
 
-[node name="CollisionShapeRightBack" type="CollisionShape" parent="Border"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.1, 0, 0.5 )
+[node name="CollisionShapeRightBack" type="CollisionShape3D" parent="Border"]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.1, 0, 0.5 )
 shape = SubResource( 5 )
 disabled = true

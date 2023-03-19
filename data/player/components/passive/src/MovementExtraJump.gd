@@ -1,8 +1,8 @@
 extends Component
 
-export(float) var jump_height : float = 15
-export(int) var jumps_before_floor : int = 1 #Times you can jump without touching the floor
-export(bool) var walls_add_jumps : bool = false
+@export var jump_height: float : float = 15
+@export var jumps_before_floor: int : int = 1 #Times you can jump without touching the floor
+@export var walls_add_jumps: bool : bool = false
 
 var triggerable : bool = true
 var jump_timer = null
@@ -44,5 +44,5 @@ func _physics_process(delta):
 			actor.linear_velocity.y += jump_height
 			actor.linear_velocity *= 1.2 #Adds a little bit of horizontal velocity
 			triggerable = false
-			yield(get_tree().create_timer(0.5), "timeout")
+			await get_tree().create_timer(0.5).timeout
 			triggerable = true

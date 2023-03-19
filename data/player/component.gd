@@ -8,13 +8,13 @@ enum CHARGE_TYPE{
 	SPECIAL
 }
 
-export(bool) var enabled : bool = true
-export(String) var _component_name = ""
-export(PackedScene) var ui_scene = null
-export(NodePath) var ui_container = ""
+@export var enabled: bool : bool = true
+@export var _component_name: String = ""
+@export var ui_scene: PackedScene = null
+@export var ui_container: NodePath = ""
 
-onready var actor : Node = get_parent()
-onready var ui_root : Node = get_node_or_null(ui_container)
+@onready var actor : Node = get_parent()
+@onready var ui_root : Node = get_node_or_null(ui_container)
 
 var charge_meter : Node = null
 
@@ -35,7 +35,7 @@ func _ready() -> void:
 	_start()
 	actor._register_component(_component_name, self)
 	if ui_root != null:
-		charge_meter = ui_scene.instance()
+		charge_meter = ui_scene.instantiate()
 		ui_root.add_child(charge_meter)
 
 func _functional_routine(input : Dictionary) -> void:

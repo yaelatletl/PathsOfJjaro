@@ -14,16 +14,16 @@ func shoot_projectile(separator_name = "")->void:
 	if separator_name != "":
 		active = ray.get_node(separator_name)
 	var barrel = spatial_parent.get_node("{}/barrel".format([gun_name], "{}"))
-	if active is Position3D or active is RayCast:
+	if active is Marker3D or active is RayCast3D:
 		#Handle more than one raycast 
 		for child_ray in active.get_children():
-			if child_ray is RayCast:
-				make_projectile_shoot(child_ray.global_transform.origin, child_ray.cast_to)
+			if child_ray is RayCast3D:
+				make_projectile_shoot(child_ray.global_transform.origin, child_ray.target_position)
 		if active.get_children().size() == 0:
 			make_projectile_shoot(barrel.global_transform.origin, Vector3.ZERO)	
-	if active is RayCast:
+	if active is RayCast3D:
 		# Shoot form main barrel 
-		make_projectile_shoot(barrel.global_transform.origin, ray.cast_to)
+		make_projectile_shoot(barrel.global_transform.origin, ray.target_position)
 	
 func make_projectile_shoot(origin, offset):
 	if actor == null:

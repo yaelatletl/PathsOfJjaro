@@ -63,7 +63,7 @@ var secondary_just_auto_triggered = false
 signal trigger_released
 
 func _ready() -> void:
-	._ready()
+	super._ready()
 	setup_spread(secondary_spread_pattern, secondary_spread_multiplier, secondary_max_range, "secondary")
 
 func _physics_process(delta):

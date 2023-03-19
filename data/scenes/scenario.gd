@@ -1,12 +1,12 @@
-extends Spatial
+extends Node3D
 
-export(NodePath) var spawn_points_parent_path : NodePath = ""
-onready var spawnpoint_parent = get_node(spawn_points_parent_path)
+@export var spawn_points_parent_path: NodePath : NodePath = ""
+@onready var spawnpoint_parent = get_node(spawn_points_parent_path)
 
 var players_in_local_instance : Dictionary = {}
 var spawn_point_in_turn = 0
 func _ready() -> void:
-	Gamestate.connect("players_changed", self, "_on_Gamestate_players_changed")
+	Gamestate.connect("players_changed",Callable(self,"_on_Gamestate_players_changed"))
 	Pooling.setup_projectile_root(self)
 
 func _on_Gamestate_players_changed():

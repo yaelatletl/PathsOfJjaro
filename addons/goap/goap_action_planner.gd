@@ -1,4 +1,4 @@
-tool
+@tool
 extends Node
 class_name GOAPActionPlanner, "res://addons/goap/goap_action_planner.png"
 
@@ -9,7 +9,7 @@ class State:
 	var value: int
 	var mask: int
 	
-	func _init(v, m):
+	func _init(v,m):
 		value = v
 		mask = m
 	
@@ -24,14 +24,14 @@ class State:
 	
 	func tostring(atoms = null):
 		if atoms != null:
-			var rv = PoolStringArray()
+			var rv = PackedStringArray()
 			for i in range(atoms.size()):
 				if mask & (1 << i) != 0:
 					if value & (1 << i) == 0:
 						rv.append("!"+atoms[i])
 					else:
 						rv.append(atoms[i])
-			return rv.join(" ")
+			return " ".join(rv)
 		else:
 			return "("+str(value)+", "+str(mask)+")"
 
@@ -41,7 +41,7 @@ class Action:
 	var effect: State
 	var cost: float
 	
-	func _init(n, p, e, c):
+	func _init(n,p,e,c):
 		name = n
 		preconditions = p
 		effect = e
@@ -56,7 +56,7 @@ class AStarNode:
 	var last_action
 	var cost: float
 	
-	func _init(s, p, la, c):
+	func _init(s,p,la,c):
 		state = s
 		previous = p
 		last_action = la
@@ -140,7 +140,7 @@ func fix_nodes_cost(nodes, index_list, difference):
 	for i in nodes.size():
 		if index_list.find(nodes[i].previous) != -1:
 			new_index_list.append(i)
-	if !new_index_list.empty():
+	if !new_index_list.is_empty():
 		fix_nodes_cost(nodes, new_index_list, difference)
 
 func state_to_string(s):

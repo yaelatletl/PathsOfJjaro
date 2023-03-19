@@ -1,12 +1,12 @@
-extends RigidBody
+extends RigidBody3D
 class_name Projectile
 
 var damage_type = Pooling.DAMAGE_TYPE.KINECTIC
 
-export(float) var type : int = 0
-export(float) var damage : int = 0
-export(float) var speed : int = 100
-export(float) var lifetime : float = 5.0
+@export var type: float : int = 0
+@export var damage: float : int = 0
+@export var speed: float : int = 100
+@export var lifetime: float : float = 5.0
 
 signal request_destroy()
 
@@ -14,18 +14,18 @@ func is_projectile(): # Helps avoid cyclic references
 	return true 
 
 func _init():
-	connect("body_entered", self, "_on_body_entered")
+	connect("body_entered",Callable(self,"_on_body_entered"))
 
 func _ready():
-	get_tree().create_timer(0.1).connect("timeout",  self, "_network_sync")
+	get_tree().create_timer(0.1).connect("timeout",Callable(self,"_network_sync"))
 
 func add_exceptions(actor):
 	add_collision_exception_with(actor)
 
 func _network_sync() -> void:
 	if is_inside_tree():
-		Gamestate.set_in_all_clients(self, "translation", translation)
-		get_tree().create_timer(0.1).connect("timeout",  self, "_network_sync")
+		Gamestate.set_in_all_clients(self, "position", position)
+		get_tree().create_timer(0.1).connect("timeout",Callable(self,"_network_sync"))
 	
 func stop() -> void:
 	sleeping = true
@@ -36,7 +36,7 @@ func stop() -> void:
 	emit_signal("request_destroy")
 
 func move(pos, dir) -> void:
-	get_tree().create_timer(lifetime).connect("timeout", self, "stop")
+	get_tree().create_timer(lifetime).connect("timeout",Callable(self,"stop"))
 	sleeping = false
 	global_transform.origin = pos
 	if is_inside_tree():

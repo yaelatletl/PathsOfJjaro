@@ -1,7 +1,7 @@
 extends CenterContainer
 
-onready var label = $Text
-onready var animator = $AnimationPlayer
+@onready var label = $Text
+@onready var animator = $AnimationPlayer
 
 
 func show_message(message):

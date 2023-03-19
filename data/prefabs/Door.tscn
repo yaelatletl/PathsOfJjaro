@@ -2,56 +2,56 @@
 
 [ext_resource path="res://data/prefabs/Door.gd" type="Script" id=1]
 
-[sub_resource type="BoxShape" id=1]
-extents = Vector3( 0.0537269, 1.17724, 0.058249 )
+[sub_resource type="BoxShape3D" id=1]
+size = Vector3( 0.0537269, 1.17724, 0.058249 )
 
-[sub_resource type="BoxShape" id=2]
-extents = Vector3( 0.575436, 1.15129, 0.0339807 )
+[sub_resource type="BoxShape3D" id=2]
+size = Vector3( 0.575436, 1.15129, 0.0339807 )
 
 [sub_resource type="QuadMesh" id=3]
 
-[sub_resource type="SpatialMaterial" id=4]
+[sub_resource type="StandardMaterial3D" id=4]
 params_cull_mode = 2
 
 [sub_resource type="OccluderShapePolygon" id=6]
-polygon_points = PoolVector2Array( 0.0182996, -1.049, 0.0195128, 1.28319, -0.98341, 1.28674, -1, -1 )
+polygon_points = PackedVector2Array( 0.0182996, -1.049, 0.0195128, 1.28319, -0.98341, 1.28674, -1, -1 )
 
-[sub_resource type="BoxShape" id=5]
-extents = Vector3( 0.944139, 1, 1.34567 )
+[sub_resource type="BoxShape3D" id=5]
+size = Vector3( 0.944139, 1, 1.34567 )
 
-[node name="Door" type="Spatial"]
+[node name="Door" type="Node3D"]
 script = ExtResource( 1 )
 message = "Press \"E\" to open"
 push_strenght = 25.0
 
-[node name="StaticBody" type="StaticBody" parent="."]
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
 
-[node name="CollisionShape" type="CollisionShape" parent="StaticBody"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.154958, 0 )
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.154958, 0 )
 shape = SubResource( 1 )
 
-[node name="DoorBlade" type="RigidBody" parent="."]
+[node name="DoorBlade" type="RigidBody3D" parent="."]
 mass = 5.36
 can_sleep = false
 linear_damp = 2.0
 angular_damp = 1.0
 
-[node name="CollisionShape" type="CollisionShape" parent="DoorBlade"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.666372, 0.155902, 0 )
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DoorBlade"]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.666372, 0.155902, 0 )
 shape = SubResource( 2 )
 
-[node name="MeshInstance" type="MeshInstance" parent="DoorBlade"]
-transform = Transform( 1.17762, 0, 0, 0, 2.38015, 0, 0, 0, 1, 0.667568, 0.165449, 0 )
+[node name="MeshInstance3D" type="MeshInstance3D" parent="DoorBlade"]
+transform = Transform3D( 1.17762, 0, 0, 0, 2.38015, 0, 0, 0, 1, 0.667568, 0.165449, 0 )
 mesh = SubResource( 3 )
 material/0 = SubResource( 4 )
 
-[node name="Occluder" type="Occluder" parent="DoorBlade"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.0391, 0, 0 )
+[node name="OccluderInstance3D" type="OccluderInstance3D" parent="DoorBlade"]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.0391, 0, 0 )
 shape = SubResource( 6 )
 
-[node name="Hinge" type="HingeJoint" parent="."]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0.0371102, 0, 0 )
-nodes/node_a = NodePath("../StaticBody")
+[node name="Hinge" type="HingeJoint3D" parent="."]
+transform = Transform3D( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0.0371102, 0, 0 )
+nodes/node_a = NodePath("../StaticBody3D")
 nodes/node_b = NodePath("../DoorBlade")
 angular_limit/enable = true
 angular_limit/bias = 0.51
@@ -59,18 +59,18 @@ angular_limit/softness = 3.12
 angular_limit/relaxation = 0.56
 motor/max_impulse = 0.2
 
-[node name="PickArea" type="Area" parent="."]
+[node name="PickArea" type="Area3D" parent="."]
 
-[node name="CollisionShape" type="CollisionShape" parent="PickArea"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.509989, 0, 0 )
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PickArea"]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.509989, 0, 0 )
 shape = SubResource( 5 )
 
 [node name="Label3D" type="Label3D" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.529344, 0, 0.672549 )
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.529344, 0, 0.672549 )
 billboard = 2
 text = "Front"
 
 [node name="Label3D2" type="Label3D" parent="."]
-transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.529344, 0, -0.945941 )
+transform = Transform3D( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.529344, 0, -0.945941 )
 billboard = 2
 text = "Back"

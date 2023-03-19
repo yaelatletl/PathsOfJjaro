@@ -1,12 +1,12 @@
-extends Spatial
+extends Node3D
 
-export(NodePath) var feet_path
-export(NodePath) var character_path
-export(NodePath) var movement_path
+@export var feet_path: NodePath
+@export var character_path: NodePath
+@export var movement_path: NodePath
 
-onready var character : Node = get_node(character_path)
-onready var feet : Node = get_node(feet_path)
-onready var movement : Node = get_node(movement_path)
+@onready var character : Node = get_node(character_path)
+@onready var feet : Node = get_node(feet_path)
+@onready var movement : Node = get_node(movement_path)
 
 var footsteep_timer : float = 0
 var footsteep_speed : float = 0.5

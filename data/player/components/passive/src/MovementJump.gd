@@ -3,8 +3,8 @@ extends Component
 var jump_timer = null
 var can_jump = true
 
-export(float) var jump_height  : float = 15 # Jump height
-export(bool) var jumps_from_wall : bool = false
+@export var jump_height: float  : float = 15 # Jump height
+@export var jumps_from_wall: bool : bool = false
 
 var movement = null
 func _ready():
@@ -13,7 +13,7 @@ func _ready():
 
 func _toggle_jump():
 	can_jump = false
-	yield(get_tree().create_timer(0.05), "timeout")
+	await get_tree().create_timer(0.05).timeout
 	can_jump = true
 
 func _physics_process(_delta):

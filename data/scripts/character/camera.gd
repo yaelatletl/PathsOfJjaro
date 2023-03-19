@@ -1,11 +1,11 @@
-extends Camera
+extends Camera3D
 
-export var shake_time : float
-export var shake_force : float
-onready var actor = $"../../../"
+@export var shake_time : float
+@export var shake_force : float
+@onready var actor = $"../../../"
 func _ready() -> void:
-	if get_tree().has_network_peer():
-		if is_network_master():
+	if get_tree().has_multiplayer_peer():
+		if is_multiplayer_authority():
 			make_current()
 
 func _process(_delta : float) -> void:
@@ -13,8 +13,8 @@ func _process(_delta : float) -> void:
 	_tilt(_delta)
 func _shake(_delta : float) -> void:
 	if shake_time > 0:
-		h_offset = rand_range(-shake_force, shake_force)
-		v_offset = rand_range(-shake_force, shake_force)
+		h_offset = randf_range(-shake_force, shake_force)
+		v_offset = randf_range(-shake_force, shake_force)
 		shake_time -= _delta
 	else:
 		h_offset = 0

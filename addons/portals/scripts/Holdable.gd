@@ -1,4 +1,4 @@
-extends RigidBody
+extends RigidBody3D
 
 # Amount of seconds to hold an object
 const TIME_HOLD_OBJ = 0.5
@@ -7,7 +7,7 @@ const TIME_HOLD_OBJ = 0.5
 const MAX_RELEASE_VELOCITY = 10.0
 
 # The node holding the object, or `null` if it's not held
-var _holder: Spatial = null
+var _holder: Node3D = null
 # Amount of seconds since object was held
 var _time_since_held := 0.0
 
@@ -36,13 +36,13 @@ func drop() -> void:
 	custom_integrator = false
 
 
-func hold(holder: Spatial) -> void:
+func hold(holder: Node3D) -> void:
 	_holder = holder
 	_time_since_held = 0.0
 	custom_integrator = true
 
 
-func _integrate_forces(state: PhysicsDirectBodyState) -> void:
+func _integrate_forces(state: PhysicsDirectBodyState3D) -> void:
 	if _holder == null:
 		return
 
@@ -62,7 +62,7 @@ func _integrate_forces(state: PhysicsDirectBodyState) -> void:
 
 	# Calculate amount cube needs to rotate
 	var rot := (pos_next * pos_cur.inverse()).basis \
-		.get_rotation_quat().get_euler()
+		super.get_rotation_quaternion().get_euler()
 
 	# Actually move the object
 	state.linear_velocity = (pos_next.origin - pos_cur.origin) / delta
