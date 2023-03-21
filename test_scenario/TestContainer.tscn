@@ -9,29 +9,29 @@ script = ExtResource( 1 )
 spread_anlge = 20.0
 
 [node name="ColorRect3" type="ColorRect" parent="."]
-margin_right = 360.0
-margin_bottom = 360.0
+offset_right = 360.0
+offset_bottom = 360.0
 
 [node name="ColorRect" type="ColorRect" parent="."]
-margin_left = 579.624
-margin_top = 95.5172
-margin_right = 759.624
-margin_bottom = 275.517
+offset_left = 579.624
+offset_top = 95.5172
+offset_right = 759.624
+offset_bottom = 275.517
 
 [node name="ColorRect4" type="ColorRect" parent="."]
-margin_left = 484.951
-margin_top = 331.528
-margin_right = 664.951
-margin_bottom = 511.528
+offset_left = 484.951
+offset_top = 331.528
+offset_right = 664.951
+offset_bottom = 511.528
 
 [node name="ColorRect5" type="ColorRect" parent="."]
-margin_left = 299.405
-margin_top = 505.415
-margin_right = 479.405
-margin_bottom = 685.415
+offset_left = 299.405
+offset_top = 505.415
+offset_right = 479.405
+offset_bottom = 685.415
 
 [node name="ColorRect6" type="ColorRect" parent="."]
-margin_left = 57.7553
-margin_top = 584.596
-margin_right = 237.755
-margin_bottom = 764.596
+offset_left = 57.7553
+offset_top = 584.596
+offset_right = 237.755
+offset_bottom = 764.596

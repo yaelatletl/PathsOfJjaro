@@ -1,12 +1,12 @@
 extends Component
 
-#Impulse: Adds an impulse to the player's movement based on the direction vector, 
+#Impulse: Adds an impulse to the player's movement based checked the direction vector, 
 # instead of the player's linear_velocity.
 # We let the player use this ability twice
 
-@export var impulse_strength: float : float = 7.0
-@export var charge_time: float : float = 5
-@export var charges_max: int : int = 2
+@export var impulse_strength : float = 7.0
+@export var charge_time : float = 5
+@export var charges_max : int = 2
 var charges : int = 2
 var movement_ref = null
 var timer = null

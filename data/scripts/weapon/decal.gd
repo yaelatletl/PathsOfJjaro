@@ -1,8 +1,7 @@
 extends Node3D
 
-@export var timer: NodePath
+@export var seconds: float
 
 func _ready() -> void:
-	timer = get_node(timer)
-	
+	var timer = get_tree().create_timer(seconds)
 	timer.connect("timeout",Callable(self,"queue_free"))

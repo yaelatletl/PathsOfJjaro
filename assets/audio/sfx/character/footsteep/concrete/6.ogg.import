@@ -1,15 +1,19 @@
 [remap]
 
-importer="ogg_vorbis"
-type="AudioStreamOGGVorbis"
-path="res://.import/6.ogg-27b1fee422654bf2d66f7513c0560c9a.oggstr"
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://coqkpmepdsbvl"
+path="res://.godot/imported/6.ogg-27b1fee422654bf2d66f7513c0560c9a.oggvorbisstr"
 
 [deps]
 
 source_file="res://assets/audio/sfx/character/footsteep/concrete/6.ogg"
-dest_files=[ "res://.import/6.ogg-27b1fee422654bf2d66f7513c0560c9a.oggstr" ]
+dest_files=["res://.godot/imported/6.ogg-27b1fee422654bf2d66f7513c0560c9a.oggvorbisstr"]
 
 [params]
 
 loop=false
 loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

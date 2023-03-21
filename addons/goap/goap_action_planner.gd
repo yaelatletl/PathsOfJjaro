@@ -1,7 +1,7 @@
 @tool
+@icon("res://addons/goap/goap_action_planner.png")
 extends Node
-class_name GOAPActionPlanner, "res://addons/goap/goap_action_planner.png"
-
+class_name GOAPActionPlanner 
 var state_atoms = []
 var actions = []
 

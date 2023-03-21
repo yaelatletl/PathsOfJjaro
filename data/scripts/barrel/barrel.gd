@@ -1,21 +1,23 @@
 extends RigidBody3D
 
-@export sync var health : int = 100
+@export var health : float = 100 #sync
 var remove_decal : bool = false
 
-puppet var on_the_net_transform := Transform3D()
+var on_the_net_transform := Transform3D() #sync
+@onready var mpAPI = get_tree().get_multiplayer()
 
 func _ready():
-
 	$timer.connect("timeout",Callable(self,"queue_remove"))
 	$explosion/timer.connect("timeout",Callable(self,"_explode_others"))
 
 func _physics_process(delta: float) -> void:
-	if get_tree().has_multiplayer_peer():
-		if get_tree().is_server():
-			rset_unreliable("on_the_net_transform", transform)
+	if mpAPI.has_multiplayer_peer():
+		if mpAPI.is_server():
+			#rset_unreliable("on_the_net_transform", transform)
+			pass
 		else:
-			transform = on_the_net_transform
+			#transform = on_the_net_transform
+			pass
 func _damage(damage, type) -> void:
 	if health > 0:
 		var dam_calc = health - damage
@@ -37,11 +39,12 @@ func _process(_delta) -> void:
 @rpc("any_peer") func _explosion(exploded_in_server : bool = false) -> void:
 
 	
-	if get_tree().is_server():
+	if mpAPI.is_server():
 		for players in Gamestate.players:
 			if players != 1:
-				rpc_unreliable_id(players, "_explosion", true)
-	if (not exploded_in_server and get_tree().has_multiplayer_peer()) and not get_tree().is_server():
+				pass
+				#rpc_unreliable_id(players, "_explosion", true)
+	if (not exploded_in_server and mpAPI.has_multiplayer_peer()) and not mpAPI.is_server():
 		return
 
 	$collision.disabled = true
@@ -53,7 +56,7 @@ func _process(_delta) -> void:
 	main.add_child(burnt_ground)
 	burnt_ground.position = global_transform.origin
 	
-	mode = FREEZE_MODE_STATIC
+	#mode = FREEZE_MODE_STATIC
 	
 	$mesh.visible = false
 	$effects/ex.emitting = true
@@ -68,7 +71,7 @@ func _process(_delta) -> void:
 	queue_free()
 
 func queue_remove() -> void:
-	if get_tree().is_server():
+	if mpAPI.is_server():
 		queue_free()
 	Gamestate.call_on_all_clients(self, "remote_queue_remove", null)
 

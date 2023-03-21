@@ -2,7 +2,12 @@
 extends Node
 class_name GOAPAction
 
-@export var action: String = null : get = get_action, set = set_action
+@export var action: String = "" :
+	get:
+		return get_action()
+	set(a):
+		set_action(a)
+		
 @export var preconditions: String = ""
 @export var effect: String = ""
 @export var cost: float = 1

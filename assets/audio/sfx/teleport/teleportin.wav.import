@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/teleportin.wav-27b52e7ea9551cc62c69e3ac04b0da34.sample"
+type="AudioStreamWAV"
+uid="uid://cl61k02dq25fm"
+path="res://.godot/imported/teleportin.wav-27b52e7ea9551cc62c69e3ac04b0da34.sample"
 
 [deps]
 
 source_file="res://assets/audio/sfx/teleport/teleportin.wav"
-dest_files=[ "res://.import/teleportin.wav-27b52e7ea9551cc62c69e3ac04b0da34.sample" ]
+dest_files=["res://.godot/imported/teleportin.wav-27b52e7ea9551cc62c69e3ac04b0da34.sample"]
 
 [params]
 

@@ -34,7 +34,7 @@ func _physics_process(delta: float) -> void:
 			on_the_net_velocity, 
 			clamp(delta*actor.linear_velocity.distance_to(on_the_net_velocity), delta, 1.0)
 		)
-	if is_multiplayer_authority():
+	if mpAPI.is_server():
 		rset_unreliable_id(1, "local_camera_look", head.rotation)
 		
 func _process(delta: float) -> void:
@@ -43,7 +43,7 @@ func _process(delta: float) -> void:
 	if get_tree().is_server():
 		if local_camera_look != null and get_multiplayer_authority() != 1:
 			head.rotation =  local_camera_look
-	elif not is_multiplayer_authority():
+	elif not mpAPI.is_server():
 		var distance_factor = head.rotation.angle_to(on_the_net_camera_look)
 		if distance_factor != null:
 			head.rotation = lerp_angles(head.rotation, on_the_net_camera_look, rad_to_deg(abs(distance_factor))*delta+delta)

@@ -1,20 +1,21 @@
 [remap]
 
 importer="wavefront_obj"
+importer_version=1
 type="Mesh"
-path="res://.import/low_buildingB.obj-877a9a62cb030fb3018ff6b39175fcb2.mesh"
+uid="uid://qbbdd7nt4qxl"
+path="res://.godot/imported/low_buildingB.obj-877a9a62cb030fb3018ff6b39175fcb2.mesh"
 
 [deps]
 
-files=[ "res://.import/low_buildingB.obj-877a9a62cb030fb3018ff6b39175fcb2.mesh" ]
+files=["res://.godot/imported/low_buildingB.obj-877a9a62cb030fb3018ff6b39175fcb2.mesh"]
 
 source_file="res://test_scenario/Models/OBJ format/low_buildingB.obj"
-dest_files=[ "res://.import/low_buildingB.obj-877a9a62cb030fb3018ff6b39175fcb2.mesh", "res://.import/low_buildingB.obj-877a9a62cb030fb3018ff6b39175fcb2.mesh" ]
+dest_files=["res://.godot/imported/low_buildingB.obj-877a9a62cb030fb3018ff6b39175fcb2.mesh", "res://.godot/imported/low_buildingB.obj-877a9a62cb030fb3018ff6b39175fcb2.mesh"]
 
 [params]
 
 generate_tangents=true
-scale_mesh=Vector3( 15, 15, 15 )
-offset_mesh=Vector3( 0, 0, 0 )
-octahedral_compression=true
-optimize_mesh_flags=4286
+scale_mesh=Vector3(15, 15, 15)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true

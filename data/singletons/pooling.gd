@@ -50,7 +50,7 @@ func _on_projectile_request_destroy(projectile):
 	if projectile.is_inside_tree():
 		projectile.sleeping = true
 		projectile.linear_velocity = Vector3(0,0,0)
-		projectiles_root.remove_child(projectile)
+		projectiles_root.call_deferred("remove_child", projectile)
 		projectiles_waiting.append(projectile)
 
 #Creates a dummy actor to be used for portal physics
@@ -60,7 +60,7 @@ func duplicate_actor(actor):
 		return null
 	if not actor in actor_pool:
 		actor_pool[actor] = actor.duplicate(1)
-		remove_cameras(actor_pool[actor]) #remove cameras from the duplicate
+		remove_cameras(actor_pool[actor]) #remove_at cameras from the duplicate
 	return actor_pool[actor]
 
 func free_actor_duplicate(actor):

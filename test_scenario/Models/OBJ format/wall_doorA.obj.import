@@ -1,20 +1,21 @@
 [remap]
 
 importer="wavefront_obj"
+importer_version=1
 type="Mesh"
-path="res://.import/wall_doorA.obj-7f922e8b137fdfe714a5fb509be8b8fe.mesh"
+uid="uid://chep8hhvsotod"
+path="res://.godot/imported/wall_doorA.obj-7f922e8b137fdfe714a5fb509be8b8fe.mesh"
 
 [deps]
 
-files=[ "res://.import/wall_doorA.obj-7f922e8b137fdfe714a5fb509be8b8fe.mesh" ]
+files=["res://.godot/imported/wall_doorA.obj-7f922e8b137fdfe714a5fb509be8b8fe.mesh"]
 
 source_file="res://test_scenario/Models/OBJ format/wall_doorA.obj"
-dest_files=[ "res://.import/wall_doorA.obj-7f922e8b137fdfe714a5fb509be8b8fe.mesh", "res://.import/wall_doorA.obj-7f922e8b137fdfe714a5fb509be8b8fe.mesh" ]
+dest_files=["res://.godot/imported/wall_doorA.obj-7f922e8b137fdfe714a5fb509be8b8fe.mesh", "res://.godot/imported/wall_doorA.obj-7f922e8b137fdfe714a5fb509be8b8fe.mesh"]
 
 [params]
 
 generate_tangents=true
-scale_mesh=Vector3( 15, 15, 15 )
-offset_mesh=Vector3( 0, 0, 0 )
-octahedral_compression=true
-optimize_mesh_flags=4286
+scale_mesh=Vector3(15, 15, 15)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true

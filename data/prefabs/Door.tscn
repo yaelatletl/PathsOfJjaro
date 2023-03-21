@@ -1,34 +1,31 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=7 format=3 uid="uid://mhiefwjp7v0c"]
 
-[ext_resource path="res://data/prefabs/Door.gd" type="Script" id=1]
+[ext_resource type="Script" path="res://data/prefabs/Door.gd" id="1"]
 
-[sub_resource type="BoxShape3D" id=1]
-size = Vector3( 0.0537269, 1.17724, 0.058249 )
+[sub_resource type="BoxShape3D" id="1"]
+size = Vector3(0.107454, 2.35448, 0.116498)
 
-[sub_resource type="BoxShape3D" id=2]
-size = Vector3( 0.575436, 1.15129, 0.0339807 )
+[sub_resource type="BoxShape3D" id="2"]
+size = Vector3(1.15087, 2.30258, 0.0679614)
 
-[sub_resource type="QuadMesh" id=3]
+[sub_resource type="QuadMesh" id="3"]
 
-[sub_resource type="StandardMaterial3D" id=4]
-params_cull_mode = 2
+[sub_resource type="QuadOccluder3D" id="QuadOccluder3D_wlnjp"]
+size = Vector2(1.143, 2.356)
 
-[sub_resource type="OccluderShapePolygon" id=6]
-polygon_points = PackedVector2Array( 0.0182996, -1.049, 0.0195128, 1.28319, -0.98341, 1.28674, -1, -1 )
-
-[sub_resource type="BoxShape3D" id=5]
-size = Vector3( 0.944139, 1, 1.34567 )
+[sub_resource type="BoxShape3D" id="5"]
+size = Vector3(1.88828, 2, 2.69134)
 
 [node name="Door" type="Node3D"]
-script = ExtResource( 1 )
-message = "Press \"E\" to open"
+script = ExtResource("1")
 push_strenght = 25.0
+message = "Press \"E\" to open"
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
-transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.154958, 0 )
-shape = SubResource( 1 )
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.154958, 0)
+shape = SubResource("1")
 
 [node name="DoorBlade" type="RigidBody3D" parent="."]
 mass = 5.36
@@ -37,22 +34,21 @@ linear_damp = 2.0
 angular_damp = 1.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="DoorBlade"]
-transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.666372, 0.155902, 0 )
-shape = SubResource( 2 )
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.666372, 0.155902, 0)
+shape = SubResource("2")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="DoorBlade"]
-transform = Transform3D( 1.17762, 0, 0, 0, 2.38015, 0, 0, 0, 1, 0.667568, 0.165449, 0 )
-mesh = SubResource( 3 )
-material/0 = SubResource( 4 )
+transform = Transform3D(1.17762, 0, 0, 0, 2.38015, 0, 0, 0, 1, 0.667568, 0.165449, 0)
+mesh = SubResource("3")
 
 [node name="OccluderInstance3D" type="OccluderInstance3D" parent="DoorBlade"]
-transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.0391, 0, 0 )
-shape = SubResource( 6 )
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.665714, 0.158028, 0)
+occluder = SubResource("QuadOccluder3D_wlnjp")
 
 [node name="Hinge" type="HingeJoint3D" parent="."]
-transform = Transform3D( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0.0371102, 0, 0 )
-nodes/node_a = NodePath("../StaticBody3D")
-nodes/node_b = NodePath("../DoorBlade")
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0.0371102, 0, 0)
+node_a = NodePath("../StaticBody3D")
+node_b = NodePath("../DoorBlade")
 angular_limit/enable = true
 angular_limit/bias = 0.51
 angular_limit/softness = 3.12
@@ -62,15 +58,15 @@ motor/max_impulse = 0.2
 [node name="PickArea" type="Area3D" parent="."]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="PickArea"]
-transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.509989, 0, 0 )
-shape = SubResource( 5 )
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.509989, 0, 0)
+shape = SubResource("5")
 
 [node name="Label3D" type="Label3D" parent="."]
-transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.529344, 0, 0.672549 )
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.529344, 0, 0.672549)
 billboard = 2
 text = "Front"
 
 [node name="Label3D2" type="Label3D" parent="."]
-transform = Transform3D( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.529344, 0, -0.945941 )
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.529344, 0, -0.945941)
 billboard = 2
 text = "Back"

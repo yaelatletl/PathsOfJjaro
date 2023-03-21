@@ -9,7 +9,7 @@ class_name AmmoPickup
 func _ready() -> void:
 	var err = area.connect("body_entered",Callable(self,"_on_area_body_entered"))
 	if err!=OK:
-		printerr("Connection on ammo pickup failed. Error code: ", err)
+		printerr("Connection checked ammo pickup failed. Error code: ", err)
 
 func _on_area_body_entered(body) -> void:
 	if body.has_method("_get_component"):

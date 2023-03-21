@@ -3,8 +3,8 @@ extends Component
 var jump_timer = null
 var can_jump = true
 
-@export var jump_height: float  : float = 15 # Jump height
-@export var jumps_from_wall: bool : bool = false
+@export var jump_height: float   = 15 # Jump height
+@export var jumps_from_wall: bool  = false
 
 var movement = null
 func _ready():
@@ -31,7 +31,7 @@ func _physics_process(_delta):
 	
 func _jump(_delta) -> void:
 	var check_jump = (not actor.is_far_from_floor()) or (jumps_from_wall and actor.is_on_wall())
-	# Makes the player jump if he is on the ground
+	# Makes the player jump if he is checked the ground
 	if actor.input["jump"] and can_jump and check_jump:
 		_toggle_jump()
 		actor.reset_wall_multi()

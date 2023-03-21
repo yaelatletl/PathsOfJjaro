@@ -4,8 +4,9 @@ extends Camera3D
 @export var shake_force : float
 @onready var actor = $"../../../"
 func _ready() -> void:
-	if get_tree().has_multiplayer_peer():
-		if is_multiplayer_authority():
+	var mpAPI = get_tree().get_multiplayer()
+	if mpAPI.has_multiplayer_peer():
+		if mpAPI.is_server():
 			make_current()
 
 func _process(_delta : float) -> void:
@@ -26,14 +27,14 @@ func _tilt(_delta : float) -> void:
 
 	#given a wall normal, tilt the camera to the opposite side of the wall
 	if actor.wall_normal != null and actor.is_on_wall() and actor.linear_velocity.length() > 5 and actor.is_far_from_floor():
-		var rotation_angle = global_transform.basis.z.cross(actor.wall_normal.normal*10).y
+		var rotation_angle = global_transform.basis.z.cross(actor.wall_normal.get_normal()*10.0).y
 
 		if not is_zero_approx(rotation_angle):
 			
-			if rotation_angle < 0:
-				rotation.z = lerp(rotation.z, 2, _delta)
+			if rotation_angle < 0.0:
+				rotation.z = lerp(rotation.z, 2.0, _delta)
 			else:
-				rotation.z  = lerp(rotation.z, -2, _delta)
+				rotation.z  = lerp(rotation.z, -2.0, _delta)
 	elif shake_time <= 0:
-		rotation.z = lerp(rotation.z, 0, _delta) 
+		rotation.z = lerp(rotation.z, 0.0, _delta) 
 

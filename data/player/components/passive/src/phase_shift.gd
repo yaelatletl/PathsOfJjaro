@@ -27,7 +27,7 @@ func _enable_shift():
 	jump_timer = null
 	
 func _shift(_delta) -> void:
-	# Makes the player jump if he is on the ground
+	# Makes the player jump if he is checked the ground
 	if actor.input["jump"] and can_shift:
 		_toggle_shift()
 		actor.reset_wall_multi()

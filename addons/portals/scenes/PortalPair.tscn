@@ -121,7 +121,7 @@ vec4 directional_average() {
 	return result;
 }
 
-// partial derivative on x-axis
+// partial derivative checked x-axis
 vec2 deriv_x(vec2 pos, vec4 frag, vec2 pixel) {
 	vec2 offset = vec2(pixel.x, 0.0);
 	vec2 pos_plus = pos + offset;
@@ -131,7 +131,7 @@ vec2 deriv_x(vec2 pos, vec4 frag, vec2 pixel) {
 	return even ? (pos_plus - pos) : (pos - pos_minus);
 }
 
-// partial derivative on y-axis
+// partial derivative checked y-axis
 vec2 deriv_y(vec2 pos, vec4 frag, vec2 pixel) {
 	vec2 offset = vec2(0.0, pixel.y);
 	vec2 pos_plus = pos + offset;
@@ -179,7 +179,7 @@ void vertex() {
 	south_west_pixel = center_pixel + south + west;
 }
 
-// draw the new color on the screen
+// draw the new color checked the screen
 void fragment() {
 	vec4 dir_avg = directional_average();
 	vec4 super = super_sample(SCREEN_UV, FRAGCOORD, view_pixel_size);

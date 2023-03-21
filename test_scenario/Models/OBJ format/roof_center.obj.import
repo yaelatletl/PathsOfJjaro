@@ -1,20 +1,21 @@
 [remap]
 
 importer="wavefront_obj"
+importer_version=1
 type="Mesh"
-path="res://.import/roof_center.obj-91d6eb49a43321f8cf848f783d41b33a.mesh"
+uid="uid://cn6x3c2u6kpph"
+path="res://.godot/imported/roof_center.obj-91d6eb49a43321f8cf848f783d41b33a.mesh"
 
 [deps]
 
-files=[ "res://.import/roof_center.obj-91d6eb49a43321f8cf848f783d41b33a.mesh" ]
+files=["res://.godot/imported/roof_center.obj-91d6eb49a43321f8cf848f783d41b33a.mesh"]
 
 source_file="res://test_scenario/Models/OBJ format/roof_center.obj"
-dest_files=[ "res://.import/roof_center.obj-91d6eb49a43321f8cf848f783d41b33a.mesh", "res://.import/roof_center.obj-91d6eb49a43321f8cf848f783d41b33a.mesh" ]
+dest_files=["res://.godot/imported/roof_center.obj-91d6eb49a43321f8cf848f783d41b33a.mesh", "res://.godot/imported/roof_center.obj-91d6eb49a43321f8cf848f783d41b33a.mesh"]
 
 [params]
 
 generate_tangents=true
-scale_mesh=Vector3( 15, 15, 15 )
-offset_mesh=Vector3( 0, 0, 0 )
-octahedral_compression=true
-optimize_mesh_flags=4286
+scale_mesh=Vector3(15, 15, 15)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true

@@ -1,15 +1,19 @@
 [remap]
 
-importer="ogg_vorbis"
-type="AudioStreamOGGVorbis"
-path="res://.import/reload.ogg-9840a2759ce7c12f70503df06ae09568.oggstr"
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://cawa8les3yhtt"
+path="res://.godot/imported/reload.ogg-9840a2759ce7c12f70503df06ae09568.oggvorbisstr"
 
 [deps]
 
 source_file="res://assets/audio/sfx/weapons/glock_17/reload.ogg"
-dest_files=[ "res://.import/reload.ogg-9840a2759ce7c12f70503df06ae09568.oggstr" ]
+dest_files=["res://.godot/imported/reload.ogg-9840a2759ce7c12f70503df06ae09568.oggvorbisstr"]
 
 [params]
 
 loop=false
 loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

@@ -1,7 +1,7 @@
 extends InteractableGeneric
 
 enum {
-	MODE_HEAVY
+	MODE_HEAVY,
 	MODE_LIGHT
 }
 @onready var hinge = $Hinge

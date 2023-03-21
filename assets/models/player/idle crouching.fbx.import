@@ -1,0 +1,32 @@
+[remap]
+
+importer="scene"
+importer_version=1
+type="PackedScene"
+uid="uid://2g78t6a6t2wd"
+path="res://.godot/imported/idle crouching.fbx-d93050bc93d38ca84946382790884e3f.scn"
+
+[deps]
+
+source_file="res://assets/models/player/idle crouching.fbx"
+dest_files=["res://.godot/imported/idle crouching.fbx-d93050bc93d38ca84946382790884e3f.scn"]
+
+[params]
+
+nodes/root_type="Spatial"
+nodes/root_name="Scene Root"
+nodes/apply_root_scale=true
+nodes/root_scale=1.0
+meshes/ensure_tangents=true
+meshes/generate_lods=true
+meshes/create_shadow_meshes=true
+meshes/light_baking=0
+meshes/lightmap_texel_size=0.1
+skins/use_named_skins=true
+animation/import=true
+animation/fps=15
+animation/trimming=false
+animation/remove_immutable_tracks=true
+import_script/path=""
+_subresources={}
+gltf/embedded_image_handling=1

@@ -3,10 +3,10 @@ class_name Projectile
 
 var damage_type = Pooling.DAMAGE_TYPE.KINECTIC
 
-@export var type: float : int = 0
-@export var damage: float : int = 0
-@export var speed: float : int = 100
-@export var lifetime: float : float = 5.0
+@export var type : int = 0
+@export var damage : int = 0
+@export var speed  : int = 100
+@export var lifetime : float = 5.0
 
 signal request_destroy()
 

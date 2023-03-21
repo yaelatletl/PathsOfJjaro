@@ -1,20 +1,21 @@
 [remap]
 
 importer="wavefront_obj"
+importer_version=1
 type="Mesh"
-path="res://.import/low_buildingM.obj-2e28ea368f8145bfef1be750a38ee993.mesh"
+uid="uid://dav3jjmc74xuo"
+path="res://.godot/imported/low_buildingM.obj-2e28ea368f8145bfef1be750a38ee993.mesh"
 
 [deps]
 
-files=[ "res://.import/low_buildingM.obj-2e28ea368f8145bfef1be750a38ee993.mesh" ]
+files=["res://.godot/imported/low_buildingM.obj-2e28ea368f8145bfef1be750a38ee993.mesh"]
 
 source_file="res://test_scenario/Models/OBJ format/low_buildingM.obj"
-dest_files=[ "res://.import/low_buildingM.obj-2e28ea368f8145bfef1be750a38ee993.mesh", "res://.import/low_buildingM.obj-2e28ea368f8145bfef1be750a38ee993.mesh" ]
+dest_files=["res://.godot/imported/low_buildingM.obj-2e28ea368f8145bfef1be750a38ee993.mesh", "res://.godot/imported/low_buildingM.obj-2e28ea368f8145bfef1be750a38ee993.mesh"]
 
 [params]
 
 generate_tangents=true
-scale_mesh=Vector3( 15, 15, 15 )
-offset_mesh=Vector3( 0, 0, 0 )
-octahedral_compression=true
-optimize_mesh_flags=4286
+scale_mesh=Vector3(15, 15, 15)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true

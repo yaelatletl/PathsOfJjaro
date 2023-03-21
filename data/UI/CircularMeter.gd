@@ -15,7 +15,7 @@ func _ready():
 	current_color = full
 
 func _process(delta):
-	update()
+	#TODO: fix update()
 	if fills:
 		current_color = lerp(empty, full, value / value_max)
 	else:

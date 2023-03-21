@@ -13,11 +13,11 @@ func _notification(what):
 		var rect_vec = 2*Vector2(max(size.x, size.y), max(size.x, size.y))/5
 		rect_vec = rect_vec.rotated(deg_to_rad(-45))
 		fit_child_in_rect( children[0], Rect2( Vector2(), new_size) )
-		children.remove(0)
+		children.remove_at(0)
 		for c in children:
 		# Fit to 
 			rect_vec = rect_vec.rotated(deg_to_rad(spread_anlge))
 			fit_child_in_rect( c, Rect2( rect_vec, (floaters_scale*new_size)/div_size) )
 func set_some_setting():
-    # Some setting changed, ask for children re-sort
-    queue_sort()
+	# Some setting changed, ask for children re-sort
+	queue_sort()

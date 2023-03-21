@@ -8,7 +8,7 @@ enum CHARGE_TYPE{
 	SPECIAL
 }
 
-@export var enabled: bool : bool = true
+@export var enabled : bool = true
 @export var _component_name: String = ""
 @export var ui_scene: PackedScene = null
 @export var ui_container: NodePath = ""

@@ -1,42 +1,42 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=5 format=3 uid="uid://bbjy6u80eyiv5"]
 
-[ext_resource path="res://addons/sade/ik_look_at.gd" type="Script" id=1]
-[ext_resource path="res://assets/models/player/New_default.gltf" type="PackedScene" id=2]
-[ext_resource path="res://data/player/visual_toggle/ThirdPersonMesh.gd" type="Script" id=3]
-[ext_resource path="res://data/player/visual_toggle/ThirdPersonCharacter.gd" type="Script" id=4]
+[ext_resource type="Script" path="res://addons/sade/ik_look_at.gd" id="1"]
+[ext_resource type="PackedScene" uid="uid://dx3jfvm3jfv2p" path="res://assets/models/player/New_default.gltf" id="2"]
+[ext_resource type="Script" path="res://data/player/visual_toggle/ThirdPersonMesh.gd" id="3"]
+[ext_resource type="Script" path="res://data/player/visual_toggle/ThirdPersonCharacter.gd" id="4"]
 
-[node name="New_default" instance=ExtResource( 2 )]
-script = ExtResource( 4 )
+[node name="New_default" instance=ExtResource("2")]
+script = ExtResource("4")
 
-[node name="BaseBody003" parent="Base/Skeleton" index="0"]
-script = ExtResource( 3 )
+[node name="BaseBody003" parent="Base/Skeleton3D" index="0"]
+script = ExtResource("3")
 
-[node name="BaseBody004" parent="Base/Skeleton" index="1"]
-script = ExtResource( 3 )
+[node name="BaseBody004" parent="Base/Skeleton3D" index="1"]
+script = ExtResource("3")
 
-[node name="BaseBody006" parent="Base/Skeleton" index="2"]
-script = ExtResource( 3 )
+[node name="BaseBody006" parent="Base/Skeleton3D" index="2"]
+script = ExtResource("3")
 
-[node name="Cube004" parent="Base/Skeleton" index="3"]
-script = ExtResource( 3 )
+[node name="Cube004" parent="Base/Skeleton3D" index="3"]
+script = ExtResource("3")
 
-[node name="Cube015" parent="Base/Skeleton" index="4"]
-script = ExtResource( 3 )
+[node name="Cube015" parent="Base/Skeleton3D" index="4"]
+script = ExtResource("3")
 
-[node name="Cube016" parent="Base/Skeleton" index="5"]
-script = ExtResource( 3 )
+[node name="Cube016" parent="Base/Skeleton3D" index="5"]
+script = ExtResource("3")
 
-[node name="Cube017" parent="Base/Skeleton" index="6"]
-script = ExtResource( 3 )
+[node name="Cube017" parent="Base/Skeleton3D" index="6"]
+script = ExtResource("3")
 
-[node name="Cube020" parent="Base/Skeleton" index="7"]
-script = ExtResource( 3 )
+[node name="Cube020" parent="Base/Skeleton3D" index="7"]
+script = ExtResource("3")
 
-[node name="ViewTarget" type="Position3D" parent="." index="1"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.46695, 1.91364 )
+[node name="ViewTarget" type="Marker3D" parent="." index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.46695, 1.91364)
 
-[node name="IK_LookAt" type="Spatial" parent="ViewTarget" index="0"]
-script = ExtResource( 1 )
-skeleton_path = NodePath("../../Base/Skeleton")
+[node name="IK_LookAt" type="Node3D" parent="ViewTarget" index="0"]
+script = ExtResource("1")
+skeleton_path = NodePath("../../Base/Skeleton3D")
 bone_name = "neck02"
-additional_rotation = Vector3( 0, 180, 0 )
+additional_rotation = Vector3(0, 180, 0)

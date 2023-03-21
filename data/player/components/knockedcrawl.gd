@@ -2,16 +2,16 @@ extends Component
 
 # All speed variables
 
-@export var n_speed: float : float = 0.1 # Normal
-@export var w_speed: float : float = 0.2 # Walking
-@export var can_move: bool : bool = false
-@export var knocked_height: float : float = 0.1
+@export var n_speed: float  = 0.1 # Normal
+@export var w_speed: float  = 0.2 # Walking
+@export var can_move: bool  = false
+@export var knocked_height : float = 0.1
 # Physics variables
-@export var gravity: float      : float = 45 # Gravity force #45 is okay, don't change it 
-@export var friction: float     : float = 25 # friction
+@export var gravity:  float = 45 # Gravity force #45 is okay, don't change it 
+@export var friction : float = 25 # friction
 @export var disable_exeptions: Array = []
 
-@export var collision: NodePath : NodePath = ""
+@export var collision: NodePath = ""
 @onready var col = get_node(collision)
 
 func _ready():
@@ -41,7 +41,7 @@ func _movement(input : Dictionary, _delta : float) -> void:
 		actor.direction += (-get_key(input, "left")    + get_key(input, "right")) * actor.head_basis.x
 		actor.direction += (-get_key(input, "forward")  +  get_key(input, "back")) * actor.head_basis.z
 	
-	# Check is on floor
+	# Check is checked floor
 	if actor.is_on_floor():
 		actor.direction.y = 0 
 		actor.direction = actor.direction.normalized()

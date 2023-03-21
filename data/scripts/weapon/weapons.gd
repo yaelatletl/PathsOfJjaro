@@ -4,33 +4,24 @@ extends Node3D
 @onready var actor = get_parent()
 
 # Get head's node path
-@export var head: NodePath
-
+@export var head_path : NodePath = ""
 # Get camera's node path
-@export var neck: NodePath
+@export var camera_path : NodePath = "" 
 
-# Get camera's node path
-@export var camera: NodePath
+@onready var head = get_node(head_path)
+@onready var neck = get_node(str(head_path) + "/neck")
+@onready var camera = get_node(camera_path)
 
 # All weapons
 var arsenal : Dictionary
 
 # Current weapon
-remotesync var current : int = 0
+var current : int = 0 #sync
 
 
 func _ready() -> void:
 	set_as_top_level(true)
 	actor._register_component("weapons", self)
-
-	# Get camera node from path
-	camera = get_node(camera)
-
-	# Get neck node from path
-	neck = get_node(neck)
-
-	# Get head node from path
-	head = get_node(head)
 
 	# Class reference : 
 	# owner, name, firerate, bullets, ammo, max_bullets, damage, reload_speed
@@ -85,7 +76,7 @@ func _process(_delta) -> void:
 func _weapon(_delta) -> void:
 	arsenal.values()[current]._sprint(actor.input["sprint"] or actor.input["jump"], _delta)
 	
-	if not actor.input["sprint"] or not actor.direction:
+	if not actor.input["sprint"] or not (actor.direction.length()==0.0):
 		if actor.input["shoot"]:
 			_shoot(_delta)
 		

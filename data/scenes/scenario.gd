@@ -1,6 +1,6 @@
 extends Node3D
 
-@export var spawn_points_parent_path: NodePath : NodePath = ""
+@export var spawn_points_parent_path : NodePath = ""
 @onready var spawnpoint_parent = get_node(spawn_points_parent_path)
 
 var players_in_local_instance : Dictionary = {}
@@ -19,5 +19,5 @@ func _on_Gamestate_players_changed():
 			spawn_point_in_turn += 1
 			$players.add_child(Gamestate.players[player])
 	for player in $players.get_children():
-		if not int(player.name) in Gamestate.players:
+		if not str_to_var(str(player.name)) in Gamestate.players:
 			player.queue_free()

@@ -1,8 +1,8 @@
 extends Component
 
-@export var jump_height: float : float = 15
-@export var jumps_before_floor: int : int = 1 #Times you can jump without touching the floor
-@export var walls_add_jumps: bool : bool = false
+@export var jump_height : float = 15
+@export var jumps_before_floor : int = 1 #Times you can jump without touching the floor
+@export var walls_add_jumps : bool = false
 
 var triggerable : bool = true
 var jump_timer = null
@@ -31,7 +31,7 @@ func _physics_process(delta):
 	#We may be able to use cross product to know if the current normal is parallel
 	#to the previous to avoid jumping twice in the same wall
 
-	#Adds jump if on floor
+	#Adds jump if checked floor
 	if not actor.is_far_from_floor() or (walls_add_jumps and actor.is_on_wall()):
 		remaining_jumps = jumps_before_floor 
 

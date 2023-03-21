@@ -4,7 +4,7 @@ extends Component
 @export var revive_time: float = 5.0
 var knocked = false
 @export var enable_exeptions: Array = []
-@export var collision: NodePath : NodePath = ""
+@export var collision : NodePath = ""
 
 var original_height = 0.0
 var original_width = 0.0

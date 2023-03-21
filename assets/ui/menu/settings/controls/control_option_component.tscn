@@ -1,9 +1,9 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene load_steps=4 format=3 uid="uid://yjg2ckjnce5f"]
 
 [ext_resource type="Theme" uid="uid://deqs1bye02w2l" path="res://assets/ui/menu/visual_assets/Terminal.tres" id="1"]
 [ext_resource type="Script" path="res://assets/ui/menu/settings/controls/control_option_component.gd" id="2"]
 
-[sub_resource type="GDScript" id=1]
+[sub_resource type="GDScript" id="1"]
 script/source = "extends ConfirmationDialog
 
 func _ready():
@@ -13,40 +13,30 @@ func _ready():
 
 func _on_size_changed():
 	var Newsize = get_viewport().get_visible_rect().size
-	scale = Vector2(1,1)*(0.5*Newsize.x/size.x)"
+	size = Vector2(1,1)*(0.5*Newsize.x/size.x)
+"
 
 [node name="ui_right" type="HBoxContainer"]
 offset_top = 36.0
 offset_right = 461.0
 offset_bottom = 106.0
-theme = ExtResource( 1 )
-script = ExtResource( 2 )
+theme = ExtResource("1")
+script = ExtResource("2")
 
 [node name="Label" type="Label" parent="."]
-offset_top = 28.0
-offset_right = 210.0
-offset_bottom = 42.0
-custom_minimum_size = Vector2( 210, 14 )
+custom_minimum_size = Vector2(210, 14)
+layout_mode = 2
 text = "Default control name"
 
 [node name="VSeparator" type="VSeparator" parent="."]
-offset_left = 214.0
-offset_right = 218.0
-offset_bottom = 70.0
+layout_mode = 2
 
 [node name="Button" type="Button" parent="."]
-offset_left = 222.0
-offset_right = 257.0
-offset_bottom = 70.0
+layout_mode = 2
 text = "Right"
 
 [node name="Confirm" type="ConfirmationDialog" parent="."]
-offset_left = 261.0
-offset_right = 461.0
-offset_bottom = 70.0
-exclusive = true
-window_title = "Please, confirm..."
-script = SubResource( 1 )
+script = SubResource("1")
 
 [node name="CenterContainer" type="CenterContainer" parent="Confirm"]
 offset_left = 8.0
@@ -55,12 +45,8 @@ offset_right = 192.0
 offset_bottom = 40.0
 
 [node name="Label2" type="Label" parent="Confirm/CenterContainer"]
-offset_left = 74.0
-offset_top = 9.0
-offset_right = 109.0
-offset_bottom = 23.0
+layout_mode = 2
 text = "Right"
-align = 1
 
 [connection signal="pressed" from="Button" to="." method="_on_change_control_pressed"]
 [connection signal="confirmed" from="Confirm" to="." method="_on_Popup_confirmed"]

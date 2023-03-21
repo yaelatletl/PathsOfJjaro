@@ -28,8 +28,8 @@ func _ready():
 	debug_shape.mesh = BoxMesh.new()
 	area.name = "PickArea"
 	collision.shape = BoxShape3D.new()
-	collision.shape.size = Vector3(AREA_RADIUS, AREA_RADIUS, distance)/2
-	debug_shape.mesh.size = collision.shape.size*2
+	collision.shape.extents = Vector3(AREA_RADIUS, AREA_RADIUS, distance)/2
+	debug_shape.mesh.size = collision.shape.extents*2
 	area.connect("body_exited",Callable(self,"_on_body_exited"))
 	interactable = InteractableInterface.new()
 	interactable.cooldown = 0.5
@@ -80,7 +80,7 @@ func _on_body_deattached(struct, delta=0.0):
 			if current_bodies[i]["body"] in linked_bodies:
 				linked_bodies.erase(current_bodies[i]["body"])
 				current_bodies[i]["movement"].add_impulse(-body.head_basis.z.normalized() * body.linear_velocity.length())
-			current_bodies.remove(i)
+			current_bodies.remove_at(i)
 			break
 
 func get_point_to_snap(actor_origin : Vector3):

@@ -10,8 +10,8 @@ func load_config():
 	for actions in InputMap.get_actions():
 		INPUT_ACTIONS.append(actions)
 	var config = ConfigFile.new()
-	var filecheck = File.new()
-	if not filecheck.file_exists(CONFIG_FILE):
+	#var filecheck = FileAccess.open(CONFIG_FILE,FileAccess.READ_WRITE)
+	if not FileAccess.file_exists(CONFIG_FILE):
 		config.save(CONFIG_FILE)
 	var err = config.load(CONFIG_FILE)
 	if err: # Assuming that file is missing, generate default config

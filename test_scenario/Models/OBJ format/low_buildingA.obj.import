@@ -1,20 +1,21 @@
 [remap]
 
 importer="wavefront_obj"
+importer_version=1
 type="Mesh"
-path="res://.import/low_buildingA.obj-4cc35af16adef1391faafcb4938b23c3.mesh"
+uid="uid://irqo3tay1sry"
+path="res://.godot/imported/low_buildingA.obj-4cc35af16adef1391faafcb4938b23c3.mesh"
 
 [deps]
 
-files=[ "res://.import/low_buildingA.obj-4cc35af16adef1391faafcb4938b23c3.mesh" ]
+files=["res://.godot/imported/low_buildingA.obj-4cc35af16adef1391faafcb4938b23c3.mesh"]
 
 source_file="res://test_scenario/Models/OBJ format/low_buildingA.obj"
-dest_files=[ "res://.import/low_buildingA.obj-4cc35af16adef1391faafcb4938b23c3.mesh", "res://.import/low_buildingA.obj-4cc35af16adef1391faafcb4938b23c3.mesh" ]
+dest_files=["res://.godot/imported/low_buildingA.obj-4cc35af16adef1391faafcb4938b23c3.mesh", "res://.godot/imported/low_buildingA.obj-4cc35af16adef1391faafcb4938b23c3.mesh"]
 
 [params]
 
 generate_tangents=true
-scale_mesh=Vector3( 15, 15, 15 )
-offset_mesh=Vector3( 0, 0, 0 )
-octahedral_compression=true
-optimize_mesh_flags=4286
+scale_mesh=Vector3(15, 15, 15)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true

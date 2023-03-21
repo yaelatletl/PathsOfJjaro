@@ -3,9 +3,9 @@ extends Control
 var viewports = []
 var textures = []
 
-onready var container = $TextureContainer
-export(NodePath) var view1 = ""
-export(NodePath) var view2 = ""
+@onready var container = $TextureContainer
+@export var view1: NodePath = ""
+@export var view2: NodePath = ""
 
 func _ready():
 	add_viewport(get_node(view1))

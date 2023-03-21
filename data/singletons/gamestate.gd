@@ -3,11 +3,11 @@ extends Node
 const SERVER_PORT = 1337
 const MAX_PLAYERS = 8
 var SERVER_IP = "localhost"
-var player_template = preload("res://data/player/character.tscn")
+var player_template = load("res://data/player/character.tscn")
 signal players_changed()
 #First, let's try to define what do we need our gamestate to do
 #we know that we must manage our incoming connections, check them for all players 
-#and that we must inform disconnections and so on.
+#and that we must inform disconnections and so checked.
 
 #The network model will go like this:
 #A central server is responsible for all the in-game calculations. 
@@ -36,6 +36,8 @@ func _sync_process(args) -> void:
 		await get_tree().create_timer(5).timeout
 		_sync_process(args)
 
+@onready var mpAPI = get_tree().get_multiplayer()
+
 func _ready() -> void:
 	peer.connect("connection_succeeded",Callable(self,"_on_NetworkPeer_connection_succeeded"))
 	peer.connect("connection_failed",Callable(self,"_on_NetworkPeer_connection_failed"))
@@ -47,7 +49,8 @@ func _ready() -> void:
 			client_setup()
 		if args == "server":
 			server_setup()
-	peer.allow_object_decoding = true
+	#TODO: why 
+	#peer.allow_object_decoding = true
 
 func server_setup() -> void:
 	peer.create_server(SERVER_PORT, MAX_PLAYERS)
@@ -97,70 +100,69 @@ func create_player(id : int) -> CharacterBody3D:
 		players[peer_id] = create_player(peer_id)
 	emit_signal("players_changed")
 	
+@rpc("unreliable") 
 func call_on_all_clients(object : Node, func_name : String , args) -> void:
-	if not get_tree().has_multiplayer_peer():
+	if not mpAPI.has_multiplayer_peer():
 		return
-	var exclude = 1
+	var exclude = object.get_multiplayer_authority()
 	if not is_instance_valid(object):
 		print("Invalid object")
 		return
-	if object.is_multiplayer_authority():
-		exclude = object.multiplayer.get_unique_id()
 	
-	if get_tree().is_server():
+	if mpAPI.is_server():
 		for player in players:
 			if player != 1 and player != exclude:
-				# print("Calling RPC on client " + str(player))
+				# print("Calling RPC checked client " + str(player))
 				if args == null:
 					object.rpc_id(player, func_name)
 				else:
 					object.rpc_id(player, func_name, args)
 
 func set_in_all_clients(object : Node, property_name : String, value) -> void:
-	if not get_tree().has_multiplayer_peer():
+	if not mpAPI.has_multiplayer_peer():
 		return
 	if not is_instance_valid(object):
 		print("Invalid object")
 		return
-	if get_tree().is_server():
+	if mpAPI.is_server():
 		for player in players:
 			if player != 1:
-				#print("Setting property on client " + str(player))
+				#print("Setting property checked client " + str(player))
 				object.rset_id(player, property_name, value)
-
+@rpc("unreliable_ordered")
 func unreliable_set_in_all_clients(object : Node, property_name : String, value) -> void:
-	if not get_tree().has_multiplayer_peer():
+	if not mpAPI.has_multiplayer_peer():
 		return
 	if not is_instance_valid(object):
 		print("Invalid object")
 		return
-	if get_tree().is_server():
+	if mpAPI.is_server():
 		for player in players:
 			if player != 1:
-				#print("Setting property on client " + str(player))
+				#print("Setting property checked client " + str(player))
 				object.rset_unreliable_id(player, property_name, value)
 
 func spawn_instance(parent : Node, scene : PackedScene) -> Node:
 	var ref = scene.instantiate()
-	if not get_tree().has_multiplayer_peer():
+	if not mpAPI.has_multiplayer_peer():
 		if is_instance_valid(parent):
 			parent.add_child(ref)
 			return ref
 		return null
 	if not is_instance_valid(parent):
 		return null
-	if get_tree().is_server():
+	if mpAPI.is_server():
 		call_on_all_clients(self, "spawn_instance", scene)
 	parent.add_child(ref)
 	return ref
 
 func remove_node(removed : Node) -> void:
-	if not get_tree().has_multiplayer_peer():
+	if not mpAPI.has_multiplayer_peer():
 		if is_instance_valid(removed):
 			removed.queue_free()
 		return
 	if not is_instance_valid(removed):
 		return
-	if get_tree().is_server():
+	if mpAPI.is_server():
 		call_on_all_clients(self, "remove_node", removed)
 	removed.queue_free()

@@ -1,6 +1,12 @@
 @tool
 extends Node3D
 
+enum UPDATE_MODE {
+	_process,
+	_physics_process,
+	_notification,
+	none
+}
 # A FABRIK IK chain with a middle joint helper.
 
 # The delta/tolerance for the bone chain (how do the bones need to be before it is considered satisfactory)
@@ -12,8 +18,8 @@ const CHAIN_MAX_ITER = 10
 @export var bones_in_chain: PackedStringArray : set = _set_bone_chain_bones
 @export var bones_in_chain_lengths: PackedFloat32Array : set = _set_bone_chain_lengths
 
-@export var update_mode = 0 setget _set_update_mode # (int, "_process", "_physics_process", "_notification", "none")
-
+@export_enum("UPDATE_MODE") var update_mode = 0
+	
 var target: Node3D = null
 
 var skeleton: Skeleton3D
@@ -31,7 +37,7 @@ var total_length = INF
 # amounts of interations.
 @export var chain_iterations: int = 0
 @export var limit_chain_iterations: bool = true
-# Should we reset chain_iterations on movement during our update method?
+# Should we reset chain_iterations checked movement during our update method?
 @export var reset_iterations_on_update: bool = false
 
 # A boolean to track whether or not we want to move the middle joint towards middle joint target.
@@ -54,7 +60,7 @@ func _ready():
 			target = Node3D.new()
 			add_child(target)
 			
-			if Engine.editor_hint:
+			if Engine.is_editor_hint():
 				if get_tree() != null:
 					if get_tree().edited_scene_root != null:
 						target.set_owner(get_tree().edited_scene_root)
@@ -64,7 +70,7 @@ func _ready():
 			target = $Target
 		
 		# If we are in the editor, we want to make a sphere at this node
-		if Engine.editor_hint:
+		if Engine.is_editor_hint():
 			_make_editor_sphere_at_node(target, Color.MAGENTA)
 	
 	if middle_joint_target == null:
@@ -72,7 +78,7 @@ func _ready():
 			middle_joint_target = Node3D.new()
 			add_child(middle_joint_target)
 			
-			if Engine.editor_hint:
+			if Engine.is_editor_hint():
 				if get_tree() != null:
 					if get_tree().edited_scene_root != null:
 						middle_joint_target.set_owner(get_tree().edited_scene_root)
@@ -82,7 +88,7 @@ func _ready():
 			middle_joint_target = get_node("MiddleJoint")
 	
 		# If we are in the editor, we want to make a sphere at this node
-		if Engine.editor_hint:
+		if Engine.is_editor_hint():
 			_make_editor_sphere_at_node(middle_joint_target, Color(1, 0.24, 1, 1))
 	
 	# Make all of the bone nodes for each bone in the IK chain
@@ -300,7 +306,7 @@ func chain_apply_rotation():
 				var last_bone = bone_nodes[i-1].global_transform
 				# Because we know the length of adjacent bone to this bone in the chain, we can
 				# position this bone by taking the last bone's position plus the length of the
-				# bone on the Z axis.
+				# bone checked the Z axis.
 				# This will place the position of the bone at the end of the last bone
 				bone_trans.origin = last_bone.origin - last_bone.basis.z.normalized() * bones_in_chain_lengths[i-1]
 		
@@ -444,7 +450,7 @@ func _make_bone_nodes():
 			bone_nodes[bone] = new_node
 			add_child(bone_nodes[bone])
 			
-			if Engine.editor_hint:
+			if Engine.is_editor_hint():
 				if get_tree() != null:
 					if get_tree().edited_scene_root != null:
 						bone_nodes[bone].set_owner(get_tree().edited_scene_root)
@@ -455,7 +461,7 @@ func _make_bone_nodes():
 			bone_nodes[bone] = get_node(bone_name)
 		
 		# If we are in the editor, we want to make a sphere at this node
-		if Engine.editor_hint:
+		if Engine.is_editor_hint():
 			_make_editor_sphere_at_node(bone_nodes[bone], Color(0.65, 0, 1, 1))
 
 

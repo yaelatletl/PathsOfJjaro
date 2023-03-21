@@ -6,17 +6,17 @@
 radius = 0.652
 height = 1.312
 
-[sub_resource type="SpatialMaterial" id=3]
+[sub_resource type="StandardMaterial3D" id=3]
 
-[sub_resource type="SphereShape" id=1]
+[sub_resource type="SphereShape3D" id=1]
 radius = 0.133356
 
-[node name="PmBt" type="RigidBody"]
+[node name="PmBt" type="RigidBody3D"]
 collision_layer = 0
 collision_mask = 5
 mass = 0.107143
 gravity_scale = 0.0
-contacts_reported = 4
+max_contacts_reported = 4
 contact_monitor = true
 axis_lock_angular_x = true
 axis_lock_angular_y = true
@@ -27,10 +27,10 @@ damage = 25.0
 speed = 120.0
 lifetime = 7.0
 
-[node name="MeshInstance" type="MeshInstance" parent="."]
-transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0 )
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0 )
 mesh = SubResource( 2 )
 material/0 = SubResource( 3 )
 
-[node name="CollisionShape" type="CollisionShape" parent="."]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource( 1 )

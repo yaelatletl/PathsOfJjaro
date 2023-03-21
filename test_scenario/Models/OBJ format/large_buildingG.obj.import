@@ -1,20 +1,21 @@
 [remap]
 
 importer="wavefront_obj"
+importer_version=1
 type="Mesh"
-path="res://.import/large_buildingG.obj-e9db26c9eb34b44ead83df227c7c1610.mesh"
+uid="uid://cogb58xchyprd"
+path="res://.godot/imported/large_buildingG.obj-e9db26c9eb34b44ead83df227c7c1610.mesh"
 
 [deps]
 
-files=[ "res://.import/large_buildingG.obj-e9db26c9eb34b44ead83df227c7c1610.mesh" ]
+files=["res://.godot/imported/large_buildingG.obj-e9db26c9eb34b44ead83df227c7c1610.mesh"]
 
 source_file="res://test_scenario/Models/OBJ format/large_buildingG.obj"
-dest_files=[ "res://.import/large_buildingG.obj-e9db26c9eb34b44ead83df227c7c1610.mesh", "res://.import/large_buildingG.obj-e9db26c9eb34b44ead83df227c7c1610.mesh" ]
+dest_files=["res://.godot/imported/large_buildingG.obj-e9db26c9eb34b44ead83df227c7c1610.mesh", "res://.godot/imported/large_buildingG.obj-e9db26c9eb34b44ead83df227c7c1610.mesh"]
 
 [params]
 
 generate_tangents=true
-scale_mesh=Vector3( 15, 15, 15 )
-offset_mesh=Vector3( 0, 0, 0 )
-octahedral_compression=true
-optimize_mesh_flags=4286
+scale_mesh=Vector3(15, 15, 15)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true

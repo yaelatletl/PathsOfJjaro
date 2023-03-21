@@ -48,13 +48,10 @@ static func safe_assign(target, dict, property, key, array_index = -1) -> void:
 		
 static func weapon_from_json( path : String, weapon_parent : Node ) -> Weapon: 
 	var result = null
-	var file : File = File.new()
-	var temp = file.open(path, File.READ)
+	var file : FileAccess = FileAccess.open(path, FileAccess.READ)
 	var test_json_conv = JSON.new()
 	test_json_conv.parse(file.get_as_text())
-	var json : JSON= test_json_conv.get_data()
-	file.close()
-	var data = json.result
+	var data = test_json_conv.get_data()
 	if data is Dictionary:
 		var type = int(data.type) # 0 = melee, 1 = raycast, 2 = projectile 
 		match type:

@@ -1,13 +1,16 @@
 extends Component
-@export var run_is_toggle: bool : bool = false
-@export var crouch_is_toggle: bool : bool = false
+@export var run_is_toggle : bool = false
+@export var crouch_is_toggle : bool = false
 
-@export var captured: bool : bool = true # Does not let the mouse leave the screen
+@export var captured : bool = true # Does not let the mouse leave the screen
 
 var can_jump = true
 var jump_timer = null
 
+var mpAPI
+
 func _ready():
+	mpAPI = get_tree().get_multiplayer()
 	#Input.set_use_accumulated_input(false)
 	_component_name = "input"
 	actor.input["look_y"] = 0
@@ -29,7 +32,6 @@ func _ready():
 	get_tree().create_timer(0.01).connect("timeout",Callable(self,"functional_routine"))
 
 
-
 func _mouse_toggle() -> void:
 	# Function to lock or unlock the mouse in the center of the screen
 	if Input.is_action_just_pressed("KEY_ESCAPE"):
@@ -43,10 +45,9 @@ func _mouse_toggle() -> void:
 		# Unlocks the mouse from the center of the screen
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	
-
 func functional_routine():
-	if get_tree().has_multiplayer_peer():
-		if not is_multiplayer_authority() or not enabled:
+	if mpAPI.has_multiplayer_peer():
+		if not mpAPI.is_server() or not enabled:
 			return
 		else:
 			get_input()
@@ -57,6 +58,7 @@ func functional_routine():
 
 		
 func get_input():
+	
 	actor.input["left"]   = int(Input.is_action_pressed("KEY_A"))
 	actor.input["right"]  = int(Input.is_action_pressed("KEY_D"))
 	actor.input["forward"] = int(Input.is_action_pressed("KEY_W"))
@@ -75,7 +77,7 @@ func get_input():
 	actor.input["use"] = int(Input.is_action_pressed("USE"))
 	sync_input()
 	#if get_tree().has_multiplayer_peer():
-	#	if is_multiplayer_authority() and not get_tree().is_server(): 
+	#	if mpAPI.is_server() and not get_tree().is_server(): 
 			#Gamestate.set_in_all_clients(self,"input", actor.input)
 	#		actor.rset_unreliable_id(1, "input", actor.input)
 #		actor.input["look_y"] = 0
@@ -84,8 +86,8 @@ func get_input():
 
 
 func sync_input():
-	if get_tree().has_multiplayer_peer():
-		if is_multiplayer_authority() and not get_tree().is_server(): 
+	if mpAPI.has_multiplayer_peer():
+		if mpAPI.is_server() and not mpAPI.is_server(): 
 			actor.rset_unreliable_id(1, "input", actor.input)
 			Gamestate.set_in_all_clients(actor, "input", actor.input)
 
@@ -99,10 +101,9 @@ func mouse_move(event):
 		actor.input["look_y"] = 0
 		actor.input["look_x"] = 0
 
-
 func _unhandled_input(event):
-	if get_tree().has_multiplayer_peer():
-		if not is_multiplayer_authority() or not enabled:
+	if mpAPI.has_multiplayer_peer():
+		if not mpAPI.is_server() or not enabled:
 			return
 		else:
 			unhandled(event)
@@ -128,7 +129,7 @@ func unhandled(event):
 		if Input.is_action_pressed("KEY_SHIFT") or Input.is_action_just_released("KEY_SPACE"):
 			actor.input["crouch"] = 0
 #	if get_tree().has_multiplayer_peer():
-#		if is_multiplayer_authority() and not get_tree().is_server(): 
+#		if mpAPI.is_server() and not get_tree().is_server(): 
 			#Gamestate.set_in_all_clients(self,"input", actor.input)
 #			actor.rset_unreliable_id(1, "input", actor.input)
 

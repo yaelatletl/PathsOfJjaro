@@ -18,15 +18,15 @@ func request_interact(interactable : Node3D, message : String, time :float= 0.0)
 
 func start_interaction():
 	current_timer = get_tree().create_timer(interaction_time)
-	current_timer.connect("timeout",Callable(self,"interaction_time_fulfilled"))
+	current_timer.connect("timeout",Callable(self,"set_interaction_time_fulfilled"))
 
 
-func interaction_time_fulfilled():
+func set_interaction_time_fulfilled():
 	interaction_time_fulfilled = true
 
 func stop_interact():
 	if current_timer != null:
-		current_timer.disconnect("timeout",Callable(self,"interaction_time_fulfilled"))
+		current_timer.disconnect("timeout",Callable(self,"set_interaction_time_fulfilled"))
 		current_timer = null
 	interaction_time_fulfilled = false
 	emit_signal("time_left_changed", interaction_time)
@@ -36,7 +36,7 @@ func clear_interact():
 	if actor._get_component("HUD"):
 		actor._get_component("HUD").interact_board.hide_message()
 	if current_timer != null:
-		current_timer.disconnect("timeout",Callable(self,"interaction_time_fulfilled"))
+		current_timer.disconnect("timeout",Callable(self,"set_interaction_time_fulfilled"))
 		current_timer = null
 	waiting_for_interaction = null
 	interaction_time = 0.0
@@ -51,7 +51,7 @@ func _physics_process(delta):
 				#We are still waiting for the interaction to be fulfilled,
 				#we show the interaction time left to the player through the HUD signal (Must be connected elsewhere)
 				emit_signal("time_left_changed", current_timer.time_left)
-			if waiting_for_interaction.has_method("interaction_triggered"):
+			if waiting_for_interaction.has_method("set_interaction_triggered"):
 				if interaction_time_fulfilled:
 					waiting_for_interaction.interaction_triggered(actor)
 	elif interaction_time > 0.0:

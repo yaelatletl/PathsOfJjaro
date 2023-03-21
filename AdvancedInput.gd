@@ -67,7 +67,7 @@ func _mouse_toggle() -> void:
 
 func functional_routine():
 	if get_tree().has_multiplayer_peer():
-		if not is_multiplayer_authority() or not enabled:
+		if not mpAPI.is_server() or not enabled:
 			return
 		else:
 			get_input()
@@ -101,7 +101,7 @@ func get_input():
 
 func sync_input():
 	if get_tree().has_multiplayer_peer():
-		if is_multiplayer_authority() and not get_tree().is_server(): 
+		if mpAPI.is_server() and not get_tree().is_server(): 
 			actor.rset_unreliable_id(1, "input", actor.input)
 			Gamestate.set_in_all_clients(actor, "input", actor.input)
 
@@ -118,7 +118,7 @@ func mouse_move(event):
 
 func _unhandled_input(event):
 	if get_tree().has_multiplayer_peer():
-		if not is_multiplayer_authority() or not enabled:
+		if not mpAPI.is_server() or not enabled:
 			return
 		else:
 			unhandled(event)
@@ -145,7 +145,7 @@ func unhandled(event):
 		if Input.is_action_pressed("KEY_SHIFT") or Input.is_action_just_released("KEY_SPACE"):
 			actor.input["crouch"] = 0
 #	if get_tree().has_multiplayer_peer():
-#		if is_multiplayer_authority() and not get_tree().is_server(): 
+#		if mpAPI.is_server() and not get_tree().is_server(): 
 			#Gamestate.set_in_all_clients(self,"input", actor.input)
 #			actor.rset_unreliable_id(1, "input", actor.input)
 

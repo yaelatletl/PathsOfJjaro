@@ -2,23 +2,26 @@ extends Component
 # All speed variables
 
 
-@export var n_speed: float : float = 04 # Normal
-@export var s_speed: float : float = 12 # Sprint
-@export var w_speed: float : float = 08 # Walking
-@export var c_speed: float : float = 10 # Crouch
-@export var slide_on_crouch: bool : bool = false
-@export var can_wallrun: bool : bool = false
+@export var n_speed : float = 04 # Normal
+@export var s_speed : float = 12 # Sprint
+@export var w_speed : float = 08 # Walking
+@export var c_speed : float = 10 # Crouch
+@export var slide_on_crouch : bool = false
+@export var can_wallrun : bool = false
 # Physics variables
-@export var gravity: float      : float = 40 # Gravity force #45 is okay, don't change it 
-@export var friction: float     : float = 25 # friction
+@export var gravity : float = 40 # Gravity force #45 is okay, don't change it 
+@export var friction : float = 25 # friction
 
 var DEFAULT_GRAVITY = gravity
 
-@export var collision: NodePath : NodePath = ""
+@export var collision : NodePath = ""
 @onready var col = get_node(collision)
-
+@export var feet_path : NodePath = ""
+@onready var feet = get_node(feet_path)
 var _delta
 var impulse = Vector3.ZERO
+
+
 
 func _physics_process(delta : float) -> void:
 	_delta = delta
@@ -44,7 +47,7 @@ func _movement(input : Dictionary, _delta : float) -> void:
 	actor.direction += (-get_key(input, "left")    + get_key(input, "right")) * actor.head_basis.x
 	actor.direction += (-get_key(input, "forward")  +  get_key(input, "back")) * actor.head_basis.z
 	
-	# Check is on floor
+	# Check is checked floor
 	if actor.is_on_floor():
 		actor.reset_wall_multi()
 		actor.direction.y = 0 
@@ -89,11 +92,11 @@ func _movement(input : Dictionary, _delta : float) -> void:
 	actor.linear_velocity = actor.velocity
 	for index in actor.get_slide_collision_count():
 		var collision = actor.get_slide_collision(index)
-		if collision.collider is RigidBody3D:
-			if collision.collider == actor.feet.get_collider():
+		if collision.get_collider(0) is RigidBody3D:
+			if collision.get_collider(0) == actor.feet.get_collider():
 				return
 			else:
-				collision.collider.apply_central_impulse((-collision.normal * actor.run_speed/collision.collider.mass)*_delta)
+				collision.get_collider(0).apply_central_impulse((-collision.get_normal() * actor.run_speed/collision.get_collider(0).mass)*_delta)
 	
 func _crouch(input : Dictionary, _delta :float) -> void:
 	# Inputs
@@ -106,16 +109,17 @@ func _crouch(input : Dictionary, _delta :float) -> void:
 	if not actor.head.is_colliding():
 		# Takes the character collision node
 		
-		
 		# Get the character's collision shape
 		var shape = col.shape.height
 		
 		# Changes the shape of the character's collision
-		shape = lerp(shape, 1.1 - (get_key(input, "crouch") * 0.9), w_speed  * _delta)
+		shape = lerp(shape, 1.7 - (get_key(input, "crouch") * 1.2), w_speed  * _delta)
 		
 		# Apply the new character collision shape
 		col.shape.height = shape
-		col.shape.radius = (0.28 - 0.12*get_key(input, "crouch"))
+		col.shape.radius = (0.24 - 0.12*get_key(input, "crouch"))
+		feet.target_position.y = -shape
+		
 
 
 

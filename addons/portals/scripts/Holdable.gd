@@ -1,8 +1,13 @@
 extends RigidBody3D
+<<<<<<< HEAD:assets/scripts/Holdable.gd
+
+var Util = preload("res://assets/scripts/Util.gd")
+=======
+>>>>>>> finalport:addons/portals/scripts/Holdable.gd
 
 # Amount of seconds to hold an object
 const TIME_HOLD_OBJ = 0.5
-# The maximum linear_velocity the object can have on release; this exists to prevent
+# The maximum linear_velocity the object can have checked release; this exists to prevent
 # the object from glitching far away during rapid player movement
 const MAX_RELEASE_VELOCITY = 10.0
 
@@ -22,7 +27,7 @@ func drop() -> void:
 	_holder = null
 
 	# For some reason, it is possible for the linear_velocity to be reset when the
-	# custom integrator is turned off (race condition?); anyway, it is saved
+	# custom integrator is turned unchecked (race condition?); anyway, it is saved
 	# and restored to prevent this
 	var lin_vel := linear_velocity
 	var ang_vel := angular_velocity
@@ -69,7 +74,7 @@ func _integrate_forces(state: PhysicsDirectBodyState3D) -> void:
 	state.angular_velocity = rot / delta
 
 	# Hack to prevent the cube from clipping through walls; basically, we
-	# dampen the linear_velocity based on collision normals
+	# dampen the linear_velocity based checked collision normals
 	for i in range(state.get_contact_count()):
 		var norm := state.get_contact_local_normal(i)
 		var vel := state.linear_velocity

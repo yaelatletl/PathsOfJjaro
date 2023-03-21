@@ -1,9 +1,15 @@
 @tool
 extends Node3D
 
+enum UPDATE_MODE {
+	_process,
+	_physics_process,
+	_notification,
+	none
+}
 @export var skeleton_path: NodePath : set = _set_skeleton_path
 @export var bone_name: String = ""
-@export var update_mode = 0 setget _set_update # (int, "_process", "_physics_process", "_notification", "none")
+@export_enum("UPDATE_MODE") var update_mode = 0
 @export var look_at_axis = 1 # (int, "X-up", "Y-up", "Z-up")
 @export var use_our_rotation_x: bool = false
 @export var use_our_rotation_y: bool = false
@@ -35,7 +41,7 @@ func _ready():
 		if debug_messages:
 			print(name, " - IK_LookAt: Unknown update mode. NOT updating skeleton")
 	
-	if Engine.editor_hint:
+	if Engine.is_editor_hint():
 		_setup_for_editor()
 
 
@@ -102,7 +108,7 @@ func update_skeleton():
 	if use_negative_our_rot:
 		self_euler = -self_euler
 	
-	# Apply this node's rotation euler on each axis, if wanted/required.
+	# Apply this node's rotation euler checked each axis, if wanted/required.
 	if use_our_rotation_x:
 		rest_euler.x = self_euler.x
 	if use_our_rotation_y:
@@ -111,7 +117,9 @@ func update_skeleton():
 		rest_euler.z = self_euler.z
 	
 	# Make a new basis with the, potentially, changed euler angles.
-	rest.basis = Basis(rest_euler)
+	rest.basis = Basis.from_euler(rest_euler)
+	
+	rest.basis = Basis(Quaternion.from_euler(rest_euler))
 	
 	# Apply additional rotation stored in additional_rotation to the bone.
 	if additional_rotation != Vector3.ZERO:
@@ -120,7 +128,7 @@ func update_skeleton():
 		rest.basis = rest.basis.rotated(rest.basis.z, deg_to_rad(additional_rotation.z))
 	
 	# If the position is set using an additional bone, then set the origin
-	# based on that bone and its length.
+	# based checked that bone and its length.
 	if position_using_additional_bone:
 		var additional_bone_id = skeleton_to_use.find_bone(additional_bone_name)
 		var additional_bone_pos = skeleton_to_use.get_bone_global_pose(additional_bone_id)
@@ -164,7 +172,7 @@ func _set_update(new_value):
 	set_physics_process(false)
 	set_notify_transform(false)
 	
-	# Based on the value of passed to update, enable the correct process.
+	# Based checked the value of passed to update, enable the correct process.
 	if update_mode == 0:
 		set_process(true)
 		if debug_messages:

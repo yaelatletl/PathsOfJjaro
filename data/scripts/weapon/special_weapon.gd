@@ -28,8 +28,8 @@ var primary_fire_mode = FIRE_MODE.RAYCAST
 var secondary_fire_mode = FIRE_MODE.PROJECTILE
 
 var secondary_firerate = 0
-remote var secondary_bullets = 0
-remote var secondary_ammo = 0
+var secondary_bullets = 0 #sync
+var secondary_ammo = 0 #sync
 var secondary_max_bullets = 0
 var secondary_damage = 0
 var secondary_reload_speed = 0

@@ -49,9 +49,9 @@ func _neck_animation(_delta) -> void:
 
 	# Get the camera node
 
-	# Creates the angle based on the character's movement
+	# Creates the angle based checked the character's movement
 	character.angle = 2 * (character.input["right"] + -character.input["left"])
 	
 
-	# Apply an interpolation to neck rotation based on angle
+	# Apply an interpolation to neck rotation based checked angle
 	camera.rotation.z = lerp(camera.rotation.z, -deg_to_rad(character.angle), rotation_speed)

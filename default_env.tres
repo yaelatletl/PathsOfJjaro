@@ -1,7 +1,16 @@
-[gd_resource type="Environment" load_steps=2 format=3 uid="uid://cdtbmi1stmrxb"]
+[gd_resource type="Environment" load_steps=3 format=3 uid="uid://dn6sg74w0bg3d"]
+
+[sub_resource type="PhysicalSkyMaterial" id="PhysicalSkyMaterial_4xuwu"]
 
 [sub_resource type="Sky" id="1"]
+sky_material = SubResource("PhysicalSkyMaterial_4xuwu")
 
 [resource]
 background_mode = 2
 sky = SubResource("1")
+ambient_light_source = 3
+reflected_light_source = 2
+tonemap_mode = 3
+tonemap_exposure = 1.2
+sdfgi_enabled = true
+sdfgi_use_occlusion = true

@@ -41,7 +41,7 @@ emission_on_uv2 = false
 material = SubResource( 2 )
 size = Vector2( 0.06, 0.06 )
 
-[node name="spark" type="Particles"]
+[node name="spark" type="GPUParticles3D"]
 cast_shadow = 0
 emitting = false
 amount = 50
