@@ -1983,7 +1983,7 @@ bones/7/parent = 6
 bones/7/rest = Transform3D(0.975191, 0.00915932, -0.221176, -0.0027994, 0.999574, 0.0290514, 0.221348, -0.0277114, 0.974801, -0.00128113, 0.0446884, -0.000238081)
 bones/7/enabled = true
 bones/7/position = Vector3(-0.00128113, 0.0446884, -0.000238081)
-bones/7/rotation = Quaternion(-0.116017, -0.132854, -0.110889, 0.978056)
+bones/7/rotation = Quaternion(-0.116017, -0.132853, -0.110889, 0.978056)
 bones/7/scale = Vector3(1, 1, 1)
 bones/8/name = "LeftHandThumb3_1_07"
 bones/8/parent = 7
@@ -2060,7 +2060,7 @@ bones/18/parent = 5
 bones/18/rest = Transform3D(0.995262, 0.0537558, -0.0810196, -0.0911987, 0.227179, -0.969573, -0.0337142, 0.972368, 0.231005, -0.000728816, 0.126951, -0.015475)
 bones/18/enabled = true
 bones/18/position = Vector3(0.00363635, 0.12218, -0.0195096)
-bones/18/rotation = Quaternion(0.362522, 0.0967725, -0.114304, 0.919863)
+bones/18/rotation = Quaternion(0.362522, 0.0967727, -0.114303, 0.919863)
 bones/18/scale = Vector3(1, 1, 1)
 bones/19/name = "LeftHandRing2_1_018"
 bones/19/parent = 18
@@ -2158,7 +2158,7 @@ bones/32/parent = 31
 bones/32/rest = Transform3D(0.996931, -0.0780837, 0.00569196, 0.0782474, 0.996162, -0.0392172, -0.0026079, 0.0395422, 0.999214, -0.00146428, 0.0424932, -5.0298e-10)
 bones/32/enabled = true
 bones/32/position = Vector3(-0.00146428, 0.0424932, -5.0298e-10)
-bones/32/rotation = Quaternion(0.0199327, -0.00220399, 0.249558, 0.968152)
+bones/32/rotation = Quaternion(0.0199178, -0.00220783, 0.249558, 0.968153)
 bones/32/scale = Vector3(1, 1, 1)
 bones/33/name = "RightHandThumb4_1_032"
 bones/33/parent = 32
@@ -2296,7 +2296,7 @@ transform = Transform3D(1, -2.11758e-22, 0, 2.11758e-22, 1, 0, 0, 0, 1, 7.10543e
 [node name="Hand_Mesh" type="Node3D" parent="mesh/gltf/RootNode model correction matrix/dc821a20f9e844d4ae232ea2bd3b6112fbx/Node2/RootNode/Hand/Node32"]
 
 [node name="CS2" type="Node3D" parent="mesh/gltf/RootNode model correction matrix/dc821a20f9e844d4ae232ea2bd3b6112fbx/Node2/RootNode/Hand/Node32"]
-transform = Transform3D(-0.377747, 0.925861, 0.899752, -0.329975, -0.975576, 0.865351, 1.24815, 0.0222933, 0.501079, -0.0526994, 1.41577, -0.09636)
+transform = Transform3D(-0.377746, 0.925861, 0.899752, -0.329976, -0.975576, 0.865351, 1.24815, 0.0222924, 0.501079, -0.0526994, 1.41577, -0.09636)
 
 [node name="ikHandle3" type="Node3D" parent="mesh/gltf/RootNode model correction matrix/dc821a20f9e844d4ae232ea2bd3b6112fbx/Node2/RootNode/Hand/Node32/CS2"]
 transform = Transform3D(1, -5.55112e-17, 1.34815e-33, 5.55112e-17, 1, -2.42861e-17, 0, 2.42861e-17, 1, -1.43168e-08, 1.53988e-08, -7.34655e-10)
@@ -2308,7 +2308,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.286467, 1.13738, 0.132549)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.221021, -0.32239, -0.223622)
 
 [node name="CS1" type="Node3D" parent="mesh/gltf/RootNode model correction matrix/dc821a20f9e844d4ae232ea2bd3b6112fbx/Node2/RootNode/Hand/Node32"]
-transform = Transform3D(0.437351, -1.17047, 0.134981, 0.0848473, 0.174894, 1.24165, -1.17516, -0.422975, 0.139882, -0.108203, 1.42967, -0.122016)
+transform = Transform3D(0.437351, -1.17047, 0.13498, 0.0848473, 0.174894, 1.24165, -1.17516, -0.422978, 0.139883, -0.108203, 1.42967, -0.122016)
 
 [node name="ikHandle32" type="Node3D" parent="mesh/gltf/RootNode model correction matrix/dc821a20f9e844d4ae232ea2bd3b6112fbx/Node2/RootNode/Hand/Node32/CS1"]
 transform = Transform3D(1, 5.55112e-17, -2.77556e-17, -5.55112e-17, 1, -8.32667e-17, 2.77556e-17, 8.32667e-17, 1, -1.43168e-08, 1.53988e-08, -7.34655e-10)

@@ -13,6 +13,8 @@ func _on_NavigationNext_pressed():
 func get_connection_settings():
 	connection_settings["players"] = get_node("%MaxPlayers/value").value
 	connection_settings["port"] = get_node("%HostPort/value").text
+	if not connection_settings.has("address"):
+		connection_settings["address"] = "localhost"
 	return connection_settings
 
 func get_match_settings():

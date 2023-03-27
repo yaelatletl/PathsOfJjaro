@@ -1,6 +1,6 @@
 extends Node
 
-var teleport= load("res://assets/materials/shaders/teleport.tres")
+var teleport = load("res://assets/materials/shaders/teleport.tres")
 
 
 

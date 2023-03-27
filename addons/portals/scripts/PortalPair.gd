@@ -61,7 +61,7 @@ func move_camera(portal: Node) -> void:
 	var portal_camera = portal.get_node("SubViewport/Camera3D")
 	var angle = portal_direction.angle_to(linked_direction)
 	var camera_holder = portal.get_node("CameraHolder")
-	if not portal_camera.is_inside_tree():
+	if not portal_camera.is_inside_tree() or player_camera == null:
 			return
 	#var angle = PI - linked.global_rotation.y 
 	var trans: Transform3D = linked.global_transform.inverse() * player_camera.global_transform
