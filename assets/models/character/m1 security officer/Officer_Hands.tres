@@ -1,0 +1,24 @@
+[gd_resource type="ShaderMaterial" load_steps=5 format=3 uid="uid://b4dnqb16olwxq"]
+
+[ext_resource type="Shader" path="res://assets/models/character/ORM_Colored.gdshader" id="1_jq7x8"]
+[ext_resource type="Texture2D" uid="uid://vfej50ar0i4d" path="res://assets/models/character/m1 security officer/M1 Officer_New_Hand_Low_Officer_Hands_Height_Utility - Raw.png" id="2_4upj6"]
+[ext_resource type="Texture2D" uid="uid://cnw67hpojbf38" path="res://assets/models/character/m1 security officer/M1 Officer_New_Hand_Low_Officer_Hands_Normal.png" id="3_s4vo0"]
+[ext_resource type="Texture2D" uid="uid://bnn0kf2kdvxmh" path="res://assets/models/character/m1 security officer/M1 Officer_New_Hand_Low_Officer_Hands_ORM.png" id="4_3dtee"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_jq7x8")
+shader_parameter/albedo = Color(0, 0.290196, 1, 1)
+shader_parameter/point_size = 1.0
+shader_parameter/roughness = 1.0
+shader_parameter/specular = 0.5
+shader_parameter/metallic = 1.0
+shader_parameter/normal_scale = 1.0
+shader_parameter/ao_light_affect = null
+shader_parameter/uv1_scale = Vector3(1, 1, 1)
+shader_parameter/uv1_offset = null
+shader_parameter/uv2_scale = null
+shader_parameter/uv2_offset = null
+shader_parameter/texture_albedo = ExtResource("2_4upj6")
+shader_parameter/texture_orm = ExtResource("4_3dtee")
+shader_parameter/texture_normal = ExtResource("3_s4vo0")

@@ -1,0 +1,51 @@
+[remap]
+
+importer="scene"
+importer_version=1
+type="PackedScene"
+uid="uid://cqeq1wfn7i5of"
+path="res://.godot/imported/M1Officer_New.gltf-137062c9e77830b2e01656219df31817.scn"
+
+[deps]
+
+source_file="res://assets/models/character/m1 security officer/M1Officer_New.gltf"
+dest_files=["res://.godot/imported/M1Officer_New.gltf-137062c9e77830b2e01656219df31817.scn"]
+
+[params]
+
+nodes/root_type="Node3D"
+nodes/root_name="Scene Root"
+nodes/apply_root_scale=true
+nodes/root_scale=1.0
+meshes/ensure_tangents=true
+meshes/generate_lods=true
+meshes/create_shadow_meshes=true
+meshes/light_baking=1
+meshes/lightmap_texel_size=0.2
+skins/use_named_skins=true
+animation/import=true
+animation/fps=30
+animation/trimming=false
+animation/remove_immutable_tracks=true
+import_script/path=""
+_subresources={
+"materials": {
+"Armor": {
+"use_external/enabled": true,
+"use_external/path": "res://assets/models/character/m1 security officer/Armor.tres"
+},
+"Clothes": {
+"use_external/enabled": true,
+"use_external/path": "res://assets/models/character/m1 security officer/Clothes.tres"
+},
+"Helmet": {
+"use_external/enabled": true,
+"use_external/path": "res://assets/models/character/m1 security officer/Helmet.tres"
+},
+"Officer_Hands": {
+"use_external/enabled": true,
+"use_external/path": "res://assets/models/character/m1 security officer/Officer_Hands.tres"
+}
+}
+}
+gltf/embedded_image_handling=1

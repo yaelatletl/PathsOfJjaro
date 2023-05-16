@@ -1,0 +1,24 @@
+[gd_resource type="ShaderMaterial" load_steps=5 format=3 uid="uid://b4dnqb16olwxq"]
+
+[ext_resource type="Shader" path="res://assets/models/character/ORM_Colored.gdshader" id="1_jq7x8"]
+[ext_resource type="Texture2D" uid="uid://b1tmp7jiryv1n" path="res://assets/models/character/m1 security officer/M1 Officer_New_Helmet_Low_Helmet_BaseMap.png" id="2_3x767"]
+[ext_resource type="Texture2D" uid="uid://1l8jfi7wmmk5" path="res://assets/models/character/m1 security officer/M1 Officer_New_Helmet_Low_Helmet_Normal.png" id="3_wlxgl"]
+[ext_resource type="Texture2D" uid="uid://delp0hrxdpc7x" path="res://assets/models/character/m1 security officer/M1 Officer_New_Helmet_Low_Helmet_ORM.png" id="4_jiey6"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_jq7x8")
+shader_parameter/albedo = Color(0, 0.290196, 1, 1)
+shader_parameter/point_size = 1.0
+shader_parameter/roughness = 1.0
+shader_parameter/specular = 0.5
+shader_parameter/metallic = 1.0
+shader_parameter/normal_scale = 1.0
+shader_parameter/ao_light_affect = null
+shader_parameter/uv1_scale = Vector3(1, 1, 1)
+shader_parameter/uv1_offset = null
+shader_parameter/uv2_scale = null
+shader_parameter/uv2_offset = null
+shader_parameter/texture_albedo = ExtResource("2_3x767")
+shader_parameter/texture_orm = ExtResource("4_jiey6")
+shader_parameter/texture_normal = ExtResource("3_wlxgl")
