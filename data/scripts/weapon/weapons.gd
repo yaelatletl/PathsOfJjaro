@@ -13,7 +13,7 @@ extends Node3D
 @onready var camera = get_node(camera_path)
 
 # All weapons
-var arsenal : Dictionary
+var arsenal : Dictionary = {}
 
 # Current weapon
 var current : int = 0 #sync
@@ -116,8 +116,10 @@ func _rotation(_delta) -> void:
 
 func _handle_guns(next):
 		if not next.check_relatives():
-			next.update_spatial_parent_relatives(self)
-			_handle_guns(next)
+			if next.update_spatial_parent_relatives(self):
+				_handle_guns(next)
+			else:
+				continue
 		else:
 			var anim = arsenal.values()[current].anim
 			if not anim.is_playing():

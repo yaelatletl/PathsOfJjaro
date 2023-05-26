@@ -1,35 +1,37 @@
-[gd_scene load_steps=6 format=3 uid="uid://civf153nj7m6r"]
+[gd_scene load_steps=8 format=3 uid="uid://civf153nj7m6r"]
 
-[ext_resource type="PackedScene" uid="uid://bbhcbstenbai5" path="res://data/scenes/scenario.tscn" id="1_g0h83"]
-[ext_resource type="PackedScene" uid="uid://dy5p2vf4pams" path="res://data/player/character.tscn" id="2_8cxl2"]
+[ext_resource type="Script" path="res://data/map/world.gd" id="1_2ndhr"]
+[ext_resource type="PackedScene" uid="uid://cbwgud76ewlii" path="res://data/player/character.tscn" id="2_8cxl2"]
+[ext_resource type="PackedScene" uid="uid://d4h6cqsn4yupm" path="res://test_scenario/Test Scene.tscn" id="2_pyrh3"]
 
-[sub_resource type="PhysicalSkyMaterial" id="PhysicalSkyMaterial_hnnbo"]
-mie_eccentricity = 0.89
-mie_color = Color(0.952941, 0.933333, 0.866667, 1)
+[sub_resource type="BoxShape3D" id="BoxShape3D_whjdt"]
+size = Vector3(122.61, 1, 142.81)
 
-[sub_resource type="Sky" id="Sky_q6hwh"]
-sky_material = SubResource("PhysicalSkyMaterial_hnnbo")
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ekstt"]
 
-[sub_resource type="Environment" id="Environment_dfghl"]
+[sub_resource type="Sky" id="Sky_0lssi"]
+sky_material = SubResource("ProceduralSkyMaterial_ekstt")
+
+[sub_resource type="Environment" id="Environment_2xua5"]
 background_mode = 2
-sky = SubResource("Sky_q6hwh")
-reflected_light_source = 2
-tonemap_mode = 3
-ssr_enabled = true
-ssao_enabled = true
-ssil_enabled = true
+sky = SubResource("Sky_0lssi")
 
 [node name="Node3d" type="Node3D"]
-
-[node name="scenario" parent="." instance=ExtResource("1_g0h83")]
-spawn_points_parent_path = ""
+script = ExtResource("1_2ndhr")
 
 [node name="character" parent="." instance=ExtResource("2_8cxl2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.07, 6.48206, 0.820884)
-motion_mode = 0
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_dfghl")
 
 [node name="DirectionalLight3d" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -0.660683, 0.750665, 0, -0.750665, -0.660683, 0, 9.69832, 0)
+
+[node name="Node3D" parent="." instance=ExtResource("2_pyrh3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.5144, 0, 0.0952134)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("BoxShape3D_whjdt")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_2xua5")

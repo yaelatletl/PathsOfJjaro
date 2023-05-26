@@ -10,7 +10,7 @@ enum BAR_LOCATIONS{
 
 
 
-@export var weapon_path: NodePath = ""
+#@export var weapon_path: NodePath = ""
 
 @export var weapon_hud_ammo_path: NodePath = ""
 @export var weapon_hud_clip_path: NodePath = ""
@@ -21,7 +21,7 @@ enum BAR_LOCATIONS{
 
 @export var crosshair_path: NodePath = ""
 
-@onready var weapon = get_node(weapon_path)
+#@onready var weapon = get_node(weapon_path)
 @onready var weapon_hud_text = get_node(weapon_hud_text_path)
 @onready var weapon_hud_clip = get_node(weapon_hud_clip_path)
 @onready var crosshair = get_node(crosshair_path)
@@ -45,15 +45,18 @@ func register_progress_bar(location, name, value, min_value, max_value):
 func _weapon_hud() -> void:
 	#var unchecked = Vector2(180, 80)
 	#weapon_hud.position = get_viewport().size - unchecked
+	var weapons_node = actor._get_component("weapons")
+	if not weapons_node:
+		return
 	
-	weapon_hud_text.text = str(weapon.arsenal.values()[weapon.current].gun_name)
-	weapon_hud_clip.text = str(weapon.arsenal.values()[weapon.current].bullets)
-	weapon_hud_ammo.text = str(weapon.arsenal.values()[weapon.current].ammo)
+	weapon_hud_text.text = str(weapons_node.arsenal.values()[weapons_node.current].gun_name)
+	weapon_hud_clip.text = str(weapons_node.arsenal.values()[weapons_node.current].bullets)
+	weapon_hud_ammo.text = str(weapons_node.arsenal.values()[weapons_node.current].ammo)
 	
 	# Color
-	if weapon.arsenal.values()[weapon.current].bullets < (weapon.arsenal.values()[weapon.current].max_bullets/4):
+	if weapons_node.arsenal.values()[weapons_node.current].bullets < (weapons_node.arsenal.values()[weapons_node.current].max_bullets/4):
 		weapon_hud_ammo.add_theme_color_override("font_color", Color("#ff0000"))
-	elif weapon.arsenal.values()[weapon.current].bullets < (weapon.arsenal.values()[weapon.current].max_bullets/2):
+	elif weapons_node.arsenal.values()[weapons_node.current].bullets < (weapons_node.arsenal.values()[weapons_node.current].max_bullets/2):
 		weapon_hud_clip.add_theme_color_override("font_color", Color("#dd761b"))
 	else:
 		weapon_hud_clip.add_theme_color_override("font_color", Color("#ffffff"))

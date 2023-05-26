@@ -1,8 +1,8 @@
 extends Component
-@export var run_is_toggle: bool : bool = true
-@export var crouch_is_toggle: bool : bool = true
+@export var run_is_toggle : bool = true
+@export var crouch_is_toggle : bool = true
 
-@export var captured: bool : bool = true # Does not let the mouse leave the screen
+@export var captured : bool = true # Does not let the mouse leave the screen
 
 var can_jump = true
 var jump_timer = null

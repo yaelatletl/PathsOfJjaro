@@ -8,6 +8,7 @@ var regions : Array = []
 func _ready() -> void:
 	mapRID = NavigationServer3D.map_create()
 	regions = get_tree().get_nodes_in_group("nav_regions")
+	Pooling.setup_projectile_root(self)
 	
 func _physics_process(delta):
 	#NavigationServer3D.process(delta)

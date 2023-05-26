@@ -39,6 +39,7 @@ func _sync_process(args) -> void:
 @onready var mpAPI = get_tree().get_multiplayer()
 
 func _ready() -> void:
+	#TODO: Check new Godot 4.0 API
 	peer.connect("connection_succeeded",Callable(self,"_on_NetworkPeer_connection_succeeded"))
 	peer.connect("connection_failed",Callable(self,"_on_NetworkPeer_connection_failed"))
 	peer.connect("peer_connected",Callable(self,"_on_NetworkPeer_peer_connected"))

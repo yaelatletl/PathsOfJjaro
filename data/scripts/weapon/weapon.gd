@@ -65,22 +65,25 @@ func check_relatives() -> bool:
 
 func update_spatial_parent_relatives(spatial_parent) -> void:
 	# Get animation node
-	anim = spatial_parent.get_node_or_null("{}/mesh/anim".format([gun_name], "{}"))
-	mesh = spatial_parent.get_node_or_null("{}".format([gun_name], "{}"))
-	effect = spatial_parent.get_node_or_null("{}/effect".format([gun_name], "{}"))
+	anim = spatial_parent.get_node_or_null(gun_name+"/mesh/anim")
+	print(anim)
+	mesh = spatial_parent.get_node_or_null(gun_name)
+	effect = spatial_parent.get_node_or_null(gun_name+"/effect")
 	
+	ray = spatial_parent.get_node(gun_name+"/ray")
+	print(ray)
 	# Get current animation
 	if anim == null:
-		return
+		return false
 	animc = anim.current_animation
 	
-	ray = spatial_parent.get_node("{}/ray".format([gun_name], "{}"))
 	if ray is RayCast3D:
 		ray.set_meta("original_cast_to", ray.target_position)
-	audio = spatial_parent.get_node("{}/audio".format([gun_name], "{}"))
+	audio = spatial_parent.get_node(gun_name+"/audio")
 	#if spread_pattern.size() > 0:
 	setup_spread(spread_pattern, spread_multiplier, max_range)
 	actor = spatial_parent.get_parent()
+	return true
 
 
 func setup_spread(spread_pattern, spread_multiplier, max_range = 200, separator_name = "") -> void:
@@ -96,6 +99,8 @@ func setup_spread(spread_pattern, spread_multiplier, max_range = 200, separator_
 	if separator_name != "":
 		separator = Marker3D.new()
 		separator.name = separator_name
+		if not ray:
+			print("ray is null at ", gun_name, " in ", get_path(), " separator_name:", separator_name)
 		ray.add_child(separator)
 		parent = separator
 	
@@ -226,7 +231,7 @@ func make_ray_shoot(ray : RayCast3D, uses_randomness, max_random_spread_x, max_r
 		ray.target_position.z = -max_range
 	if ray.is_colliding():
 		# Get barrel node
-		var barrel = spatial_parent.get_node("{}/barrel".format([gun_name], "{}"))
+		var barrel = spatial_parent.get_node(gun_name+"/barrel")
 		# Get main scene
 		var main = spatial_parent.get_tree().get_root().get_child(0)
 				

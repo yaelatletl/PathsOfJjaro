@@ -14,8 +14,11 @@
 [sub_resource type="Shortcut" id="3"]
 
 [node name="MenuScreen" type="PanelContainer"]
-offset_right = 511.0
-offset_bottom = 256.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 theme = ExtResource("1_354da")
 script = ExtResource("2")
 
@@ -30,7 +33,6 @@ color = Color(0, 0, 0, 1)
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Background"]
 layout_mode = 2
-size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="TopContainer" type="PanelContainer" parent="Background/VBoxContainer"]
@@ -58,13 +60,18 @@ layout_mode = 2
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 7
+theme_override_colors/font_color = Color(1, 0, 0, 1)
 text = "Opening Connection to ß.4.5-23 	 "
+vertical_alignment = 1
 
-[node name="Subsystem" type="Label" parent="Background/VBoxContainer/TopContainer/HBoxContainer"]
+[node name="Date" type="Label" parent="Background/VBoxContainer/TopContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 7
-text = "CAS.qterm//CyberAcme Systems, Inc."
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+text = "2207 08.25.2337"
+horizontal_alignment = 2
+vertical_alignment = 1
 
 [node name="Control4" type="Control" parent="Background/VBoxContainer/TopContainer/HBoxContainer"]
 layout_mode = 2
@@ -84,9 +91,12 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Background/VBoxContainer/MenuContents/Main"]
-layout_mode = 0
+layout_mode = 1
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="Spacer2" type="Control" parent="Background/VBoxContainer/MenuContents/Main/HBoxContainer"]
 layout_mode = 2
@@ -174,6 +184,7 @@ size_flags_stretch_ratio = 0.5
 text = "U.E.S.C. Marathon 
 Public Access Terminal 59-e<34.567.19.298>"
 horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Spacer" type="Control" parent="Background/VBoxContainer/MenuContents/Main/HBoxContainer"]
 layout_mode = 2
@@ -1098,17 +1109,22 @@ alignment = 1
 [node name="Control2" type="Control" parent="Background/VBoxContainer/BottomContainer/HBoxContainer2"]
 layout_mode = 2
 
+[node name="Subsystem" type="Label" parent="Background/VBoxContainer/BottomContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 7
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+text = "CAS.qterm//CyberAcme Systems, Inc."
+vertical_alignment = 1
+
 [node name="Ipv10" type="Label" parent="Background/VBoxContainer/BottomContainer/HBoxContainer2"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 7
+theme_override_colors/font_color = Color(1, 0, 0, 1)
 text = "<931.461.60231.14.vt920>"
-
-[node name="Date" type="Label" parent="Background/VBoxContainer/BottomContainer/HBoxContainer2"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 7
-text = "2207 08.25.2337"
+horizontal_alignment = 2
+vertical_alignment = 1
 
 [node name="Control" type="Control" parent="Background/VBoxContainer/BottomContainer/HBoxContainer2"]
 layout_mode = 2
