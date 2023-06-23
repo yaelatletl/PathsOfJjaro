@@ -1,46 +1,61 @@
 extends Node
 
 const MAP_PATH = "res://maps/"
+const CHAR_PATH = "res://characters/"
 
 var scenarios = {}
 # Have them as a dict, we access by scenario name all the levels in the scenario
+var characters = {}
 
 var current_scenario = 0
 
 #we load all pck files in the directory "maps" and we create a list of all the maps in the package
 
-func explore_scenarios():
-	var dir = DirAccess.open("res://maps")
+func explore_folder(path : String, callable : Callable, const_path : String, dict : Dictionary, object : Object):
+	var dir = DirAccess.open(path)
 	dir.list_dir_begin() # TODOGODOT4 fill missing arguments https://github.com/godotengine/godot/pull/40547
 	var file = dir.get_next()
 	while file != "":
 		if file.ends_with(".pck"):
-			var scenario = load_scenario(file)
-			if scenario != null:
-				scenarios[scenario.name] = scenario
+			var pack = callable.call(file, const_path, dict, object)
 		file = dir.get_next()
 	dir.list_dir_end()
 
+func load_character(path : String):
+	pass
 
-func load_scenario(scenario_path) -> Scenario:
+func load_resource(pack_path, const_path, dict, object) -> Object:
 	# This could fail if, for example, mod.pck cannot be found.
-	var success = ProjectSettings.load_resource_pack(MAP_PATH + scenario_path, false)
+	var success = ProjectSettings.load_resource_pack(const_path + pack_path, false)
 	if success:
 		# Now one can use the assets as if they had them in the project from the start.
-		var metadata = load(MAP_PATH + scenario_path.trim_suffix(".pck") + "/" + "metadata.tscn")
-		var scenario = Scenario.new()
-		scenario.name = metadata.get("name")
-		scenario.levels = metadata.get("levels")
-		return scenario
+		var metadata = load(const_path + pack_path.trim_suffix(".pck") + "/" + "metadata.tscn")
+		assert(metadata!= null, "Invalid Resource Pack, metadata not found.")
+		object = object.duplicate()
+		object.name = metadata.get("name")
+		if object is Scenario:
+			object.levels = metadata.get("levels")
+		elif object is CharacterPack:
+			object.char_list = metadata.get("character_list")
+		if object != null:
+			dict[object.name] = object
+		return object
 	else:
-		print("Failed to load resource pack: " + scenario_path)
+		print("Failed to load resource pack: " + pack_path)
 		return null
 
 
 func _ready():
-	explore_scenarios()
+	explore_folder("res://maps", load_resource, MAP_PATH, scenarios, Scenario.new())
+	explore_folder("res://characters", load_character, CHAR_PATH, characters, CharacterPack.new())
 
+class CharacterPack:
+	var name = ""
+	var char_list = []
+	
+	
 class Scenario:
+	var name = ""
 	var levels = []
 	var bin_levels = {}
 
