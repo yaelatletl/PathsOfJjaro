@@ -2,7 +2,7 @@
 
 [ext_resource type="Theme" uid="uid://deqs1bye02w2l" path="res://assets/ui/menu/visual_assets/Terminal.tres" id="1_354da"]
 [ext_resource type="Script" path="res://assets/ui/menu/MainMenu.gd" id="2"]
-[ext_resource type="Texture2D" uid="uid://dr027ryjw1k5r" path="res://assets/ui/menu/visual_assets/MarathonLogo.png" id="4"]
+[ext_resource type="Texture2D" uid="uid://bnc54fb55xgbx" path="res://assets/ui/menu/visual_assets/Marathon.svg" id="3_j8ya4"]
 [ext_resource type="PackedScene" uid="uid://yjg2ckjnce5f" path="res://assets/ui/menu/settings/controls/control_option_component.tscn" id="5"]
 [ext_resource type="Script" path="res://assets/ui/menu/network_host/NetworkHost.gd" id="6"]
 [ext_resource type="Script" path="res://assets/ui/menu/network_host/NetworkLobby.gd" id="7"]
@@ -172,7 +172,7 @@ size_flags_stretch_ratio = 0.2
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-texture = ExtResource("4")
+texture = ExtResource("3_j8ya4")
 expand_mode = 1
 stretch_mode = 5
 
