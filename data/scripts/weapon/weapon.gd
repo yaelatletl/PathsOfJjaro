@@ -63,7 +63,7 @@ func check_relatives() -> bool:
 		return false
 	return true
 
-func update_spatial_parent_relatives(spatial_parent) -> void:
+func update_spatial_parent_relatives(spatial_parent) -> bool:
 	# Get animation node
 	anim = spatial_parent.get_node_or_null(gun_name+"/mesh/anim")
 	print(anim)

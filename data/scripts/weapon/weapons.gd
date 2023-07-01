@@ -119,7 +119,7 @@ func _handle_guns(next):
 			if next.update_spatial_parent_relatives(self):
 				_handle_guns(next)
 			else:
-				continue
+				pass
 		else:
 			var anim = arsenal.values()[current].anim
 			if not anim.is_playing():
