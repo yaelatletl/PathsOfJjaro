@@ -1,0 +1,23 @@
+{
+    "allOf": [
+        {
+            "$ref": "./weapon_base_schema.json"
+        }
+    ],
+    "properties": {
+        "type": {
+            "type": "integer",
+            "minimum": 2,
+            "maximum": 2,
+            "description": "Identifies this as a projectile weapon"
+        },
+        "projectileIndex": {
+            "type": "integer",
+            "description": "TODO"
+        }
+    },
+    "required": [
+        "projectileIndex",
+        "type"
+    ]
+}
