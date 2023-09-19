@@ -1,4 +1,5 @@
 {
+	"$schema": "schemas/projectile_weapon.json",
 	"type": 2,
 	"name": "plasma",
 	"fireRate" : 2.5,

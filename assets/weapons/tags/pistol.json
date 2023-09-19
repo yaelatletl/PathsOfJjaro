@@ -1,4 +1,5 @@
 {
+	"$schema": "schemas/raycast_weapon.json",
 	"type": 1,
 	"name": "glock_lock",
 	"fireRate" : 3.0,

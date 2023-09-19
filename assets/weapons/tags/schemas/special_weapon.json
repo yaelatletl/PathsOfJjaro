@@ -1,0 +1,126 @@
+{
+    "allOf": [
+        {
+            "$ref": "./base_weapon.json"
+        }
+    ],
+    "properties": {
+        "type": {
+            "const": 3,
+            "description": "Identifies this as a special weapon"
+        },
+        "projectileIndex": {
+            "type": "integer",
+            "description": "TODO"
+        },
+        "secondaryFireMode": {
+            "type": "integer",
+            "description": "TODO"
+        },
+        "secondaryFireRate": {
+            "type": "number",
+            "description": "Rate of fire for secondary mode in rounds per second"
+        },
+        "secondaryBullets": {
+            "type": "integer"
+        },
+        "secondaryAmmo": {
+            "type": "integer"
+        },
+        "secondaryMaxBullets": {
+            "type": "integer"
+        },
+        "secondaryDamage": {
+            "type": "integer"
+        },
+        "secondaryReloadSpeed": {
+            "type": "number",
+            "description": "Duration of a reload in seconds"
+        },
+        "secondaryRandomness": {
+            "type": "integer"
+        },
+        "secondarySpreadPattern": {
+            "type": "array",
+            "items": {
+                "type": "array",
+                "items": {
+                    "type": "number",
+                    "minimum": -1,
+                    "maximum": 1
+                },
+                "maxItems": 2
+            },
+            "description": "Sequence of 2D vectors used to purturb projectile path"
+        },
+        "secondarySpreadMultiplier": {
+            "type": "integer",
+            "description": "TODO"
+        },
+        "secondaryProjectileIndex": {
+            "type": "integer",
+            "description": "TODO"
+        },
+        "specialType": {
+            "type": "integer",
+            "description": "TODO"
+        },
+        "primaryFireMode": {
+            "type": "integer",
+            "description": "TODO"
+        },
+        "secondaryRange": {
+            "type": "integer",
+            "description": "TODO"
+        },
+        "secondaryRandomSpread": {
+            "type": "array",
+            "items": {
+                "type": "number",
+                "enum": [
+                    0.0
+                ]
+            },
+            "minItems": 2,
+            "maxItems": 2,
+            "description": "TODO"
+        },
+        "usesSecondaryAmmo": {
+            "type": "boolean",
+            "description": "Flag for whether secondary fire uses own ammo or primary ammo"
+        },
+        "primaryModifierType": {
+            "enum": [
+                "None",
+                "OnRelease",
+                "OnReleaseIfLoaded",
+                "OnReleaseOrAuto",
+                "AutoReleaseIfLoaded"
+            ],
+            "description": "TODO"
+        },
+        "secondaryModifierType": {
+            "enum": [
+                "None",
+                "OnRelease",
+                "OnReleaseIfLoaded",
+                "OnReleaseOrAuto",
+                "AutoReleaseIfLoaded"
+            ],
+            "description": "TODO"
+        },
+        "primaryModifierTimer": {
+            "type": "integer",
+            "description": "TODO"
+        },
+        "secondaryModifierTimer": {
+            "type": "integer",
+            "description": "TODO"
+        }
+    },
+    "required": [
+        "projectileIndex",
+        "type"
+    ],
+    "unevaluatedProperties": false
+}

@@ -4,10 +4,16 @@
     "description": "These are properties shared by all weapon types.",
     "type": "object",
     "properties": {
+        "$schema": {
+            "type": "string"
+        },
         "type": {
-            "type": "integer",
-            "minimum": 0,
-            "maximum": 3,
+            "enum": [
+                0,
+                1,
+                2,
+                3
+            ],
             "description": "0 = melee, 1 = raycast, 2 = projectile, 3 = special"
         },
         "name": {
@@ -16,7 +22,7 @@
         },
         "fireRate": {
             "type": "number",
-            "description": "The rate of fire in units of TODO"
+            "description": "The rate of fire in units of rounds per second"
         },
         "bullets": {
             "type": "integer",
@@ -25,6 +31,12 @@
         "ammo": {
             "type": "integer",
             "description": "TODO"
+        },
+        "ammoType": {
+            "enum": [
+                "SMG"
+            ],
+            "description": "The type of ammo used by the weapon"
         },
         "maxBullets": {
             "type": "integer",
@@ -56,14 +68,17 @@
             "items": {
                 "type": "array",
                 "items": {
-                    "type": "integer",
-                    "maxItems": 2
-                }
+                    "type": "number",
+                    "minimum": -1,
+                    "maximum": 1
+                },
+                "maxItems": 2
             },
-            "additionalItems": true
+            "description": "Sequence of 2D vectors used to purturb projectile path"
         },
         "spreadMultiplier": {
-            "type": "integer"
+            "type": "integer",
+            "description": "TODO"
         },
         "randomSpread": {
             "type": "array",
@@ -71,6 +86,13 @@
                 "type": "number"
             },
             "additionalItems": true
+        },
+        "zoomLevels": {
+            "type": "array",
+            "items": {
+                "type": "integer"
+            },
+            "description": "FOVs to be used for each zoom level"
         },
         "defaultZoomFOV": {
             "type": "integer",
