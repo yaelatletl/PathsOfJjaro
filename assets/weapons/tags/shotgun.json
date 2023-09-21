@@ -1,4 +1,5 @@
 {
+	"$schema": "schemas/raycast_weapon.json",
 	"type": 1,
 	"name": "shotgun",
 	"fireRate" : 0.5,

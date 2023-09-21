@@ -1,0 +1,22 @@
+{
+    "allOf": [
+        {
+            "$ref": "./base_weapon.json"
+        }
+    ],
+    "properties": {
+        "type": {
+            "const": 2,
+            "description": "Identifies this as a projectile weapon"
+        },
+        "projectileIndex": {
+            "type": "integer",
+            "description": "TODO"
+        }
+    },
+    "required": [
+        "projectileIndex",
+        "type"
+    ],
+    "unevaluatedProperties": false
+}

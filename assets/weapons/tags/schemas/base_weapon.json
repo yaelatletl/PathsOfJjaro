@@ -1,0 +1,122 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Base Weapon",
+    "description": "These are properties shared by all weapon types.",
+    "type": "object",
+    "properties": {
+        "$schema": {
+            "type": "string"
+        },
+        "type": {
+            "enum": [
+                0,
+                1,
+                2,
+                3
+            ],
+            "description": "0 = melee, 1 = raycast, 2 = projectile, 3 = special"
+        },
+        "name": {
+            "type": "string",
+            "description": "The name of the weapon. Used both for identification and display."
+        },
+        "fireRate": {
+            "type": "number",
+            "description": "The rate of fire in units of rounds per second"
+        },
+        "bullets": {
+            "type": "integer",
+            "description": "The number of rounds per magazine"
+        },
+        "ammo": {
+            "type": "integer",
+            "description": "TODO"
+        },
+        "ammoType": {
+            "enum": [
+                "SMG"
+            ],
+            "description": "The type of ammo used by the weapon"
+        },
+        "maxBullets": {
+            "type": "integer",
+            "description": "The maximum number of rounds that can be carried in the player's inventory"
+        },
+        "damage": {
+            "type": "integer",
+            "description": "The amount of damage applied to the target"
+        },
+        "reloadSpeed": {
+            "type": "number",
+            "description": "The time required to reload the weapon in seconds"
+        },
+        "randomness": {
+            "oneOf": [
+                {
+                    "type": "boolean"
+                },
+                {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 1
+                }
+            ],
+            "description": "TODO"
+        },
+        "spreadPattern": {
+            "type": "array",
+            "items": {
+                "type": "array",
+                "items": {
+                    "type": "number",
+                    "minimum": -1,
+                    "maximum": 1
+                },
+                "maxItems": 2
+            },
+            "description": "Sequence of 2D vectors used to purturb projectile path"
+        },
+        "spreadMultiplier": {
+            "type": "integer",
+            "description": "TODO"
+        },
+        "randomSpread": {
+            "type": "array",
+            "items": {
+                "type": "number"
+            },
+            "additionalItems": true
+        },
+        "zoomLevels": {
+            "type": "array",
+            "items": {
+                "type": "integer"
+            },
+            "description": "FOVs to be used for each zoom level"
+        },
+        "defaultZoomFOV": {
+            "type": "integer",
+            "description": "TODO"
+        },
+        "range": {
+            "type": "integer",
+            "description": "TODO"
+        }
+    },
+    "required": [
+        "type",
+        "name",
+        "fireRate",
+        "bullets",
+        "ammo",
+        "maxBullets",
+        "damage",
+        "reloadSpeed",
+        "randomness",
+        "spreadPattern",
+        "spreadMultiplier",
+        "randomSpread",
+        "defaultZoomFOV",
+        "range"
+    ]
+}
