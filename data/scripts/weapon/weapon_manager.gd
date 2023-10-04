@@ -38,9 +38,9 @@ func _ready() -> void:
 	# owner, name, firerate, bullets, ammo, max_bullets, damage, reload_speed
 
 	#add actors first, then add weapons to tree, otherwise their _ready() code will break
-	for w in arsenal:
-		add_child(arsenal[w])
-		arsenal.values()[current]._hide()
+	#for w in arsenal:
+	#	add_child(arsenal[w])
+	#	arsenal.values()[current]._hide()
 	_change()
 
 func _physics_process(_delta) -> void:

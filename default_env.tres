@@ -1,16 +1,22 @@
-[gd_resource type="Environment" load_steps=3 format=3 uid="uid://dn6sg74w0bg3d"]
+[gd_resource type="Environment" load_steps=4 format=3 uid="uid://dn6sg74w0bg3d"]
 
-[sub_resource type="PhysicalSkyMaterial" id="PhysicalSkyMaterial_4xuwu"]
+[ext_resource type="Texture2D" uid="uid://drd88b0ugw7ws" path="res://data/player/TauCeti.hdr" id="1_mqasg"]
 
-[sub_resource type="Sky" id="1"]
-sky_material = SubResource("PhysicalSkyMaterial_4xuwu")
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_c2y8u"]
+panorama = ExtResource("1_mqasg")
+
+[sub_resource type="Sky" id="Sky_vcw4n"]
+sky_material = SubResource("PanoramaSkyMaterial_c2y8u")
 
 [resource]
 background_mode = 2
-sky = SubResource("1")
+sky = SubResource("Sky_vcw4n")
 ambient_light_source = 3
 reflected_light_source = 2
 tonemap_mode = 3
 tonemap_exposure = 1.2
+ssao_enabled = true
 sdfgi_enabled = true
 sdfgi_use_occlusion = true
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.0

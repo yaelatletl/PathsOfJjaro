@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://dtu2f63lmxv0j"]
+[gd_scene load_steps=20 format=3 uid="uid://dtu2f63lmxv0j"]
 
 [ext_resource type="PackedScene" uid="uid://dfq77sqkxhyl6" path="res://test_scenario/test.blend" id="1_ll5h2"]
 [ext_resource type="PackedScene" uid="uid://cbwgud76ewlii" path="res://data/player/character.tscn" id="2_q6sa3"]
@@ -49,17 +49,9 @@ data = PackedVector3Array(-2432, 1760, 384, -2432, 2816, -128, -2432, 2816, 384,
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_0st5d"]
 data = PackedVector3Array(-2432, 2816, 384, -2432, 3200, -128, -2432, 3200, 384, -2432, 2816, 384, -2432, 2816, -128, -2432, 3200, -128, -2176, 3200, -128, -2432, 3200, 384, -2432, 3200, -128, -2176, 3200, -128, -2176, 3200, 384, -2432, 3200, 384, -2176, 3200, 384, -2432, 2816, 384, -2432, 3200, 384, -2176, 3200, 384, -2176, 2816, 384, -2432, 2816, 384, -2176, 2816, -128, -2432, 3200, -128, -2432, 2816, -128, -2176, 2816, -128, -2176, 3200, -128, -2432, 3200, -128, -2176, 2816, 384, -2432, 2816, -128, -2432, 2816, 384, -2176, 2816, 384, -2176, 2816, -128, -2432, 2816, -128, -2176, 2816, -128, -2176, 3200, 384, -2176, 3200, -128, -2176, 2816, -128, -2176, 2816, 384, -2176, 3200, 384)
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_vbk2y"]
-noise_type = 3
-frequency = 0.1032
-
-[sub_resource type="NoiseTexture3D" id="NoiseTexture3D_r2tla"]
-noise = SubResource("FastNoiseLite_vbk2y")
-
 [sub_resource type="FogMaterial" id="FogMaterial_8nkby"]
 density = 0.1369
 edge_fade = 0.0757862
-density_texture = SubResource("NoiseTexture3D_r2tla")
 
 [node name="Node3D" type="Node3D"]
 
