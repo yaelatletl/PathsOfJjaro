@@ -23,6 +23,7 @@ Pooling="*res://data/singletons/pooling.gd"
 GlobalSettings="*res://data/singletons/global_settings.gd"
 MaterialPool="*res://data/singletons/material_pool.gd"
 InputMaping="*res://data/singletons/input_maping.gd"
+ResourceManager="*res://data/singletons/resource_manager.gd"
 
 [debug]
 
@@ -189,7 +190,6 @@ anti_aliasing/quality/msaa_3d=1
 anti_aliasing/quality/screen_space_aa=1
 anti_aliasing/quality/use_taa=true
 occlusion_culling/use_occlusion_culling=true
-environment/defaults/default_environment="res://default_env.tres"
 quality/filters/sharpen_intensity=0.5
 quality/filters/anisotropic_filter_level=8
 quality/spatial_partitioning/render_tree_balance=0.54

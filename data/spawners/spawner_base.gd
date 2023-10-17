@@ -1,6 +1,12 @@
 extends Node3D
 class_name SpawnerBase
 
+enum SPAWN_TYPE {
+	PLAYER, 
+	CHARACTER,
+	ITEM
+}
+
 @export var spawn_on_ready : bool = true 
 @export var spawn_on_body_enter : bool = false
 @export var spawn_on_body_exit : bool = false
@@ -9,7 +15,11 @@ class_name SpawnerBase
 
 @onready var area_trigger : Area3D = get_node(area_trigger_path)
 
+@export_enum("Player", "Character", "Item") var spawn_type  : int 
 
+@export var identifier : String = "Default:NULL"
+
+@onready var object = get_object(identifier)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -19,6 +29,10 @@ func _ready():
 		area_trigger.body_entered.connect(self.spawn)
 	if spawn_on_body_exit:
 		area_trigger.body_exited.connect(self.spawn)
+
+func get_object(id : String):
+	ResourceManager
+	pass
 
 func spawn():
 	pass

@@ -29,7 +29,7 @@ func load_resource(pack_path, const_path, dict, object) -> Object:
 	var success = ProjectSettings.load_resource_pack(const_path + pack_path, false)
 	if success:
 		# Now one can use the assets as if they had them in the project from the start.
-		var metadata = load(const_path + pack_path.trim_suffix(".pck") + "/" + "metadata.tscn")
+		var metadata = load(const_path + pack_path.trim_suffix(".pck") + "/" + "metadata.tscn") #TODO: Define behavior and strcuture
 		assert(metadata!= null, "Invalid Resource Pack, metadata not found.")
 		object = object.duplicate()
 		object.name = metadata.get("name")
@@ -55,13 +55,16 @@ class CharacterPack:
 	
 	
 class Scenario:
+	#MISSING: Objects
+	#MISSING: Weapons
+
 	var name = ""
 	var levels = []
 	var bin_levels = {}
 
 	func load_levels():
 		for level_i in levels:
-			var level = load(level_i)
+			var level = load(level_i) #TODO: This is overly expensive, we should load the levels only when needed
 			if level != null:
 				bin_levels[level.name] = level
 
