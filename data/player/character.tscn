@@ -349,6 +349,7 @@ transform = Transform3D(1, 0, 0, 0, 0.999999, 0, 0, 0, 0.999999, 0, 0, 0)
 [node name="camera" type="Camera3D" parent="head/neck"]
 cull_mask = 1048571
 doppler_tracking = 2
+current = true
 fov = 110.0
 near = 0.01
 far = 6500.0

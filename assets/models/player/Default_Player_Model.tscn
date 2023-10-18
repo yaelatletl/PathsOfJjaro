@@ -18,18 +18,23 @@ script = ExtResource("3")
 script = ExtResource("3")
 
 [node name="Cube004" parent="Base/Skeleton3D" index="3"]
+layers = 4
 script = ExtResource("3")
 
 [node name="Cube015" parent="Base/Skeleton3D" index="4"]
+layers = 4
 script = ExtResource("3")
 
 [node name="Cube016" parent="Base/Skeleton3D" index="5"]
+layers = 4
 script = ExtResource("3")
 
 [node name="Cube017" parent="Base/Skeleton3D" index="6"]
+layers = 4
 script = ExtResource("3")
 
 [node name="Cube020" parent="Base/Skeleton3D" index="7"]
+layers = 4
 script = ExtResource("3")
 
 [node name="ViewTarget" type="Marker3D" parent="." index="1"]
