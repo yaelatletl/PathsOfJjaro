@@ -13,7 +13,7 @@ func _on_JoinNetwork_pressed():
 	pass # Replace with function body.
 
 func _on_Settings_pressed():
-	get_node("%MenuContents").current_tab = 3
+	get_node("%MenuContents").current_tab = 4
 
 func _on_Quit_pressed():
 	get_tree().quit()

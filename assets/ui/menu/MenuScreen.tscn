@@ -1,12 +1,11 @@
-[gd_scene load_steps=12 format=3 uid="uid://b5beap7xiosd"]
+[gd_scene load_steps=11 format=3 uid="uid://b5beap7xiosd"]
 
 [ext_resource type="Theme" uid="uid://deqs1bye02w2l" path="res://assets/ui/menu/visual_assets/Terminal.tres" id="1_354da"]
 [ext_resource type="Script" path="res://assets/ui/menu/MainMenu.gd" id="2"]
 [ext_resource type="Texture2D" uid="uid://bnc54fb55xgbx" path="res://assets/ui/menu/visual_assets/Marathon.svg" id="3_j8ya4"]
-[ext_resource type="PackedScene" uid="uid://yjg2ckjnce5f" path="res://assets/ui/menu/settings/controls/control_option_component.tscn" id="5"]
 [ext_resource type="Script" path="res://assets/ui/menu/network_host/NetworkHost.gd" id="6"]
 [ext_resource type="Script" path="res://assets/ui/menu/network_host/NetworkLobby.gd" id="7"]
-[ext_resource type="Script" path="res://assets/ui/menu/settings/Settings.gd" id="8"]
+[ext_resource type="PackedScene" uid="uid://c67pbo0i2rjmd" path="res://assets/ui/menu/settings/settings.tscn" id="8_nrqqp"]
 [ext_resource type="Script" path="res://assets/ui/menu/network_join/NetworkJoin.gd" id="9"]
 [ext_resource type="Script" path="res://assets/ui/menu/do_not_enter_letters.gd" id="10"]
 [ext_resource type="Script" path="res://assets/ui/menu/SinglePlayerMenu.gd" id="11"]
@@ -35,28 +34,28 @@ color = Color(0, 0, 0, 1)
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="TopContainer" type="PanelContainer" parent="Background/VBoxContainer"]
+[node name="TopHeader" type="PanelContainer" parent="Background/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.2
 
-[node name="Red1" type="ColorRect" parent="Background/VBoxContainer/TopContainer"]
+[node name="Red1" type="ColorRect" parent="Background/VBoxContainer/TopHeader"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.2
 color = Color(0.285156, 0, 0, 1)
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Background/VBoxContainer/TopContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Background/VBoxContainer/TopHeader"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="Control3" type="Control" parent="Background/VBoxContainer/TopContainer/HBoxContainer"]
+[node name="Control3" type="Control" parent="Background/VBoxContainer/TopHeader/HBoxContainer"]
 layout_mode = 2
 
-[node name="Connection" type="Label" parent="Background/VBoxContainer/TopContainer/HBoxContainer"]
+[node name="Connection" type="Label" parent="Background/VBoxContainer/TopHeader/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 7
@@ -64,7 +63,7 @@ theme_override_colors/font_color = Color(1, 0, 0, 1)
 text = "Opening Connection to ß.4.5-23 	 "
 vertical_alignment = 1
 
-[node name="Date" type="Label" parent="Background/VBoxContainer/TopContainer/HBoxContainer"]
+[node name="Date" type="Label" parent="Background/VBoxContainer/TopHeader/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 7
@@ -73,7 +72,7 @@ text = "2207 08.25.2337"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="Control4" type="Control" parent="Background/VBoxContainer/TopContainer/HBoxContainer"]
+[node name="Control4" type="Control" parent="Background/VBoxContainer/TopHeader/HBoxContainer"]
 layout_mode = 2
 
 [node name="MenuContents" type="TabContainer" parent="Background/VBoxContainer"]
@@ -86,6 +85,7 @@ tabs_visible = false
 use_hidden_tabs_for_min_size = true
 
 [node name="Main" type="TabBar" parent="Background/VBoxContainer/MenuContents"]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -474,353 +474,6 @@ NO.
 TROUBLE."
 dialog_autowrap = true
 
-[node name="Settings" type="VBoxContainer" parent="Background/VBoxContainer/MenuContents"]
-visible = false
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-script = ExtResource("8")
-
-[node name="TabContainer" type="TabContainer" parent="Background/VBoxContainer/MenuContents/Settings"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="Graphics" type="HBoxContainer" parent="Background/VBoxContainer/MenuContents/Settings/TabContainer"]
-layout_mode = 2
-
-[node name="Spacer4" type="Control" parent="Background/VBoxContainer/MenuContents/Settings/TabContainer/Graphics"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Background/VBoxContainer/MenuContents/Settings/TabContainer/Graphics"]
-layout_mode = 2
-
-[node name="Spacer5" type="Control" parent="Background/VBoxContainer/MenuContents/Settings/TabContainer/Graphics/VBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="SSAO" type="CheckBox" parent="Background/VBoxContainer/MenuContents/Settings/TabContainer/Graphics/VBoxContainer"]
-layout_mode = 2
-text = "SS A. Occlusion"
-
-[node name="Screen Space Relfections" type="CheckBox" parent="Background/VBoxContainer/MenuContents/Settings/TabContainer/Graphics/VBoxContainer"]
-layout_mode = 2
-text = "SS Reflections"
-
-[node name="MSAA Filter" type="CheckBox" parent="Background/VBoxContainer/MenuContents/Settings/TabContainer/Graphics/VBoxContainer"]
-layout_mode = 2
-text = "MSAA Filter"
-
-[node name="AnsFilter" type="CheckBox" parent="Background/VBoxContainer/MenuContents/Settings/TabContainer/Graphics/VBoxContainer"]
-layout_mode = 2
-text = "Ansiotropic filter "
-
-[node name="Spacer3" type="Control" parent="Background/VBoxContainer/MenuContents/Settings/TabContainer/Graphics"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="Video" type="HBoxContainer" parent="Background/VBoxContainer/MenuContents/Settings/TabContainer"]
-visible = false
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 7
-
-[node name="Spacer" type="Control" parent="Background/VBoxContainer/MenuContents/Settings/TabContainer/Video"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Background/VBoxContainer/MenuContents/Settings/TabContainer/Video"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 7
-
-[node name="Spacer3" type="Control" parent="Background/VBoxContainer/MenuContents/Settings/TabContainer/Video/VBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="HBoxContainer" type="HBoxContainer" parent="Background/VBoxContainer/MenuContents/Settings/TabContainer/Video/VBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 7
-
-[node name="Resolution" type="Label" parent="Background/VBoxContainer/MenuContents/Settings/TabContainer/Video/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 7
-text = "Resolution"
-
-[node name="value" type="MenuButton" parent="Background/VBoxContainer/MenuContents/Settings/TabContainer/Video/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 7
-text = "Default"
-
-[node name="Screen Space Relfections" type="CheckBox" parent="Background/VBoxContainer/MenuContents/Settings/TabContainer/Video/VBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 7
-text = "Fullscreen"
-
-[node name="HBoxContainer2" type="HBoxContainer" parent="Background/VBoxContainer/MenuContents/Settings/TabContainer/Video/VBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 7
-
-[node name="Gamma Corection" type="Label" parent="Background/VBoxContainer/MenuContents/Settings/TabContainer/Video/VBoxContainer/HBoxContainer2"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 7
-text = "Gamma Correction"
-
-[node name="value" type="HSlider" parent="Background/VBoxContainer/MenuContents/Settings/TabContainer/Video/VBoxContainer/HBoxContainer2"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 7
-
-[node name="HBoxContainer3" type="HBoxContainer" parent="Background/VBoxContainer/MenuContents/Settings/TabContainer/Video/VBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 7
-
-[node name="Brightness" type="Label" parent="Background/VBoxContainer/MenuContents/Settings/TabContainer/Video/VBoxContainer/HBoxContainer3"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 7
-text = "Brightness"
-
-[node name="value" type="HSlider" parent="Background/VBoxContainer/MenuContents/Settings/TabContainer/Video/VBoxContainer/HBoxContainer3"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 7
-
-[node name="Spacer2" type="Control" parent="Background/VBoxContainer/MenuContents/Settings/TabContainer/Video"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="Controls" type="VBoxContainer" parent="Background/VBoxContainer/MenuContents/Settings/TabContainer"]
-visible = false
-layout_mode = 2
-
-[node name="TabContainer" type="TabContainer" parent="Background/VBoxContainer/MenuContents/Settings/TabContainer/Controls"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="Movement" type="HBoxContainer" parent="Background/VBoxContainer/MenuContents/Settings/TabContainer/Controls/TabContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="Spacer3" type="Control" parent="Background/VBoxContainer/MenuContents/Settings/TabContainer/Controls/TabContainer/Movement"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-size_flags_stretch_ratio = 0.2
-
-[node name="ScrollContainer" type="ScrollContainer" parent="Background/VBoxContainer/MenuContents/Settings/TabContainer/Controls/TabContainer/Movement"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Background/VBoxContainer/MenuContents/Settings/TabContainer/Controls/TabContainer/Movement/ScrollContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="move_left" parent="Background/VBoxContainer/MenuContents/Settings/TabContainer/Controls/TabContainer/Movement/ScrollContainer/VBoxContainer" instance=ExtResource("5")]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-Label_text = "Strafe Left"
-
-[node name="move_right" parent="Background/VBoxContainer/MenuContents/Settings/TabContainer/Controls/TabContainer/Movement/ScrollContainer/VBoxContainer" instance=ExtResource("5")]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-Label_text = "Strafe right"
-
-[node name="move_forwards" parent="Background/VBoxContainer/MenuContents/Settings/TabContainer/Controls/TabContainer/Movement/ScrollContainer/VBoxContainer" instance=ExtResource("5")]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-Label_text = "Move Forwards"
-
-[node name="move_backwards" parent="Background/VBoxContainer/MenuContents/Settings/TabContainer/Controls/TabContainer/Movement/ScrollContainer/VBoxContainer" instance=ExtResource("5")]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-Label_text = "Move Backwards"
-
-[node name="jump" parent="Background/VBoxContainer/MenuContents/Settings/TabContainer/Controls/TabContainer/Movement/ScrollContainer/VBoxContainer" instance=ExtResource("5")]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-Label_text = "Jump"
-
-[node name="run" parent="Background/VBoxContainer/MenuContents/Settings/TabContainer/Controls/TabContainer/Movement/ScrollContainer/VBoxContainer" instance=ExtResource("5")]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-Label_text = "Run/Walk"
-
-[node name="swim" parent="Background/VBoxContainer/MenuContents/Settings/TabContainer/Controls/TabContainer/Movement/ScrollContainer/VBoxContainer" instance=ExtResource("5")]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-Label_text = "Swim toggle"
-
-[node name="Spacer4" type="Control" parent="Background/VBoxContainer/MenuContents/Settings/TabContainer/Controls/TabContainer/Movement"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-size_flags_stretch_ratio = 0.2
-
-[node name="Combat" type="HBoxContainer" parent="Background/VBoxContainer/MenuContents/Settings/TabContainer/Controls/TabContainer"]
-visible = false
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="Spacer5" type="Control" parent="Background/VBoxContainer/MenuContents/Settings/TabContainer/Controls/TabContainer/Combat"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-size_flags_stretch_ratio = 0.2
-
-[node name="ScrollContainer2" type="ScrollContainer" parent="Background/VBoxContainer/MenuContents/Settings/TabContainer/Controls/TabContainer/Combat"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Background/VBoxContainer/MenuContents/Settings/TabContainer/Controls/TabContainer/Combat/ScrollContainer2"]
-layout_mode = 2
-
-[node name="second_fire" parent="Background/VBoxContainer/MenuContents/Settings/TabContainer/Controls/TabContainer/Combat/ScrollContainer2/VBoxContainer" instance=ExtResource("5")]
-layout_mode = 2
-Label_text = "Secondary Fire"
-
-[node name="first_fire" parent="Background/VBoxContainer/MenuContents/Settings/TabContainer/Controls/TabContainer/Combat/ScrollContainer2/VBoxContainer" instance=ExtResource("5")]
-layout_mode = 2
-Label_text = "Primary fire"
-
-[node name="next_gun" parent="Background/VBoxContainer/MenuContents/Settings/TabContainer/Controls/TabContainer/Combat/ScrollContainer2/VBoxContainer" instance=ExtResource("5")]
-layout_mode = 2
-Label_text = "Next gun"
-
-[node name="prev_gun" parent="Background/VBoxContainer/MenuContents/Settings/TabContainer/Controls/TabContainer/Combat/ScrollContainer2/VBoxContainer" instance=ExtResource("5")]
-layout_mode = 2
-Label_text = "Previous gun"
-
-[node name="Spacer6" type="Control" parent="Background/VBoxContainer/MenuContents/Settings/TabContainer/Controls/TabContainer/Combat"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-size_flags_stretch_ratio = 0.2
-
-[node name="Comm" type="HBoxContainer" parent="Background/VBoxContainer/MenuContents/Settings/TabContainer/Controls/TabContainer"]
-visible = false
-layout_mode = 2
-
-[node name="Spacer7" type="Control" parent="Background/VBoxContainer/MenuContents/Settings/TabContainer/Controls/TabContainer/Comm"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-size_flags_stretch_ratio = 0.2
-
-[node name="ScrollContainer" type="ScrollContainer" parent="Background/VBoxContainer/MenuContents/Settings/TabContainer/Controls/TabContainer/Comm"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Background/VBoxContainer/MenuContents/Settings/TabContainer/Controls/TabContainer/Comm/ScrollContainer"]
-layout_mode = 2
-
-[node name="ui_right" parent="Background/VBoxContainer/MenuContents/Settings/TabContainer/Controls/TabContainer/Comm/ScrollContainer/VBoxContainer" instance=ExtResource("5")]
-layout_mode = 2
-Label_text = "Chat"
-
-[node name="ui_right2" parent="Background/VBoxContainer/MenuContents/Settings/TabContainer/Controls/TabContainer/Comm/ScrollContainer/VBoxContainer" instance=ExtResource("5")]
-layout_mode = 2
-Label_text = "Push-to-talk"
-
-[node name="Spacer8" type="Control" parent="Background/VBoxContainer/MenuContents/Settings/TabContainer/Controls/TabContainer/Comm"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-size_flags_stretch_ratio = 0.2
-
-[node name="Misc" type="HBoxContainer" parent="Background/VBoxContainer/MenuContents/Settings/TabContainer/Controls/TabContainer"]
-visible = false
-layout_mode = 2
-
-[node name="Spacer7" type="Control" parent="Background/VBoxContainer/MenuContents/Settings/TabContainer/Controls/TabContainer/Misc"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-size_flags_stretch_ratio = 0.2
-
-[node name="ScrollContainer" type="ScrollContainer" parent="Background/VBoxContainer/MenuContents/Settings/TabContainer/Controls/TabContainer/Misc"]
-layout_mode = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Background/VBoxContainer/MenuContents/Settings/TabContainer/Controls/TabContainer/Misc/ScrollContainer"]
-layout_mode = 2
-
-[node name="vol_plus" parent="Background/VBoxContainer/MenuContents/Settings/TabContainer/Controls/TabContainer/Misc/ScrollContainer/VBoxContainer" instance=ExtResource("5")]
-layout_mode = 2
-Label_text = "Voulme up"
-
-[node name="vol_minus" parent="Background/VBoxContainer/MenuContents/Settings/TabContainer/Controls/TabContainer/Misc/ScrollContainer/VBoxContainer" instance=ExtResource("5")]
-layout_mode = 2
-Label_text = "Volume down"
-
-[node name="gun_center" parent="Background/VBoxContainer/MenuContents/Settings/TabContainer/Controls/TabContainer/Misc/ScrollContainer/VBoxContainer" instance=ExtResource("5")]
-layout_mode = 2
-Label_text = "Toggle gun position"
-
-[node name="open_map" parent="Background/VBoxContainer/MenuContents/Settings/TabContainer/Controls/TabContainer/Misc/ScrollContainer/VBoxContainer" instance=ExtResource("5")]
-layout_mode = 2
-Label_text = "Open Minimap"
-
-[node name="Spacer8" type="Control" parent="Background/VBoxContainer/MenuContents/Settings/TabContainer/Controls/TabContainer/Misc"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-size_flags_stretch_ratio = 0.2
-
-[node name="NavigationButtons2" type="HBoxContainer" parent="Background/VBoxContainer/MenuContents/Settings"]
-layout_mode = 2
-
-[node name="Spacer4" type="Control" parent="Background/VBoxContainer/MenuContents/Settings/NavigationButtons2"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-size_flags_stretch_ratio = 0.2
-
-[node name="Cancel" type="Button" parent="Background/VBoxContainer/MenuContents/Settings/NavigationButtons2"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "Cancel"
-icon_alignment = 2
-
-[node name="Save" type="Button" parent="Background/VBoxContainer/MenuContents/Settings/NavigationButtons2"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "Save"
-icon_alignment = 2
-
-[node name="Spacer5" type="Control" parent="Background/VBoxContainer/MenuContents/Settings/NavigationButtons2"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-size_flags_stretch_ratio = 0.2
-
 [node name="NetworkLobby" type="Control" parent="Background/VBoxContainer/MenuContents"]
 unique_name_in_owner = true
 visible = false
@@ -962,6 +615,9 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.2
 
+[node name="Settings" parent="Background/VBoxContainer/MenuContents" instance=ExtResource("8_nrqqp")]
+layout_mode = 2
+
 [node name="SinglePlayerMenu" type="VBoxContainer" parent="Background/VBoxContainer/MenuContents"]
 visible = false
 layout_mode = 2
@@ -1087,29 +743,29 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.2
 
-[node name="BottomContainer" type="PanelContainer" parent="Background/VBoxContainer"]
+[node name="BottomHeader" type="PanelContainer" parent="Background/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.2
 
-[node name="Red2" type="ColorRect" parent="Background/VBoxContainer/BottomContainer"]
+[node name="Red2" type="ColorRect" parent="Background/VBoxContainer/BottomHeader"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.2
 color = Color(0.286275, 0, 0, 1)
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="Background/VBoxContainer/BottomContainer"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="Background/VBoxContainer/BottomHeader"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 alignment = 1
 
-[node name="Control2" type="Control" parent="Background/VBoxContainer/BottomContainer/HBoxContainer2"]
+[node name="Control2" type="Control" parent="Background/VBoxContainer/BottomHeader/HBoxContainer2"]
 layout_mode = 2
 
-[node name="Subsystem" type="Label" parent="Background/VBoxContainer/BottomContainer/HBoxContainer2"]
+[node name="Subsystem" type="Label" parent="Background/VBoxContainer/BottomHeader/HBoxContainer2"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 7
@@ -1117,7 +773,7 @@ theme_override_colors/font_color = Color(1, 0, 0, 1)
 text = "CAS.qterm//CyberAcme Systems, Inc."
 vertical_alignment = 1
 
-[node name="Ipv10" type="Label" parent="Background/VBoxContainer/BottomContainer/HBoxContainer2"]
+[node name="Ipv10" type="Label" parent="Background/VBoxContainer/BottomHeader/HBoxContainer2"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 7
@@ -1126,7 +782,7 @@ text = "<931.461.60231.14.vt920>"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="Control" type="Control" parent="Background/VBoxContainer/BottomContainer/HBoxContainer2"]
+[node name="Control" type="Control" parent="Background/VBoxContainer/BottomHeader/HBoxContainer2"]
 layout_mode = 2
 
 [connection signal="pressed" from="Background/VBoxContainer/MenuContents/Main/HBoxContainer/Options/SinglePlayer" to="." method="_on_SinglePlayer_pressed"]
@@ -1142,8 +798,6 @@ layout_mode = 2
 [connection signal="text_changed" from="Background/VBoxContainer/MenuContents/NetworkJoin/VBC1/HBC/VBC/HostPort/value" to="Background/VBoxContainer/MenuContents/NetworkJoin/VBC1/HBC/VBC/HostPort/value" method="_on_value_text_changed"]
 [connection signal="pressed" from="Background/VBoxContainer/MenuContents/NetworkJoin/VBC1/NavigationButtons2/Cancel" to="Background/VBoxContainer/MenuContents/NetworkJoin" method="_on_Cancel_pressed"]
 [connection signal="pressed" from="Background/VBoxContainer/MenuContents/NetworkJoin/VBC1/NavigationButtons2/Next" to="Background/VBoxContainer/MenuContents/NetworkJoin" method="_on_Next_pressed"]
-[connection signal="pressed" from="Background/VBoxContainer/MenuContents/Settings/NavigationButtons2/Cancel" to="Background/VBoxContainer/MenuContents/Settings" method="_on_Cancel_pressed"]
-[connection signal="pressed" from="Background/VBoxContainer/MenuContents/Settings/NavigationButtons2/Save" to="Background/VBoxContainer/MenuContents/Settings" method="_on_Save_pressed"]
 [connection signal="visibility_changed" from="Background/VBoxContainer/MenuContents/NetworkLobby/VBoxContainer/HBoxContainer/Info/IP/value" to="Background/VBoxContainer/MenuContents/NetworkLobby" method="_on_value_visibility_changed"]
 [connection signal="visibility_changed" from="Background/VBoxContainer/MenuContents/NetworkLobby/VBoxContainer/HBoxContainer/Info/Port/value" to="Background/VBoxContainer/MenuContents/NetworkLobby" method="_on_value_visibility_changed"]
 [connection signal="pressed" from="Background/VBoxContainer/MenuContents/NetworkLobby/VBoxContainer/NavigationButtons/Cancel" to="Background/VBoxContainer/MenuContents/NetworkLobby" method="_on_Cancel_pressed"]
