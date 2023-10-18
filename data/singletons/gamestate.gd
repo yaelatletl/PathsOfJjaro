@@ -40,11 +40,11 @@ func _sync_process(args) -> void:
 
 func _ready() -> void:
 	#TODO: Check new Godot 4.0 API
-	peer.connect("connection_succeeded",Callable(self,"_on_NetworkPeer_connection_succeeded"))
-	peer.connect("connection_failed",Callable(self,"_on_NetworkPeer_connection_failed"))
-	peer.connect("peer_connected",Callable(self,"_on_NetworkPeer_peer_connected"))
-	peer.connect("peer_disconnected",Callable(self,"_on_NetworkPeer_peer_disconnected"))
-	peer.connect("server_disconnected",Callable(self,"_on_NetworkPeer_server_disconnected"))
+	# peer.connect("connection_succeeded",Callable(self,"_on_NetworkPeer_connection_succeeded"))
+	# peer.connect("connection_failed",Callable(self,"_on_NetworkPeer_connection_failed"))
+	# peer.connect("peer_connected",Callable(self,"_on_NetworkPeer_peer_connected"))
+	# peer.connect("peer_disconnected",Callable(self,"_on_NetworkPeer_peer_disconnected"))
+	# peer.connect("server_disconnected",Callable(self,"_on_NetworkPeer_server_disconnected"))
 	for args in OS.get_cmdline_args():
 		if args == "client":
 			client_setup()

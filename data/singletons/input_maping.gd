@@ -14,7 +14,7 @@ func load_config():
 	if not FileAccess.file_exists(CONFIG_FILE):
 		config.save(CONFIG_FILE)
 	var err = config.load(CONFIG_FILE)
-	if err: # Assuming that file is missing, generate default config
+	if err or not config.has_section("input"): # Assuming that file is missing, generate default config
 		for action_name in INPUT_ACTIONS:
 			var action_list = InputMap.action_get_events(action_name)
 			# There could be multiple actions in the list, but we save the first one by default
@@ -24,7 +24,7 @@ func load_config():
 	else: # ConfigFile was properly loaded, initialize InputMap
 		for action_name in config.get_section_keys("input"):
 			# Get the key keycode corresponding to the saved human-readable string
-			var keycode = config.get_value("input", action_name)
+			var keycode = OS.find_keycode_from_string(config.get_value("input", action_name))
 			# Create a new event object based on the saved keycode
 			var event = InputEventKey.new()
 			event.keycode = keycode
