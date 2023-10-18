@@ -1,6 +1,7 @@
-[gd_scene load_steps=20 format=3 uid="uid://dtu2f63lmxv0j"]
+[gd_scene load_steps=21 format=3 uid="uid://dtu2f63lmxv0j"]
 
 [ext_resource type="PackedScene" uid="uid://dfq77sqkxhyl6" path="res://test_scenario/test.blend" id="1_ll5h2"]
+[ext_resource type="Script" path="res://data/map/world.gd" id="1_s0lrj"]
 [ext_resource type="PackedScene" uid="uid://cbwgud76ewlii" path="res://data/player/character.tscn" id="2_q6sa3"]
 [ext_resource type="Environment" uid="uid://dn6sg74w0bg3d" path="res://default_env.tres" id="3_fx08g"]
 
@@ -54,6 +55,7 @@ density = 0.1369
 edge_fade = 0.0757862
 
 [node name="Node3D" type="Node3D"]
+script = ExtResource("1_s0lrj")
 
 [node name="test" parent="." instance=ExtResource("1_ll5h2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0547891, 26.2027, -21.5786)

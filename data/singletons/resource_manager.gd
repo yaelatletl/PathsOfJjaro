@@ -1,7 +1,7 @@
 extends Node
 
-const MAP_PATH = "res://maps/"
-const CHAR_PATH = "res://characters/"
+const MAP_PATH = "res://packs/maps/"
+const CHAR_PATH = "res://packs/characters/"
 
 var scenarios = {}
 # Have them as a dict, we access by scenario name all the levels in the scenario
@@ -46,8 +46,8 @@ func load_resource(pack_path, const_path, dict, object) -> Object:
 
 
 func _ready():
-	explore_folder("res://maps", load_resource, MAP_PATH, scenarios, Scenario.new())
-	explore_folder("res://characters", load_character, CHAR_PATH, characters, CharacterPack.new())
+	explore_folder(MAP_PATH, load_resource, MAP_PATH, scenarios, Scenario.new())
+	explore_folder(CHAR_PATH, load_character, CHAR_PATH, characters, CharacterPack.new())
 
 class CharacterPack:
 	var name = ""

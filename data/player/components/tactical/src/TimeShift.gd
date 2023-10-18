@@ -1,7 +1,7 @@
 extends Component
 
 signal save_shift_pos()
-sync var pos_on_time = []
+var pos_on_time = []
 
 func _ready():
 	_component_name = "shift_pos"

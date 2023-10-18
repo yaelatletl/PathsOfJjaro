@@ -7,8 +7,8 @@ extends Component
 
 
 var active : bool = false
-@export var velocity_constant: float : float = 0.8
-@export var stim_duration: float : float = 5
+@export var velocity_constant: float  = 0.8
+@export var stim_duration: float  = 5
 
 var timer = null
 func _ready():
