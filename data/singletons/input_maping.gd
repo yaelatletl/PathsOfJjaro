@@ -18,6 +18,10 @@ func load_config():
 		for action_name in INPUT_ACTIONS:
 			var action_list = InputMap.action_get_events(action_name)
 			# There could be multiple actions in the list, but we save the first one by default
+			if action_list.size() == 0:
+				continue	
+			if action_list[0] != InputEventKey:
+				continue
 			var keycode = OS.get_keycode_string(action_list[0].keycode)
 			config.set_value("input", action_name, keycode)
 		config.save(CONFIG_FILE)

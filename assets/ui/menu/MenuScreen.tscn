@@ -85,7 +85,6 @@ tabs_visible = false
 use_hidden_tabs_for_min_size = true
 
 [node name="Main" type="TabBar" parent="Background/VBoxContainer/MenuContents"]
-visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -616,6 +615,7 @@ size_flags_vertical = 3
 size_flags_stretch_ratio = 0.2
 
 [node name="Settings" parent="Background/VBoxContainer/MenuContents" instance=ExtResource("8_nrqqp")]
+visible = false
 layout_mode = 2
 
 [node name="SinglePlayerMenu" type="VBoxContainer" parent="Background/VBoxContainer/MenuContents"]
