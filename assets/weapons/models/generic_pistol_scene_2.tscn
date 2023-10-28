@@ -302,6 +302,7 @@ transform = Transform3D(1, -7.65718e-19, 0, 1.76183e-19, 1, 0, 0, 0, 1, 0, 0, 0)
 
 [node name="ray" type="RayCast3D" parent="."]
 transform = Transform3D(1, -1.01644e-19, 0, -1.76183e-19, 1, 0, 3.50254e-28, 0, 1, 0, 0, 0)
+target_position = Vector3(0, 0, -200)
 
 [node name="effect" type="Node3D" parent="."]
 transform = Transform3D(1, 9.82558e-19, 0, 1.76183e-19, 1, 0, 0, 0, 1, 0, 0, 0)

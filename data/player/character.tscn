@@ -338,7 +338,7 @@ shape = SubResource("51")
 [node name="head" type="RayCast3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.04244, 0)
 target_position = Vector3(0, 0.3, 0)
-debug_shape_custom_color = Color(0.54902, 0.0117647, 0.666667, 1)
+debug_shape_custom_color = Color(0.54902, 0.0117647, 0.603922, 0.509804)
 debug_shape_thickness = 5
 script = ExtResource("1")
 sensibility = 0.129
@@ -370,6 +370,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -20)
 [node name="feet" type="RayCast3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.12863, 0)
 target_position = Vector3(0, -1.7, 0)
+debug_shape_custom_color = Color(1, 1, 0.14902, 0.345098)
 
 [node name="hud" type="CanvasLayer" parent="."]
 script = ExtResource("35")

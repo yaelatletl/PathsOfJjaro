@@ -1,6 +1,7 @@
-[gd_scene load_steps=18 format=3 uid="uid://clwvs0y18jwcn"]
+[gd_scene load_steps=19 format=3 uid="uid://clwvs0y18jwcn"]
 
 [ext_resource type="PackedScene" uid="uid://cbwgud76ewlii" path="res://data/player/character.tscn" id="1_fngtr"]
+[ext_resource type="Script" path="res://data/map/world.gd" id="1_si6ao"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_hxefe"]
 size = Vector3(17.4, 0.185, 35.9)
@@ -52,6 +53,7 @@ sky = SubResource("Sky_rl75e")
 tonemap_mode = 1
 
 [node name="Node3D" type="Node3D"]
+script = ExtResource("1_si6ao")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0231087, 0)
