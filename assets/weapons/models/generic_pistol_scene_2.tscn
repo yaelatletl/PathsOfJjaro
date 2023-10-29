@@ -1,6 +1,6 @@
 [gd_scene load_steps=25 format=3 uid="uid://w4jp3qlr7y8e"]
 
-[ext_resource type="Script" path="res://data/player/visual_toggle/FirstPersonMesh.gd" id="1"]
+[ext_resource type="Script" path="res://data/actors/player/visual_toggle/FirstPersonMesh.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://bve7oyjafib1b" path="res://assets/placeholders/textures/fire.png" id="2"]
 [ext_resource type="Material" path="res://assets/models/weapons/glock_17/Glove_D.material" id="3"]
 [ext_resource type="Material" path="res://assets/models/weapons/glock_17/Hand_D.material" id="4"]
@@ -10,6 +10,7 @@
 [ext_resource type="AudioStream" uid="uid://nne16k88x0a" path="res://assets/audio/sfx/weapons/glock_17/out.ogg" id="8"]
 [ext_resource type="AudioStream" uid="uid://cbc8qag73a8td" path="res://assets/audio/sfx/weapons/glock_17/draw.ogg" id="9"]
 [ext_resource type="Texture2D" uid="uid://bbselonh68eyx" path="res://assets/placeholders/textures/smoke.png" id="10"]
+
 
 [sub_resource type="Curve" id="20"]
 _data = [Vector2(0, 0.477273), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]

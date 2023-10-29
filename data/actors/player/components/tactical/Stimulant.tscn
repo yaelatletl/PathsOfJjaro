@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://data/actors/player/components/tactical/src/Stimulant.gd" id="1"]
+[ext_resource type="PackedScene" path="res://assets/ui/tacticals/Stim.tscn" id="2"]
+
+
+
+[node name="Stimulant" type="Node"]
+script = ExtResource( 1 )
+_component_name = "stimulant"
+ui_scene = ExtResource( 2 )

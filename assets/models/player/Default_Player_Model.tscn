@@ -2,40 +2,35 @@
 
 [ext_resource type="Script" path="res://addons/sade/ik_look_at.gd" id="1"]
 [ext_resource type="PackedScene" uid="uid://dx3jfvm3jfv2p" path="res://assets/models/player/New_default.gltf" id="2"]
-[ext_resource type="Script" path="res://data/player/visual_toggle/ThirdPersonMesh.gd" id="3"]
-[ext_resource type="Script" path="res://data/player/visual_toggle/ThirdPersonCharacter.gd" id="4"]
+[ext_resource type="Script" path="res://data/actors/player/visual_toggle/ThirdPersonCharacter.gd" id="2_hdvj8"]
+[ext_resource type="Script" path="res://data/actors/player/visual_toggle/ThirdPersonMesh.gd" id="3_jl7lf"]
 
 [node name="New_default" instance=ExtResource("2")]
-script = ExtResource("4")
+script = ExtResource("2_hdvj8")
 
-[node name="BaseBody003" parent="Base/Skeleton3D" index="0"]
-script = ExtResource("3")
+[node name="Base_Body_003" parent="Base/Skeleton3D" index="0"]
+script = ExtResource("3_jl7lf")
 
-[node name="BaseBody004" parent="Base/Skeleton3D" index="1"]
-script = ExtResource("3")
+[node name="Base_Body_004" parent="Base/Skeleton3D" index="1"]
+script = ExtResource("3_jl7lf")
 
-[node name="BaseBody006" parent="Base/Skeleton3D" index="2"]
-script = ExtResource("3")
+[node name="Base_Body_006" parent="Base/Skeleton3D" index="2"]
+script = ExtResource("3_jl7lf")
 
-[node name="Cube004" parent="Base/Skeleton3D" index="3"]
-layers = 4
-script = ExtResource("3")
+[node name="Cube_004" parent="Base/Skeleton3D" index="3"]
+script = ExtResource("3_jl7lf")
 
-[node name="Cube015" parent="Base/Skeleton3D" index="4"]
-layers = 4
-script = ExtResource("3")
+[node name="Cube_015" parent="Base/Skeleton3D" index="4"]
+script = ExtResource("3_jl7lf")
 
-[node name="Cube016" parent="Base/Skeleton3D" index="5"]
-layers = 4
-script = ExtResource("3")
+[node name="Cube_016" parent="Base/Skeleton3D" index="5"]
+script = ExtResource("3_jl7lf")
 
-[node name="Cube017" parent="Base/Skeleton3D" index="6"]
-layers = 4
-script = ExtResource("3")
+[node name="Cube_017" parent="Base/Skeleton3D" index="6"]
+script = ExtResource("3_jl7lf")
 
-[node name="Cube020" parent="Base/Skeleton3D" index="7"]
-layers = 4
-script = ExtResource("3")
+[node name="Cube_020" parent="Base/Skeleton3D" index="7"]
+script = ExtResource("3_jl7lf")
 
 [node name="ViewTarget" type="Marker3D" parent="." index="1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.46695, 1.91364)

@@ -8,7 +8,7 @@
 [ext_resource type="Script" path="res://data/scenes/scenario.gd" id="6"]
 [ext_resource type="PackedScene" uid="uid://bbjy6u80eyiv5" path="res://assets/models/player/Default_Player_Model.tscn" id="7"]
 [ext_resource type="PackedScene" uid="uid://mhiefwjp7v0c" path="res://data/prefabs/Door.tscn" id="8"]
-[ext_resource type="PackedScene" uid="uid://cbwgud76ewlii" path="res://data/player/character.tscn" id="9"]
+[ext_resource type="PackedScene" uid="uid://cbwgud76ewlii" path="res://data/actors/player/character.tscn" id="9"]
 [ext_resource type="PackedScene" path="res://assets/picakbles/weapons/Kriss.tscn" id="10"]
 [ext_resource type="Script" path="res://data/prefabs/ZipLine.gd" id="11"]
 [ext_resource type="PackedScene" path="res://addons/portals/scenes/PortalPair.tscn" id="12"]

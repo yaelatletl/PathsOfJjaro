@@ -1,9 +1,0 @@
-[gd_scene load_steps=3 format=2]
-
-[ext_resource path="res://data/player/components/tactical/shared/grapple_ball.tscn" type="PackedScene" id=1]
-[ext_resource path="res://data/player/components/tactical/src/TimeShift2.gd" type="Script" id=2]
-
-[node name="ShiftForward" type="Node"]
-script = ExtResource( 2 )
-camera_path = NodePath("../head/neck/camera")
-grapple_point = ExtResource( 1 )
