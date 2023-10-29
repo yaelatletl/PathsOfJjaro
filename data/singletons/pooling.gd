@@ -34,7 +34,7 @@ func add_projectile(projectile_type,position, direction, actor):
 	if found == null:
 		projectile_instance = projectiles[projectile_type].instantiate()
 		projectile_instance.set_as_top_level(true)
-		projectile_instance.connect("request_destroy",Callable(self,"_on_projectile_request_destroy").bind(projectile_instance))
+		projectile_instance.request_destroy.connect(_on_projectile_request_destroy.bind(projectile_instance))
 	else:
 		projectiles_waiting.erase(found)
 		projectile_instance = found
