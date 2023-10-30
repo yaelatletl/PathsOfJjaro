@@ -1,6 +1,6 @@
 [gd_resource type="Environment" load_steps=4 format=3 uid="uid://dn6sg74w0bg3d"]
 
-[ext_resource type="Texture2D" uid="uid://drd88b0ugw7ws" path="res://data/actors/player/TauCeti.hdr" id="1_mqasg"]
+[ext_resource type="Texture2D" uid="uid://drd88b0ugw7ws" path="res://assets/TauCeti.hdr" id="1_mqasg"]
 
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_c2y8u"]

@@ -1,6 +1,6 @@
 [gd_scene load_steps=19 format=3 uid="uid://clwvs0y18jwcn"]
 
-[ext_resource type="PackedScene" uid="uid://cbwgud76ewlii" path="res://data/actors/player/character.tscn" id="1_fngtr"]
+[ext_resource type="PackedScene" uid="uid://cbwgud76ewlii" path="res://data/actors/character.tscn" id="1_fngtr"]
 [ext_resource type="Script" path="res://data/map/world.gd" id="1_si6ao"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_hxefe"]

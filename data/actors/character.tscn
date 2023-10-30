@@ -1,0 +1,658 @@
+[gd_scene load_steps=52 format=3 uid="uid://cbwgud76ewlii"]
+
+[ext_resource type="Script" path="res://data/scripts/character/head.gd" id="1"]
+[ext_resource type="Script" path="res://data/scripts/character/player.gd" id="2"]
+[ext_resource type="Script" path="res://data/scripts/character/animation.gd" id="3"]
+[ext_resource type="Script" path="res://data/actors/shared/systems/input.gd" id="3_4yg5q"]
+[ext_resource type="Texture2D" uid="uid://djvpeq1ktwq5" path="res://assets/placeholders/textures/crosshair.png" id="13"]
+[ext_resource type="Script" path="res://data/scripts/weapon/weapon_manager.gd" id="16"]
+[ext_resource type="Script" path="res://data/scripts/character/footsteep.gd" id="20"]
+[ext_resource type="AudioStream" uid="uid://btge6i2u0pi35" path="res://assets/audio/sfx/character/footsteep/concrete/4.ogg" id="21"]
+[ext_resource type="AudioStream" uid="uid://bw7gjgvkary00" path="res://assets/audio/sfx/character/footsteep/concrete/3.ogg" id="22"]
+[ext_resource type="AudioStream" uid="uid://ckwwwt2qmpdud" path="res://assets/audio/sfx/character/footsteep/concrete/0.ogg" id="23"]
+[ext_resource type="AudioStream" uid="uid://coqkpmepdsbvl" path="res://assets/audio/sfx/character/footsteep/concrete/6.ogg" id="24"]
+[ext_resource type="AudioStream" uid="uid://c6nf3me2li8wb" path="res://assets/audio/sfx/character/footsteep/concrete/2.ogg" id="25"]
+[ext_resource type="AudioStream" uid="uid://t2xijw2cg0lt" path="res://assets/audio/sfx/character/footsteep/concrete/1.ogg" id="26"]
+[ext_resource type="AudioStream" uid="uid://dhx4a04bi68vr" path="res://assets/audio/sfx/character/footsteep/concrete/5.ogg" id="27"]
+[ext_resource type="Script" path="res://data/scripts/character/camera.gd" id="28"]
+[ext_resource type="AudioStream" uid="uid://baglh5rge5p7k" path="res://assets/audio/sfx/character/footsteep/grass/1.ogg" id="29"]
+[ext_resource type="Script" path="res://data/actors/shared/movement.gd" id="29_6hcxm"]
+[ext_resource type="AudioStream" uid="uid://bq3sx220e6c6t" path="res://assets/audio/sfx/character/footsteep/grass/3.ogg" id="30"]
+[ext_resource type="AudioStream" uid="uid://dpbvkglh38m6m" path="res://assets/audio/sfx/character/footsteep/grass/0.ogg" id="31"]
+[ext_resource type="AudioStream" uid="uid://cl5rhaun8jmy0" path="res://assets/audio/sfx/character/footsteep/grass/2.ogg" id="32"]
+[ext_resource type="AudioStream" uid="uid://dm25qgkq5khmu" path="res://assets/audio/sfx/character/footsteep/grass/4.ogg" id="33"]
+[ext_resource type="AudioStream" uid="uid://dug5u1ogaqum5" path="res://assets/audio/sfx/character/footsteep/grass/5.ogg" id="34"]
+[ext_resource type="Script" path="res://data/scripts/character/hud.gd" id="35"]
+[ext_resource type="Script" path="res://data/actors/shared/knockedcrawl.gd" id="35_kyl1c"]
+[ext_resource type="Script" path="res://data/actors/shared/systems/reload_abilities.gd" id="36_nb1ht"]
+[ext_resource type="Script" path="res://data/actors/shared/revive.gd" id="37_3rbpx"]
+[ext_resource type="Script" path="res://data/actors/shared/systems/interact.gd" id="38_bcjw3"]
+[ext_resource type="PackedScene" path="res://data/actors/player/components/passive/vault_over.tscn" id="48"]
+[ext_resource type="PackedScene" path="res://data/actors/player/components/passive/MovementJump.tscn" id="49"]
+[ext_resource type="PackedScene" path="res://data/actors/player/components/passive/JumpJetpack.tscn" id="50"]
+[ext_resource type="PackedScene" path="res://data/actors/player/components/passive/MovementExtraJump.tscn" id="51"]
+[ext_resource type="Script" path="res://data/UI/HUD/MessageBoard.gd" id="52"]
+[ext_resource type="Theme" path="res://data/UI/HUD/ui.theme" id="54"]
+[ext_resource type="Script" path="res://data/UI/HUD/InteractionBoard.gd" id="57"]
+[ext_resource type="Script" path="res://data/UI/Radar.gd" id="61"]
+[ext_resource type="Script" path="res://data/UI/counter.gd" id="63"]
+[ext_resource type="Script" path="res://data/UI/layout/CircularContainer.gd" id="65"]
+[ext_resource type="Script" path="res://data/actors/player/components/tactical/src/Impulse.gd" id="66"]
+[ext_resource type="PackedScene" uid="uid://bbjy6u80eyiv5" path="res://assets/models/player/Default_Player_Model.tscn" id="71"]
+
+[sub_resource type="SphereShape3D" id="73"]
+radius = 0.322255
+
+[sub_resource type="CapsuleShape3D" id="51"]
+resource_local_to_scene = true
+radius = 0.288786
+height = 1.82098
+
+[sub_resource type="Animation" id="52"]
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="53"]
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-5, 0, 0)]
+}
+
+[sub_resource type="Animation" id="54"]
+length = 1.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.6, 0.9, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, -0.01, 0), Vector3(0, 0, 0), Vector3(0, -0.01, 0), Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.6, 0.9, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(-2, -0.3, 0), Vector3(0, 0, 0), Vector3(-2, 0.3, 0), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="55"]
+length = 1.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.6, 0.9, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, -0.01, 0), Vector3(0, 0, 0), Vector3(0, -0.01, 0), Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.6, 0.9, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(-1, 0.5, 0), Vector3(0, 0, 0), Vector3(-1, -0.5, 0), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_olj6a"]
+_data = {
+"idle": SubResource("52"),
+"jump": SubResource("53"),
+"sprint": SubResource("54"),
+"walk": SubResource("55")
+}
+
+[sub_resource type="Animation" id="63"]
+resource_name = "FadeIn"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Text:rect_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(2, 2), Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Text:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="65"]
+resource_name = "FadeOut"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Text:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="64"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Text:rect_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(2, 2)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Text:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_f4tbb"]
+_data = {
+"FadeIn": SubResource("63"),
+"FadeOut": SubResource("65"),
+"RESET": SubResource("64")
+}
+
+[sub_resource type="CylinderShape3D" id="72"]
+height = 2.3586
+radius = 1.93094
+
+[node name="character" type="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.02065, 0)
+collision_mask = 5
+script = ExtResource("2")
+
+[node name="ThirdPersonModel" parent="." instance=ExtResource("71")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 3.92552e-09, -3.56543, 0.0449027)
+rotation_offset = 180.0
+sharp_rotation_angle = 35.0
+
+[node name="KBnM_Input" type="Node" parent="."]
+script = ExtResource("3_4yg5q")
+run_is_toggle = true
+_component_name = "input"
+
+[node name="weapons" type="Node3D" parent="."]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, -2.04244, -0.0764225)
+script = ExtResource("16")
+head_path = NodePath("../head")
+camera_path = NodePath("../head/neck/camera")
+
+[node name="audios" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4.02065, 0)
+
+[node name="footsteep" type="Node3D" parent="audios"]
+script = ExtResource("20")
+feet_path = NodePath("../../feet")
+character_path = NodePath("../..")
+movement_path = NodePath("../../Movement")
+
+[node name="metal" type="Node3D" parent="audios/footsteep" groups=["metal"]]
+
+[node name="grass" type="Node3D" parent="audios/footsteep" groups=["metal"]]
+
+[node name="0" type="AudioStreamPlayer3D" parent="audios/footsteep/grass"]
+stream = ExtResource("31")
+
+[node name="1" type="AudioStreamPlayer3D" parent="audios/footsteep/grass"]
+stream = ExtResource("29")
+
+[node name="2" type="AudioStreamPlayer3D" parent="audios/footsteep/grass"]
+stream = ExtResource("32")
+
+[node name="3" type="AudioStreamPlayer3D" parent="audios/footsteep/grass"]
+stream = ExtResource("30")
+
+[node name="4" type="AudioStreamPlayer3D" parent="audios/footsteep/grass"]
+stream = ExtResource("33")
+
+[node name="5" type="AudioStreamPlayer3D" parent="audios/footsteep/grass"]
+stream = ExtResource("34")
+
+[node name="concrete" type="Node3D" parent="audios/footsteep" groups=["default"]]
+
+[node name="0" type="AudioStreamPlayer3D" parent="audios/footsteep/concrete"]
+stream = ExtResource("23")
+
+[node name="1" type="AudioStreamPlayer3D" parent="audios/footsteep/concrete"]
+stream = ExtResource("26")
+
+[node name="2" type="AudioStreamPlayer3D" parent="audios/footsteep/concrete"]
+stream = ExtResource("25")
+
+[node name="3" type="AudioStreamPlayer3D" parent="audios/footsteep/concrete"]
+stream = ExtResource("22")
+
+[node name="4" type="AudioStreamPlayer3D" parent="audios/footsteep/concrete"]
+stream = ExtResource("21")
+
+[node name="5" type="AudioStreamPlayer3D" parent="audios/footsteep/concrete"]
+stream = ExtResource("27")
+
+[node name="6" type="AudioStreamPlayer3D" parent="audios/footsteep/concrete"]
+stream = ExtResource("24")
+
+[node name="minimal" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.11158, 0)
+shape = SubResource("73")
+
+[node name="body" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.71176, -3.41149e-08)
+shape = SubResource("51")
+
+[node name="head" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.04244, 0)
+target_position = Vector3(0, 0.3, 0)
+debug_shape_custom_color = Color(0.54902, 0.0117647, 0.603922, 0.509804)
+debug_shape_thickness = 5
+script = ExtResource("1")
+sensibility = 0.129
+
+[node name="neck" type="Node3D" parent="head"]
+transform = Transform3D(1, 0, 0, 0, 0.999999, 0, 0, 0, 0.999999, 0, 0, 0)
+
+[node name="camera" type="Camera3D" parent="head/neck"]
+cull_mask = 1048571
+doppler_tracking = 2
+current = true
+fov = 110.0
+near = 0.01
+far = 6500.0
+script = ExtResource("28")
+
+[node name="anim" type="AnimationPlayer" parent="head/neck"]
+libraries = {
+"": SubResource("AnimationLibrary_olj6a")
+}
+script = ExtResource("3")
+character_path = NodePath("../../..")
+camera_path = NodePath("../camera")
+movement_path = NodePath("../../../Movement")
+
+[node name="ViewTarget" type="Marker3D" parent="head/neck"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -20)
+
+[node name="feet" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.12863, 0)
+target_position = Vector3(0, -1.7, 0)
+debug_shape_custom_color = Color(1, 1, 0.14902, 0.345098)
+
+[node name="hud" type="CanvasLayer" parent="."]
+script = ExtResource("35")
+weapon_hud_ammo_path = NodePath("Layout/VerticalSections/Bottom/Weapons/Ammo/ammo")
+weapon_hud_clip_path = NodePath("Layout/VerticalSections/Bottom/Weapons/Ammo/bullets")
+weapon_hud_text_path = NodePath("Layout/VerticalSections/Bottom/Weapons/name")
+interact_board_path = NodePath("Layout/VerticalSections/Top/Right/InteractionBoard")
+crosshair_path = NodePath("Layout/VerticalSections/Mid/crosshair")
+_component_name = "HUD"
+
+[node name="Layout" type="Control" parent="hud"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = ExtResource("54")
+
+[node name="VerticalSections" type="VBoxContainer" parent="hud/Layout"]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="Top" type="HBoxContainer" parent="hud/Layout/VerticalSections"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="Radar" type="Container" parent="hud/Layout/VerticalSections/Top"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+script = ExtResource("65")
+spread_anlge = 30.0
+floaters_scale = 0.1
+
+[node name="Radar_meter" type="ColorRect" parent="hud/Layout/VerticalSections/Top/Radar"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+color = Color(1, 1, 1, 0)
+script = ExtResource("61")
+actor_path = NodePath("../../../../../..")
+background = Color(0.443137, 0.647059, 1, 0.611765)
+border = Color(0.439216, 0.439216, 0.439216, 0.819608)
+border_resolution = 50
+border_width = 7
+health_color = Color(0.705882, 0.0509804, 0.0509804, 1)
+shield_color = Color(0, 0.905882, 1, 1)
+
+[node name="Center" type="Control" parent="hud/Layout/VerticalSections/Top"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="Right" type="VBoxContainer" parent="hud/Layout/VerticalSections/Top"]
+layout_mode = 2
+
+[node name="Fill5" type="Control" parent="hud/Layout/VerticalSections/Top/Right"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="AspectRatioContainer" type="CenterContainer" parent="hud/Layout/VerticalSections/Top/Right"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Fill4" type="Control" parent="hud/Layout/VerticalSections/Top/Right/AspectRatioContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="InteractionBoard" type="CenterContainer" parent="hud/Layout/VerticalSections/Top/Right"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+script = ExtResource("57")
+
+[node name="Text" type="Label" parent="hud/Layout/VerticalSections/Top/Right/InteractionBoard"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+text = "Press E to pick up \"WAAAHOOO\""
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="hud/Layout/VerticalSections/Top/Right/InteractionBoard"]
+libraries = {
+"": SubResource("AnimationLibrary_f4tbb")
+}
+
+[node name="Mid" type="HBoxContainer" parent="hud/Layout/VerticalSections"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+alignment = 1
+
+[node name="MessageBoard" type="VBoxContainer" parent="hud/Layout/VerticalSections/Mid"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+alignment = 1
+script = ExtResource("52")
+
+[node name="Fill3" type="Control" parent="hud/Layout/VerticalSections/Mid"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="crosshair" type="TextureRect" parent="hud/Layout/VerticalSections/Mid"]
+modulate = Color(1, 1, 1, 0.392157)
+layout_mode = 2
+size_flags_vertical = 4
+mouse_filter = 2
+texture = ExtResource("13")
+stretch_mode = 1
+
+[node name="border" type="TextureRect" parent="hud/Layout/VerticalSections/Mid/crosshair"]
+modulate = Color(0, 0, 0, 1)
+layout_mode = 0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+size_flags_horizontal = 0
+size_flags_vertical = 4
+mouse_filter = 2
+texture = ExtResource("13")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="Fill4" type="Control" parent="hud/Layout/VerticalSections/Mid"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="Right" type="Control" parent="hud/Layout/VerticalSections/Mid"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="Bottom" type="HBoxContainer" parent="hud/Layout/VerticalSections"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="Fill3" type="Control" parent="hud/Layout/VerticalSections/Bottom"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="Fill4" type="Control" parent="hud/Layout/VerticalSections/Bottom"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="Weapons" type="VBoxContainer" parent="hud/Layout/VerticalSections/Bottom"]
+layout_mode = 2
+mouse_filter = 2
+alignment = 1
+
+[node name="name" type="Label" parent="hud/Layout/VerticalSections/Bottom/Weapons"]
+layout_mode = 2
+text = "AK 47"
+uppercase = true
+
+[node name="Ammo" type="HBoxContainer" parent="hud/Layout/VerticalSections/Bottom/Weapons"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="bullets" type="Label" parent="hud/Layout/VerticalSections/Bottom/Weapons/Ammo"]
+layout_mode = 2
+theme = ExtResource("54")
+text = "12"
+uppercase = true
+
+[node name="shadow" type="ColorRect" parent="hud/Layout/VerticalSections/Bottom/Weapons/Ammo"]
+self_modulate = Color(1, 1, 1, 0.588235)
+layout_mode = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+
+[node name="line" type="ColorRect" parent="hud/Layout/VerticalSections/Bottom/Weapons/Ammo/shadow"]
+layout_mode = 0
+mouse_filter = 2
+
+[node name="ammo" type="Label" parent="hud/Layout/VerticalSections/Bottom/Weapons/Ammo"]
+layout_mode = 2
+text = "999"
+uppercase = true
+
+[node name="Movement" type="Node" parent="."]
+script = ExtResource("29_6hcxm")
+n_speed = 6.0
+s_speed = 10.0
+c_speed = 4.0
+slide_on_crouch = true
+can_wallrun = true
+collision = NodePath("../body")
+feet_path = NodePath("../feet")
+_component_name = "movement_basic"
+
+[node name="vault_over_root" parent="." instance=ExtResource("48")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.41721, -0.0732268)
+
+[node name="MovementJump" parent="." instance=ExtResource("49")]
+jump_height = 10.0
+jumps_from_wall = true
+
+[node name="Impulse" type="Node" parent="."]
+script = ExtResource("66")
+impulse_strength = 15.0
+
+[node name="JumpJetpack" parent="." instance=ExtResource("50")]
+fuel_limit = 200.0
+enabled = false
+ui_container = NodePath("../hud/Layout/VerticalSections/Top/Radar")
+
+[node name="MovementExtraJump" parent="." instance=ExtResource("51")]
+jumps_before_floor = 1
+walls_add_jumps = true
+
+[node name="KnockedCrawl" type="Node" parent="."]
+script = ExtResource("35_kyl1c")
+n_speed = 4.0
+w_speed = 4.0
+can_move = true
+knocked_height = 0.16
+friction = 120.0
+disable_exeptions = ["input"]
+collision = NodePath("../body")
+_component_name = "knocked_down_crawl"
+
+[node name="ablities_reload" type="Node" parent="."]
+script = ExtResource("36_nb1ht")
+abilities = [NodePath("../JumpJetpack"), NodePath("../Impulse")]
+_component_name = "abilities_reload"
+
+[node name="revive" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.01657, 0)
+script = ExtResource("37_3rbpx")
+can_self_res = true
+enable_exeptions = ["knocked_down_crawl"]
+collision = NodePath("../body")
+_component_name = "revive_interaction"
+
+[node name="CollisionShape" type="CollisionShape3D" parent="revive"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.295273, 0)
+shape = SubResource("72")
+
+[node name="interactor" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.65958, 0)
+script = ExtResource("38_bcjw3")
+_component_name = "interactor"
+
+[node name="CollisionShape" type="CollisionShape3D" parent="interactor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.653707, 0)
+shape = SubResource("72")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="CanvasLayer/Control"]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/Control/CenterContainer"]
+visible = false
+layout_mode = 2
+text = "0.0"
+script = ExtResource("63")
+counter_node_path = NodePath("../../../../interactor")
+counter_signal_name = "time_left_changed"
+
+[node name="NavigationAgent" type="NavigationAgent3D" parent="."]

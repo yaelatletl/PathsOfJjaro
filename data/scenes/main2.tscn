@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://civf153nj7m6r"]
 
 [ext_resource type="Script" path="res://data/map/world.gd" id="1_2ndhr"]
-[ext_resource type="PackedScene" uid="uid://cbwgud76ewlii" path="res://data/actors/player/character.tscn" id="2_8cxl2"]
+[ext_resource type="PackedScene" uid="uid://cbwgud76ewlii" path="res://data/actors/character.tscn" id="2_8cxl2"]
 [ext_resource type="PackedScene" uid="uid://d4h6cqsn4yupm" path="res://test_scenario/Test Scene.tscn" id="2_pyrh3"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_whjdt"]
