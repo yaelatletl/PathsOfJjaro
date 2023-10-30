@@ -1,10 +1,11 @@
 [gd_scene load_steps=15 format=3 uid="uid://bbhcbstenbai5"]
 
 [ext_resource type="Script" path="res://data/scenes/scenario.gd" id="1_pl5xw"]
-[ext_resource type="PackedScene" uid="uid://0f8ogji6ms71" path="res://data/scenes/barrel.tscn" id="2_57rd5"]
-[ext_resource type="Texture2D" uid="uid://cvqmnkt5mapwu" path="res://data/textures/grid.png" id="3_fi6m4"]
-[ext_resource type="PackedScene" uid="uid://d4h6cqsn4yupm" path="res://test_scenario/Test Scene.tscn" id="4_mlh2b"]
+[ext_resource type="PackedScene" uid="uid://dybu6ytk8o4qd" path="res://data/scenes/barrel.tscn" id="2_57rd5"]
+[ext_resource type="Texture2D" path="res://data/textures/grid.png" id="3_fi6m4"]
+[ext_resource type="PackedScene" uid="uid://d4h6cqsn4yupm" path="res://assets/test_scenario/Test Scene.tscn" id="4_mlh2b"]
 [ext_resource type="Script" path="res://data/prefabs/ZipLine.gd" id="5_7u3l6"]
+
 
 [sub_resource type="StandardMaterial3D" id="6"]
 albedo_texture = ExtResource("3_fi6m4")
