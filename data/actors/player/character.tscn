@@ -3,6 +3,7 @@
 [ext_resource type="Script" path="res://data/scripts/character/head.gd" id="1"]
 [ext_resource type="Script" path="res://data/scripts/character/player.gd" id="2"]
 [ext_resource type="Script" path="res://data/scripts/character/animation.gd" id="3"]
+[ext_resource type="Script" path="res://data/actors/player/components/systems/input.gd" id="3_xjijo"]
 [ext_resource type="Texture2D" uid="uid://djvpeq1ktwq5" path="res://assets/placeholders/textures/crosshair.png" id="13"]
 [ext_resource type="Script" path="res://data/scripts/weapon/weapon_manager.gd" id="16"]
 [ext_resource type="Script" path="res://data/scripts/character/footsteep.gd" id="20"]
@@ -15,14 +16,16 @@
 [ext_resource type="AudioStream" uid="uid://dhx4a04bi68vr" path="res://assets/audio/sfx/character/footsteep/concrete/5.ogg" id="27"]
 [ext_resource type="Script" path="res://data/scripts/character/camera.gd" id="28"]
 [ext_resource type="AudioStream" uid="uid://baglh5rge5p7k" path="res://assets/audio/sfx/character/footsteep/grass/1.ogg" id="29"]
+[ext_resource type="Script" path="res://data/actors/shared/movement.gd" id="29_6hcxm"]
 [ext_resource type="AudioStream" uid="uid://bq3sx220e6c6t" path="res://assets/audio/sfx/character/footsteep/grass/3.ogg" id="30"]
 [ext_resource type="AudioStream" uid="uid://dpbvkglh38m6m" path="res://assets/audio/sfx/character/footsteep/grass/0.ogg" id="31"]
 [ext_resource type="AudioStream" uid="uid://cl5rhaun8jmy0" path="res://assets/audio/sfx/character/footsteep/grass/2.ogg" id="32"]
 [ext_resource type="AudioStream" uid="uid://dm25qgkq5khmu" path="res://assets/audio/sfx/character/footsteep/grass/4.ogg" id="33"]
 [ext_resource type="AudioStream" uid="uid://dug5u1ogaqum5" path="res://assets/audio/sfx/character/footsteep/grass/5.ogg" id="34"]
 [ext_resource type="Script" path="res://data/scripts/character/hud.gd" id="35"]
-[ext_resource type="Script" path="res://data/actors/player/components/movement.gd" id="46"]
-[ext_resource type="Script" path="res://data/actors/player/components/input.gd" id="47"]
+[ext_resource type="Script" path="res://data/actors/shared/knockedcrawl.gd" id="35_kyl1c"]
+[ext_resource type="Script" path="res://data/actors/player/components/systems/reload_abilities.gd" id="36_jj73k"]
+[ext_resource type="Script" path="res://data/actors/player/components/systems/interact.gd" id="38_nro1o"]
 [ext_resource type="PackedScene" path="res://data/actors/player/components/passive/vault_over.tscn" id="48"]
 [ext_resource type="PackedScene" path="res://data/actors/player/components/passive/MovementJump.tscn" id="49"]
 [ext_resource type="PackedScene" path="res://data/actors/player/components/passive/JumpJetpack.tscn" id="50"]
@@ -31,15 +34,12 @@
 [ext_resource type="PackedScene" uid="uid://cq3tvjwaw1pkh" path="res://data/actors/player/components/network/ClientSidePrediction.tscn" id="53"]
 [ext_resource type="Theme" path="res://data/UI/HUD/ui.theme" id="54"]
 [ext_resource type="Script" path="res://data/UI/HUD/InteractionBoard.gd" id="57"]
-[ext_resource type="Script" path="res://data/actors/player/components/knockedcrawl.gd" id="59"]
 [ext_resource type="Script" path="res://data/actors/player/revive.gd" id="60"]
 [ext_resource type="Script" path="res://data/UI/Radar.gd" id="61"]
-[ext_resource type="Script" path="res://data/actors/player/components/interact.gd" id="62"]
 [ext_resource type="Script" path="res://data/UI/counter.gd" id="63"]
-[ext_resource type="Script" path="res://data/actors/player/components/reload_abilities.gd" id="64"]
 [ext_resource type="Script" path="res://data/UI/layout/CircularContainer.gd" id="65"]
 [ext_resource type="Script" path="res://data/actors/player/components/tactical/src/Impulse.gd" id="66"]
-[ext_resource type="PackedScene" uid="uid://bbjy6u80eyiv5" path="res://assets/models/actors/player/Default_Player_Model.tscn" id="71"]
+[ext_resource type="PackedScene" uid="uid://bbjy6u80eyiv5" path="res://assets/models/player/Default_Player_Model.tscn" id="71"]
 
 [sub_resource type="SphereShape3D" id="73"]
 radius = 0.322255
@@ -263,7 +263,7 @@ rotation_offset = 180.0
 sharp_rotation_angle = 35.0
 
 [node name="KBnM_Input" type="Node" parent="."]
-script = ExtResource("47")
+script = ExtResource("3_xjijo")
 run_is_toggle = true
 _component_name = "input"
 
@@ -580,7 +580,7 @@ text = "999"
 uppercase = true
 
 [node name="Movement" type="Node" parent="."]
-script = ExtResource("46")
+script = ExtResource("29_6hcxm")
 n_speed = 6.0
 s_speed = 10.0
 c_speed = 4.0
@@ -611,7 +611,7 @@ jumps_before_floor = 1
 walls_add_jumps = true
 
 [node name="KnockedCrawl" type="Node" parent="."]
-script = ExtResource("59")
+script = ExtResource("35_kyl1c")
 n_speed = 4.0
 w_speed = 4.0
 can_move = true
@@ -622,7 +622,7 @@ collision = NodePath("../body")
 _component_name = "knocked_down_crawl"
 
 [node name="ablities_reload" type="Node" parent="."]
-script = ExtResource("64")
+script = ExtResource("36_jj73k")
 abilities = [NodePath("../JumpJetpack"), NodePath("../Impulse")]
 _component_name = "abilities_reload"
 
@@ -640,7 +640,7 @@ shape = SubResource("72")
 
 [node name="interactor" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.65958, 0)
-script = ExtResource("62")
+script = ExtResource("38_nro1o")
 _component_name = "interactor"
 
 [node name="CollisionShape" type="CollisionShape3D" parent="interactor"]
