@@ -1,20 +1,21 @@
 [gd_scene load_steps=52 format=3 uid="uid://cbwgud76ewlii"]
 
-[ext_resource type="Script" path="res://data/scripts/character/head.gd" id="1"]
-[ext_resource type="Script" path="res://data/scripts/character/player.gd" id="2"]
-[ext_resource type="Script" path="res://data/scripts/character/animation.gd" id="3"]
+[ext_resource type="Script" path="res://data/actors/shared/player.gd" id="1_a7u56"]
 [ext_resource type="Script" path="res://data/actors/shared/systems/input.gd" id="3_4yg5q"]
+[ext_resource type="Script" path="res://data/actors/shared/footsteep.gd" id="5_r551c"]
 [ext_resource type="Texture2D" uid="uid://djvpeq1ktwq5" path="res://assets/placeholders/textures/crosshair.png" id="13"]
 [ext_resource type="Script" path="res://data/scripts/weapon/weapon_manager.gd" id="16"]
-[ext_resource type="Script" path="res://data/scripts/character/footsteep.gd" id="20"]
+[ext_resource type="Script" path="res://data/actors/shared/head.gd" id="19_aifrm"]
+[ext_resource type="Script" path="res://data/actors/shared/camera.gd" id="20_pcddq"]
 [ext_resource type="AudioStream" uid="uid://btge6i2u0pi35" path="res://assets/audio/sfx/character/footsteep/concrete/4.ogg" id="21"]
+[ext_resource type="Script" path="res://data/actors/shared/animation.gd" id="21_kp05l"]
 [ext_resource type="AudioStream" uid="uid://bw7gjgvkary00" path="res://assets/audio/sfx/character/footsteep/concrete/3.ogg" id="22"]
+[ext_resource type="Script" path="res://data/actors/shared/hud.gd" id="22_arhkv"]
 [ext_resource type="AudioStream" uid="uid://ckwwwt2qmpdud" path="res://assets/audio/sfx/character/footsteep/concrete/0.ogg" id="23"]
 [ext_resource type="AudioStream" uid="uid://coqkpmepdsbvl" path="res://assets/audio/sfx/character/footsteep/concrete/6.ogg" id="24"]
 [ext_resource type="AudioStream" uid="uid://c6nf3me2li8wb" path="res://assets/audio/sfx/character/footsteep/concrete/2.ogg" id="25"]
 [ext_resource type="AudioStream" uid="uid://t2xijw2cg0lt" path="res://assets/audio/sfx/character/footsteep/concrete/1.ogg" id="26"]
 [ext_resource type="AudioStream" uid="uid://dhx4a04bi68vr" path="res://assets/audio/sfx/character/footsteep/concrete/5.ogg" id="27"]
-[ext_resource type="Script" path="res://data/scripts/character/camera.gd" id="28"]
 [ext_resource type="AudioStream" uid="uid://baglh5rge5p7k" path="res://assets/audio/sfx/character/footsteep/grass/1.ogg" id="29"]
 [ext_resource type="Script" path="res://data/actors/shared/movement.gd" id="29_6hcxm"]
 [ext_resource type="AudioStream" uid="uid://bq3sx220e6c6t" path="res://assets/audio/sfx/character/footsteep/grass/3.ogg" id="30"]
@@ -22,7 +23,6 @@
 [ext_resource type="AudioStream" uid="uid://cl5rhaun8jmy0" path="res://assets/audio/sfx/character/footsteep/grass/2.ogg" id="32"]
 [ext_resource type="AudioStream" uid="uid://dm25qgkq5khmu" path="res://assets/audio/sfx/character/footsteep/grass/4.ogg" id="33"]
 [ext_resource type="AudioStream" uid="uid://dug5u1ogaqum5" path="res://assets/audio/sfx/character/footsteep/grass/5.ogg" id="34"]
-[ext_resource type="Script" path="res://data/scripts/character/hud.gd" id="35"]
 [ext_resource type="Script" path="res://data/actors/shared/knockedcrawl.gd" id="35_kyl1c"]
 [ext_resource type="Script" path="res://data/actors/shared/systems/reload_abilities.gd" id="36_nb1ht"]
 [ext_resource type="Script" path="res://data/actors/shared/revive.gd" id="37_3rbpx"]
@@ -236,7 +236,7 @@ radius = 1.93094
 [node name="character" type="CharacterBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.02065, 0)
 collision_mask = 5
-script = ExtResource("2")
+script = ExtResource("1_a7u56")
 
 [node name="ThirdPersonModel" parent="." instance=ExtResource("71")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 3.92552e-09, -3.56543, 0.0449027)
@@ -258,7 +258,7 @@ camera_path = NodePath("../head/neck/camera")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4.02065, 0)
 
 [node name="footsteep" type="Node3D" parent="audios"]
-script = ExtResource("20")
+script = ExtResource("5_r551c")
 feet_path = NodePath("../../feet")
 character_path = NodePath("../..")
 movement_path = NodePath("../../Movement")
@@ -321,7 +321,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.04244, 0)
 target_position = Vector3(0, 0.3, 0)
 debug_shape_custom_color = Color(0.54902, 0.0117647, 0.603922, 0.509804)
 debug_shape_thickness = 5
-script = ExtResource("1")
+script = ExtResource("19_aifrm")
 sensibility = 0.129
 
 [node name="neck" type="Node3D" parent="head"]
@@ -334,13 +334,13 @@ current = true
 fov = 110.0
 near = 0.01
 far = 6500.0
-script = ExtResource("28")
+script = ExtResource("20_pcddq")
 
 [node name="anim" type="AnimationPlayer" parent="head/neck"]
 libraries = {
 "": SubResource("AnimationLibrary_olj6a")
 }
-script = ExtResource("3")
+script = ExtResource("21_kp05l")
 character_path = NodePath("../../..")
 camera_path = NodePath("../camera")
 movement_path = NodePath("../../../Movement")
@@ -354,7 +354,7 @@ target_position = Vector3(0, -1.7, 0)
 debug_shape_custom_color = Color(1, 1, 0.14902, 0.345098)
 
 [node name="hud" type="CanvasLayer" parent="."]
-script = ExtResource("35")
+script = ExtResource("22_arhkv")
 weapon_hud_ammo_path = NodePath("Layout/VerticalSections/Bottom/Weapons/Ammo/ammo")
 weapon_hud_clip_path = NodePath("Layout/VerticalSections/Bottom/Weapons/Ammo/bullets")
 weapon_hud_text_path = NodePath("Layout/VerticalSections/Bottom/Weapons/name")
