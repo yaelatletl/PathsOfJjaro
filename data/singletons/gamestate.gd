@@ -3,7 +3,7 @@ extends Node
 const SERVER_PORT = 1337
 const MAX_PLAYERS = 8
 var SERVER_IP = "localhost"
-var player_template = load("res://data/player/character.tscn")
+var player_template = load("res://data/actors/character.tscn")
 signal players_changed()
 #First, let's try to define what do we need our gamestate to do
 #we know that we must manage our incoming connections, check them for all players 
