@@ -36,7 +36,7 @@ _subresources={
 },
 "VacSuit.001": {
 "use_external/enabled": true,
-"use_external/path": "res://assets/models/player/VacSuit.001.tres"
+"use_external/path": "res://assets/models/player/VacSuit.tres"
 }
 }
 }
