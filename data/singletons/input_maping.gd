@@ -4,8 +4,8 @@ const CONFIG_FILE = "user://inputmap.cfg"
 var INPUT_ACTIONS = []
 
 func _ready():
-	load_config()
-
+	#load_config()
+	pass
 func load_config():
 	for actions in InputMap.get_actions():
 		INPUT_ACTIONS.append(actions)

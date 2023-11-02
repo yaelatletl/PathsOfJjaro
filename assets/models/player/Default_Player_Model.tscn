@@ -9,6 +9,7 @@
 script = ExtResource("2_hdvj8")
 
 [node name="Base_Body_003" parent="Base/Skeleton3D" index="0"]
+<<<<<<< HEAD
 script = ExtResource("3_jl7lf")
 
 [node name="Base_Body_004" parent="Base/Skeleton3D" index="1"]
@@ -31,6 +32,30 @@ script = ExtResource("3_jl7lf")
 
 [node name="Cube_020" parent="Base/Skeleton3D" index="7"]
 script = ExtResource("3_jl7lf")
+=======
+script = ExtResource("3")
+
+[node name="Base_Body_004" parent="Base/Skeleton3D" index="1"]
+script = ExtResource("3")
+
+[node name="Base_Body_006" parent="Base/Skeleton3D" index="2"]
+script = ExtResource("3")
+
+[node name="Cube_004" parent="Base/Skeleton3D" index="3"]
+script = ExtResource("3")
+
+[node name="Cube_015" parent="Base/Skeleton3D" index="4"]
+script = ExtResource("3")
+
+[node name="Cube_016" parent="Base/Skeleton3D" index="5"]
+script = ExtResource("3")
+
+[node name="Cube_017" parent="Base/Skeleton3D" index="6"]
+script = ExtResource("3")
+
+[node name="Cube_020" parent="Base/Skeleton3D" index="7"]
+script = ExtResource("3")
+>>>>>>> main
 
 [node name="ViewTarget" type="Marker3D" parent="." index="1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.46695, 1.91364)
