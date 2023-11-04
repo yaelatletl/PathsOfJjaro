@@ -1,0 +1,615 @@
+[gd_scene load_steps=46 format=3 uid="uid://c87vctm3qaah6"]
+
+[ext_resource type="Script" path="res://data/actors/shared/player.gd" id="1_vav12"]
+[ext_resource type="PackedScene" uid="uid://bbjy6u80eyiv5" path="res://assets/models/player/Default_Player_Model.tscn" id="2_kj7mw"]
+[ext_resource type="Script" path="res://data/actors/shared/systems/input.gd" id="3_mg3cv"]
+[ext_resource type="Script" path="res://data/scripts/weapon/weapon_manager.gd" id="4_nwnvi"]
+[ext_resource type="Script" path="res://data/actors/shared/footsteep.gd" id="5_48ih6"]
+[ext_resource type="AudioStream" uid="uid://dpbvkglh38m6m" path="res://assets/audio/sfx/character/footsteep/grass/0.ogg" id="6_8dnqi"]
+[ext_resource type="AudioStream" uid="uid://baglh5rge5p7k" path="res://assets/audio/sfx/character/footsteep/grass/1.ogg" id="7_fwvm0"]
+[ext_resource type="AudioStream" uid="uid://cl5rhaun8jmy0" path="res://assets/audio/sfx/character/footsteep/grass/2.ogg" id="8_mdxgt"]
+[ext_resource type="AudioStream" uid="uid://bq3sx220e6c6t" path="res://assets/audio/sfx/character/footsteep/grass/3.ogg" id="9_soaaa"]
+[ext_resource type="AudioStream" uid="uid://dm25qgkq5khmu" path="res://assets/audio/sfx/character/footsteep/grass/4.ogg" id="10_1dghr"]
+[ext_resource type="AudioStream" uid="uid://dug5u1ogaqum5" path="res://assets/audio/sfx/character/footsteep/grass/5.ogg" id="11_vv60i"]
+[ext_resource type="AudioStream" uid="uid://ckwwwt2qmpdud" path="res://assets/audio/sfx/character/footsteep/concrete/0.ogg" id="12_w3lxa"]
+[ext_resource type="AudioStream" uid="uid://t2xijw2cg0lt" path="res://assets/audio/sfx/character/footsteep/concrete/1.ogg" id="13_1e4f2"]
+[ext_resource type="AudioStream" uid="uid://c6nf3me2li8wb" path="res://assets/audio/sfx/character/footsteep/concrete/2.ogg" id="14_tlbes"]
+[ext_resource type="AudioStream" uid="uid://bw7gjgvkary00" path="res://assets/audio/sfx/character/footsteep/concrete/3.ogg" id="15_27ax7"]
+[ext_resource type="AudioStream" uid="uid://btge6i2u0pi35" path="res://assets/audio/sfx/character/footsteep/concrete/4.ogg" id="16_3hptc"]
+[ext_resource type="AudioStream" uid="uid://dhx4a04bi68vr" path="res://assets/audio/sfx/character/footsteep/concrete/5.ogg" id="17_b1s6g"]
+[ext_resource type="AudioStream" uid="uid://coqkpmepdsbvl" path="res://assets/audio/sfx/character/footsteep/concrete/6.ogg" id="18_gpxxe"]
+[ext_resource type="Script" path="res://data/actors/shared/head.gd" id="19_3loum"]
+[ext_resource type="Script" path="res://data/actors/shared/camera.gd" id="20_icotg"]
+[ext_resource type="Script" path="res://data/actors/shared/animation.gd" id="21_obeh1"]
+[ext_resource type="Script" path="res://data/actors/shared/hud.gd" id="22_32ca1"]
+[ext_resource type="Theme" path="res://data/UI/HUD/ui.theme" id="23_qcolu"]
+[ext_resource type="Script" path="res://data/UI/layout/CircularContainer.gd" id="24_ood7w"]
+[ext_resource type="Script" path="res://data/UI/Radar.gd" id="25_255ii"]
+[ext_resource type="Script" path="res://data/UI/HUD/InteractionBoard.gd" id="26_vk1w7"]
+[ext_resource type="Script" path="res://data/UI/HUD/MessageBoard.gd" id="27_1yce8"]
+[ext_resource type="Texture2D" uid="uid://djvpeq1ktwq5" path="res://assets/placeholders/textures/crosshair.png" id="28_0o8v4"]
+[ext_resource type="Script" path="res://data/actors/shared/m1_movement.gd" id="29_e5ae1"]
+[ext_resource type="PackedScene" path="res://data/actors/player/components/passive/MovementJump.tscn" id="30_d2ndp"]
+[ext_resource type="Script" path="res://data/actors/shared/systems/reload_abilities.gd" id="31_57jek"]
+[ext_resource type="Script" path="res://data/actors/shared/systems/interact.gd" id="32_rnu1t"]
+[ext_resource type="Script" path="res://data/UI/counter.gd" id="33_qi7s5"]
+
+[sub_resource type="SphereShape3D" id="73"]
+radius = 0.322255
+
+[sub_resource type="CapsuleShape3D" id="51"]
+resource_local_to_scene = true
+radius = 0.288786
+height = 1.82098
+
+[sub_resource type="Animation" id="52"]
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="53"]
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-5, 0, 0)]
+}
+
+[sub_resource type="Animation" id="54"]
+length = 1.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.6, 0.9, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, -0.01, 0), Vector3(0, 0, 0), Vector3(0, -0.01, 0), Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.6, 0.9, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(-2, -0.3, 0), Vector3(0, 0, 0), Vector3(-2, 0.3, 0), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="55"]
+length = 1.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.6, 0.9, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, -0.01, 0), Vector3(0, 0, 0), Vector3(0, -0.01, 0), Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.6, 0.9, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(-1, 0.5, 0), Vector3(0, 0, 0), Vector3(-1, -0.5, 0), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_olj6a"]
+_data = {
+"idle": SubResource("52"),
+"jump": SubResource("53"),
+"sprint": SubResource("54"),
+"walk": SubResource("55")
+}
+
+[sub_resource type="Animation" id="63"]
+resource_name = "FadeIn"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Text:rect_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(2, 2), Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Text:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="65"]
+resource_name = "FadeOut"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Text:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="64"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Text:rect_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(2, 2)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Text:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_f4tbb"]
+_data = {
+"FadeIn": SubResource("63"),
+"FadeOut": SubResource("65"),
+"RESET": SubResource("64")
+}
+
+[sub_resource type="CylinderShape3D" id="72"]
+height = 2.3586
+radius = 1.93094
+
+[node name="character" type="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.02065, 0)
+collision_mask = 5
+script = ExtResource("1_vav12")
+
+[node name="ThirdPersonModel" parent="." instance=ExtResource("2_kj7mw")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 3.92552e-09, -3.56543, 0.0449027)
+rotation_offset = 180.0
+sharp_rotation_angle = 35.0
+
+[node name="KBnM_Input" type="Node" parent="."]
+script = ExtResource("3_mg3cv")
+run_is_toggle = true
+_component_name = "input"
+
+[node name="weapons" type="Node3D" parent="."]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, -2.04244, -0.0764225)
+script = ExtResource("4_nwnvi")
+head_path = NodePath("../head")
+camera_path = NodePath("../head/neck/camera")
+
+[node name="audios" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4.02065, 0)
+
+[node name="footsteep" type="Node3D" parent="audios"]
+script = ExtResource("5_48ih6")
+feet_path = NodePath("../../feet")
+character_path = NodePath("../..")
+movement_path = NodePath("../../Movement")
+
+[node name="metal" type="Node3D" parent="audios/footsteep" groups=["metal"]]
+
+[node name="grass" type="Node3D" parent="audios/footsteep" groups=["metal"]]
+
+[node name="0" type="AudioStreamPlayer3D" parent="audios/footsteep/grass"]
+stream = ExtResource("6_8dnqi")
+
+[node name="1" type="AudioStreamPlayer3D" parent="audios/footsteep/grass"]
+stream = ExtResource("7_fwvm0")
+
+[node name="2" type="AudioStreamPlayer3D" parent="audios/footsteep/grass"]
+stream = ExtResource("8_mdxgt")
+
+[node name="3" type="AudioStreamPlayer3D" parent="audios/footsteep/grass"]
+stream = ExtResource("9_soaaa")
+
+[node name="4" type="AudioStreamPlayer3D" parent="audios/footsteep/grass"]
+stream = ExtResource("10_1dghr")
+
+[node name="5" type="AudioStreamPlayer3D" parent="audios/footsteep/grass"]
+stream = ExtResource("11_vv60i")
+
+[node name="concrete" type="Node3D" parent="audios/footsteep" groups=["default"]]
+
+[node name="0" type="AudioStreamPlayer3D" parent="audios/footsteep/concrete"]
+stream = ExtResource("12_w3lxa")
+
+[node name="1" type="AudioStreamPlayer3D" parent="audios/footsteep/concrete"]
+stream = ExtResource("13_1e4f2")
+
+[node name="2" type="AudioStreamPlayer3D" parent="audios/footsteep/concrete"]
+stream = ExtResource("14_tlbes")
+
+[node name="3" type="AudioStreamPlayer3D" parent="audios/footsteep/concrete"]
+stream = ExtResource("15_27ax7")
+
+[node name="4" type="AudioStreamPlayer3D" parent="audios/footsteep/concrete"]
+stream = ExtResource("16_3hptc")
+
+[node name="5" type="AudioStreamPlayer3D" parent="audios/footsteep/concrete"]
+stream = ExtResource("17_b1s6g")
+
+[node name="6" type="AudioStreamPlayer3D" parent="audios/footsteep/concrete"]
+stream = ExtResource("18_gpxxe")
+
+[node name="minimal" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.11158, 0)
+shape = SubResource("73")
+
+[node name="body" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.71176, -3.41149e-08)
+shape = SubResource("51")
+
+[node name="head" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.04244, 0)
+target_position = Vector3(0, 0.3, 0)
+debug_shape_custom_color = Color(0.54902, 0.0117647, 0.603922, 0.509804)
+debug_shape_thickness = 5
+script = ExtResource("19_3loum")
+sensibility = 0.129
+
+[node name="neck" type="Node3D" parent="head"]
+transform = Transform3D(1, 0, 0, 0, 0.999999, 0, 0, 0, 0.999999, 0, 0, 0)
+
+[node name="camera" type="Camera3D" parent="head/neck"]
+cull_mask = 1048571
+doppler_tracking = 2
+current = true
+fov = 110.0
+near = 0.01
+far = 6500.0
+script = ExtResource("20_icotg")
+
+[node name="anim" type="AnimationPlayer" parent="head/neck"]
+libraries = {
+"": SubResource("AnimationLibrary_olj6a")
+}
+script = ExtResource("21_obeh1")
+character_path = NodePath("../../..")
+camera_path = NodePath("../camera")
+movement_path = NodePath("../../../Movement")
+
+[node name="ViewTarget" type="Marker3D" parent="head/neck"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -20)
+
+[node name="feet" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.12863, 0)
+target_position = Vector3(0, -1.7, 0)
+debug_shape_custom_color = Color(1, 1, 0.14902, 0.345098)
+
+[node name="hud" type="CanvasLayer" parent="."]
+script = ExtResource("22_32ca1")
+weapon_hud_ammo_path = NodePath("Layout/VerticalSections/Bottom/Weapons/Ammo/ammo")
+weapon_hud_clip_path = NodePath("Layout/VerticalSections/Bottom/Weapons/Ammo/bullets")
+weapon_hud_text_path = NodePath("Layout/VerticalSections/Bottom/Weapons/name")
+interact_board_path = NodePath("Layout/VerticalSections/Top/Right/InteractionBoard")
+crosshair_path = NodePath("Layout/VerticalSections/Mid/crosshair")
+_component_name = "HUD"
+
+[node name="Layout" type="Control" parent="hud"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = ExtResource("23_qcolu")
+
+[node name="VerticalSections" type="VBoxContainer" parent="hud/Layout"]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="Top" type="HBoxContainer" parent="hud/Layout/VerticalSections"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="Radar" type="Container" parent="hud/Layout/VerticalSections/Top"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+script = ExtResource("24_ood7w")
+spread_anlge = 30.0
+floaters_scale = 0.1
+
+[node name="Radar_meter" type="ColorRect" parent="hud/Layout/VerticalSections/Top/Radar"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+color = Color(1, 1, 1, 0)
+script = ExtResource("25_255ii")
+actor_path = NodePath("../../../../../..")
+background = Color(0.443137, 0.647059, 1, 0.611765)
+border = Color(0.439216, 0.439216, 0.439216, 0.819608)
+border_resolution = 50
+border_width = 7
+health_color = Color(0.705882, 0.0509804, 0.0509804, 1)
+shield_color = Color(0, 0.905882, 1, 1)
+
+[node name="Center" type="Control" parent="hud/Layout/VerticalSections/Top"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="Right" type="VBoxContainer" parent="hud/Layout/VerticalSections/Top"]
+layout_mode = 2
+
+[node name="Fill5" type="Control" parent="hud/Layout/VerticalSections/Top/Right"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="AspectRatioContainer" type="CenterContainer" parent="hud/Layout/VerticalSections/Top/Right"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Fill4" type="Control" parent="hud/Layout/VerticalSections/Top/Right/AspectRatioContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="InteractionBoard" type="CenterContainer" parent="hud/Layout/VerticalSections/Top/Right"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+script = ExtResource("26_vk1w7")
+
+[node name="Text" type="Label" parent="hud/Layout/VerticalSections/Top/Right/InteractionBoard"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+text = "Press E to pick up \"WAAAHOOO\""
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="hud/Layout/VerticalSections/Top/Right/InteractionBoard"]
+libraries = {
+"": SubResource("AnimationLibrary_f4tbb")
+}
+
+[node name="Mid" type="HBoxContainer" parent="hud/Layout/VerticalSections"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+alignment = 1
+
+[node name="MessageBoard" type="VBoxContainer" parent="hud/Layout/VerticalSections/Mid"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+alignment = 1
+script = ExtResource("27_1yce8")
+
+[node name="Fill3" type="Control" parent="hud/Layout/VerticalSections/Mid"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="crosshair" type="TextureRect" parent="hud/Layout/VerticalSections/Mid"]
+modulate = Color(1, 1, 1, 0.392157)
+layout_mode = 2
+size_flags_vertical = 4
+mouse_filter = 2
+texture = ExtResource("28_0o8v4")
+stretch_mode = 1
+
+[node name="border" type="TextureRect" parent="hud/Layout/VerticalSections/Mid/crosshair"]
+modulate = Color(0, 0, 0, 1)
+layout_mode = 0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+size_flags_horizontal = 0
+size_flags_vertical = 4
+mouse_filter = 2
+texture = ExtResource("28_0o8v4")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="Fill4" type="Control" parent="hud/Layout/VerticalSections/Mid"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="Right" type="Control" parent="hud/Layout/VerticalSections/Mid"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="Bottom" type="HBoxContainer" parent="hud/Layout/VerticalSections"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="Fill3" type="Control" parent="hud/Layout/VerticalSections/Bottom"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="Fill4" type="Control" parent="hud/Layout/VerticalSections/Bottom"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="Weapons" type="VBoxContainer" parent="hud/Layout/VerticalSections/Bottom"]
+layout_mode = 2
+mouse_filter = 2
+alignment = 1
+
+[node name="name" type="Label" parent="hud/Layout/VerticalSections/Bottom/Weapons"]
+layout_mode = 2
+text = "AK 47"
+uppercase = true
+
+[node name="Ammo" type="HBoxContainer" parent="hud/Layout/VerticalSections/Bottom/Weapons"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="bullets" type="Label" parent="hud/Layout/VerticalSections/Bottom/Weapons/Ammo"]
+layout_mode = 2
+theme = ExtResource("23_qcolu")
+text = "12"
+uppercase = true
+
+[node name="shadow" type="ColorRect" parent="hud/Layout/VerticalSections/Bottom/Weapons/Ammo"]
+self_modulate = Color(1, 1, 1, 0.588235)
+layout_mode = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+
+[node name="line" type="ColorRect" parent="hud/Layout/VerticalSections/Bottom/Weapons/Ammo/shadow"]
+layout_mode = 0
+mouse_filter = 2
+
+[node name="ammo" type="Label" parent="hud/Layout/VerticalSections/Bottom/Weapons/Ammo"]
+layout_mode = 2
+text = "999"
+uppercase = true
+
+[node name="Movement" type="Node" parent="."]
+script = ExtResource("29_e5ae1")
+n_speed = 2.0
+s_speed = 4.0
+w_speed = 4.0
+c_speed = 1.0
+slide_on_crouch = true
+can_wallrun = true
+gravity = 9.8
+step_treshold = 0.5
+collision = NodePath("../body")
+feet_path = NodePath("../feet")
+_component_name = "movement_basic"
+
+[node name="MovementJump" parent="." instance=ExtResource("30_d2ndp")]
+jump_height = 10.0
+
+[node name="ablities_reload" type="Node" parent="."]
+script = ExtResource("31_57jek")
+abilities = [NodePath(""), NodePath("")]
+_component_name = "abilities_reload"
+
+[node name="interactor" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.65958, 0)
+script = ExtResource("32_rnu1t")
+_component_name = "interactor"
+
+[node name="CollisionShape" type="CollisionShape3D" parent="interactor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.653707, 0)
+shape = SubResource("72")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="CanvasLayer/Control"]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/Control/CenterContainer"]
+visible = false
+layout_mode = 2
+text = "0.0"
+script = ExtResource("33_qi7s5")
+counter_node_path = NodePath("../../../../interactor")
+counter_signal_name = "time_left_changed"
+
+[node name="NavigationAgent" type="NavigationAgent3D" parent="."]
