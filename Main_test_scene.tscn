@@ -1,7 +1,9 @@
-[gd_scene load_steps=19 format=3 uid="uid://clwvs0y18jwcn"]
+[gd_scene load_steps=21 format=3 uid="uid://clwvs0y18jwcn"]
 
 [ext_resource type="PackedScene" uid="uid://cbwgud76ewlii" path="res://data/actors/character.tscn" id="1_fngtr"]
 [ext_resource type="Script" path="res://data/map/world.gd" id="1_si6ao"]
+[ext_resource type="PackedScene" uid="uid://32q2l6ybonnb" path="res://Sliding_object.tscn" id="3_4k5p7"]
+[ext_resource type="PackedScene" uid="uid://dqfb5yf42myme" path="res://data/prefabs/interactables/switch/switch.tscn" id="4_nko8q"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_hxefe"]
 size = Vector3(17.4, 0.185, 35.9)
@@ -135,3 +137,11 @@ environment = SubResource("Environment_0b502")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.209448, 0.640102, -0.739189, 0, 0.755956, 0.654622, 0.97782, -0.137109, 0.158333, -18.1126, 6.59957, 0)
+
+[node name="Sliding" parent="." instance=ExtResource("3_4k5p7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.93152, 0.970086, -3.07169)
+
+[node name="Switch" parent="." instance=ExtResource("4_nko8q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.22129, 1.68068, 17.5858)
+
+[connection signal="pressed" from="Switch" to="Sliding" method="_on_switch_pressed"]

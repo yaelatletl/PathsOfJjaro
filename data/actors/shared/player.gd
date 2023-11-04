@@ -1,5 +1,5 @@
 extends CharacterBody3D
-
+class_name Actor3D
 const SLIDE_MULT = 3
 const WALLRUN_MULT = 1.7
 
