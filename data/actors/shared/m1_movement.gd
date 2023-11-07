@@ -15,9 +15,14 @@ extends Component
 var DEFAULT_GRAVITY = gravity
 @export var step_treshold : float = 0.4
 @export var collision : NodePath = ""
-@onready var col = get_node(collision)
 @export var feet_path : NodePath = ""
+@export var coyote_time : float = 0.1
+
+var elapsed_coyote_time : float = 0
+
+@onready var col = get_node(collision)
 @onready var feet = get_node(feet_path)
+
 var _delta
 var impulse = Vector3.ZERO
 
@@ -44,9 +49,12 @@ func _movement(input : Dictionary, _delta : float) -> void:
 	# Check is checked floor
 	if actor.is_on_floor():
 		actor.direction.y = 0 
+		elapsed_coyote_time = 0
 		actor.direction = actor.direction.normalized()
 		actor.direction = actor.direction.lerp(Vector3(), air_friction * _delta)
 #		if get_key(input, "crouch"):
+	elif elapsed_coyote_time < coyote_time and actor.direction.y <= 0:
+		elapsed_coyote_time += _delta
 	else:
 		# Applies gravity
 		actor.linear_velocity.y -= gravity * _delta

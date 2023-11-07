@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=3 uid="uid://c87vctm3qaah6"]
+[gd_scene load_steps=47 format=3 uid="uid://c87vctm3qaah6"]
 
 [ext_resource type="Script" path="res://data/actors/shared/player.gd" id="1_vav12"]
 [ext_resource type="PackedScene" uid="uid://bbjy6u80eyiv5" path="res://assets/models/player/Default_Player_Model.tscn" id="2_kj7mw"]
@@ -37,10 +37,13 @@
 [sub_resource type="SphereShape3D" id="73"]
 radius = 0.322255
 
+[sub_resource type="SeparationRayShape3D" id="SeparationRayShape3D_ef3r4"]
+length = 0.766099
+
 [sub_resource type="CapsuleShape3D" id="51"]
 resource_local_to_scene = true
 radius = 0.288786
-height = 1.82098
+height = 1.23966
 
 [sub_resource type="Animation" id="52"]
 tracks/0/type = "value"
@@ -306,8 +309,12 @@ stream = ExtResource("18_gpxxe")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.11158, 0)
 shape = SubResource("73")
 
+[node name="minimal2" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, -2.84581, 0)
+shape = SubResource("SeparationRayShape3D_ef3r4")
+
 [node name="body" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.71176, -3.41149e-08)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.39424, -3.41149e-08)
 shape = SubResource("51")
 
 [node name="head" type="RayCast3D" parent="."]
@@ -556,16 +563,15 @@ uppercase = true
 
 [node name="Movement" type="Node" parent="."]
 script = ExtResource("29_e5ae1")
-n_speed = 2.0
-s_speed = 4.0
-w_speed = 4.0
-c_speed = 1.0
+s_speed = 8.0
+w_speed = 6.0
+c_speed = 2.0
 slide_on_crouch = true
-can_wallrun = true
 gravity = 9.8
 step_treshold = 0.5
 collision = NodePath("../body")
 feet_path = NodePath("../feet")
+coyote_time = 0.3
 _component_name = "movement_basic"
 
 [node name="MovementJump" parent="." instance=ExtResource("30_d2ndp")]
