@@ -38,7 +38,7 @@
 radius = 0.322255
 
 [sub_resource type="SeparationRayShape3D" id="SeparationRayShape3D_ef3r4"]
-length = 0.766099
+length = 1.66393
 
 [sub_resource type="CapsuleShape3D" id="51"]
 resource_local_to_scene = true
@@ -309,8 +309,8 @@ stream = ExtResource("18_gpxxe")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.11158, 0)
 shape = SubResource("73")
 
-[node name="minimal2" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, -2.84581, 0)
+[node name="separation_ray" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, -1.89457, 0)
 shape = SubResource("SeparationRayShape3D_ef3r4")
 
 [node name="body" type="CollisionShape3D" parent="."]
@@ -350,7 +350,7 @@ movement_path = NodePath("../../../Movement")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -20)
 
 [node name="feet" type="RayCast3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.12863, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.90131, 0)
 target_position = Vector3(0, -1.7, 0)
 debug_shape_custom_color = Color(1, 1, 0.14902, 0.345098)
 
