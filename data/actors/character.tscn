@@ -1,6 +1,6 @@
 [gd_scene load_steps=52 format=3 uid="uid://cbwgud76ewlii"]
 
-[ext_resource type="Script" path="res://data/actors/shared/player.gd" id="1_a7u56"]
+[ext_resource type="Script" path="res://data/actors/shared/character.gd" id="1_a7u56"]
 [ext_resource type="Script" path="res://data/actors/shared/systems/input.gd" id="3_4yg5q"]
 [ext_resource type="Script" path="res://data/actors/shared/footsteep.gd" id="5_r551c"]
 [ext_resource type="Texture2D" uid="uid://djvpeq1ktwq5" path="res://assets/placeholders/textures/crosshair.png" id="13"]
