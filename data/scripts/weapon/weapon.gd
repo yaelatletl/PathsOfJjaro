@@ -155,7 +155,6 @@ func _shoot(node_in, _delta, l_bullets, l_max_bullets, l_ammo, l_reload_speed, l
 		# Play shoot animation if not reloading
 		if can_shoot and animc != "Reload" and animc != "Draw" and animc != "Hide":
 			node_in.set_deferred(bullets_name, l_bullets - 1)
-			Gamestate.set_in_all_clients(node_in, bullets_name, l_bullets)
 			# recoil
 			spatial_parent.camera.rotation.x = lerp(spatial_parent.camera.rotation.x, randf_range(1, 2), _delta)
 			spatial_parent.camera.rotation.y = lerp(spatial_parent.camera.rotation.y, randf_range(-1, 1), _delta)
@@ -304,7 +303,6 @@ func _reload(node_in, bullets, max_bullets, ammo, ammo_variable_name, bullets_va
 				
 				if bullets >= max_bullets:
 					break
-			Gamestate.set_in_all_clients(node_in, ammo_variable_name, ammo)
 
 func _zoom(input, _delta) -> void:
 	if not check_relatives():
@@ -347,4 +345,4 @@ func _update(_delta) -> void:
 
 func add_ammo(ammo_in):
 	ammo += ammo_in
-	Gamestate.set_in_all_clients(self, "ammo", ammo)
+

@@ -17,15 +17,11 @@ func _init():
 	connect("body_entered",Callable(self,"_on_body_entered"))
 
 func _ready():
-	get_tree().create_timer(0.1).connect("timeout",Callable(self,"_network_sync"))
+	pass
 
 func add_exceptions(actor):
 	add_collision_exception_with(actor)
 
-func _network_sync() -> void:
-	if is_inside_tree():
-		Gamestate.set_in_all_clients(self, "position", position)
-		get_tree().create_timer(0.1).connect("timeout",Callable(self,"_network_sync"))
 	
 func stop() -> void:
 	sleeping = true

@@ -1,6 +1,0 @@
-[gd_resource type="SpatialMaterial" format=2]
-
-[resource]
-render_priority = 1
-flags_transparent = true
-albedo_color = Color( 0.301961, 1, 0.0784314, 0.388235 )

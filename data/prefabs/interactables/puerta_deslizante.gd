@@ -1,6 +1,8 @@
 extends Node3D
+
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
+
 @export var speed: float = 100
 @export var direction: Vector3= Vector3(0, 0, 0)
 @onready var plataform = $CharacterBody3D
@@ -10,10 +12,13 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 #Derecha es +X y izquierda es -X
 @export var active : bool = false 
 @onready var isplayerinside : bool = false
+
+
 func _physics_process(delta):
 	#compare_position()
 	mover(delta)
 	plataform.move_and_slide( )
+
 func mover(delta):	
 	if active == true:
 		compare_position()
@@ -22,12 +27,14 @@ func mover(delta):
 	else:
 		plataform.velocity = direction * 0
 		#print("not moving")
+
 func _input(event):
 	#Toggle plataform by pressing F
 	#if event is InputEventKey and isplayerinside:
 		if event.is_action_pressed("ui_select") and isplayerinside:
 			active = not active
 			print("Player entered the area and activated the elevator")	
+
 func compare_position():
 	#Esta funcion revisa si la posicion del objeto esta acercandose a la posicion indicada en sus markers
 	#print(plataform.position.y-marker1.position.y)

@@ -3,15 +3,15 @@ extends Camera3D
 @export var shake_time : float
 @export var shake_force : float
 @onready var actor = $"../../../"
+
+
 func _ready() -> void:
-	var mpAPI = get_tree().get_multiplayer()
-	if mpAPI.has_multiplayer_peer():
-		if mpAPI.is_server():
-			make_current()
+	pass
 
 func _process(_delta : float) -> void:
 	_shake(_delta)
 	_tilt(_delta)
+
 func _shake(_delta : float) -> void:
 	if shake_time > 0:
 		h_offset = randf_range(-shake_force, shake_force)
