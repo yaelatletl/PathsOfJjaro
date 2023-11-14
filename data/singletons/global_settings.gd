@@ -20,9 +20,9 @@ var default_view_models = {
 	"follower" :  "res://assets/weapons/models/generic_pistol_scene.tscn", 
 	"zeus" : "res://assets/weapons/models/generic_pistol_scene.tscn",
 	"alien_gun" : "res://assets/weapons/models/generic_pistol_scene.tscn",
-	"ma75b" : "res://assets/weapons/models/generic_kriss_scene.tscn",
+	"ma75b" : "res://assets/weapons/models/generic_pistol_scene.tscn",
 	"mk_23" : "res://assets/weapons/models/generic_pistol_scene.tscn",
 	"glock_17" : "res://assets/weapons/models/generic_pistol_scene_2.tscn",
-	"shotgun" : "res://assets/weapons/models/generic_kriss_scene.tscn",
-	"kriss" : "res://assets/weapons/models/generic_kriss_scene.tscn"
+	"shotgun" : "res://assets/weapons/models/generic_pistol_scene.tscn",
+	"kriss" : "res://assets/weapons/models/generic_pistol_scene.tscn"
 }

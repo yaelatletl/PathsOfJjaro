@@ -237,12 +237,12 @@ func make_ray_shoot(ray : RayCast3D, uses_randomness, max_random_spread_x, max_r
 		# Create a instance of trail scene
 		var local_trail = trail.instantiate()
 		# Change trail position to out of barrel position
-		main.add_child(local_trail)
 		local_trail.global_transform.origin = barrel.global_transform.origin
 		
-		# Add the trail to main scene
-		# Change trail rotation to match bullet hit
 		#TODO: Show trails even if the bullet doesn't hit anything
+		# Add the trail to main scene
+		main.add_child(local_trail)
+		# Change trail rotation to match bullet hit
 		local_trail.look_at(ray.get_collision_point(),Vector3(0, 1, 0))
 
 		var local_damage = int(randf_range(damage/1.5, damage))

@@ -55,8 +55,8 @@ func get_input():
 	actor.input["forward"] = int(Input.is_action_pressed("MOVE_FORWARD"))
 	actor.input["back"]   = int(Input.is_action_pressed("MOVE_BACKWARD"))
 	actor.input["next_weapon"] = int(Input.is_action_pressed("NEXT_GUN"))
-#	if not crouch_is_toggle:
-#		actor.input["crouch"] = int(Input.is_action_pressed("CROUCH"))
+	if not crouch_is_toggle:
+		actor.input["crouch"] = int(Input.is_action_pressed("CROUCH"))
 	if not run_is_toggle:
 		actor.input["sprint"] = int(Input.is_action_pressed("SPRINT"))
 	actor.input["use"] = int(Input.is_action_pressed("USE"))

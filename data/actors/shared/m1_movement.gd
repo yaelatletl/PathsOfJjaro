@@ -17,7 +17,6 @@ var DEFAULT_GRAVITY = gravity
 @export var collision : NodePath = ""
 @export var feet_path : NodePath = ""
 @export var coyote_time : float = 0.1
-
 var elapsed_coyote_time : float = 0
 
 @onready var col = get_node(collision)
