@@ -1,0 +1,38 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://assets/models/weapons/kriss/scene.gltf" type="PackedScene" id=1]
+[ext_resource path="res://data/pickables/floor_weapon.gd" type="Script" id=2]
+[ext_resource path="res://assets/weapons/models/generic_kriss_scene.tscn" type="PackedScene" id=3]
+
+[sub_resource type="SphereShape3D" id=1]
+radius = 1.53057
+
+[sub_resource type="BoxShape3D" id=2]
+extents = Vector3( 0.0390255, 0.17127, 0.414518 )
+
+[node name="Kriss" type="RigidBody3D"]
+collision_layer = 2
+collision_mask = 2
+script = ExtResource( 2 )
+weapon_archetype = "res://assets/weapons/tags/pistol.json"
+view_model = ExtResource( 3 )
+
+[node name="scene" parent="." instance=ExtResource( 1 )]
+transform = Transform3D( 0.01, 0, 0, 0, 0.01, 0, 0, 0, 0.01, 0.130053, -1.27442, 0 )
+
+[node name="Mesh 2" parent="scene/RootNode gltf orientation matrix/RootNode model correction matrix/e5925612b21a4f1eb6baf1abc1b3ea53fbx/Node 2/RootNode/Node 3 2/Skeleton3D" index="0"]
+visible = false
+
+[node name="Mesh 3 2" parent="scene/RootNode gltf orientation matrix/RootNode model correction matrix/e5925612b21a4f1eb6baf1abc1b3ea53fbx/Node 2/RootNode/Node 3 2/Skeleton3D" index="1"]
+visible = false
+
+[node name="PickArea" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PickArea"]
+shape = SubResource( 1 )
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0806634, 0.0536273 )
+shape = SubResource( 2 )
+
+[editable path="scene"]

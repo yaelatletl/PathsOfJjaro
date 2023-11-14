@@ -31,7 +31,6 @@ func _ready():
 		area_trigger.body_exited.connect(self.spawn)
 
 func get_object(id : String):
-	ResourceManager
 	pass
 
 func spawn():

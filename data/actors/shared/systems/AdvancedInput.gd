@@ -2,6 +2,12 @@ extends Component
 @export var run_is_toggle : bool = true
 @export var crouch_is_toggle : bool = true
 
+
+
+# TO DO: is this MP? if so, delete
+
+
+
 @export var captured : bool = true # Does not let the mouse leave the screen
 
 var can_jump = true
@@ -53,7 +59,7 @@ func _ready():
 
 func _mouse_toggle() -> void:
 	# Function to lock or unlock the mouse in the center of the screen
-	if Input.is_action_just_pressed("KEY_ESCAPE"):
+	if Input.is_action_just_pressed("ESCAPE"):
 		# Captured will receive the opposite of the value itself
 		captured = !captured
 	
@@ -66,13 +72,7 @@ func _mouse_toggle() -> void:
 	
 
 func functional_routine():
-	if get_tree().has_multiplayer_peer():
-		if not mpAPI.is_server() or not enabled:
-			return
-		else:
-			get_input()
-			get_tree().create_timer(0.01).connect("timeout",Callable(self,"functional_routine"))
-	else:
+
 		get_input()
 		get_tree().create_timer(0.01).connect("timeout",Callable(self,"functional_routine"))
 
@@ -96,14 +96,8 @@ func get_input():
 	actor.input["extra_jump"] = local_input["extra_jump"]
 	actor.input["look_y"] = local_input["look_y"]
 	actor.input["look_x"] = local_input["look_x"]
-	sync_input()
 
 
-func sync_input():
-	if get_tree().has_multiplayer_peer():
-		if mpAPI.is_server() and not get_tree().is_server(): 
-			actor.rset_unreliable_id(1, "input", actor.input)
-			Gamestate.set_in_all_clients(actor, "input", actor.input)
 
 
 func mouse_move(event):
@@ -117,40 +111,29 @@ func mouse_move(event):
 
 
 func _unhandled_input(event):
-	if get_tree().has_multiplayer_peer():
-		if not mpAPI.is_server() or not enabled:
-			return
-		else:
-			unhandled(event)
-	else:
+
 		unhandled(event)
 
 func unhandled(event):
 	# Calls function to switch between locked and unlocked mouse
 	_mouse_toggle()
 	
-	if int(Input.is_action_just_pressed("KEY_SPACE")):
+	if int(Input.is_action_just_pressed("JUMP")):
 		actor.input["jump"] = true
 	mouse_move(event)
 	
 
 	if run_is_toggle:
-		if Input.is_action_just_pressed("KEY_SHIFT"):
+		if Input.is_action_just_pressed("SPRINT"):
 			actor.input["sprint"] = int(not bool(actor.input["sprint"]))
-		if Input.is_action_pressed("KEY_CTRL") or actor.run_speed < 0.3 or Input.is_action_just_released("KEY_W"):
+		if Input.is_action_pressed("CROUCH") or actor.run_speed < 0.3 or Input.is_action_just_released("MOVE_FORWARD"):
 			actor.input["sprint"] = 0
 	if crouch_is_toggle:
-		if Input.is_action_just_released("KEY_CTRL"):
+		if Input.is_action_just_released("CROUCH"):
 			actor.input["crouch"] = int(not bool(actor.input["crouch"]))
-		if Input.is_action_pressed("KEY_SHIFT") or Input.is_action_just_released("KEY_SPACE"):
+		if Input.is_action_pressed("SPRINT") or Input.is_action_just_released("JUMP"):
 			actor.input["crouch"] = 0
-#	if get_tree().has_multiplayer_peer():
-#		if mpAPI.is_server() and not get_tree().is_server(): 
-			#Gamestate.set_in_all_clients(self,"input", actor.input)
-#			actor.rset_unreliable_id(1, "input", actor.input)
 
-#	if Input.is_action_just_released(("KEY_SPACE")) and Input.is_action_pressed("KEY_SPACE"):
-#		actor.input["jump_extra"] = 1
 
 
 	
@@ -176,25 +159,26 @@ func _input(event):
 
 func _XInput_scheme(event):
 	if event is InputEventJoypadMotion:
-		if event.axis == JOY_AXIS_0: 
-			if event.axis_value > 0:
-				input_devices[event.device]["right"] = clamp(event.axis_value, 0, 1)
-			else:
-				input_devices[event.device]["left"] = clamp(-event.axis_value, 0, 1)
-	
-		if event.axis == JOY_AXIS_1:
-			if event.axis_value > 0:
-				input_devices[event.device]["back"] = clamp(event.axis_value, 0, 1)
-			else:
-				input_devices[event.device]["forward"] = clamp(-event.axis_value, 0, 1)
-	
-		if event.axis == JOY_AXIS_2:
-			input_devices[event.device]["look_x"] = event.axis_value
-
-		if event.axis == JOY_AXIS_3:
-			input_devices[event.device]["look_y"] = event.axis_value
+		match event.axis:
+			JoyAxis.JOY_AXIS_LEFT_X: 
+				if event.axis_value > 0:
+					input_devices[event.device]["right"] = clamp(event.axis_value, 0, 1)
+				else:
+					input_devices[event.device]["left"] = clamp(-event.axis_value, 0, 1)
 		
-		if event.axis == JOY_AXIS_6:
-			input_devices[event.device]["shoot"] = event.axis_value
-		if event.axis == JOY_AXIS_7:
-			input_devices[event.device]["zoom"] = event.axis_value
+			JoyAxis.JOY_AXIS_LEFT_Y:
+				if event.axis_value > 0:
+					input_devices[event.device]["back"] = clamp(event.axis_value, 0, 1)
+				else:
+					input_devices[event.device]["forward"] = clamp(-event.axis_value, 0, 1)
+		
+			JoyAxis.JOY_AXIS_RIGHT_X:
+				input_devices[event.device]["look_x"] = event.axis_value
+
+			JoyAxis.JOY_AXIS_RIGHT_Y:
+				input_devices[event.device]["look_y"] = event.axis_value
+			
+			JoyAxis.JOY_AXIS_TRIGGER_LEFT:
+				input_devices[event.device]["shoot"] = event.axis_value
+			JoyAxis.JOY_AXIS_TRIGGER_RIGHT:
+				input_devices[event.device]["zoom"] = event.axis_value

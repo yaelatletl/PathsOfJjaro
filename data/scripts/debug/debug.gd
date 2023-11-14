@@ -2,55 +2,29 @@ extends CanvasLayer
 
 # Screen variables
 var fullscreen : bool = false
+
 @export var player: NodePath : NodePath = ""
-@onready var node_player = get_node(player) 
+@onready var node_player = get_node(player)
+
 # All debug inputs
 var input : Dictionary = {}
 
+
 func _process(_delta) -> void:
-	# Calls the function to switch to fullscren or window with Alt and Enter
-	_toggle_fullscreen()
-	
-	# Calls the function to show the framerate
-	_display_framerate()
 	
 	# Calls the function to reset the game
-	_reload_scene()
-
-func _toggle_fullscreen() -> void:
-	# If you don't have a fullscreen node timer it will create a
-	if not has_node("timer_fullscreen"):
-		# Creates a timer
-		var timer = Timer.new()
-		
-		# Change timer name to fullscreen
-		timer.name = "timer_fullscreen"
-		
-		# The timer time
-		timer.wait_time = 0.2
-		
-		# Timer will count once and stop
-		timer.one_shot = true
-		
-		# Adds the timer to the debug
-		add_child(timer)
+	if Input.is_action_just_pressed("RESET_GAME"):
+		get_tree().reload_current_scene()
+		return
 	
-	else: # if you already have the fullscreen node timer
-		# Get the fullscreen node timer
-		var timer = $"timer_fullscreen"
-		
-		# If the timer reaches zero I can change the screen mode
-		if !timer.time_left:
-			input["enter"] = Input.is_action_pressed("KEY_ENTER")
-			input['alt']   = Input.is_action_pressed("KEY_ALT")
-			
-			if input['alt'] and input['enter']:
-				fullscreen = !fullscreen
+	# Calls the function to switch to fullscren or window
+	if Input.is_action_just_pressed("TOGGLE_FULLSCREEN"):
+		fullscreen = !fullscreen			
+		get_window().mode = Window.MODE_EXCLUSIVE_FULLSCREEN if (fullscreen) else Window.MODE_WINDOWED
 				
-				get_window().mode = Window.MODE_EXCLUSIVE_FULLSCREEN if (fullscreen) else Window.MODE_WINDOWED
-				
-				# Starts the timer again
-				timer.start()
+	# Calls the function to show the framerate
+	_display_framerate()
+
 
 func _display_framerate() -> void:
 	# If you don't have the framerate label
@@ -76,11 +50,3 @@ func _display_framerate() -> void:
 		# Changes the text of the label to that of the framerate
 		framerate_label.text = str(node_player.run_speed," MPH")
 
-func _reload_scene() -> void:
-	# Input
-	input["reload"] = Input.is_action_just_pressed("KEY_F6")
-	
-	# If I press the reload button
-	if input["reload"]:
-		# Reload the scene
-		get_tree().reload_current_scene()

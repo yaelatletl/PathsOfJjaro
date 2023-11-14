@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://data/pickables/ammo_pickup.gd" type="Script" id=1]
+
+[sub_resource type="BoxShape3D" id=1]
+extents = Vector3( 0.393561, 0.369688, 0.371207 )
+
+[sub_resource type="BoxMesh" id=2]
+
+[sub_resource type="SphereShape3D" id=3]
+radius = 1.47592
+
+[node name="ExampleAmmo" type="RigidBody3D"]
+script = ExtResource( 1 )
+weapon_name = "zeus"
+ammo = 10
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource( 1 )
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D( 0.283377, 0, 0, 0, 0.283377, 0, 0, 0, 0.283377, 0, 0, 0 )
+mesh = SubResource( 2 )
+
+[node name="PickupArea" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PickupArea"]
+shape = SubResource( 3 )

@@ -65,7 +65,7 @@ func is_far_from_floor() -> bool:
 		return false
 	return true
 
-@rpc("any_peer", "call_local") func _damage(amount : float, type):
+func _damage(amount : float, type):
 	var temp = amount
 	amount = (amount - shields)/10
 	shields -= temp
@@ -74,11 +74,9 @@ func is_far_from_floor() -> bool:
 	if health <= 0:
 		die()
 	emit_signal("health_changed", health, shields)
-	Gamestate.set_in_all_clients(self, "health", health)
-	Gamestate.set_in_all_clients(self, "shields", shields)
+
 		
-@rpc("any_peer", "call_local") func die():
-	Gamestate.call_on_all_clients(self, "die", null)
+func die():
 	_get_component("input").enabled = false
 	emit_signal("died")
 	#print("Player "+name+" died")

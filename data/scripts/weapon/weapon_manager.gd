@@ -56,7 +56,7 @@ func _process(_delta) -> void:
 	_rotation(_delta)
 	_position(_delta)
 
-@rpc("any_peer") func add_weapon(name : String, path : String, view_model : PackedScene) -> void:
+func add_weapon(name : String, path : String, view_model : PackedScene) -> void:
 	var model = view_model.instantiate()
 	arsenal[name] = FormatParser.weapon_from_json(path, self)
 	model.name = arsenal[name].gun_name
@@ -65,14 +65,12 @@ func _process(_delta) -> void:
 	add_child(arsenal[name])
 	arsenal.values()[current]._hide()
 
-@rpc("any_peer") func _shoot(_delta) -> void:
+func _shoot(_delta) -> void:
 	# Call weapon function
 	arsenal.values()[current].shoot(_delta)
-	Gamestate.call_on_all_clients(self, "_shoot", _delta)
 
-@rpc("any_peer") func _reload() -> void:
+func _reload() -> void:
 	arsenal.values()[current].reload()
-	Gamestate.call_on_all_clients(self, "_reload", null)
 
 func _weapon(_delta) -> void:
 	arsenal.values()[current]._sprint(actor.input["sprint"] or actor.input["jump"], _delta)
@@ -110,9 +108,8 @@ func _rotation(_delta) -> void:
 	else:
 		rotation = camera.global_transform.basis.get_euler()
 
-@rpc("any_peer", "call_local") func _change_weapon(_index) -> void:
+func _change_weapon(_index) -> void:
 	current = _index
-	Gamestate.set_in_all_clients(self, "current", _index)
 	_change()
 
 func _handle_guns(next):

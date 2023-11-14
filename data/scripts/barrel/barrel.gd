@@ -4,20 +4,15 @@ extends RigidBody3D
 var remove_decal : bool = false
 
 var on_the_net_transform := Transform3D() #sync
-@onready var mpAPI = get_tree().get_multiplayer()
 
 func _ready():
 	$timer.connect("timeout",Callable(self,"queue_remove"))
 	$explosion/timer.connect("timeout",Callable(self,"_explode_others"))
 
 func _physics_process(delta: float) -> void:
-	if mpAPI.has_multiplayer_peer():
-		if mpAPI.is_server():
-			#rset_unreliable("on_the_net_transform", transform)
-			pass
-		else:
 			#transform = on_the_net_transform
 			pass
+
 func _damage(damage, type) -> void:
 	if health > 0:
 		var dam_calc = health - damage
@@ -36,19 +31,8 @@ func _damage(damage, type) -> void:
 func _process(_delta) -> void:
 	_remove_decal()
 
-@rpc("any_peer") func _explosion(exploded_in_server : bool = false) -> void:
-
-	
-	if mpAPI.is_server():
-		for players in Gamestate.players:
-			if players != 1:
-				pass
-				#rpc_unreliable_id(players, "_explosion", true)
-	if (not exploded_in_server and mpAPI.has_multiplayer_peer()) and not mpAPI.is_server():
-		return
-
+func _explosion(exploded_in_server : bool = false) -> void:
 	$collision.disabled = true
-
 	
 	var main = get_tree().get_root().get_child(0)
 	
@@ -67,13 +51,10 @@ func _process(_delta) -> void:
 	
 	remove_decal = true
 
-@rpc("any_peer") func remote_queue_remove() -> void:
-	queue_free()
 
 func queue_remove() -> void:
-	if mpAPI.is_server():
-		queue_free()
-	Gamestate.call_on_all_clients(self, "remote_queue_remove", null)
+	queue_free()
+
 
 func _remove_decal():
 	if remove_decal:

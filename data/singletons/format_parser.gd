@@ -3,6 +3,10 @@
 extends Node
 class_name FormatParser
 
+
+# TO DO: delete this: convert all Physics definitions from JSON to Dictionary and put in .gd files
+
+
 enum MODIFIER_TYPE{
 	NONE, 
 	ON_RELEASE,
