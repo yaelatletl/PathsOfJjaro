@@ -230,7 +230,7 @@ _data = {
 height = 2.3586
 radius = 1.93094
 
-[node name="character" type="CharacterBody3D"]
+[node name="Player" type="CharacterBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.02065, 0)
 collision_mask = 5
 script = ExtResource("1_7385i")
