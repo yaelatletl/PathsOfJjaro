@@ -1,0 +1,37 @@
+[gd_scene load_steps=5 format=3 uid="uid://32q2l6ybonnb"]
+
+[ext_resource type="Script" path="res://engine/levels/SlidingDoor.gd" id="1_oj4ux"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_he473"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_dg22f"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ncxpg"]
+size = Vector3(2, 2, 2)
+
+[node name="Node3D" type="Node3D"]
+script = ExtResource("1_oj4ux")
+direction = Vector3(0, 2, 0)
+
+[node name="CharacterBody3D" type="CharacterBody3D" parent="."]
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D"]
+shape = SubResource("BoxShape3D_he473")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CharacterBody3D"]
+mesh = SubResource("BoxMesh_dg22f")
+
+[node name="Up" type="Marker3D" parent="."]
+transform = Transform3D(0.999848, 0, 0.0174524, 0, 1, 0, -0.0174524, 0, 0.999848, 0, 2.88981, 0)
+
+[node name="Down" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.96905, 0)
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("BoxShape3D_ncxpg")
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
+[connection signal="body_exited" from="Area3D" to="." method="_on_area_3d_body_exited"]

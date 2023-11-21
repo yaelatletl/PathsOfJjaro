@@ -1,0 +1,53 @@
+[gd_scene load_steps=7 format=3 uid="uid://dsfml4ri8636v"]
+
+[ext_resource type="Script" path="res://engine/effects/spark.gd" id="2"]
+
+[sub_resource type="Curve" id="4"]
+_data = [Vector2(0.0124224, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="5"]
+curve = SubResource("4")
+
+[sub_resource type="ParticleProcessMaterial" id="1"]
+lifetime_randomness = 0.3
+emission_shape = 1
+emission_sphere_radius = 0.01
+direction = Vector3(0, 0, 0)
+spread = 180.0
+flatness = 1.0
+gravity = Vector3(0, -1, 0)
+scale_curve = SubResource("5")
+
+[sub_resource type="StandardMaterial3D" id="2"]
+transparency = 4
+blend_mode = 1
+cull_mode = 2
+metallic_specular = 0.0
+emission_enabled = true
+emission = Color(1, 0.72549, 0, 1)
+emission_energy_multiplier = 8.0
+billboard_mode = 3
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="3"]
+material = SubResource("2")
+size = Vector2(0.06, 0.06)
+
+[node name="spark" type="GPUParticles3D"]
+cast_shadow = 0
+emitting = false
+amount = 50
+lifetime = 0.15
+one_shot = true
+explosiveness = 0.5
+process_material = SubResource("1")
+draw_pass_1 = SubResource("3")
+script = ExtResource("2")
+
+[node name="timer" type="Timer" parent="."]
+wait_time = 0.3
+one_shot = true
+autostart = true

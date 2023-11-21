@@ -1,0 +1,260 @@
+[gd_scene load_steps=22 format=3 uid="uid://dxx6xubs1bfbr"]
+
+[ext_resource type="Script" path="res://engine/actors/player/Player.gd" id="1_dw56p"]
+[ext_resource type="Script" path="res://engine/actors/player/components/input.gd" id="2_516s3"]
+[ext_resource type="Script" path="res://engine/weapons/weapon_manager.gd" id="3_6riii"]
+[ext_resource type="Script" path="res://engine/actors/player/components/head.gd" id="4_eorfr"]
+[ext_resource type="Script" path="res://engine/actors/player/components/camera.gd" id="5_1l2iv"]
+[ext_resource type="Script" path="res://engine/actors/player/components/animation.gd" id="6_8g53l"]
+[ext_resource type="Script" path="res://engine/HUD/HUD.gd" id="7_4h7xk"]
+[ext_resource type="Script" path="res://engine/actors/player/components/m1_movement.gd" id="8_myksp"]
+[ext_resource type="PackedScene" uid="uid://y34xc55f0863" path="res://engine/actors/player/components/MovementJump.tscn" id="9_p37x5"]
+[ext_resource type="Script" path="res://engine/actors/player/components/reload_abilities.gd" id="10_qj7jd"]
+[ext_resource type="Script" path="res://engine/pickables/interact.gd" id="11_3kl1f"]
+[ext_resource type="Script" path="res://engine/HUD/counter.gd" id="12_ik53x"]
+
+[sub_resource type="SphereShape3D" id="73"]
+radius = 0.322255
+
+[sub_resource type="SeparationRayShape3D" id="SeparationRayShape3D_ef3r4"]
+length = 1.66393
+
+[sub_resource type="CapsuleShape3D" id="51"]
+resource_local_to_scene = true
+radius = 0.288786
+height = 1.23966
+
+[sub_resource type="Animation" id="52"]
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="53"]
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-5, 0, 0)]
+}
+
+[sub_resource type="Animation" id="54"]
+length = 1.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.6, 0.9, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, -0.01, 0), Vector3(0, 0, 0), Vector3(0, -0.01, 0), Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.6, 0.9, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(-2, -0.3, 0), Vector3(0, 0, 0), Vector3(-2, 0.3, 0), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="55"]
+length = 1.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.6, 0.9, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, -0.01, 0), Vector3(0, 0, 0), Vector3(0, -0.01, 0), Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.6, 0.9, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(-1, 0.5, 0), Vector3(0, 0, 0), Vector3(-1, -0.5, 0), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_olj6a"]
+_data = {
+"idle": SubResource("52"),
+"jump": SubResource("53"),
+"sprint": SubResource("54"),
+"walk": SubResource("55")
+}
+
+[sub_resource type="CylinderShape3D" id="72"]
+height = 2.3586
+radius = 1.93094
+
+[node name="Player" type="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.02065, 0)
+collision_mask = 5
+script = ExtResource("1_dw56p")
+
+[node name="KBnM_Input" type="Node" parent="."]
+script = ExtResource("2_516s3")
+run_is_toggle = true
+_component_name = "input"
+
+[node name="weapons" type="Node3D" parent="."]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, -2.04244, -0.0764225)
+script = ExtResource("3_6riii")
+head_path = NodePath("../head")
+camera_path = NodePath("../head/neck/camera")
+
+[node name="minimal" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.11158, 0)
+shape = SubResource("73")
+
+[node name="separation_ray" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, -1.89457, 0)
+shape = SubResource("SeparationRayShape3D_ef3r4")
+
+[node name="body" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.39424, -3.41149e-08)
+shape = SubResource("51")
+
+[node name="head" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.04244, 0)
+target_position = Vector3(0, 0.3, 0)
+debug_shape_custom_color = Color(0.54902, 0.0117647, 0.603922, 0.509804)
+debug_shape_thickness = 5
+script = ExtResource("4_eorfr")
+sensibility = 0.129
+
+[node name="neck" type="Node3D" parent="head"]
+transform = Transform3D(1, 0, 0, 0, 0.999999, 0, 0, 0, 0.999999, 0, 0, 0)
+
+[node name="camera" type="Camera3D" parent="head/neck"]
+cull_mask = 1048571
+doppler_tracking = 2
+current = true
+fov = 110.0
+near = 0.01
+far = 6500.0
+script = ExtResource("5_1l2iv")
+
+[node name="anim" type="AnimationPlayer" parent="head/neck"]
+libraries = {
+"": SubResource("AnimationLibrary_olj6a")
+}
+script = ExtResource("6_8g53l")
+character_path = NodePath("../../..")
+camera_path = NodePath("../camera")
+movement_path = NodePath("../../../Movement")
+
+[node name="ViewTarget" type="Marker3D" parent="head/neck"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -20)
+
+[node name="feet" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.90131, 0)
+target_position = Vector3(0, -1.7, 0)
+debug_shape_custom_color = Color(1, 1, 0.14902, 0.345098)
+
+[node name="hud" type="CanvasLayer" parent="."]
+script = ExtResource("7_4h7xk")
+interact_board_path = NodePath("")
+message_board_path = NodePath("")
+_component_name = "HUD"
+
+[node name="Movement" type="Node" parent="."]
+script = ExtResource("8_myksp")
+s_speed = 8.0
+w_speed = 6.0
+c_speed = 2.0
+slide_on_crouch = true
+gravity = 9.8
+step_treshold = 0.5
+collision = NodePath("../body")
+feet_path = NodePath("../feet")
+coyote_time = 0.3
+_component_name = "movement_basic"
+
+[node name="MovementJump" parent="." instance=ExtResource("9_p37x5")]
+jump_height = 10.0
+
+[node name="ablities_reload" type="Node" parent="."]
+script = ExtResource("10_qj7jd")
+abilities = [NodePath(""), NodePath("")]
+_component_name = "abilities_reload"
+
+[node name="interactor" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.65958, 0)
+script = ExtResource("11_3kl1f")
+_component_name = "interactor"
+
+[node name="CollisionShape" type="CollisionShape3D" parent="interactor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.653707, 0)
+shape = SubResource("72")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="CanvasLayer/Control"]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/Control/CenterContainer"]
+visible = false
+layout_mode = 2
+text = "0.0"
+script = ExtResource("12_ik53x")
+counter_node_path = NodePath("../../../../interactor")
+counter_signal_name = "time_left_changed"

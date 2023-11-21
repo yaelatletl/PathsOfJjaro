@@ -1,0 +1,51 @@
+[gd_scene load_steps=4 format=3 uid="uid://bp31k8r75y2ln"]
+
+[sub_resource type="GDScript" id="GDScript_5th2c"]
+script/source = "extends Node3D
+
+var speed : float = 200
+@export var seconds: float = 0.1
+
+func _ready() -> void:
+	$mesh.position.z = -$mesh.mesh.height/2
+	var timer = get_tree().create_timer(seconds)
+	timer.connect(\"timeout\",Callable(self,\"queue_free\"))
+
+func _process(_delta) -> void:
+	global_transform.origin -= (global_transform.basis.z * speed) * _delta
+"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1aob5"]
+albedo_color = Color(1, 1, 0, 1)
+emission_enabled = true
+emission = Color(1, 0.701961, 0.0588235, 1)
+
+[sub_resource type="CapsuleMesh" id="1"]
+radius = 0.03
+height = 20.0
+
+[node name="trail" type="Node3D"]
+script = SubResource("GDScript_5th2c")
+
+[node name="mesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.91069e-15, 4.37114e-08, -1, 1, -4.37114e-08, 0, -4.37114e-08, -1, -4.37114e-08, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_1aob5")
+cast_shadow = 0
+mesh = SubResource("1")
+
+[node name="mesh2" type="MeshInstance3D" parent="."]
+transform = Transform3D(4.37114e-08, 4.37114e-08, 1, -4.37114e-08, -1, 4.37114e-08, 1, -4.37114e-08, -4.37114e-08, -0.10318, 0, 0)
+visible = false
+cast_shadow = 0
+mesh = SubResource("1")
+
+[node name="mesh3" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -0.55743, 1.34935, 0)
+visible = false
+cast_shadow = 0
+mesh = SubResource("1")
+
+[node name="timer" type="Timer" parent="."]
+wait_time = 0.3
+one_shot = true
+autostart = true

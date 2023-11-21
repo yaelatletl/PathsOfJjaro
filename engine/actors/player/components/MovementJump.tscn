@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://y34xc55f0863"]
+
+[ext_resource type="Script" path="res://engine/actors/player/components/MovementJump.gd" id="1"]
+
+[node name="MovementJump" type="Node"]
+script = ExtResource("1")
+_component_name = "movement_jump"

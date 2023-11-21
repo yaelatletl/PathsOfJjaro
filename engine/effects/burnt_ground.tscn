@@ -1,0 +1,37 @@
+[gd_scene load_steps=5 format=3 uid="uid://c6admttjcnr4y"]
+
+[ext_resource type="Texture2D" uid="uid://vemtrbvbs2wc" path="res://assets/placeholders/textures/burnt_ground.png" id="1_30bwf"]
+
+[sub_resource type="GDScript" id="GDScript_f18di"]
+script/source = "extends Node3D
+
+@export var ray: NodePath
+@onready var ray_node = get_node(ray)
+var ground : bool = false
+
+func _process(delta):
+	if not ground:
+		if ray_node.is_colliding():
+			$mesh.global_transform.origin = ray_node.get_collision_point() + Vector3(0, 0.1, 0)
+			ground = false
+"
+
+[sub_resource type="StandardMaterial3D" id="1"]
+transparency = 4
+albedo_color = Color(1, 1, 1, 0.588235)
+albedo_texture = ExtResource("1_30bwf")
+metallic_specular = 0.0
+
+[sub_resource type="PlaneMesh" id="2"]
+material = SubResource("1")
+size = Vector2(4, 4)
+
+[node name="burnt_ground" type="Node3D"]
+script = SubResource("GDScript_f18di")
+ray = NodePath("ray")
+
+[node name="mesh" type="MeshInstance3D" parent="."]
+mesh = SubResource("2")
+
+[node name="ray" type="RayCast3D" parent="."]
+target_position = Vector3(0, -100, 0)

@@ -16,11 +16,14 @@ run/main_scene="res://menu/MainMenu.tscn"
 config/features=PackedStringArray("4.1")
 config/icon="res://icon.png"
 
+[audio]
+
+buses/default_bus_layout="res://engine/default_bus_layout.tres"
+
 [autoload]
 
-Pooling="*res://data/singletons/pooling.gd"
-GlobalSettings="*res://data/singletons/global_settings.gd"
-MaterialPool="*res://data/singletons/material_pool.gd"
+Pooling="*res://engine/singletons/pooling.gd"
+Global="*res://engine/singletons/Global.tscn"
 
 [debug]
 
@@ -42,7 +45,7 @@ project/assembly_name="Paths Of Jjaro"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/multirun/plugin.cfg", "res://addons/goap/plugin.cfg")
+enabled=PackedStringArray("res://addons/goap/plugin.cfg")
 
 [filesystem]
 

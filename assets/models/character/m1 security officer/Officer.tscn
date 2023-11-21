@@ -1,5 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://dl3fehq7vbnt7"]
-
-[ext_resource type="PackedScene" uid="uid://cqeq1wfn7i5of" path="res://assets/models/character/m1 security officer/M1Officer_New.gltf" id="1_qcaul"]
-
-[node name="M1Officer_New" instance=ExtResource("1_qcaul")]
