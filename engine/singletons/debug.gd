@@ -3,7 +3,7 @@ extends CanvasLayer
 # Screen variables
 var fullscreen : bool = false
 
-@export var player: NodePath : NodePath = ""
+@export var player: NodePath = ""
 @onready var node_player = get_node(player)
 
 # All debug inputs
@@ -28,7 +28,7 @@ func _process(_delta) -> void:
 
 func _display_framerate() -> void:
 	# If you don't have the framerate label
-	if not has_node("framerate_label"):
+	if not has_node("framerate_label"): # TO DO: why? there is already a debug.tscn with a CanvasLayer, so why not just attach a Label node directly to that in editor?
 		# Create a new label
 		var framerate_label = Label.new()
 		
@@ -39,7 +39,7 @@ func _display_framerate() -> void:
 		framerate_label.position = Vector2(5, 5)
 		
 		# Changes the color of the framerate label
-		framerate_label.add_theme_color_override("font_color", ColorN("black"))
+		framerate_label.add_theme_color_override("font_color", Color("black"))
 		
 		# Adds the framerate label to the debug
 		add_child(framerate_label)

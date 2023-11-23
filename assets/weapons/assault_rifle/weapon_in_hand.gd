@@ -1,6 +1,6 @@
 extends Node3D
 
-# WeaponInHand.gd -- this implements standard API for performing weapon's animations
+# assault_rifle/WeaponInHand.gd -- this implements the standard API for performing weapon's animations; TO DO: is it worth defining this API in an abstract base class as part of engine?
 
 enum WeaponHandedness {
 	PRIMARY, # for now, assume PRIMARY=left, SECONDARY=right
@@ -39,7 +39,18 @@ func swap_out() -> void: # called by Weapon when Player deactivates it
 	# TO DO:  remove 4.4sec of dead time from animation (the swap in/out animations should be around 1sec)
 	pass
 
-func idle() -> void: # resting state;
+
+func set_bullets_remaining(count: int) -> void:
+	pass
+
+# TO DO: for animating bobbing motions as player moves, define either a `move(gait)` method or separate stop+walk+sprint+crouch+swim methods
+
+# TO DO: what about vertical look motions? (in Classic M2, the weapon moves down/up in camera as the camera looks up/down)
+
+
+# weapon states
+
+func idle() -> void: # weapon is doing nothing
 	pass
 
 func shoot_primary() -> void:
@@ -52,4 +63,18 @@ func reload_primary() -> void:
 	pass
 
 func reload_secondary() -> void:
+	pass
+
+func empty() -> void: # e.g. plays click sound
+	pass
+
+# fusion pistol only
+
+func charging() -> void:
+	pass
+
+func charged() -> void: # TO DO: FusionPistol.gd can manage its own animation by setting timers (the pistol visibly shakes and beeps while charged, and the longer it remains charged the larger the shake; Q. should it give user a brief 1-2sec warning when it reaches critical?)
+	pass
+
+func exploding() -> void:
 	pass

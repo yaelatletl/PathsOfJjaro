@@ -1,9 +1,10 @@
-@tool
 extends Container
 class_name CircularContainer
 
 @export var spread_anlge: float = 15
 @export var floaters_scale: float = 1.0
+
+
 func _notification(what):
 	if what == NOTIFICATION_SORT_CHILDREN:
 		# Must re-sort the children
@@ -18,6 +19,8 @@ func _notification(what):
 		# Fit to 
 			rect_vec = rect_vec.rotated(deg_to_rad(spread_anlge))
 			fit_child_in_rect( c, Rect2( rect_vec, (floaters_scale*new_size)/div_size) )
+
+
 func set_some_setting():
 	# Some setting changed, ask for children re-sort
 	queue_sort()

@@ -3,8 +3,10 @@
 [ext_resource type="Script" path="res://engine/levels/SlidingDoor.gd" id="1_oj4ux"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_he473"]
+size = Vector3(2, 0.2, 2)
 
 [sub_resource type="BoxMesh" id="BoxMesh_dg22f"]
+size = Vector3(2, 0.2, 2)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ncxpg"]
 size = Vector3(2, 2, 2)

@@ -3,6 +3,10 @@
 [sub_resource type="GDScript" id="GDScript_5th2c"]
 script/source = "extends Node3D
 
+
+# this looks like a laser beam; while MCR weapons are all projectile-based, this might be useful as a map element
+
+
 var speed : float = 200
 @export var seconds: float = 0.1
 

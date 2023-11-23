@@ -2,7 +2,6 @@ extends Node
 class_name Component
 
 # TO DO: what is purpose of this?
-
 enum CHARGE_TYPE{
 	SELF_MANAGE,
 	USE_MANAGER,

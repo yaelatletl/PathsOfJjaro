@@ -1,18 +1,19 @@
 extends Camera3D
 
-# TO DO: what is purpose of this?
+# TO DO: what is purpose of this? (what camera effects do we need?)
 
 @export var shake_time : float
 @export var shake_force : float
-@onready var actor = $"../../../"
+@onready var actor = $"../../"
 
 
 func _ready() -> void:
 	pass
 
 func _process(_delta : float) -> void:
-	_shake(_delta)
-	_tilt(_delta)
+	pass
+	#_shake(_delta)
+	#_tilt(_delta)
 
 func _shake(_delta : float) -> void:
 	if shake_time > 0:

@@ -4,6 +4,9 @@ class_name Explosion
 # Explosion.gd -- this was Grenade.gd, but that class mixed projectile behavior with explosion behavior and it's probably simpler to use a separate scene with its own collision object, animation, viewport/canvas layer effects, etc
 
 
+# TO DO: add collision area
+
+
 
 # TO DO: if Explosion does no shrapnel damage, it only needs to animate (the exact animation depends on both projectile type and what it hits, e.g. a bullet riccochets off metal, playing spark animation, and pierces flesh, playing human/alien blood splash) and apply damage to the object it impacted; it doesn't need a collision sphere; Q. should Explosions that do shrapnel damage be implemented as ShrapnelExplosion subclass of concrete Explosion? or just include `var shrapnelRadius` where 0 = no shrapnel? for now, ignore shrapnel damage entirely and focus on getting Weapon -> Projectile -> Explosion working
 

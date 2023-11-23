@@ -1,4 +1,3 @@
-@tool
 extends ColorRect
 
 @export var actor_path: NodePath = ""
@@ -15,6 +14,7 @@ extends ColorRect
 @export var shield_color: Color = Color.BLACK
 
 @onready var actor = get_node(actor_path)
+
 
 func _ready():
 	actor.connect("health_changed",Callable(self,"_on_health_changed"))

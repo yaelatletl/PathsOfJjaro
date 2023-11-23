@@ -1,30 +1,38 @@
-[gd_scene load_steps=5 format=3 uid="uid://65hdrolflc6l"]
+[gd_scene load_steps=6 format=3 uid="uid://65hdrolflc6l"]
 
 [ext_resource type="Script" path="res://engine/pickables/PickableItem.gd" id="1_avixr"]
 
 [sub_resource type="BoxShape3D" id="1"]
-size = Vector3(0.787122, 0.739376, 0.742414)
+size = Vector3(0.5, 2.08165e-12, 0.25)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hybdw"]
+albedo_color = Color(0.211765, 0.364706, 0.788235, 1)
 
 [sub_resource type="BoxMesh" id="2"]
+material = SubResource("StandardMaterial3D_hybdw")
+size = Vector3(0.5, 0.5, 0.25)
 
 [sub_resource type="SphereShape3D" id="3"]
-radius = 1.47592
 
 [node name="PickableItem" type="RigidBody3D"]
 script = ExtResource("1_avixr")
-weapon_name = "zeus"
-ammo = 10
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
 shape = SubResource("1")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.283377, 0, 0, 0, 0.283377, 0, 0, 0, 0.283377, 0, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 0.25, 2.08165e-12)
 mesh = SubResource("2")
 
 [node name="Pickup" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 0.25, 2.08165e-12)
+collision_layer = 32
+collision_mask = 2
+monitorable = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Pickup"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 0.25, 2.08165e-12)
 shape = SubResource("3")
 
 [connection signal="body_entered" from="Pickup" to="." method="_on_pickup_body_entered"]

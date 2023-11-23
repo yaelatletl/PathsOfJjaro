@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://d100dmmgyku2"
-path="res://.godot/imported/scene.gltf-119c8b0051ef5eccdc656e107ea9efa0.scn"
+path="res://.godot/imported/scene.gltf-88ad050f388b6324e7f79fd1b07f6f39.scn"
 
 [deps]
 
-source_file="res://assets/weapons/assault_rifle/scene.gltf"
-dest_files=["res://.godot/imported/scene.gltf-119c8b0051ef5eccdc656e107ea9efa0.scn"]
+source_file="res://assets/weapons/assault_rifle/mesh/scene.gltf"
+dest_files=["res://.godot/imported/scene.gltf-88ad050f388b6324e7f79fd1b07f6f39.scn"]
 
 [params]
 

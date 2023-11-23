@@ -1,7 +1,11 @@
 extends Node3D
 
 
-# TO DO: placing individual Player behaviors in their own "plugin" scenes is problematic as all behaviors should be managed by Player's state machine to avoid any transition problems
+
+# TO DO: I think this is vaulting over railings; it is hard to tell. 
+
+# In any case, Player vaulting (which is automatic behavior) needs a bit of thought on how best to trigger it. From Player/NPC POV, a railing may be non-solid; i.e. ledges retain their Classic structure, so anyone can run off the ledge at any time. (his will require a bit of work on incident angles: a very shallow angle would need to deflect the moving body along its basis to "throw" it over the railing quickly, otherwise it'll need a very slow-motion vault (very unconvincing); or it might prevent the body vaulting, keeping them on the ledge unless they turn into it. Also need to decide how best to detect Player/NPC colliding with railing; it's probably simpler for a static railing to detect the moving body entering its collision area and tell it to "vault".
+
 
 
 @onready var actor = get_parent()

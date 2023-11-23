@@ -1,6 +1,6 @@
 extends Component
 
-# what does this do? what does "knocked crawl" even mean?
+# what does this do? what does "knocked crawl" mean?
 
 # All speed variables
 
@@ -38,6 +38,7 @@ func _physics_process(delta):
 		_movement(actor.input, delta)
 
 func _movement(input : Dictionary, _delta : float) -> void:
+	# this is not dissimilar to the existing movement code in Player._physics_process
 	actor.direction = Vector3()
 	if can_move:
 		actor.direction += (-get_key(input, "left")    + get_key(input, "right")) * actor.head_basis.x

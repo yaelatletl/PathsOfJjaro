@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bwnkftgdg8fxk"]
+
+[ext_resource type="Script" path="res://engine/actors/npc/NPC.gd" id="1_v8ap4"]
+
+[node name="Enemy" type="Node3D"]
+script = ExtResource("1_v8ap4")

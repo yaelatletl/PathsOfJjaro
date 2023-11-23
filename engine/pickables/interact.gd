@@ -1,7 +1,12 @@
 extends Component
 
 
-# TO DO: this is creating unnecessary complexity; stop!
+# TO DO: this has more abstractions than functionality, creating unnecessary complexity; stop!
+
+
+# TO DO: the player can interact with ControlPanels, which should be identified by line-of-sight raycast from camera that intersects the ControlPanel's Area detection box; the CollisionShape for this box has layer=ControlPanel and may be larger than the control panel itself, if the control mesh is physically small; a reasonable minimum might be 1x1m, which is the size of M1 switches, but probably no smaller than 0.7m on either axis
+
+#
 
 
 var waiting_for_interaction : Node = null
@@ -47,7 +52,7 @@ func clear_interact():
 	interaction_time_fulfilled = false
 
 func _physics_process(delta):
-	if actor.input["use"]:
+	if false: # actor.input["use"]:
 		if is_instance_valid(waiting_for_interaction):
 			if current_timer == null:
 				start_interaction()

@@ -5,7 +5,7 @@
 [ext_resource type="Script" path="res://engine/HUD/Radar.gd" id="3_sisr2"]
 [ext_resource type="Script" path="res://engine/HUD/InteractionBoard.gd" id="4_pwp5t"]
 [ext_resource type="Script" path="res://engine/HUD/MessageBoard.gd" id="5_dc40w"]
-[ext_resource type="Texture2D" uid="uid://djvpeq1ktwq5" path="res://assets/placeholders/textures/crosshair.png" id="6_do26b"]
+[ext_resource type="Texture2D" uid="uid://djvpeq1ktwq5" path="res://assets/textures/crosshair.png" id="6_1fa4m"]
 [ext_resource type="Theme" path="res://engine/HUD/ui.theme" id="7_hmh0t"]
 
 [sub_resource type="Animation" id="63"]
@@ -201,7 +201,7 @@ modulate = Color(1, 1, 1, 0.392157)
 layout_mode = 2
 size_flags_vertical = 4
 mouse_filter = 2
-texture = ExtResource("6_do26b")
+texture = ExtResource("6_1fa4m")
 stretch_mode = 1
 
 [node name="border" type="TextureRect" parent="VerticalSections/Mid/crosshair"]
@@ -214,7 +214,7 @@ anchor_bottom = 0.5
 size_flags_horizontal = 0
 size_flags_vertical = 4
 mouse_filter = 2
-texture = ExtResource("6_do26b")
+texture = ExtResource("6_1fa4m")
 expand_mode = 1
 stretch_mode = 1
 
