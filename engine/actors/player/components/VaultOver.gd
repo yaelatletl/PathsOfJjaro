@@ -2,9 +2,15 @@ extends Node3D
 
 
 
-# TO DO: I think this is vaulting over railings; it is hard to tell. 
-
-# In any case, Player vaulting (which is automatic behavior) needs a bit of thought on how best to trigger it. From Player/NPC POV, a railing may be non-solid; i.e. ledges retain their Classic structure, so anyone can run off the ledge at any time. (his will require a bit of work on incident angles: a very shallow angle would need to deflect the moving body along its basis to "throw" it over the railing quickly, otherwise it'll need a very slow-motion vault (very unconvincing); or it might prevent the body vaulting, keeping them on the ledge unless they turn into it. Also need to decide how best to detect Player/NPC colliding with railing; it's probably simpler for a static railing to detect the moving body entering its collision area and tell it to "vault".
+# TO DO: This appears to be vaulting over railings, although its logic is not immediately clear and it overloads JUMP/CROUCH keys which is not good for consistent behavior.
+#
+# In any case, Player vaulting (which should be automatic behavior) needs a bit of thought on how best to trigger it. Our primary goal is that crouch, jump, and vault do not significantly change Classic gameplay. 
+#
+# For instance, the raised walkway in Arrival's pattern buffer room is high enough the Player cannot step up onto it; however, the new jump mechanic would allow the player to jump onto it. We can prevent jumping onto the walkway by placing a railing around it, which acts as an external barrier. When player is inside the barrier, however, they should still have the ability to run off the raised walkway to the lower floor area below. 
+#
+# To avoid affecting gameplay, the easiest solution may be to make the barrier non-solid when the player is level with it and running on solid ground (we'd also need to integrate airborne so that a jump or explosive impulse translates into a 'vault'). The Player would pass straight through the barrier as if it isn't there, replicating Classic's running-off-ledge movement. This can be supplemented with hand and camera animations and sound effect to create the illusion of the player jumping over a solid barrier. Vault will also need to check the angle of incidence, so approaching the railing at a very shallow angle either doesn't vault or else adds a lateral impulse to throw the player quickly sideways over it - we don't want the player's hands and camera animations to run out while player is still "on top of the railing"!
+#
+# Also need to decide how best to detect Player/NPC colliding with railing/close enough to vault it. Whereas jump should be fully automatic, using raycasts to determine jumpable rises, vault can use collision Areas as railings will always be separate assets placed on top of level geometry. It may be simplest for a StaticBody3D railing to detect a moving Player/NPC body entering its collision area, checking its speed and angle, and calling the object's `vault_railing` or `collided_with_railing` method, though it really depends if we want the Player to take off early (as in stair climbing) or wait till last moment (making contact) to perform its "vaulting" animation. 
 
 
 

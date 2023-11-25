@@ -1,14 +1,24 @@
-[gd_scene load_steps=4 format=3 uid="uid://kkkafhswxdjq"]
+[gd_scene load_steps=5 format=3 uid="uid://kkkafhswxdjq"]
 
 [ext_resource type="Script" path="res://engine/projectiles/Projectile.gd" id="1_ew1pd"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_1mf3e"]
-radius = 0.254383
+radius = 0.1
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_aav7t"]
+albedo_color = Color(0.631373, 0.603922, 0, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_eu3ea"]
+material = SubResource("StandardMaterial3D_aav7t")
+size = Vector3(0.1, 0.1, 0.2)
 
 [node name="Explosion" type="RigidBody3D"]
+collision_layer = 8
+collision_mask = 65479
 mass = 1.5
+max_contacts_reported = 99
+contact_monitor = true
+can_sleep = false
 script = ExtResource("1_ew1pd")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
@@ -17,3 +27,5 @@ shape = SubResource("SphereShape3D_1mf3e")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.332555, 0, 0, 0, 0.332555, 0, 0, 0, 0.332555, 0, 0, 0)
 mesh = SubResource("BoxMesh_eu3ea")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

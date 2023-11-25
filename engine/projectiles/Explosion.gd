@@ -4,7 +4,7 @@ class_name Explosion
 # Explosion.gd -- this was Grenade.gd, but that class mixed projectile behavior with explosion behavior and it's probably simpler to use a separate scene with its own collision object, animation, viewport/canvas layer effects, etc
 
 
-# TO DO: add collision area
+# TO DO: for radius-damage explosions (exploding grenade, missile, etc.) use a collision Area with spherical shape to detect all damageable bodies inside blast radius (probably the easiest way to detect them); caution: except for nuclear hard death, explosion radius damage must not penetrate walls so presumably we need some sort of raycast from explosion center to recipient's center to confirm the recipient should be hit by the blast (unfortunately RayCast3D doesn't have an option for projecting a 3D cylinder instead of a 1D line, so center-to-center detection will fail if recipient is 51% covered by a wall; dunno how best to deal with this - e.g. by using multiple rays or moving the ray side-to-side and up-and-down to 'scan' the recipient and estimate how protected it is); worth checking out too how M2 determined if partially wall-covered Player/NPCs should/shouldn't take damage (although it did have an easier job of it given its very simple level geometry and self-occluding portals)
 
 
 

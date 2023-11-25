@@ -1,4 +1,4 @@
-extends Component
+extends Node
 
 
 # TO DO: this has more abstractions than functionality, creating unnecessary complexity; stop!
@@ -17,11 +17,11 @@ var interaction_time : float = 0.0
 signal time_left_changed(time_left)
 
 func _ready():
-	_component_name = "interactor"
+	pass #_component_name = "interactor"
 
 func request_interact(interactable : Node3D, message : String, time :float= 0.0):
 	#We need to pass the message to the HUD
-	actor._get_component("HUD").interact_board.show_message(message)
+	#actor._get_component("HUD").interact_board.show_message(message)
 	waiting_for_interaction = interactable
 	interaction_time = time
 
@@ -42,8 +42,8 @@ func stop_interact():
 	clear_interact()
 
 func clear_interact():
-	if actor._get_component("HUD"):
-		actor._get_component("HUD").interact_board.hide_message()
+	#if actor._get_component("HUD"):
+	#	actor._get_component("HUD").interact_board.hide_message()
 	if current_timer != null:
 		current_timer.disconnect("timeout",Callable(self,"set_interaction_time_fulfilled"))
 		current_timer = null
@@ -61,10 +61,11 @@ func _physics_process(delta):
 				#we show the interaction time left to the player through the HUD signal (Must be connected elsewhere)
 				emit_signal("time_left_changed", current_timer.time_left)
 			if waiting_for_interaction.has_method("set_interaction_triggered"):
-				if interaction_time_fulfilled:
-					waiting_for_interaction.interaction_triggered(actor)
+				pass
+				#if interaction_time_fulfilled:
+				#	waiting_for_interaction.interaction_triggered(actor)
 	elif interaction_time > 0.0:
 		stop_interact()
 
 func request_actor():
-	return actor
+	[ass # return actor

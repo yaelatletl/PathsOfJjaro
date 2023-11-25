@@ -3,7 +3,11 @@ class_name Projectile
 
 # Projectile.gd
 
-var damage_type = Pooling.DAMAGE_TYPE.KINECTIC
+
+# TO DO: sort out this implementation; don't use Pooling for now (caching can be added once engine is functionally complete if performance profiling shows new/free calls are a bottleneck, but right now it just complicates the code and slows development)
+
+
+var damage_type = Pooling.DAMAGE_TYPE.KINECTIC # define a Constants.DamageType
 
 @export var type : int = 0
 @export var damage : int = 0
@@ -26,6 +30,19 @@ func _ready():
 func add_exceptions(actor):
 	add_collision_exception_with(actor) # TO DO: a projectile needs an exception for the Player/Enemy that fired it
 
+
+	
+func configure_and_shoot(): # TO DO: what to pass here? it needs access to the level's scene tree (so that the projectile's life is scoped to that level; when the player exits a level, the level and all extant NPCS, items, explosions, projectiles, etc freed too), it also needs to know its point of origin and direction (both provided by the Player/NPC in the initial 'shoot' call), and projectile_type (so it nows what asset to use and what its speed, gravitation, explosion_type, etc are); it also needs an owner (the Player or NPC that fired it) so its collision exception can be set
+	pass
+#	offset = Vector3(offset.x, offset.y, 0)
+#	var direction = camera.to_global(Vector3.ZERO) - camera.to_global(Vector3(0,0,100) + offset)
+	# Add the projectile to the scene through pooling
+	
+	# add_collision_exception_with(owner)
+	
+#	Pooling.add_projectile(projectile_type, origin, direction, actor) # get rid of this
+
+
 #
 func stop() -> void:
 	sleeping = true
@@ -33,7 +50,7 @@ func stop() -> void:
 	angular_velocity = Vector3.ZERO
 	for exeptions in get_collision_exceptions(): # needed? it's redundant if the projectile is discarded
 		remove_collision_exception_with(exeptions)
-	emit_signal("request_destroy")
+	#emit_signal("request_destroy")
 
 
 func move(pos, dir) -> void:
@@ -45,7 +62,7 @@ func move(pos, dir) -> void:
 
 
 func _on_body_entered(body) -> void:
-	#if body.has_method("is_projectile"): # TO DO: delete this: projectiles don't collide with projectiles; set up Collision Layers and Masks correctly and use that
+	#if body.has_method("is_projectile"):
 	#	if body.type == type:
 	#		return
 	#if body.has_method("_damage"): # TO DO: 

@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dopdlwqaop3ch"]
+
+[ext_resource type="Script" path="res://engine/level/SlidingDoor.gd" id="1_q5ap8"]
+
+[node name="SlidingDoor" type="Node3D"]
+script = ExtResource("1_q5ap8")

@@ -1,0 +1,7 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://cx33kaaj6vwje"]
+
+[ext_resource type="FontFile" uid="uid://cncbjn0v7fxvn" path="res://assets/fonts/Squarish Sans CT Regular.ttf" id="1_ewuxn"]
+
+[resource]
+default_font = ExtResource("1_ewuxn")
+default_font_size = 24
