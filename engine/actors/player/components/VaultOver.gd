@@ -1,8 +1,7 @@
 extends Node3D
 
 
-
-# TO DO: This appears to be vaulting over railings, although its logic is not immediately clear and it overloads JUMP/CROUCH keys which is not good for consistent behavior.
+# TO DO: This appears to be vaulting over railings, although its logic is not immediately clear and it overloads JUMP/CROUCH keys which is not good for consistent behavior. Leaving it here for reference only; delete it once vaulting is figured out and implemented in Player
 #
 # In any case, Player vaulting (which should be automatic behavior) needs a bit of thought on how best to trigger it. Our primary goal is that crouch, jump, and vault do not significantly change Classic gameplay. 
 #

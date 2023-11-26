@@ -6,7 +6,7 @@ extends Node
 
 # TO DO: the player can interact with ControlPanels, which should be identified by line-of-sight raycast from camera that intersects the ControlPanel's Area detection box; the CollisionShape for this box has layer=ControlPanel and may be larger than the control panel itself, if the control mesh is physically small; a reasonable minimum might be 1x1m, which is the size of M1 switches, but probably no smaller than 0.7m on either axis
 
-#
+# TO DO: this is currently attached to Player.interactor, which is unused; I think it can be removed now - HUD messages should be triggered by Player detection Areas and possibly terminal logout (e.g. to remind user of current level objective); low oxygen warnings can also be displayed (we might want to add an optional info/warning/critical argument that changes the label's appearance); in any case, the HUD's API should be signals-based so that gameplay classes can be tested with or without a hud connected (given the HUD updates infrequently, using indirect signals instead of direct method calls won't affect performance
 
 
 var waiting_for_interaction : Node = null
@@ -67,5 +67,3 @@ func _physics_process(delta):
 	elif interaction_time > 0.0:
 		stop_interact()
 
-func request_actor():
-	[ass # return actor

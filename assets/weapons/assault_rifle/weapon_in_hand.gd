@@ -1,6 +1,6 @@
 extends Node3D
 
-# assault_rifle/WeaponInHand.gd -- this implements the standard API for performing weapon's animations; TO DO: is it worth defining this API in an abstract base class as part of engine?
+# weapons/assault_rifle/WeaponInHand.gd -- this implements the standard API for performing weapon's animations; TO DO: make this API signal-based so that engine can be tested with or without HUD attached and vice-versa
 
 enum WeaponHandedness {
 	PRIMARY, # for now, assume PRIMARY=left, SECONDARY=right

@@ -1,6 +1,7 @@
-[gd_scene load_steps=1005 format=3 uid="uid://cgpta8uxkvqyv"]
+[gd_scene load_steps=1006 format=3 uid="uid://cgpta8uxkvqyv"]
 
 [ext_resource type="PackedScene" uid="uid://dxx6xubs1bfbr" path="res://engine/actors/player/Player.tscn" id="1_d14hk"]
+[ext_resource type="Script" path="res://engine/level/LevelBase.gd" id="1_hop1f"]
 [ext_resource type="Texture2D" uid="uid://c1f6duvpfuijb" path="res://assets/materials/T_Grid.png" id="1_kldml"]
 [ext_resource type="Material" uid="uid://sofvlrq3jmka" path="res://assets/materials/M_Dark.tres" id="2_5qgsb"]
 
@@ -3515,9 +3516,12 @@ size = Vector3(2, 14.7969, 0.01)
 
 [node name="Arrival_test" type="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
+script = ExtResource("1_hop1f")
 
 [node name="character" parent="." instance=ExtResource("1_d14hk")]
 transform = Transform3D(0.722702, 0, -0.69116, 0, 1, 0, 0.69116, 0, 0.722702, -83.2734, 4.51452, -55.7308)
+shake_time = 0.0
+shake_force = 0.0
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -33.765, 2.7374, 0)

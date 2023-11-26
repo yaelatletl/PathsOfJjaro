@@ -22,7 +22,6 @@ buses/default_bus_layout="res://engine/default_bus_layout.tres"
 
 [autoload]
 
-Pooling="*res://engine/globals/pooling.gd"
 Global="*res://engine/globals/Global.tscn"
 Constants="*res://engine/globals/Constants.gd"
 Inventory="*res://engine/globals/Inventory.gd"

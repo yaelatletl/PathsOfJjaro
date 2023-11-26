@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bwwv7h4vfopy"]
+
+[ext_resource type="Script" path="res://engine/actors/projectiles/Detonation.gd" id="1_7oviy"]
+
+[node name="Detonation" type="Node3D"]
+script = ExtResource("1_7oviy")

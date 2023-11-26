@@ -9,6 +9,8 @@ extends Node
 # TO DO: for function naming convention, use single leading underscore for Godot event handlers (_ready, _on_area_foo_entered), use double underscores for private functions and vars; do NOT use leading underscores on public properies and methods
 
 
+var current_level: Node # currently set by LevelBase._ready; TO DO: once Global (or LevelManager) manages level loading, this may change to SceneTree
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -18,3 +20,20 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass
+
+
+
+func array_to_vector3(arr: Array) -> Vector3:
+	return Vector3(arr[0], arr[1], arr[2])
+
+func vector3_to_array(vec: Vector3) -> Array:
+	return [vec.x, vec.y, vec.z]
+
+
+
+func add_to_level(node: Node3D) -> void:
+	var owner: Node = current_level #.get_tree()
+	owner.add_child(node) # TO DO: the current level scene should be available on Global; Global would also handle level loading and anything else that persists across process lifetime (unless Global also ontains lots of non-level logic, in which case put level management code in a dedicated LevelManager singleton)
+	node.owner = owner
+	#print("added ", node, " to ", owner)
+

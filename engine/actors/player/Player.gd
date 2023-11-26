@@ -13,12 +13,16 @@ const INPUT_AXIS_MULTIPLIER := 10 # temporary until we decide on final values in
 # TO DO: Boomer maps have low gravity flag, but I assume we can get the same effect by loading a different physics?
 
 
+# TO DO: step detection may work best if we use some vertical raycasts placed in front of player that extend downwards from MAX_STEP_HEIGHT to KERB_HEIGHT; this should detect open-tread stairs (which forward-facing raycasts may miss)
+
+
 # TO DO: Player currently uses CapsuleShape to detect floor; at what point does capsule slide off a ledge? (not sure what M2's collision cylinder does - it might remain on ledge as long as any part of its base remains in contact; capsule is useful as it can push player out from wall so the model doesn't appear to slide down wall partly embedded in it; we might want to add a smaller cylinder to bottom of capsule to widen it a bit; also need to decide on player's Projectile/Explosion hit box, which may be a slightly narrower capsule or cylinder; there is also Player-NPC collisions to consider, which may need a wider collision cylinder to prevent NPC models' extremities appearing embedded in Player when both bodies are very close/touching)
 
 
 # TO DO: player speed when running up/down ramps should be similar/same to player speed running up/down stairs, which should be similar to Classic player on stairs (if up and down ramp speeds are the same, SeparationRayShape3D at bottom of player body can provide that; not sure how that will behave around stairs though)
 
 
+# TO DO: finish these dictionaries then move them to Constants
 
 const WALK_PHYSICS := {
 	"maximum_forward_velocity": 1.0 * INPUT_AXIS_MULTIPLIER, # 0.07142639, # TO DO: for now, multiply all velocity-related fields by 14 to get values relative to forward walk speed (we can figure out the final multiplier to emulate M2 speeds later)
@@ -106,29 +110,35 @@ const CROUCH_PHYSICS := WALK_PHYSICS # finish walk and sprint first, then implem
 
 
 enum Movement {
-	IDLE,
+	STATIONARY,
 	WALK,
 	SPRINT,
 	JUMP,
-	CRAWL,
+	FALL,
+	CROUCH,
 	CLIMB,
 	SWIM,
+	SINK,
+	DYING,
+	DEAD,
+	TELEPORT_IN,
+	TELEPORT_OUT,
 }
 
-
-var current_movement := Movement.IDLE
-
+var current_movement := Movement.STATIONARY # TO DO: Player should know which state it's in (e.g. major-fist needs to know if player is sprinting or falling - we can't just use difference between player and npc velocities as a fast-moving enemy that runs into player's fist only receives minor-fist damage if player is standing or walking); this needs more thought (e.g. a player in CROUCH may be moving or stopped, so that probably needs separate CROUCH_IDLE and CROUCH_move) and we need to decide if some states can be entered before the current state exits (e.g. player could jump and crouch to get into a raised duct so this may require JUMP_CROUCH)
 
 
 
-
-# Physics variables
+# Physics variables; TO DO: define in dictionaries above
 var gravity : float = 10 # Gravity force #45 is okay, don't change it 
 var air_friction : float = 50 # air friction # TO DO: use airborne_deceleration
 var floor_friction : float = 250 # floor friction
 
+var mass: float = 45 # think this is only used for imparting impulse to other movable bodies; presumably all other objects must have a `mass` property too (RigidBody3D has `mass` property built in)
 
-const MAX_STEP_HEIGHT := 0.4 # this looks too low; M2 steps can be ~0.3WU, which is ~0.6m
+
+
+const MAX_STEP_HEIGHT := 0.4 # this looks too low; M2 steps can be ~0.3WU, which is ~0.6m (Q. where is max step height defined in Classic/AO)
 
 
 var coyote_time : float = 0.1 # the delay between walking off a ledge and starting to fall # TO DO: is this needed? given that M2 allows user some control over movement in xz plane, returning to the ledge might be a step-up movement; need to check AO code to see how it does it (i.e. after running off ledge, is it possible to reverse forwards/backwards movement to regain it? or is the only way to regain ledge to turn mid-air while falling and step-up onto it before the y delta exceeds MAX_STEP_HEIGHT?)
@@ -136,24 +146,7 @@ var elapsed_coyote_time : float = 0
 
 
 
-
-var mass: float = 45 # think this is only used for imparting impulse to other movable bodies; presumably all other objects must have a `mass` property too (RigidBody3D has `mass` property built in)
-
 var impulse = Vector3.ZERO
-
-
-
-
-# TO DO: any benefits to using signals here? any health changes can be sent from Player to HUD via method call
-signal died()
-signal health_changed(health, shields)
-
-
-var health  := 100
-var shields := 100
-
-
-
 
 var wall_direction : Vector3 = Vector3.ZERO # used in VaultOver, do we need this? hopefully Player only needs a camera animation to imply jumping over a barrier
 
@@ -189,9 +182,7 @@ const MAX_LOOK_ANGLE := deg_to_rad(85) # Maximum camera angle
 
 var mouse_velocity := Vector2.ZERO # TO DO: is there any benefit to handing mouse motion _input events ourselves vs. calling Input.get_last_mouse_velocity() in _process?
 
-func _input(event):
-	if event is InputEventMouseMotion:
-		mouse_velocity = event.relative
+
 
 
 func _ready() -> void:
@@ -201,8 +192,9 @@ func _ready() -> void:
 	#self.floor_max_angle = PI / 4 # as does this
 
 
-
-
+func _input(event):
+	if event is InputEventMouseMotion:
+		mouse_velocity = event.relative
 
 
 func _physics_process(delta: float) -> void: # fixed interval (see Project Settings > General > Physics > Common > Physics FPS, which is currently set to 120fps)
@@ -219,15 +211,17 @@ func _physics_process(delta: float) -> void: # fixed interval (see Project Setti
 		camera.rotation.x = clamp(vertical_look, -MAX_LOOK_ANGLE, MAX_LOOK_ANGLE)
 		mouse_velocity = Vector2.ZERO
 		
+		# TO DO: shoot keys need to move after move_and_slide so that projectile's origin matches player's position when next frame is drawn (right now shooting and sidestepping shows bullet originating from left or right instead of center)
+		
 		# shoot
 		if Input.is_action_just_pressed(&"NEXT_WEAPON"):
 			Inventory.next_weapon()
 		elif Input.is_action_just_pressed(&"PREVIOUS_WEAPON"):
-			Inventory.current_weapon.previous_weapon()
-		if Input.is_action_pressed(&"SHOOT_PRIMARY"):
-			Inventory.current_weapon.shoot_primary(self.global_position, camera.global_rotation, self)
+			Inventory.previous_weapon()
+		if Input.is_action_just_pressed(&"SHOOT_PRIMARY"): # TO DO: temporary until triggers wait between shots
+			Inventory.current_weapon.shoot_primary(self.global_position, (camera.global_transform.basis.z * -1), self) # TO DO: should we pass the camera's global transform and let Projectile do the math?
 		if Input.is_action_pressed(&"SHOOT_SECONDARY"):
-			Inventory.shoot_secondary(self.global_position, camera.global_rotation, self)
+			Inventory.current_weapon.shoot_secondary(self.global_position, (camera.global_transform.basis.z * -1), self)
 		
 		# action
 		if detect_control_panel.is_colliding():
@@ -316,10 +310,7 @@ func _physics_process(delta: float) -> void: # fixed interval (see Project Setti
 	#var can_move_down = self.test_move(self.transform, self.velocity * delta + Vector3(0, -MAX_STEP_HEIGHT, 0))
 	#self.velocity = self.velocity + Vector3(0, MAX_STEP_HEIGHT * delta, 0) if should_go_up else self.velocity #- Vector3(0,MAX_STEP_HEIGHT,0) if can_move_down else self.velocity)
 	
-	
 	self.move_and_slide()
-	
-	
 	
 	return # temporary
 	
@@ -335,9 +326,24 @@ func _physics_process(delta: float) -> void: # fixed interval (see Project Setti
 
 
 
-	
+
 func is_far_from_floor() -> bool: # TO DO: what is purpose of this? it is not the same as the built-in is_on_floor method
 	return not feet_clearance.is_colliding()
+
+
+
+
+
+# health
+
+# TO DO: move health and its signals to Inventory so they persist across levels
+
+signal died()
+signal health_changed(health, shields)
+
+var health  := 100
+var shields := 100
+var oxygen  := 100
 
 
 func _damage(amount : float, type):
@@ -348,34 +354,22 @@ func _damage(amount : float, type):
 		health -= amount
 	if health <= 0:
 		die()
-	emit_signal("health_changed", health, shields)
+	health_changed.emit(health, shields)
 
 func die():
 #	_get_component("input").enabled = false
-	emit_signal("died")
+	died.emit()
 	#print("Player "+name+" died")
 
 
 
 
-func request_interact(interactable : Node3D, message : String, time : float = 0.0):
-	pass
-	#We need to pass the message to the HUD
-#	if	_get_component("interactor"):
-#		_get_component("interactor").request_interact(interactable, message, time)
+# called by PickableItem when it detects Player walking into it
 
-func stop_interact():
-	pass
-#	if _get_component("interactor"):
-#		_get_component("interactor").stop_interact()
-
-
-
-
-
-func found_item(item) -> void:
+func found_item(item: PickableItem) -> void: # called by PickableItem when Player collides with it (we'll keep this flexible just in case we want any NPCs to grab items as well)
 	# if there is space in inventory for this item, pick it up
-	item.picked_up()
+	if Inventory.get_item(item.item_type).try_to_increment():
+		item.picked_up()
 
 
 
@@ -419,13 +413,15 @@ func found_item(item) -> void:
 
 
 
+# external impulse, e.g. applied by explosion
+
 func add_impulse(impulse_in : Vector3) -> void:
 	impulse += impulse_in
 
 
 
 
-# TO DO: dumping these functions here for now; they came from weapon code but aiming is performed by Player (player position and camera rotation); when the Player tells a WeaponTrigger to shoot, it should pass the player's global position and camera's global angle to the Trigger; the Trigger is responsible for adding any offset from player's (camera's?) center (e.g. rockets launch from left shoulder) to get projectile's point of origin, then instantiating a Projectile with that point of origin, camera angle, and projectile parameters (once attached to the scene tree, the projectile propels itself); for MCR we should not need anything more sophisticated than this
+# TO DO: leaving these functions here for now; they came from previous weapon code but aiming is done by Player (although we do want to rotate projectiles that have 3D meshes so the projectile always points in direction of travel)
 #func _position(_delta) -> void:
 #	global_transform.origin = head.global_transform.origin
 	
@@ -441,11 +437,7 @@ func add_impulse(impulse_in : Vector3) -> void:
 #		rotation = $head/camera.global_transform.basis.get_euler()
 
 
-
-
-
 #func _animation() -> void: # this animates head bob when walking/sprinting; TO DO: get rid of this and play bob animations in Player
-	
 	# If the player presses the jump button
 #	if character.input["jump"]:
 		# Checks if the jump animation is active
@@ -470,6 +462,7 @@ func add_impulse(impulse_in : Vector3) -> void:
 #			play("idle", 0.3, 0.1)
 
 
+
 # TO DO: camera shake is a useful visual effect, e.g. when smacked by a Hulk or when something explodes nearby, or maybe when player hits ground hard after jumping from great height
 
 @export var shake_time := 0.0
@@ -485,8 +478,7 @@ func shake_camera(_delta : float) -> void:
 		camera.v_offset = 0
 
 
-# 
-#func _tilt(_delta : float) -> void:
+#func _tilt(_delta : float) -> void: # don't think we want tilt though; it's getting too far away from Classic gameplay look and feel
 	#wall_normal.normal is in global space, wall_normal is an object! 
 	#camera forward/back is basis.z 
 	#given a wall normal, tilt the camera to the opposite side of the wall

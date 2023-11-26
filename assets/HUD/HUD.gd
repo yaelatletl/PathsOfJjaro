@@ -6,14 +6,14 @@ extends Node
 
 # TO DO: move current weapon's ammo readouts onto gun stocks (cf Halo and other modern FPSes); these should look similar to Classic's bitmap/bar ammo readouts (we might make an exception for Magnum and show that as number for space); BTW, this is another reason for using signals for change notification, keeping both HUD and WIH loosely coupled to Inventory
 
-# for Inventory, listing ammo counts as vertical list in top-right corner should be sufficient; we can show all ammo types here, omitting those for which we don't yet have a weapon; that gives user the same ammo information that was displayed in the Classic HUD, using short names so it isn't [too] visually intrusive
+# for Inventory, listing ammo counts as a vertical list in top-right corner should be sufficient; we can show all ammo types here, omitting those for which we don't yet have a weapon; that gives user the same ammo information that was displayed in the Classic HUD, using short names so it isn't [too] visually intrusive
 
 # Q. list magazine counts for all [currently carried] weapons on-screen, as in M2? or show current weapon's magazines only and only list all magazines in inventory overlay? if we show all mags on screen, keep it visually low-key, e.g. white lettering with short ammo names (the current weapon's ammo supply can be highlighted in bold)
 #
 # one argument for always showing *all* ammos on screen is that this is a Classic gameplay feature (albeit a minor one): seeing at a glance how much ammo the player is carrying enables user to judge when to switch guns to preserve a particular ammo type for later, e.g. switching from AR to magnums when AR ammo is running low but pistol ammo is plentiful
 
 
-
+# note: M3 solo campaign should use different HUD designs to indicate SO's current allegiance (if Classic-style recording is implemented, M3 maps could also have a bit of fun inserting the player's earlier 'ghosts' when revisiting a level)
 
 
 # TO DO: decide when/how to draw automap later: redraws would probably be triggered by having Player's _physics_process emit a `player_did_move(...)` signal whenever the player turns or moves (i.e. whenever Player.global_transform changes); Radar could receive the same signal and redraw its center blip
@@ -42,7 +42,7 @@ extends Node
 func _ready():
 	reset_notification()
 	update_weapon()
-	crosshair.position = get_viewport().size / 2 # let's assume the viewport size won't change while in-game
+	crosshair.position = get_viewport().size / 2 - Vector2i(crosshair.size / 2) # let's assume the viewport size won't change while in-game
 	await get_tree().create_timer(2).timeout
 	display_notification("Testing HUD notification", 2)
 	
@@ -59,8 +59,8 @@ func update_weapon() -> void:
 	var trigger2 := weapon.secondaryTrigger
 	weapon_name.text = weapon.long_name
 	# TO DO: triggers' ammo count[s] should appear on gun barrels, c.f. Halo and other modern FPSes - that puts weapon status information near to center of screen (where the user's eye is usually focused) so it's quick and easy to glance at, makes use of what would otherwise be boring wasted screen space (solid gun butts), and just looks plain gosh darn good when playing
-	primary_ammo.text = "%s/%s   %02d %s" % [trigger1.count, trigger1.max_count, trigger1.inventory_item.count, trigger1.inventory_item.short_name]
-	secondary_ammo.text = "%s/%s   %02d %s" % [trigger2.count, trigger2.max_count, trigger2.inventory_item.count, trigger2.inventory_item.short_name]
+	primary_ammo.text = "%s/%s   %02d %s" % [trigger1.count, trigger1.max_count, trigger1.ammunition.count, trigger1.ammunition.short_name]
+	secondary_ammo.text = "%s/%s   %02d %s" % [trigger2.count, trigger2.max_count, trigger2.ammunition.count, trigger2.ammunition.short_name]
 
 
 

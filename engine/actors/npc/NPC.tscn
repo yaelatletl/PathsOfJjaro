@@ -1,6 +1,27 @@
-[gd_scene load_steps=2 format=3 uid="uid://bwnkftgdg8fxk"]
+[gd_scene load_steps=5 format=3 uid="uid://bwnkftgdg8fxk"]
 
 [ext_resource type="Script" path="res://engine/actors/npc/NPC.gd" id="1_v8ap4"]
 
-[node name="Enemy" type="Node3D"]
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_gkbkl"]
+radius = 0.49
+height = 1.59
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bf35v"]
+albedo_color = Color(0.866667, 0, 0, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_mlr7x"]
+material = SubResource("StandardMaterial3D_bf35v")
+radius = 0.49
+height = 1.59
+radial_segments = 16
+
+[node name="NPC" type="RigidBody3D"]
+collision_layer = 4
+collision_mask = 65479
 script = ExtResource("1_v8ap4")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_gkbkl")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CapsuleMesh_mlr7x")

@@ -130,8 +130,6 @@ collision_layer = 2
 collision_mask = 16325
 floor_stop_on_slope = false
 script = ExtResource("1_dw56p")
-shake_time = null
-shake_force = null
 
 [node name="body" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
@@ -141,9 +139,6 @@ shape = SubResource("51")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
 visible = false
 script = ExtResource("11_3kl1f")
-enabled = null
-_component_name = "interactor"
-ui_container = null
 
 [node name="CollisionShape" type="CollisionShape3D" parent="interactor"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)

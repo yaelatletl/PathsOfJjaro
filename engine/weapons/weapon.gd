@@ -12,40 +12,60 @@ class_name Weapon
 # TO DO: Ammunition class: this contains both the InventoryItem (for reloading) and the current ammo count; this allows fusion pistol to share a single Ammunition instance between both triggers (so both triggers deplete the same energy cell) whereas magnum has a separate Ammunition instance for each trigger 
 
 
-# TO DO: sort out active/ready/is_ready/etc naming conventions (note: `ready` is already reserved by Node)
+# TO DO: PlayerAssetsManager which receives the following signals and sets its current_weapon to the appropriate WeaponInHand upon weapon_activated, and forward trigger signals to that (alternatively all weapons could register their own signal handlers, but then they have to decide which one of them is active); this can probably be defined as res://engine/assetlib/PlayerAssetsManager as its code shouldn't be specific to assets (it only needs to know which scenes to load for what purposes)
+
+signal weapon_activated(weapon: Weapon)
+signal weapon_deactivated(weapon: Weapon)
+signal primary_trigger_fired(successfully: bool, weapon: Weapon)
+signal secondary_trigger_fired(successfully: bool, weapon: Weapon)
+signal primary_trigger_reloaded(weapon: Weapon)
+signal secondary_trigger_reloaded(weapon: Weapon)
+
 
 
 var primaryTrigger:   WeaponTrigger
 var secondaryTrigger: WeaponTrigger # TO DO: single pistol/shotgun, and rocket launcher/flamethrower/flechette gun, have only a single firing mode (one enabled trigger) in which case should secondaryTrigger hold the same WeaponTrigger instance as primaryTrigger? (i.e. either trigger key will activate the weapon's primary trigger)
 
-# note: in case of dual-wield weapons, where the Weapon toggles between shooting left-hand and right-hand while the trigger key is held, the Weapon needs to know if the primary or secondary trigger is pulled as that determines which hand fires *first* (for first and shotgun this makes no difference to gameplay; however, the user may want to empty a pistol's magazine which they can do by tapping its trigger key repeatedly, in which case the weapon does not toggle between hands)
 
-
-# single weapons: fusion pistol, assault rifle, rocket launcher, flamethrower, flechette gun
-
-# dual-wield weapons: fist, pistol, shotgun (note: these are also represented by a *single* Weapon instance)
-
-
-# TO DO: Weapon's state machine may be a bit awkward to implement as most dual-trigger weapons tie the two triggers together behaviorally, whereas AR allows both triggers to operate independently [except when reloading]; probably another reason why Classic's Weapon physics has weaponClass property (I've not checked the AO source but I expect M2's WiH functions contain lots of `switch (weaponClass) {...}` blocks); if it's a PITA to implement all behaviors in a single class then define concrete subclasses corresponding to each M2 weaponClass:
+# Classic M2 weapon types:
 #
-# melee -- fist (this is basically dual_wield but firing a higher-damage projectile when sprinting)
+# melee -- fist (this is effectively dual_wield with added custom damage behavior; we can get rid of this and fire MINOR_FIST vs MAJOR_FIST projectiles when walking vs sprinting)
 # dual_wield -- pistol, shotgun (if player has only one of these weapon items in inventory, only one is shown on screen and can be fired by either trigger key)
 # dual_purpose -- fusion pistol (basically multipurpose except only one trigger can be used at a time and both share the same Magazine)
 # multipurpose -- assault_rifle, alien_gun (Q. what is difference between alien gun's primary and secondary firing behaviors, and what does it do when both triggers are pressed at same time? also, alien Magazine is shared between both triggers)
 # normal -- rocket_launcher, flamethrower, flechette_gun (single firing mode; either trigger key fires)
 #
+# TO DO: we should be able to rationalize these as flags:
+#
+# - dual_wield:
+#
+#	- fist = DUAL_MODE + INTERLOCKED_TRIGGERS + SPRINT_FIRES_MAJOR_PROJECTILE + NO_MAGAZINE
+#
+#	- pistol, shotgun = DUAL_MODE + INTERLOCKED_TRIGGERS + INDEPENDENT_MAGAZINE
+#
+# - single_wield:
+#
+#	- fusion pistol, alien gun = DUAL_MODE + INTERLOCKED_TRIGGERS + SHARED_MAGAZINE
+#
+#	- AR = dual_mode + INDEPENDENT_TRIGGERS + INDEPENDENT_MAGAZINE
+#
+#	- flechette, flamethrower, rocket launcher = SINGLE_MODE [ + INDEPENDENT_TRIGGERS + INDEPENDENT_MAGAZINE ]
 
 
-var available: bool : get = get_available
+# note: dual_wield weapons are represented by a *single* Weapon instance controlling a single WIH scene that has animations for left, right, and both hands); TO DO: where the Weapon toggles between shooting left-hand and right-hand while the trigger key is held, the Weapon needs to know if the primary or secondary trigger is pulled as that determines which hand fires *first* (for first and shotgun this makes no difference to gameplay; however, the user may want to empty a pistol's magazine which they can do by tapping its trigger key repeatedly, in which case the weapon does not toggle between hands); for now, treat left hand as primary trigger and right hand as secondary trigger (we'll make it user-configurable later so that a user who places their primary trigger key on the right mouse button sees it operating the Player's right hand, but that's a UX detail we can ignore while we're working on the core implementation as most mouse users use left button as primary trigger)
+
+
+
+var available: bool : get = get_available # TO DO:
 
 func get_available() -> bool:
 	return count > 0 and (primaryTrigger.available or secondaryTrigger.available)
 
 
-var active := false : get = get_active
+var in_hand := false : get = get_in_hand # if true, the gun has finished its activate sequence
 
-func get_active() -> bool:
-	return active
+func get_in_hand() -> bool:
+	return in_hand
 
 
 var long_name: String # show this in Inventory overlay
@@ -70,12 +90,11 @@ var fires_under_media := false
 var triggers_share_ammo := false
 var secondary_has_angular_flipping := false
 
-
+var origin_offset := Vector3(0, 1, 0.5) # TO DO: this needs to be set from weapon_definition's primary/secondary_trigger (for dual-wield weapons when only 1 weapon is visible, the x-offset should probably be the average of primary and secondary x-offsets, with the WIH animation set up to show single pistol in center of screen to match)
 
 
 func _ready():
 	pass
-
 
 
 func configure(data: Dictionary) -> void:
@@ -108,28 +127,35 @@ func configure(data: Dictionary) -> void:
 
 
 
-# important: Player must call Weapon.shoot/reload_primary/secondary; it must not call WeaponTrigger directly as Weapon is responsible for managing synchronous triggers, which it can only do in the following functions
+# important: Player must call Weapon.shoot/reload_primary/secondary; it must not call WeaponTrigger.shoot directly as Weapon.shoot_primary/secondary are responsible for managing any interactions between triggers (e.g. AR can fire both triggers independently; dual pistols/shotguns can only fire alternately and should swap automatically while a trigger key is held; fusion can only use one trigger at a time)
 
 
-func shoot_primary(origin: Vector3, aim: Vector3, owner: PhysicsBody3D) -> void: # TO DO: pass entire Player so FIST trigger can check if player is sprinting; this also allows us to call WeaponInHand animations which are presumably attached to the Player
-	print("try to shoot primary trigger...")
-	if active and primaryTrigger.ready:
-		if primaryTrigger.shoot(origin, aim, owner): # this only requests trigger to fire; if the trigger is empty (because there is no ammo to reload it) it will do nothing
-			pass # TO DO: if trigger fired, play shoot animation
-			print("...trigger did shoot")
-		else:
-			pass # else play "empty click" animation
-			print("...trigger failed to shoot")
-		# TO DO: 
+func __shoot(trigger: WeaponTrigger, projectile_origin: Vector3, projectile_direction: Vector3, shooter: PhysicsBody3D) -> bool:
+	if in_hand:
+		# ask the trigger to fire; if the trigger can't fire (because it is empty and there's no ammo to reload it, or because it is in middle of its wait cycle), it will do nothing and return false to indicate it couldn't shoot AFAIK only multipurpose weapons can have this condition: e.g. AR has bullets but no grenades or vice-versa)
+		var success = trigger.shoot(projectile_origin, projectile_direction, shooter) # note: an atomic operation ('try to shoot') is easier to reason about than sequential (`if trigger.can_shoot: trigger.shoot`)
+		print("...trigger did shoot: ", success)
+		return true
 	else:
-		print("...weapon/trigger not ready")
-	# TO DO: check if trigger needs reload and call reload method
+		print("...weapon/trigger not ready (weapon.in_hand=", in_hand, ", trigger_can_fire=", trigger.can_fire, ")")
+		return false
 
 
-func shoot_secondary(origin: Vector3, aim: Vector3, owner: PhysicsBody3D) -> void:
-	if active and secondaryTrigger.ready:
-		pass #secondaryTrigger.shoot(origin, aim, owner) # ditto
-	# TO DO: check if trigger needs reload
+func shoot_primary(player_origin: Vector3, projectile_direction: Vector3, shooter: PhysicsBody3D) -> void: # TO DO: pass entire Player so FIST trigger can check if player is sprinting; this also allows us to call WeaponInHand animations which are presumably attached to the Player
+	print("try to shoot primary trigger... ", player_origin, "   ", projectile_direction)
+	# TO DO: calculate projectile_origin
+	var success = __shoot(primaryTrigger, player_origin, projectile_direction, shooter)
+	primary_trigger_fired.emit(success, self)
+	
+	
+	# TO DO: where to check if trigger needs reload and call reload method
+
+
+func shoot_secondary(player_origin: Vector3, projectile_direction: Vector3, shooter: PhysicsBody3D) -> void:
+	print("try to shoot secondary trigger...")
+	var success = __shoot(secondaryTrigger, player_origin, projectile_direction, shooter)
+	secondary_trigger_fired.emit(success, self)
+	
 
 
 # reload; this ties in with weapon flags and ammunition
@@ -158,14 +184,17 @@ func activate(is_instant: bool = false) -> void: # pass is_instant to skip draw-
 		reload_primary()
 	if secondaryTrigger.count == 0:
 		reload_secondary()
+	# TO DO: should reload calls return bool indicating success or failure? if both fail, the weapon would be in-hand but can't fire (although Inventory should never switch to an empty weapon, in which case all we need here is an assert to confirm correct behavior during testing)
+	assert(primaryTrigger.count > 0 or secondaryTrigger.count > 0)
+	weapon_activated.emit(self)
 	# TO DO: play model animation when player draws weapon
-	# TO DO:
-	active = true
+	in_hand = true
 	print("activated weapon ", self)
 
 
 func deactivate() -> void:
-	active = false
+	in_hand = false
+	weapon_deactivated.emit(self)
 	# TO DO: play model animation when player holsters weapon
 	print("deactivated weapon ", self)
 
