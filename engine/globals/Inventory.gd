@@ -59,7 +59,7 @@ class InventoryItem:
 			# TO DO: ditto
 			return true
 		else:
-			return false
+			return false # TO DO: we should probably return `self.count != 0` here so Fist can have an infinite magazine with count=-1 (i.e. never runs out)
 
 
 

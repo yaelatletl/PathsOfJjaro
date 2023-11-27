@@ -61,7 +61,7 @@ func configure(data: Dictionary) -> void: # TO DO: should Weapon also pass itsel
 
 
 func shoot(projectile_origin: Vector3, projectile_direction: Vector3, shooter: PhysicsBody3D) -> bool:
-	if can_fire:
+	if count != 0:
 		# TO DO: check if some weapons may have a delay between pulling trigger and emitting projectile; is so, move
 		var projectile := Projectile.instantiate()
 		Global.add_to_level(projectile)
@@ -74,10 +74,10 @@ func shoot(projectile_origin: Vector3, projectile_direction: Vector3, shooter: P
 	
 	
 func load_ammo() -> bool: # this reloads instantly and returns true or false depending on success; it is up to Weapon to add timing delays and trigger the WeaponInHand animations
-	if self.ammunition.try_to_decrement():
-		# TO DO: play reload animation
-		return true
-	return false # no animation - it's up to Weapon what it wants to do next (which depends in turn on what type of weapon it is, e.g. pistol/shotgun will switch from 2-handed to 1-handed to previous weapon; fusion, SPNKR, flamethrower will switch to previous weapon; AR will either ignore the empty trigger if the other still has ammo, else switch to previous weapon)
+	var success = self.ammunition.try_to_decrement()
+	if success:
+		self.count = self.max_count
+	return success
 
 
 

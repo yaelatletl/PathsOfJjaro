@@ -345,8 +345,8 @@ const WEAPON_DEFINITIONS := [
 		"primary_trigger": {
 			
 			"ammunition_type": PickableType.AR_MAGAZINE, # TO DO: how best to represent this? enum/int/&string/class/instance?
-			"max_count": 52, # was: rounds_per_magazine
-			"count": 52,
+			"max_count": 5, # was: rounds_per_magazine
+			"count": 5,
 			
 			"projectile_type": ProjectileType.RIFLE_BULLET,
 			"burst_count": 0, # 10 for shotgun, 2 for flechette; pretty sure this is no. of Projectiles fired by a single bullet, but need to check if this is added to 1 or is `min(1,burst_count)`
@@ -354,7 +354,7 @@ const WEAPON_DEFINITIONS := [
 			# offset from Player's center to Projectile's origin # TO DO: this is M2 WU(?) - update to Godot dimensions
 			#"dx": 0.0,
 			#"dz": -0.01953125,
-			"origin_delta": [0.0, -0.01953125, 0.3], # TO DO: I’m guessing what Classic calls dz is the y-axis offset, which I'm guessing is relative to center of camera
+			"origin_delta": [0.0, -0.01953125, 0.3], # TO DO: I’m guessing what Classic calls dz is the y-axis offset, which I'm guessing is relative to center of camera; also ensure projectile always originate *inside* the Player's capsule body, never outside it, as we don't want projectiles originating inside walls or scenery when squeezing along tight service corridors
 			
 			"recoil_magnitude": 0.0048828125, # applies backward impulse to Player
 			#"shell_casing_type": 0, # pistol, AR primary, flechette # TO DO: this is purely cosmetic so belongs in WeaponInHand's shoot animation

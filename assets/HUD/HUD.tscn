@@ -1,10 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://bcdg4sigkkarn"]
+[gd_scene load_steps=11 format=3 uid="uid://bcdg4sigkkarn"]
 
 [ext_resource type="Script" path="res://assets/HUD/HUD.gd" id="1_1pqav"]
 [ext_resource type="Script" path="res://assets/HUD/CircularContainer.gd" id="2_72liu"]
 [ext_resource type="Script" path="res://assets/HUD/Radar.gd" id="3_85ny1"]
 [ext_resource type="Theme" uid="uid://cx33kaaj6vwje" path="res://hud.tres" id="4_26t8g"]
 [ext_resource type="Texture2D" uid="uid://djvpeq1ktwq5" path="res://assets/textures/crosshair.png" id="5_jva5t"]
+[ext_resource type="Script" path="res://assets/HUD/CounterMonitor.gd" id="6_jqgqd"]
 
 [sub_resource type="Animation" id="Animation_l3o38"]
 resource_name = "FadeIn"
@@ -181,21 +182,21 @@ grow_horizontal = 0
 [node name="WeaponName" type="Label" parent="WeaponStatus"]
 layout_mode = 2
 theme = ExtResource("4_26t8g")
-text = "MA75 ASSAULT RIFLE"
+text = "WEAPON NAME"
 horizontal_alignment = 2
 uppercase = true
 
 [node name="PrimaryAmmo" type="Label" parent="WeaponStatus"]
 layout_mode = 2
 theme = ExtResource("4_26t8g")
-text = "AR MAG 52/52 (15)"
+text = "PRIMARY AMMO"
 horizontal_alignment = 2
 uppercase = true
 
 [node name="SecondaryAmmo" type="Label" parent="WeaponStatus"]
 layout_mode = 2
 theme = ExtResource("4_26t8g")
-text = "GREN 7/7 (8)"
+text = "SECONDARY AMMO"
 horizontal_alignment = 2
 uppercase = true
 
@@ -210,6 +211,7 @@ offset_right = -160.0
 offset_bottom = -250.0
 grow_horizontal = 2
 grow_vertical = 2
+scale = Vector2(2, 2)
 pivot_offset = Vector2(480, 60)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="CenterContainer"]
@@ -225,3 +227,26 @@ theme = ExtResource("4_26t8g")
 text = "Some text message"
 horizontal_alignment = 1
 uppercase = true
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="Control"]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="CounterMonitor" type="Label" parent="Control/CenterContainer"]
+layout_mode = 2
+text = "0.0"
+script = ExtResource("6_jqgqd")
+counter_signal_name = "time_left_changed"

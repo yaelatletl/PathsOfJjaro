@@ -41,20 +41,31 @@ extends Node
 
 func _ready():
 	reset_notification()
-	update_weapon()
+	Global.weapon_activating.connect(update_weapon_status)
+	Global.weapon_activated.connect(update_weapon_status)
+	Global.primary_trigger_fired.connect(func(successfully, weapon): update_weapon_status(weapon))
+	Global.secondary_trigger_fired.connect(func(successfully, weapon): update_weapon_status(weapon))
+	Global.primary_trigger_reloaded.connect(func(successfully, weapon): update_weapon_status(weapon))
+	Global.secondary_trigger_reloaded.connect(func(successfully, weapon): update_weapon_status(weapon))
+	Global.weapon_deactivating.connect(update_weapon_status)
+	Global.weapon_deactivated.connect(update_weapon_status)
+	
 	crosshair.position = get_viewport().size / 2 - Vector2i(crosshair.size / 2) # let's assume the viewport size won't change while in-game
 	await get_tree().create_timer(2).timeout
 	display_notification("Testing HUD notification", 2)
-	
+
+
+# TO DO:  it's possible for weapon activating animation to be reversed if the user presses previous/next_weapon key multiple times (repeatedly pressing the key quickly will step over weapons without activating any except the last-selected weapon, but pressing it a bit more slowly may cause a weapon's activating animation to start playing without allowing time for it to finish; ideally there should be a single animation that can be played either forward or backward or slowed/paused at any point so it's trivially reversible, otherwise we'll have to interpolate the model between 2 different positions, which may or may not produce a satisfactory animation)
 
 
 
-func update_health() -> void:
+func update_health_Status() -> void:
 	pass
 
 
-func update_weapon() -> void:
-	var weapon := Inventory.current_weapon
+func update_weapon_status(weapon: Weapon) -> void: # TO DO: in addition to updating the HUD display this also needs to drive the WIH animation
+	print("   ...update weapon status: ", weapon.long_name)
+	#var weapon := Inventory.current_weapon
 	var trigger1 := weapon.primaryTrigger
 	var trigger2 := weapon.secondaryTrigger
 	weapon_name.text = weapon.long_name

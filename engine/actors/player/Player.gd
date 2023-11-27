@@ -151,16 +151,29 @@ var impulse = Vector3.ZERO
 var wall_direction : Vector3 = Vector3.ZERO # used in VaultOver, do we need this? hopefully Player only needs a camera animation to imply jumping over a barrier
 
 
+@onready var body   := $body
+@onready var head   := $head # not sure if we need this node?
+@onready var camera := $head/camera
+
 
 # vertical collision detection using raycasting
 @onready var head_clearance := $HeadClearance # crouching -> standing -> jumping
 @onready var feet_clearance := $FeetClearance # TO DO: not sure about this one
 
-@onready var head   := $head
-@onready var body   := $body
-@onready var camera := $head/camera
-
+# control panel detection
 @onready var detect_control_panel := $head/camera/ActionReach
+
+
+# TO DO: in 3D Physics layers, rename "Level" to Map/MapGeometry/Wall/Surface/Solid/Exterior/Architecture/Shell or something else that's descriptive as "Level" is unhelpful (in mapping terms, a Level is the map geometry *and* all of the objects inside it)
+
+
+@onready var detect_step := $StepDetection # note: this raycast only detects a collision body that MAY block player walking forward (e.g. it could be a smooth ramp, which is climbable by Player's capsule body up to a certain angle); it also doesn't guarantee that it won't return false if the player proceeds forward, moving the ray to other side of a narrow body (e.g. ladder tread); TO DO: probably want 2 raycasts positioned left and right to better detect ledges approached at an angle; these will need to rotate around the Player's y=0 axis
+#
+# once a collision is initially detected, we'll want some way of determining if it's a climbable step, jumpable ledge, smooth ramp (doesn't need special handling), or non-climable (e.g. it's too small/shallow/steeply sloped to stand on, e.g. wall greebles are ignored but greeble-like structures in the Level layer will be detected); for now, use a single raycast while getting the basic implementation working
+#
+# there are also ladders to consider, although those will probably have their own Layer and collision Area and can hopefully be built as self-contained assets with the necessary logic to enable Player and pathfinding NPCs to climb them
+#
+# TO DO: hit_from_inside=true but ray doesn't detect solid full-height walls in front of it (i.e. ray starts from inside the wall's collision box) - why?
 
 
 
@@ -182,6 +195,8 @@ const MAX_LOOK_ANGLE := deg_to_rad(85) # Maximum camera angle
 
 var mouse_velocity := Vector2.ZERO # TO DO: is there any benefit to handing mouse motion _input events ourselves vs. calling Input.get_last_mouse_velocity() in _process?
 
+
+var detected_step = null
 
 
 
@@ -220,7 +235,7 @@ func _physics_process(delta: float) -> void: # fixed interval (see Project Setti
 			Inventory.previous_weapon()
 		if Input.is_action_just_pressed(&"SHOOT_PRIMARY"): # TO DO: temporary until triggers wait between shots
 			Inventory.current_weapon.shoot_primary(self.global_position, (camera.global_transform.basis.z * -1), self) # TO DO: should we pass the camera's global transform and let Projectile do the math?
-		if Input.is_action_pressed(&"SHOOT_SECONDARY"):
+		if Input.is_action_pressed(&"SHOOT_SECONDARY"): # TO DO: ATM Weapon has no time delay between shots so pressing this empties the second trigger in <1sec(!); not sure how best to arrange this logic - might want to implement Inventory.current_weapon.is_secondary_ready which can be checked first; alternatively, we just call shoot_secondary each time and let it figure it out
 			Inventory.current_weapon.shoot_secondary(self.global_position, (camera.global_transform.basis.z * -1), self)
 		
 		# action
@@ -241,7 +256,7 @@ func _physics_process(delta: float) -> void: # fixed interval (see Project Setti
 		# TO DO: CROUCH will become automatic; leave on manual key for now
 		if Input.is_action_just_pressed(&"CROUCH"):
 			pass
-
+		
 		# movement
 		var physics = SPRINT_PHYSICS if is_sprint_enabled else WALK_PHYSICS # temporary until crouch+swim states are implemented
 		if is_on_floor():
@@ -311,6 +326,16 @@ func _physics_process(delta: float) -> void: # fixed interval (see Project Setti
 	#self.velocity = self.velocity + Vector3(0, MAX_STEP_HEIGHT * delta, 0) if should_go_up else self.velocity #- Vector3(0,MAX_STEP_HEIGHT,0) if can_move_down else self.velocity)
 	
 	self.move_and_slide()
+	
+	if detect_step.is_colliding():
+		var step = detect_step.get_collider().get_parent()
+		if step != detected_step:
+			detected_step = step
+			print("entering step or ramp: ", detected_step.name)
+	else:
+		if detected_step != null:
+			print("exiting step or ramp: ", detected_step.name)
+			detected_step = null
 	
 	return # temporary
 	

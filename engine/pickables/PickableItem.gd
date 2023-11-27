@@ -3,6 +3,9 @@ class_name PickableItem
 
 # TO DO: how large should pickup radius be (currently 0.5m)
 
+# TO DO: would it be cheaper to have a single Cylinder collision Area on Player that detects all pickable items entering it?
+
+
 @export var item_type: Constants.PickableType
 
 

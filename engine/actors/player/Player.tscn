@@ -1,18 +1,13 @@
-[gd_scene load_steps=13 format=3 uid="uid://dxx6xubs1bfbr"]
+[gd_scene load_steps=12 format=3 uid="uid://dxx6xubs1bfbr"]
 
 [ext_resource type="Script" path="res://engine/actors/player/Player.gd" id="1_dw56p"]
+[ext_resource type="Script" path="res://engine/actors/player/components/interact.gd" id="2_ote7q"]
 [ext_resource type="PackedScene" uid="uid://bcdg4sigkkarn" path="res://assets/HUD/HUD.tscn" id="6_4fgbk"]
-[ext_resource type="Script" path="res://engine/pickables/interact.gd" id="11_3kl1f"]
-[ext_resource type="Script" path="res://assets/HUD/counter.gd" id="12_ik53x"]
 
 [sub_resource type="CapsuleShape3D" id="51"]
 resource_local_to_scene = true
 radius = 0.49
 height = 1.59
-
-[sub_resource type="CylinderShape3D" id="72"]
-height = 2.3586
-radius = 1.93094
 
 [sub_resource type="Animation" id="52"]
 length = 0.001
@@ -124,6 +119,10 @@ _data = {
 "walk": SubResource("55")
 }
 
+[sub_resource type="CylinderShape3D" id="72"]
+height = 2.3586
+radius = 1.93094
+
 [node name="Player" type="CharacterBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
 collision_layer = 2
@@ -134,15 +133,6 @@ script = ExtResource("1_dw56p")
 [node name="body" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
 shape = SubResource("51")
-
-[node name="interactor" type="Area3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
-visible = false
-script = ExtResource("11_3kl1f")
-
-[node name="CollisionShape" type="CollisionShape3D" parent="interactor"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
-shape = SubResource("72")
 
 [node name="head" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.999999, 0, 0, 0, 0.999999, 0, 0, 0)
@@ -184,31 +174,24 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.0
 target_position = Vector3(0, -1.7, 0)
 debug_shape_custom_color = Color(0.54902, 0.0117647, 0.603922, 0.509804)
 
+[node name="StepDetection" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, -1)
+exclude_parent = false
+target_position = Vector3(2.08165e-12, -0.78, 2.08165e-12)
+collision_mask = 32897
+hit_from_inside = true
+debug_shape_custom_color = Color(0.54902, 0.0117647, 0.603922, 0.509804)
+debug_shape_thickness = 4
+
 [node name="hud" type="CanvasLayer" parent="."]
 
-[node name="Control" type="Control" parent="hud"]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-
-[node name="CenterContainer" type="CenterContainer" parent="hud/Control"]
-layout_mode = 0
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-
-[node name="Label" type="Label" parent="hud/Control/CenterContainer"]
-visible = false
-layout_mode = 2
-text = "0.0"
-script = ExtResource("12_ik53x")
-counter_node_path = NodePath("../../../../interactor")
-counter_signal_name = "time_left_changed"
-
 [node name="HUD" parent="hud" instance=ExtResource("6_4fgbk")]
+
+[node name="interactor" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
+visible = false
+script = ExtResource("2_ote7q")
+
+[node name="CollisionShape" type="CollisionShape3D" parent="interactor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
+shape = SubResource("72")

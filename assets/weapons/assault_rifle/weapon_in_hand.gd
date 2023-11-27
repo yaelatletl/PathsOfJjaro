@@ -2,6 +2,10 @@ extends Node3D
 
 # weapons/assault_rifle/WeaponInHand.gd -- this implements the standard API for performing weapon's animations; TO DO: make this API signal-based so that engine can be tested with or without HUD attached and vice-versa
 
+
+# TO DO: the WIH needs separately rendered from walls and composited into Viewport/HUD's CanvasLayer to fix the problem where barrels visually clip through nearby walls; Q. separate rendering also means we'll need 2 muzzle flash light sources, one on the WIH (to light the WIH model) and one on Player (to light the surrounding environment) - TO DO: how to apply level's lighting effects to the WIH if it's rendered in an unrelated scene? is there any way to render the WIH in the same scene as level without it clipping through walls? (I don't think we can simply hide the level's walls and other visible objects leaving only the lightsources, then render WIH in that, as all of the lights which were blocked by walls would now hit WIH too); need to do more research on this as other Godot FPSes will have had to solve/kludge it too; Q. what about two Player cameras which track together but have different cull masks - will that work?
+
+
 enum WeaponHandedness {
 	PRIMARY, # for now, assume PRIMARY=left, SECONDARY=right
 	SECONDARY,
