@@ -16,6 +16,7 @@ size = Vector3(0.5, 0.5, 0.25)
 
 [node name="PickableItem" type="RigidBody3D"]
 collision_layer = 32
+can_sleep = false
 script = ExtResource("1_avixr")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]

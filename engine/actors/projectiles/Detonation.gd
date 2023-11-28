@@ -1,4 +1,4 @@
-extends StaticBody3D # TO DO: what class should detonation effect (bullet, energy bolt, grenade, etc impact) use?
+extends StaticBody3D # TO DO: what class should detonation effect (bullet, energy bolt, grenade, etc impact) use? AnimatedBody3D?
 
 # Detonation.gd -- created by a projectile upon self-destructive impact (note: bullets and other projectiles that hit destructible glass and some destructible props, e.g. glass bottles, [usually?] do not explode on that impact but instead destroy the object and continue moving until they hit something else)
 
@@ -12,6 +12,10 @@ extends StaticBody3D # TO DO: what class should detonation effect (bullet, energ
 # Q. should Detonations that do shrapnel damage be implemented as ShrapnelExplosion subclass? or should Detonation have a `shrapnelRadius` property where 0 = no shrapnel and >0 = shrapnel damage to everything in its area? Q. when a grenade hits an NPC does it do direct damage AND shrapnel damage to that NPC, or shrapnel damage only? (need to check AO code for this)
 
 # TO DO: if using a mesh/billboard sprite to represent the explosion shape, if it hits underside of a shallow shelf (e.g. the elevator platform in the Gameplay_test map) the mesh will appear half beneath and half above the shelf - how can we create a smarter explosion that doesn't penetrate through solid surfaces (though can still extend around corners)? or can a cloud of particle effects handle this use case better than a solid mesh? more research needed
+
+
+
+# TO DO: can/should damaging effects such as burning materials, electric sparks, cryogenic leaks be implemented as detonations? (non-damaging effects might be simpler done in their own class as they don't need Detonation's damage behaviors, though they may still need some collision detection to control their behavior, e.g. if a door closes on the effect or an NPC corpse falls on top of it that should hide/suspend/stop it so it isn't "spraying" through the solid body)
 
 
 func _ready() -> void:

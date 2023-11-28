@@ -137,7 +137,7 @@ func shoot_primary(player_origin: Vector3, projectile_direction: Vector3, shoote
 	# ask the trigger to fire; if the trigger can't fire (because it is empty and there's no ammo to reload it, or because it is in middle of its wait cycle), it will do nothing and return false to indicate it couldn't shoot AFAIK only multipurpose weapons can have this condition: e.g. AR has bullets but no grenades or vice-versa)
 	var success = primaryTrigger.shoot(player_origin, projectile_direction, shooter)
 	print("try to shoot primary trigger:", success)
-	Global.primary_trigger_fired.emit(success, self)
+	Global.primary_trigger_fired.emit(success)
 	if primaryTrigger.count == 0:
 		reload_primary()
 
@@ -147,7 +147,7 @@ func shoot_secondary(player_origin: Vector3, projectile_direction: Vector3, shoo
 	# TO DO: ditto
 	var success = secondaryTrigger.shoot(player_origin, projectile_direction, shooter)
 	print("try to shoot secondary trigger: ", success)
-	Global.secondary_trigger_fired.emit(success, self)
+	Global.secondary_trigger_fired.emit(success)
 	if secondaryTrigger.count == 0:
 		reload_secondary()
 	
@@ -158,13 +158,13 @@ func shoot_secondary(player_origin: Vector3, projectile_direction: Vector3, shoo
 func reload_primary() -> void:
 	var success = primaryTrigger.load_ammo()
 	print("try to reload primary trigger: ", success)
-	Global.primary_trigger_reloaded.emit(success, self)
+	Global.primary_trigger_reloaded.emit(success)
 	# TO DO: if reload failed, need to change that trigger's state so its 
 
 func reload_secondary() -> void:
 	var success = secondaryTrigger.load_ammo()
 	print("try to reload primary trigger: ", success)
-	Global.secondary_trigger_reloaded.emit(success, self)
+	Global.secondary_trigger_reloaded.emit(success)
 
 
 # draw weapon ready for use or holster it; Inventory will only call activate after checking if the weapon is available

@@ -6,6 +6,15 @@ class_name PickableItem
 # TO DO: would it be cheaper to have a single Cylinder collision Area on Player that detects all pickable items entering it?
 
 
+# TO DO: if PickableItem.can_sleep is true, there is an obvious problem where ammo placed on the moving platform is pushed up by rising platform but does not fall down again as platform lowers (it's also impossible for player to pick up once it's pushed); this is a physics issue, obvs, 
+
+# Q. should all pickables be simple static bodies, and any placed on platforms become the platform's responsibility to move - the platform's own collision detection can find it and add it to an array of items that the platform will move in sync to its own movements
+#
+# most pickable items *never* move, so having to do any physics at all on them is a waste of resources; alternatively, if we implement Pickable as RigidBody then it probably makes sense to freeze the stationary pickables so they aren't a significant load (we can set the freeze flag in the map editor when the Pickable node is added to the map)
+
+
+
+
 @export var item_type: Constants.PickableType
 
 

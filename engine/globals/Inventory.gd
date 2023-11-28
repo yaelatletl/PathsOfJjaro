@@ -48,7 +48,7 @@ class InventoryItem:
 	func try_to_increment() -> bool:
 		if self.count < self.max_count:
 			self.count += 1
-			# TO DO: probably want to emit inventory_item_changed.emit(self) signal here, so HUD can query the Inventory and update itself
+			Global.inventory_item_changed.emit(self)
 			return true
 		else:
 			return false
@@ -56,7 +56,7 @@ class InventoryItem:
 	func try_to_decrement() -> bool:
 		if self.count > 0:
 			self.count -= 1
-			# TO DO: ditto
+			Global.inventory_item_changed.emit(self)
 			return true
 		else:
 			return false # TO DO: we should probably return `self.count != 0` here so Fist can have an infinite magazine with count=-1 (i.e. never runs out)

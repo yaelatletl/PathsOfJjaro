@@ -10,7 +10,10 @@ extends Node
 
 
 
-# signals need to be declared in a global node (or some other node which all emitters and listeners can reference); in this case we're connecting: Weapon -> Global.SOME_SIGNAL <- HUD
+# note: signals need to be declared in a global node (or some other node which all emitters and listeners can reference); in this case we're connecting: Weapon -> Global.SOME_SIGNAL <- HUD
+
+
+# TO DO: is it worth moving signal definitions into their own Signals.gd global? (leave them here for now; they can easily be relocated later)
 
 # TO DO: this API is temporary until we figure out the best design for it; most of these signals might be combined into a single `weapon_state_changed([from_state: WeaponState] weapon: Weapon)` - I think this will make the weapon's state changes easier to understand and reason about (and thus robustly implement in WIH view)
 
@@ -27,13 +30,16 @@ signal weapon_deactivated(weapon: Weapon)
 
 
 
-signal primary_trigger_fired(successfully: bool, weapon: Weapon) # passing the Weapon allows recipient to query the weapon's current state as well as the state of the firing trigger (and the other trigger if needed), which should be enough information to drive all the animations
-signal secondary_trigger_fired(successfully: bool, weapon: Weapon)
+signal primary_trigger_fired(successfully: bool) # passing the Weapon allows recipient to query the weapon's current state as well as the state of the firing trigger (and the other trigger if needed), which should be enough information to drive all the animations
+signal secondary_trigger_fired(successfully: bool)
 
 
-signal primary_trigger_reloaded(successfully: bool, weapon: Weapon)
-signal secondary_trigger_reloaded(successfully: bool, weapon: Weapon)
+signal primary_trigger_reloaded(successfully: bool)
+signal secondary_trigger_reloaded(successfully: bool)
 
+
+
+signal inventory_item_changed(item: Inventory.InventoryItem)
 
 
 

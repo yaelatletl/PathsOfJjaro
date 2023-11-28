@@ -41,29 +41,36 @@ extends Node
 
 func _ready():
 	reset_notification()
+	update_weapon_status()
+	# TO DO: is there any way to set up signal connections in the node editor? oddly, the HUD's Scene tab doesn't allow Inventory.tscn to be added via Add Child Node, although it does allow it to be dragged and dropped from the FileSystem tab - but does this create a separate instance of it or reference the existing global instance? need to check Godot documentation; not sure if it'd be easier setting these signals in the Node tab than in code, but for now just stick to doing it in code (that this code is visibly ugly suggests the current API design is badly factored):
+	
+	# note: in addition to updating the HUD display these signals will also drive the WIH animation (but connecting signals to that is the WIH manager's job)
 	Global.weapon_activating.connect(update_weapon_status)
 	Global.weapon_activated.connect(update_weapon_status)
-	Global.primary_trigger_fired.connect(func(successfully, weapon): update_weapon_status(weapon))
-	Global.secondary_trigger_fired.connect(func(successfully, weapon): update_weapon_status(weapon))
-	Global.primary_trigger_reloaded.connect(func(successfully, weapon): update_weapon_status(weapon))
-	Global.secondary_trigger_reloaded.connect(func(successfully, weapon): update_weapon_status(weapon))
-	Global.weapon_deactivating.connect(update_weapon_status)
-	Global.weapon_deactivated.connect(update_weapon_status)
+	Global.primary_trigger_fired.connect(update_weapon_status)
+	Global.secondary_trigger_fired.connect(update_weapon_status)
+	Global.primary_trigger_reloaded.connect(update_weapon_status)
+	Global.secondary_trigger_reloaded.connect(update_weapon_status)
+	#Global.weapon_deactivating.connect(update_weapon_status) # shouldn't be needed as the status will change when the next weapoon activates
+	#Global.weapon_deactivated.connect(update_weapon_status)
+	Global.inventory_item_changed.connect(update_weapon_status)
 	
 	crosshair.position = get_viewport().size / 2 - Vector2i(crosshair.size / 2) # let's assume the viewport size won't change while in-game
 	await get_tree().create_timer(2).timeout
 	display_notification("Testing HUD notification", 2)
 
 
+
 # TO DO:  it's possible for weapon activating animation to be reversed if the user presses previous/next_weapon key multiple times (repeatedly pressing the key quickly will step over weapons without activating any except the last-selected weapon, but pressing it a bit more slowly may cause a weapon's activating animation to start playing without allowing time for it to finish; ideally there should be a single animation that can be played either forward or backward or slowed/paused at any point so it's trivially reversible, otherwise we'll have to interpolate the model between 2 different positions, which may or may not produce a satisfactory animation)
 
 
 
-func update_health_Status() -> void:
+func update_health_status() -> void:
 	pass
 
 
-func update_weapon_status(weapon: Weapon) -> void: # TO DO: in addition to updating the HUD display this also needs to drive the WIH animation
+func update_weapon_status(_arg = null) -> void: 
+	var weapon := Inventory.current_weapon
 	print("   ...update weapon status: ", weapon.long_name)
 	#var weapon := Inventory.current_weapon
 	var trigger1 := weapon.primaryTrigger
