@@ -103,10 +103,10 @@ func __switch_weapon(search_func: Callable) -> void:
 	if new_weapon != current_weapon:
 		# TO DO: fast weapon switching: if user presses PREVIOUS/NEXT key repeatedly, e.g. to switch from SPNKR to Magnum, do not fully cycle through every weapon's draw and holster animations; basically, once user presses PREV/NEXT the first time, start the current weapon's deactivation and, while that is playing, monitor for any additional presses and continue switching; once user stops pressing for, say, 0.2sec, start the next activate animation but allow that animation to be quickly reversed by any additional PREV/NEXT press[es]; rinse and repeat until user makes mind up/a new weapon is brought fully to bear and is ready for use
 		current_weapon.deactivate()
-		await get_tree().create_timer(current_weapon.ready_time).timeout
+		await get_tree().create_timer(current_weapon.deactivation_time).timeout
 		current_weapon = new_weapon
 		current_weapon.activate()
-		await get_tree().create_timer(current_weapon.ready_time).timeout
+		await get_tree().create_timer(current_weapon.activation_time).timeout # TO DO: check blocking behavior; can't remember if the __switch_weapon function returns immediately, allowing previous_weapon to return as well, or if it blocks both until timeout; either way, we want to prevent weapon being used before timeout but we should do this with non-blocking Weapon.current_state transitions
 
 
 func previous_weapon() -> void:
@@ -133,6 +133,60 @@ func next_weapon() -> void:
 	__switch_weapon(search_func)
 
 
-# TO DO: health management goes here? since health has to persist across levels, it can't be stored on per-level Player objects. Define an API here for adding/removing health/oxygen;
+
+# health
+# note: health has to persist across levels so can't be held in per-level Player objects
+
+
+# TO DO: hook up to Player and HUD via signals; add health packs, rechargers, and radiation damage areas to test map once Detonations are implemented; test it works
+
+
+signal oxygen_changed() # while oxygen/shield increment/decrement could be reported as health_changed, it doesn't really simplify things (since it needs an DamageType.OXYGEN constant added and listeners must implement an extra conditional test to handle it; plus shield hits probably want to take the original DamageType enum so it can display different screen effects for different types of impact)
+signal health_changed(damage_type: Constants.DamageType) # M2 calls health "shields" (unlike DOOM, M2 doesn't have separate health plus optional ablative armor which reduces health damage), but since it is running out of health which kills you we use DOOM-style nomenclature in code
+signal player_died(damage_type: Constants.DamageType)
+
+const OXYGEN_MAX := 100
+const HEALTH_MAX := 300
+
+var oxygen := 100
+var health := 100
+
+
+func get_oxygen() -> int:
+	return oxygen
+
+func increase_oxygen(amount: float) -> void:
+	if oxygen < OXYGEN_MAX:
+		oxygen = min(oxygen + amount, OXYGEN_MAX)
+		oxygen_changed.emit()
+
+func set_oxygen(amount: float) -> void:
+	oxygen = amount
+
+func decrease_oxygen(amount: float) -> void:
+	oxygen -= amount
+	if oxygen > 0:
+		oxygen_changed.emit() # TO DO: should we also emit changed before died? depends if died is intended to provide notifications to objects that ignore all other health changes
+	else:
+		player_died.emit(Constants.DamageType.SUFFOCATION)
+
+
+func get_health() -> int:
+	return health
+
+func increase_health(amount: float) -> void:
+	if health < HEALTH_MAX:
+		health = min(health + amount, HEALTH_MAX)
+		health_changed.emit(Constants.DamageType.NONE) # TO DO: change to reusable DamageClass instance
+
+func set_health(amount: float) -> void:
+	health = amount
+
+func decrease_health(amount: float, damage_type: Constants.DamageType) -> void:
+	health -= amount
+	if health > 0:
+		health_changed.emit(damage_type) # TO DO: ditto
+	else:
+		player_died.emit(damage_type)
 
 

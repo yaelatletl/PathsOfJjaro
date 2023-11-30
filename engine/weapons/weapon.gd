@@ -66,62 +66,79 @@ func get_in_hand() -> bool:
 
 
 
-var long_name: String # show this in Inventory overlay
-var short_name: String # show this in HUD
+var long_name: String  : get = get_long_name # show this in Inventory overlay
+var short_name: String : get = get_short_name # show this in HUD
 
-var max_count := 0
-var count := 0 # how many guns of this type is player carrying? 0/1/2 (let's cap this for each weapon type to avoid Classic's TC silliness where the player's inventory can contain multiple ARs, fusions, SPNKRs, etc; either leave excess weapons on ground or else convert them to additional ammo)
+var max_count: int : get = get_max_count
+var count: int :     get = get_count # how many guns of this type is player carrying? 0/1/2 (let's cap this for each weapon type to avoid Classic's TC silliness where the player's inventory can contain multiple ARs, fusions, SPNKRs, etc; either leave excess weapons on ground or else convert them to additional ammo)
+
+func get_long_name() -> String:
+	return inventory_item.long_name
+
+func get_short_name() -> String:
+	return inventory_item.short_name
+
+func get_max_count() -> int:
+	return inventory_item.max_count
+	
+func get_count() -> int:
+	return inventory_item.count
 
 
-var item_type: Constants.PickableType
+var inventory_item: Inventory.InventoryItem
 
-var weapon_class := &"multipurpose" # TO DO: replace this property with additional bool flags (the Classic flags below already cover most of the behavioral differences)
+
+#var weapon_class := &"multipurpose" # TO DO: replace this property with additional bool flags (the Classic flags below already cover most of the behavioral differences)
 
 # flags
 var is_automatic := true # true for AR, TOZT, alien gun, SMG; what is not clear is why it is needed since all weapons repeat-fire while trigger is held
-var overloads := false # neeeded for fusion (TO DO: move this flag from weapon config to both primaryTrigger and secondaryTrigger configs)
-var reloads_in_one_hand := false # true for shotgun; we shouldn't need this flag as AFAIK this only affects WIH's animation (unlike Classic, which has 2 separate animation players for left and right hands, we only have one animation player for both)
 var fires_out_of_phase := false # true for magnum; don't think we need this
+var reloads_out_of_phase := false # true for shotgun; we shouldn't need this flag as AFAIK this only affects WIH's animation (unlike Classic, which has 2 separate animation players for left and right hands, we only have one animation player for both)
 var fires_under_media := false # fist, fusion, SMG -- TO DO: check fusion's underwater behavior (can't remember if both triggers shock player, or secondary only); probably best moved to WeaponTrigger and replaced with an enum to describe its behavior under water as well as above
 var fires_in_vacuum: bool # TO DO: implement this (M1 campaign needs it; I forget how M3's vacuum levels disabled non-vacuum weapons but we'll just use the same flag for those too); again, probably best moved to WeaponTrigger
-var triggers_share_ammo := false # true for fusion and alien gun (i.e. gun holds a single magazine which both triggers deplete)
-var secondary_has_angular_flipping := false # true for alien gun
-var disappears_after_use := false # true for alien gun
+var overloads := false # neeeded for fusion (TO DO: move this flag from weapon config to both primaryTrigger and secondaryTrigger configs)
 var has_random_ammo_on_pickup := false # true for alien gun
+var disappears_after_use := false # true for alien gun
+var secondary_has_angular_flipping := false # true for alien gun # TO DO: make this a trigger property
 
 var origin_offset := Vector3(0, 1, 0.5) # TO DO: this needs to be set from weapon_definition's primary/secondary_trigger (for dual-wield weapons when only 1 weapon is visible, the x-offset should probably be the average of primary and secondary x-offsets, with the WIH animation set up to show single pistol in center of screen to match)
 
+var activation_time: float # TO DO: M3 physics has this on weapon, not trigger, so I suspect it's time it takes between selecting weapon and weapon being ready to take its first shot
+var deactivation_time: float
 
 func _ready():
 	pass
 
 
-func configure(data: Dictionary) -> void:
-	self.long_name = data.long_name
-	self.short_name = data.short_name
+func configure(weapon_data: Dictionary) -> void:
+	self.inventory_item = Inventory.get_item(weapon_data.item_type)
 	
-	self.max_count = data.max_count
-	self.count = data.count
+	#self.weapon_class = weapon_data.weapon_class
 	
-	self.item_type = data.item_type
+	self.activation_time                = weapon_data.activation_time
+	self.deactivation_time              = weapon_data.deactivation_time
 	
-	self.weapon_class = data.weapon_class
+	self.is_automatic                   = weapon_data.flags.is_automatic
+	self.fires_out_of_phase             = weapon_data.flags.fires_out_of_phase
+	self.reloads_out_of_phase            = weapon_data.flags.reloads_out_of_phase
+	self.fires_under_media              = weapon_data.flags.fires_under_media
+	self.fires_in_vacuum                = weapon_data.fires_in_vacuum
+	self.overloads                      = weapon_data.flags.overloads
+	self.has_random_ammo_on_pickup      = weapon_data.flags.has_random_ammo_on_pickup
+	self.disappears_after_use           = weapon_data.flags.disappears_after_use
+	self.secondary_has_angular_flipping = weapon_data.flags.secondary_has_angular_flipping
 	
-	# this can be rearranged later; for now, it is helpful to see all attributes
-	self.is_automatic = data.flags.is_automatic
-	self.disappears_after_use = data.flags.disappears_after_use
-	self.overloads = data.flags.overloads
-	self.has_random_ammo_on_pickup = data.flags.has_random_ammo_on_pickup
-	self.reloads_in_one_hand = data.flags.reloads_in_one_hand
-	self.fires_out_of_phase = data.flags.fires_out_of_phase
-	self.fires_under_media = data.flags.fires_under_media
-	self.triggers_share_ammo = data.flags.triggers_share_ammo
-	self.secondary_has_angular_flipping = data.flags.secondary_has_angular_flipping
-	
+	# TO DO: private Weapon.Magazine class so both triggers can share a single magazinw when Fusion
+	var magazine = WeaponTrigger.Magazine.new()
+	magazine.configure(weapon_data.primaryTrigger, weapon_data.has_random_ammo_on_pickup)
 	self.primaryTrigger = WeaponTrigger.new()
-	self.primaryTrigger.configure(data.primary_trigger)
+	self.primaryTrigger.configure(weapon_data.primary_trigger, magazine)
+	
 	self.secondaryTrigger = WeaponTrigger.new()
-	self.secondaryTrigger.configure(data.secondary_trigger) # TO DO: WeaponTrigger.configure needs to take optional Magazine argument: if triggers_share_ammo=true, pass the primary trigger's magazine to the secondary trigger, otherwise pass null to tell trigger[s] to find their own magazine[s]
+	if not weapon_data.triggers_share_magazine: # weapon holds a single magazine which both triggers deplete; true for fusion and alien gun
+		magazine = WeaponTrigger.Magazine.new()
+		magazine.configure(weapon_data.secondaryTrigger, weapon_data.has_random_ammo_on_pickup)
+	self.secondaryTrigger.configure(weapon_data.secondary_trigger, magazine)
 
 
 
@@ -154,6 +171,8 @@ func shoot_secondary(player_origin: Vector3, projectile_direction: Vector3, shoo
 
 
 # reload; this ties in with weapon flags and ammunition
+
+# TO DO: timings; these might be in state machine, caveat that shotguns allow out-of-phase reloading
 
 func reload_primary() -> void:
 	var success = primaryTrigger.load_ammo()

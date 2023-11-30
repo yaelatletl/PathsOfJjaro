@@ -10,7 +10,7 @@ extends Node
 
 
 
-# note: signals need to be declared in a global node (or some other node which all emitters and listeners can reference); in this case we're connecting: Weapon -> Global.SOME_SIGNAL <- HUD
+# note: these signals need to be declared in a global node (or some other Node which all emitters and listeners can access); in this case we're connecting: Weapon -> Global.SOME_SIGNAL <- HUD; the alternative would be to use Groups (which are globally defined in Project Settings), although that makes relationships less apparent and loses typechecking (since you're jumping between Project Settings tabs and code whereas signals are all done in code); for now, continue using signals for loose view-model connections and reserve Groups for a few specific use-cases, e.g.  a "SaveGame" group broadcast can tell all in-game bodies to serialize their state and pass it to SavedGameManager to be added to the outgoing JSON Dictionary
 
 
 # TO DO: is it worth moving signal definitions into their own Signals.gd global? (leave them here for now; they can easily be relocated later)

@@ -26,10 +26,12 @@ func _ready():
 	get_tree().create_timer(lifetime).connect("timeout", Callable(self, "queue_free"))
 
 
-
-# note: shooter is only used for collision exception and origin and direction are passed separately so Projectile class can be used by NPCs (which have a different aiming mechanism) as well as Player (which uses camera rotation to aim); caller is responsible for calculating the projectile's point of origin as an offset from its global_position; direction is a global_rotation
-func configure_and_shoot(projectile_type: Constants.ProjectileType, projectile_origin: Vector3, direction: Vector3, shooter: PhysicsBody3D) -> void: # TO DO: WeaponTrigger.configure() needs to look up the projectile's settings, which may be a Dictionary or ProjectileDefinition created from a dictionary of parameters (c.f. Weapon)
+# note: `shooter` parameter is only used for collision exception; origin and direction are passed separately so Projectile class can be used by Player (which uses camera rotation to aim) and by NPCs (which use a different mechanism for aiming)
+# note: caller should calculate the projectile's point of origin as an offset from its global_position
+# note: direction is a global_rotation; for Player, this is calculated from camera's look vector; for NPCs, this is calculated by their own target acquisition logic (e.g. identify the nearest hostile that's in range and unobstructed line of sight, and shoot at it)
+func configure_and_shoot(projectile_type: Constants.ProjectileType, projectile_origin: Vector3, direction: Vector3, shooter: PhysicsBody3D) -> void: # TO DO: WeaponTrigger.configure() needs to look up the projectile's settings, which may be a Dictionary or ProjectileDefinition created from a dictionary of parameters (c.f. Weapon) 
 	add_collision_exception_with(shooter)
+	Global.add_to_level(self)
 	global_position = projectile_origin
 	# TO DO: projectiles that have a solid form (grenade, rocket; any others?) will need to set their rotation as well so the 3D mesh points in correct direction; OTOH bullets have no visible shape and 2D billboard sprites are best for energy bolts; flamethrower will require some experimentation to find the right look (possibly a mixture of sphere meshes, materials, and sprites); however we only need bullets and energy bolts for Arrival Demo so can ignore 3D projectiles and flame for now
 	__vector = direction * speed

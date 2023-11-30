@@ -357,38 +357,6 @@ func is_far_from_floor() -> bool: # TO DO: what is purpose of this? it is not th
 
 
 
-
-
-# health
-
-# TO DO: move health and its signals to Inventory so they persist across levels
-
-signal died()
-signal health_changed(health, shields)
-
-var health  := 100
-var shields := 100
-var oxygen  := 100
-
-
-func _damage(amount : float, type):
-	var temp = amount
-	amount = (amount - shields)/10
-	shields -= temp
-	if health > 0:
-		health -= amount
-	if health <= 0:
-		die()
-	health_changed.emit(health, shields)
-
-func die():
-#	_get_component("input").enabled = false
-	died.emit()
-	#print("Player "+name+" died")
-
-
-
-
 # called by PickableItem when it detects Player walking into it
 
 func found_item(item: PickableItem) -> void: # called by PickableItem when Player collides with it (we'll keep this flexible just in case we want any NPCs to grab items as well)
