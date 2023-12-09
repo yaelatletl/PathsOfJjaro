@@ -5,12 +5,13 @@ extends Node
 
 
 const WEAPON_DEFINITIONS := [ # TO DO: add remaining definitions in order of previous/next weapon switching (Arrival Demo requires FIST, MAGNUM_PISTOL, and ASSAULT_RIFLE; the rest can be added later)
-{
+	{
+		# TO DO: add a separate Enums.WeaponType? for now, just use PickableType to identify weapons by enum
 		"pickable": Enums.PickableType.FIST,
 		#"weapon_class": "melee", # how does this influence weapon behaviors? (e.g. I think melee affects run-punch damage; what else?)
 		
-		"activation_time": 0.117,
-		"deactivation_time": 0.117,
+		"activation_time": 1.0, # 0.117,
+		"deactivation_time": 1.0, # 0.117,
 		
 		"flags": {
 			"is_automatic": false, # TO DO: check AO code for behavior; all Classic weapons are automatic, except possibly SPNKR, as holding a trigger repeats firing (a true semi-automatic requires a fresh trigger pull for each shot - holding the trigger would only shoot once)
@@ -78,8 +79,8 @@ const WEAPON_DEFINITIONS := [ # TO DO: add remaining definitions in order of pre
 		"pickable": Enums.PickableType.MAGNUM_PISTOL,
 		#"weapon_class": "dual wield",
 		
-		"activation_time": 0.167,
-		"deactivation_time": 0.167,
+		"activation_time": 1.0, # 0.167,
+		"deactivation_time": 1.0, # 0.167,
 		
 		"flags": {
 			"is_automatic": false,
@@ -157,8 +158,8 @@ const WEAPON_DEFINITIONS := [ # TO DO: add remaining definitions in order of pre
 		#"powerup_type": null,
 		#"weapon_class": "multipurpose", # how does this influence weapon behaviors? (e.g. I think melee affects run-punch damage; what else?)
 		
-		"activation_time": 0.25, # (Classic MacOS used 60tick/sec) # TO DO: rename 'ticks' to 'time' in all weapon definitions and convert values to seconds (divide ticks by 60)
-		"deactivation_time": 0.25,
+		"activation_time": 1.0, # 0.25, # (Classic MacOS used 60tick/sec) # TO DO: rename 'ticks' to 'time' in all weapon definitions and convert values to seconds (divide ticks by 60)
+		"deactivation_time": 1.0, # 0.25,
 		
 		"flags": {
 			"is_automatic": true, # true for AR, SPNKR, flamethrower, alien gun, flechette gun; not sure what it does though as other weapons also fire repeatedly when trigger key is held down
@@ -187,8 +188,8 @@ const WEAPON_DEFINITIONS := [ # TO DO: add remaining definitions in order of pre
 		
 		"primary_trigger": {
 			"pickable": Enums.PickableType.AR_MAGAZINE,
-			"max_count": 52, # was: rounds_per_magazine # TO DO: 52
-			"count": 52,
+			"max_count": 12, # was: rounds_per_magazine # TO DO: 52
+			"count": 12,
 			
 			"projectile_type": Enums.ProjectileType.RIFLE_BULLET,
 			"special_projectile_type": null,
@@ -228,8 +229,8 @@ const WEAPON_DEFINITIONS := [ # TO DO: add remaining definitions in order of pre
 		"secondary_trigger": {
 			
 			"pickable": Enums.PickableType.AR_GRENADE_MAGAZINE,
-			"max_count": 7,
-			"count": 7,
+			"max_count": 3, # TO DO: 7
+			"count": 3,
 			
 			"projectile_type": Enums.ProjectileType.GRENADE,
 			"special_projectile_type": null,

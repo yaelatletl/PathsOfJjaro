@@ -33,6 +33,7 @@ ProjectileDefinitions="*res://engine/globals/physics/ProjectileDefinitions.gd"
 TransitionDefinitions="*res://engine/globals/physics/TransitionDefinitions.gd"
 DetonationDefinitions="*res://engine/globals/physics/DetonationDefinitions.gd"
 AnimationDefinitions="*res://engine/globals/physics/AnimationDefinitions.gd"
+WeaponManager="*res://engine/weapons/WeaponManager.tscn"
 
 [debug]
 
@@ -161,6 +162,8 @@ RESET_GAME={
 
 [layer_names]
 
+3d_render/layer_1="Level"
+3d_render/layer_2="WeaponInHand"
 3d_physics/layer_1="Level"
 3d_physics/layer_2="Player"
 3d_physics/layer_3="NPC"

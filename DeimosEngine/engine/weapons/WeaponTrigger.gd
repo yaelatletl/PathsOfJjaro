@@ -75,16 +75,20 @@ var can_fire := true # TO DO: currently this is always true; should we put wait 
 
 var available: bool: # called by Inventory.previous/next_weapon to determine if a Weapon can be drawn for use (either it has ammo in it or the player has picked up more ammo since emptying it) # TO DO: rename this?
 	get:
-		return magazine.count > 0 or get_can_reload()
+		return has_rounds() or can_reload()
 
-func get_can_reload() -> bool: # should this be separate to get_available? if the gun is empty, calling load_ammo will try to reload it
-	return magazine.count != 0
+func can_reload() -> bool: # should this be separate to get_available? if the gun is empty, calling load_ammo will try to reload it
+	return magazine.inventory_item.count != 0
 
+func has_rounds() -> bool:
+	return magazine.count > 0
 
-func needs_reload() -> bool:
+func is_empty() -> bool:
 	return magazine.count <= 0
 
 
+func should_reload_now() -> bool:
+	return is_empty() and can_reload()
 
 
 
@@ -133,8 +137,8 @@ func shoot(projectile_origin: Vector3, projectile_direction: Vector3, shooter: P
 		return true
 	else:
 		return false
-	
-	
+
+
 func load_ammo() -> bool: # this reloads instantly and returns true or false depending on success; it is up to Weapon to add timing delays and trigger the WeaponInHand animations
 	return magazine.try_to_refill()
 

@@ -9,7 +9,7 @@ class_name FloatCounter
 
 
 func _ready():
-	self.connect(counter_signal_name, Callable(self, "counter_changed"))
+	pass # self.connect(counter_signal_name, Callable(self, "counter_changed"))
 
 func counter_changed(value: float):
 	self.text = str(snapped(value, 0.1))

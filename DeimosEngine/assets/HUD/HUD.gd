@@ -47,29 +47,37 @@ func _ready():
 	# TO DO: is there any way to set up signal connections in the node editor? oddly, the HUD's Scene tab doesn't allow Inventory.tscn to be added via Add Child Node, although it does allow it to be dragged and dropped from the FileSystem tab - but does this create a separate instance of it or reference the existing global instance? need to check Godot documentation; not sure if it'd be easier setting these signals in the Node tab than in code, but for now just stick to doing it in code (that this code is visibly ugly suggests the current API design is badly factored):
 	
 	# note: in addition to updating the HUD display these signals will also drive the WIH animation (but connecting signals to that is the WIH manager's job)
-	Global.weapon_activating.connect(update_weapon_status)
-	Global.weapon_activated.connect(update_weapon_status)
-	Global.primary_trigger_fired.connect(update_weapon_status)
-	Global.secondary_trigger_fired.connect(update_weapon_status)
-	Global.primary_trigger_reloaded.connect(update_weapon_status)
-	Global.secondary_trigger_reloaded.connect(update_weapon_status)
-	#Global.weapon_deactivating.connect(update_weapon_status) # shouldn't be needed as the status will change when the next weapoon activates
-	#Global.weapon_deactivated.connect(update_weapon_status)
-	Global.inventory_item_count_changed.connect(update_weapon_status)
+	# TO DO: combine these signals into one? HUD would call Weapon.status to discover which transition it's in
+	WeaponManager.weapon_activating.connect(update_weapon_status)
+	WeaponManager.weapon_activated.connect(update_weapon_status)
+	WeaponManager.weapon_deactivating.connect(update_weapon_status)
+	WeaponManager.weapon_deactivated.connect(update_weapon_status)
+	
+	WeaponManager.weapon_primary_magazine_changed.connect(update_weapon_status)
+	WeaponManager.weapon_secondary_magazine_changed.connect(update_weapon_status)
+	Inventory.inventory_item_increased.connect(update_inventory_status)
+	Inventory.inventory_item_decreased.connect(update_inventory_status)
+	
 	Global.health_changed.connect(update_health_status)
 	Global.player_died.connect(update_health_status)
+	
 	crosshair.position = get_viewport().size / 2 - Vector2i(crosshair.size / 2) # let's assume the viewport size won't change while in-game
 	self.visible = true # set to false when player dies
 	
 	# test
 	await get_tree().create_timer(2).timeout
 	display_notification("Testing HUD notification", 2)
-	
 
 
 
-# TO DO:  it's possible for weapon activating animation to be reversed if the user presses previous/next_weapon key multiple times (repeatedly pressing the key quickly will step over weapons without activating any except the last-selected weapon, but pressing it a bit more slowly may cause a weapon's activating animation to start playing without allowing time for it to finish; ideally there should be a single animation that can be played either forward or backward or slowed/paused at any point so it's trivially reversible, otherwise we'll have to interpolate the model between 2 different positions, which may or may not produce a satisfactory animation)
+func player_died(_damage_type: Enums.DamageType) -> void:
+	self.visible = false
 
+func player_revived() -> void:
+	self.visible = true
+	update_health_status()
+	update_weapon_status()
+	reset_notification()
 
 
 func update_health_status(damage_type: Enums.DamageType = Enums.DamageType.NONE) -> void:
@@ -78,12 +86,15 @@ func update_health_status(damage_type: Enums.DamageType = Enums.DamageType.NONE)
 		pass # TO DO: damage effect animations, e.g. red ColorRect "pain" pulse animation when struck by projectile; jagged blue-white jittery "shock" shader effect when hit by an energy bolt
 
 
-func player_died(_damage_type: Enums.DamageType) -> void:
-	self.visible = false
+# TO DO:  it's possible for weapon activating animation to be reversed if the user presses previous/next_weapon key multiple times (repeatedly pressing the key quickly will step over weapons without activating any except the last-selected weapon, but pressing it a bit more slowly may cause a weapon's activating animation to start playing without allowing time for it to finish; ideally there should be a single animation that can be played either forward or backward or slowed/paused at any point so it's trivially reversible, otherwise we'll have to interpolate the model between 2 different positions, which may or may not produce a satisfactory animation)
 
+func update_inventory_status(_arg = null) -> void:
+	update_weapon_status(_arg)
+	# TO DO: implement list of all available ammos down right side of screen
 
 func update_weapon_status(_arg = null) -> void: 
-	var weapon := Inventory.current_weapon
+	var weapon: Weapon = WeaponManager.current_weapon
+	if not weapon: return # TO DO: kludgy; WeaponManager.current_weapon should be set before HUD loads
 	print("   ...update weapon status: ", weapon.long_name)
 	weapon_name.text = weapon.long_name
 	var magazine_1  := weapon.primary_trigger.magazine
@@ -95,9 +106,7 @@ func update_weapon_status(_arg = null) -> void:
 	secondary_ammo.text = "%s/%s   %02d %s" % [magazine_2.count, magazine_2.max_count, inventory_2.count, inventory_2.short_name]
 
 
-
-
-
+# center screen message
 
 func display_notification(message: String, wait_time: float) -> void:
 	center_notification.text = message
@@ -109,6 +118,7 @@ func reset_notification() -> void:
 	center_animations.play("RESET")
 
 
+# left screen message log
 
 #var message_count = 0
 

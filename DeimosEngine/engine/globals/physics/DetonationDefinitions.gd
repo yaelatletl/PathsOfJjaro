@@ -5,10 +5,10 @@ extends Node
 const DETONATION_DEFINITIONS := [ # originally Physics Effects, but we've separated visual-only effects from detonations
 	
 	{
+		"damage_type": Enums.DamageType.PROJECTILE, # TO DO: might want to put damage_type to detonation_type mappings in their own table; alternatively, we might use damage_type + projectile_type or some other combination 
 		"detonation_type": Enums.DetonationType.PISTOL_BULLET_DETONATION,
 		"name": "bullet explosion",
 		"area_of_effect": 0.0,
-		"damage_type": Enums.DamageType.PROJECTILE,
 		"base": 20,
 		"random": 8,
 		"scale": 0.0,
@@ -17,6 +17,7 @@ const DETONATION_DEFINITIONS := [ # originally Physics Effects, but we've separa
 	},
 	
 	{
+		"damage_type": Enums.DamageType.EXPLOSION,
 		"detonation_type": Enums.DetonationType.GRENADE_EXPLOSION, # once these data structures move to external JSON, auto-generate an int (array index or GUID?) for all types; use the "name" property in JSON to identify both the .tscn and a definition's relationships to other definitions (we currently use enums for relationships as that has better typechecking)
 		"name": "grenade explosion", # TO DO: naming conversion for mapping human-readable names to scene names/panes (simplest is just to insert the definition type and definition name strings into "res://assets/%s/%s.tscn" after validating strings, e.g. "res://assets/detonations/grenade explosion.tscn", although we could convert names to e.g. "GrenadeExplosion.tscn" if TitleCase works better)
 		# bear in mind that we can pack the final WAD data into binary form for efficient loading, though writing data to .ini/.json is advantageous for git and interchange with other tools (still, we might end up using .ini for our uncompiled data files as Godot prefers .ini for its own data and has greater serialization support)
@@ -31,7 +32,6 @@ const DETONATION_DEFINITIONS := [ # originally Physics Effects, but we've separa
 		# TO DO: we could include scene [sub]path/name here, or we can add `@export detonation_type: DetonationType.GRENADE_EXPLOSION` to the detonation scene's base script and set the mapping there (requires attaching to a scene); probably best to use scene name, minus ".tscn" here and construct the full path to the scene when loading it (once we convert)
 		
 		"area_of_effect": 0.75, # moved from Projectiles
-		"damage_type": Enums.DamageType.EXPLOSION,
 		#"alien_damage": false, # TO DO: shouldn't need this
 		"base": 80,
 		"random": 20,

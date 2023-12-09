@@ -154,6 +154,7 @@ mouse_filter = 2
 metadata/_edit_lock_ = true
 
 [node name="FloatCounter" type="Label" parent="CenterDisplay/CenterAlign"]
+visible = false
 layout_mode = 2
 text = "0.0"
 script = ExtResource("6_jqgqd")

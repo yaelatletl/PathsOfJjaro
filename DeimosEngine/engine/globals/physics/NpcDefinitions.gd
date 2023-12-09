@@ -102,7 +102,10 @@ const NPC_DEFINITIONS := [
 				"Yeti"
 			],
 			
-			# these move to NPC scene assets
+			# TO DO: sound files for Classic's Shapes and Physics-triggered sounds should go in (e.g.) `assets/audio/[audio_collection_id]`
+			# TO DO: define an engine/actors/npc/NpcAudioCore class with standard API for playing activation, attack, death sounds which is called by behavioral methods in `engine/actors/npc/NPC.gd`; define a one-to-many relational-like table of audio_collection_id to npc_type and create an NpcAudio instance for each audio collection when the scenario is loaded; NpcDefinition instance will have a required `var audio_core: NpcAudioCore` property (e.g. all 4 Fighter definitions will share the same audio collection)
+			# TO DO: define a separate NpcAudioConversation class with a standard set of methods for Npcs that verbally communicate with each other and/or player; NpcDefinition will have a nullable `var audio_conversation: NpcAudioConversation` property as only some NPCs chat to each other
+			# NPC audio playback should normally be controlled by engine/actors/npc/NPC.tscn so there is only one point of contact between NPCs and audio: that keeps the code easy to understand and test (there might be the odd case where an NPC's special behavior/AnimationPlayer controls a non-standard sound effect but let's only worry about that if and when we need it)
 			"sound_pitch": 1.125,
 			"activation_sound": "fighter activate",
 			"friendly_activation_sound": null,
@@ -115,7 +118,7 @@ const NPC_DEFINITIONS := [
 			"random_sound_mask": 15,
 			
 			
-			"carrying_pickable": null,
+			"carrying_pickable": null, # an item dropped by dying NPC, if any; used by pistol/fusion Bobs and Enforcer # TO DO: rename `drops_pickable_on_death`; caution: the dropped item MUST be clearly visible, not obscured by corpse
 			
 			"radius": 0.19921875,
 			"height": 0.7998047,

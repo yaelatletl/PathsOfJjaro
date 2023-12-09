@@ -1,19 +1,16 @@
-extends Node
+extends Object
 class_name Weapon
+
+
+# TO DO: [this needs done next!] define SingleWeapon and DualWeapon subclasses as trigger behavior is quite different for single-wield vs double-wield weapons; in particular, holding either trigger key should alternately fire both weapons (which key is pressed determines which hand fires first but the subsequent swapping is automatic, as is switching to one hand when only one gun is available or one runs out of ammo, and switching to two hands when a second gun or ammo to reload the empty gun is picked up)
 
 
 # Weapon.gd -- managed by Inventory.gd, this represents one of the weapons available to Player in the game and holds that weapon's gameplay state: primary/secondary WeaponTrigger[s] and various timers, as well as the weapon's readiness; it does NOT contain the WeaponInHand view object but should instead emit signals to which the
 
-# WeaponInHand.tscn provides a weapon's visible in-hand representation: the meshes, sounds, etc for a particular weapon type - fist, pistol, fusion_gun, shotgun, assault_rifle, flechette_gun, missile_lancher, flamethrower, alien_gun - plus animation player and a standard API for triggering those animations, which Weapon's state machine calls on transitions)
-#
-# TO DO: to avoid barrels clipping through walls, 3D WeaponInHand models need rendered to a 2D view with transparent background; this image can then be composited on the CanvasLayer behind the HUD (unless there's a way to force WiH models *always* to render frontmost in viewport? but AFAIK only 2D canvas items provide control over z_order)
+# assets/weapons/assault_rifle/AssaultRifle.tscn provides a weapon's visible in-hand representation: the meshes, sounds, etc for a particular weapon type - fist, pistol, fusion_gun, shotgun, assault_rifle, flechette_gun, missile_lancher, flamethrower, alien_gun - plus animation player and a standard API for triggering those animations, which Weapon's state machine calls on transitions)
 
 
-# TO DO: Ammunition class: this contains both the InventoryItem (for reloading) and the current ammo count; this allows fusion pistol to share a single Ammunition instance between both triggers (so both triggers deplete the same energy cell) whereas magnum has a separate Ammunition instance for each trigger 
-
-
-# TO DO: PlayerAssetsManager which receives the following signals and sets its current_weapon to the appropriate WeaponInHand upon weapon_activated, and forward trigger signals to that (alternatively all weapons could register their own signal handlers, but then they have to decide which one of them is active); this can probably be defined as res://engine/assetlib/PlayerAssetsManager as its code shouldn't be specific to assets (it only needs to know which scenes to load for what purposes)
-
+# TO DO: Weapon.TriggerState (or WeaponTrigger.State) for each trigger, with bool flags/Weapon.LockState on Weapon for tracking interlocks? i.e. how much logic and timings should go in triggers, bearing in mind Weapon must have overall control?; note: if triggers track their own state, they need some way to notify Weapon (either holding a reference to it or by using signals)
 
 
 var primary_trigger:   WeaponTrigger
@@ -102,13 +99,21 @@ var origin_offset := Vector3(0, 1, 0.5) # TO DO: this needs to be set from weapo
 var activation_time: float # TO DO: M3 physics has this on weapon, not trigger, so I suspect it's time it takes between selecting weapon and weapon being ready to take its first shot
 var deactivation_time: float
 
+var __activation_timer: Timer
 
 
-func _ready():
-	pass
+var weapon_type: Enums.WeaponType:
+	get:
+		return self.inventory_item.pickable as Enums.WeaponType
+
+
+var weapon_in_hand: WeaponInHand # TO DO: set this to a placeholder WIH when scenario WIH is not available
 
 
 func configure(weapon_data: Dictionary) -> void:
+	Inventory.inventory_item_increased.connect(inventory_item_changed) # TO DO: appropriate? no!
+	__activation_timer = WeaponManager.activation_timer
+	assert(__activation_timer)
 	self.inventory_item = Inventory.get_item(weapon_data.pickable)
 	
 	#self.weapon_class = weapon_data.weapon_class
@@ -138,87 +143,108 @@ func configure(weapon_data: Dictionary) -> void:
 	self.secondary_trigger.configure(weapon_data.secondary_trigger, magazine)
 
 
+func inventory_item_changed(item: Inventory.InventoryItem) -> void: # this is sent when any inventory item increments/decrements (while inventory signals could be more specific, pickups are sufficiently rare that it won't affect performance; we might want separate signals for increment vs decrement though, just to improve legibility - it's redundant that depletion due to reloading sends a second signal through here)
+	# TO DO: what about timings?
+	if primary_trigger.should_reload_now(): # if trigger is empty but couldn't reload before as ammo was out, if player has just picked up that ammo reload it now
+		__reload_primary()
+	elif secondary_trigger.should_reload_now():
+		__reload_secondary()
 
 
-# important: Player must call Weapon.shoot/reload_primary/secondary; it must not call WeaponTrigger.shoot directly as Weapon.shoot_primary/secondary are responsible for managing any interactions between triggers (e.g. AR can fire both triggers independently; dual pistols/shotguns can only fire alternately and should swap automatically while a trigger key is held; fusion can only use one trigger at a time)
-
-# TO DO: this API and implementation is temporary while figuring out how Weapon should coordinate its state changes correctly
-
-
-
-func shoot_primary(player_origin: Vector3, projectile_direction: Vector3, shooter: PhysicsBody3D) -> void: # TO DO: pass entire Player so FIST trigger can check if player is sprinting; this also allows us to call WeaponInHand animations which are presumably attached to the Player
-	# TO DO: calculate projectile_origin
-	# ask the trigger to fire; if the trigger can't fire (because it is empty and there's no ammo to reload it, or because it is in middle of its wait cycle), it will do nothing and return false to indicate it couldn't shoot AFAIK only multipurpose weapons can have this condition: e.g. AR has bullets but no grenades or vice-versa)
-	var success = primary_trigger.shoot(player_origin, projectile_direction, shooter)
-	print("try to shoot primary trigger:", success)
-	if success:
-		Global.primary_trigger_fired.emit(success)
-		Global.primary_magazine_count_changed.emit(primary_trigger.magazine)
-	else:
-		Global.primary_trigger_clicked.emit()
-	if primary_trigger.magazine.count == 0:
-		reload_primary()
-
-
-func shoot_secondary(player_origin: Vector3, projectile_direction: Vector3, shooter: PhysicsBody3D) -> void:
-	# TO DO: ditto
-	var success = secondary_trigger.shoot(player_origin, projectile_direction, shooter)
-	print("try to shoot secondary trigger: ", success)
-	if success:
-		Global.secondary_trigger_fired.emit(success)
-		Global.secondary_magazine_count_changed.emit(secondary_trigger.magazine)
-	else:
-		Global.secondary_trigger_clicked.emit()
-	if secondary_trigger.magazine.count == 0:
-		reload_secondary()
-
-
-# reload; this ties in with weapon flags and ammunition
-
-# TO DO: timings; these might be in state machine, caveat that shotguns allow out-of-phase reloading
-
-func reload_primary() -> void:
-	var success = primary_trigger.load_ammo()
-	#print("try to reload primary trigger: ", success)
-	if success:
-		Global.primary_trigger_reloaded.emit(success)
-	# TO DO: if reload failed, need to change that trigger's state so its 
-
-func reload_secondary() -> void:
-	var success = secondary_trigger.load_ammo()
-	#print("try to reload primary trigger: ", success)
-	if success:
-		Global.secondary_trigger_reloaded.emit(success)
 
 
 # draw weapon ready for use or holster it; Inventory will only call activate after checking if the weapon is available
 
 func activate(is_instant: bool = false) -> void: # pass is_instant to skip weapon_activating animation
 	if not is_instant:
-		Global.weapon_activating.emit(self)
+		print("activating ", self.long_name)
+		WeaponManager.weapon_activating.emit(self)
+		weapon_in_hand.activating(self)
+		__activation_timer.start(activation_time)
+		await __activation_timer.timeout
+		# TO DO: if one or both triggers need reloaded and there is ammo, segue from activating to reloading animations
 	
 	# TO DO: reloads need to be synchronized so these will move into Weapon.set_current_state (also need to check when Classic AR auto-reloads after running out of ammo for one or both triggers)
-	if primary_trigger.magazine.count == 0:
-		reload_primary()
-	if secondary_trigger.magazine.count == 0:
-		reload_secondary()
+	if primary_trigger.should_reload_now():
+		__reload_primary()
+	if secondary_trigger.should_reload_now():
+		__reload_secondary()
 	
 	# TO DO: should reload calls return bool indicating success or failure? if both fail, the weapon would be in-hand but can't fire (although Inventory should never switch to an empty weapon, in which case all we need here is an assert to confirm correct behavior during testing)
 	assert(primary_trigger.magazine.count > 0 or secondary_trigger.magazine.count > 0)
 	# TO DO: timer
 	
-	Global.weapon_activated.emit(self) # TO DO: are weapon_[de]activated signals needed? should they be named weapon_ready, weapon_sleep? (advantage of a 'weapon_ready' signal/state is it can also be sent after user stops firing; WIH can e.g. use this to check its own state changes are synchronized with Weapon, or to interrupt over-long animation with RESET so WIH immediately enters its idle state)
-	# TO DO: play model animation when player draws weapon
+	weapon_in_hand.activated(self) # TO DO: are weapon_[de]activated signals needed? should they be named weapon_ready, weapon_sleep? (advantage of a 'weapon_ready' signal/state is it can also be sent after user stops firing; WIH can e.g. use this to check its own state changes are synchronized with Weapon, or to interrupt over-long animation with RESET so WIH immediately enters its idle state)
+	WeaponManager.weapon_activated.emit(self)
 	in_hand = true
-	print("activated weapon ", self.long_name)
+	print("activated ", self.long_name)
 
 
-func deactivate() -> void:
-	Global.weapon_deactivating.emit(self)
+func deactivate() -> void: # TO DO: pass died=true when player dies?
+	print("deactivating ", self.long_name)
+	WeaponManager.weapon_deactivating.emit(self)
+	weapon_in_hand.deactivating(self)
 	in_hand = false
-	# TO DO: timer
-	Global.weapon_deactivated.emit(self)
-	# TO DO: play model animation when player holsters weapon
-	print("deactivated weapon ", self.long_name)
+	__activation_timer.start(activation_time)
+	await __activation_timer.timeout
+	weapon_in_hand.deactivated(self)
+	WeaponManager.weapon_deactivated.emit(self)
+	print("deactivated ", self.long_name)
 
+
+# important: Player must call Weapon.shoot/reload_primary/secondary; it must not call WeaponTrigger.shoot directly as Weapon.shoot_primary/secondary are responsible for managing any interactions between triggers (e.g. AR can fire both triggers independently; dual pistols/shotguns can only fire alternately and should swap automatically while a trigger key is held; fusion can only use one trigger at a time)
+
+# TO DO: this API and implementation is temporary while figuring out how Weapon should coordinate its state changes correctly
+
+func shoot_primary(player_origin: Vector3, projectile_direction: Vector3, shooter: PhysicsBody3D) -> void: # TO DO: pass entire Player so FIST trigger can check if player is sprinting; this also allows us to call WeaponInHand animations which are presumably attached to the Player
+	# TO DO: calculate projectile_origin
+	# ask the trigger to fire; if the trigger can't fire (because it is empty and there's no ammo to reload it, or because it is in middle of its wait cycle), it will do nothing and return false to indicate it couldn't shoot AFAIK only multipurpose weapons can have this condition: e.g. AR has bullets but no grenades or vice-versa)
+	var success = primary_trigger.shoot(player_origin, projectile_direction, shooter)
+	print("shoot primary:", success)
+	if success:
+		WeaponManager.weapon_primary_magazine_changed.emit(primary_trigger.magazine) # HUD listens to this
+	weapon_in_hand.shoot_primary(self, success)
+	# TO DO: delays
+	if primary_trigger.is_empty():
+		__reload_primary()
+
+
+func shoot_secondary(player_origin: Vector3, projectile_direction: Vector3, shooter: PhysicsBody3D) -> void:
+	# TO DO: ditto
+	var success = secondary_trigger.shoot(player_origin, projectile_direction, shooter)
+	print("shoot secondary: ", success)
+	if success:
+		WeaponManager.weapon_secondary_magazine_changed.emit(secondary_trigger.magazine)
+	weapon_in_hand.shoot_secondary(self, success)
+	# TO DO: delays
+	if secondary_trigger.is_empty():
+		__reload_secondary()
+
+
+# reload; this ties in with weapon flags and ammunition
+
+# TO DO: timings; these might be in state machine, caveat that shotguns allow out-of-phase reloading
+
+# TO DO: these need to distinguish reloading a previously empty trigger when ammo is later picked up vs reloading a newly empty trigger from existing inventory; in addition, if reloading fails that state should be reflected in Weapon (i.e. trigger is empty and there are no magazines to reload it, which leads to different states for pistol/shotgun vs AR vs other weapons with single/shared triggers)
+
+func __reload_primary() -> void:
+	var success = primary_trigger.load_ammo()
+	print("reload primary: ", success)
+	if success:
+		WeaponManager.weapon_primary_magazine_changed.emit(primary_trigger.magazine)
+	weapon_in_hand.reload_primary(self, success)
+	# TO DO: delays
+	if not success and not secondary_trigger.can_fire:
+		WeaponManager.previous_weapon()
+
+
+func __reload_secondary() -> void:
+	var success = secondary_trigger.load_ammo()
+	print("reload primary: ", success)
+	if success:
+		WeaponManager.weapon_secondary_magazine_changed.emit(secondary_trigger.magazine)
+	weapon_in_hand.reload_secondary(self, success)
+	# TO DO: delays
+	if not success and not primary_trigger.can_fire:
+		WeaponManager.previous_weapon()
 

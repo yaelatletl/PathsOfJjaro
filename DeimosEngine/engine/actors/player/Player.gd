@@ -4,6 +4,14 @@ class_name Player
 # Player.gd
 
 
+# important:
+#
+# WiH is scaled down and moved completely inside Body radius close to camera to prevent clipping through walls
+#
+#
+#
+
+
 const INPUT_AXIS_MULTIPLIER := 10 # temporary until we decide on final values in physics dictionaries below
 
 
@@ -15,6 +23,8 @@ const INPUT_AXIS_MULTIPLIER := 10 # temporary until we decide on final values in
 
 # TO DO: step detection may work best if we use some vertical raycasts placed in front of player that extend downwards from MAX_STEP_HEIGHT to KERB_HEIGHT; this should detect open-tread stairs (which forward-facing raycasts may miss)
 
+
+# TO DO: in 3D Physics layers, rename "Level" to Map/MapGeometry/Wall/Surface/Solid/Exterior/Architecture/Shell or something else that's descriptive as "Level" is unhelpful (in mapping terms, a Level is the map geometry *and* all of the objects inside it)
 
 # TO DO: Player currently uses CapsuleShape to detect floor; at what point does capsule slide off a ledge? (not sure what M2's collision cylinder does - it might remain on ledge as long as any part of its base remains in contact; capsule is useful as it can push player out from wall so the model doesn't appear to slide down wall partly embedded in it; we might want to add a smaller cylinder to bottom of capsule to widen it a bit; also need to decide on player's Projectile/Explosion hit box, which may be a slightly narrower capsule or cylinder; there is also Player-NPC collisions to consider, which may need a wider collision cylinder to prevent NPC models' extremities appearing embedded in Player when both bodies are very close/touching)
 
@@ -151,9 +161,9 @@ var impulse = Vector3.ZERO
 var wall_direction : Vector3 = Vector3.ZERO # used in VaultOver, do we need this? hopefully Player only needs a camera animation to imply jumping over a barrier
 
 
-@onready var body   := $body
-@onready var head   := $head # not sure if we need this node?
-@onready var camera := $head/camera
+@onready var      body   := $Body
+@onready var      head   := $Head # not sure if we need this node?
+@onready var main_camera := $Head/Camera
 
 
 # vertical collision detection using raycasting
@@ -161,10 +171,7 @@ var wall_direction : Vector3 = Vector3.ZERO # used in VaultOver, do we need this
 @onready var feet_clearance := $FeetClearance # TO DO: not sure about this one
 
 # control panel detection
-@onready var detect_control_panel := $head/camera/ActionReach
-
-
-# TO DO: in 3D Physics layers, rename "Level" to Map/MapGeometry/Wall/Surface/Solid/Exterior/Architecture/Shell or something else that's descriptive as "Level" is unhelpful (in mapping terms, a Level is the map geometry *and* all of the objects inside it)
+@onready var detect_control_panel := $Head/Camera/ActionReach
 
 
 @onready var detect_step := $StepDetection # note: this raycast only detects a collision body that MAY block player walking forward (e.g. it could be a smooth ramp, which is climbable by Player's capsule body up to a certain angle); it also doesn't guarantee that it won't return false if the player proceeds forward, moving the ray to other side of a narrow body (e.g. ladder tread); TO DO: probably want 2 raycasts positioned left and right to better detect ledges approached at an angle; these will need to rotate around the Player's y=0 axis
@@ -205,6 +212,7 @@ var __alive := true
 
 
 func _ready() -> void:
+	WeaponManager.activate_weapon_now(Enums.WeaponType.ASSAULT_RIFLE)
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED) # put this here for now, and MOUSE_MODE_VISIBLE in MainMenu._ready; TO DO: mouse capture/release logic can eventually move to Global (note: game should not have a Pause/Resume key [Ctrl-P in M2]; instead, provide a key for exiting the game world back to menu and save the game's current state as a temporary saved game file which is loaded and deleted when the game is next reentered)
 	self.max_slides = 4 # oddly max_slides doesn't appear in Editor's CharacterBody3D inspector
 	#self.floor_stop_on_slope_enabled = false # this does, however
@@ -213,7 +221,6 @@ func _ready() -> void:
 	Global.health_changed.connect(update_health_status)
 	Global.player_died.connect(update_health_status)
 	update_health_status()
-
 
 
 # Inventory signals
@@ -244,21 +251,21 @@ func _physics_process(delta: float) -> void: # fixed interval (see Project Setti
 		# turn left/right (rotates Player around its y-axis)
 		self.rotation.y += mouse_velocity.x * -mouse_x_sensitivity * delta # TO DO: clamp to ±MAX_TURN_SPEED
 		# look down/up (rotates camera along its x-axis); note: do not implement Classic's camera looks left/right keys as those do not translate well to gamepad/touch controls and a user can strafe using existing controls
-		var vertical_look = camera.rotation.x - (mouse_velocity.y * mouse_y_sensitivity) * delta # TO DO: should head rotate instead of camera? that allows walk/sprint bounce to control camera's height without changing aiming or ActionReach raycast (currently, bouncing the camera will cause these to move vertically as well; Q. how does M2 do it? is bounce 100% cosmetic or does it affect aim too? and does the bounce delta have an appreciable effect?) alternatively, could change bounce animation to operate on Camera3D.y_offset instead of position as (AFAIK) that only moves the viewport
-		camera.rotation.x = clamp(vertical_look, -MAX_LOOK_ANGLE, MAX_LOOK_ANGLE)
+		var vertical_look = main_camera.rotation.x - (mouse_velocity.y * mouse_y_sensitivity) * delta # TO DO: should head rotate instead of camera? that allows walk/sprint bounce to control camera's height without changing aiming or ActionReach raycast (currently, bouncing the camera will cause these to move vertically as well; Q. how does M2 do it? is bounce 100% cosmetic or does it affect aim too? and does the bounce delta have an appreciable effect?) alternatively, could change bounce animation to operate on Camera3D.y_offset instead of position as (AFAIK) that only moves the viewport
+		main_camera.rotation.x = clamp(vertical_look, -MAX_LOOK_ANGLE, MAX_LOOK_ANGLE)
 		mouse_velocity = Vector2.ZERO
 		
 		# TO DO: shoot keys need to move after move_and_slide so that projectile's origin matches player's position when next frame is drawn (right now shooting and sidestepping shows bullet originating from left or right instead of center)
 		
 		# shoot
 		if Input.is_action_just_pressed(&"NEXT_WEAPON"):
-			Inventory.next_weapon()
+			WeaponManager.next_weapon()
 		elif Input.is_action_just_pressed(&"PREVIOUS_WEAPON"):
-			Inventory.previous_weapon()
-		if Input.is_action_just_pressed(&"SHOOT_PRIMARY"): # TO DO: temporary until triggers wait between shots
-			Inventory.current_weapon.shoot_primary(self.global_position, (camera.global_transform.basis.z * -1), self) # TO DO: should we pass the camera's global transform and let Projectile do the math?
-		if Input.is_action_pressed(&"SHOOT_SECONDARY"): # TO DO: ATM Weapon has no time delay between shots so pressing this empties the second trigger in <1sec(!); not sure how best to arrange this logic - might want to implement Inventory.current_weapon.is_secondary_ready which can be checked first; alternatively, we just call shoot_secondary each time and let it figure it out
-			Inventory.current_weapon.shoot_secondary(self.global_position, (camera.global_transform.basis.z * -1), self)
+			WeaponManager.previous_weapon()
+		if Input.is_action_just_pressed(&"SHOOT_PRIMARY"): # TO DO: `just_pressed` is temporary until triggers wait between shots
+			WeaponManager.current_weapon.shoot_primary(self.global_position, (main_camera.global_transform.basis.z * -1), self) # TO DO: should we pass the camera's global transform and let Projectile do the math?
+		if Input.is_action_just_pressed(&"SHOOT_SECONDARY"): # TO DO: ATM Weapon has no time delay between shots so pressing this empties the second trigger in <1sec(!); not sure how best to arrange this logic - might want to implement WeaponManager.current_weapon.is_secondary_ready which can be checked first; alternatively, we just call shoot_secondary each time and let it figure it out
+			WeaponManager.current_weapon.shoot_secondary(self.global_position, (main_camera.global_transform.basis.z * -1), self)
 		
 		# action
 		if detect_control_panel.is_colliding():
@@ -281,7 +288,7 @@ func _physics_process(delta: float) -> void: # fixed interval (see Project Setti
 		
 		# movement
 		var physics = SPRINT_PHYSICS if is_sprint_enabled else WALK_PHYSICS # temporary until crouch+swim states are implemented
-		if is_on_floor():
+		if is_on_floor(): # TO DO: see comment on is_far_from_floor
 			input_axis = Input.get_vector(&"MOVE_BACKWARD", &"MOVE_FORWARD", &"MOVE_LEFT", &"MOVE_RIGHT")
 			friction += floor_friction
 			# TO DO: JUMP will become automatic, but leave on manual key for now
@@ -353,7 +360,16 @@ func _physics_process(delta: float) -> void: # fixed interval (see Project Setti
 		var step = detect_step.get_collider().get_parent()
 		if step != detected_step:
 			detected_step = step
-			print("entering step or ramp: ", detected_step.name)
+			
+			# TO DO: direction on xz plane matters; the detection ray should always be on leading edge of player body (currently it is fixed to front edge)
+			
+			print("entering step or ramp: ", detected_step.name, "  z=", self.velocity.z)
+			
+			print(" pos=", self.global_position.y, "   h=", self.body.shape.height)
+			print(" base=", self.global_position.y - self.body.shape.height / 2)
+			
+			
+			
 	else:
 		if detected_step != null:
 			print("exiting step or ramp: ", detected_step.name)
@@ -374,7 +390,9 @@ func _physics_process(delta: float) -> void: # fixed interval (see Project Setti
 
 
 
-func is_far_from_floor() -> bool: # TO DO: what is purpose of this? it is not the same as the built-in is_on_floor method
+func is_far_from_floor() -> bool:
+	# @hhas01: TO DO: what is purpose of this? it is not the same as the built-in is_on_floor method
+	# @810-Dude answers: There are some functions implemented to fix some quirks of the engine, like the function feet_clearance, that one exists due to that the function is_on_floor won't work unless move_and_slide is being called and the object moves. So certain static situations needed it. Perhaps now we don't, but it's something to consider
 	return not feet_clearance.is_colliding()
 
 
@@ -385,6 +403,7 @@ func found_item(item: PickableItem) -> void: # called by PickableItem when Playe
 	# if there is space in inventory for this item, pick it up
 	if Inventory.get_item(item.pickable).try_to_increment():
 		item.picked_up()
+		$Audio/PickedUp.play()
 
 
 
@@ -485,12 +504,12 @@ func add_impulse(impulse_in : Vector3) -> void:
 
 func shake_camera(_delta : float) -> void:
 	if shake_time > 0:
-		camera.h_offset = randf_range(-shake_force, shake_force)
-		camera.v_offset = randf_range(-shake_force, shake_force)
+		main_camera.h_offset = randf_range(-shake_force, shake_force)
+		main_camera.v_offset = randf_range(-shake_force, shake_force)
 		shake_time -= _delta
 	else:
-		camera.h_offset = 0
-		camera.v_offset = 0
+		main_camera.h_offset = 0
+		main_camera.v_offset = 0
 
 
 #func _tilt(_delta : float) -> void: # don't think we want tilt though; it's getting too far away from Classic gameplay look and feel

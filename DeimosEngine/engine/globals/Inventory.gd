@@ -3,6 +3,10 @@ extends Node
 # Inventory.gd -- global Inventory manages all Weapon instances and PickableItem counts; it also provides an API by which Player can get the current Weapon instance, switch to previous/next weapon, and enable/disable a weapon when it is picked up/discarded
 
 
+# TO DO: the Classic behavior was to auto-switch when a higher-powered weapon is first added to inventory; we should replicate this
+
+# note: we won't pick up more than max weapons in TC (a Classic quirk); however, we could convert them to extra ammo which allows TC players to enjoy additional ammo over <=MD [TrojanSE did this, in addition to varying ammo quantities placed in new levels depending on player's current inventory]
+
 
 # TO DO: whereas M2's primary and secondary trigger inputs operate independently for dual weapons (fists, pistols, shotguns), we want to make dual-wielding largely automatic: if [loaded] dual weapons are available then always show both on screen. Pressing primary/secondary trigger fires the corresponding left/right weapon first; if user holds the trigger for repeating fire then the opposite weapon fires next, and so on. This allows user to empty one pistol (by repeatedly tapping to fire the same gun) if they wish to manage exactly when left/right pisto, reloads occur, or to hold down either trigger and have both weapons fire and reload themselves.
 
@@ -10,16 +14,13 @@ extends Node
 # TO DO: decide how best to organize player Inventory; not sure that attaching ammo count to Weapon[Trigger] is a good idea; better to have Ammunition instances for all player ammo types which are managed by Inventory; these instances can be shared with WeaponTrigger instances so that a Trigger decrements Ammunition.count when it reloads and Inventory increments it when an ammo Pickable is picked up
 
 
+signal inventory_item_increased(item: Inventory.InventoryItem)
+signal inventory_item_decreased(item: Inventory.InventoryItem)
+
+
 
 func _ready() -> void:
-	# TO DO: __initialize_xxxx functions can be used to initialize Inventory for new game or to load saved game state
-	# for now, there's only 1 weapon defined (index 0), which is for AR
 	__initialize_pickables(PickableDefinitions.PICKABLE_DEFINITIONS)
-	__initialize_weapons(WeaponDefinitions.WEAPON_DEFINITIONS)
-	current_weapon = __all_weapons[__current_weapon_index]
-	current_weapon.activate(true)
-	select_weapon(2)
-
 
 
 # inventory management
@@ -46,7 +47,7 @@ class InventoryItem: # TO DO: presumably this extends Object by default; should 
 	func try_to_increment() -> bool:
 		if self.count < self.max_count:
 			self.count += 1
-			Global.inventory_item_count_changed.emit(self)
+			Inventory.inventory_item_increased.emit(self)
 			return true
 		else:
 			return false
@@ -54,7 +55,7 @@ class InventoryItem: # TO DO: presumably this extends Object by default; should 
 	func try_to_decrement() -> bool:
 		if self.count > 0:
 			self.count -= 1
-			Global.inventory_item_count_changed.emit(self)
+			Inventory.inventory_item_decreased.emit(self)
 			return true
 		else:
 			return false
@@ -76,71 +77,6 @@ func get_item(pickable: Enums.PickableType) -> InventoryItem:
 	return __all_items[int(pickable)]
 
 
-
-# weapon management
-
-var __all_weapons := [] # note: Weapon.count indicates if the player is carrying 0, 1, or 2 of each
-var __current_weapon_index := 0
-
-var current_weapon: Weapon : get = get_current_weapon # Player has read-only access to this property
-
-func get_current_weapon() -> Weapon:
-	return current_weapon
-
-
-func __initialize_weapons(weapon_states: Array) -> void:
-	__all_weapons.clear()
-	for state in weapon_states:
-		var weapon = Weapon.new()
-		weapon.configure(state)
-		__all_weapons.append(weapon)
-
-
-func __switch_weapon(search_func: Callable) -> void:
-	var new_weapon = search_func.call()
-	if new_weapon != current_weapon:
-		# TO DO: fast weapon switching: if user presses PREVIOUS/NEXT key repeatedly, e.g. to switch from SPNKR to Magnum, do not fully cycle through every weapon's draw and holster animations; basically, once user presses PREV/NEXT the first time, start the current weapon's deactivation and, while that is playing, monitor for any additional presses and continue switching; once user stops pressing for, say, 0.2sec, start the next activate animation but allow that animation to be quickly reversed by any additional PREV/NEXT press[es]; rinse and repeat until user makes mind up/a new weapon is brought fully to bear and is ready for use
-		current_weapon.deactivate()
-		await get_tree().create_timer(current_weapon.deactivation_time).timeout
-		current_weapon = new_weapon
-		current_weapon.activate()
-		await get_tree().create_timer(current_weapon.activation_time).timeout # TO DO: check blocking behavior; can't remember if the __switch_weapon function returns immediately, allowing previous_weapon to return as well, or if it blocks both until timeout; either way, we want to prevent weapon being used before timeout but we should do this with non-blocking Weapon.current_state transitions
-
-
-func select_weapon(index: int) -> bool:
-	if index >= 0 and index < __all_weapons.size():
-		var weapon = __all_weapons[index]
-		if weapon.available:
-			current_weapon.deactivate()
-			__current_weapon_index = index
-			current_weapon = weapon
-			current_weapon.activate()
-			return true
-	return false
-
-
-func previous_weapon() -> void:
-	var search_func = func():
-		while true:
-			__current_weapon_index -= 1
-			if __current_weapon_index < 0:
-				__current_weapon_index = __all_weapons.size() - 1
-			var weapon = __all_weapons[__current_weapon_index]
-			if weapon.available or weapon == current_weapon:
-				return weapon
-	__switch_weapon(search_func)
-
-
-func next_weapon() -> void:
-	var search_func = func():
-		while true:
-			__current_weapon_index += 1
-			if __current_weapon_index == __all_weapons.size():
-				__current_weapon_index = 0
-			var weapon = __all_weapons[__current_weapon_index]
-			if weapon.available or weapon == current_weapon:
-				return weapon
-	__switch_weapon(search_func)
 
 
 # health

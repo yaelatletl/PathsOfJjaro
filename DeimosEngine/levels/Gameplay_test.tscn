@@ -82,11 +82,39 @@ material = SubResource("StandardMaterial3D_i1ajx")
 [node name="Level" type="Node3D"]
 script = ExtResource("1_q5461")
 
-[node name="ARMag" parent="." instance=ExtResource("2_51ci0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.64134, 0.115472, -9.00856)
+[node name="Ammo" type="Node3D" parent="."]
 
-[node name="ARGrn" parent="." instance=ExtResource("2_51ci0")]
+[node name="MgMag_1" parent="Ammo" instance=ExtResource("2_51ci0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.29515, 0.115472, -10.4809)
+pickable = 2
+
+[node name="MgMag_2" parent="Ammo" instance=ExtResource("2_51ci0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.29515, 0.115472, -12.9682)
+pickable = 2
+
+[node name="MgMag_3" parent="Ammo" instance=ExtResource("2_51ci0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.53868, 0.115472, -10.4809)
+pickable = 2
+
+[node name="ARMag_1" parent="Ammo" instance=ExtResource("2_51ci0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.64134, 0.115472, -9.00856)
+pickable = 6
+
+[node name="ARMag_2" parent="Ammo" instance=ExtResource("2_51ci0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.45775, 0.115472, -9.00856)
+pickable = 6
+
+[node name="ARMag_3" parent="Ammo" instance=ExtResource("2_51ci0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.84654, 0.115472, -9.00856)
+pickable = 6
+
+[node name="ARGrn_1" parent="Ammo" instance=ExtResource("2_51ci0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5092, 2.07544, -3.53285)
+pickable = 7
+
+[node name="ARGrn_2" parent="Ammo" instance=ExtResource("2_51ci0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.55748, 0.0798345, -3.53285)
+pickable = 7
 
 [node name="Floor" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, -0.1, 2.08165e-12)
@@ -220,7 +248,7 @@ mesh = SubResource("BoxMesh_1aovp")
 shape = SubResource("BoxShape3D_rojiv")
 
 [node name="Kerb2" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 0.1, -3)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13, -0.025, -3)
 mesh = SubResource("BoxMesh_1aovp")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Kerb2"]
@@ -244,6 +272,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.22129, 1.68068, 17.5858)
 
 [node name="Player" parent="." instance=ExtResource("6_wbgh5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.363, 0.8, 1.825)
+shake_time = null
+shake_force = null
 
 [node name="PurpleBlock" type="StaticBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.28458, 2.53247, -1.8949)
