@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://snhgvohr5rec"
+path="res://.godot/imported/08 - Suffocation.wav-a0b1d092840da0f923fadbd858372859.sample"
+
+[deps]
+
+source_file="res://assets/audio/player/08 - Suffocation.wav"
+dest_files=["res://.godot/imported/08 - Suffocation.wav-a0b1d092840da0f923fadbd858372859.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

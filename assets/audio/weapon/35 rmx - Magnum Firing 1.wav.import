@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://bstjgg1ou5um1"
+path="res://.godot/imported/35 rmx - Magnum Firing 1.wav-494dafe152a17167ae81320b622705bb.sample"
+
+[deps]
+
+source_file="res://assets/audio/weapon/35 rmx - Magnum Firing 1.wav"
+dest_files=["res://.godot/imported/35 rmx - Magnum Firing 1.wav-494dafe152a17167ae81320b622705bb.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

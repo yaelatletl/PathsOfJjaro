@@ -1,0 +1,525 @@
+[gd_scene load_steps=27 format=3 uid="uid://ddeas4dqqgef8"]
+
+[ext_resource type="Script" path="res://assets/weapons/AssaultRifle/AssaultRifle.gd" id="1_mp04b"]
+[ext_resource type="AudioStream" uid="uid://dv4bqqaot5rpj" path="res://assets/audio/weapon/activate.ogg" id="2_yorwo"]
+[ext_resource type="AudioStream" uid="uid://crl8s7p4q2u11" path="res://assets/audio/weapon/37 rms - Assault Rifle Firing.wav" id="3_gia2u"]
+[ext_resource type="AudioStream" uid="uid://dehwjedqkvgjb" path="res://assets/audio/weapon/134 - Assault Rifle Reloading.wav" id="4_52b8w"]
+[ext_resource type="AudioStream" uid="uid://cj7v6fvw7a3j8" path="res://assets/audio/weapon/38 rmx - Grenade Launcher Firing 1.wav" id="5_w3v1p"]
+[ext_resource type="AudioStream" uid="uid://b6jf1xki440m0" path="res://assets/audio/weapon/23 rms - Empty Gun.wav" id="6_2qb08"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_l5ufs"]
+albedo_color = Color(0.556863, 0.635294, 0.670588, 1)
+emission_enabled = true
+emission = Color(0.321569, 0.321569, 0.321569, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_n3ubk"]
+material = SubResource("StandardMaterial3D_l5ufs")
+size = Vector3(0.07, 0.15, 1.25)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_us33u"]
+albedo_color = Color(0.478431, 0.45098, 0.423529, 1)
+emission_enabled = true
+emission = Color(0.321569, 0.321569, 0.321569, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_5tgf7"]
+material = SubResource("StandardMaterial3D_us33u")
+size = Vector3(0.061, 0.2, 0.15)
+
+[sub_resource type="BoxMesh" id="BoxMesh_tihji"]
+material = SubResource("StandardMaterial3D_us33u")
+size = Vector3(0.05, 0.4, 0.12)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_j8gjj"]
+top_radius = 0.15
+bottom_radius = 0.15
+height = 0.2
+radial_segments = 8
+rings = 1
+
+[sub_resource type="Animation" id="Animation_ltx3e"]
+resource_name = "RESET"
+length = 0.001
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Mag")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 2.08165e-12, -0.2, 0.3)
+tracks/1/type = "position_3d"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Gren")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0, 1, 2.08165e-12, -0.15, -0.3)
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Gren:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1.5708, 3.48787e-16, 3.48787e-16)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Mag:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/4/type = "position_3d"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = PackedFloat32Array(0, 1, 2.08165e-12, -2, 2.08165e-12)
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath(".:rotation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(3.48787e-16, 3.48787e-16, 3.48787e-16)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath(".:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_bxsn1"]
+resource_name = "activate"
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0.05, -1.5, 2.08165e-12, 0.05, 1, 0.05, -1, 2.08165e-12, 0.4, 1, 2.08165e-12, -0.05, 2.08165e-12, 0.7, 1, 2.08165e-12, 0.1, 2.08165e-12, 0.9, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5, 0.8, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(-0.959931, 3.48787e-16, 3.48787e-16), Vector3(-0.244346, 3.48787e-16, 3.48787e-16), Vector3(0.0349066, 3.48787e-16, 3.48787e-16), Vector3(0, 0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_6ee28"]
+resource_name = "deactivate"
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12, 0.15, 1, 2.08165e-12, -0.05, 2.08165e-12, 0.5, 1, 0.05, -0.2, 2.08165e-12, 1, 1, 0.05, -1.5, 2.08165e-12)
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(-0.244346, 3.48787e-16, 3.48787e-16), Vector3(-0.959931, 3.48787e-16, 3.48787e-16)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_2hxvk"]
+resource_name = "idle"
+length = 0.001
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Mag")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 2.08165e-12, -0.2, 0.3)
+tracks/1/type = "position_3d"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Gren")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0, 1, 2.08165e-12, -0.15, -0.3)
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Gren:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1.5708, 3.48787e-16, 3.48787e-16)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Mag:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/4/type = "position_3d"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = PackedFloat32Array(0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath(".:rotation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(3.48787e-16, 3.48787e-16, 3.48787e-16)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath(".:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_8v67e"]
+resource_name = "primary_reload"
+length = 1.5
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12, 0.3, 1, 2.08165e-12, 0.33, 2.08165e-12, 0.9, 1, 2.08165e-12, 0.25, 2.08165e-12, 1.2, 1, 2.08165e-12, 0.1, 2.08165e-12, 1.5, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.9, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(3.48787e-16, 3.48787e-16, 3.48787e-16), Vector3(0.383972, 3.48787e-16, -0.349066), Vector3(0.383972, 3.48787e-16, -0.349066), Vector3(3.48787e-16, 3.48787e-16, 3.48787e-16)]
+}
+tracks/2/type = "position_3d"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Mag")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = PackedFloat32Array(0, 1, 2.08165e-12, -0.2, 0.3, 0.3, 1, 2.08165e-12, -0.5, 0.4, 0.5, 1, 2.08165e-12, -0.5, 0.3, 1.2, 1, 2.08165e-12, -0.2, 0.3)
+
+[sub_resource type="Animation" id="Animation_tdsra"]
+resource_name = "primary_shoot"
+length = 0.3
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12, 0.1, 1, 2.08165e-12, 0.03, 0.04, 0.25, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.025, 0.1, 0.25, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(3.48787e-16, 3.48787e-16, 3.48787e-16), Vector3(0.0698132, 3.48787e-16, 3.48787e-16), Vector3(0.0174533, 3.48787e-16, 3.48787e-16), Vector3(3.48787e-16, 3.48787e-16, 3.48787e-16)]
+}
+
+[sub_resource type="Animation" id="Animation_6nbq2"]
+resource_name = "secondary_reload"
+length = 1.5
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12, 0.3, 1, 2.08165e-12, 0.33, 2.08165e-12, 0.9, 1, 2.08165e-12, 0.25, 2.08165e-12, 1.1, 1, 2.08165e-12, 0.1, 2.08165e-12, 1.5, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.9, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(3.48787e-16, 3.48787e-16, 3.48787e-16), Vector3(0.20944, 3.48787e-16, 0.349066), Vector3(0.20944, 3.48787e-16, 0.349066), Vector3(-0.0174533, 3.48787e-16, 3.48787e-16)]
+}
+tracks/2/type = "position_3d"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Gren")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = PackedFloat32Array(0, 1, 2.08165e-12, -0.15, -0.3, 0.3, 1, 2.08165e-12, -0.75, -0.3, 0.7, 1, 2.08165e-12, -0.5, -0.25, 1.2, 1, 2.08165e-12, -0.15, -0.3)
+
+[sub_resource type="Animation" id="Animation_ca5sg"]
+resource_name = "secondary_shoot"
+length = 0.001
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_baphn"]
+_data = {
+"RESET": SubResource("Animation_ltx3e"),
+"activate": SubResource("Animation_bxsn1"),
+"deactivate": SubResource("Animation_6ee28"),
+"idle": SubResource("Animation_2hxvk"),
+"primary_reload": SubResource("Animation_8v67e"),
+"primary_shoot": SubResource("Animation_tdsra"),
+"secondary_reload": SubResource("Animation_6nbq2"),
+"secondary_shoot": SubResource("Animation_ca5sg")
+}
+
+[sub_resource type="Animation" id="Animation_ujsfr"]
+resource_name = "RESET"
+length = 0.001
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, -2.08165e-12, -2.08165e-12, 0)
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-3.48787e-16, -3.48787e-16, -3.48787e-16)]
+}
+
+[sub_resource type="Animation" id="Animation_vmveo"]
+resource_name = "idle"
+length = 0.001
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, -2.08165e-12, -2.08165e-12, 0)
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-3.48787e-16, -3.48787e-16, -3.48787e-16)]
+}
+
+[sub_resource type="Animation" id="Animation_7hiqx"]
+resource_name = "secondary_reload"
+length = 1.5
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12, 0.3, 1, 2.08165e-12, 0.33, 2.08165e-12, 0.9, 1, 2.08165e-12, 0.25, 2.08165e-12, 1.1, 1, 2.08165e-12, 0.1, 2.08165e-12, 1.5, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.9, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(3.48787e-16, 3.48787e-16, 3.48787e-16), Vector3(0.20944, 3.48787e-16, 0.349066), Vector3(0.20944, 3.48787e-16, 0.349066), Vector3(-0.0174533, 3.48787e-16, 3.48787e-16)]
+}
+tracks/2/type = "position_3d"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Weapon/Gren")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = PackedFloat32Array(0, 1, 2.08165e-12, -0.15, -0.3, 0.3, 1, 2.08165e-12, -0.75, -0.3, 0.7, 1, 2.08165e-12, -0.5, -0.25, 1.2, 1, 2.08165e-12, -0.15, -0.3)
+
+[sub_resource type="Animation" id="Animation_83g5u"]
+resource_name = "secondary_shoot"
+length = 0.8
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, -2.08165e-12, -2.08165e-12, 0, 0.1, 1, 2.08165e-12, 0.1, 0.25, 0.3, 1, 2.08165e-12, 0.1, 0.1, 0.8, 1, -2.08165e-12, -2.08165e-12, 0)
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(-3.48787e-16, -3.48787e-16, -3.48787e-16), Vector3(0.0872665, 3.48787e-16, 3.48787e-16), Vector3(0.0872665, 3.48787e-16, 3.48787e-16), Vector3(-3.48787e-16, -3.48787e-16, -3.48787e-16)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_lmd7b"]
+_data = {
+"RESET": SubResource("Animation_ujsfr"),
+"idle": SubResource("Animation_vmveo"),
+"secondary_reload": SubResource("Animation_7hiqx"),
+"secondary_shoot": SubResource("Animation_83g5u")
+}
+
+[node name="AssaultRifle" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, -0.1)
+script = ExtResource("1_mp04b")
+
+[node name="PrimaryHand" type="Node3D" parent="."]
+transform = Transform3D(1, -3.48787e-16, 3.48787e-16, 3.48787e-16, 1, -3.48787e-16, -3.48787e-16, 3.48787e-16, 1, 2.08165e-12, 2.08165e-12, 0)
+
+[node name="SecondaryMovement" type="Node3D" parent="PrimaryHand"]
+transform = Transform3D(1, 3.48787e-16, -3.48787e-16, -3.48787e-16, 1, 3.48787e-16, 3.48787e-16, -3.48787e-16, 1, -2.08165e-12, -2.08165e-12, 0)
+
+[node name="Weapon" type="Node3D" parent="PrimaryHand/SecondaryMovement"]
+transform = Transform3D(1, -3.48787e-16, 3.48787e-16, 3.48787e-16, 1, -3.48787e-16, -3.48787e-16, 3.48787e-16, 1, 2.08165e-12, -2, 2.08165e-12)
+visible = false
+
+[node name="Barrel" type="MeshInstance3D" parent="PrimaryHand/SecondaryMovement/Weapon"]
+transform = Transform3D(1, -2.64698e-23, 1.51089e-23, 2.64698e-23, 1, -1.51089e-23, -1.51089e-23, 1.51088e-23, 1, 2.08165e-12, 0.004, -0.012)
+mesh = SubResource("BoxMesh_n3ubk")
+
+[node name="Grip" type="MeshInstance3D" parent="PrimaryHand/SecondaryMovement/Weapon"]
+transform = Transform3D(1, -4.36116e-16, 3.37677e-16, 3.37677e-16, 0.968147, 0.25038, -4.36116e-16, -0.25038, 0.968147, 2.08165e-12, -0.152, 0.071)
+mesh = SubResource("BoxMesh_5tgf7")
+
+[node name="Mag" type="MeshInstance3D" parent="PrimaryHand/SecondaryMovement/Weapon"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, -0.2, 0.3)
+mesh = SubResource("BoxMesh_tihji")
+
+[node name="Gren" type="MeshInstance3D" parent="PrimaryHand/SecondaryMovement/Weapon"]
+transform = Transform3D(1, 0, -1.26261e-21, -1.26261e-21, -3.61999e-06, -1, 0, 1, -3.61999e-06, 2.08165e-12, -0.15, -0.3)
+mesh = SubResource("CylinderMesh_j8gjj")
+
+[node name="PrimaryAnimation" type="AnimationPlayer" parent="."]
+root_node = NodePath("../PrimaryHand/SecondaryMovement/Weapon")
+libraries = {
+"": SubResource("AnimationLibrary_baphn")
+}
+
+[node name="SecondaryAnimation" type="AnimationPlayer" parent="."]
+root_node = NodePath("../PrimaryHand/SecondaryMovement")
+libraries = {
+"": SubResource("AnimationLibrary_lmd7b")
+}
+
+[node name="Audio" type="Node3D" parent="."]
+
+[node name="Activate" type="AudioStreamPlayer3D" parent="Audio"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0370563, 0.0519936)
+stream = ExtResource("2_yorwo")
+
+[node name="ShootPrimary" type="AudioStreamPlayer3D" parent="Audio"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0370563, 0.0519936)
+stream = ExtResource("3_gia2u")
+
+[node name="ReloadPrimary" type="AudioStreamPlayer3D" parent="Audio"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0370563, 0.0519936)
+stream = ExtResource("4_52b8w")
+
+[node name="ShootSecondary" type="AudioStreamPlayer3D" parent="Audio"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0370563, 0.0519936)
+stream = ExtResource("5_w3v1p")
+
+[node name="ReloadSecondary" type="AudioStreamPlayer3D" parent="Audio"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0370563, 0.0519936)
+stream = ExtResource("4_52b8w")
+
+[node name="Empty" type="AudioStreamPlayer3D" parent="Audio"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0370563, 0.0519936)
+stream = ExtResource("6_2qb08")

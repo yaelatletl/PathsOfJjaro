@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://n7tmmo30d5xj"
+path="res://.godot/imported/01250 Marathon switch off.wav-5ed50cdf8ff75ddde39cf94e7427a4ac.sample"
+
+[deps]
+
+source_file="res://assets/audio/switch/01250 Marathon switch off.wav"
+dest_files=["res://.godot/imported/01250 Marathon switch off.wav-5ed50cdf8ff75ddde39cf94e7427a4ac.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

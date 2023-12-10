@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://b2s0f27qsv7mt"
+path="res://.godot/imported/21 rmx - Bullet Ricochet 2.wav-6e699d9a633a7390cb30bf62ca758b5a.sample"
+
+[deps]
+
+source_file="res://assets/audio/projectile/21 rmx - Bullet Ricochet 2.wav"
+dest_files=["res://.godot/imported/21 rmx - Bullet Ricochet 2.wav-6e699d9a633a7390cb30bf62ca758b5a.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

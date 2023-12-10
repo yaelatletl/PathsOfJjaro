@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://drpaxwgmjbclp"
+path="res://.godot/imported/20180 Can't toggle switch.wav-94f4be9eb663fcaa7e4577196247b00f.sample"
+
+[deps]
+
+source_file="res://assets/audio/switch/20180 Can't toggle switch.wav"
+dest_files=["res://.godot/imported/20180 Can't toggle switch.wav-94f4be9eb663fcaa7e4577196247b00f.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0
