@@ -19,6 +19,12 @@ extends Node
 # TO DO: decide when/how to draw automap later: redraws would probably be triggered by having Player's _physics_process emit a `player_did_move(...)` signal whenever the player turns or moves (i.e. whenever Player.global_transform changes); Radar could receive the same signal and redraw its center blip
 
 
+func set_movement_text(msg: String) -> void:
+	$Movement.text = msg
+
+func set_speed_text(msg: String) -> void:
+	$Speed.text = msg
+
 
 @onready var health := $Health
 
@@ -102,8 +108,8 @@ func update_weapon_status(_arg = null) -> void:
 	var inventory_1 := magazine_1.inventory_item
 	var inventory_2 := magazine_2.inventory_item
 	# TO DO: triggers' ammo count[s] should appear on gun barrels, c.f. Halo and other modern FPSes - that puts weapon status information near to center of screen (where the user's eye is usually focused) so it's quick and easy to glance at, makes use of what would otherwise be boring wasted screen space (solid gun butts), and just looks plain gosh darn good when playing
-	primary_ammo.text = "%s/%s   %02d %s" % [magazine_1.count, magazine_1.max_count, inventory_1.count, inventory_1.short_name]
-	secondary_ammo.text = "%s/%s   %02d %s" % [magazine_2.count, magazine_2.max_count, inventory_2.count, inventory_2.short_name]
+	primary_ammo.text = "%s/%s   %02d/%02d %s" % [magazine_1.count, magazine_1.max_count, inventory_1.count, inventory_1.max_count, inventory_1.short_name]
+	secondary_ammo.text = "%s/%s   %02d/%02d %s" % [magazine_2.count, magazine_2.max_count, inventory_2.count, inventory_2.max_count, inventory_2.short_name]
 
 
 # center screen message

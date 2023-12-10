@@ -148,15 +148,13 @@ func shoot_secondary(weapon: Weapon, successfully: bool) -> void:
 
 
 func reload_primary(weapon: Weapon, successfully: bool) -> void:
-	if successfully != is_secondary_available:
-		self.update_trigger_availability(weapon.primary_trigger.available, weapon.secondary_trigger.available)
+	self.update_trigger_availability(weapon.primary_trigger.available, weapon.secondary_trigger.available)
 	if successfully:
 		self.play_animation("primary_reload")
 		audio_reload_primary.play()
 
 func reload_secondary(weapon: Weapon, successfully: bool) -> void:
-	if successfully != is_secondary_available:
-		self.update_trigger_availability(weapon.primary_trigger.available, weapon.secondary_trigger.available)
+	self.update_trigger_availability(weapon.primary_trigger.available, weapon.secondary_trigger.available)
 	if successfully:
 		self.play_animation("secondary_reload")
 		audio_shoot_secondary.play()

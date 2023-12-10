@@ -12,7 +12,7 @@ class_name Player
 #
 
 
-const INPUT_AXIS_MULTIPLIER := 10 # temporary until we decide on final values in physics dictionaries below
+const INPUT_AXIS_MULTIPLIER := 15 # temporary until we decide on final values in physics dictionaries below
 
 
 # TO DO: these are copied directly from M3 physics so currently use Classic WU and need converted to meters
@@ -38,6 +38,9 @@ const WALK_PHYSICS := {
 	"maximum_forward_velocity": 1.0 * INPUT_AXIS_MULTIPLIER, # 0.07142639, # TO DO: for now, multiply all velocity-related fields by 14 to get values relative to forward walk speed (we can figure out the final multiplier to emulate M2 speeds later)
 	"maximum_backward_velocity": 0.82 * INPUT_AXIS_MULTIPLIER, # 0.05882263,
 	"maximum_perpendicular_velocity": 0.7 * INPUT_AXIS_MULTIPLIER, # 0.049987793,
+	
+	
+	# TO DO: these aren't currently hooked up
 	
 	"acceleration": 0.004989624,
 	"deceleration": 0.009994507,
@@ -116,7 +119,45 @@ const SPRINT_PHYSICS := {
 const JUMP_Y_SPEED := 5.0 # temporary till we figure out jumping
 
 
-const CROUCH_PHYSICS := WALK_PHYSICS # finish walk and sprint first, then implement crouch; note that jump and crouch should be mutually exclusive
+
+const CROUCH_PHYSICS := {
+		"maximum_forward_velocity": 0.5 * INPUT_AXIS_MULTIPLIER, # 0.07142639, # TO DO: for now, multiply all velocity-related fields by 14 to get values relative to forward walk speed (we can figure out the final multiplier to emulate M2 speeds later)
+	"maximum_backward_velocity": 0.3 * INPUT_AXIS_MULTIPLIER, # 0.05882263,
+	"maximum_perpendicular_velocity": 0.3 * INPUT_AXIS_MULTIPLIER, # 0.049987793,
+	
+	"acceleration": 0.004989624,
+	"deceleration": 0.009994507,
+	"climbing_acceleration": 0.003326416,
+	
+	"angular_acceleration": 0.625, # I think this is y-axis rotation
+	"angular_deceleration": 1.25, # ditto
+	"maximum_angular_velocity": 6.0, # ditto
+	"angular_recentering_velocity": 0.75, # TO DO: how quickly the camera vertically auto-recenters when moving forward/backward (note: moving sideways does not auto-recenter)
+	
+	"radius": 0.25,
+	"height": 0.7999878,
+	"camera_height": 0.19999695, # TO DO: I think this is deducted from height
+	"splash_height": 0.5, # TO DO: I assume this puts waterline around waist when swimming on surface of liquid
+	
+	# will the following be same for all gaits? what about swimming?
+	
+	"airborne_deceleration": 0.005554199, # applies to xz plane (AFAIK)
+	"gravitational_acceleration": 0.0024871826, # applies to y axis
+	"terminal_velocity": 0.14285278, # applies to y-axis 
+	"external_deceleration": 0.004989624, # not sure about this: friction acting against xz motion?
+	"external_angular_deceleration": 0.33332825, # not sure
+	
+	#"fast_angular_velocity": 21.333328, # head turn, so ignore it (strafing's the usual tactic for spraying bullets in one direction while moving in another and doesn't need extra keys)
+	#"fast_angular_maximum": 128.0,
+	
+	# camera bob, I think
+	"step_delta": 0.049987793, # units? (looks like seconds? it's not ticks) M2 uses the exact same camera bounce at both walk and sprint; not sure if we want walk to have slightly different bounce to visually differentiate gaits; crawl and swim will use different values; what about low-gravity?; TO DO: should we use M2 Physics params or hardcoded AnimationPlayer tracks to control camera bounce? (AP has advantage that play only needs called at transitions whereas code-based bounce requires extra code in _physics_process to update it; one advantage of code is when player stops at any point in bounce: animation track has to run to end of sequence to reset height, although we could use AP and switch to a timer-based function to reduce current bounce height)
+	"step_amplitude": 0.099990845,
+	
+	"dead_height": 0.25,
+	"half_camera_separation": 0.03125, # FOV
+	"maximum_elevation": 42.666656, # vertical look limit (±42.7deg is the Classic value, which was determined less by gameplay than by need to avoid visual distortion due to the Classic renderer's lack of true verticals; while we probably want to constrain the angle to some degree to avoid changing gameplay too much - e.g. near-vertical look allows user unlimited freedom to snipe from ledges whereas Classic forced user to jump down to shoot monsters directly below - we might allow a somewhat greater angle, e.g. ±60-70deg, for a more modern gameplay feel)
+}
 
 
 enum Movement {
@@ -148,8 +189,9 @@ var mass: float = 45 # think this is only used for imparting impulse to other mo
 
 
 
-const MAX_STEP_HEIGHT := 0.4 # this looks too low; M2 steps can be ~0.3WU, which is ~0.6m (Q. where is max step height defined in Classic/AO)
+const MAX_STEP_HEIGHT := 0.5 # this looks too low; M2 steps can be ~0.3WU, which is ~0.6m (Q. where is max step height defined in Classic/AO)
 
+const MAX_JUMP_HEIGHT := 0.75 # this looks too low; M2 steps can be ~0.3WU, which is ~0.6m (Q. where is max step height defined in Classic/AO)
 
 var coyote_time : float = 0.1 # the delay between walking off a ledge and starting to fall # TO DO: is this needed? given that M2 allows user some control over movement in xz plane, returning to the ledge might be a step-up movement; need to check AO code to see how it does it (i.e. after running off ledge, is it possible to reverse forwards/backwards movement to regain it? or is the only way to regain ledge to turn mid-air while falling and step-up onto it before the y delta exceeds MAX_STEP_HEIGHT?)
 var elapsed_coyote_time : float = 0
@@ -174,7 +216,14 @@ var wall_direction : Vector3 = Vector3.ZERO # used in VaultOver, do we need this
 @onready var detect_control_panel := $Head/Camera/ActionReach
 
 
-@onready var detect_step := $StepDetection # note: this raycast only detects a collision body that MAY block player walking forward (e.g. it could be a smooth ramp, which is climbable by Player's capsule body up to a certain angle); it also doesn't guarantee that it won't return false if the player proceeds forward, moving the ray to other side of a narrow body (e.g. ladder tread); TO DO: probably want 2 raycasts positioned left and right to better detect ledges approached at an angle; these will need to rotate around the Player's y=0 axis
+# TO DO: use ShapeCast3D? more expensive but should be better at detecting
+
+const STEP_DETECTION_OFFSET := 0.8 # distance from center of player at which to position the raycast's origin; is always calculated in the direction of movement on xz plane
+
+@onready var forward_clearance := $ForwardClearance # this is always 0.8m ahead of player in direction of movement, which should be enough to detect approaching step/ladder/crouch/ledge/railing
+
+@onready var duck_detector     := $ForwardClearance/DuckDetector
+@onready var step_detector     := $ForwardClearance/StepDetector # note: this raycast only detects a collision body that MAY block player walking forward (e.g. it could be a smooth ramp, which is climbable by Player's capsule body up to a certain angle); it also doesn't guarantee that it won't return false if the player proceeds forward, moving the ray to other side of a narrow body (e.g. ladder tread); TO DO: probably want 2 raycasts positioned left and right to better detect ledges approached at an angle; these will need to rotate around the Player's y=0 axis
 #
 # once a collision is initially detected, we'll want some way of determining if it's a climbable step, jumpable ledge, smooth ramp (doesn't need special handling), or non-climable (e.g. it's too small/shallow/steeply sloped to stand on, e.g. wall greebles are ignored but greeble-like structures in the Level layer will be detected); for now, use a single raycast while getting the basic implementation working
 #
@@ -188,6 +237,9 @@ var wall_direction : Vector3 = Vector3.ZERO # used in VaultOver, do we need this
 
 var input_axis := Vector2.ZERO # sidestep and forward/backward movements on xz plane
 var y_speed := 0.0 # WIP: this is downward speed due to gravity but also upward speed when jumping
+
+var climb_direction   := Vector3.ZERO
+var climb_destination := Vector3.ZERO
 
 
 var is_sprint_enabled := false # TO DO: whereas Classic requires user to hold key constantly to Sprint key, let's make WALK/SPRINT states toggle when user taps the TOGGLE_SPRINT key (note: crouching and swimming modes will eventually override this, hence '...enabled' as this property only records the toggle state)
@@ -288,7 +340,7 @@ func _physics_process(delta: float) -> void: # fixed interval (see Project Setti
 		
 		# movement
 		var physics = SPRINT_PHYSICS if is_sprint_enabled else WALK_PHYSICS # temporary until crouch+swim states are implemented
-		if is_on_floor(): # TO DO: see comment on is_far_from_floor
+		if has_traction():
 			input_axis = Input.get_vector(&"MOVE_BACKWARD", &"MOVE_FORWARD", &"MOVE_LEFT", &"MOVE_RIGHT")
 			friction += floor_friction
 			# TO DO: JUMP will become automatic, but leave on manual key for now
@@ -333,49 +385,34 @@ func _physics_process(delta: float) -> void: # fixed interval (see Project Setti
 		impulse -= impulse.lerp(Vector3.ZERO, delta) * delta
 	
 	
-	# TO DO: fix stair climbing; the Player (and NPCs) should follow a straight-ish diagonal line when running up stairs, so either needs to take off at a distance or treat stairs differently wrt collision detection (I suspect the bottom-leading edge of M2's simple collision cylinder intersects edges of steps, with each step imparting enough vertical momentum that the bottom of the cylinder's vertical axis just clears it, or possibly that the M2 player, upon detecting an intersection of cylinder and floor, automatically rises to stand on top of it)
-	#
-	# AFAIK the best way to do stair climbing in Godot (for Player and NPCs) is to add a pair of forward raycasts to the character, one just above the character's max step height (stepable detector) and the other at ground (kerb detector): if top raycast is clear and bottom raycast collides with Level or FixedScenery then add vertical impulse to start the climb; hopefully we can generalize this mechanism to support auto-jump (jumpable and clearable detectors), auto-crouch (crouchable detector), and auto-vault (railing detector) as well; note that kerb detection won't work on stairs with open treads, so might need to use a vertical raycast, or possibly try an Area with cylinder shape to detect all ledges near feet
-	#
-	# one caveat: how well will a single point raycast detect stairs when approaching at a shallow angle of incidence? do we need to add extra rays to the center ray's left and right?
-	#
-	# might be of help:
-	#
-	# https://www.youtube.com/watch?v=ILVUc_yV24g
-	#
-	# https://godotengine.org/asset-library/asset/2278
+	$Canvas/HUD.set_speed_text("%s\n%0.2f,%0.2f,%0.2f" % ["sprint" if is_sprint_enabled else "walk", self.velocity.x, self.velocity.y, self.velocity.z])
 	
-	#Stairs/ledge step check
-	#Do a test move, check if the character could go up a step or down a step
-	#check if the character would be stopped if going forward, then if it would be stopped if going forward and up. Then it should go up. 
-	#var test_transform = Transform3D(self.transform.basis, self.transform.origin + Vector3(0, MAX_STEP_HEIGHT, 0) + (self.velocity) * delta)
-	#var should_go_up = self.test_move(self.transform, self.velocity * delta) and not self.test_move(test_transform, self.velocity * delta)
-	#Do a test move, check if the character could go down a step, if its linear velocity on the y axis is negative 
-	#var can_move_down = self.test_move(self.transform, self.velocity * delta + Vector3(0, -MAX_STEP_HEIGHT, 0))
-	#self.velocity = self.velocity + Vector3(0, MAX_STEP_HEIGHT * delta, 0) if should_go_up else self.velocity #- Vector3(0,MAX_STEP_HEIGHT,0) if can_move_down else self.velocity)
+	# automatic step climb, ledge jump, and crouch; TO DO: can this also detect vault reliably? (we may need a forward pointing ray for that since railings are narrow)
+	# TO DO: FIX: this needs to take into account the direction player *wants* to move, not just the direction they are moving as a result of move_and_slide: if player is already hard up against step, its velocity places the detector in direction of the sliding movement (which is parallel to the step) - we want to use direction of movement, but we need to offset the detector's position when player velocity and user movement direction don't match to check for a step in the user's desired direction
+	var horizontal_direction = Vector3(self.velocity.x, 0, self.velocity.z).normalized()
+	if horizontal_direction:
+		forward_clearance.global_position = self.global_position + horizontal_direction * STEP_DETECTION_OFFSET
+	
+	if duck_detector.is_colliding():
+		# TO DO: implement auto-duck; this reduces Player to 0.8-0.97 height (radius is unchanged) and reduces xz velocity to crawl speed
+		$Canvas/HUD.set_movement_text("low ceiling ahead\n%s" % duck_detector.get_collider().get_parent().name)
+		# TO DO: need to decide how to combine ducking and climbing into a 1m high duct 0.5m from floor; also, once in a duct, use HeadClearance to check if it's safe to stand up (this probably needs to be a ShapeCast cylinder/sphere while crouched so that player can't stand up until properly clear)
+	
+	# TO DO: how best to bridge gaps (e.g. from platform across purple pillars; player tends to stick on first gap)
+	
+	if step_detector.is_colliding():
+		climb()
+	elif detected_step != null: # was climbing
+		print("stop climbing ", detected_step.get_parent().name)
+		stop_climbing()
+		detected_step = null
+	
 	
 	self.move_and_slide()
 	
-	if detect_step.is_colliding():
-		var step = detect_step.get_collider().get_parent()
-		if step != detected_step:
-			detected_step = step
-			
-			# TO DO: direction on xz plane matters; the detection ray should always be on leading edge of player body (currently it is fixed to front edge)
-			
-			print("entering step or ramp: ", detected_step.name, "  z=", self.velocity.z)
-			
-			print(" pos=", self.global_position.y, "   h=", self.body.shape.height)
-			print(" base=", self.global_position.y - self.body.shape.height / 2)
-			
-			
-			
-	else:
-		if detected_step != null:
-			print("exiting step or ramp: ", detected_step.name)
-			detected_step = null
 	
-	return # temporary
+	
+	return # temporary until last collision detection below is sorted out
 	
 	# TO DO: I think the purpose of this is last bit to bounce movable bodies off player (elastic collisions); every movable body is responsible for doing this (since any body can bounce off any other body), so move this logic into its own shared function if practical (that being said, we should also check if Godot physics can do this automatically for non-character bodies)
 	for index in self.get_slide_collision_count():
@@ -387,6 +424,94 @@ func _physics_process(delta: float) -> void: # fixed interval (see Project Setti
 				collision.get_collider(0).apply_central_impulse(
 					(-collision.get_normal() * self.run_speed / collision.get_collider(0).mass) * delta)
 
+
+
+
+
+
+func has_traction() -> bool:
+	return is_on_floor() or climb_direction # player has traction while on ground/stairs/ladders/ledge-jump TO DO: see comment on is_far_from_floor about its reliability
+
+
+func stop_climbing():
+	$Canvas/HUD.set_movement_text("stop climbing")
+	self.velocity.y = 0
+	climb_direction = Vector3.ZERO
+	#print("exiting step or ramp: ", detected_step.get_parent().name, "  ", self.velocity)
+
+
+func climb() -> void:
+	var step = step_detector.get_collider()
+	if step != detected_step: # found a new step so start climbing that
+		detected_step = step
+		print("detected climb ", detected_step.get_parent().name)
+		
+		if self.velocity.z < 0: # while player is moving forward
+			
+			var col_point = step_detector.get_collision_point()
+			var col_normal = step_detector.get_collision_normal()
+			
+			
+			# TO DO: use collision point to determine if this is step, ledge, or too high to climb
+			
+			# TO DO: use normal to determine surface's slope (i.e. don't step up on steeply angled objects, unless they are ladders in which case climb); Q. what is steepest angled surface the player can reasonably step onto? maybe 15-30deg - TBD
+			
+			# TO DO: direction on xz plane matters; the detection ray should always be on leading edge of player body (currently it is fixed to front edge)
+			#print("entering step or ramp: ", detected_step.get_parent().name, "  z=", self.velocity.z)
+			
+			var player_base_y = self.global_position.y - self.body.shape.height / 2
+			
+			var player_point = Vector3(self.global_position.x, player_base_y, self.global_position.z)
+			
+			var step_height = col_point.y - player_base_y
+			
+			if step_height <= MAX_STEP_HEIGHT:
+				print("climb step ", step_height)
+			elif step_height <= MAX_JUMP_HEIGHT:
+				if is_sprint_enabled:
+					print("auto-jump ", step_height)
+					y_speed = JUMP_Y_SPEED
+					self.velocity.y = y_speed * 3
+				else:
+					print("can't auto-jump at walk")
+				return
+			else:
+				print("too high")
+				return
+			
+
+			# TO DO: if step height > MAX_STEP_HEIGHT it may be a jumpable ledge, in which case decide if/when to auto-jump (e.g. player must be running and not hard up against the ledge); we also want to prevent auto-jump auto-repeating - unlike stairs where player can step up repeatedly to next step, auto-jump should put player on ledge and stop waiting for new movement to start (alternatively, once on ledge start a ~1sec do_not_autojump timer so they can't immediately launch again onto next ledge - need to build test geometry to exercise this)
+			
+			#print(" pos=", self.global_position.y, "   h=", self.body.shape.height)
+			#print(" player=%s  step=%s   height=%0.2f  normal=%s  vel=%s" % [player_point, col_point, step_height, col_normal, self.velocity])
+			
+			
+			climb_direction = (col_point - player_point).normalized()
+			climb_destination = col_point # TO DO: this probably isn't useful as player may turn/sidestep/be knocked sideways while climbing so is not guaranteed to end up at this point; also, it is the very edge of the stair; Q. can we rely on self.velocity.z<0 and StepDetection raycast for setting climb_direction back to ZERO when there is no more need to climb?
+		
+			#print("climb_direction=", climb_direction)
+			
+			$Canvas/HUD.set_movement_text("start climbing\n%s\n%s" % [detected_step.get_parent().name, climb_direction])
+			
+			var speed = -self.velocity.z
+			self.velocity.y = speed * climb_direction.y * 2
+			self.velocity.z *= -climb_direction.z
+			
+			#print("velocity=", self.velocity)
+			
+			#y_speed = step_height * 10 # kludge # TO DO: we want a nice straight climb
+			#self.velocity.y = y_speed
+		
+	else: # still climbing same step
+		#print("still climbing: ", self.velocity)
+		if self.velocity.z < 0: # while player is moving forward
+			var speed = -self.velocity.z
+			self.velocity.y = speed * climb_direction.y * 2
+		else:
+			#y_speed = 0.0 # TO DO: appropriate?
+			pass #print("stopped moving forward but still colliding with step") # TO DO: what, if anything, to do if player stops moving forward? will existing physics do the right thing?
+			
+			
 
 
 

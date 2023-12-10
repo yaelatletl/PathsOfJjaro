@@ -162,8 +162,6 @@ RESET_GAME={
 
 [layer_names]
 
-3d_render/layer_1="Level"
-3d_render/layer_2="WeaponInHand"
 3d_physics/layer_1="Level"
 3d_physics/layer_2="Player"
 3d_physics/layer_3="NPC"
@@ -180,6 +178,7 @@ RESET_GAME={
 3d_physics/layer_14="IndestructibleWindow"
 3d_physics/layer_15="Liquid"
 3d_physics/layer_16="VaultableRailing"
+3d_physics/layer_17="Ladder"
 
 [mono]
 
