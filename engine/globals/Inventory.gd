@@ -14,8 +14,8 @@ extends Node
 # TO DO: decide how best to organize player Inventory; not sure that attaching ammo count to Weapon[Trigger] is a good idea; better to have Ammunition instances for all player ammo types which are managed by Inventory; these instances can be shared with WeaponTrigger instances so that a Trigger decrements Ammunition.count when it reloads and Inventory increments it when an ammo Pickable is picked up
 
 
-signal inventory_item_increased(item: Inventory.InventoryItem)
-signal inventory_item_decreased(item: Inventory.InventoryItem)
+signal inventory_increased(item: Inventory.InventoryItem)
+signal inventory_decreased(item: Inventory.InventoryItem)
 
 
 
@@ -47,7 +47,7 @@ class InventoryItem: # TO DO: presumably this extends Object by default; should 
 	func try_to_increment() -> bool:
 		if self.count < self.max_count:
 			self.count += 1
-			Inventory.inventory_item_increased.emit(self)
+			Inventory.inventory_increased.emit(self)
 			return true
 		else:
 			return false
@@ -55,7 +55,7 @@ class InventoryItem: # TO DO: presumably this extends Object by default; should 
 	func try_to_decrement() -> bool:
 		if self.count > 0:
 			self.count -= 1
-			Inventory.inventory_item_decreased.emit(self)
+			Inventory.inventory_decreased.emit(self)
 			return true
 		else:
 			return false

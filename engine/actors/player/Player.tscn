@@ -1,43 +1,16 @@
-[gd_scene load_steps=20 format=3 uid="uid://dxx6xubs1bfbr"]
+[gd_scene load_steps=19 format=3 uid="uid://dxx6xubs1bfbr"]
 
 [ext_resource type="Script" path="res://engine/actors/player/Player.gd" id="1_dw56p"]
 [ext_resource type="PackedScene" uid="uid://btafi6rm8lbsm" path="res://assets/weapons/MagnumPistol/MagnumPistol.tscn" id="2_d66r2"]
 [ext_resource type="PackedScene" uid="uid://c7jhdrua1yaxt" path="res://assets/weapons/Fist/Fist.tscn" id="2_t35jt"]
 [ext_resource type="PackedScene" uid="uid://ddeas4dqqgef8" path="res://assets/weapons/AssaultRifle/AssaultRifle.tscn" id="4_00qt7"]
-[ext_resource type="AudioStream" uid="uid://bxuoosvgw78hi" path="res://assets/audio/chime.wav" id="5_71nvu"]
+[ext_resource type="AudioStream" uid="uid://b2ku47o6aco0g" path="res://assets/audio/player/20 - Got Item.wav" id="6_1hkb0"]
 [ext_resource type="PackedScene" uid="uid://bcdg4sigkkarn" path="res://assets/HUD/HUD.tscn" id="6_4fgbk"]
 
 [sub_resource type="CapsuleShape3D" id="51"]
 resource_local_to_scene = true
 radius = 0.49
 height = 1.59
-
-[sub_resource type="Animation" id="52"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(0, 0, 0)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:rotation_degrees")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(0, 0, 0)]
-}
 
 [sub_resource type="Animation" id="53"]
 length = 0.2
@@ -102,7 +75,7 @@ length = 0.6
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
-tracks/0/enabled = true
+tracks/0/enabled = false
 tracks/0/path = NodePath(".:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
@@ -115,7 +88,6 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_olj6a"]
 _data = {
-"idle": SubResource("52"),
 "jump": SubResource("53"),
 "land": SubResource("Animation_kfjl7"),
 "sprint": SubResource("54"),
@@ -182,11 +154,19 @@ far = 6500.0
 [node name="WeaponsInHand" type="Node3D" parent="Head/Camera"]
 transform = Transform3D(1, -4.86609e-31, 0, -4.86609e-31, 1, 0, 0, 0, 1, 0, 0, 0)
 
-[node name="Fist" parent="Head/Camera/WeaponsInHand" instance=ExtResource("2_t35jt")]
-transform = Transform3D(0.25, -8.71967e-17, 8.71967e-17, 8.71967e-17, 0.25, -8.71967e-17, -8.71967e-17, 8.71967e-17, 0.25, 2.08173e-12, -0.0669937, -0.193649)
+[node name="FistPrimary" parent="Head/Camera/WeaponsInHand" instance=ExtResource("2_t35jt")]
+transform = Transform3D(-0.25, -8.71967e-17, 8.71967e-17, -8.71967e-17, 0.25, -8.71967e-17, 8.71967e-17, 8.71967e-17, 0.25, -0.05, -0.067, -0.194)
 
-[node name="Pistol" parent="Head/Camera/WeaponsInHand" instance=ExtResource("2_d66r2")]
-transform = Transform3D(0.25, -8.71967e-17, 8.71967e-17, 8.71967e-17, 0.25, -8.71967e-17, -8.71967e-17, 8.71967e-17, 0.25, 1.08203e-16, -0.0567093, -0.211731)
+[node name="FistSecondary" parent="Head/Camera/WeaponsInHand" instance=ExtResource("2_t35jt")]
+transform = Transform3D(0.25, -8.71967e-17, 8.71967e-17, 8.71967e-17, 0.25, -8.71967e-17, -8.71967e-17, 8.71967e-17, 0.25, 0.05, -0.067, -0.194)
+hand = 1
+
+[node name="PistolPrimary" parent="Head/Camera/WeaponsInHand" instance=ExtResource("2_d66r2")]
+transform = Transform3D(-0.25, -8.71967e-17, 8.71967e-17, -8.71967e-17, 0.25, -8.71967e-17, 8.71967e-17, 8.71967e-17, 0.25, -0.05, -0.057, -0.212)
+
+[node name="PistolSecondary" parent="Head/Camera/WeaponsInHand" instance=ExtResource("2_d66r2")]
+transform = Transform3D(0.25, -8.71967e-17, 8.71967e-17, 8.71967e-17, 0.25, -8.71967e-17, -8.71967e-17, 8.71967e-17, 0.25, 0.05, -0.057, -0.212)
+hand = 1
 
 [node name="AssaultRifle" parent="Head/Camera/WeaponsInHand" instance=ExtResource("4_00qt7")]
 transform = Transform3D(0.25, -8.71967e-17, 8.71967e-17, 8.71967e-17, 0.25, -8.71967e-17, -8.71967e-17, 8.71967e-17, 0.25, 2.08157e-12, -0.0612897, -0.232899)
@@ -223,7 +203,7 @@ transform = Transform3D(1, -1.21652e-31, 0, -1.21652e-31, 1, 0, 0, 0, 1, 2.08165
 [node name="DuckDetector" type="RayCast3D" parent="ForwardClearance"]
 transform = Transform3D(1, -1.21652e-31, 0, -1.21652e-31, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 0)
 exclude_parent = false
-target_position = Vector3(2.08165e-12, 0.79, 2.08165e-12)
+target_position = Vector3(2.08165e-12, 0.795, 2.08165e-12)
 collision_mask = 98433
 hit_from_inside = true
 debug_shape_custom_color = Color(0.54902, 0.0117647, 0.603922, 0.509804)
@@ -240,7 +220,7 @@ mesh = SubResource("SphereMesh_xfkde")
 [node name="StepDetector" type="RayCast3D" parent="ForwardClearance"]
 transform = Transform3D(1, -1.21652e-31, 0, -1.21652e-31, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
 exclude_parent = false
-target_position = Vector3(2.08165e-12, -0.79, 2.08165e-12)
+target_position = Vector3(2.08165e-12, -0.795, 2.08165e-12)
 collision_mask = 98433
 hit_from_inside = true
 debug_shape_custom_color = Color(0.54902, 0.0117647, 0.603922, 0.509804)
@@ -261,4 +241,4 @@ mesh = SubResource("SphereMesh_xfkde")
 [node name="Audio" type="Node" parent="."]
 
 [node name="PickedUp" type="AudioStreamPlayer" parent="Audio"]
-stream = ExtResource("5_71nvu")
+stream = ExtResource("6_1hkb0")

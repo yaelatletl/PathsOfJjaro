@@ -53,16 +53,12 @@ func _ready():
 	# TO DO: is there any way to set up signal connections in the node editor? oddly, the HUD's Scene tab doesn't allow Inventory.tscn to be added via Add Child Node, although it does allow it to be dragged and dropped from the FileSystem tab - but does this create a separate instance of it or reference the existing global instance? need to check Godot documentation; not sure if it'd be easier setting these signals in the Node tab than in code, but for now just stick to doing it in code (that this code is visibly ugly suggests the current API design is badly factored):
 	
 	# note: in addition to updating the HUD display these signals will also drive the WIH animation (but connecting signals to that is the WIH manager's job)
-	# TO DO: combine these signals into one? HUD would call Weapon.status to discover which transition it's in
-	WeaponManager.weapon_activating.connect(update_weapon_status)
-	WeaponManager.weapon_activated.connect(update_weapon_status)
-	WeaponManager.weapon_deactivating.connect(update_weapon_status)
-	WeaponManager.weapon_deactivated.connect(update_weapon_status)
+	# TO DO: combine these signals into one? HUD would call WeaponManager.current_weapon.status to discover which transition it's in; an additional caveat is dual-wield weapons, where one gun is activating/deactivating while the other is active
+	WeaponManager.weapon_activity_changed.connect(update_weapon_status)
+	WeaponManager.weapon_magazine_changed.connect(update_weapon_status)
 	
-	WeaponManager.weapon_primary_magazine_changed.connect(update_weapon_status)
-	WeaponManager.weapon_secondary_magazine_changed.connect(update_weapon_status)
-	Inventory.inventory_item_increased.connect(update_inventory_status)
-	Inventory.inventory_item_decreased.connect(update_inventory_status)
+	Inventory.inventory_increased.connect(update_inventory_status)
+	Inventory.inventory_decreased.connect(update_inventory_status)
 	
 	Global.health_changed.connect(update_health_status)
 	Global.player_died.connect(update_health_status)
@@ -98,10 +94,10 @@ func update_inventory_status(_arg = null) -> void:
 	update_weapon_status(_arg)
 	# TO DO: implement list of all available ammos down right side of screen
 
-func update_weapon_status(_arg = null) -> void: 
+func update_weapon_status(_arg = null, _arg2 = null) -> void: # TO DO: what should weapon signals pass as arguments, if anything? it may be best to pass nothing, leaving listeners to retrieve whatever they need from WeaponManager
 	var weapon: Weapon = WeaponManager.current_weapon
 	if not weapon: return # TO DO: kludgy; WeaponManager.current_weapon should be set before HUD loads
-	print("   ...update weapon status: ", weapon.long_name)
+	#print("   ...update weapon status: ", weapon.long_name)
 	weapon_name.text = weapon.long_name
 	var magazine_1  := weapon.primary_trigger.magazine
 	var magazine_2  := weapon.secondary_trigger.magazine

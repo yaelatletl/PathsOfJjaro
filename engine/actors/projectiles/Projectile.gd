@@ -6,6 +6,7 @@ extends StaticBody3D # static body should sufficient for projectiles; TO DO: gre
 # TO DO: can/should Trooper use a shoulder-mounted launcher to fire its grenades? that would make the Trooper's rifle look and behave less like the player's AR - it could also use a different bullet effect (similar to M1's alien gun) for added 'alien-ness'; a shoulder-mounted launcher would also be consistent with Hunter (shoulder-mounted energy weapon) and Juggernaut (shoulder-mounted rocket launchers) designs for a more unified-looking bestiary (the Trooper's body armor could be revised to look more like Hunter's chest armor, so that Fighter -> Trooper -> Hunter designs have a logical progression from minimal to medium to full armor - plus it allows mesh reuse)
 
 
+
 const Detonation = preload("res://engine/actors/projectiles/Detonation.tscn")
 
 

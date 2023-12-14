@@ -1,53 +1,67 @@
 extends WeaponInHand
 
 
-# AssaultRifle.gd
+# assets/weapons/AssaultRifle/AssaultRifle.gd
 
 
-# TO DO: one-handed with single/dual-function; two-handed (which can show left, right, or both hands, depending on whether player has 1 or 2 guns; when player has 2 guns, always show both)
+const WEAPON_TYPE := Enums.WeaponType.ASSAULT_RIFLE
 
 
-# weapons/assault_rifle/WeaponInHand.gd -- this implements the standard API for performing weapon's animations; TO DO: make this API signal-based so that engine can be tested with or without HUD attached and vice-versa
+@onready var secondary_animation := $SecondaryAnimation
 
+# randomized sound effects
 
-# TO DO: in M2, when player looks up/down the WiH visually moves down/up (M1 doesn't do this but we probably want to replicate the M2 effect - it doesn't change weapon behavior but it looks “more lifelike”); ignore this for now and figure how best to add it later (WiH may need rendered in its own viewport and overlaid via canvas layer to prevent weapon barrel clipping through walls, in which case the simplest solution is for Player to adjust its viewport positioning when vertical look angle changes)
+@onready var audio_primary   := $Weapon/Audio
+@onready var audio_secondary := $Weapon/SecondaryAudio
 
-# TO DO: for animating bobbing motions as player moves, define either a `move(gait)` method or separate stop+walk+sprint+crouch+swim methods
+const AUDIO_PRIMARY_SHOOT := [
+	preload("res://assets/audio/weapon/37 rms - Assault Rifle Firing.wav"), # TO DO: add slightly different alternative(s)?
+]
 
-# TO DO: the WIH needs separately rendered from walls and composited into Viewport/HUD's CanvasLayer to fix the problem where barrels visually clip through nearby walls:
-#
-# https://godotforums.org/d/28766-better-way-to-handle-first-person-weapon-clipping
-#
-# https://www.youtube.com/watch?v=Nhx3-hViv-Y
-#
-# Q. how to simulate shadows? (is there any way to get environment light intensity at a spatial coordinate? if so, we could sample the light hue and intensity at a point on front of player's capsule body as seen from primary camera's viewport and apply that light when rendering the WIH in the second viewport); note: we might also adjust FOV on WIH view to exaggerate perspective shortening (we don't want a gun's barrel extending into the far distance; it should be squat almost to point of looking flattened out, reminiscent of Classic's flat WIH renderings)
+const AUDIO_SECONDARY_SHOOT := [
+	preload("res://assets/audio/weapon/38 rmx - Grenade Launcher Firing 1.wav"),
+	preload("res://assets/audio/weapon/38 rmx - Grenade Launcher Firing 2.wav"), 
+]
 
+# these methods are called by animations
 
-# all WiH scenes must implement the following API:
+func play_primary_shoot() -> void:
+	audio_primary.stream = AUDIO_PRIMARY_SHOOT.pick_random()
+	audio_primary.play()
 
-
-# note: dual-wield weapons (fists, pistols, shotguns) should use a single WeaponInHand.tscn which can display left, right, or both hands
-
-
-# TO DO: for dual wield WIH, engine should always map primary_trigger = left hand, secondary_trigger = right hand; we can add a `var dual_wield_left_hand_is_triggered_by:PRIMARY_TRIGGER/SECONDARY_TRIGGER` flag in Settings later, which tells WeaponInHand if shoot_primary plays the left-hand or right-hand animation, and vice-versa
-#
-# Q. can we set this reverse flag automatically? e.g. with gamepad and mouse, the left hand is always controlled by the left button; with touch screen, by whichever trigger button the user positions to left side of screen; keyboard is tricky though: if we can know the physical keys' layout then we can determine which trigger key is left of the other key (e.g. Left-Shift is to left of Spacebar), otherwise it'll need a checkbox to set the swap flag manually
-
-
-
-# TO DO: this will be cleaner if both AnimationPlayers are moved to top level and always named $PrimaryAnimation and $SecondaryAnimation
-
-func _ready() -> void:
-	super._ready()
-	self.initialize(Enums.WeaponType.ASSAULT_RIFLE, $PrimaryHand, $PrimaryAnimation, $PrimaryHand, $SecondaryAnimation)
+func play_secondary_shoot() -> void:
+	audio_secondary.stream = AUDIO_SECONDARY_SHOOT.pick_random()
+	audio_secondary.play()
 
 
 
-# TO DO: how best to implement magazine displays?
+
+# TO DO: diegetic magazine displays for all weapons except FIST (which has infinite "ammo") and ROCKET_LAUNCHER (which should have a heads-up targeting and ammo display that appears on HUD to make long-range aiming easier)
 
 func update_primary_magazine_display(magazine: WeaponTrigger.Magazine) -> void:
 	print("update_primary_magazine_display ", magazine)
 
 func update_secondary_magazine_display(magazine: WeaponTrigger.Magazine) -> void:
 	print("update_secondary_magazine_display ", magazine)
+
+
+
+func reset() -> void:
+	secondary_animation.play("RESET")
+	super.reset()
+
+
+
+
+func secondary_idle() -> void: # keep reset and idle separate for each trigger (AR can idle one while shooting other)
+	secondary_animation.play("RESET")
+
+func secondary_shoot() -> void:
+	secondary_animation.play("shoot") # AR has independent shoot and reload animations for each trigger
+
+func secondary_empty() -> void:
+	secondary_animation.play("empty")
+
+func secondary_reload() -> void:
+	secondary_animation.play("reload")
 

@@ -8,20 +8,16 @@ class_name Player
 #
 # WiH is scaled down and moved completely inside Body radius close to camera to prevent clipping through walls
 #
-#
-#
+# for now, WIH (assets) are attached directly to Player (engine) so they initialize and connect to Weapons when level is entered; this also allows them to be positioned in-camera in the 3D view; eventually, they should attach programatically to avoid asset->engine coupling
+
+
 
 
 const INPUT_AXIS_MULTIPLIER := 15 # temporary until we decide on final values in physics dictionaries below
 
 
-# TO DO: these are copied directly from M3 physics so currently use Classic WU and need converted to meters
+# TO DO: Boomer (Pfhor ship) maps have a low gravity flag, but I assume we can get the same effect by loading a different physics model for those levels? (really don't want lots of flag modifiers)
 
-
-# TO DO: Boomer maps have low gravity flag, but I assume we can get the same effect by loading a different physics?
-
-
-# TO DO: step detection may work best if we use some vertical raycasts placed in front of player that extend downwards from MAX_STEP_HEIGHT to KERB_HEIGHT; this should detect open-tread stairs (which forward-facing raycasts may miss)
 
 
 # TO DO: in 3D Physics layers, rename "Level" to Map/MapGeometry/Wall/Surface/Solid/Exterior/Architecture/Shell or something else that's descriptive as "Level" is unhelpful (in mapping terms, a Level is the map geometry *and* all of the objects inside it)
@@ -32,7 +28,10 @@ const INPUT_AXIS_MULTIPLIER := 15 # temporary until we decide on final values in
 # TO DO: player speed when running up/down ramps should be similar/same to player speed running up/down stairs, which should be similar to Classic player on stairs (if up and down ramp speeds are the same, SeparationRayShape3D at bottom of player body can provide that; not sure how that will behave around stairs though)
 
 
-# TO DO: finish these dictionaries then move them to Constants
+
+# TO DO: these were copied from M3 physics so need converted to Godot quantities; most properties have yet to be connected to implementation
+
+# TO DO: finish these dictionaries then move them to PlayerPhysicsDefinitions
 
 const WALK_PHYSICS := {
 	"maximum_forward_velocity": 1.0 * INPUT_AXIS_MULTIPLIER, # 0.07142639, # TO DO: for now, multiply all velocity-related fields by 14 to get values relative to forward walk speed (we can figure out the final multiplier to emulate M2 speeds later)
@@ -51,9 +50,9 @@ const WALK_PHYSICS := {
 	"maximum_angular_velocity": 6.0, # ditto
 	"angular_recentering_velocity": 0.75, # TO DO: how quickly the camera vertically auto-recenters when moving forward/backward (note: moving sideways does not auto-recenter)
 	
-	"radius": 0.25,
-	"height": 0.7999878,
-	"camera_height": 0.19999695, # TO DO: I think this is deducted from height
+	"radius": 0.245,
+	"height": 0.79,
+	"head_height": 0.3,
 	"splash_height": 0.5, # TO DO: I assume this puts waterline around waist when swimming on surface of liquid
 	
 	# will the following be same for all gaits? what about swimming?
@@ -91,9 +90,9 @@ const SPRINT_PHYSICS := {
 	"maximum_angular_velocity": 10.0,
 	"angular_recentering_velocity": 1.5,
 	
-	"radius": 0.25,
-	"height": 0.7999878,
-	"camera_height": 0.19999695,
+	"radius": 0.245,
+	"height": 0.79,
+	"head_height": 0.3,
 	"splash_height": 0.5,
 	
 	# same for all gaits?
@@ -121,7 +120,7 @@ const JUMP_Y_SPEED := 5.0 # temporary till we figure out jumping
 
 
 const CROUCH_PHYSICS := {
-		"maximum_forward_velocity": 0.5 * INPUT_AXIS_MULTIPLIER, # 0.07142639, # TO DO: for now, multiply all velocity-related fields by 14 to get values relative to forward walk speed (we can figure out the final multiplier to emulate M2 speeds later)
+	"maximum_forward_velocity": 0.5 * INPUT_AXIS_MULTIPLIER, # 0.07142639, # TO DO: for now, multiply all velocity-related fields by 14 to get values relative to forward walk speed (we can figure out the final multiplier to emulate M2 speeds later)
 	"maximum_backward_velocity": 0.3 * INPUT_AXIS_MULTIPLIER, # 0.05882263,
 	"maximum_perpendicular_velocity": 0.3 * INPUT_AXIS_MULTIPLIER, # 0.049987793,
 	
@@ -129,15 +128,15 @@ const CROUCH_PHYSICS := {
 	"deceleration": 0.009994507,
 	"climbing_acceleration": 0.003326416,
 	
-	"angular_acceleration": 0.625, # I think this is y-axis rotation
-	"angular_deceleration": 1.25, # ditto
-	"maximum_angular_velocity": 6.0, # ditto
-	"angular_recentering_velocity": 0.75, # TO DO: how quickly the camera vertically auto-recenters when moving forward/backward (note: moving sideways does not auto-recenter)
+	"angular_acceleration": 0.625,
+	"angular_deceleration": 1.25,
+	"maximum_angular_velocity": 6.0,
+	"angular_recentering_velocity": 0.75,
 	
-	"radius": 0.25,
-	"height": 0.7999878,
-	"camera_height": 0.19999695, # TO DO: I think this is deducted from height
-	"splash_height": 0.5, # TO DO: I assume this puts waterline around waist when swimming on surface of liquid
+	"radius": 0.245,
+	"height": 0.49,
+	"head_height": 0.25,
+	"splash_height": 0.5,
 	
 	# will the following be same for all gaits? what about swimming?
 	
@@ -216,6 +215,10 @@ var wall_direction : Vector3 = Vector3.ZERO # used in VaultOver, do we need this
 @onready var detect_control_panel := $Head/Camera/ActionReach
 
 
+# step/ledge/crawlway detection 
+
+# this uses a pair of vertical raycasts placed in front of player that extend downwards to ground and upwards to Player's head height (the exact ends may need some finessing); this should detect open-tread stairs (which forward-facing raycasts may miss), though might not reliably detect railings (which are narrow enough to fit in the gap between detector and player body)
+
 # TO DO: use ShapeCast3D? more expensive but should be better at detecting
 
 const STEP_DETECTION_OFFSET := 0.8 # distance from center of player at which to position the raycast's origin; is always calculated in the direction of movement on xz plane
@@ -261,6 +264,10 @@ var detected_step = null
 var __alive := true
 
 
+var global_look: Vector3:
+	get:
+		return main_camera.global_transform.basis.z * -1
+
 
 
 func _ready() -> void:
@@ -297,6 +304,7 @@ func _input(event):
 func _physics_process(delta: float) -> void: # fixed interval (see Project Settings > General > Physics > Common > Physics FPS, which is currently set to 120fps)
 	# if Player is dead, disconnect inputs (i.e. player's corpse should move under its own physics only; no user input); what's easiest way to do this? (maybe checking if dead and skipping over everything except gravitational, external impulse, and inertial movement, aka flying gibs)
 	var player_velocity := Vector3.ZERO
+	var user_direction  := Vector3.ZERO # the direction the user is trying to move
 	var friction := air_friction
 	if __alive:
 		# mouse look
@@ -314,10 +322,15 @@ func _physics_process(delta: float) -> void: # fixed interval (see Project Setti
 			WeaponManager.next_weapon()
 		elif Input.is_action_just_pressed(&"PREVIOUS_WEAPON"):
 			WeaponManager.previous_weapon()
-		if Input.is_action_just_pressed(&"SHOOT_PRIMARY"): # TO DO: `just_pressed` is temporary until triggers wait between shots
-			WeaponManager.current_weapon.shoot_primary(self.global_position, (main_camera.global_transform.basis.z * -1), self) # TO DO: should we pass the camera's global transform and let Projectile do the math?
-		if Input.is_action_just_pressed(&"SHOOT_SECONDARY"): # TO DO: ATM Weapon has no time delay between shots so pressing this empties the second trigger in <1sec(!); not sure how best to arrange this logic - might want to implement WeaponManager.current_weapon.is_secondary_ready which can be checked first; alternatively, we just call shoot_secondary each time and let it figure it out
-			WeaponManager.current_weapon.shoot_secondary(self.global_position, (main_camera.global_transform.basis.z * -1), self)
+		if Input.is_action_pressed(&"SHOOT_PRIMARY"): # note: while key is held down, this will call shoot_primary on each tick; the weapon and its trigger will only fire when ready to do so
+			WeaponManager.current_weapon.shoot_primary(self) # TO DO: should we pass the camera's global transform and let Projectile do the math?
+		if Input.is_action_pressed(&"SHOOT_SECONDARY"):
+			WeaponManager.current_weapon.shoot_secondary(self)
+		
+		if Input.is_action_just_released(&"SHOOT_PRIMARY"):
+			WeaponManager.current_weapon.stop_shooting_primary()
+		if Input.is_action_pressed(&"SHOOT_SECONDARY"):
+			WeaponManager.current_weapon.stop_shooting_secondary()
 		
 		# action
 		if detect_control_panel.is_colliding():
@@ -360,6 +373,12 @@ func _physics_process(delta: float) -> void: # fixed interval (see Project Setti
 		assert(look.y == Vector3.UP)
 		var z_multiplier = physics.maximum_forward_velocity if input_axis.x > 0 else physics.maximum_backward_velocity
 		player_velocity = (look.z * -input_axis.x * z_multiplier) + (look.x * input_axis.y * physics.maximum_perpendicular_velocity)
+		
+		# bias step detector's position so that it is a combination of Player's move-and-slide velocity and the direction the user input is telling the Player to move (if only self.velocity is used, the step detector will be positioned in direction of movement, so if player is hard against a step sliding along it the detector doesn't intersect the edge of the step)
+		user_direction.x = player_velocity.x
+		# TO DO: what about vertical look?
+		user_direction.z = player_velocity.z
+		
 		#
 		# TO DO: decide swim mechanics later
 		
@@ -389,7 +408,7 @@ func _physics_process(delta: float) -> void: # fixed interval (see Project Setti
 	
 	# automatic step climb, ledge jump, and crouch; TO DO: can this also detect vault reliably? (we may need a forward pointing ray for that since railings are narrow)
 	# TO DO: FIX: this needs to take into account the direction player *wants* to move, not just the direction they are moving as a result of move_and_slide: if player is already hard up against step, its velocity places the detector in direction of the sliding movement (which is parallel to the step) - we want to use direction of movement, but we need to offset the detector's position when player velocity and user movement direction don't match to check for a step in the user's desired direction
-	var horizontal_direction = Vector3(self.velocity.x, 0, self.velocity.z).normalized()
+	var horizontal_direction = Vector3(self.velocity.x + user_direction.x, 0, self.velocity.z + user_direction.z).normalized()
 	if horizontal_direction:
 		forward_clearance.global_position = self.global_position + horizontal_direction * STEP_DETECTION_OFFSET
 	
@@ -401,7 +420,7 @@ func _physics_process(delta: float) -> void: # fixed interval (see Project Setti
 	# TO DO: how best to bridge gaps (e.g. from platform across purple pillars; player tends to stick on first gap)
 	
 	if step_detector.is_colliding():
-		climb()
+		climb(user_direction)
 	elif detected_step != null: # was climbing
 		print("stop climbing ", detected_step.get_parent().name)
 		stop_climbing()
@@ -440,13 +459,13 @@ func stop_climbing():
 	#print("exiting step or ramp: ", detected_step.get_parent().name, "  ", self.velocity)
 
 
-func climb() -> void:
+func climb(user_direction: Vector3) -> void: # user-direction is currently unused but see above comments on step detector's orientation
 	var step = step_detector.get_collider()
 	if step != detected_step: # found a new step so start climbing that
 		detected_step = step
 		print("detected climb ", detected_step.get_parent().name)
 		
-		if self.velocity.z < 0: # while player is moving forward
+		if self.velocity.x != 0 or self.velocity.z != 0: # while player is moving # TO DO: this is crude;
 			
 			var col_point = step_detector.get_collision_point()
 			var col_normal = step_detector.get_collision_normal()
@@ -468,7 +487,7 @@ func climb() -> void:
 			if step_height <= MAX_STEP_HEIGHT:
 				print("climb step ", step_height)
 			elif step_height <= MAX_JUMP_HEIGHT:
-				if is_sprint_enabled:
+				if is_sprint_enabled: # TO DO: we only want to jump if player is sprinting and user is pressing forward key; Q. should pressing forward + sidestep also be permitted? (jumping backwards is not)
 					print("auto-jump ", step_height)
 					y_speed = JUMP_Y_SPEED
 					self.velocity.y = y_speed * 3
@@ -528,7 +547,7 @@ func found_item(item: PickableItem) -> void: # called by PickableItem when Playe
 	# if there is space in inventory for this item, pick it up
 	if Inventory.get_item(item.pickable).try_to_increment():
 		item.picked_up()
-		$Audio/PickedUp.play()
+		$Audio/PickedUp.play() # TO DO: we don't want to couple assets/audio directly to Player; need some sort of API between them
 
 
 
@@ -572,7 +591,7 @@ func found_item(item: PickableItem) -> void: # called by PickableItem when Playe
 
 
 
-# external impulse, e.g. applied by explosion
+# external impulse, e.g. applied by a detonation's shrapnel radius or by firing rocket launcher
 
 func add_impulse(impulse_in : Vector3) -> void:
 	impulse += impulse_in

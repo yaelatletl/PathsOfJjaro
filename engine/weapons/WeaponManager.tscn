@@ -1,37 +1,12 @@
-[gd_scene load_steps=4 format=3 uid="uid://dnpe7grujlcyo"]
+[gd_scene load_steps=2 format=3 uid="uid://dnpe7grujlcyo"]
 
 [ext_resource type="Script" path="res://engine/weapons/WeaponManager.gd" id="1_yto62"]
-[ext_resource type="AudioStream" uid="uid://cgtb0uaigamch" path="res://assets/audio/click-low.wav" id="2_1rq46"]
-[ext_resource type="AudioStream" uid="uid://b4djq74cje6n7" path="res://assets/weapons/Fist/audio/player-throw.wav" id="3_rsuw4"]
 
 [node name="WeaponManager" type="Node"]
 script = ExtResource("1_yto62")
 
-[node name="ActivationTimer" type="Timer" parent="."]
+[node name="PrimaryTimer" type="Timer" parent="."]
 one_shot = true
 
-[node name="Audio" type="Node3D" parent="."]
-
-[node name="Activate" type="AudioStreamPlayer3D" parent="Audio"]
-transform = Transform3D(1, 0, 0, 0, 0.968148, 0.25038, 0, -0.25038, 0.968148, 0, 0, 0.099)
-stream = ExtResource("2_1rq46")
-
-[node name="ShootPrimary" type="AudioStreamPlayer3D" parent="Audio"]
-transform = Transform3D(1, 0, 0, 0, 0.968148, 0.25038, 0, -0.25038, 0.968148, 0, 0, 0.099)
-stream = ExtResource("3_rsuw4")
-
-[node name="ReloadPrimary" type="AudioStreamPlayer3D" parent="Audio"]
-transform = Transform3D(1, 0, 0, 0, 0.968148, 0.25038, 0, -0.25038, 0.968148, 0, 0, 0.099)
-stream = ExtResource("3_rsuw4")
-
-[node name="ShootSecondary" type="AudioStreamPlayer3D" parent="Audio"]
-transform = Transform3D(1, 0, 0, 0, 0.968148, 0.25038, 0, -0.25038, 0.968148, 0, 0, 0.099)
-stream = ExtResource("3_rsuw4")
-
-[node name="ReloadSecondary" type="AudioStreamPlayer3D" parent="Audio"]
-transform = Transform3D(1, 0, 0, 0, 0.968148, 0.25038, 0, -0.25038, 0.968148, 0, 0, 0.099)
-stream = ExtResource("3_rsuw4")
-
-[node name="Empty" type="AudioStreamPlayer3D" parent="Audio"]
-transform = Transform3D(1, 0, 0, 0, 0.968148, 0.25038, 0, -0.25038, 0.968148, 0, 0, 0.099)
-stream = ExtResource("3_rsuw4")
+[node name="SecondaryTimer" type="Timer" parent="."]
+one_shot = true

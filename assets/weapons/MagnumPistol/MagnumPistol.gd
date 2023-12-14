@@ -1,11 +1,19 @@
-extends DualWeaponInHand
+extends WeaponInHand
 
 
-# weapons/Pistol.gd
+# assets/weapons/Pistol.gd
 
 
 # TO DO: need animations for the hand holding magazine when reloading; this needs two animations, one holding pistol and magazine, the other holding magazine only
 
+
+@onready var audio := $Weapon/Audio
+
+const AUDIO_SHOOT := [
+	preload("res://assets/audio/weapon/35 rmx - Magnum Firing 1.wav"),
+	preload("res://assets/audio/weapon/35 rmx - Magnum Firing 2.wav"),
+	preload("res://assets/audio/weapon/35 rmx - Magnum Firing 3.wav"), 
+]
 
 
 # two-handed weapon, which can show left, right, or both hands, depending on whether inventory contains 1 or 2 guns
@@ -27,21 +35,20 @@ extends DualWeaponInHand
 
 # TO DO: need 3 reloading animations: the primary hand holding the gun to reload, the secondary hand holding the magazine only, and the secondary hand holding both magazine and other gun; TO DO: should the single-gun reload animation use both hands, or only the hand containing the gun? the latter has the advantage that the other hand can easily be visible=false
 
-
-const DUAL_OFFSET_X := 0.3
-
-
-func _ready() -> void:
-	super._ready()
-	self.initialize(Enums.WeaponType.MAGNUM_PISTOL, $PrimaryHand, $PrimaryAnimation, $SecondaryHand, $SecondaryAnimation, DUAL_OFFSET_X)
-
+const WEAPON_TYPE   := Enums.WeaponType.MAGNUM_PISTOL
+const DUAL_OFFSET_X := 0.3 # TO DO: should this be in Weapon physics?
 
 
 # TO DO: how best to implement magazine displays?
 
-func update_primary_magazine_display(magazine: WeaponTrigger.Magazine) -> void:
-	pass
+func update_ammo(primary_magazine: WeaponTrigger.Magazine, _secondary_magazine: WeaponTrigger.Magazine) -> void:
+	var capacity  := primary_magazine.max_count
+	var remaining := primary_magazine.count
+	print(remaining, "/", capacity)
 
-func update_secondary_magazine_display(magazine: WeaponTrigger.Magazine) -> void:
-	pass
+
+
+func play_shoot() -> void:
+	audio.stream = AUDIO_SHOOT.pick_random()
+	audio.play()
 

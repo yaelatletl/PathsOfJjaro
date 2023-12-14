@@ -1,0 +1,1 @@
+projectile transitions that produce an audiovisual effect, e.g. bullet hitting Pfhor flesh, bullet passing through breakable glass, grenade impacting metal wall

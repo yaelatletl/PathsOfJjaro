@@ -2,165 +2,100 @@ extends Node3D
 class_name WeaponInHand
 
 
-# weapons/WeaponInHand.gd -- abstract base class for single-wield weapon with single/dual-function trigger[s]
+# weapons/WeaponInHand.gd -- abstract base class for a View class that animates one of Player's hands
+#
+# this file also contains DualWield, SingleWieldPrimary, and SingleWieldSecondary classes for connecting WeaponTriggers to WeaponInHand views
 
-# TO DO: move these reusable base classes to engine/weapons?
-
-
-# note: WiH assumes Weapon enforces all trigger interlocks and delays, and will only enit valid signals
 
 
 # TO DO: in M2, when player looks up/down the WiH visually moves down/up (M1 doesn't do this but we probably want to replicate the M2 effect - it doesn't change weapon behavior but it looks “more lifelike”); ignore this for now and figure how best to add it later (WiH may need rendered in its own viewport and overlaid via canvas layer to prevent weapon barrel clipping through walls, in which case the simplest solution is for Player to adjust its viewport positioning when vertical look angle changes)
 
-# TO DO: for animating bobbing motions as player moves, define either a `move(gait)` method or separate stop+walk+sprint+crouch+swim methods
 
 
+enum Hand { # used for dual-wield weapons
+	PRIMARY,
+	SECONDARY,
+}
 
-# TO DO: while WiH animations could send `animation_ended` notifications back to Weapon, we probably want to avoid that coupling and rely solely on the timings specified in the weapon_definition to trigger Weapon's state machine transitions (this means a weapon animation might be interrupted by a new animation, causing it to glitch visually; however, that is much less evil than tying weapon behavior to animations which would cause all sorts of timing problems in the engine)
+@export var hand := Hand.PRIMARY
 
+@onready var model     := $Weapon
+@onready var animation := $Animation
 
-#var asset_id: int:
-#	get:
-#		return Enums.make_asset_id(asset_type, weapon_type)
-
-
-#var asset_type  := Enums.AssetType.WEAPON_IN_HAND
-var weapon_type: Enums.WeaponType
-
-
-
-var primary_hand: Node3D
-var primary_animation: AnimationPlayer
-var is_primary_available := false
-
-var secondary_hand: Node3D # for single-wield weapons this should be same as primary
-var secondary_animation: AnimationPlayer # ditto, except where firing modes are independent (AR) in which case the secondary trigger's shoot and reload animation player
-var is_secondary_available := false
-
-var dual_offset_x: float
-
-
-# TO DO: decide how best to manage sounds; it'd be nice not to have dozens of audio nodes! probably best to put 
-@onready var audio_activate         := $Audio/Activate
-@onready var audio_shoot_primary    := $Audio/ShootPrimary
-@onready var audio_shoot_secondary  := $Audio/ShootSecondary
-@onready var audio_reload_primary   := $Audio/ReloadPrimary
-@onready var audio_reload_secondary := $Audio/ReloadSecondary
-@onready var audio_empty            := $Audio/Empty
-
-
-var is_connected_to_current_weapon := false
 
 
 func _ready() -> void:
-	pass
-
-
-# IMPORTANT: each WIH must implement a _ready function that calls this
-# TO DO: this API is NOT final; once the remaining weapons are added, we can decide how best to map single-wield single-trigger, single-wield dual-trigger/mode, and dual-wield
-func initialize(weapon_type: Enums.WeaponType, 
-				primary_hand: Node3D, primary_animation: AnimationPlayer, 
-				secondary_hand: Node3D, secondary_animation: AnimationPlayer, dual_offset_x: float = 0) -> void:
-	self.weapon_type = weapon_type
-	self.primary_hand       = primary_hand
-	self.primary_animation   = primary_animation
-	self.secondary_hand     = secondary_hand
-	self.secondary_animation = secondary_animation
-	self.dual_offset_x       = dual_offset_x
-	self.visible = false
+	model.visible = false
 	self.reset()
-	WeaponManager.add_weapon_in_hand(self)
-	print("initialized WeaponInHand: ", self.weapon_type)
+	WeaponManager.add_weapon_in_hand(self) # WeaponInHand scenes attached to Player call this when Player is instantiated
+	print("initialized WeaponInHand: ", self.name)
 
 
-# in dual-wield weapons, either or both hands may hold guns, depending on how many guns are in Inventory and whether they contain rounds (or can be reloaded) or not
+# called by WeaponTrigger via a ViewController
 
-func update_trigger_availability(is_primary_available: bool, is_secondary_available: bool) -> void: # for single-wield weapons, this only sets the flags; that being said, WIH subclasses could override to perform animations if needed
-	self.is_primary_available = is_primary_available
-	self.is_secondary_available = is_secondary_available
+func activating() -> void:
+	model.visible = true
+	animation.play("activate")
 
-
-func play_animation(track: String) -> void:
-	self.primary_animation.play(track)
-	print(self.name, ": animate: ", track)
-
-
-# Weapon signal handlers
-
-func activating(weapon: Weapon) -> void: # called by Weapon when Player activates it
-	self.visible = true # this hides the entire WIH node when it's unused and out of sight, which is separate to hiding primary/secondary hand when only 1 is in use
-	self.update_trigger_availability(weapon.primary_trigger.available, weapon.secondary_trigger.available)
-	print("ACTIVATING ", self.name, "  ", self.visible)
-	self.play_animation("activate")
-	audio_activate.play()
-
-
-func activated(weapon: Weapon) -> void: # called by Weapon when Player activates it
-	self.visible = true
-	print("ACTIVATED ", self.name)
-	self.update_trigger_availability(weapon.primary_trigger.available, weapon.secondary_trigger.available)
+func activated() -> void: # called by Weapon when Player activates it
+	model.visible = true
 	self.idle()
-	
 
-func deactivating(weapon: Weapon) -> void: # called by Weapon when Player deactivates it
-	# TO DO: fix the `swap_out` animation so that it starts with single pistol in its idle position and ends with nothing visible on screen
-	# TO DO:  remove 4.4sec of dead time from animation (the swap in/out animations should be around 1sec)
-	print("DEACTIVATING ", self.name)
-	self.play_animation("deactivate")
+func deactivating() -> void: # called by Weapon when Player deactivates it
+	animation.play("deactivate")
 
-func deactivated(weapon: Weapon) -> void:
-	self.visible = false
-	print("DEACTIVATED ", self.name)
+func deactivated() -> void:
+	model.visible = false
 
 
 # TO DO: how best to implement magazine displays?
 
-func update_primary_magazine_display(magazine: WeaponTrigger.Magazine) -> void:
-	pass
-
-func update_secondary_magazine_display(magazine: WeaponTrigger.Magazine) -> void:
+func update_ammo(primary_magazine: WeaponTrigger.Magazine, secondary_magazine: WeaponTrigger.Magazine) -> void:
 	pass
 
 
 # weapon states
 
 func reset() -> void: # weapon is doing nothing and is out of sight (below camera)
-	self.play_animation("RESET")
-	
+	animation.play("RESET")
 
 func idle() -> void: # weapon is doing nothing
-	self.play_animation("idle")
+	animation.play("idle")
+
+# TO DO: do not pass successfully; define emptied method instead
+func shoot() -> void:
+	animation.play("shoot")
+
+func empty() -> void:
+	animation.play("empty")
+
+func reload() -> void:
+	animation.play("reload")
 
 
-func shoot_primary(weapon: Weapon, successfully: bool) -> void:
-	if successfully:
-		self.play_animation("primary_shoot")
-		audio_shoot_primary.play()
-	else:
-		audio_empty.play()
+# TO DO: alternative approach is to build the single-gun reload as one animation, since the other hand is already hidden
 
-func shoot_secondary(weapon: Weapon, successfully: bool) -> void:
-	if successfully:
-		self.play_animation("secondary_shoot")
-		audio_shoot_secondary.play()
-	else:
-		audio_empty.play()
+func reload_other() -> void: # dual-wield weapons where both hands must interact to reload one gun while holding magazine (and possibly another gun) in the other hand
+	# note: only used by pistols (fists never reload, shotguns reload one-handed, and single-wield weapons use a single model which can animate one or two hands)
+	animation.play("reload_other_hand_while_holding_weapon" if model.visible else "reload_other_hand")
 
 
-func reload_primary(weapon: Weapon, successfully: bool) -> void:
-	self.update_trigger_availability(weapon.primary_trigger.available, weapon.secondary_trigger.available)
-	if successfully:
-		self.play_animation("primary_reload")
-		audio_reload_primary.play()
+# single-wield WIH subclasses (fusion, AR, maybe alien gun) can override some/all of these secondary trigger methods
 
-func reload_secondary(weapon: Weapon, successfully: bool) -> void:
-	self.update_trigger_availability(weapon.primary_trigger.available, weapon.secondary_trigger.available)
-	if successfully:
-		self.play_animation("secondary_reload")
-		audio_reload_secondary.play()
+func secondary_idle() -> void: # TO DO: standardize namings: either foo_secondary OR secondary_foo
+	pass
+
+func secondary_shoot() -> void:
+	pass
+
+func secondary_empty() -> void:
+	pass
+
+func secondary_reload() -> void:
+	pass
 
 
-# fusion pistol only
+# fusion pistol's secondary trigger only
 
 func charging() -> void:
 	pass
@@ -170,4 +105,132 @@ func charged() -> void:
 
 func explode() -> void:
 	pass
+
+
+
+
+# ViewController classes connect primary and secondary WeaponTriggers to WeaponInHand views
+
+
+class ViewController extends RefCounted:
+	
+	var __hand: WeaponInHand # primary or secondary WIH instance
+	var __primary_magazine: WeaponTrigger.Magazine # primary [or secondary, if dual-wield] magazine; used for diegetic ammo display
+	var __secondary_magazine: WeaponTrigger.Magazine
+	
+	func configure(primary_magazine: WeaponTrigger.Magazine, secondary_magazine: WeaponTrigger.Magazine) -> void: # called when instantiated
+		# TO DO: assign a dummy WIH instance to __hand, allowing Weapon to be tested with or without WIHs connected
+		__primary_magazine   = primary_magazine
+		__secondary_magazine = secondary_magazine
+	
+	func set_hand(hand: WeaponInHand) -> void: # called when Player's attached WIH are instanced
+		__hand = hand
+
+
+
+# TO DO: dual wield objects require some shared knowledge so they can correctly synchronize movements involving both hands (activating/deactivating one hand while other hand is active, requiring other hand to move away from/toward center; two-handed reload of one hand while other holds magazine and optionally gun)
+
+
+class DualWield extends ViewController:
+	
+	var __magazine: WeaponTrigger.Magazine
+	
+	func set_hand(hand: WeaponInHand) -> void:
+		super.set_hand(hand)
+		__magazine = __primary_magazine if hand.hand == WeaponInHand.Hand.PRIMARY else __secondary_magazine
+		assert(hand)
+		assert(__primary_magazine)
+		assert(__secondary_magazine)
+	
+	
+	func activating() -> void: # called by Weapon when Player activates it
+		__hand.activating()
+		__hand.update_ammo(__magazine, __magazine)
+	
+	func activated() -> void: # called by Weapon when Player activates it
+		__hand.activated()
+		__hand.update_ammo(__magazine, __magazine)
+	
+	func deactivating() -> void: # called by Weapon when Player deactivates it
+		__hand.deactivating()
+	
+	func deactivated() -> void:
+		__hand.deactivated()
+	
+	
+	func idle() -> void:
+		__hand.idle()
+	
+	func empty() -> void:
+		__hand.empty()
+	
+	func shooting() -> void:
+		__hand.shoot()
+		__hand.update_ammo(__magazine, __magazine)
+	
+	func reloading() -> void:
+		__hand.reload()
+		__hand.update_ammo(__magazine, __magazine)
+
+
+class SingleWieldPrimary extends ViewController:
+	
+	func activating() -> void: # called by Weapon when Player activates it
+		__hand.activating()
+		__hand.update_ammo(__primary_magazine, __secondary_magazine)
+	
+	func activated() -> void: # called by Weapon when Player activates it
+		__hand.activated()
+		__hand.update_ammo(__primary_magazine, __secondary_magazine)
+	
+	func deactivating() -> void: # called by Weapon when Player deactivates it
+		__hand.deactivating()
+
+	func deactivated() -> void:
+		__hand.deactivated()
+	
+	
+	func idle() -> void:
+		__hand.idle()
+	
+	func empty() -> void:
+		__hand.empty()
+	
+	func shooting() -> void:
+		__hand.shoot()
+		__hand.update_ammo(__primary_magazine, __secondary_magazine)
+	
+	func reloading() -> void:
+		__hand.reload()
+		__hand.update_ammo(__primary_magazine, __secondary_magazine)
+
+
+class SingleWieldSecondary extends ViewController:
+	
+	func activating() -> void: # called by Weapon when Player activates it
+		pass
+	
+	func activated() -> void: # called by Weapon when Player activates it
+		pass
+	
+	func deactivating() -> void: # called by Weapon when Player deactivates it
+		pass
+	
+	func deactivated() -> void:
+		pass
+	
+	
+	func idle() -> void:
+		__hand.secondary_idle()
+	
+	func empty() -> void:
+		__hand.secondary_empty()
+	
+	func shooting() -> void:
+		__hand.secondary_shoot()
+		__hand.update_ammo(__primary_magazine, __secondary_magazine)
+	
+	func reloading() -> void:
+		__hand.secondary_reload()
+		__hand.update_ammo(__primary_magazine, __secondary_magazine)
 
