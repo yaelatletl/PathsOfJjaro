@@ -31,7 +31,7 @@ const INPUT_AXIS_MULTIPLIER := 15 # temporary until we decide on final values in
 
 # TO DO: these were copied from M3 physics so need converted to Godot quantities; most properties have yet to be connected to implementation
 
-# TO DO: finish these dictionaries then move them to PlayerPhysicsDefinitions
+# TO DO: finish these dictionaries then move them to PlayerDefinitions
 
 const WALK_PHYSICS := {
 	"maximum_forward_velocity": 1.0 * INPUT_AXIS_MULTIPLIER, # 0.07142639, # TO DO: for now, multiply all velocity-related fields by 14 to get values relative to forward walk speed (we can figure out the final multiplier to emulate M2 speeds later)
@@ -159,7 +159,7 @@ const CROUCH_PHYSICS := {
 }
 
 
-enum Movement {
+enum Movement { # Player states are TBD; not yet implemented
 	STATIONARY,
 	WALK,
 	SPRINT,
@@ -271,7 +271,6 @@ var global_look: Vector3:
 
 
 func _ready() -> void:
-	WeaponManager.activate_weapon_now(Enums.WeaponType.ASSAULT_RIFLE)
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED) # put this here for now, and MOUSE_MODE_VISIBLE in MainMenu._ready; TO DO: mouse capture/release logic can eventually move to Global (note: game should not have a Pause/Resume key [Ctrl-P in M2]; instead, provide a key for exiting the game world back to menu and save the game's current state as a temporary saved game file which is loaded and deleted when the game is next reentered)
 	self.max_slides = 4 # oddly max_slides doesn't appear in Editor's CharacterBody3D inspector
 	#self.floor_stop_on_slope_enabled = false # this does, however
@@ -280,9 +279,12 @@ func _ready() -> void:
 	Global.health_changed.connect(update_health_status)
 	Global.player_died.connect(update_health_status)
 	update_health_status()
+	#
+	print("Player activating weapon")
+	WeaponManager.activate_current_weapon(true) # TO DO: this is temporary until we have proper level loading
 
 
-# Inventory signals
+# InventoryManager signals
 
 func update_health_status(damage_type: Enums.DamageType = Enums.DamageType.NONE) -> void:
 	if damage_type != Enums.DamageType.NONE:
@@ -319,18 +321,18 @@ func _physics_process(delta: float) -> void: # fixed interval (see Project Setti
 		
 		# shoot
 		if Input.is_action_just_pressed(&"NEXT_WEAPON"):
-			WeaponManager.next_weapon()
+			WeaponManager.activate_next_weapon()
 		elif Input.is_action_just_pressed(&"PREVIOUS_WEAPON"):
-			WeaponManager.previous_weapon()
+			WeaponManager.activate_previous_weapon()
 		if Input.is_action_pressed(&"SHOOT_PRIMARY"): # note: while key is held down, this will call shoot_primary on each tick; the weapon and its trigger will only fire when ready to do so
-			WeaponManager.current_weapon.shoot_primary(self) # TO DO: should we pass the camera's global transform and let Projectile do the math?
+			WeaponManager.current_weapon.shoot(self, true) # TO DO: should we pass the camera's global transform and let Projectile do the math?
 		if Input.is_action_pressed(&"SHOOT_SECONDARY"):
-			WeaponManager.current_weapon.shoot_secondary(self)
+			WeaponManager.current_weapon.shoot(self, false)
 		
 		if Input.is_action_just_released(&"SHOOT_PRIMARY"):
-			WeaponManager.current_weapon.stop_shooting_primary()
-		if Input.is_action_pressed(&"SHOOT_SECONDARY"):
-			WeaponManager.current_weapon.stop_shooting_secondary()
+			WeaponManager.current_weapon.trigger_just_released(true)
+		if Input.is_action_just_released(&"SHOOT_SECONDARY"):
+			WeaponManager.current_weapon.trigger_just_released(false)
 		
 		# action
 		if detect_control_panel.is_colliding():
@@ -545,7 +547,7 @@ func is_far_from_floor() -> bool:
 
 func found_item(item: PickableItem) -> void: # called by PickableItem when Player collides with it (we'll keep this flexible just in case we want any NPCs to grab items as well)
 	# if there is space in inventory for this item, pick it up
-	if Inventory.get_item(item.pickable).try_to_increment():
+	if InventoryManager.get_item(item.pickable_type).try_to_increment():
 		item.picked_up()
 		$Audio/PickedUp.play() # TO DO: we don't want to couple assets/audio directly to Player; need some sort of API between them
 

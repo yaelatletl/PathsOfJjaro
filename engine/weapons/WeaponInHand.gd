@@ -1,14 +1,28 @@
-extends Node3D
-class_name WeaponInHand
+class_name WeaponInHand extends Node3D
 
 
-# weapons/WeaponInHand.gd -- abstract base class for a View class that animates one of Player's hands
+# weapons/WeaponInHand.gd -- abstract base class for a View class that animates the Player's hand[s] holding a gun; see assets/weapons/NAME/NAME.tscn
+
+
+# important: each WIH subclass MUST define a WEAPON_TYPE constant, e.g.:
 #
-# this file also contains DualWield, SingleWieldPrimary, and SingleWieldSecondary classes for connecting WeaponTriggers to WeaponInHand views
+# const WEAPON_TYPE := Enums.WeaponType.FIST
+#
+# WEAPON_TYPE is used to attach WIH views, which are [currently] part of each level's scene tree, to their Weapon, which is managed by global WeaponManager and persists across levels (this arrangement will likely change in future, but it will do for Arrival Demo)
 
 
 
 # TO DO: in M2, when player looks up/down the WiH visually moves down/up (M1 doesn't do this but we probably want to replicate the M2 effect - it doesn't change weapon behavior but it looks “more lifelike”); ignore this for now and figure how best to add it later (WiH may need rendered in its own viewport and overlaid via canvas layer to prevent weapon barrel clipping through walls, in which case the simplest solution is for Player to adjust its viewport positioning when vertical look angle changes)
+
+
+# TO DO: define a WeaponInHand.Placeholder class which implements all WIH methods but emits print and/or HUD messages only (it won't have animations or sounds so can be RefCounted); use this placeholder scene as the initial value of Weapon's __primary_hand and __secondary_hand properties; this will allow Weapon to be tested with or without view scenes attached (using Weapon without its required WIH[s] currently raises an exception)
+
+
+# TO DO: how best to animate weapon-in-hand bob when Player walks/runs/crawls/jumps/climbs, etc? these might be implemented on Player, using parameters from PlayerDefinitions to customize bob height, sway, etc; alternatively, they might be implemented as WIH methods which Player calls
+#
+# similarly, if we use hand gestures to indicate when an Action can be performed (e.g. player is looking at a switch), should the WIH be responsible for animating that hand gesture or should there be separate hand animation scenes?
+#
+# I think for now we don't worry too much about this: let's get the "dumb" 1990s-era WIHs working first, where gun[s] are *always* visible on screen (MVP for Arrival Demo), and we can decide if/how to pretty up individual hand animations later
 
 
 
@@ -23,15 +37,17 @@ enum Hand { # used for dual-wield weapons
 @onready var animation := $Animation
 
 
+# TO DO: consider attaching magazines to WIH via configure() call, allowing animation methods below to update diegetic ammo displays themselves (currently Weapons must call update_ammo, which is clumsy)
+
 
 func _ready() -> void:
 	model.visible = false
 	self.reset()
-	WeaponManager.add_weapon_in_hand(self) # WeaponInHand scenes attached to Player call this when Player is instantiated
-	print("initialized WeaponInHand: ", self.name)
+	WeaponManager.connect_weapon_in_hand(self) # WeaponInHand scenes attached to Player call this when Player is instantiated
+	#print("WeaponInHand._ready for: ", self.name)
 
 
-# called by WeaponTrigger via a ViewController
+# called by Weapon
 
 func activating() -> void:
 	model.visible = true
@@ -50,7 +66,7 @@ func deactivated() -> void:
 
 # TO DO: how best to implement magazine displays?
 
-func update_ammo(primary_magazine: WeaponTrigger.Magazine, secondary_magazine: WeaponTrigger.Magazine) -> void:
+func update_ammo(primary_magazine: Weapon.Magazine, secondary_magazine: Weapon.Magazine) -> void:
 	pass
 
 
@@ -106,131 +122,4 @@ func charged() -> void:
 func explode() -> void:
 	pass
 
-
-
-
-# ViewController classes connect primary and secondary WeaponTriggers to WeaponInHand views
-
-
-class ViewController extends RefCounted:
-	
-	var __hand: WeaponInHand # primary or secondary WIH instance
-	var __primary_magazine: WeaponTrigger.Magazine # primary [or secondary, if dual-wield] magazine; used for diegetic ammo display
-	var __secondary_magazine: WeaponTrigger.Magazine
-	
-	func configure(primary_magazine: WeaponTrigger.Magazine, secondary_magazine: WeaponTrigger.Magazine) -> void: # called when instantiated
-		# TO DO: assign a dummy WIH instance to __hand, allowing Weapon to be tested with or without WIHs connected
-		__primary_magazine   = primary_magazine
-		__secondary_magazine = secondary_magazine
-	
-	func set_hand(hand: WeaponInHand) -> void: # called when Player's attached WIH are instanced
-		__hand = hand
-
-
-
-# TO DO: dual wield objects require some shared knowledge so they can correctly synchronize movements involving both hands (activating/deactivating one hand while other hand is active, requiring other hand to move away from/toward center; two-handed reload of one hand while other holds magazine and optionally gun)
-
-
-class DualWield extends ViewController:
-	
-	var __magazine: WeaponTrigger.Magazine
-	
-	func set_hand(hand: WeaponInHand) -> void:
-		super.set_hand(hand)
-		__magazine = __primary_magazine if hand.hand == WeaponInHand.Hand.PRIMARY else __secondary_magazine
-		assert(hand)
-		assert(__primary_magazine)
-		assert(__secondary_magazine)
-	
-	
-	func activating() -> void: # called by Weapon when Player activates it
-		__hand.activating()
-		__hand.update_ammo(__magazine, __magazine)
-	
-	func activated() -> void: # called by Weapon when Player activates it
-		__hand.activated()
-		__hand.update_ammo(__magazine, __magazine)
-	
-	func deactivating() -> void: # called by Weapon when Player deactivates it
-		__hand.deactivating()
-	
-	func deactivated() -> void:
-		__hand.deactivated()
-	
-	
-	func idle() -> void:
-		__hand.idle()
-	
-	func empty() -> void:
-		__hand.empty()
-	
-	func shooting() -> void:
-		__hand.shoot()
-		__hand.update_ammo(__magazine, __magazine)
-	
-	func reloading() -> void:
-		__hand.reload()
-		__hand.update_ammo(__magazine, __magazine)
-
-
-class SingleWieldPrimary extends ViewController:
-	
-	func activating() -> void: # called by Weapon when Player activates it
-		__hand.activating()
-		__hand.update_ammo(__primary_magazine, __secondary_magazine)
-	
-	func activated() -> void: # called by Weapon when Player activates it
-		__hand.activated()
-		__hand.update_ammo(__primary_magazine, __secondary_magazine)
-	
-	func deactivating() -> void: # called by Weapon when Player deactivates it
-		__hand.deactivating()
-
-	func deactivated() -> void:
-		__hand.deactivated()
-	
-	
-	func idle() -> void:
-		__hand.idle()
-	
-	func empty() -> void:
-		__hand.empty()
-	
-	func shooting() -> void:
-		__hand.shoot()
-		__hand.update_ammo(__primary_magazine, __secondary_magazine)
-	
-	func reloading() -> void:
-		__hand.reload()
-		__hand.update_ammo(__primary_magazine, __secondary_magazine)
-
-
-class SingleWieldSecondary extends ViewController:
-	
-	func activating() -> void: # called by Weapon when Player activates it
-		pass
-	
-	func activated() -> void: # called by Weapon when Player activates it
-		pass
-	
-	func deactivating() -> void: # called by Weapon when Player deactivates it
-		pass
-	
-	func deactivated() -> void:
-		pass
-	
-	
-	func idle() -> void:
-		__hand.secondary_idle()
-	
-	func empty() -> void:
-		__hand.secondary_empty()
-	
-	func shooting() -> void:
-		__hand.secondary_shoot()
-		__hand.update_ammo(__primary_magazine, __secondary_magazine)
-	
-	func reloading() -> void:
-		__hand.secondary_reload()
-		__hand.update_ammo(__primary_magazine, __secondary_magazine)
 

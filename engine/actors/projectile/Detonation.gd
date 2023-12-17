@@ -18,21 +18,27 @@ extends StaticBody3D # TO DO: what class should detonation effect (bullet, energ
 # TO DO: can/should damaging effects such as burning materials, electric sparks, cryogenic leaks be implemented as detonations? (non-damaging effects might be simpler done in their own class as they don't need Detonation's damage behaviors, though they may still need some collision detection to control their behavior, e.g. if a door closes on the effect or an NPC corpse falls on top of it that should hide/suspend/stop it so it isn't "spraying" through the solid body)
 
 
+@onready var mesh := $MeshInstance3D # TBD: depends how we apply visual effects
+@onready var col  := $CollisionShape3D
+
+
+
+
 func _ready() -> void:
 	pass
 
-# TO DO: Projectile should call Detonation.detonate, passing itself and the body it has impacted so the Detonation instance can decide for itself what animation to play (e.g. a bullet detonation may play a Player/Bob/Pfhor/Hulk/etc blood splash OR an exploding glass or stool effect OR a metal riccochet that occasionally leaves a black smudge/dent on the impacted wall)
 
-func detonate(projectile, body):
+
+func detonate(detonation_class, origin, collider, collidee):
 	Global.add_to_level(self)
-	self.global_position = projectile.global_position
+	self.global_position = origin
 	print("EXPLODE! ", self.global_position)
 	await get_tree().create_timer(0.1).timeout
 	queue_free()
 
 
 
-func _on_Area_body_entered(body) -> void: # TO DO: only connect this if detonation has a shrapnel radius
+func _on_Area_body_entered(body) -> void: # TO DO: only connect this if detonation_class.shrapnel_radius>0; if it does, set col.shape.radius and see if Godot automatically picks up all bodies within that radius and passes them here; if not, we'll need some other means to detect them
 	
 	# TO DO: how best to determine if body is in same room as explosion? one option is to raycast from one to other, although we don't want that to fail if the ray impinges on a trivial scenery object (e.g. a bottle or chair) or partial wall (e.g. if player is 51% hidden from the explosion by a low wall which blocks a simple center-to-center raycast, they should still receive damage). Q. Is there a way to raycast a 2D area instead of a point?
 	# What we do NOT want is for an explosion on one side of a full wall damaging anything on the other side of that wall. (Only exception to this rule is a nuclear explosion, which passes through walls and damages everything inside its radius.)

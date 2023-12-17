@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://dsfml4ri8636v"]
 
-[ext_resource type="Script" path="res://engine/effects/spark.gd" id="2"]
+[ext_resource type="Script" path="res://assets/actors/effects/spark.gd" id="2"]
 
 [sub_resource type="Curve" id="4"]
 _data = [Vector2(0.0124224, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]

@@ -5,8 +5,55 @@ extends Node
 const PROJECTILE_DEFINITIONS := [
 	
 	{
-		"family": Enums.FamilyType.HUMAN,
-		"name": Enums.ProjectileType.RIFLE_BULLET,
+		"projectile_type": Enums.ProjectileType.MINOR_FIST,
+		"radius": 0.0,
+	},
+	
+	{
+		"projectile_type": Enums.ProjectileType.MAJOR_FIST,
+		"radius": 0.0,
+	},
+	
+	{
+		"projectile_type": Enums.ProjectileType.PISTOL_BULLET,
+		"radius": 0.0,
+	},
+	
+	{
+		"projectile_type": Enums.ProjectileType.GRENADE,
+		"radius": 0.0,
+	},
+	
+	{
+		"projectile_type": Enums.ProjectileType.FIGHTER_MELEE,
+		"radius": 0.0,
+	},
+	
+	{
+		"projectile_type": Enums.ProjectileType.FIGHTER_BOLT,
+		"radius": 0.0,
+	},
+	
+	{
+		"projectile_type": Enums.ProjectileType.COMPILER_BOLT_MINOR,
+		"radius": 0.0,
+	},
+	
+	
+	{
+		"projectile_type": Enums.ProjectileType.COMPILER_BOLT_MAJOR,
+		"radius": 0.0,
+	},
+	
+	{
+		# the theoretical advantage of splitting a projectile's type into a hierarchy is debatable, e.g. we can define a wildcard "ANY|RIFLE_BULLET" transition that works for any kind of "bullet", human or alien, with the option of overriding parts of it where we want to customize - e.g. if Pfhor bullets have a different blood-splash size to Human bullets, or if Pfhor grenades have a different shape and contrail color to Human grenades but otherwise deal the same damage; for sake of getting something working, let's ignore this for now and use a single "projectile_type" which matches a trigger's "projectile_type" in WeaponDefinitions
+		#
+		# note: if we do use a hierarchy, it might be better to use strings of form e.g. "type.subtype.strength", rather than multiple enums: while strings will need parsing, they will be easier to read once definition dictionaries are moved to external JSON files; plus our WAD build tools can replace the string with a uniquely generated int
+		#
+		#"family": Enums.FamilyType.HUMAN,
+		#"name": Enums.ProjectileType.RIFLE_BULLET,
+		#
+		"projectile_type": Enums.ProjectileType.RIFLE_BULLET,
 		
 		# we may use relational tables for joining contrail, boundary transition, detonation, visual effect; Q. visual effect may represent both visible projectiles in flight (any contrail would be part of that), with state machine transitions indicating looped or one-time animation; the states are defined in tables, not code
 		
@@ -45,6 +92,7 @@ const PROJECTILE_DEFINITIONS := [
 			
 			# pathfinding
 			"guided": false,
+			
 			"affected_by_gravity": false, # TO DO: combine these three into dict where keys are all gravities used in game and values are gravity to apply to projectile (0.0 = none, 1.0 = 1G)
 			"affected_by_half_gravity": false,
 			"doubly_affected_by_gravity": false,
@@ -56,15 +104,14 @@ const PROJECTILE_DEFINITIONS := [
 			"vertical_wander": false,
 			
 			
-			"melee": false, # TO DO: what does this do in Classic?
+			"melee": false, # TO DO: what does this do in Classic? can we get rid of it? need to check AO code
 			
 			
-			# true for ball only; TO DO: special cases like this should be defined as scenes that implement their own gameplay behavior; may want a CUSTOM type or some other way to delegate full control the the scene rather than using that type's standard flags and behavior
-			
+			# TO DO: these flags are true for ball only; any special cases like this should be defined as Projectile subclasses that implement their own gameplay behavior
 			#"persistent_and_virulent": false,
 			#"becomes_item_on_detonation": false,
 			
-			# boundary transitions; TO DO: replace flags like this IMPACT_TYPES which is a 2D table of ProjectileType to BodyType (metal/wood/soil/glass, Human/Pfhor/Hulk/Wasp flesh, water/sewage/lava liquid, Deimos/BoomerControlPanel, etc), with each table field containing a Damage[Sub]Type (or callback?) which declares the effect (detonate/pass/transform/bounce, boundary transition, special activation, etc)
+			# TO DO: rest of these flags should be replaced with boundary transitions
 			"usually_pass_transparent_side": true,
 			"sometimes_pass_transparent_side": false,
 			"rebounds_from_floor": false,

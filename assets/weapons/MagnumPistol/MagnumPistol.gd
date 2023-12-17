@@ -41,7 +41,7 @@ const DUAL_OFFSET_X := 0.3 # TO DO: should this be in Weapon physics?
 
 # TO DO: how best to implement magazine displays?
 
-func update_ammo(primary_magazine: WeaponTrigger.Magazine, _secondary_magazine: WeaponTrigger.Magazine) -> void:
+func update_ammo(primary_magazine: Weapon.Magazine, _secondary_magazine: Weapon.Magazine) -> void:
 	var capacity  := primary_magazine.max_count
 	var remaining := primary_magazine.count
 	print(remaining, "/", capacity)

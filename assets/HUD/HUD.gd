@@ -2,11 +2,11 @@ extends Node
 
 # HUD.gd -- this is the `hud` node moved out of Player and into its own scene
 
-# TO DO: define public API for HUD, so that HUD receives 'update_weapon', 'update_health', 'show_message', 'take_damage', etc whenever something changes; the only HUD element that needs to draw itself in [_physics]_process is the radar, as it must track NPCs' independent movements; Q. should we implement this public API as signals? probably: signals allow Inventory to update the HUD by broadcasting weapon/health-change notifications (to invoke HUD methods directly, Inventory would need access to Player.HUD, or HUD._ready would have to bind self to Inventory - tighter coupling that prevents us testing the Inventory without a HUD attached)
+# TO DO: define public API for HUD, so that HUD receives 'update_weapon', 'update_health', 'show_message', 'take_damage', etc whenever something changes; the only HUD element that needs to draw itself in [_physics]_process is the radar, as it must track NPCs' independent movements; Q. should we implement this public API as signals? probably: signals allow InventoryManager to update the HUD by broadcasting weapon/health-change notifications (to invoke HUD methods directly, InventoryManager would need access to Player.HUD, or HUD._ready would have to bind self to InventoryManager - tighter coupling that prevents us testing the InventoryManager without a HUD attached)
 
-# TO DO: move current weapon's ammo readouts onto gun stocks (cf Halo and other modern FPSes); these should look similar to Classic's bitmap/bar ammo readouts (we might make an exception for Magnum and show that as number for space); BTW, this is another reason for using signals for change notification, keeping both HUD and WIH loosely coupled to Inventory
+# TO DO: move current weapon's ammo readouts onto gun stocks (cf Halo and other modern FPSes); these should look similar to Classic's bitmap/bar ammo readouts (we might make an exception for Magnum and show that as number for space); BTW, this is another reason for using signals for change notification, keeping both HUD and WIH loosely coupled to InventoryManager
 
-# for Inventory, listing ammo counts as a vertical list in top-right corner should be sufficient; we can show all ammo types here, omitting those for which we don't yet have a weapon; that gives user the same ammo information that was displayed in the Classic HUD, using short names so it isn't [too] visually intrusive
+# for InventoryManager, listing ammo counts as a vertical list in top-right corner should be sufficient; we can show all ammo types here, omitting those for which we don't yet have a weapon; that gives user the same ammo information that was displayed in the Classic HUD, using short names so it isn't [too] visually intrusive
 
 # Q. list magazine counts for all [currently carried] weapons on-screen, as in M2? or show current weapon's magazines only and only list all magazines in inventory overlay? if we show all mags on screen, keep it visually low-key, e.g. white lettering with short ammo names (the current weapon's ammo supply can be highlighted in bold)
 #
@@ -48,17 +48,17 @@ func set_speed_text(msg: String) -> void:
 
 func _ready():
 	reset_notification()
-	update_weapon_status()
+	redraw_current_weapon_status()
 	update_health_status()
-	# TO DO: is there any way to set up signal connections in the node editor? oddly, the HUD's Scene tab doesn't allow Inventory.tscn to be added via Add Child Node, although it does allow it to be dragged and dropped from the FileSystem tab - but does this create a separate instance of it or reference the existing global instance? need to check Godot documentation; not sure if it'd be easier setting these signals in the Node tab than in code, but for now just stick to doing it in code (that this code is visibly ugly suggests the current API design is badly factored):
+	# TO DO: is there any way to set up signal connections in the node editor? oddly, the HUD's Scene tab doesn't allow InventoryManager.tscn to be added via Add Child Node, although it does allow it to be dragged and dropped from the FileSystem tab - but does this create a separate instance of it or reference the existing global instance? need to check Godot documentation; not sure if it'd be easier setting these signals in the Node tab than in code, but for now just stick to doing it in code (that this code is visibly ugly suggests the current API design is badly factored):
 	
 	# note: in addition to updating the HUD display these signals will also drive the WIH animation (but connecting signals to that is the WIH manager's job)
 	# TO DO: combine these signals into one? HUD would call WeaponManager.current_weapon.status to discover which transition it's in; an additional caveat is dual-wield weapons, where one gun is activating/deactivating while the other is active
-	WeaponManager.weapon_activity_changed.connect(update_weapon_status)
-	WeaponManager.weapon_magazine_changed.connect(update_weapon_status)
+	WeaponManager.weapon_activity_changed.connect(__weapon_status_changed)
+	WeaponManager.weapon_magazines_changed.connect(__weapon_status_changed)
 	
-	Inventory.inventory_increased.connect(update_inventory_status)
-	Inventory.inventory_decreased.connect(update_inventory_status)
+	InventoryManager.inventory_increased.connect(__inventory_status_changed)
+	InventoryManager.inventory_decreased.connect(__inventory_status_changed)
 	
 	Global.health_changed.connect(update_health_status)
 	Global.player_died.connect(update_health_status)
@@ -78,29 +78,33 @@ func player_died(_damage_type: Enums.DamageType) -> void:
 func player_revived() -> void:
 	self.visible = true
 	update_health_status()
-	update_weapon_status()
+	redraw_current_weapon_status()
 	reset_notification()
 
 
 func update_health_status(damage_type: Enums.DamageType = Enums.DamageType.NONE) -> void:
-	health.text = "SHIELDS: %03d\nOXYGEN: %03d" % [Inventory.health, Inventory.oxygen]
+	health.text = "SHIELDS: %03d\nOXYGEN: %03d" % [InventoryManager.health, InventoryManager.oxygen]
 	if damage_type != Enums.DamageType.NONE:
 		pass # TO DO: damage effect animations, e.g. red ColorRect "pain" pulse animation when struck by projectile; jagged blue-white jittery "shock" shader effect when hit by an energy bolt
 
 
 # TO DO:  it's possible for weapon activating animation to be reversed if the user presses previous/next_weapon key multiple times (repeatedly pressing the key quickly will step over weapons without activating any except the last-selected weapon, but pressing it a bit more slowly may cause a weapon's activating animation to start playing without allowing time for it to finish; ideally there should be a single animation that can be played either forward or backward or slowed/paused at any point so it's trivially reversible, otherwise we'll have to interpolate the model between 2 different positions, which may or may not produce a satisfactory animation)
 
-func update_inventory_status(_arg = null) -> void:
-	update_weapon_status(_arg)
+func __inventory_status_changed(_item: InventoryManager.InventoryItem) -> void:
+	redraw_current_weapon_status()
 	# TO DO: implement list of all available ammos down right side of screen
 
-func update_weapon_status(_arg = null, _arg2 = null) -> void: # TO DO: what should weapon signals pass as arguments, if anything? it may be best to pass nothing, leaving listeners to retrieve whatever they need from WeaponManager
+func __weapon_status_changed(_weapon: Weapon) -> void: # TO DO: what should weapon signals pass as arguments, if anything? it may be best to pass nothing, leaving listeners to retrieve whatever they need from WeaponManager
+	redraw_current_weapon_status()
+
+
+func redraw_current_weapon_status() -> void:
 	var weapon: Weapon = WeaponManager.current_weapon
 	if not weapon: return # TO DO: kludgy; WeaponManager.current_weapon should be set before HUD loads
 	#print("   ...update weapon status: ", weapon.long_name)
 	weapon_name.text = weapon.long_name
-	var magazine_1  := weapon.primary_trigger.magazine
-	var magazine_2  := weapon.secondary_trigger.magazine
+	var magazine_1  := weapon.primary_magazine
+	var magazine_2  := weapon.secondary_magazine
 	var inventory_1 := magazine_1.inventory_item
 	var inventory_2 := magazine_2.inventory_item
 	# TO DO: triggers' ammo count[s] should appear on gun barrels, c.f. Halo and other modern FPSes - that puts weapon status information near to center of screen (where the user's eye is usually focused) so it's quick and easy to glance at, makes use of what would otherwise be boring wasted screen space (solid gun butts), and just looks plain gosh darn good when playing

@@ -17,7 +17,7 @@ class_name PickableItem
 # most pickable items *never* move, so having to do any physics at all on them is a waste of resources; alternatively, if we implement Pickable as RigidBody then it probably makes sense to freeze the stationary pickables so they aren't a significant load (we can set the freeze flag in the map editor when the Pickable node is added to the map)
 #
 #
-# @810-Dude: For pickables, we can sleep them but have them report collisions, this way we can detect if they're suddenly floating and awake them
+# @810-Dude: "For pickables, we can sleep them but have them report collisions, this way we can detect if they're suddenly floating and awake them"
 #
 
 
@@ -25,17 +25,17 @@ class_name PickableItem
 #
 
 
-@export var pickable: Enums.PickableType
+@export var pickable_type: Enums.PickableType
 
 
 func _ready() -> void:
-	pass
+	pass # TO DO: need to load the displayed mesh from assets/pickables, selected by PickableType; this sort of thing is probably easiest with a global manager that auto-loads all scenes from a given directory into the corresponding asset lookup table (one table for pickables, one for visual effects, one for props, etc; alternatively one big dictionary where keys are combination of AssetType and subtype, e.g. `AssetType.Pickable|PickableType`, with AssetType enums using the high byte and subtype enums using the 3 low bytes)
 
 func picked_up() -> void: # items can also be picked up by other players, so keep this method separate
 	queue_free()
-	print("picked up ammo type ", pickable)
+	print("picked up ammo type ", pickable_type)
 
 
 func _on_pickup_body_entered(body: Node) -> void: # collision_mask=[Player]
-	body.found_item(self) # Player.found_item(item) will call item.picked_up() if the Player adds the item to its inventory (this call goes to Player, not directly to Inventory, so that Player can update its HUD and play picked-up animation when the Inventory accepts the item)
+	body.found_item(self) # Player.found_item(item) will call item.picked_up() if the Player adds the item to its inventory (this call goes to Player, not directly to InventoryManager, so that Player can update its HUD and play picked-up animation when the InventoryManager accepts the item)
 

@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c37drbcwj8r7q"
-path.s3tc="res://.godot/imported/decal.png-b6c1eeab540aa21fa2014098a80986fa.s3tc.ctex"
+uid="uid://vemtrbvbs2wc"
+path.s3tc="res://.godot/imported/burnt_ground.png-abfb89493e1fe83dd4929359d084d3fc.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://engine/effects/decal.png"
-dest_files=["res://.godot/imported/decal.png-b6c1eeab540aa21fa2014098a80986fa.s3tc.ctex"]
+source_file="res://assets/actors/effects/burnt_ground.png"
+dest_files=["res://.godot/imported/burnt_ground.png-abfb89493e1fe83dd4929359d084d3fc.s3tc.ctex"]
 
 [params]
 
@@ -26,7 +26,7 @@ mipmaps/generate=true
 mipmaps/limit=-1
 roughness/mode=0
 roughness/src_normal=""
-process/fix_alpha_border=false
+process/fix_alpha_border=true
 process/premult_alpha=false
 process/normal_map_invert_y=false
 process/hdr_as_srgb=false

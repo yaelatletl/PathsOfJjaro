@@ -10,3 +10,6 @@ one_shot = true
 
 [node name="SecondaryTimer" type="Timer" parent="."]
 one_shot = true
+
+[node name="WeaponTimer" type="Timer" parent="."]
+one_shot = true

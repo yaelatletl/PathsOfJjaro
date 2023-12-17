@@ -11,7 +11,7 @@ extends Node3D
 
 var mapRID : RID = RID()
 var regions : Array = []
-
+  
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

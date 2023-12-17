@@ -4,6 +4,25 @@ extends WeaponInHand
 # assets/weapons/AssaultRifle/AssaultRifle.gd
 
 
+# TO DO: WeaponInHand scenes should provide muzzle-flash illuminations; these can be omnidirectional lights for simplicity and performed in "shoot" animations
+#
+# Classic muzzle-flash settings for AR:
+#
+#	"firing_light_intensity": 0.75,
+#	"firing_intensity_decay_time": 6,
+#	we can also add Color, e.g. yellowish-white for magnum and AR primary; bluish-white for fusion; saturated orange for flamethrower and alien gun
+
+
+# TO DO: these are from Classic weapon physics and, except for bob (which is TBD), are all superseded by model animations:
+#"idle_height": 1.1666565,
+#"bob_amplitude": 0.028564453,
+#"idle_width": 0.5,
+#"horizontal_amplitude": 0.0,
+#"kick_height": 0.0625, # presumably M2 WU
+#"reload_height": 0.75,
+
+
+
 const WEAPON_TYPE := Enums.WeaponType.ASSAULT_RIFLE
 
 
@@ -38,12 +57,8 @@ func play_secondary_shoot() -> void:
 
 # TO DO: diegetic magazine displays for all weapons except FIST (which has infinite "ammo") and ROCKET_LAUNCHER (which should have a heads-up targeting and ammo display that appears on HUD to make long-range aiming easier)
 
-func update_primary_magazine_display(magazine: WeaponTrigger.Magazine) -> void:
-	print("update_primary_magazine_display ", magazine)
-
-func update_secondary_magazine_display(magazine: WeaponTrigger.Magazine) -> void:
-	print("update_secondary_magazine_display ", magazine)
-
+func update_ammo(primary_magazine: Weapon.Magazine, secondary_magazine: Weapon.Magazine) -> void:
+	print(primary_magazine.count, "/", primary_magazine.max_count, " ,  ", secondary_magazine.count, "/", secondary_magazine.max_count)
 
 
 func reset() -> void:

@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://c73b11lvgmw2h"]
 
-[ext_resource type="Script" path="res://engine/effects/decal.gd" id="1_gpx8n"]
+[ext_resource type="Script" path="res://assets/actors/effects/decal.gd" id="1_gpx8n"]
 [ext_resource type="Material" path="res://assets/materials/decal.material" id="2_7a0k4"]
 
 [sub_resource type="QuadMesh" id="1"]

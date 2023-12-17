@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://c6admttjcnr4y"]
 
-[ext_resource type="Texture2D" uid="uid://vemtrbvbs2wc" path="res://engine/effects/burnt_ground.png" id="1_8iq6j"]
+[ext_resource type="Texture2D" uid="uid://vemtrbvbs2wc" path="res://assets/actors/effects/burnt_ground.png" id="1_8iq6j"]
 
 [sub_resource type="GDScript" id="GDScript_f18di"]
 script/source = "extends Node3D

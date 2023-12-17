@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://kkkafhswxdjq"]
 
-[ext_resource type="Script" path="res://engine/actors/projectiles/Projectile.gd" id="1_ew1pd"]
+[ext_resource type="Script" path="res://engine/actors/projectile/Projectile.gd" id="1_txlp0"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_1mf3e"]
 radius = 0.1
@@ -18,7 +18,7 @@ height = 0.1
 [node name="Projectile" type="StaticBody3D"]
 collision_layer = 8
 collision_mask = 65479
-script = ExtResource("1_ew1pd")
+script = ExtResource("1_txlp0")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_1mf3e")
