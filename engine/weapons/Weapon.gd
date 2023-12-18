@@ -46,6 +46,7 @@ enum State {
 	DEACTIVATED  = 0,
 	ACTIVATING   = 1,
 	ACTIVATED    = 2,
+	REACTIVATING = 3,
 	IDLE         = 5,
 	EMPTY        = 8,
 	DEACTIVATING = 9,

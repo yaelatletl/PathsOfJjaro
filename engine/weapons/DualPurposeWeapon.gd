@@ -42,7 +42,7 @@ func __set_state(next_state: State) -> void:
 			next_state = Weapon.State.IDLE
 		
 		Weapon.State.IDLE:
-			# reloading is exclusive: both triggers must finish firing before one can be reloaded and then, optionally, the other
+			# note: reloading is exclusive: both triggers must finish firing before one can be reloaded and then, optionally, the other (while simultaneous reloading of both could be implemented if needed, MCR doesn’t need it as the only dual-purpose weapon with 2 magazines is the AR, and the player would require a third hand to reload both mags at once while holding the gun. Which would look very silly.)
 			if self.primary_needs_reload():
 				# TO DO: implement __weapon_data.disappears_when_empty
 				if self.primary_magazine.try_to_refill():
@@ -145,13 +145,10 @@ func __weapon_timer_ended() -> void:
 		Weapon.State.RELOADING_PRIMARY, Weapon.State.RELOADING_SECONDARY:
 			self.__set_state(Weapon.State.IDLE) # if reloaded primary, IDLE will check if secondary needs reloading
 		
+		# TO DO: confirm no other states need to be handled here; if not, these remaining lines can be deleted
 		
-		# DEBUG: check if there's any other states that might slip through
-		
-		# TO DO: what's correct behavior for this line?
 		Weapon.State.SHOOTING_PRIMARY_FAILED, Weapon.State.SHOOTING_SECONDARY_FAILED:
 			pass
-			#__set_state(Weapon.State.IDLE) # premature, as the other trigger may be shooting
 		
 		Weapon.State.SHOOTING_PRIMARY, Weapon.State.SHOOTING_SECONDARY:
 			pass
@@ -159,7 +156,7 @@ func __weapon_timer_ended() -> void:
 		Weapon.State.SHOOTING_PRIMARY_ENDED, Weapon.State.SHOOTING_SECONDARY_ENDED:
 			pass
 		
-		Weapon.State.EMPTY:
+		Weapon.State.EMPTY, Weapon.State.IDLE:
 			pass
 		_:
 			assert(false, "Timed out but on unexpected %s" % self.debug_state)

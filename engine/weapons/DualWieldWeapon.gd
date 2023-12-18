@@ -9,6 +9,8 @@ class_name DualWieldWeapon extends Weapon
 # (note: fist is a subclass of SinglePurposeWeapon: while the view displays two hands they operate as one weapon, firing at a constant rate)
 
 
+# TO DO: reloading isn't right when it has run out of ammo then picks up 1 new mag, at which point it can be reactivated, then shortly after picks up another mag - this should activate and reload the 2nd pistol but appears to reload the 1st twice
+
 
 # if one hand runs out of ammo # TO DO: think these do need to be State so they sync correctly when second gun is picked up; or may be better to wait till enabled hand is idle before
 var __primary_enabled   := false
@@ -45,8 +47,18 @@ func __set_state(next_state: State) -> void:
 	# important: this switch and the function calls inside it must not call __set_state, directly or indirectly; transitional states, e.g. ACTIVATED, should set next_state to the state they want to transition to
 	match next_state:
 		Weapon.State.ACTIVATING:
-			if previous_state == Weapon.State.DEACTIVATED: # TO DO: it'd be better for dual-wield to have separate ACTIVATING and REACTIVATING states
-				self.__connect()
+			self.__connect()
+			next_state = Weapon.State.REACTIVATING
+		
+		Weapon.State.ACTIVATED:
+			WeaponManager.weapon_timer.stop() # cancel the activation timer if weapon was activated instantly
+			if __primary_enabled:
+				self.__activated_primary()
+			if __secondary_enabled:
+				self.__activated_secondary()
+			next_state = Weapon.State.IDLE
+		
+		Weapon.State.REACTIVATING:
 			if __primary_needs_activating:
 				__primary_needs_activating = false
 				__primary_enabled = true
@@ -57,17 +69,9 @@ func __set_state(next_state: State) -> void:
 				self.__activating_secondary()
 			WeaponManager.weapon_timer.start(self.__weapon_data.activating_time)
 		
-		Weapon.State.ACTIVATED:
-			WeaponManager.weapon_timer.stop() # cancel the activation timer if weapon was activated instantly
-			if __primary_enabled:
-				self.__activated_primary()
-			if __secondary_enabled:
-				self.__activated_secondary()
-			next_state = Weapon.State.IDLE
-		
 		Weapon.State.IDLE:
 			if __primary_needs_activating or __secondary_needs_activating:
-				next_state = Weapon.State.ACTIVATING
+				next_state = Weapon.State.REACTIVATING
 			elif self.primary_needs_reload():
 				# TO DO: implement __weapon_data.disappears_when_empty
 				if self.primary_magazine.try_to_refill():
@@ -159,7 +163,15 @@ func __weapon_timer_ended() -> void:
 		Weapon.State.DEACTIVATING:
 			self.__set_state(Weapon.State.DEACTIVATED)
 		
-		Weapon.State.RELOADING_PRIMARY, Weapon.State.RELOADING_SECONDARY:
+		Weapon.State.REACTIVATING:
+			self.__set_state(Weapon.State.IDLE)
+		
+		Weapon.State.RELOADING_PRIMARY:
+			__primary_enabled = true
+			self.__set_state(Weapon.State.IDLE) # if reloaded primary, IDLE will check if secondary needs reloading
+			
+		Weapon.State.RELOADING_SECONDARY:
+			__secondary_enabled = true
 			self.__set_state(Weapon.State.IDLE) # if reloaded primary, IDLE will check if secondary needs reloading
 		
 		Weapon.State.SHOOTING_PRIMARY, Weapon.State.SHOOTING_SECONDARY:
@@ -256,13 +268,13 @@ func inventory_increased(item: InventoryManager.InventoryItem) -> void: # sent b
 		if self.primary_needs_reload():
 			if self.state == Weapon.State.IDLE:
 				self.__set_state(Weapon.State.RELOADING_PRIMARY if __primary_enabled else Weapon.State.ACTIVATING)
-			else:
-				__secondary_needs_activating = true
+			elif not __primary_enabled:
+				__primary_needs_activating = true # primary will be reactivated once weapon has finished its current activity and returns to IDLE
 		elif self.secondary_needs_reload():
 			if self.state == Weapon.State.IDLE:
 				self.__set_state(Weapon.State.RELOADING_SECONDARY if __secondary_enabled else Weapon.State.ACTIVATING)
-			else:
-				__secondary_needs_activating = true
+			elif not __secondary_enabled:
+				__secondary_needs_activating = true # secondary will be reactivated once weapon has finished its current activity and returns to IDLE
 
 
 # WeaponManager activates and deactivates the weapon

@@ -97,15 +97,39 @@ script = ExtResource("1_q5461")
 [node name="Ammo" type="Node3D" parent="."]
 
 [node name="MgMag_1" parent="Ammo" instance=ExtResource("2_51ci0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.29515, 0.115472, -10.4809)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00678682, 0.115472, -10.2411)
 pickable_type = 2
 
 [node name="MgMag_2" parent="Ammo" instance=ExtResource("2_51ci0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.75568, 0.115472, -10.4769)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.46732, 0.115472, -10.2371)
 pickable_type = 2
 
 [node name="MgMag_3" parent="Ammo" instance=ExtResource("2_51ci0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.53868, 0.115472, -10.4809)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.25032, 0.115472, -10.2411)
+pickable_type = 2
+
+[node name="MgMag_4" parent="Ammo" instance=ExtResource("2_51ci0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00678682, 0.115472, -9.27532)
+pickable_type = 2
+
+[node name="MgMag_5" parent="Ammo" instance=ExtResource("2_51ci0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.46732, 0.115472, -9.27132)
+pickable_type = 2
+
+[node name="MgMag_6" parent="Ammo" instance=ExtResource("2_51ci0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.25032, 0.115472, -9.27532)
+pickable_type = 2
+
+[node name="MgMag_7" parent="Ammo" instance=ExtResource("2_51ci0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00678682, 0.115472, -8.36292)
+pickable_type = 2
+
+[node name="MgMag_8" parent="Ammo" instance=ExtResource("2_51ci0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.46732, 0.115472, -8.35892)
+pickable_type = 2
+
+[node name="MgMag_9" parent="Ammo" instance=ExtResource("2_51ci0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.25032, 0.115472, -8.36292)
 pickable_type = 2
 
 [node name="ARMag_1" parent="Ammo" instance=ExtResource("2_51ci0")]
@@ -120,12 +144,44 @@ pickable_type = 6
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.84654, 0.115472, -9.00856)
 pickable_type = 6
 
+[node name="ARMag_4" parent="Ammo" instance=ExtResource("2_51ci0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.64134, 0.115472, -10.3503)
+pickable_type = 6
+
+[node name="ARMag_5" parent="Ammo" instance=ExtResource("2_51ci0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.45775, 0.115472, -10.3503)
+pickable_type = 6
+
+[node name="ARMag_6" parent="Ammo" instance=ExtResource("2_51ci0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.84654, 0.115472, -10.3503)
+pickable_type = 6
+
 [node name="ARGrn_1" parent="Ammo" instance=ExtResource("2_51ci0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5092, 2.07544, -3.53285)
 pickable_type = 7
 
 [node name="ARGrn_2" parent="Ammo" instance=ExtResource("2_51ci0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.55748, 0.0798345, -3.53285)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.3577, 0.0798345, -9.04207)
+pickable_type = 7
+
+[node name="ARGrn_3" parent="Ammo" instance=ExtResource("2_51ci0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.9356, 0.0798345, -9.04207)
+pickable_type = 7
+
+[node name="ARGrn_4" parent="Ammo" instance=ExtResource("2_51ci0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.5673, 0.0798345, -9.04207)
+pickable_type = 7
+
+[node name="ARGrn_5" parent="Ammo" instance=ExtResource("2_51ci0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.3577, 0.0798345, -10.4643)
+pickable_type = 7
+
+[node name="ARGrn_6" parent="Ammo" instance=ExtResource("2_51ci0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.9356, 0.0798345, -10.4643)
+pickable_type = 7
+
+[node name="ARGrn_7" parent="Ammo" instance=ExtResource("2_51ci0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.5673, 0.0798345, -10.4643)
 pickable_type = 7
 
 [node name="Floor" type="MeshInstance3D" parent="."]
