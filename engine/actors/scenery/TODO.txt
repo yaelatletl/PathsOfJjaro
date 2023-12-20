@@ -1,0 +1,1 @@
+any standard logic used by multiple scenery objects can go here (note: unlike pickable items, which all have same size and behavior, scenery items may vary widely so most/all of their behavior might end up in assets/ anyway)

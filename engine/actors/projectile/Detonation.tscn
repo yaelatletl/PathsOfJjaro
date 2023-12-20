@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://bwwv7h4vfopy"]
+
+[ext_resource type="Script" path="res://engine/actors/projectile/Detonation.gd" id="1_2uq01"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7yulg"]
+albedo_color = Color(1, 0.278431, 0.172549, 1)
+emission_enabled = true
+emission = Color(1, 0.278431, 0.172549, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_k346j"]
+material = SubResource("StandardMaterial3D_7yulg")
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_bxdga"]
+
+[node name="Detonation" type="StaticBody3D"]
+collision_layer = 16
+collision_mask = 0
+script = ExtResource("1_2uq01")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_k346j")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_bxdga")

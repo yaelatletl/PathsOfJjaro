@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://bnwqfk5641dir"]
+
+[ext_resource type="Script" path="res://engine/actors/player/components/VaultOver.gd" id="1_rvl12"]
+
+[node name="VaultOver" type="Node3D"]
+script = ExtResource("1_rvl12")
+
+[node name="vault_over" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.705654, -0.419547)
+target_position = Vector3(0, -0.5, 0)
+
+[node name="vault_over2" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.705654, 0.276985)
+target_position = Vector3(0, 0, -0.8)

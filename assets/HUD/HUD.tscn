@@ -1,0 +1,278 @@
+[gd_scene load_steps=10 format=3 uid="uid://bcdg4sigkkarn"]
+
+[ext_resource type="Script" path="res://assets/HUD/HUD.gd" id="1_1pqav"]
+[ext_resource type="Script" path="res://assets/HUD/Radar.gd" id="3_85ny1"]
+[ext_resource type="Theme" uid="uid://cx33kaaj6vwje" path="res://hud.tres" id="4_26t8g"]
+[ext_resource type="Texture2D" uid="uid://djvpeq1ktwq5" path="res://assets/textures/crosshair.png" id="5_jva5t"]
+[ext_resource type="Script" path="res://assets/HUD/CounterMonitor.gd" id="6_jqgqd"]
+
+[sub_resource type="Animation" id="Animation_l3o38"]
+resource_name = "FadeIn"
+length = 0.15
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("..:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.15),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(2, 2), Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_tj00a"]
+resource_name = "FadeOut"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("..:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0.5, 0.5)]
+}
+
+[sub_resource type="Animation" id="Animation_hpqct"]
+resource_name = "RESET"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_4ox01"]
+_data = {
+"FadeIn": SubResource("Animation_l3o38"),
+"FadeOut": SubResource("Animation_tj00a"),
+"RESET": SubResource("Animation_hpqct")
+}
+
+[node name="HUD" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_1pqav")
+metadata/_edit_lock_ = true
+
+[node name="CenterDisplay" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+metadata/_edit_lock_ = true
+
+[node name="Crosshair" type="TextureRect" parent="CenterDisplay"]
+modulate = Color(1, 1, 1, 0.392157)
+layout_mode = 2
+offset_left = 624.0
+offset_top = 343.0
+offset_right = 656.0
+offset_bottom = 375.0
+size_flags_vertical = 4
+mouse_filter = 2
+texture = ExtResource("5_jva5t")
+stretch_mode = 1
+metadata/_edit_lock_ = true
+
+[node name="border" type="TextureRect" parent="CenterDisplay/Crosshair"]
+modulate = Color(0, 0, 0, 1)
+layout_mode = 0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+size_flags_horizontal = 0
+size_flags_vertical = 4
+mouse_filter = 2
+texture = ExtResource("5_jva5t")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="CenterAlign" type="CenterContainer" parent="CenterDisplay"]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+metadata/_edit_lock_ = true
+
+[node name="FloatCounter" type="Label" parent="CenterDisplay/CenterAlign"]
+visible = false
+layout_mode = 2
+text = "0.0"
+script = ExtResource("6_jqgqd")
+counter_signal_name = "time_left_changed"
+
+[node name="Notification" type="CenterContainer" parent="CenterDisplay"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 160.0
+offset_top = 90.0
+offset_right = -160.0
+offset_bottom = -310.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.33333, 1.33333)
+pivot_offset = Vector2(480, 60)
+metadata/_edit_lock_ = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CenterDisplay/Notification"]
+root_node = NodePath("../Message")
+libraries = {
+"": SubResource("AnimationLibrary_4ox01")
+}
+
+[node name="Message" type="Label" parent="CenterDisplay/Notification"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+theme = ExtResource("4_26t8g")
+text = "Some text message"
+horizontal_alignment = 1
+uppercase = true
+metadata/_edit_lock_ = true
+
+[node name="Radar" type="Container" parent="."]
+layout_mode = 2
+offset_right = 511.0
+offset_bottom = 237.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+script = ExtResource("3_85ny1")
+floaters_scale = 0.1
+
+[node name="Health" type="Label" parent="."]
+layout_mode = 0
+offset_left = 534.0
+offset_top = 16.0
+offset_right = 743.0
+offset_bottom = 80.0
+theme = ExtResource("4_26t8g")
+text = "SHIELDS: xxx
+OXYGEN: XXX"
+uppercase = true
+
+[node name="Movement" type="Label" parent="."]
+layout_mode = 0
+offset_left = 909.0
+offset_top = 617.0
+offset_right = 1265.0
+offset_bottom = 713.0
+theme = ExtResource("4_26t8g")
+text = "xx
+xx
+xx"
+uppercase = true
+
+[node name="Speed" type="Label" parent="."]
+layout_mode = 0
+offset_left = 37.0
+offset_top = 617.0
+offset_right = 393.0
+offset_bottom = 713.0
+theme = ExtResource("4_26t8g")
+text = "xx
+xx
+xx"
+uppercase = true
+
+[node name="WeaponStatus" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -418.0
+offset_top = 16.0
+offset_right = -18.0
+offset_bottom = 141.0
+grow_horizontal = 0
+
+[node name="WeaponName" type="Label" parent="WeaponStatus"]
+layout_mode = 2
+theme = ExtResource("4_26t8g")
+text = "WEAPON NAME"
+horizontal_alignment = 2
+uppercase = true
+
+[node name="PrimaryAmmo" type="Label" parent="WeaponStatus"]
+layout_mode = 2
+theme = ExtResource("4_26t8g")
+text = "PRIMARY AMMO"
+horizontal_alignment = 2
+uppercase = true
+
+[node name="SecondaryAmmo" type="Label" parent="WeaponStatus"]
+layout_mode = 2
+theme = ExtResource("4_26t8g")
+text = "SECONDARY AMMO"
+horizontal_alignment = 2
+uppercase = true
+
+[node name="MessageList" type="VBoxContainer" parent="."]
+layout_mode = 2
+offset_top = 241.0
+offset_right = 308.0
+offset_bottom = 478.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+alignment = 1

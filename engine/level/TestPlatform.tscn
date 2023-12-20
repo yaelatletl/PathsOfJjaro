@@ -1,0 +1,67 @@
+[gd_scene load_steps=10 format=3 uid="uid://32q2l6ybonnb"]
+
+[ext_resource type="Script" path="res://engine/level/TestPlatform.gd" id="1_x135u"]
+[ext_resource type="Script" path="res://engine/level/PressureHandler.gd" id="2_7pcoo"]
+[ext_resource type="Script" path="res://engine/level/ActionHandler.gd" id="2_l4c2j"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_he473"]
+size = Vector3(2, 0.2, 2)
+
+[sub_resource type="BoxMesh" id="BoxMesh_dg22f"]
+size = Vector3(2, 0.2, 2)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_sne4r"]
+size = Vector3(1.8, 0.2, 1.8)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ncxpg"]
+size = Vector3(0.5, 0.5, 0.5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kxeck"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_qusrf"]
+material = SubResource("StandardMaterial3D_kxeck")
+size = Vector3(0.5, 0.5, 0.1)
+
+[node name="Elevator" type="Node3D"]
+script = ExtResource("1_x135u")
+
+[node name="Platform" type="AnimatableBody3D" parent="."]
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Platform"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
+shape = SubResource("BoxShape3D_he473")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Platform"]
+mesh = SubResource("BoxMesh_dg22f")
+skeleton = NodePath("")
+
+[node name="PressureHandler" type="Area3D" parent="Platform"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 0.2, 2.08165e-12)
+collision_layer = 0
+collision_mask = 6
+monitorable = false
+script = ExtResource("2_7pcoo")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Platform/PressureHandler"]
+shape = SubResource("BoxShape3D_sne4r")
+
+[node name="Top" type="Marker3D" parent="."]
+transform = Transform3D(0.999848, 0, 0.0174524, 0, 1, 0, -0.0174524, 0, 0.999848, 0, 2.88981, 0)
+
+[node name="Bottom" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.96905, 0)
+
+[node name="ActionHandler" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.70904, -1.02063, 0.746338)
+collision_layer = 64
+collision_mask = 0
+script = ExtResource("2_l4c2j")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ActionHandler"]
+shape = SubResource("BoxShape3D_ncxpg")
+
+[node name="ControlPanel" type="MeshInstance3D" parent="ActionHandler"]
+mesh = SubResource("BoxMesh_qusrf")
+
+[connection signal="body_entered" from="Platform/PressureHandler" to="Platform/PressureHandler" method="_on_body_entered"]

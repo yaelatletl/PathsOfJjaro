@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://dnpe7grujlcyo"]
+
+[ext_resource type="Script" path="res://engine/weapons/WeaponManager.gd" id="1_yto62"]
+
+[node name="WeaponManager" type="Node"]
+script = ExtResource("1_yto62")
+
+[node name="PrimaryTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="SecondaryTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="WeaponTimer" type="Timer" parent="."]
+one_shot = true

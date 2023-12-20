@@ -1,9 +1,0 @@
-[gd_scene load_steps=2 format=3]
-
-[ext_resource type="Script" path="res://data/actors/player/components/passive/src/MovementExtraJump.gd" id="1"]
-
-
-[node name="MovementExtraJump" type="Node"]
-script = ExtResource( 1 )
-_component_name = "movement_slide"
-jumps_before_floor = -1
