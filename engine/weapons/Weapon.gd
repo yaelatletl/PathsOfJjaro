@@ -1,7 +1,9 @@
 class_name Weapon extends Object
 
 
-# Weapon.gd -- managed by InventoryManager.gd, this represents one of the weapons available to Player in the game and holds that weapon's gameplay state: primary/secondary WeaponTrigger[s] and various timers, as well as the weapon's readiness; it does NOT contain the WeaponInHand view object but should instead emit signals to which the
+# Weapon.gd -- managed by InventoryManager.gd, abstract base class for all weapons available to Player in the game; holds that weapon's gameplay state: primary/secondary WeaponTrigger[s] and various timers, as well as the weapon's readiness
+
+# note: each weapon's in-hand view (mesh, sounds, animations) is represented by a WeaponInHand scene which is attached to the Player, and is automatically assigned to Weapon.__primary_hand/__secondary_hand when the player enters a level
 
 
 # assets/weapons/name/NAME.tscn provides a weapon's in-hand representation: meshes, materials, sounds, animations, etc for a particular weapon type (fist, pistol, fusion_gun, shotgun, assault_rifle, flechette_gun, missile_lancher, flamethrower, alien_gun) plus a standard API which Weapon calls to play its animations; the directory might also contain the weapon and ammo meshes for the weapon's ammo (it should not contain projectiles or explosion effects, however, as those may also be used by NPCs)
@@ -20,7 +22,7 @@ var __primary_trigger_data:   Dictionary
 var __secondary_trigger_data: Dictionary # this is same as primary if single-purpose or dual-wield
 
 # gives us the current number of guns in inventory; determines if Player can wield 0, 1, or 2 guns of this [sub]class
-var __weapon_item: InventoryManager.InventoryItem
+var weapon_item: InventoryManager.InventoryItem
 
 # magazine[s] -- used internally and are also available externally, e.g. if HUD displays the current weapon's ammo count
 var primary_magazine: Weapon.Magazine:
@@ -43,28 +45,35 @@ var __secondary_hand: WeaponInHand
 # weapon state (Finite State Machine)
 
 enum State {
-	DEACTIVATED  = 0,
-	ACTIVATING   = 1,
-	ACTIVATED    = 2,
-	REACTIVATING = 3,
-	IDLE         = 5,
-	EMPTY        = 8,
-	DEACTIVATING = 9,
+	DEACTIVATED  = 0, # stable state
+	DEACTIVATING = 1,
+	ACTIVATING   = 2,
+	ACTIVATED    = 3, # transient state immediately advances to IDLE
+	REACTIVATING = 4, # used by dual-wield: reactivating an empty gun upon picking up new ammo
+	EMPTY        = 5, # transient state immediately advances to DEACTIVATING
 	
-	SHOOTING_PRIMARY          = 11,
-	SHOOTING_PRIMARY_ENDED    = 12,
-	SHOOTING_PRIMARY_FAILED   = 13,
+	# for now, reloading sequences are exclusive and non-interruptible; TO DO: shotgun reloading is non-exclusive with shooting other
+	RELOADING_PRIMARY         = 6,
+	RELOADING_PRIMARY_ENDED   = 7,
 	
-	SHOOTING_SECONDARY        = 21,
-	SHOOTING_SECONDARY_ENDED  = 22,
-	SHOOTING_SECONDARY_FAILED = 23,
+	RELOADING_SECONDARY       = 8,
+	RELOADING_SECONDARY_ENDED = 9,
 	
-	SYNCHRONIZE_SHOOTING      = 30,
-	CAN_SHOOT_PRIMARY         = 31,
-	CAN_SHOOT_SECONDARY       = 32,
+	IDLE                         = 10, # checks for and advances to RELOADING/EMPTY if needed, otherwise is stable state
 	
-	RELOADING_PRIMARY         = 41,
-	RELOADING_SECONDARY       = 42,
+	SHOOTING_PRIMARY             = 11, # consumes ammo and starts shooting animation if successful, else fails
+	# ...FAILED/SUCCEEDED are not full transitions but are set by SHOOTING_PRIMARY/SECONDARY to indicate the shot succeeds or fails; the `shoot` method must check for SHOOTING_PRIMARY/SECONDARY_SUCCEEDED before spawning a Projectile
+	SHOOTING_PRIMARY_FAILED      = 12,
+	SHOOTING_PRIMARY_SUCCEEDED   = 13,
+	
+	SHOOTING_SECONDARY           = 21,
+	SHOOTING_SECONDARY_FAILED    = 22,
+	SHOOTING_SECONDARY_SUCCEEDED = 23,
+	
+	# in dual-wield, shooting one gun locks the other trigger for the first half of the shooting cycle, after which the interlock is released so the other gun is free to shoot
+	PRIMARY_RELEASES_INTERLOCK   = 31,
+	SECONDARY_RELEASES_INTERLOCK = 32,
+	
 }
 
 
@@ -73,17 +82,49 @@ var state := Weapon.State.DEACTIVATED:
 		return state
 
 
+var __next_state: Weapon.State
+
+
 # the heart of the beast; advance the FSM to its next state (some transitions may set timers, some may trigger further transitions, some may do nothing until the next transition is externally triggered)
 # subclasses must override this with their own implementation; the three standard subclasses - SinglePurposeWeapon, DualPurposeWeapon, DualWieldWeapon - should cover the common use cases
 
 func __set_state(next_state: Weapon.State) -> void:
+	#print(self.long_name, " __set_state: ", name_for_state(state), " -> ", name_for_state(next_state))
+	assert(not (state == State.ACTIVATING and next_state == State.DEACTIVATED))
 	state = next_state
+	__next_state = state
 
 
-# timer callbacks; __set_state starts timers while the weapon is performing an action - activating/deactivating/shooting/reloading/etc; the following stubs should be overridden in subclasses to handle the timeout and call __set_state to transition weapon to its next state
+# transitional states can immediately transition to next state, or wait for wait_time
+func __set_next_transition(next_state: Weapon.State, wait_time: float = 0.0) -> void:
+	assert(next_state != state)
+	#print(self.long_name, " __set_next_transition: ", name_for_state(state), " -> ", name_for_state(next_state))
+	__next_state = next_state
+	WeaponManager.weapon_timer.stop() # cancel the activation timer if weapon was activated instantly
+	if wait_time == 0.0:
+		self.__goto_next_state.call_deferred()
+	else:
+		WeaponManager.weapon_timer.start(wait_time)
 
-func __weapon_timer_ended() -> void:
-	pass
+
+func __goto_next_state() -> void:
+	#print(self.long_name, " __goto_next_state: ", name_for_state(state), " -> ", name_for_state(__next_state))
+	if __next_state != state:
+		self.__set_state(__next_state)
+
+
+# fast weapon switching allows DEACTIVATING/ACTIVATING animations to be reversed while in progress, so calculate the [remaining] ACTIVATING/DEACTIVATING time accordingly
+
+func __activating_time(previous_state: Weapon.State) -> float:
+	return (self.__weapon_data.deactivating_time - WeaponManager.weapon_timer.time_left 
+			if previous_state == Weapon.State.DEACTIVATING else self.__weapon_data.activating_time)
+
+func __deactivating_time(previous_state: Weapon.State) -> float:
+	return (self.__weapon_data.activating_time - WeaponManager.weapon_timer.time_left 
+			if previous_state == Weapon.State.ACTIVATING else self.__weapon_data.activating_time)
+
+
+# AR's triggers use independent timers
 
 func __primary_timer_ended() -> void:
 	pass
@@ -118,53 +159,54 @@ func configure(weapon_data: Dictionary) -> void:
 	__weapon_data                = weapon_data
 	__primary_trigger_data       = weapon_data.primary_trigger
 	__secondary_trigger_data     = weapon_data.secondary_trigger if weapon_data.secondary_trigger else weapon_data.primary_trigger
-	__weapon_item                = InventoryManager.get_item(weapon_data.pickable_type)
+	weapon_item                = InventoryManager.get_item(weapon_data.pickable_type)
 	__primary_projectile_class   = ProjectileManager.projectile_class_for_type(__primary_trigger_data.projectile_type)
 	__secondary_projectile_class = ProjectileManager.projectile_class_for_type(__secondary_trigger_data.projectile_type)
 	# create magazine[s] for this weapon
-	self.primary_magazine = Weapon.Magazine.new()
-	self.primary_magazine.configure(__primary_trigger_data)
-	if weapon_data.triggers_share_magazine or (__weapon_item.max_count == 1 and weapon_data.secondary_trigger == null):
-		self.secondary_magazine = self.primary_magazine # single-wield with 1 magazine
+	primary_magazine = Weapon.Magazine.new()
+	primary_magazine.configure(__primary_trigger_data)
+	if weapon_data.triggers_share_magazine or (weapon_item.max_count == 1 and weapon_data.secondary_trigger == null):
+		secondary_magazine = primary_magazine # single-wield with 1 magazine
 	else: # separate magazines for each trigger
-		self.secondary_magazine = Weapon.Magazine.new()
-		self.secondary_magazine.configure(__secondary_trigger_data)
+		secondary_magazine = Weapon.Magazine.new()
+		secondary_magazine.configure(__secondary_trigger_data)
 
 
 # called by WeaponInHand._ready via WeaponManager.connect_weapon_in_hand
 func connect_weapon_in_hand(weapon_in_hand: WeaponInHand) -> void:
-	print("Add WIH to ", self.long_name, "   ", weapon_in_hand.hand, "   ", weapon_in_hand.name)
+	#print("Add WIH to ", self.long_name, "   ", weapon_in_hand.hand, "   ", weapon_in_hand.name)
 	if weapon_in_hand.hand == WeaponInHand.Hand.PRIMARY:
 		__primary_hand = weapon_in_hand
 	else:
 		__secondary_hand = weapon_in_hand
+	weapon_in_hand.configure(primary_magazine, secondary_magazine)
 
 
 # weapon info
 
 var is_available: bool: # WeaponManager instantiates all Weapons, including those which the Player does not [yet] possess and those which have run out of ammo, so needs some way to determine if a weapon can/should be activated or not (i.e. Classic's weapon switching ignores empty weapons and we want to replicate that behavior)
 	get:
-		return __weapon_item.count > 0 and (primary_magazine.is_available or secondary_magazine.is_available)
+		return weapon_item.count > 0 and (primary_magazine.is_available or secondary_magazine.is_available)
 
 var weapon_type: Enums.WeaponType:
 	get:
-		return __weapon_item.pickable_type as Enums.WeaponType
+		return weapon_item.pickable_type as Enums.WeaponType
 
 var long_name: String: # show this in InventoryManager overlay
 	get:
-		return __weapon_item.long_name
+		return weapon_item.long_name
 
 var short_name: String: # show this in HUD
 	get:
-		return __weapon_item.short_name
+		return weapon_item.short_name
 
 var max_count: int:
 	get:
-		return __weapon_item.max_count
+		return weapon_item.max_count
 
 var count: int: # how many guns of this type is player carrying? 0/1/2 (let's cap this for each weapon type to avoid Classic's TC silliness where the player's inventory can contain multiple ARs, fusions, SPNKRs, etc; either leave excess weapons on ground or else convert them to additional ammo)
 	get:
-		return __weapon_item.count
+		return weapon_item.count
 
 func primary_needs_reload() -> bool: # these are functions, not getters, as DualWieldWeapon overrides secondary_needs_reload and [AFAIK] there's no way for a subclass to override an existing var
 	return primary_magazine.count == 0
@@ -177,41 +219,47 @@ func secondary_needs_reload() -> bool:
 
 func inventory_increased(item: InventoryManager.InventoryItem) -> void: # sent by any InventoryItem when it increments/decrements (while InventoryItem instances could send their own inventory_item_changed signals, allowing a WeaponTrigger to listen for a specific pickable, pickups are sufficiently rare that it shouldn't affect performance to listen to them all and filter here)
 	if self.state == Weapon.State.IDLE:
-		if item == self.primary_magazine.inventory_item and primary_needs_reload():
+		if item == primary_magazine.inventory_item and primary_needs_reload():
 			self.__set_state(Weapon.State.RELOADING_PRIMARY)
-		elif item == self.secondary_magazine.inventory_item and secondary_needs_reload():
+		elif item == secondary_magazine.inventory_item and secondary_needs_reload():
 			self.__set_state(Weapon.State.RELOADING_SECONDARY)
 	# else: __set_state will do any reloading the next time it returns to IDLE state
 
 
-# subclasses' __set_state method MUST call these methods on ACTIVATING and DEACTIVATED
+# called by WeaponManager before ACTIVATING and after DEACTIVATED
 
-func __connect() -> void:
+func become_current_weapon() -> void:
 	InventoryManager.inventory_increased.connect(inventory_increased)
 	WeaponManager.primary_timer.timeout.connect(self.__primary_timer_ended)
 	WeaponManager.secondary_timer.timeout.connect(self.__secondary_timer_ended)
-	WeaponManager.weapon_timer.timeout.connect(self.__weapon_timer_ended)
-	
+	WeaponManager.weapon_timer.timeout.connect(self.__goto_next_state)
 
-func __disconnect() -> void:
+func resign_current_weapon() -> void:
 	InventoryManager.inventory_increased.disconnect(inventory_increased)
 	WeaponManager.primary_timer.timeout.disconnect(self.__primary_timer_ended)
 	WeaponManager.secondary_timer.timeout.disconnect(self.__secondary_timer_ended)
-	WeaponManager.weapon_timer.timeout.disconnect(self.__weapon_timer_ended)
-	WeaponManager.weapon_deactivated.emit(self) # WeaponManager can now activate the next weapon
+	WeaponManager.weapon_timer.timeout.disconnect(self.__goto_next_state)
 
 
 # WeaponManager calls these methods to activate and deactivate the weapon; Weapon subclasses should not need to override them
 
 func activate(instantly: bool = false) -> void: # note: instantly is true when restoring from saved game file
-	self.__set_state(Weapon.State.ACTIVATING)
-	if instantly:
-		self.__set_state(Weapon.State.ACTIVATED)
+	# calling activate while weapon is DEACTIVATING will return it to ACTIVATED
+	match self.state:
+		Weapon.State.IDLE, Weapon.State.DEACTIVATED, Weapon.State.DEACTIVATING:
+			self.__set_state(Weapon.State.ACTIVATING)
+			if instantly:
+				self.__set_state(Weapon.State.ACTIVATED)
+
 
 func deactivate(instantly: bool = false) -> void:
-	self.__set_state(Weapon.State.DEACTIVATING)
-	if instantly:
-		self.__set_state(Weapon.State.DEACTIVATED)
+	# calling deactivate while weapon is [RE]ACTIVATING will return it to DEACTIVATED
+	# important: don't deactivate while firing/reloading; if weapon is busy, WeaponManager must wait until it is IDLE, then call deactivate again
+	match self.state:
+		Weapon.State.IDLE, Weapon.State.EMPTY, Weapon.State.ACTIVATING, Weapon.State.REACTIVATING:
+			self.__set_state(Weapon.State.DEACTIVATING)
+			if instantly:
+				self.__set_state(Weapon.State.DEACTIVATED)
 
 
 # Player shoots the weapon; Weapon subclasses must override shoot and may override trigger_just_released to receive notification when user releases a trigger key

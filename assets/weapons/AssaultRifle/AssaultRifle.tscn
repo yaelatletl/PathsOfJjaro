@@ -287,20 +287,6 @@ tracks/1/keys = {
 "update": 0,
 "values": [Vector3(3.48787e-16, 3.48787e-16, 3.48787e-16), Vector3(0.0698132, 3.48787e-16, 3.48787e-16), Vector3(0.0174533, 3.48787e-16, 3.48787e-16), Vector3(3.48787e-16, 3.48787e-16, 3.48787e-16)]
 }
-tracks/2/type = "method"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath(".")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [],
-"method": &"play_primary_shoot"
-}]
-}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_baphn"]
 _data = {
@@ -421,20 +407,6 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
 "values": [Vector3(-3.48787e-16, -3.48787e-16, -3.48787e-16), Vector3(0.0872665, 3.48787e-16, 3.48787e-16), Vector3(0.0872665, 3.48787e-16, 3.48787e-16), Vector3(-3.48787e-16, -3.48787e-16, -3.48787e-16)]
-}
-tracks/2/type = "method"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath(".")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [],
-"method": &"play_secondary_shoot"
-}]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_lmd7b"]

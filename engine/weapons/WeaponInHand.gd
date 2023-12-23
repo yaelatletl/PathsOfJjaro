@@ -37,36 +37,59 @@ enum Hand { # used for dual-wield weapons
 @onready var animation := $Animation
 
 
-# TO DO: consider attaching magazines to WIH via configure() call, allowing animation methods below to update diegetic ammo displays themselves (currently Weapons must call update_ammo, which is clumsy)
+var __primary_magazine:   Weapon.Magazine
+var __secondary_magazine: Weapon.Magazine
+
 
 
 func _ready() -> void:
 	model.visible = false
 	self.reset()
 	WeaponManager.connect_weapon_in_hand(self) # WeaponInHand scenes attached to Player call this when Player is instantiated
-	#print("WeaponInHand._ready for: ", self.name)
+
+
+func configure(primary_magazine: Weapon.Magazine, secondary_magazine: Weapon.Magazine) -> void:
+	__primary_magazine = primary_magazine
+	__secondary_magazine = secondary_magazine
+
+
+func __redraw_ammo_display() -> void:
+	pass
 
 
 # called by Weapon
 
 func activating() -> void:
 	model.visible = true
-	animation.play("activate")
+	if animation.current_animation == "deactivating": # reverse deactivation animation
+		animation.speed_scale = -1.0
+	else:
+		animation.speed_scale = +1.0
+		animation.play("activate")
+		self.__redraw_ammo_display()
 
 func activated() -> void: # called by Weapon when Player activates it
 	model.visible = true
+	animation.speed_scale = +1.0
 	self.idle()
 
 func deactivating() -> void: # called by Weapon when Player deactivates it
-	animation.play("deactivate")
+	if animation.current_animation == "activating":
+		animation.speed_scale = -1.0
+	else:
+		animation.speed_scale = +1.0
+		animation.play("deactivate")
+		self.__redraw_ammo_display()
 
 func deactivated() -> void:
+	animation.speed_scale = +1.0
 	model.visible = false
 
 
-# TO DO: how best to implement magazine displays?
+func move_to_center(instantly: bool = false) -> void:
+	pass
 
-func update_ammo(primary_magazine: Weapon.Magazine, secondary_magazine: Weapon.Magazine) -> void:
+func move_to_side(instantly: bool = false) -> void:
 	pass
 
 
@@ -81,12 +104,14 @@ func idle() -> void: # weapon is doing nothing
 # TO DO: do not pass successfully; define emptied method instead
 func shoot() -> void:
 	animation.play("shoot")
+	self.__redraw_ammo_display()
 
 func empty() -> void:
 	animation.play("empty")
 
 func reload() -> void:
 	animation.play("reload")
+	self.__redraw_ammo_display()
 
 
 # TO DO: alternative approach is to build the single-gun reload as one animation, since the other hand is already hidden
@@ -113,13 +138,13 @@ func secondary_reload() -> void:
 
 # fusion pistol's secondary trigger only
 
-func charging() -> void:
+func secondary_charging() -> void:
 	pass
 
-func charged() -> void:
+func secondary_charged() -> void:
 	pass
 
-func explode() -> void:
+func secondary_detonating() -> void:
 	pass
 
 

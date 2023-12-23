@@ -4,6 +4,11 @@ extends WeaponInHand
 # assets/weapons/AssaultRifle/AssaultRifle.gd
 
 
+# TO DO: diegetic magazine displays for all weapons except FIST (which has infinite "ammo") and ROCKET_LAUNCHER (which should have a heads-up targeting and ammo display that appears on HUD to make long-range aiming easier)
+#
+# https://www.youtube.com/watch?v=Xq0wgrCmnyw
+
+
 # TO DO: WeaponInHand scenes should provide muzzle-flash illuminations; these can be omnidirectional lights for simplicity and performed in "shoot" animations
 #
 # Classic muzzle-flash settings for AR:
@@ -42,23 +47,11 @@ const AUDIO_SECONDARY_SHOOT := [
 	preload("res://assets/audio/weapon/38 rmx - Grenade Launcher Firing 2.wav"), 
 ]
 
-# these methods are called by animations
 
-func play_primary_shoot() -> void:
-	audio_primary.stream = AUDIO_PRIMARY_SHOOT.pick_random()
-	audio_primary.play()
-
-func play_secondary_shoot() -> void:
-	audio_secondary.stream = AUDIO_SECONDARY_SHOOT.pick_random()
-	audio_secondary.play()
-
-
-
-
-# TO DO: diegetic magazine displays for all weapons except FIST (which has infinite "ammo") and ROCKET_LAUNCHER (which should have a heads-up targeting and ammo display that appears on HUD to make long-range aiming easier)
-
-func update_ammo(primary_magazine: Weapon.Magazine, secondary_magazine: Weapon.Magazine) -> void:
-	print(primary_magazine.count, "/", primary_magazine.max_count, " ,  ", secondary_magazine.count, "/", secondary_magazine.max_count)
+func __redraw_ammo_display() -> void:
+	pass
+	# print(self.__primary_magazine.count, "/", self.__primary_magazine.max_count, " ,  ", 
+	#	self.__secondary_magazine.count, "/", self.__secondary_magazine.max_count)
 
 
 func reset() -> void:
@@ -66,17 +59,26 @@ func reset() -> void:
 	super.reset()
 
 
+func shoot() -> void:
+	super.shoot()
+	audio_primary.stream = AUDIO_PRIMARY_SHOOT.pick_random()
+	audio_primary.play()
 
 
-func secondary_idle() -> void: # keep reset and idle separate for each trigger (AR can idle one while shooting other)
+func secondary_idle() -> void:
+	# note: each trigger has its own idle method since AR can idle one while shooting other
 	secondary_animation.play("RESET")
 
 func secondary_shoot() -> void:
 	secondary_animation.play("shoot") # AR has independent shoot and reload animations for each trigger
+	audio_secondary.stream = AUDIO_SECONDARY_SHOOT.pick_random()
+	audio_secondary.play()
+	__redraw_ammo_display()
 
 func secondary_empty() -> void:
 	secondary_animation.play("empty")
 
 func secondary_reload() -> void:
 	secondary_animation.play("reload")
+	__redraw_ammo_display()
 

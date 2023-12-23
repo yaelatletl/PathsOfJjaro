@@ -1,6 +1,8 @@
 extends Node
 
 
+# TO DO: fill in these
+
 
 const PROJECTILE_DEFINITIONS := [
 	

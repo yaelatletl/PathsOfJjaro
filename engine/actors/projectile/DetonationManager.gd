@@ -9,7 +9,7 @@ var __detonation_classes := {}
 
 
 func _ready() -> void:
-	print("DetonationManager initialize")
+	#print("DetonationManager initialize")
 	for definition in DetonationDefinitions.DETONATION_DEFINITIONS:
 		var detonation_class = DetonationClass.new()
 		detonation_class.configure(definition)

@@ -10,22 +10,23 @@ extends Node
 # note: these currently use timings appropriate for the greybox weapon animations; setting final timings to replicate M2 can be done later
 
 
+# caution: if rounds_per_shot > 1, it must be possible to deplete that magazine or it will never reload
+
+
 const WEAPON_DEFINITIONS := [ # TO DO: add remaining definitions in order of previous/next weapon switching (Arrival Demo requires FIST, MAGNUM_PISTOL, and ASSAULT_RIFLE; the rest can be added later)
 	{
-		# TO DO: add a separate Enums.WeaponType? for now, just use PickableType to identify weapons by enum
-		"pickable_type": Enums.PickableType.FIST,
+		"pickable_type": Enums.PickableType.FIST, # == Enums.WeaponType.FIST
 		"weapon_class": "FistWeapon", # for now, these names are defined in a hardcoded lookup table in WeaponManager; eventually that table should be populated dynamically
 		
 		"activating_time":   0.25,
 		"deactivating_time": 0.25,
 		
-		#"is_automatic": false, # true for AR, TOZT, alien gun, SMG; what is not clear is why it is needed since all weapons repeat-fire while trigger is held # TO DO: check AO code for behavior; all Classic weapons are automatic, except possibly SPNKR, as holding a trigger repeats firing (a true semi-automatic requires a fresh trigger pull for each shot - holding the trigger would only shoot once)
+		#"is_automatic": false, # true for AR, TOZT, alien gun, SMG; what is not clear is why it is needed since all weapons repeat-fire as long as trigger is held # TO DO: check AO code for behavior; all Classic weapons are automatic, except possibly SPNKR, as holding a trigger repeats firing (semi-automatic would require a fresh trigger pull for each shot)
 		
-		"triggers_shoot_independently": false, # allows one pistol to fire before other finishes its firing animation # TO DO: this should be timing
-		"triggers_reload_independently": false, # was triggers_reload_independently`; allows one shotgun to reload before the other finishes its firing animation (TO DO: if both shotguns require reloading, should they reload one at a time before either starts firing? or can the first reload and then start firing as the second reloads?)
+		"triggers_shoot_independently": false, # allows one pistol to fire before other finishes its firing animation
+		#"triggers_reload_independently": false, # was triggers_reload_independently`; allows one shotgun to reload before the other finishes its firing animation (TO DO: if both shotguns require reloading, should they reload one at a time before either starts firing? or can the first reload and then start firing as the second reloads?)
 		"triggers_share_magazine": false, # was `triggers_share_ammo`; true for fusion and alien gun, false for AR and other weapons
 		"disappears_when_empty": false, # true for alien gun
-		
 		
 		"primary_trigger": {
 			"pickable_type":  Enums.PickableType.FIST,
@@ -48,10 +49,9 @@ const WEAPON_DEFINITIONS := [ # TO DO: add remaining definitions in order of pre
 			"charging_time":    0.0,
 			"overloading_time": 0.0,
 			"overload_damage_type": Enums.DamageType.NONE,
-			
-			
 		},
-		"secondary_trigger": {
+		
+		"secondary_trigger": { # sprint-punch
 			"pickable_type": Enums.PickableType.FIST,
 			"max_count": 1,
 			"count": 1,
@@ -71,7 +71,6 @@ const WEAPON_DEFINITIONS := [ # TO DO: add remaining definitions in order of pre
 			"overloading_time":     0.0,
 			
 			"overload_damage_type": Enums.DamageType.NONE,
-			
 		},
 	},
 	
@@ -84,7 +83,7 @@ const WEAPON_DEFINITIONS := [ # TO DO: add remaining definitions in order of pre
 		"deactivating_time": 0.5,
 		
 		"triggers_shoot_independently":  false,
-		"triggers_reload_independently": false,
+		#"triggers_reload_independently": false,
 		"triggers_share_magazine":       false,
 		"disappears_when_empty":         false,
 		
@@ -112,6 +111,7 @@ const WEAPON_DEFINITIONS := [ # TO DO: add remaining definitions in order of pre
 		"secondary_trigger": null,
 	},
 	
+	
 	{
 		"pickable_type":     Enums.PickableType.ASSAULT_RIFLE,
 		"weapon_class":      "DualPurposeWeapon",
@@ -120,7 +120,7 @@ const WEAPON_DEFINITIONS := [ # TO DO: add remaining definitions in order of pre
 		"deactivating_time": 0.5,
 		
 		"triggers_shoot_independently":  true, # true for AR
-		"triggers_reload_independently": false, # true for shotgun
+		#"triggers_reload_independently": false, # true for shotgun
 		"triggers_share_magazine":       false, # true for fusion pistol and alien gun; if true, both triggers share one Magazine instance, else each trigger gets its own Magazine instance
 		"disappears_when_empty":         false,
 		
@@ -149,7 +149,6 @@ const WEAPON_DEFINITIONS := [ # TO DO: add remaining definitions in order of pre
 		},
 		
 		"secondary_trigger": { # normally null for single-wield single-mode weapons (TOZT, SPNKR, SMG); if null, both __primary_trigger_data and __secondary_trigger_data are set to the primary_trigger definition
-			
 			"pickable_type":        Enums.PickableType.AR_GRENADE_MAGAZINE,
 			"max_count":            7,
 			"count":                7,

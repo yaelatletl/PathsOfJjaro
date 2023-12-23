@@ -96,6 +96,14 @@ script = ExtResource("1_q5461")
 
 [node name="Ammo" type="Node3D" parent="."]
 
+[node name="Magnum" parent="Ammo" instance=ExtResource("2_51ci0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2394, 0.115472, -3.32044)
+pickable_type = 1
+
+[node name="Magnum2" parent="Ammo" instance=ExtResource("2_51ci0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.99889, 0.117425, -5.73634)
+pickable_type = 5
+
 [node name="MgMag_1" parent="Ammo" instance=ExtResource("2_51ci0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00678682, 0.115472, -10.2411)
 pickable_type = 2

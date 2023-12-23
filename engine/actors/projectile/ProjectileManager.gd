@@ -12,12 +12,12 @@ var __projectile_classes := {}
 
 
 func _ready() -> void:
-	print("ProjectileManager initialize")
+	#print("ProjectileManager initialize")
 	for definition in ProjectileDefinitions.PROJECTILE_DEFINITIONS:
 		var projectile_class = ProjectileClass.new()
 		projectile_class.configure(definition)
 		__projectile_classes[definition.projectile_type] = projectile_class
-		print("Added ProjectileClass for type ", definition.projectile_type)
+		#print("Added ProjectileClass for type ", definition.projectile_type)
 
 
 

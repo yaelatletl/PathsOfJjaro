@@ -79,6 +79,13 @@ enum __SpeciesType {
 	# TO DO: M1-only types (Hulk, Wasp, Looker, MADD, and Deimos's unarmed crew; we may also add Pfhor crew on Boomer maps, which will be unarmed, unarmored, unmasked Pfhor which normally run away from SO and only use weak teeth and claws for defense when cornered; conversely we can add a few [fairly ineffectual] pistol Bobs to Deimos's Ch2 levels, with some extra Pfhor and scripted scenes so they don't affect the gameplay balance)
 }
 
+enum PickableFamily {
+	WEAPON,
+	AMMO,
+	KEY,
+	POWERUP,
+	OTHER,
+}
 
 enum PickableType { # TO DO: can GDScript coerce enums to and from ints?
 	FIST = 0,

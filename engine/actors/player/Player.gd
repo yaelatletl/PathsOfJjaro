@@ -279,9 +279,7 @@ func _ready() -> void:
 	Global.health_changed.connect(update_health_status)
 	Global.player_died.connect(update_health_status)
 	update_health_status()
-	#
-	print("Player activating weapon")
-	WeaponManager.activate_current_weapon(true) # TO DO: this is temporary until we have proper level loading
+	WeaponManager.activate_current_weapon(true) # TO DO: this is temporary until we have proper level loading, at which point we can decide how/when/where to get everything ready
 
 
 # InventoryManager signals
@@ -336,7 +334,7 @@ func _physics_process(delta: float) -> void: # fixed interval (see Project Setti
 		
 		# action
 		if detect_control_panel.is_colliding():
-			# TO DO: ideally SHOOT_PRIMARY and/or SHOOT_SECONDARY would automatically perform action when facing control panel, but keep it separate for now
+			# TO DO: ideally SHOOT_PRIMARY and/or SHOOT_SECONDARY keys would change behavior automatically to perform an action when player is facing a control panel, but keep it separate for now
 			# TO DO: when player is inside ACTION range, consider playing a hand animation to the show secondary hand poised to press the control when SHOOT_SECONDARY is pressed: this makes it clear to user when the trigger key's behavior is toggled between SHOOT and ACTION, although this is somewhat complicated by dual-wield pistol (since hand needs to retain pistol while pressing button, the animation needs to rotate hand+pistol to press switch with bottom of grip/back of hand), fusion/AR/shotgun (secondary trigger normally fires a switch-activating projectile, so we need to differentiate destructible circuits from normal control panels - in this case if the circuit is in ACTION range then simplest is just to play a punch animation)
 			# we'd also need to avoid the player accidentally grenading/spnkring themselves when hunting for hidden doors or otherwise attempting to activate a switch while moving past it, so this definitely needs more thought (if we can't make it work safely, we'll have to keep a separate ACTION key, which is acceptable for keyboard and gamepad control but not ideal for 2-thumbed touch control)
 			if Input.is_action_just_pressed(&"ACTION"):

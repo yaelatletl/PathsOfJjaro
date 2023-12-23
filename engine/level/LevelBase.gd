@@ -6,9 +6,6 @@ extends Node3D
 # TO DO: eliminate 5D space in all M1 solo maps - that saves us having to support it (Q. does M3 use 5D as a gameplay element?)
 
 
-# TO DO: FIX: the ammo on the platform isn't falling under gravity and player can't pick it up
-
-
 var mapRID : RID = RID()
 var regions : Array = []
   

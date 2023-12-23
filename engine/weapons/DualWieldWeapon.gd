@@ -9,21 +9,37 @@ class_name DualWieldWeapon extends Weapon
 # (note: fist is a subclass of SinglePurposeWeapon: while the view displays two hands they operate as one weapon, firing at a constant rate)
 
 
-# TO DO: reloading isn't right when it has run out of ammo then picks up 1 new mag, at which point it can be reactivated, then shortly after picks up another mag - this should activate and reload the 2nd pistol but appears to reload the 1st twice
+# TO DO: when 1 trigger is DISABLED, the other hand should be centered on screen; when both triggers are active, each hand should be horizontally offset from center; how to slide hands horizontally when switching from 1 gun to 2 and vice-versa; maybe define activating_other, deactivating_other methods and call these on the hand that is not currently activating/deactivating
 
+				# TO DO: implement __weapon_data.disappears_when_empty
 
-# if one hand runs out of ammo # TO DO: think these do need to be State so they sync correctly when second gun is picked up; or may be better to wait till enabled hand is idle before
-var __primary_enabled   := false
-var __secondary_enabled := false
+enum TriggerState {
+	DISABLED        = 0,
+	NEEDS_ENABLED   = 1, # set when activating weapon or when reactivating an empty gun after picking up fresh ammo
+	NEEDS_RELOADING = 2,
+	RELOADING       = 5,
+	IDLE            = 10,
+	SHOOTING        = 11,
+	INTERLOCKED     = 15,
+}
 
-var __primary_needs_activating   := false
-var __secondary_needs_activating := false
+# one or both triggers may be enabled
+var __primary_trigger   := TriggerState.DISABLED
+var __secondary_trigger := TriggerState.DISABLED
+
+var __trigger_state_names := {}
+
+func name_for_trigger_state(some_state: int) -> String:
+	if __trigger_state_names.is_empty():
+		for key in TriggerState.keys():
+			__trigger_state_names[TriggerState[key]] = key
+	return __trigger_state_names[some_state]
 
 
 #var __triggers_reload_independently: bool # ignore this for now; not needed for MCR
 
-var __can_dual_wield: bool # true if player has 2 guns; false if 1 or 0 guns
-var __swaps_shooting_hand := false # hands swap automatically while either trigger key is held
+var __has_second_gun: bool # true if player has 2 guns; false if 1 or 0 guns
+var __repeat_firing := false # hands swap automatically while either trigger key is held
 
 
 # initialization
@@ -32,308 +48,254 @@ func configure(weapon_data: Dictionary) -> void:
 	# assert(weapon_data.secondary_trigger == null) # primary_trigger definition is used for both guns
 	super.configure(weapon_data)
 	self.__secondary_trigger_data = weapon_data.primary_trigger
-	assert(self.__weapon_item.max_count == 2)
-	assert(self.__weapon_item.count in [0, 1, 2])
-	__can_dual_wield = self.__weapon_item.count == 2
+	assert(self.weapon_item.max_count == 2)
+	assert(self.weapon_item.count in [0, 1, 2])
 	#__triggers_reload_independently = weapon_data.triggers_reload_independently
 
 
 # FSM
 
 func __set_state(next_state: State) -> void:
-	assert(next_state != self.state) # we could ignore non-transition transitions, better to catch them during testing as they're likely due to bad implementation
+	assert(next_state != self.state) # DEBUG: we could ignore non-transition transitions,q better to catch them during testing as they're likely due to bad implementation
 	var previous_state = self.state
 	super.__set_state(next_state)
-	# important: this switch and the function calls inside it must not call __set_state, directly or indirectly; transitional states, e.g. ACTIVATED, should set next_state to the state they want to transition to
+	var wait_time := 0.0
 	match next_state:
 		Weapon.State.ACTIVATING:
-			self.__connect()
-			next_state = Weapon.State.REACTIVATING
+			# check if there's enough ammo for one or both guns and activate hand[s] accordingly
+			var remaining_magazines = self.primary_magazine.inventory_item.count
+			__primary_trigger = TriggerState.NEEDS_ENABLED
+			if primary_magazine.count == 0:
+				if remaining_magazines == 0:
+					__primary_trigger = TriggerState.DISABLED
+				remaining_magazines -= 1
+			# if player only has 1 gun, it is primary
+			__secondary_trigger = TriggerState.DISABLED
+			__has_second_gun = self.weapon_item.count == 2
+			if __has_second_gun and (secondary_magazine.count > 0 or remaining_magazines > 0):
+				__secondary_trigger = TriggerState.NEEDS_ENABLED
+			self.__set_next_transition(Weapon.State.REACTIVATING)
+			#print("Activating dual-wield weapon ", name_for_trigger_state(__primary_trigger), "  ", name_for_trigger_state(__secondary_trigger))
+						
+		Weapon.State.REACTIVATING: # this is a separate state is if player picks up ammo for empty gun while ACTIVATING, at which point we don't want to re-enter ACTIVATING state
+			self.__primary_hand.move_to_center()
+			self.__secondary_hand.move_to_center()
+			if __primary_trigger == TriggerState.NEEDS_ENABLED:
+				self.__primary_hand.activating()
+			if __secondary_trigger == TriggerState.NEEDS_ENABLED:
+				self.__secondary_hand.activating()
+			if __primary_trigger == TriggerState.DISABLED or __secondary_trigger == TriggerState.DISABLED:
+				self.__primary_hand.move_to_center(true)
+				self.__secondary_hand.move_to_center(true)
+			else:
+				self.__primary_hand.move_to_side(__primary_trigger == TriggerState.NEEDS_ENABLED)
+				self.__secondary_hand.move_to_side(__secondary_trigger == TriggerState.NEEDS_ENABLED)
+			self.__set_next_transition(Weapon.State.ACTIVATED, self.__activating_time(previous_state))
 		
 		Weapon.State.ACTIVATED:
-			WeaponManager.weapon_timer.stop() # cancel the activation timer if weapon was activated instantly
-			if __primary_enabled:
-				self.__activated_primary()
-			if __secondary_enabled:
-				self.__activated_secondary()
-			next_state = Weapon.State.IDLE
-		
-		Weapon.State.REACTIVATING:
-			if __primary_needs_activating:
-				__primary_needs_activating = false
-				__primary_enabled = true
-				self.__activating_primary()
-			if __secondary_needs_activating:
-				__secondary_needs_activating = false
-				__secondary_enabled = true
-				self.__activating_secondary()
-			WeaponManager.weapon_timer.start(self.__weapon_data.activating_time)
+			if __primary_trigger == TriggerState.NEEDS_ENABLED:
+				__primary_trigger = TriggerState.IDLE if primary_magazine.count > 0 else TriggerState.NEEDS_RELOADING
+				self.__primary_hand.activated()
+			if __secondary_trigger == TriggerState.NEEDS_ENABLED:
+				__secondary_trigger = TriggerState.IDLE if secondary_magazine.count > 0 else TriggerState.NEEDS_RELOADING
+				self.__secondary_hand.activated()
+			self.__set_next_transition(Weapon.State.IDLE)
 		
 		Weapon.State.IDLE:
-			if __primary_needs_activating or __secondary_needs_activating:
-				next_state = Weapon.State.REACTIVATING
-			elif self.primary_needs_reload():
-				# TO DO: implement __weapon_data.disappears_when_empty
-				if self.primary_magazine.try_to_refill():
-					next_state = Weapon.State.RELOADING_PRIMARY
-				elif self.secondary_needs_reload():
-					next_state = Weapon.State.EMPTY
-				else:
-					self.__deactivating_primary()
-			elif self.secondary_needs_reload():
-				# TO DO: implement __weapon_data.disappears_when_empty
-				if self.secondary_magazine.try_to_refill():
-					next_state = Weapon.State.RELOADING_SECONDARY
-				else:
-					self.__deactivating_secondary()
+			if __primary_trigger == TriggerState.NEEDS_ENABLED or __secondary_trigger == TriggerState.NEEDS_ENABLED:
+				self.__set_next_transition(Weapon.State.REACTIVATING)
+			elif __primary_trigger == TriggerState.NEEDS_RELOADING:
+				self.__set_next_transition(Weapon.State.RELOADING_PRIMARY)
+			elif __secondary_trigger == TriggerState.NEEDS_RELOADING:
+				self.__set_next_transition(Weapon.State.RELOADING_SECONDARY)
+			else:
+				if __primary_trigger > TriggerState.IDLE:
+					__primary_trigger = TriggerState.IDLE
+				if __secondary_trigger > TriggerState.IDLE:
+					__secondary_trigger = TriggerState.IDLE
 		
 		Weapon.State.RELOADING_PRIMARY:
-			self.__reloading_primary()
-			WeaponManager.weapon_timer.start(self.__primary_trigger_data.reloading_time)
+			if self.primary_magazine.try_to_refill():
+				self.__primary_hand.reload()
+				self.__secondary_hand.reload_other()
+				self.__set_next_transition(Weapon.State.RELOADING_PRIMARY_ENDED, self.__primary_trigger_data.reloading_time)
+			else:
+				__primary_trigger = TriggerState.DISABLED
+				self.__primary_hand.deactivating()
+				if secondary_magazine.is_available:
+					self.__secondary_hand.move_to_center()
+				elif __secondary_trigger != TriggerState.DISABLED:
+					__secondary_trigger = TriggerState.DISABLED
+					self.__secondary_hand.deactivating()
+				if __secondary_trigger == TriggerState.DISABLED:
+					self.__set_next_transition(Weapon.State.EMPTY)
+				else:
+					self.__set_next_transition(Weapon.State.IDLE, self.__deactivating_time(previous_state))
 		
 		Weapon.State.RELOADING_SECONDARY:
-			self.__reloading_secondary()
-			WeaponManager.weapon_timer.start(self.__secondary_trigger_data.reloading_time)
+			if self.secondary_magazine.try_to_refill():
+				self.__secondary_hand.reload()
+				self.__primary_hand.reload_other()
+				self.__set_next_transition(Weapon.State.RELOADING_SECONDARY_ENDED, self.__secondary_trigger_data.reloading_time)
+			else:
+				__secondary_trigger = TriggerState.DISABLED
+				self.__secondary_hand.deactivating()
+				if primary_magazine.is_available:
+					self.__primary_hand.move_to_center()
+				elif __primary_trigger != TriggerState.DISABLED:
+					__primary_trigger = TriggerState.DISABLED
+					self.__primary_hand.deactivating()
+				if __primary_trigger == TriggerState.DISABLED:
+					self.__set_next_transition(Weapon.State.EMPTY)
+				else:
+					self.__set_next_transition(Weapon.State.IDLE, self.__deactivating_time(previous_state))
 		
+		Weapon.State.RELOADING_PRIMARY_ENDED:
+			__primary_trigger = TriggerState.IDLE
+			self.__set_next_transition(Weapon.State.IDLE)
 		
-		# TO DO: if there is inadequate ammo here, that's a config bug as there's no way to deplete using the other trigger
+		Weapon.State.RELOADING_SECONDARY_ENDED:
+			__secondary_trigger = TriggerState.IDLE
+			self.__set_next_transition(Weapon.State.IDLE)
+		
 		Weapon.State.SHOOTING_PRIMARY:
 			if self.primary_magazine.try_to_consume(self.__primary_trigger_data.rounds_per_shot):
-				self.__shooting_primary()
-				WeaponManager.weapon_timer.start(self.__primary_trigger_data.shooting_time / 2)
+				# set the interlock on the other gun; this prevents the other gun shooting until the current gun is halfway through its shooting sequence
+				if __secondary_trigger >= TriggerState.IDLE:
+					__secondary_trigger = TriggerState.INTERLOCKED
+				super.__set_state(Weapon.State.SHOOTING_PRIMARY_SUCCEEDED)
+				__primary_trigger = TriggerState.SHOOTING
+				self.__primary_hand.shoot()
+				self.__set_next_transition(Weapon.State.PRIMARY_RELEASES_INTERLOCK, self.__primary_trigger_data.shooting_time / 2)
 			else:
-				next_state = Weapon.State.SHOOTING_PRIMARY_FAILED # primary failed to fire
+				__primary_trigger = TriggerState.NEEDS_RELOADING
+				super.__set_state(Weapon.State.SHOOTING_PRIMARY_FAILED)
+				self.__primary_hand.empty()
+				self.__set_next_transition(Weapon.State.IDLE, self.__primary_trigger_data.empty_time)
 		
 		Weapon.State.SHOOTING_SECONDARY:
 			if self.secondary_magazine.try_to_consume(self.__secondary_trigger_data.rounds_per_shot):
-				self.__shooting_secondary()
-				WeaponManager.weapon_timer.start(self.__secondary_trigger_data.shooting_time / 2)
+				if __primary_trigger >= TriggerState.IDLE:
+					__primary_trigger = TriggerState.INTERLOCKED
+				super.__set_state(Weapon.State.SHOOTING_SECONDARY_SUCCEEDED)
+				__secondary_trigger = TriggerState.SHOOTING
+				self.__secondary_hand.shoot()
+				self.__set_next_transition(Weapon.State.SECONDARY_RELEASES_INTERLOCK, self.__secondary_trigger_data.shooting_time / 2)
 			else:
-				next_state = Weapon.State.SHOOTING_SECONDARY_FAILED
+				__secondary_trigger = TriggerState.NEEDS_RELOADING
+				super.__set_state(Weapon.State.SHOOTING_SECONDARY_FAILED)
+				self.__secondary_hand.empty()
+				self.__set_next_transition(Weapon.State.IDLE, self.__secondary_trigger_data.empty_time)
 		
-		#Weapon.State.SHOOTING_PRIMARY_ENDED:
-		#	pass
-		#Weapon.State.SHOOTING_SECONDARY_ENDED:
-		#	pass
+		Weapon.State.PRIMARY_RELEASES_INTERLOCK:
+			# release the interlock on the secondary gun so it may start shooting while the primary finishes; for now, this is hardcoded for dual pistols
+			if __secondary_trigger == TriggerState.INTERLOCKED: # may also be DISABLED
+				__secondary_trigger = TriggerState.IDLE if secondary_magazine.count > 0 else TriggerState.NEEDS_RELOADING
+			if primary_magazine.count == 0:
+				__primary_trigger = TriggerState.NEEDS_RELOADING
+			self.__set_next_transition(Weapon.State.IDLE, self.__primary_trigger_data.shooting_time / 2) # run the remaining time on the primary hand while it finishes shooting
 		
-		Weapon.State.SHOOTING_PRIMARY_FAILED:
-			self.__shooting_primary_failed()
-			WeaponManager.weapon_timer.start(self.__primary_trigger_data.empty_time)
-		
-		Weapon.State.SHOOTING_SECONDARY_FAILED:
-			self.__shooting_secondary_failed()
-			WeaponManager.weapon_timer.start(self.__secondary_trigger_data.empty_time)
-		
-		Weapon.State.SYNCHRONIZE_SHOOTING:
-			if __swaps_shooting_hand:
-				if previous_state == Weapon.State.SHOOTING_PRIMARY:
-					if __secondary_enabled and not self.secondary_needs_reload(): # should be finished by now
-						next_state = Weapon.State.CAN_SHOOT_SECONDARY
-				else:
-					if __primary_enabled and not self.primary_needs_reload(): # should be finished by now
-						next_state = Weapon.State.CAN_SHOOT_PRIMARY
-			WeaponManager.weapon_timer.start(self.__primary_trigger_data.shooting_time / 2) # run the remaining time on the currently shooting hand
-		
-		Weapon.State.CAN_SHOOT_PRIMARY, Weapon.State.CAN_SHOOT_SECONDARY:
-			pass
+		Weapon.State.SECONDARY_RELEASES_INTERLOCK:
+			# release the interlock on the primary gun so it may start shooting while the secondary finishes; for now, this is hardcoded for dual pistols
+			if __primary_trigger == TriggerState.INTERLOCKED: # may also be DISABLED
+				__primary_trigger = TriggerState.IDLE if primary_magazine.count > 0 else TriggerState.NEEDS_RELOADING
+			if secondary_magazine.count == 0:
+				__secondary_trigger = TriggerState.NEEDS_RELOADING
+			self.__set_next_transition(Weapon.State.IDLE, self.__secondary_trigger_data.shooting_time / 2) # run the remaining time on the secondary hand while it finishes shooting
 		
 		Weapon.State.EMPTY:
 			# both triggers are empty so tell WeaponManager to deactivate this weapon
 			WeaponManager.current_weapon_emptied.call_deferred(self) # important: WeaponManager must be notified *after* __set_state has returned
 		
 		Weapon.State.DEACTIVATING:
-			self.__deactivating_primary()
-			self.__deactivating_secondary()
-			WeaponManager.weapon_timer.start(self.__weapon_data.deactivating_time)
+			#print("Deactivating dual-wield weapon ", name_for_trigger_state(__primary_trigger), "  ", name_for_trigger_state(__secondary_trigger))
+			if __primary_trigger != TriggerState.DISABLED:
+				__primary_trigger = TriggerState.DISABLED
+				self.__primary_hand.deactivating()
+			if __secondary_trigger != TriggerState.DISABLED:
+				__secondary_trigger = TriggerState.DISABLED
+				self.__secondary_hand.deactivating()
+			self.__set_next_transition(Weapon.State.DEACTIVATED, self.__deactivating_time(previous_state))
 		
 		Weapon.State.DEACTIVATED:
-			self.__deactivated()
-			self.__disconnect()
+			self.__primary_hand.deactivated()
+			self.__secondary_hand.deactivated()
 	WeaponManager.weapon_activity_changed.emit(self)
-	# transitional states can immediately transition to next state
-	if next_state != self.state:
-		self.__set_state(next_state)
 
-
-func __weapon_timer_ended() -> void:
-	match self.state:
-		Weapon.State.ACTIVATING:
-			self.__set_state(Weapon.State.ACTIVATED)
-		
-		Weapon.State.DEACTIVATING:
-			self.__set_state(Weapon.State.DEACTIVATED)
-		
-		Weapon.State.REACTIVATING:
-			self.__set_state(Weapon.State.IDLE)
-		
-		Weapon.State.RELOADING_PRIMARY:
-			__primary_enabled = true
-			self.__set_state(Weapon.State.IDLE) # if reloaded primary, IDLE will check if secondary needs reloading
-			
-		Weapon.State.RELOADING_SECONDARY:
-			__secondary_enabled = true
-			self.__set_state(Weapon.State.IDLE) # if reloaded primary, IDLE will check if secondary needs reloading
-		
-		Weapon.State.SHOOTING_PRIMARY, Weapon.State.SHOOTING_SECONDARY:
-			self.__set_state(Weapon.State.SYNCHRONIZE_SHOOTING)
-		
-		Weapon.State.SHOOTING_PRIMARY_FAILED, Weapon.State.SHOOTING_SECONDARY_FAILED:
-			self.__set_state(Weapon.State.IDLE) # IDLE will try to reload one more time (in case ammo has just been picked up) then deactivate the empty trigger
-		
-		Weapon.State.CAN_SHOOT_PRIMARY, Weapon.State.CAN_SHOOT_SECONDARY: # other gun finished shooting and user has released firing key
-			self.__set_state(Weapon.State.IDLE)
-		
-		Weapon.State.SYNCHRONIZE_SHOOTING: # both guns finished shooting
-			self.__set_state(Weapon.State.IDLE)
 
 
 func secondary_needs_reload() -> bool:
-	return __can_dual_wield and self.secondary_magazine.count == 0
-
-
-# animations # TO DO: these could be inlined but keeping them as separate functions makes __set_state easier to read
-
-func __activating_primary() -> void:
-	self.__primary_hand.activating()
-
-func __activating_secondary() -> void:
-	self.__secondary_hand.activating()
-
-
-func __activated_primary() -> void:
-	self.__primary_hand.activated()
-	self.__primary_hand.update_ammo(self.primary_magazine, null)
-
-func __activated_secondary() -> void:
-	self.__secondary_hand.activated()
-	self.__secondary_hand.update_ammo(self.secondary_magazine, null)
-
-func __reloading_primary() -> void:
-	self.__primary_hand.reload()
-	self.__secondary_hand.reload_other()
-	self.__primary_hand.update_ammo(self.primary_magazine, null) # TO DO: premature; display shouldn't update until reloading finished
-
-func __reloading_secondary() -> void:
-	self.__secondary_hand.reload()
-	self.__primary_hand.reload_other()
-	self.__secondary_hand.update_ammo(self.secondary_magazine, null) # TO DO: premature
-
-
-func __shooting_primary() -> void:
-	self.__primary_hand.shoot()
-	self.__primary_hand.update_ammo(self.primary_magazine, null)
-
-func __shooting_secondary() -> void:
-	self.__secondary_hand.shoot()
-	self.__secondary_hand.update_ammo(self.secondary_magazine, null)
-
-func __shooting_primary_failed() -> void:
-	self.__primary_hand.empty()
-
-func __shooting_secondary_failed() -> void:
-	self.__secondary_hand.empty()
-
-
-func __deactivating_primary() -> void:
-	__swaps_shooting_hand = false
-	if __primary_enabled:
-		__primary_enabled = false
-		self.__primary_hand.deactivating()
-
-func __deactivating_secondary() -> void:
-	__swaps_shooting_hand = false
-	if __secondary_enabled:
-		__secondary_enabled = false
-		self.__secondary_hand.deactivating()
-
-func __deactivated() -> void:
-	self.__primary_hand.deactivated()
-	self.__secondary_hand.deactivated()
-
+	return __has_second_gun and self.secondary_magazine.count == 0
 
 
 # signal notification from InventoryManager when any pickable is picked up
 
 func inventory_increased(item: InventoryManager.InventoryItem) -> void: # sent by any InventoryItem when it increments/decrements (while InventoryItem instances could send their own inventory_item_changed signals, allowing a WeaponTrigger to listen for a specific pickable, pickups are sufficiently rare that it shouldn't affect performance to listen to them all and filter here)
-	if item == self.__weapon_item and not __can_dual_wield: # picked up second weapon, so activate it now if currently IDLE or on next IDLE if busy
-		__can_dual_wield = true
-		__secondary_needs_activating = true
+	if item == self.weapon_item: # picked up second weapon, so activate it now if currently IDLE or on next IDLE if busy
+		__has_second_gun = true
+		__secondary_trigger = TriggerState.NEEDS_ENABLED
 		if self.state == Weapon.State.IDLE:
-			self.__set_state(Weapon.State.ACTIVATING) # for now, pause shooting primary while activating secondary; TO DO: check Classic, and if secondary can activate while primary is mid-shot, amend this
+			self.__set_state(Weapon.State.REACTIVATING) # for now, pause shooting primary while activating secondary; TO DO: check Classic, and if secondary can activate while primary is mid-shot, amend this
+	
 	elif item == self.primary_magazine.inventory_item:
-		
-		# reload now if needed (if busy, will reload if needed on next IDLE)
-		print("picked up ammo on ", self.debug_status, "; needs reload: ", self.primary_needs_reload(), "/", self.secondary_needs_reload())
-		
 		if self.primary_needs_reload():
 			if self.state == Weapon.State.IDLE:
-				self.__set_state(Weapon.State.RELOADING_PRIMARY if __primary_enabled else Weapon.State.ACTIVATING)
-			elif not __primary_enabled:
-				__primary_needs_activating = true # primary will be reactivated once weapon has finished its current activity and returns to IDLE
+				if __primary_trigger == TriggerState.DISABLED:
+					__primary_trigger = TriggerState.NEEDS_ENABLED
+					self.__set_state(Weapon.State.REACTIVATING)
+				else:
+					__primary_trigger = TriggerState.NEEDS_RELOADING
+					self.__set_state(Weapon.State.RELOADING_PRIMARY)
+			elif __primary_trigger == TriggerState.DISABLED:
+				__primary_trigger = TriggerState.NEEDS_ENABLED # primary will be reactivated once weapon has finished its current activity and returns to IDLE
+			# else trigger is currenly busy
 		elif self.secondary_needs_reload():
 			if self.state == Weapon.State.IDLE:
-				self.__set_state(Weapon.State.RELOADING_SECONDARY if __secondary_enabled else Weapon.State.ACTIVATING)
-			elif not __secondary_enabled:
-				__secondary_needs_activating = true # secondary will be reactivated once weapon has finished its current activity and returns to IDLE
-
-
-# WeaponManager activates and deactivates the weapon
-
-func activate(instantly: bool = false) -> void: # instantly is true when loading from saved game file
-	# don't deplete inventory until reloading animations; for now, only check if there's enough ammo to reload one or both and activate one or both hands accordingly
-	var magazines_count = self.primary_magazine.inventory_item.count
-	if self.primary_needs_reload():
-		magazines_count -= 1
-		__primary_needs_activating = magazines_count >= 0
-	else:
-		__primary_needs_activating = true
-	if __can_dual_wield: # if player only has 1 gun, it is always primary
-		if self.secondary_needs_reload():
-			magazines_count -= 1
-			__secondary_needs_activating = magazines_count >= 0
-		else:
-			__secondary_needs_activating = true
-	else:
-		__secondary_needs_activating = false
-	# activate one or both hands
-	super.activate(instantly)
+				if __secondary_trigger == TriggerState.DISABLED:
+					__secondary_trigger = TriggerState.NEEDS_ENABLED
+					self.__set_state(Weapon.State.REACTIVATING)
+				else:
+					__secondary_trigger = TriggerState.NEEDS_RELOADING
+					self.__set_state(Weapon.State.RELOADING_SECONDARY)
+			elif __secondary_trigger == TriggerState.DISABLED:
+				__secondary_trigger = TriggerState.NEEDS_ENABLED # secondary will be reactivated once weapon has finished its current activity and returns to IDLE
 
 
 # Player shoots the weapon
 
 func shoot(player: Player, is_primary: bool) -> void: # is_primary determines which hand shoots first
+	#print("shoot ", debug_state, "  ", name_for_trigger_state(__primary_trigger),  "  ", name_for_trigger_state(__secondary_trigger))
 	match self.state:
 		Weapon.State.IDLE:
-			__swaps_shooting_hand = __can_dual_wield and __primary_enabled and __secondary_enabled
-			if __can_dual_wield:
+			if __has_second_gun:
 				if is_primary:
-					self.__set_state(Weapon.State.SHOOTING_PRIMARY if __primary_enabled else Weapon.State.SHOOTING_SECONDARY)
+					self.__set_state(Weapon.State.SHOOTING_SECONDARY if __primary_trigger == TriggerState.DISABLED else Weapon.State.SHOOTING_PRIMARY)
 				else:
-					self.__set_state(Weapon.State.SHOOTING_SECONDARY if __secondary_enabled else Weapon.State.SHOOTING_PRIMARY)
+					self.__set_state(Weapon.State.SHOOTING_PRIMARY if __secondary_trigger == TriggerState.DISABLED else Weapon.State.SHOOTING_SECONDARY)
+				__repeat_firing = true
 			else:
 				self.__set_state(Weapon.State.SHOOTING_PRIMARY)
 		
-		# SYCHRONIZE_SHOOTING is called halfway through one hand's shooting sequence and will transition to CAN_SHOOT_PRIMARY/SECONDARY if both guns are available, giving the other hand opportunity to start shooting if the trigger key is held down, effectively doubling the Player's firing rate
-		Weapon.State.CAN_SHOOT_PRIMARY:
-			self.__set_state(Weapon.State.SHOOTING_PRIMARY)
+		# RELEASE_PRIMARY/SECONDARY_TRIGGER is called halfway through one gun's shooting sequence and will release the lock on the other gun if both guns are available, giving the other hand opportunity to start shooting if the trigger key is held down, doubling the firing rate
+		Weapon.State.SECONDARY_RELEASES_INTERLOCK:
+			if __repeat_firing and __primary_trigger == TriggerState.IDLE:
+				self.__set_state(Weapon.State.SHOOTING_PRIMARY)
 		
-		Weapon.State.CAN_SHOOT_SECONDARY:
-			self.__set_state(Weapon.State.SHOOTING_SECONDARY)
-			
+		Weapon.State.PRIMARY_RELEASES_INTERLOCK:
+			if __repeat_firing and __secondary_trigger == TriggerState.IDLE:
+					self.__set_state(Weapon.State.SHOOTING_SECONDARY)
+		
 		_: # can't fire ATM
 			return
 	
-	# TO DO: this is a bit mucky since __set_state doesn't have access to Player, which is required to create the projectile, so after calling __set_state we must confirm the new state is SHOOTING_[TRIGGER] before launching Projectile here
-	
-	# __set_state(SHOOTING_[TRIGGER]) may transition to FAILED, so must confirm here before launching Projectile
-	match self.state:
-		Weapon.State.SHOOTING_PRIMARY:
+	match self.state: # confirm projectile should be launched
+		Weapon.State.SHOOTING_PRIMARY_SUCCEEDED:
 			self.spawn_primary_projectile(player)
-		Weapon.State.SHOOTING_SECONDARY:
+		Weapon.State.SHOOTING_SECONDARY_SUCCEEDED:
 			self.spawn_secondary_projectile(player)
 
 
 func trigger_just_released(is_primary: bool) -> void:
-	__swaps_shooting_hand = false
+	__repeat_firing = false
 
 

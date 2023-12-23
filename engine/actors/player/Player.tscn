@@ -162,10 +162,10 @@ transform = Transform3D(0.25, -8.71967e-17, 8.71967e-17, 8.71967e-17, 0.25, -8.7
 hand = 1
 
 [node name="PistolPrimary" parent="Head/Camera/WeaponsInHand" instance=ExtResource("2_d66r2")]
-transform = Transform3D(-0.25, -8.71967e-17, 8.71967e-17, -8.71967e-17, 0.25, -8.71967e-17, 8.71967e-17, 8.71967e-17, 0.25, -0.05, -0.057, -0.212)
+transform = Transform3D(-0.25, -8.71967e-17, 8.71967e-17, -8.71967e-17, 0.25, -8.71967e-17, 8.71967e-17, 8.71967e-17, 0.25, 2.08165e-12, -0.057, -0.212)
 
 [node name="PistolSecondary" parent="Head/Camera/WeaponsInHand" instance=ExtResource("2_d66r2")]
-transform = Transform3D(0.25, -8.71967e-17, 8.71967e-17, 8.71967e-17, 0.25, -8.71967e-17, -8.71967e-17, 8.71967e-17, 0.25, 0.05, -0.057, -0.212)
+transform = Transform3D(0.25, -8.71967e-17, 8.71967e-17, 8.71967e-17, 0.25, -8.71967e-17, -8.71967e-17, 8.71967e-17, 0.25, 2.08165e-12, -0.057, -0.212)
 hand = 1
 
 [node name="AssaultRifle" parent="Head/Camera/WeaponsInHand" instance=ExtResource("4_00qt7")]
