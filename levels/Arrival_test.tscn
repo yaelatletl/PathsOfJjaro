@@ -3520,8 +3520,6 @@ script = ExtResource("1_hop1f")
 
 [node name="character" parent="." instance=ExtResource("1_d14hk")]
 transform = Transform3D(0.722702, 0, -0.69116, 0, 1, 0, 0.69116, 0, 0.722702, -83.2734, 4.51452, -55.7308)
-shake_time = 0.0
-shake_force = 0.0
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -33.765, 2.7374, 0)

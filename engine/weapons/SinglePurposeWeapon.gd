@@ -69,7 +69,7 @@ func __set_state(next_state: State) -> void:
 	WeaponManager.weapon_activity_changed.emit(self)
 
 
-# animations
+# animation methods (whereas DualPurpose and DualWield have inlined these calls, the Fist subclass currently overrides these methods to display 2 alternating fists as 2 separate scenes; the 2 fists may eventually be combined into a single scene, allowing these to be inlined as well)
 
 func __activating_primary() -> void:
 	self.__primary_hand.activating()

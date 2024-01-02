@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://clwvs0y18jwcn"]
+[gd_scene load_steps=45 format=3 uid="uid://clwvs0y18jwcn"]
 
 [ext_resource type="Script" path="res://engine/level/LevelBase.gd" id="1_q5461"]
 [ext_resource type="PackedScene" uid="uid://65hdrolflc6l" path="res://engine/pickables/PickableItem.tscn" id="2_51ci0"]
@@ -62,7 +62,7 @@ size = Vector3(3, 0.1, 0.5)
 [sub_resource type="BoxMesh" id="BoxMesh_v5yjr"]
 size = Vector3(4, 0.1, 4.5)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_58i31"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_ki4ce"]
 size = Vector3(4, 0.1, 4.5)
 
 [sub_resource type="BoxMesh" id="BoxMesh_1aovp"]
@@ -90,6 +90,45 @@ albedo_color = Color(0.639216, 0.384314, 0.819608, 1)
 [sub_resource type="BoxMesh" id="BoxMesh_o35ul"]
 material = SubResource("StandardMaterial3D_i1ajx")
 size = Vector3(0.5, 1.6, 0.5)
+
+[sub_resource type="BoxMesh" id="BoxMesh_x0pmj"]
+size = Vector3(4, 0.1, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_hnfsf"]
+size = Vector3(4, 0.1, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_iltot"]
+size = Vector3(4, 0.1, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_4021j"]
+size = Vector3(5, 0.1, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_rducp"]
+size = Vector3(3, 0.1, 2)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_58i31"]
+size = Vector3(3, 0.1, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_j3yih"]
+size = Vector3(1, 0.1, 0.9)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_x7nfl"]
+size = Vector3(1, 0.1, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_0kej0"]
+size = Vector3(4, 0.1, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_p4nol"]
+size = Vector3(4, 0.1, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_jtp0k"]
+size = Vector3(4, 0.1, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_k44uy"]
+size = Vector3(4, 0.1, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_o5idl"]
+size = Vector3(4, 0.1, 1)
 
 [node name="Level" type="Node3D"]
 script = ExtResource("1_q5461")
@@ -324,7 +363,7 @@ skeleton = NodePath("../..")
 [node name="StaticBody3D" type="StaticBody3D" parent="Stair/Stair7"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Stair/Stair7/StaticBody3D"]
-shape = SubResource("BoxShape3D_58i31")
+shape = SubResource("BoxShape3D_ki4ce")
 
 [node name="Kerb1" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 2.08165e-12, -3)
@@ -368,7 +407,7 @@ move_up = false
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.22129, 1.68068, 17.5858)
 
 [node name="Player" parent="." instance=ExtResource("6_wbgh5")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.82502, 0.8, 0.0201836)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.0857, 0.8, -0.111681)
 
 [node name="PurpleBlock" type="StaticBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.28458, 2.53247, -1.8949)
@@ -382,59 +421,188 @@ shape = SubResource("BoxShape3D_17gog")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
 mesh = SubResource("BoxMesh_o35ul")
 
-[node name="Height" type="StaticBody3D" parent="."]
+[node name="Pillars" type="Node3D" parent="."]
+
+[node name="Height" type="StaticBody3D" parent="Pillars"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.3, 0.8, -12)
 collision_mask = 0
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Height"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Pillars/Height"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
 shape = SubResource("BoxShape3D_17gog")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Height"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Pillars/Height"]
 mesh = SubResource("BoxMesh_o35ul")
 
-[node name="Height2" type="StaticBody3D" parent="."]
+[node name="Height2" type="StaticBody3D" parent="Pillars"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3, 0.8, -12)
 collision_mask = 0
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Height2"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Pillars/Height2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
 shape = SubResource("BoxShape3D_17gog")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Height2"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Pillars/Height2"]
 mesh = SubResource("BoxMesh_o35ul")
 
-[node name="Height3" type="StaticBody3D" parent="."]
+[node name="Height3" type="StaticBody3D" parent="Pillars"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.7, 0.8, -12)
 collision_mask = 0
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Height3"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Pillars/Height3"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
 shape = SubResource("BoxShape3D_17gog")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Height3"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Pillars/Height3"]
 mesh = SubResource("BoxMesh_o35ul")
 
-[node name="Height4" type="StaticBody3D" parent="."]
+[node name="Height4" type="StaticBody3D" parent="Pillars"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0.8, -12)
 collision_mask = 0
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Height4"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Pillars/Height4"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
 shape = SubResource("BoxShape3D_17gog")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Height4"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Pillars/Height4"]
 mesh = SubResource("BoxMesh_o35ul")
 
-[node name="Height5" type="StaticBody3D" parent="."]
+[node name="Height5" type="StaticBody3D" parent="Pillars"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5, 0.8, -12)
 collision_mask = 0
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Height5"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Pillars/Height5"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
 shape = SubResource("BoxShape3D_17gog")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Height5"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Pillars/Height5"]
 mesh = SubResource("BoxMesh_o35ul")
+
+[node name="Duct" type="Node3D" parent="."]
+
+[node name="Duct1" type="MeshInstance3D" parent="Duct"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 1.1, 0)
+mesh = SubResource("BoxMesh_x0pmj")
+skeleton = NodePath("../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Duct/Duct1"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Duct/Duct1/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0570679, 0)
+shape = SubResource("BoxShape3D_hnfsf")
+
+[node name="Duct2" type="MeshInstance3D" parent="Duct"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 2.08165e-12, 2.08165e-12)
+mesh = SubResource("BoxMesh_iltot")
+skeleton = NodePath("../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Duct/Duct2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0313721, 0)
+visible = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Duct/Duct2/StaticBody3D"]
+shape = SubResource("BoxShape3D_4021j")
+disabled = true
+
+[node name="Duct3" type="MeshInstance3D" parent="Duct"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 17.5, 0.55, 0.54)
+mesh = SubResource("BoxMesh_rducp")
+skeleton = NodePath("../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Duct/Duct3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.059021, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Duct/Duct3/StaticBody3D"]
+shape = SubResource("BoxShape3D_58i31")
+
+[node name="Duct5" type="MeshInstance3D" parent="Duct"]
+transform = Transform3D(-4.37114e-08, 1, -4.37114e-08, -1.5246e-23, -4.37114e-08, -1, -1, -4.37114e-08, 1.91069e-15, 18.96, 0.55, 2)
+mesh = SubResource("BoxMesh_rducp")
+skeleton = NodePath("../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Duct/Duct5"]
+transform = Transform3D(1, 0, 0, 0, 1, -8.35187e-23, 0, -8.35187e-23, 1, 0, -0.0440063, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Duct/Duct5/StaticBody3D"]
+shape = SubResource("BoxShape3D_58i31")
+
+[node name="Wall1" type="MeshInstance3D" parent="Duct"]
+transform = Transform3D(-4.37114e-08, 1, -4.37114e-08, -1.5246e-23, -4.37114e-08, -1, -1, -4.37114e-08, 1.91069e-15, 16.05, 1, 2)
+mesh = SubResource("BoxMesh_rducp")
+skeleton = NodePath("../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Duct/Wall1"]
+transform = Transform3D(1, 0, 0, 0, 1, -8.35187e-23, 0, -8.35187e-23, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Duct/Wall1/StaticBody3D"]
+shape = SubResource("BoxShape3D_58i31")
+
+[node name="Wall2" type="MeshInstance3D" parent="Duct"]
+transform = Transform3D(-4.37114e-08, 1, -4.37114e-08, -1.5246e-23, -4.37114e-08, -1, -1, -4.37114e-08, 1.91069e-15, 16.05, 1, -2)
+mesh = SubResource("BoxMesh_rducp")
+skeleton = NodePath("../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Duct/Wall2"]
+transform = Transform3D(1, 0, 0, 0, 1, -8.35187e-23, 0, -8.35187e-23, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Duct/Wall2/StaticBody3D"]
+shape = SubResource("BoxShape3D_58i31")
+
+[node name="Wall3" type="MeshInstance3D" parent="Duct"]
+transform = Transform3D(-4.37114e-08, 1, -4.37114e-08, -1.5246e-23, -4.37114e-08, -1, -1, -4.37114e-08, 1.91069e-15, 16.05, 1.555, 2.08165e-12)
+mesh = SubResource("BoxMesh_j3yih")
+skeleton = NodePath("../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Duct/Wall3"]
+transform = Transform3D(1, 0, 0, 0, 1, -8.35187e-23, 0, -8.35187e-23, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Duct/Wall3/StaticBody3D"]
+shape = SubResource("BoxShape3D_x7nfl")
+
+[node name="Duct4" type="MeshInstance3D" parent="Duct"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 18, 0.55, -0.54)
+mesh = SubResource("BoxMesh_0kej0")
+skeleton = NodePath("../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Duct/Duct4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0414963, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Duct/Duct4/StaticBody3D"]
+shape = SubResource("BoxShape3D_p4nol")
+
+[node name="Duct6" type="MeshInstance3D" parent="Duct"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 19.5, 1.1, 1.5)
+mesh = SubResource("BoxMesh_x0pmj")
+skeleton = NodePath("../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Duct/Duct6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0540161, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Duct/Duct6/StaticBody3D"]
+shape = SubResource("BoxShape3D_jtp0k")
+
+[node name="Duct7" type="MeshInstance3D" parent="Duct"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 19.5, 2.08165e-12, 1.5)
+mesh = SubResource("BoxMesh_x0pmj")
+skeleton = NodePath("../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Duct/Duct7"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0359497, 0)
+visible = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Duct/Duct7/StaticBody3D"]
+shape = SubResource("BoxShape3D_k44uy")
+disabled = true
+
+[node name="Duct8" type="MeshInstance3D" parent="Duct"]
+transform = Transform3D(-4.37114e-08, 1, -4.37114e-08, 0, -4.37114e-08, -1, -1, -4.37114e-08, 1.91069e-15, 20.04, 0.55, 1.5)
+mesh = SubResource("BoxMesh_x0pmj")
+skeleton = NodePath("../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Duct/Duct8"]
+transform = Transform3D(1, 0, 0, 0, 1, -8.35187e-23, 0, -8.35187e-23, 1, 0, 0.0521851, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Duct/Duct8/StaticBody3D"]
+shape = SubResource("BoxShape3D_o5idl")
 
 [connection signal="pressed" from="Switch" to="Elevator" method="_on_switch_pressed"]

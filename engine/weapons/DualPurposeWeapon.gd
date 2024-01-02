@@ -29,125 +29,116 @@ func __set_state(next_state: State) -> void:
 	# important: this switch and the function calls inside it must not call __set_state, directly or indirectly; transitional states, e.g. ACTIVATED, should set next_state to the state they want to transition to
 	match next_state:
 		Weapon.State.ACTIVATING:
-			self.__activating()
+			self.__primary_hand.activating()
 			self.__set_next_transition(Weapon.State.ACTIVATED, self.__activating_time(previous_state))
 		
 		Weapon.State.ACTIVATED:
-			self.__activated()
+			if self.primary_magazine.is_available:
+				self.__primary_trigger = TriggerState.NEEDS_RELOADING if self.primary_magazine.count == 0 else TriggerState.IDLE
+			else:
+				self.__primary_trigger = TriggerState.DISABLED
+			if self.secondary_magazine.is_available:
+				self.__secondary_trigger = TriggerState.NEEDS_RELOADING if self.secondary_magazine.count == 0 else TriggerState.IDLE
+			else:
+				self.__secondary_trigger = TriggerState.DISABLED
+			self.__primary_hand.activated()
 			self.__set_next_transition(Weapon.State.IDLE)
 		
 		Weapon.State.IDLE:
 			# note: reloading is exclusive: both triggers must finish firing before one can be reloaded and then, optionally, the other (while simultaneous reloading of both could be implemented if needed, MCR doesn’t need it as the only dual-purpose weapon with 2 magazines is the AR, and the player would require a third hand to reload both mags at once while holding the gun. Which would look very silly.)
-			if self.primary_needs_reload():
-				# TO DO: implement __weapon_data.disappears_when_empty
-				if self.primary_magazine.try_to_refill():
-					self.__set_next_transition(Weapon.State.RELOADING_PRIMARY)
-				elif self.secondary_needs_reload():
-					if self.secondary_magazine.try_to_refill():
-						self.__set_next_transition(Weapon.State.RELOADING_SECONDARY)
-					else:
-						if not __primary_is_shooting and not __secondary_is_shooting:
-							self.__set_next_transition(Weapon.State.EMPTY)
-						# else wait for trigger[s] to stop shooting
-			elif self.secondary_needs_reload():
-				# TO DO: implement __weapon_data.disappears_when_empty
-				if self.secondary_magazine.try_to_refill():
-					self.__set_next_transition(Weapon.State.RELOADING_SECONDARY)
+			if self.__primary_trigger == TriggerState.NEEDS_RELOADING:
+				self.__set_next_transition(Weapon.State.RELOADING_PRIMARY)
+			elif self.__secondary_trigger == TriggerState.NEEDS_RELOADING:
+				self.__set_next_transition(Weapon.State.RELOADING_SECONDARY)
 		
 		Weapon.State.RELOADING_PRIMARY:
-			self.__reloading_primary()
-			self.__set_next_transition(Weapon.State.IDLE, self.__primary_trigger_data.reloading_time)
+			if self.primary_magazine.try_to_refill():
+				self.__primary_hand.reload()
+				self.__set_next_transition(Weapon.State.RELOADING_PRIMARY_ENDED, self.__primary_trigger_data.reloading_time)
+			else:
+				self.__primary_trigger = TriggerState.DISABLED
+				self.__set_next_transition(Weapon.State.EMPTY if self.__secondary_trigger == TriggerState.DISABLED else Weapon.State.IDLE)
 		
 		Weapon.State.RELOADING_SECONDARY:
-			self.__reloading_secondary()
-			self.__set_next_transition(Weapon.State.IDLE, self.__secondary_trigger_data.reloading_time)
+			if self.secondary_magazine.try_to_refill():
+				self.__primary_hand.secondary_reload()
+				self.__set_next_transition(Weapon.State.RELOADING_SECONDARY_ENDED, self.__secondary_trigger_data.reloading_time)
+			else:
+				self.__secondary_trigger = TriggerState.DISABLED
+				self.__set_next_transition(Weapon.State.EMPTY if self.__primary_trigger == TriggerState.DISABLED else Weapon.State.IDLE)
+		
+		Weapon.State.RELOADING_PRIMARY_ENDED:
+			self.__primary_trigger = TriggerState.IDLE
+			self.__set_next_transition(Weapon.State.IDLE)
+		
+		Weapon.State.RELOADING_SECONDARY_ENDED:
+			self.__secondary_trigger = TriggerState.IDLE
+			self.__set_next_transition(Weapon.State.IDLE)
 		
 		Weapon.State.SHOOTING_PRIMARY:
-			if not __primary_is_shooting and self.primary_magazine.try_to_consume(self.__primary_trigger_data.rounds_per_shot):
+			if self.primary_magazine.try_to_consume(self.__primary_trigger_data.rounds_per_shot):
 				super.__set_state(Weapon.State.SHOOTING_PRIMARY_SUCCEEDED)
-				__primary_is_shooting = true
-				self.__shooting_primary()
+				self.__primary_trigger = TriggerState.SHOOTING
+				self.__primary_hand.shoot()
 				WeaponManager.primary_timer.start(self.__primary_trigger_data.shooting_time)
 			else:
 				super.__set_state(Weapon.State.SHOOTING_PRIMARY_FAILED) # primary failed to fire
-				__primary_is_shooting = false
-				self.__shooting_primary_failed()
+				self.__primary_trigger = TriggerState.NEEDS_RELOADING
+				self.__primary_hand.empty()
 				WeaponManager.primary_timer.start(self.__primary_trigger_data.empty_time)
 		
 		Weapon.State.SHOOTING_SECONDARY:
-			if not __secondary_is_shooting and self.secondary_magazine.try_to_consume(self.__secondary_trigger_data.rounds_per_shot):
+			if self.secondary_magazine.try_to_consume(self.__secondary_trigger_data.rounds_per_shot):
 				super.__set_state(Weapon.State.SHOOTING_SECONDARY_SUCCEEDED)
-				__secondary_is_shooting = true
-				self.__shooting_secondary()
+				self.__secondary_trigger = TriggerState.SHOOTING
+				self.__primary_hand.secondary_shoot()
 				WeaponManager.secondary_timer.start(self.__secondary_trigger_data.shooting_time)
 			else:
 				super.__set_state(Weapon.State.SHOOTING_SECONDARY_FAILED)
-				__secondary_is_shooting = false
-				self.__shooting_secondary_failed()
+				self.__secondary_trigger = TriggerState.NEEDS_RELOADING
+				self.__primary_hand.secondary_empty()
 				WeaponManager.secondary_timer.start(self.__secondary_trigger_data.empty_time)
 		
+		
 		Weapon.State.EMPTY:
+			# TO DO: implement __weapon_data.disappears_when_empty
 			assert(previous_state != Weapon.State.DEACTIVATING)
 			# both triggers are empty so tell WeaponManager to deactivate this weapon
 			WeaponManager.current_weapon_emptied.call_deferred(self) # important: WeaponManager must be notified *after* __set_state has returned
 		
 		Weapon.State.DEACTIVATING:
-			self.__deactivating()
+			self.__primary_hand.deactivating()
 			self.__set_next_transition(Weapon.State.DEACTIVATED, self.__deactivating_time(previous_state))
 		
 		Weapon.State.DEACTIVATED:
-			self.__deactivated()
+			self.__primary_hand.deactivated()
 			# TO DO: support weapon_data.disappears_after_use; change it to disappears_when_empty, possibly moving this flag to trigger data, which allows for optional ammo reloads
 	WeaponManager.weapon_activity_changed.emit(self)
 
 
 
 func __primary_timer_ended() -> void:
-	if self.state >= Weapon.State.IDLE:
-		__primary_is_shooting = false
-		if not __secondary_is_shooting:
-			self.__set_state(Weapon.State.IDLE)
+	self.__primary_trigger = TriggerState.IDLE if self.primary_magazine.count > 0 else TriggerState.NEEDS_RELOADING
+	if self.__secondary_trigger != TriggerState.SHOOTING and self.state > Weapon.State.IDLE:
+		self.__set_state(Weapon.State.IDLE)
 
 func __secondary_timer_ended() -> void:
-	if self.state >= Weapon.State.IDLE:
-		__secondary_is_shooting = false
-		if not __primary_is_shooting:
-			self.__set_state(Weapon.State.IDLE)
+	self.__secondary_trigger = TriggerState.IDLE if self.secondary_magazine.count > 0 else TriggerState.NEEDS_RELOADING
+	if self.__primary_trigger != TriggerState.SHOOTING and self.state > Weapon.State.IDLE:
+		self.__set_state(Weapon.State.IDLE)
 
 
-# activation
+# signal notification from InventoryManager when any pickable is picked up; subclasses may override if needed (e.g. DualWieldWeapon provides its own implementation)
 
-func __activating() -> void:
-	self.__primary_hand.activating()
-
-func __activated() -> void:
-	self.__primary_hand.activated()
-
-
-func __reloading_primary() -> void:
-	self.__primary_hand.reload()
-
-func __reloading_secondary() -> void:
-	self.__primary_hand.secondary_reload()
-
-func __shooting_primary() -> void:
-	self.__primary_hand.shoot()
-
-func __shooting_secondary() -> void:
-	self.__primary_hand.secondary_shoot()
-
-func __shooting_primary_failed() -> void:
-	self.__primary_hand.empty()
-
-func __shooting_secondary_failed() -> void:
-	self.__primary_hand.secondary_empty()
-
-
-func __deactivating() -> void:
-	self.__primary_hand.deactivating()
-
-func __deactivated() -> void:
-	self.__primary_hand.deactivated()
+func inventory_increased(item: InventoryManager.InventoryItem) -> void: # sent by any InventoryItem when it increments/decrements (while InventoryItem instances could send their own inventory_item_changed signals, allowing a WeaponTrigger to listen for a specific pickable, pickups are sufficiently rare that it shouldn't affect performance to listen to them all and filter here)
+	if self.__primary_trigger == TriggerState.DISABLED and item == primary_magazine.inventory_item:
+		self.__primary_trigger = TriggerState.NEEDS_RELOADING
+		if self.state == Weapon.State.IDLE:
+			self.__set_state(Weapon.State.RELOADING_PRIMARY)
+	elif self.__secondary_trigger == TriggerState.DISABLED and item == secondary_magazine.inventory_item:
+		self.__secondary_trigger = TriggerState.NEEDS_RELOADING
+		if self.state == Weapon.State.IDLE:
+			self.__set_state(Weapon.State.RELOADING_SECONDARY)
 
 
 # Player shoots the weapon
@@ -159,12 +150,12 @@ func shoot(player: Player, is_primary: bool) -> void: # is_primary determines wh
 	
 	elif self.state  > Weapon.State.IDLE:
 		if is_primary:
-			if not __primary_is_shooting and (__triggers_shoot_independently or not __secondary_is_shooting):
+			if self.__primary_trigger != TriggerState.SHOOTING and (__triggers_shoot_independently or self.__secondary_trigger != TriggerState.SHOOTING):
 				self.__set_state(Weapon.State.SHOOTING_PRIMARY)
 			else:
 				return
 		else:
-			if not __secondary_is_shooting and (__triggers_shoot_independently or not __primary_is_shooting):
+			if self.__secondary_trigger != TriggerState.SHOOTING and (__triggers_shoot_independently or self.__primary_trigger != TriggerState.SHOOTING):
 				self.__set_state(Weapon.State.SHOOTING_SECONDARY)
 			else:
 				return

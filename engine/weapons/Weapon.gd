@@ -42,6 +42,26 @@ var __primary_hand:   WeaponInHand
 var __secondary_hand: WeaponInHand
 
 
+# trigger state; used by dual-purpose/dual-wield weapon
+
+enum TriggerState {
+	DISABLED        = 0,
+	NEEDS_ENABLED   = 1, # set when activating weapon or when reactivating an empty gun after picking up fresh ammo
+	NEEDS_RELOADING = 2,
+	RELOADING       = 5,
+	IDLE            = 10,
+	SHOOTING        = 11,
+	INTERLOCKED     = 15,
+}
+
+# one or both triggers may be enabled
+var __primary_trigger   := TriggerState.DISABLED
+var __secondary_trigger := TriggerState.DISABLED
+
+func name_for_trigger_state(some_state: int) -> String:
+	return Global.enum_to_string(some_state, TriggerState)
+
+
 # weapon state (Finite State Machine)
 
 enum State {
@@ -135,13 +155,8 @@ func __secondary_timer_ended() -> void:
 
 # debugging support
 
-var __state_names := {}
-
 func name_for_state(some_state: int) -> String:
-	if __state_names.is_empty():
-		for key in State.keys():
-			__state_names[State[key]] = key
-	return __state_names[some_state]
+	return Global.enum_to_string(some_state, State)
 
 var debug_state: String: # human-readable string since enums display as ints
 	get:
@@ -277,12 +292,12 @@ func trigger_just_released(is_primary: bool) -> void: # used by dual-wield weapo
 
 func spawn_primary_projectile(player: Player) -> void:
 	for i in range(0, __primary_trigger_data.projectiles_per_shot):
-		__primary_projectile_class.spawn(player.global_position, player.global_look, player)
+		__primary_projectile_class.spawn(player.global_head_position, player.global_look_direction, player)
 
 
 func spawn_secondary_projectile(player: Player) -> void:
 	for i in range(0, __secondary_trigger_data.projectiles_per_shot):
-		__secondary_projectile_class.spawn(player.global_position, player.global_look, player)
+		__secondary_projectile_class.spawn(player.global_head_position, player.global_look_direction, player)
 
 
 

@@ -48,10 +48,25 @@ func vector3_to_array(vec: Vector3) -> Array:
 	return [vec.x, vec.y, vec.z]
 
 
+func enum_to_string(value: int, enum_type) -> String:
+	for key in enum_type.keys():
+		if enum_type[key] == value:
+			return key
+	return "??"
+
+
 
 func add_to_level(node: Node3D) -> void:
 	var owner: Node = current_level #.get_tree()
 	owner.add_child(node) # TO DO: the current level scene should be available on Global; Global would also handle level loading and anything else that persists across process lifetime (unless Global also ontains lots of non-level logic, in which case put level management code in a dedicated LevelManager singleton)
 	node.owner = owner
 	#print("added ", node, " to ", owner)
+
+
+
+func enter_level() -> void:
+	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+
+func exit_level() -> void:
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 

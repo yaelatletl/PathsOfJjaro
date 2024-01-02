@@ -2,7 +2,7 @@ extends Control
 
 
 func _ready():
-	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	Global.exit_level()
 	_on_Gameplay_test_pressed() # temporary; jump straight into test map on launch
 	
 

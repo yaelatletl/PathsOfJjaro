@@ -19,7 +19,6 @@ size = Vector3(1.88828, 2, 2.69134)
 [node name="Door" type="Node3D"]
 script = ExtResource("1")
 push_strenght = 25.0
-message = "Press \"E\" to open"
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
 
