@@ -292,12 +292,12 @@ func trigger_just_released(is_primary: bool) -> void: # used by dual-wield weapo
 
 func spawn_primary_projectile(player: Player) -> void:
 	for i in range(0, __primary_trigger_data.projectiles_per_shot):
-		__primary_projectile_class.spawn(player.global_head_position, player.global_look_direction, player)
+		__primary_projectile_class.spawn(player.global_head_position(), player.global_look_direction(), player)
 
 
 func spawn_secondary_projectile(player: Player) -> void:
 	for i in range(0, __secondary_trigger_data.projectiles_per_shot):
-		__secondary_projectile_class.spawn(player.global_head_position, player.global_look_direction, player)
+		__secondary_projectile_class.spawn(player.global_head_position(), player.global_look_direction(), player)
 
 
 

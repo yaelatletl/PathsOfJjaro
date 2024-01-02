@@ -28,7 +28,41 @@ const JUMP_Y_SPEED := 5.0 # temporary till we figure out jumping; this just punt
 
 const CROUCH_MAX_SPEED: float = PlayerDefinitions.WALK_PHYSICS.maximum_forward_velocity * 0.2 # player must be almost stopped in order to crouch
 
+const MAX_LOOK_ANGLE := deg_to_rad(85) # Maximum camera angle
 
+
+# body parts
+
+@onready var body   := $Body
+@onready var head   := $Head
+@onready var camera := $Head/Camera
+
+
+# vertical collision detection using raycasting
+@onready var head_clearance := $Head/HeadClearance # crouching -> standing -> jumping
+@onready var feet_clearance := $FeetClearance # TO DO: not sure about this one
+
+# control panel detection
+@onready var detect_control_panel := $Head/Camera/ActionReach
+
+
+# step/ledge/crawlway detection 
+
+# this uses a pair of vertical raycasts placed in front of player that extend downwards to ground and upwards to Player's head height (the exact ends may need some finessing); this should detect open-tread stairs (which forward-facing raycasts may miss), though might not reliably detect railings (which are narrow enough to fit in the gap between detector and player body)
+
+# TO DO: use ShapeCast3D? more expensive but should be better at detecting
+
+const STEP_DETECTOR_OFFSET := 0.9 # distance from center of player at which to position the raycast's origin; is always calculated in the direction of movement on xz plane # TO DO: should this distance be larger when sprinting?
+
+@onready var duck_detector := $DuckDetector # this is always 0.1m in front of Player
+@onready var hole_detector := $HoleDetector # quick-n-dirty check; TO DO: use shape cast to determine if player is facing a crawlable duct
+@onready var step_detector := $StepDetector # this is always STEP_DETECTOR_OFFSET (0.8m) ahead of player center in direction of movement, which should be enough to detect approaching step/ladder/crouch/ledge/railing # note: this raycast only detects a collision body that MAY block player walking forward (e.g. it could be a smooth ramp, which is climbable by Player's capsule body up to a certain angle); it also doesn't guarantee that it won't return false if the player proceeds forward, moving the ray to other side of a narrow body (e.g. ladder tread); TO DO: probably want 2 raycasts positioned left and right to better detect ledges approached at an angle; these will need to rotate around the Player's y=0 axis
+
+@onready var crouch_animation := $CrouchAnimation
+@onready var crouch_timer     := $CrouchTimer # once crouching starts, wait until timeout before uncrouching
+
+
+# movement states
 
 enum HorizontalMovement {
 	
@@ -71,7 +105,6 @@ enum VerticalMovement { # Player states are TBD; not yet implemented
 	FALL,
 	JUMP,
 	VAULT,
-	
 	#SWIM,
 	#SINK,
 }
@@ -104,14 +137,8 @@ func __set_vertical_movement(new_movement: VerticalMovement) -> void:
 
 
 
-# Physics variables; TO DO: define these values in PlayerDefinitions dictionaries so per-level Physics can override (e.g. low-gravity, vacuum levels)
-var gravity := 10.0 # Gravity force #45 is okay, don't change it 
-var air_friction := 50.0 # air friction # TO DO: use airborne_deceleration
-var floor_friction := 250.0 # floor friction
+
 var mass := 45.0 # think this is only used for imparting impulse to other movable bodies (elastic collisions); presumably all other objects must have a `mass` property too (RigidBody3D has `mass` property built in)
-
-
-
 
 
 var coyote_time : float = 0.1 # the delay between walking off a ledge and starting to fall # TO DO: is this needed? given that M2 allows user some control over movement in xz plane, returning to the ledge might be a step-up movement; need to check AO code to see how it does it (i.e. after running off ledge, is it possible to reverse forwards/backwards movement to regain it? or is the only way to regain ledge to turn mid-air while falling and step-up onto it before the y delta exceeds MAX_STEP_HEIGHT?)
@@ -119,46 +146,28 @@ var elapsed_coyote_time : float = 0
 
 
 
+
+var current_physics: Dictionary
+
+
 var impulse = Vector3.ZERO
 
 var wall_direction : Vector3 = Vector3.ZERO # used in VaultOver, do we need this? hopefully Player only needs a camera animation to imply jumping over a barrier
 
 
-@onready var body   := $Body
-@onready var head   := $Head
-@onready var camera := $Head/Camera
-
-
-# vertical collision detection using raycasting
-@onready var head_clearance := $Head/HeadClearance # crouching -> standing -> jumping
-@onready var feet_clearance := $FeetClearance # TO DO: not sure about this one
-
-# control panel detection
-@onready var detect_control_panel := $Head/Camera/ActionReach
-
-
-# step/ledge/crawlway detection 
-
-# this uses a pair of vertical raycasts placed in front of player that extend downwards to ground and upwards to Player's head height (the exact ends may need some finessing); this should detect open-tread stairs (which forward-facing raycasts may miss), though might not reliably detect railings (which are narrow enough to fit in the gap between detector and player body)
-
-# TO DO: use ShapeCast3D? more expensive but should be better at detecting
-
-const STEP_DETECTION_OFFSET := 0.9 # distance from center of player at which to position the raycast's origin; is always calculated in the direction of movement on xz plane # TO DO: should this distance be larger when sprinting?
-
-@onready var duck_detector := $DuckDetector # this is always 0.1m in front of Player
-@onready var hole_detector := $HoleDetector # quick-n-dirty check; TO DO: use shape cast to determine if player is facing a crawlable duct
-@onready var step_detector := $StepDetector # this is always STEP_DETECTION_OFFSET (0.8m) ahead of player center in direction of movement, which should be enough to detect approaching step/ladder/crouch/ledge/railing # note: this raycast only detects a collision body that MAY block player walking forward (e.g. it could be a smooth ramp, which is climbable by Player's capsule body up to a certain angle); it also doesn't guarantee that it won't return false if the player proceeds forward, moving the ray to other side of a narrow body (e.g. ladder tread); TO DO: probably want 2 raycasts positioned left and right to better detect ledges approached at an angle; these will need to rotate around the Player's y=0 axis
-
-
-@onready var crouch_animation := $CrouchAnimation
-@onready var crouch_timer     := $CrouchTimer # once crouching starts, wait until timeout before uncrouching
-
-
-
 var xz_input := Vector2.ZERO # sidestep and forward/backward movements on xz plane
 var y_speed := 0.0 # WIP: this is downward speed due to gravity but also upward speed when jumping
 
-var climb_direction   := Vector3.ZERO
+var climb_direction := Vector3.ZERO
+var detected_step = null
+var detected_step_top := 0.0
+
+
+var mouse_x_sensitivity := deg_to_rad(20.0) #0.2 # TO DO: need separate parameters for horizontal and vertical axes (user typically wants fast turn and slow vertical look, otherwise vertical aiming is difficult)
+var mouse_y_sensitivity := deg_to_rad(5.0) #0.2 # TO DO: need separate parameters for horizontal and vertical axes (user typically wants fast turn and slow vertical look, otherwise vertical aiming is difficult)
+
+var mouse_velocity := Vector2.ZERO # TO DO: is there any benefit to handing mouse motion _input events ourselves vs. calling Input.get_last_mouse_velocity() in _process?
+
 
 
 var is_sprint_enabled := true: # toggles between walk and sprint each time SPRINT key is pressed
@@ -167,10 +176,6 @@ var is_sprint_enabled := true: # toggles between walk and sprint each time SPRIN
 	set(new_value):
 		is_sprint_enabled = new_value
 		__update_horizontal_movement()
-
-
-var current_physics: Dictionary
-
 
 
 var is_crouch_enabled := false:
@@ -188,38 +193,39 @@ var is_crouch_enabled := false:
 				crouch_animation.play("crouch", -1, -1.0, true)
 
 
-
-
-var mouse_x_sensitivity := deg_to_rad(20.0) #0.2 # TO DO: need separate parameters for horizontal and vertical axes (user typically wants fast turn and slow vertical look, otherwise vertical aiming is difficult)
-var mouse_y_sensitivity := deg_to_rad(5.0) #0.2 # TO DO: need separate parameters for horizontal and vertical axes (user typically wants fast turn and slow vertical look, otherwise vertical aiming is difficult)
-
-const MAX_LOOK_ANGLE := deg_to_rad(85) # Maximum camera angle
-
-var mouse_velocity := Vector2.ZERO # TO DO: is there any benefit to handing mouse motion _input events ourselves vs. calling Input.get_last_mouse_velocity() in _process?
-
-
-
-
-var detected_step = null
-
 func get_step_name() -> String:
 	if detected_step:
 		return detected_step.get_parent().name
 	else:
 		return ""
 
-var detected_step_top := 0.0
+
+func global_head_position() -> Vector3:
+	return head.global_position
+
+func global_look_direction() -> Vector3:
+	return camera.global_transform.basis.z * -1
+
+func global_feet_y() -> float:
+	return self.global_position.y - body.shape.height / 2
+
+func global_feet_position() -> Vector3:
+	return Vector3(self.global_position.x, global_feet_y(), self.global_position.z)
+
+func horizontal_speed() -> float:
+	var v = Vector3(self.velocity)
+	v.y = 0
+	return v.length()
+
+func has_traction() -> bool:
+	return is_on_floor() or vertical_movement == VerticalMovement.CLIMB_STEP
+
+func is_far_from_floor() -> bool:
+	# @hhas01: TO DO: what is purpose of this? it is not the same as the built-in is_on_floor method
+	# @810-Dude answers: There are some functions implemented to fix some quirks of the engine, like the function feet_clearance, that one exists due to that the function is_on_floor won't work unless move_and_slide is being called and the object moves. So certain static situations needed it. Perhaps now we don't, but it's something to consider
+	return not feet_clearance.is_colliding()
 
 
-
-var global_head_position: Vector3:
-	get:
-		return head.global_position
-
-
-var global_look_direction: Vector3:
-	get:
-		return camera.global_transform.basis.z * -1
 
 
 
@@ -237,24 +243,11 @@ func _ready() -> void:
 	Global.enter_level()
 
 
-# InventoryManager signals
-
-func update_health_status(damage_type: Enums.DamageType = Enums.DamageType.NONE) -> void:
-	if damage_type != Enums.DamageType.NONE:
-		pass # TO DO: damage effect animations, e.g. Player may "sway" or "stagger" when hit, which is a camera animation (the Player itself won't move)
-
-
-func player_died(_damage_type: Enums.DamageType) -> void:
-	__alive = false
-	# TO DO: death effect: camera drops to ground, colliders and inputs are disabled
-
-
 # user input processing, Player actions and movement
 
 func _input(event):
 	if event is InputEventMouseMotion:
 		mouse_velocity = event.relative
-
 
 
 func process_action_inputs() -> void:
@@ -279,7 +272,6 @@ func process_action_inputs() -> void:
 				# TO DO: some control panels require start+stop action (e.g. recharger immediately stops charging if player moves)
 
 
-
 func get_user_movement(delta:float) -> Vector3:
 	assert(current_physics)
 	# mouse look
@@ -294,10 +286,10 @@ func get_user_movement(delta:float) -> Vector3:
 		is_sprint_enabled = not is_sprint_enabled
 	
 	# TO DO: CROUCH will become automatic; leave on manual key for now
-	if Input.is_action_just_pressed(&"CROUCH"):
-		self.is_crouch_enabled = true
-	elif Input.is_action_just_released(&"CROUCH"):
-		self.is_crouch_enabled = false # TO DO: also need to confirm player has head clearance to stand; should this be is_crouch_enabled?
+	#if Input.is_action_just_pressed(&"CROUCH"):
+	#	self.is_crouch_enabled = true
+	#elif Input.is_action_just_released(&"CROUCH"):
+	#	self.is_crouch_enabled = false # TO DO: also need to confirm player has head clearance to stand; should this be is_crouch_enabled?
 	
 	# movement
 	if has_traction(): # player has traction while on ground/stairs/ladders/ledge-jump TO DO: see comment on is_far_from_floor about its reliability
@@ -305,8 +297,8 @@ func get_user_movement(delta:float) -> Vector3:
 			__set_vertical_movement(VerticalMovement.NONE)
 		xz_input = Input.get_vector(&"MOVE_LEFT", &"MOVE_RIGHT", &"MOVE_BACKWARD", &"MOVE_FORWARD")
 		# TO DO: JUMP will become automatic, but leave on manual key for now
-		if Input.is_action_just_pressed(&"JUMP") and not head_clearance.is_colliding(): # TO DO: do we need to check head clearance? or just jump and let physics deal with it?
-			__set_vertical_movement(VerticalMovement.JUMP)
+		#if Input.is_action_just_pressed(&"JUMP") and not head_clearance.is_colliding(): # TO DO: do we need to check head clearance? or just jump and let physics deal with it?
+		#	__set_vertical_movement(VerticalMovement.JUMP)
 	else:
 		if vertical_movement == VerticalMovement.CLIMB_LADDER:
 			pass
@@ -317,7 +309,7 @@ func get_user_movement(delta:float) -> Vector3:
 		#	vertical_movement = VerticalMovement.FALL
 			xz_input = Vector2.ZERO
 			var prev_y_speed = y_speed
-			y_speed -= gravity * delta # TO DO: does vacuum/air/liquid make a difference here?
+			y_speed -= current_physics.gravity * delta # TO DO: does vacuum/air/liquid make a difference here?
 			if prev_y_speed > 0 and y_speed <= 0:
 				__set_vertical_movement(VerticalMovement.FALL)
 	
@@ -329,27 +321,11 @@ func get_user_movement(delta:float) -> Vector3:
 
 
 
-func feet_y() -> float:
-	return self.global_position.y - body.shape.height / 2
-
-
-func feet_position() -> Vector3:
-	return Vector3(self.global_position.x, feet_y(), self.global_position.z)
-
-
-func horizontal_speed() -> float:
-	var v = Vector3(self.velocity)
-	v.y = 0
-	return v.length()
-
-
+# physics processing
 
 func _physics_process(delta: float) -> void:
 	var player_velocity := Vector3.ZERO # the direction the player is moving
 	var desired_direction := Vector3.ZERO # the direction the user input wants player to move; this influences the step detector's positioning more than the player's velocity so that if e.g. the player is sliding along a wall, the step detector will face into the wall, not be parallel to it, and so will detect a step at end of that wall
-	var friction := air_friction
-	if has_traction():
-		friction += floor_friction
 	
 	if __alive:
 		player_velocity = get_user_movement(delta)
@@ -366,6 +342,9 @@ func _physics_process(delta: float) -> void:
 	
 	# Interpolates between the current position and the future position of the character
 	#Funny numbers, magic numbers. Wrong.
+	var friction: float = current_physics.air_friction
+	if has_traction():
+		friction += current_physics.floor_friction
 	var inertia = self.velocity.lerp(Vector3(), friction * delta)
 	if inertia.length() >= 0.1:
 		player_velocity += inertia
@@ -396,37 +375,34 @@ func _physics_process(delta: float) -> void:
 		# TO DO: if input keys are released just before step, player may slide along side of a step under inertia only (without user input, the step detector orients in the collide-and-slide direction); is this acceptable? or should we capture the previous velocity before the collision and compare the two, using the previous velocity if a step is detected?
 		var move_x = self.velocity.x + desired_direction.x * 20
 		var move_z = self.velocity.z + desired_direction.z * 20
-		var horizontal_direction := Vector3(move_x, 0, move_z).normalized() if move_x or move_z else self.global_look_direction
+		var horizontal_direction := Vector3(move_x, 0, move_z).normalized() if move_x or move_z else global_look_direction()
 		
-		step_detector.global_position = self.global_position + horizontal_direction * STEP_DETECTION_OFFSET
+		step_detector.global_position = self.global_position + horizontal_direction * STEP_DETECTOR_OFFSET
 		
 		if not is_crouch_enabled and duck_detector.is_colliding() and not hole_detector.is_colliding() and horizontal_speed() <= CROUCH_MAX_SPEED:
 			# auto-crouch; this reduces Player body to sphere (radius is unchanged) and reduces xz velocity to crawl spe
 			self.is_crouch_enabled = true
-			$Canvas/HUD.set_movement_text("low ceiling ahead: %s (speed=%0.1f)" % [duck_detector.get_collider().get_parent().name, horizontal_speed()])
-			
+			#$Canvas/HUD.set_movement_text("low ceiling ahead: %s (speed=%0.1f)" % [duck_detector.get_collider().get_parent().name, horizontal_speed()])
 		
 		if step_detector.is_colliding():
 			match vertical_movement:
 				VerticalMovement.CLIMB_STEP:
 					continue_climb()
-					
 				VerticalMovement.JUMP:
-					pass # TO DO
-					
+					pass # do nothing
 				_:
 					start_climb()
+		
 		elif vertical_movement == VerticalMovement.CLIMB_STEP: # was climbing # TO DO: this needs to be more selective; it may stop colliding because Player is sliding against step
-			
-			if feet_y() >= detected_step_top or y_speed <= 0: # has Player cleared the step/started falling?
+			if global_feet_y() >= detected_step_top or y_speed <= 0: # has Player cleared the step/started falling?
 				print("stop climbing ", get_step_name())
-				stop_climbing()
+				stop_climb()
 				detected_step = null
 		
 		elif vertical_movement == VerticalMovement.JUMP:
-			if feet_y() >= detected_step_top or y_speed <= 0:
+			if global_feet_y() >= detected_step_top or y_speed <= 0:
 				print("stop jumping ", get_step_name())
-				stop_climbing()
+				stop_climb()
 				detected_step = null
 	
 	
@@ -446,45 +422,40 @@ func _physics_process(delta: float) -> void:
 					(-collision.get_normal() * self.run_speed / collision.get_collider(0).mass) * delta)
 
 
-
-
-func stop_climbing():
-	__set_vertical_movement(VerticalMovement.NONE) # wrong, probably
-	$Canvas/HUD.set_movement_text("stop climbing")
-	#self.velocity.y = 0 # rather abrupt
-	climb_direction = Vector3.ZERO
-	print("exiting step or ramp: ", get_step_name(), "  ", self.velocity)
-
-
+# climb/jump
 
 func start_climb() -> void: # TO DO: also check head clearance?
 	detected_step = step_detector.get_collider()
 	var col_point = step_detector.get_collision_point()
 	detected_step_top = col_point.y
-	var step_height := detected_step_top - feet_y()
+	var step_height := detected_step_top - global_feet_y()
 	print("start of step or ledge: ", get_step_name())
 	var speed = horizontal_speed()
 	
 	if step_height <= current_physics.max_step_height:
 		__set_vertical_movement(VerticalMovement.CLIMB_STEP)
 		print("climb step ", detected_step_top)
-		climb_direction = (col_point - feet_position()).normalized() # not the right launch vector as it doesn't account for gravity or air friction (although currently we don't use the vector)
+		climb_direction = (col_point - global_feet_position()).normalized() # not the right launch vector as it doesn't account for gravity or air friction (although currently we don't use the vector)
 		
 		$Canvas/HUD.set_movement_text("start climbing\n%s\n%s" % [get_step_name(), climb_direction])
 		
 		self.velocity.y = speed * climb_direction.y * 2
 		
 	elif step_height <= current_physics.max_jump_height:
-		if speed >= JUMP_MIN_SPEED: # TO DO: we only want to jump if player is sprinting and user is pressing forward key; Q. should pressing forward + sidestep also be permitted? (jumping backwards is not)
-			print("auto-jump ", detected_step_top, "   speed=", speed)
-			y_speed = JUMP_Y_SPEED * 3
-			self.velocity.y = y_speed
-			__set_vertical_movement(VerticalMovement.JUMP)
+		if vertical_movement != VerticalMovement.JUMP:
+			if speed >= JUMP_MIN_SPEED: # TO DO: we only want to jump if player is sprinting and user is pressing forward key; Q. should pressing forward + sidestep also be permitted? (jumping backwards is not)
+				print("auto-jump ", detected_step_top, "   speed=", speed)
+				climb_direction = (col_point - global_feet_position()).normalized() # not the right launch vector as it doesn't account for gravity or air friction (although currently we don't use the vector)
+				$Canvas/HUD.set_movement_text("start jumping\n%s\n%s" % [get_step_name(), climb_direction])
+				y_speed = JUMP_Y_SPEED * 3
+				self.velocity.y = y_speed
+				__set_vertical_movement(VerticalMovement.JUMP)
+			else:
+				print("can't auto-jump (too slow) ", speed, "  min=", JUMP_MIN_SPEED)
 		else:
-			print("can't auto-jump (too slow) ", is_sprint_enabled, "  ", speed, "  min=", JUMP_MIN_SPEED)
+			print("can't double-jump")
 	else:
 		print("can't climb/jump (too high)")
-
 
 
 func continue_climb() -> void:
@@ -496,84 +467,21 @@ func continue_climb() -> void:
 		start_climb()
 	else:
 		self.velocity.y = horizontal_speed() * climb_direction.y * 2
-		
-		
 
 
-func climb(desired_direction: Vector3) -> void: # user-direction is currently unused but see above comments on step detector's orientation
-	var step = step_detector.get_collider()
-	if step != detected_step: # found a new step so start climbing that
-		detected_step = step
-		detected_step_top = step_detector.get_collision_point().y
-		print("Detected a new step or ledge: ", get_step_name())
-		
-		var speed = horizontal_speed()
-		if speed != 0: # while player is moving
-			
-			var col_point = step_detector.get_collision_point()
-			#var col_normal = step_detector.get_collision_normal() # TO DO: use normal to determine surface's slope (i.e. don't step up on steeply sloped ledges); Q. what is steepest angled surface the player can reasonably step onto? maybe 15-30deg - TBD
-			
-			
-			var step_height = col_point.y - feet_y()
-			
-			if step_height <= current_physics.max_step_height:
-				__set_vertical_movement(VerticalMovement.CLIMB_STEP)
-				print("climb step ", step_height)
-			elif step_height <= current_physics.max_jump_height:
-				if speed >= JUMP_MIN_SPEED: # TO DO: we only want to jump if player is sprinting and user is pressing forward key; Q. should pressing forward + sidestep also be permitted? (jumping backwards is not)
-					print("auto-jump ", step_height, "   speed=", speed)
-					y_speed = JUMP_Y_SPEED
-					self.velocity.y = y_speed * 3
-					__set_vertical_movement(VerticalMovement.JUMP)
-				else:
-					print("can't auto-jump (too slow) ", is_sprint_enabled, "  ", speed, "  min=", JUMP_MIN_SPEED)
-				return
-			else:
-				print("too high")
-				return
-			
-			climb_direction = (col_point - feet_position()).normalized() # not the right launch vector as it doesn't account for gravity or air friction (although currently we don't use the vector)
-			
-			#print("climb_direction=", climb_direction)
-			
-			$Canvas/HUD.set_movement_text("start climbing\n%s\n%s" % [get_step_name(), climb_direction])
-			
-			#var speed = 5 #-self.velocity.z # wrong
-			#self.velocity.y = speed * climb_direction.y * 2
-			self.velocity.y = y_speed
-			#self.velocity.z *= -climb_direction.z
-			
-			#print("velocity=", self.velocity)
-			
-			#y_speed = step_height * 10 # kludge # TO DO: we want a nice straight climb
-			#self.velocity.y = y_speed
-		
-	else: # still climbing same step
-			
-		#	if vertical_movement == VerticalMovement.JUMP:
-				#print("still jumping: ", self.velocity)
-		#		self.velocity = jump_direction
-		#	else:
-		#		pass#print("still climbing: ", self.velocity)
-			
-	#	if self.velocity.z < 0: # while player is moving forward
-			var speed = 5 #-self.velocity.z # wrong
-			self.velocity.y = speed * climb_direction.y * 2
-			
-			#print("jumpdir=", jump_direction, "   ", self.velocity)
-	#	else:
-			#y_speed = 0.0 # TO DO: appropriate?
-			pass #print("stopped moving forward but still colliding with step") # TO DO: what, if anything, to do if player stops moving forward? will existing physics do the right thing?
+func stop_climb():
+	__set_vertical_movement(VerticalMovement.NONE) # wrong, probably
+	$Canvas/HUD.set_movement_text("stop climbing")
+	#self.velocity.y = 0 # rather abrupt
+	climb_direction = Vector3.ZERO
+	print("exiting step or ramp: ", get_step_name(), "  ", self.velocity)
 
 
-func has_traction() -> bool:
-	return is_on_floor() or vertical_movement == VerticalMovement.CLIMB_STEP
 
+# external impulse, e.g. applied by a detonation's shrapnel radius or by firing rocket launcher
 
-func is_far_from_floor() -> bool:
-	# @hhas01: TO DO: what is purpose of this? it is not the same as the built-in is_on_floor method
-	# @810-Dude answers: There are some functions implemented to fix some quirks of the engine, like the function feet_clearance, that one exists due to that the function is_on_floor won't work unless move_and_slide is being called and the object moves. So certain static situations needed it. Perhaps now we don't, but it's something to consider
-	return not feet_clearance.is_colliding()
+func add_impulse(impulse_in : Vector3) -> void:
+	impulse += impulse_in
 
 
 
@@ -586,22 +494,32 @@ func found_item(item: PickableItem) -> void: # called by PickableItem when Playe
 		$Audio/PickedUp.play() # TO DO: we don't want to couple assets/audio directly to Player; need some sort of API between them
 
 
+# InventoryManager signal handlers
 
-#func _crouch(input : Dictionary, delta :float) -> void:
-	# Inputs
-	# Get the character's head node
-	# If the head node is not touching the ceiling
-#	if not head_clearance.is_colliding():
-		
-		# Takes the character collision node
-		
-		# change the character's collision shape
-#		var shape = body.shape.height
-#		shape = lerp(shape, 1.7 - (get_key(input, "crouch") * 1.5), WALK_SPEED  * delta)
-#		body.shape.height = shape
-#		body.shape.radius = (0.24 - 0.12*get_key(input, "crouch"))
-		#separation_ray.shape.length = shape
-#		feet.target_position.y = -shape
+func update_health_status(damage_type: Enums.DamageType = Enums.DamageType.NONE) -> void:
+	if damage_type != Enums.DamageType.NONE:
+		pass # TO DO: damage effect animations, e.g. Player may "sway" or "stagger" when hit, which is a camera animation (the Player itself won't move)
+
+
+func player_died(_damage_type: Enums.DamageType) -> void:
+	__alive = false
+	# TO DO: death effect: camera drops to ground, colliders and inputs are disabled
+
+
+# TO DO: camera shake is a useful visual effect, e.g. when smacked by a Hulk or when something explodes nearby, or maybe when player hits ground hard after jumping from great height
+
+@export var shake_time := 0.0
+@export var shake_force := 0.0
+
+func shake_camera(_delta : float) -> void:
+	if shake_time > 0:
+		camera.h_offset = randf_range(-shake_force, shake_force)
+		camera.v_offset = randf_range(-shake_force, shake_force)
+		shake_time -= _delta
+	else:
+		camera.h_offset = 0
+		camera.v_offset = 0
+
 
 
 
@@ -624,13 +542,6 @@ func found_item(item: PickableItem) -> void: # called by PickableItem when Playe
 #			n_speed = lerp(n_speed, CROUCH_SPEED, self.multiplier*delta)
 #			self.reset_slide_multi()
 #			self.reset_wall_multi()
-
-
-
-# external impulse, e.g. applied by a detonation's shrapnel radius or by firing rocket launcher
-
-func add_impulse(impulse_in : Vector3) -> void:
-	impulse += impulse_in
 
 
 
@@ -675,21 +586,6 @@ func add_impulse(impulse_in : Vector3) -> void:
 			# Starts animation with smoothing
 #			play("idle", 0.3, 0.1)
 
-
-
-# TO DO: camera shake is a useful visual effect, e.g. when smacked by a Hulk or when something explodes nearby, or maybe when player hits ground hard after jumping from great height
-
-@export var shake_time := 0.0
-@export var shake_force := 0.0
-
-func shake_camera(_delta : float) -> void:
-	if shake_time > 0:
-		camera.h_offset = randf_range(-shake_force, shake_force)
-		camera.v_offset = randf_range(-shake_force, shake_force)
-		shake_time -= _delta
-	else:
-		camera.h_offset = 0
-		camera.v_offset = 0
 
 
 #func _tilt(_delta : float) -> void: # don't think we want tilt though; it's getting too far away from Classic gameplay look and feel

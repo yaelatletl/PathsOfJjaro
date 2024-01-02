@@ -4,6 +4,9 @@ class_name DualPurposeWeapon extends Weapon
 # engine/weapons/DualPurposeWeapon -- fusion, AR, alien gun
 
 
+# TO DO: should AR have better accuracy in single-shot? (burst shots should be as inaccurate as Classic)
+
+
 var __triggers_shoot_independently: bool # true for AR; false for fusion and alien gun
 
 var __primary_is_shooting   := false # used if triggers are independent
