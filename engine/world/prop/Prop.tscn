@@ -2,6 +2,5 @@
 
 [ext_resource type="Script" path="res://engine/world/prop/Prop.gd" id="1_7u43g"]
 
-
-[node name="Prop" type="Node3D"]
+[node name="Prop" type="RigidBody3D"]
 script = ExtResource("1_7u43g")
