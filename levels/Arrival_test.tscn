@@ -3519,7 +3519,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.0
 script = ExtResource("1_hop1f")
 
 [node name="character" parent="." instance=ExtResource("1_d14hk")]
-transform = Transform3D(0.722702, 0, -0.69116, 0, 1, 0, 0.69116, 0, 0.722702, -83.2734, 4.51452, -55.7308)
+transform = Transform3D(0.722702, 0, -0.69116, 0, 1, 0, 0.69116, 0, 0.722702, -83.273, 0.8, -55.731)
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -33.765, 2.7374, 0)
@@ -3563,7 +3563,7 @@ metadata/_edit_lock_ = true
 metadata/_edit_lock_ = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Floor/StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, -0.5, 2.08165e-12)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
 shape = SubResource("BoxShape3D_2cvjk")
 metadata/_edit_lock_ = true
 

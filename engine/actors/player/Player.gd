@@ -4,17 +4,19 @@ class_name Player
 # Player.gd
 
 
-# important:
+# notes:
 #
-# WiH is scaled down and moved completely inside Body radius close to camera to prevent clipping through walls
+# - 810-dude tip: WiH are scaled down and moved completely inside Body radius close to camera to prevent gun barrels clipping through walls
 #
-# for now, WeaponInHand scenes (assets) are attached directly to Player (engine) so they initialize and connect to Weapons when level is entered;; eventually, they should be attached by code for loose coupling
+# - for now, WeaponInHand scenes (assets) are attached directly to Player (engine) so they initialize and connect to Weapons when level is entered; they should eventually be attached to Player by code for loose coupling between engine and assets
+#
+# auto-jump and auto-crouch mechanics are provisional, for early play testing only; we will probably modify these further once levels are being built (there are lots of situations where we don't want auto-crouch triggered, e.g. when facing a moving door/platform)
 
 
 # TO DO: should step detection also detect descending stairs? ATM climbing stairs is smooth (player maintains traction in CLIMB_STEP) whereas descending may be a bit bumpy
 
 
-# TO DO: easiest way to implement ladder is to have ladder Area tell the body when it enters/exits the ladder; while on the ladder, translate forward/backward/sideways movement to up/down movement depending on whether player is looking at ladder (forward->up) or away from it (forward->down); also decide how/when to use FALL: should Player and NPCs always jump down shaft rather than controlled descent of ladder?
+# TO DO: easiest way to implement ladder is to have ladder Area tell the body when it enters/exits the ladder; while on the ladder, translate forward/backward/sideways movement to up/down movement depending on whether player is looking at ladder (forward->up) or awfay from it (forward->down); also decide how/when to use FALL: should Player and NPCs always jump down shaft rather than controlled descent of ladder?
 
 
 var __alive := true
@@ -54,12 +56,12 @@ const MAX_LOOK_ANGLE := deg_to_rad(85) # Maximum camera angle
 
 const STEP_DETECTOR_OFFSET := 0.9 # distance from center of player at which to position the raycast's origin; is always calculated in the direction of movement on xz plane # TO DO: should this distance be larger when sprinting?
 
-@onready var duck_detector := $DuckDetector # this is always 0.1m in front of Player
-@onready var hole_detector := $HoleDetector # quick-n-dirty check; TO DO: use shape cast to determine if player is facing a crawlable duct
 @onready var step_detector := $StepDetector # this is always STEP_DETECTOR_OFFSET (0.8m) ahead of player center in direction of movement, which should be enough to detect approaching step/ladder/crouch/ledge/railing # note: this raycast only detects a collision body that MAY block player walking forward (e.g. it could be a smooth ramp, which is climbable by Player's capsule body up to a certain angle); it also doesn't guarantee that it won't return false if the player proceeds forward, moving the ray to other side of a narrow body (e.g. ladder tread); TO DO: probably want 2 raycasts positioned left and right to better detect ledges approached at an angle; these will need to rotate around the Player's y=0 axis
 
-@onready var crouch_animation := $CrouchAnimation
-@onready var crouch_timer     := $CrouchTimer # once crouching starts, wait until timeout before uncrouching
+@onready var crawlway_ceiling_detector := $CrouchedBody/CeilingDetector # this is always 0.1m in front of Player
+@onready var crawlway_floor_detector   := $CrouchedBody/FloorDetector # quick-n-dirty check; TO DO: use shape cast to determine if player is facing a crawlable duct
+@onready var crouch_animation          := $CrouchedBody/AnimationPlayer
+@onready var crouch_timer              := $CrouchedBody/Timer # once crouching starts, wait until timeout before uncrouching
 
 
 # movement states
@@ -168,6 +170,8 @@ var mouse_y_sensitivity := deg_to_rad(5.0) #0.2 # TO DO: need separate parameter
 
 var mouse_velocity := Vector2.ZERO # TO DO: is there any benefit to handing mouse motion _input events ourselves vs. calling Input.get_last_mouse_velocity() in _process?
 
+var debug_view := false
+
 
 
 var is_sprint_enabled := true: # toggles between walk and sprint each time SPRINT key is pressed
@@ -178,6 +182,7 @@ var is_sprint_enabled := true: # toggles between walk and sprint each time SPRIN
 		__update_horizontal_movement()
 
 
+# crouch; this reduces Player body to sphere (radius is unchanged) and reduces xz velocity to crawl speed
 var is_crouch_enabled := false:
 	get:
 		return is_crouch_enabled
@@ -227,9 +232,18 @@ func is_far_from_floor() -> bool:
 
 
 
+func set_horizontal_movement_text(text: String) -> void: # DEBUG
+	#print("horizontal_movement: ", text)
+	$Canvas/HUD.set_horizontal_movement_text(text)
+
+func set_vertical_movement_text(text: String) -> void: # DEBUG
+	#print("vertical_movement: ", text)
+	$Canvas/HUD.set_vertical_movement_text(text)
+
 
 
 func _ready() -> void:
+	self.scale = Vector3(0.96, 0.96, 0.96) # Player is built to dimensions (1.0,1.6,1.0) to keep its math simple, but needs to squeeze through ~1.0m gaps so reduce Player's size slightly here to allow clearance
 	self.max_slides = 4 # oddly max_slides doesn't appear in Editor's CharacterBody3D inspector
 	#self.floor_stop_on_slope_enabled = false # this does, however
 	#self.floor_max_angle = PI / 4 # as does this
@@ -251,6 +265,11 @@ func _input(event):
 
 
 func process_action_inputs() -> void:
+		# DEBUG: quick-n-dirty chase cam view; note: weapons and Action raycast are attached to Camera so won't look/behave correctly when camera is behind Player
+		if Input.is_action_just_pressed(&"DEBUG_CAMERA"):
+			debug_view = not debug_view
+			$BodyMarker.visible = debug_view
+			camera.position.z = 3 if debug_view else 0
 		# shoot
 		if Input.is_action_just_pressed(&"NEXT_WEAPON"):
 			WeaponManager.activate_next_weapon()
@@ -300,22 +319,25 @@ func get_user_movement(delta:float) -> Vector3:
 		#if Input.is_action_just_pressed(&"JUMP") and not head_clearance.is_colliding(): # TO DO: do we need to check head clearance? or just jump and let physics deal with it?
 		#	__set_vertical_movement(VerticalMovement.JUMP)
 	else:
-		if vertical_movement == VerticalMovement.CLIMB_LADDER:
-			pass
-			# TO DO: translate xz_input to climb/descend; Q. what if player is facing away from ladder: descend/climb? or fall?
+		match vertical_movement:
+			VerticalMovement.CLIMB_LADDER:
+				pass # TO DO: translate xz_input to climb/descend; Q. what if player is facing away from ladder: descend/climb? or fall?
 			
-		else:
-		#if y_speed < 0 and not vertical_movement == VerticalMovement.CLIMB_LADDER: # TO DO: decide descending ladder behavior (should player climb down or jump down?)
-		#	vertical_movement = VerticalMovement.FALL
-			xz_input = Vector2.ZERO
-			var prev_y_speed = y_speed
-			y_speed -= current_physics.gravity * delta # TO DO: does vacuum/air/liquid make a difference here?
-			if prev_y_speed > 0 and y_speed <= 0:
-				__set_vertical_movement(VerticalMovement.FALL)
+			VerticalMovement.JUMP:
+				pass
+				
+			_:
+			#if y_speed < 0 and not vertical_movement == VerticalMovement.CLIMB_LADDER: # TO DO: decide descending ladder behavior (should player climb down or jump down?)
+			#	vertical_movement = VerticalMovement.FALL
+				xz_input = Vector2.ZERO
+				var prev_y_speed = y_speed
+				y_speed -= current_physics.gravity * delta # TO DO: does vacuum/air/liquid make a difference here?
+				if prev_y_speed >= 0 and y_speed < 0:
+					__set_vertical_movement(VerticalMovement.FALL)
 	
 	# if Player is falling, they can still look freely which allows them to turn mid-air (a Classic quirk we preserve as a gameplay feature)
 	var look = self.global_transform.basis
-	assert(look.y == Vector3.UP)
+	#assert(look.y.normalized() == Vector3.UP)
 	var z_multiplier = current_physics.maximum_forward_velocity if xz_input.y > 0 else current_physics.maximum_backward_velocity
 	return (look.z * -xz_input.y * z_multiplier) + (look.x * xz_input.x * current_physics.maximum_perpendicular_velocity)
 
@@ -363,12 +385,13 @@ func _physics_process(delta: float) -> void:
 	
 	var v = self.velocity#.normalized()
 	var w = desired_direction#.normalized()
-	$Canvas/HUD.set_speed_text("%s  %s\n%0.2f,%0.2f,%0.2f\n%0.2f,%0.2f,%0.2f" % [Global.enum_to_string(horizontal_movement, HorizontalMovement), Global.enum_to_string(vertical_movement, VerticalMovement), v.x, v.y, v.z, w.x, w.y, w.z])
+	set_horizontal_movement_text("%s  %s\n%0.2f,%0.2f,%0.2f\n%0.2f,%0.2f,%0.2f" % [Global.enum_to_string(horizontal_movement, HorizontalMovement), Global.enum_to_string(vertical_movement, VerticalMovement), v.x, v.y, v.z, w.x, w.y, w.z])
 	
 	if is_crouch_enabled:
-		if crouch_timer.is_stopped() and not head_clearance.is_colliding() and not duck_detector.is_colliding():
+		if crouch_timer.is_stopped() and not head_clearance.is_colliding() and not crawlway_ceiling_detector.is_colliding():
 			print("head clearance: ", head_clearance.is_colliding())
 			self.is_crouch_enabled = false
+			set_vertical_movement_text("")
 	else:
 		# automatic step climb, ledge jump, and crouch; TO DO: can this also detect vault reliably? (we may need a forward pointing ray for that since railings are narrow)
 		# StepDetector preferentially orients in direction the user wants to move, falling back to direction player is moving under inertia if no user inputs, falling back to direction player is looking if no movement
@@ -376,13 +399,15 @@ func _physics_process(delta: float) -> void:
 		var move_x = self.velocity.x + desired_direction.x * 20
 		var move_z = self.velocity.z + desired_direction.z * 20
 		var horizontal_direction := Vector3(move_x, 0, move_z).normalized() if move_x or move_z else global_look_direction()
-		
+		horizontal_direction.y = 0
 		step_detector.global_position = self.global_position + horizontal_direction * STEP_DETECTOR_OFFSET
 		
-		if not is_crouch_enabled and duck_detector.is_colliding() and not hole_detector.is_colliding() and horizontal_speed() <= CROUCH_MAX_SPEED:
-			# auto-crouch; this reduces Player body to sphere (radius is unchanged) and reduces xz velocity to crawl spe
+		# TO DO: if ceiling and floor detectors are both colliding, use the difference between them (i.e. player should be able to crawl into a duct as long as it isn't above step [jump?] height); the alternative would be to explicitly indicate crouch+crawl locations within levels using Areas (similar to how ladders are explicitly marked as Areas); this could work well enough in gameplay and will prevent unwanted crouches (we'll have enough to worry about preventing unwanted jumps, though again we might use explicit Area markers to trigger a +y impulse where the player needs to leap a gap)
+		if not is_crouch_enabled and crawlway_ceiling_detector.is_colliding() and not crawlway_floor_detector.is_colliding() and horizontal_speed() <= CROUCH_MAX_SPEED:
+			# TO DO: do not crouch in front of a moving platform/door, or when standing on a moving platform (caveat: we might want to make level 4's trash compactor exit a duct, requiring player to punch out grille and crawl in before they get crushed; we might get around that by pausing compactor platform briefly as large garbage objects press against ceiling)
+			# TO DO: use shape cast to confirm there is a crawlable hole
+			set_vertical_movement_text("crouching\nduct-height=%0.2f" % (crawlway_ceiling_detector.get_collision_point().y - crawlway_floor_detector.get_collision_point().y))
 			self.is_crouch_enabled = true
-			#$Canvas/HUD.set_movement_text("low ceiling ahead: %s (speed=%0.1f)" % [duck_detector.get_collider().get_parent().name, horizontal_speed()])
 		
 		if step_detector.is_colliding():
 			match vertical_movement:
@@ -434,28 +459,27 @@ func start_climb() -> void: # TO DO: also check head clearance?
 	
 	if step_height <= current_physics.max_step_height:
 		__set_vertical_movement(VerticalMovement.CLIMB_STEP)
-		print("climb step ", detected_step_top)
+
 		climb_direction = (col_point - global_feet_position()).normalized() # not the right launch vector as it doesn't account for gravity or air friction (although currently we don't use the vector)
 		
-		$Canvas/HUD.set_movement_text("start climbing\n%s\n%s" % [get_step_name(), climb_direction])
+		set_vertical_movement_text("start climbing step\n%s\n%s" % [get_step_name(), climb_direction])
 		
 		self.velocity.y = speed * climb_direction.y * 2
 		
 	elif step_height <= current_physics.max_jump_height:
 		if vertical_movement != VerticalMovement.JUMP:
 			if speed >= JUMP_MIN_SPEED: # TO DO: we only want to jump if player is sprinting and user is pressing forward key; Q. should pressing forward + sidestep also be permitted? (jumping backwards is not)
-				print("auto-jump ", detected_step_top, "   speed=", speed)
 				climb_direction = (col_point - global_feet_position()).normalized() # not the right launch vector as it doesn't account for gravity or air friction (although currently we don't use the vector)
-				$Canvas/HUD.set_movement_text("start jumping\n%s\n%s" % [get_step_name(), climb_direction])
+				set_vertical_movement_text("start jumping\n%s\n%s" % [get_step_name(), climb_direction])
 				y_speed = JUMP_Y_SPEED * 3
 				self.velocity.y = y_speed
 				__set_vertical_movement(VerticalMovement.JUMP)
 			else:
-				print("can't auto-jump (too slow) ", speed, "  min=", JUMP_MIN_SPEED)
+				set_vertical_movement_text("can't auto-jump (too slow) speed=%0.2f < %0.2f" % [speed, JUMP_MIN_SPEED])
 		else:
-			print("can't double-jump")
+			set_vertical_movement_text("can't double-jump")
 	else:
-		print("can't climb/jump (too high)")
+		set_vertical_movement_text("can't climb/jump (too high)")
 
 
 func continue_climb() -> void:
@@ -463,7 +487,7 @@ func continue_climb() -> void:
 	if step != detected_step: # found a new step so start climbing that
 		detected_step = step
 		detected_step_top = step_detector.get_collision_point().y
-		print("Detected next step or ledge: ", get_step_name())
+		set_vertical_movement_text("Detected next step or ledge: %s" % get_step_name())
 		start_climb()
 	else:
 		self.velocity.y = horizontal_speed() * climb_direction.y * 2
@@ -471,10 +495,9 @@ func continue_climb() -> void:
 
 func stop_climb():
 	__set_vertical_movement(VerticalMovement.NONE) # wrong, probably
-	$Canvas/HUD.set_movement_text("stop climbing")
 	#self.velocity.y = 0 # rather abrupt
 	climb_direction = Vector3.ZERO
-	print("exiting step or ramp: ", get_step_name(), "  ", self.velocity)
+	set_vertical_movement_text("stop climbing: %s" % get_step_name())
 
 
 
@@ -503,7 +526,8 @@ func update_health_status(damage_type: Enums.DamageType = Enums.DamageType.NONE)
 
 func player_died(_damage_type: Enums.DamageType) -> void:
 	__alive = false
-	# TO DO: death effect: camera drops to ground, colliders and inputs are disabled
+	# TO DO: death effect: camera drops to ground (use crouch dimensions for dead player, although it'll need a different animation), colliders and inputs are disabled
+	# note: don't bother implementing player_revived: solo games will reload the entire Level scene from last savepoint; ignore netplay respawning for now
 
 
 # TO DO: camera shake is a useful visual effect, e.g. when smacked by a Hulk or when something explodes nearby, or maybe when player hits ground hard after jumping from great height
@@ -588,7 +612,7 @@ func shake_camera(_delta : float) -> void:
 
 
 
-#func _tilt(_delta : float) -> void: # don't think we want tilt though; it's getting too far away from Classic gameplay look and feel
+#func _tilt(_delta : float) -> void: # do we want tilt? it's getting a bit far away from Classic gameplay look and feel; OTOH, if we swap the sidestep and turn axes for touch controls (so the primary joystick provides forward/backward + turning, which allows user's other thumb to press primary trigger while player moves around tank-style), having the secondary (sidestep + v-look) joystick lean player left/right when sidestepping could make it more intuitive (i.e. using the "look" joystick to "lean left/right" activates sidestepping)
 	#wall_normal.normal is in global space, wall_normal is an object! 
 	#camera forward/back is basis.z 
 	#given a wall normal, tilt the camera to the opposite side of the wall

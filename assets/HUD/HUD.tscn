@@ -211,30 +211,6 @@ text = "SHIELDS: xxx
 OXYGEN: XXX"
 uppercase = true
 
-[node name="Movement" type="Label" parent="."]
-layout_mode = 0
-offset_left = 909.0
-offset_top = 617.0
-offset_right = 1265.0
-offset_bottom = 713.0
-theme = ExtResource("4_26t8g")
-text = "xx
-xx
-xx"
-uppercase = true
-
-[node name="Speed" type="Label" parent="."]
-layout_mode = 0
-offset_left = 37.0
-offset_top = 617.0
-offset_right = 393.0
-offset_bottom = 713.0
-theme = ExtResource("4_26t8g")
-text = "xx
-xx
-xx"
-uppercase = true
-
 [node name="WeaponStatus" type="VBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = 1
@@ -276,3 +252,34 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 mouse_filter = 2
 alignment = 1
+
+[node name="Debug" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="VerticalMovement" type="Label" parent="Debug"]
+layout_mode = 0
+offset_left = 909.0
+offset_top = 617.0
+offset_right = 1265.0
+offset_bottom = 713.0
+theme = ExtResource("4_26t8g")
+text = "xx
+xx
+xx"
+autowrap_mode = 2
+uppercase = true
+
+[node name="HorizontalMovement" type="Label" parent="Debug"]
+layout_mode = 0
+offset_left = 37.0
+offset_top = 617.0
+offset_right = 393.0
+offset_bottom = 713.0
+theme = ExtResource("4_26t8g")
+text = "xx
+xx
+xx"
+autowrap_mode = 2
+uppercase = true

@@ -42,9 +42,10 @@ const CRAWL_PHYSICS := {
 	"maximum_angular_velocity": 6.0,
 	"angular_recentering_velocity": 0.75,
 	
-	"radius": 0.49,
-	"height": 0.98,
-	"head_height": 0.25,
+	# Player is built to 0.5m radius + 1.6m height (1.0m when crouched), then scaled to 96% to allow clearance in tight corridors
+	#"radius": 0.25,
+	#"height": 0.7999878,
+	#"camera_height": 0.19999695,
 	"splash_height": 0.5,
 	
 	# will the following be same for all gaits? what about swimming?
@@ -62,9 +63,9 @@ const CRAWL_PHYSICS := {
 	"step_delta": 0.049987793, # units? (looks like seconds? it's not ticks) M2 uses the exact same camera bounce at both walk and sprint; not sure if we want walk to have slightly different bounce to visually differentiate gaits; crawl and swim will use different values; what about low-gravity?; TO DO: should we use M2 Physics params or hardcoded AnimationPlayer tracks to control camera bounce? (AP has advantage that play only needs called at transitions whereas code-based bounce requires extra code in _physics_process to update it; one advantage of code is when player stops at any point in bounce: animation track has to run to end of sequence to reset height, although we could use AP and switch to a timer-based function to reduce current bounce height)
 	"step_amplitude": 0.099990845,
 	
-	"dead_height": 0.25,
-	"half_camera_separation": 0.03125, # FOV
-	"maximum_elevation": 42.666656, # vertical look limit (±42.7deg is the Classic value, which was determined less by gameplay than by need to avoid visual distortion due to the Classic renderer's lack of true verticals; while we probably want to constrain the angle to some degree to avoid changing gameplay too much - e.g. near-vertical look allows user unlimited freedom to snipe from ledges whereas Classic forced user to jump down to shoot monsters directly below - we might allow a somewhat greater angle, e.g. ±60-70deg, for a more modern gameplay feel)
+	#"dead_height": 0.25,
+	#"half_camera_separation": 0.03125, # FOV
+	#"maximum_elevation": 42.666656, # vertical look limit (±42.7deg is the Classic value, which was determined less by gameplay than by need to avoid visual distortion due to the Classic renderer's lack of true verticals; while we probably want to constrain the angle to some degree to avoid changing gameplay too much - e.g. near-vertical look allows user unlimited freedom to snipe from ledges whereas Classic forced user to jump down to shoot monsters directly below - we might allow a somewhat greater angle, e.g. ±60-70deg, for a more modern gameplay feel)
 }
 
 
@@ -95,10 +96,9 @@ const WALK_PHYSICS := {
 	"angular_recentering_velocity": 0.75, # TO DO: how quickly the camera vertically auto-recenters when moving forward/backward (note: moving sideways does not auto-recenter)
 	
 	
-	
-	"radius": 0.49,
-	"height": 1.59,
-	"head_height": 0.3,
+	#"radius": 0.25,
+	#"height": 0.7999878,
+	#"camera_height": 0.19999695,
 	"splash_height": 0.5, # TO DO: I assume this puts waterline around waist when swimming on surface of liquid
 	
 	# will the following be same for all gaits? what about swimming?
@@ -116,9 +116,9 @@ const WALK_PHYSICS := {
 	"step_delta": 0.049987793, # units? (looks like seconds? it's not ticks) M2 uses the exact same camera bounce at both walk and sprint; not sure if we want walk to have slightly different bounce to visually differentiate gaits; crawl and swim will use different values; what about low-gravity?; TO DO: should we use M2 Physics params or hardcoded AnimationPlayer tracks to control camera bounce? (AP has advantage that play only needs called at transitions whereas code-based bounce requires extra code in _physics_process to update it; one advantage of code is when player stops at any point in bounce: animation track has to run to end of sequence to reset height, although we could use AP and switch to a timer-based function to reduce current bounce height)
 	"step_amplitude": 0.099990845,
 	
-	"dead_height": 0.25,
-	"half_camera_separation": 0.03125, # FOV
-	"maximum_elevation": 42.666656, # vertical look limit (±42.7deg is the Classic value, which was determined less by gameplay than by need to avoid visual distortion due to the Classic renderer's lack of true verticals; while we probably want to constrain the angle to some degree to avoid changing gameplay too much - e.g. near-vertical look allows user unlimited freedom to snipe from ledges whereas Classic forced user to jump down to shoot monsters directly below - we might allow a somewhat greater angle, e.g. ±60-70deg, for a more modern gameplay feel)
+	#"dead_height": 0.25,
+	#"half_camera_separation": 0.03125, # FOV
+	#"maximum_elevation": 42.666656, # vertical look limit (±42.7deg is the Classic value, which was determined less by gameplay than by need to avoid visual distortion due to the Classic renderer's lack of true verticals; while we probably want to constrain the angle to some degree to avoid changing gameplay too much - e.g. near-vertical look allows user unlimited freedom to snipe from ledges whereas Classic forced user to jump down to shoot monsters directly below - we might allow a somewhat greater angle, e.g. ±60-70deg, for a more modern gameplay feel)
 }
 
 
@@ -145,9 +145,9 @@ const SPRINT_PHYSICS := {
 	"maximum_angular_velocity": 10.0,
 	"angular_recentering_velocity": 1.5,
 	
-	"radius": 0.49,
-	"height": 1.59,
-	"head_height": 0.3,
+	#"radius": 0.25,
+	#"height": 0.7999878,
+	#"camera_height": 0.19999695,
 	"splash_height": 0.5,
 	
 	# same for all gaits?
@@ -164,9 +164,9 @@ const SPRINT_PHYSICS := {
 	"step_delta": 0.049987793,
 	"step_amplitude": 0.099990845,
 	
-	"dead_height": 0.25,
-	"half_camera_separation": 0.03125,
-	"maximum_elevation": 42.666656,
+	#"dead_height": 0.25,
+	#"half_camera_separation": 0.03125,
+	#"maximum_elevation": 42.666656,
 }
 
 

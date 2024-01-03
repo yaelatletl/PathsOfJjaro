@@ -20,7 +20,7 @@ uv1_triplanar = true
 texture_filter = 5
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_lqqmu"]
-plane = Plane(2.08165e-12, 1, 2.08165e-12, 2.08165e-12)
+plane = Plane(2.08165e-12, 1, 2.08165e-12, 0.1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_m3uog"]
 size = Vector3(1, 2.775, 8.235)
@@ -505,7 +505,7 @@ shape = SubResource("BoxShape3D_4021j")
 disabled = true
 
 [node name="Duct3" type="MeshInstance3D" parent="Duct"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 17.5, 0.55, 0.54)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 17.5, 0.55, 0.55)
 mesh = SubResource("BoxMesh_rducp")
 skeleton = NodePath("../..")
 
@@ -560,7 +560,7 @@ transform = Transform3D(1, 0, 0, 0, 1, -8.35187e-23, 0, -8.35187e-23, 1, 2.08165
 shape = SubResource("BoxShape3D_x7nfl")
 
 [node name="Duct4" type="MeshInstance3D" parent="Duct"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 18, 0.55, -0.54)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 18, 0.55, -0.55)
 mesh = SubResource("BoxMesh_0kej0")
 skeleton = NodePath("../..")
 

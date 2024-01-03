@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://dxx6xubs1bfbr"]
+[gd_scene load_steps=35 format=3 uid="uid://dxx6xubs1bfbr"]
 
 [ext_resource type="Script" path="res://engine/actors/player/Player.gd" id="1_dw56p"]
 [ext_resource type="PackedScene" uid="uid://btafi6rm8lbsm" path="res://assets/weapons/MagnumPistol/MagnumPistol.tscn" id="2_d66r2"]
@@ -8,11 +8,109 @@
 [ext_resource type="PackedScene" uid="uid://bcdg4sigkkarn" path="res://assets/HUD/HUD.tscn" id="6_4fgbk"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_fe3pe"]
-radius = 0.49
-height = 1.59
+height = 1.6
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_dhlqt"]
-radius = 0.49
+
+[sub_resource type="Animation" id="Animation_qtbba"]
+resource_name = "RESET"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Body:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "position_3d"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Head")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0, 1, 2.08165e-12, 0.3, 2.08165e-12)
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Head/HeadClearance:target_position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(2.08165e-12, 0.3, 2.08165e-12)]
+}
+
+[sub_resource type="Animation" id="Animation_uv0ft"]
+resource_name = "crouch"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Body:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/1/type = "position_3d"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Head")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0, 1, 2.08165e-12, 0.3, 2.08165e-12, 0.5, 1, 2.08165e-12, -0.3, 2.08165e-12)
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Head/HeadClearance:target_position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(2.08165e-12, 0.3, 2.08165e-12), Vector3(2.08165e-12, 0.7, 2.08165e-12)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_y2bld"]
+_data = {
+"RESET": SubResource("Animation_qtbba"),
+"crouch": SubResource("Animation_uv0ft")
+}
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_oibuu"]
+transparency = 1
+albedo_color = Color(0, 1, 1, 0.12549)
+emission_enabled = true
+emission = Color(0, 0.878431, 0.847059, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_o3k8t"]
+material = SubResource("StandardMaterial3D_oibuu")
+top_radius = 0.01
+bottom_radius = 0.01
+height = 1.6
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gwmw2"]
+albedo_color = Color(0, 1, 1, 1)
+emission_enabled = true
+emission = Color(0, 1, 1, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_xfkde"]
+material = SubResource("StandardMaterial3D_gwmw2")
+radius = 0.01
+height = 0.02
+radial_segments = 8
+rings = 4
 
 [sub_resource type="Animation" id="53"]
 length = 0.2
@@ -96,35 +194,6 @@ _data = {
 "walk": SubResource("55")
 }
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_oibuu"]
-transparency = 1
-albedo_color = Color(0, 1, 1, 0.027451)
-emission_enabled = true
-emission = Color(0, 1, 0, 1)
-
-[sub_resource type="CylinderMesh" id="CylinderMesh_o3k8t"]
-material = SubResource("StandardMaterial3D_oibuu")
-top_radius = 0.01
-bottom_radius = 0.01
-height = 0.795
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gwmw2"]
-emission_enabled = true
-emission = Color(1, 1, 1, 1)
-
-[sub_resource type="SphereMesh" id="SphereMesh_xfkde"]
-material = SubResource("StandardMaterial3D_gwmw2")
-radius = 0.01
-height = 0.02
-radial_segments = 8
-rings = 4
-
-[sub_resource type="CylinderMesh" id="CylinderMesh_1cdkl"]
-material = SubResource("StandardMaterial3D_oibuu")
-top_radius = 0.01
-bottom_radius = 0.01
-height = 0.975
-
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ajqya"]
 transparency = 1
 albedo_color = Color(1, 0.439216, 0, 0.309804)
@@ -137,90 +206,58 @@ top_radius = 0.03
 bottom_radius = 0.01
 height = 0.8
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_00moj"]
+albedo_color = Color(1, 0, 1, 1)
+emission_enabled = true
+emission = Color(1, 0, 1, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_5h6w4"]
+material = SubResource("StandardMaterial3D_00moj")
+radius = 0.01
+height = 0.02
+radial_segments = 8
+rings = 4
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_y705y"]
+transparency = 1
+albedo_color = Color(0, 0.807843, 0.0941176, 0.168627)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_ovopj"]
+material = SubResource("StandardMaterial3D_y705y")
+height = 1.6
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2f2xy"]
+transparency = 1
+albedo_color = Color(0, 1, 0, 0.462745)
+
+[sub_resource type="SphereMesh" id="SphereMesh_cbah8"]
+material = SubResource("StandardMaterial3D_2f2xy")
+radius = 0.1
+height = 0.2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yjl6j"]
+transparency = 1
+albedo_color = Color(0.00392157, 1, 0.12549, 0.101961)
+
+[sub_resource type="SphereMesh" id="SphereMesh_e45i5"]
+material = SubResource("StandardMaterial3D_yjl6j")
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cltay"]
-albedo_color = Color(1, 0.478431, 0, 1)
+albedo_color = Color(0, 0.607843, 0, 1)
 
-[sub_resource type="CylinderMesh" id="CylinderMesh_rxxcc"]
+[sub_resource type="CylinderMesh" id="CylinderMesh_mac7e"]
 material = SubResource("StandardMaterial3D_cltay")
-top_radius = 0.49
-bottom_radius = 0.59
-height = 0.01
+top_radius = 0.0
+bottom_radius = 0.25
+height = 0.004
 
-[sub_resource type="Animation" id="Animation_qtbba"]
-resource_name = "RESET"
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Body:disabled")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-tracks/1/type = "position_3d"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Head")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = PackedFloat32Array(0, 1, 2.08165e-12, 0.3, 2.08165e-12)
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Head/HeadClearance:target_position")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(2.08165e-12, 0.3, 2.08165e-12)]
-}
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cl8fu"]
+albedo_color = Color(1, 0.435294, 0, 1)
 
-[sub_resource type="Animation" id="Animation_uv0ft"]
-resource_name = "crouch"
-length = 0.5
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Body:disabled")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [false, true]
-}
-tracks/1/type = "position_3d"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Head")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = PackedFloat32Array(0, 1, 2.08165e-12, 0.3, 2.08165e-12, 0.5, 1, 2.08165e-12, -0.3, 2.08165e-12)
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Head/HeadClearance:target_position")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector3(2.08165e-12, 0.3, 2.08165e-12), Vector3(2.08165e-12, 0.7, 2.08165e-12)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_y2bld"]
-_data = {
-"RESET": SubResource("Animation_qtbba"),
-"crouch": SubResource("Animation_uv0ft")
-}
+[sub_resource type="CylinderMesh" id="CylinderMesh_uie4x"]
+material = SubResource("StandardMaterial3D_cl8fu")
+top_radius = 0.25
+height = 0.004
 
 [node name="Player" type="CharacterBody3D"]
 transform = Transform3D(1, -3.48787e-16, 3.48787e-16, 3.48787e-16, 1, -3.48787e-16, -3.48787e-16, 3.48787e-16, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
@@ -234,8 +271,59 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.0
 shape = SubResource("CapsuleShape3D_fe3pe")
 
 [node name="CrouchedBody" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, -1.21652e-31, 0, -1.21652e-31, 1, 0, 0, 0, 1, 2.08168e-12, -0.305419, 2.08161e-12)
+transform = Transform3D(1, -1.21652e-31, 0, -1.21652e-31, 1, 0, 0, 0, 1, 2.08165e-12, -0.3, 2.08165e-12)
 shape = SubResource("SphereShape3D_dhlqt")
+
+[node name="CeilingDetector" type="RayCast3D" parent="CrouchedBody"]
+transform = Transform3D(1, -1.21652e-31, 0, -1.21652e-31, 1, 0, 0, 0, 1, 2.08165e-12, 0.3, -0.6)
+exclude_parent = false
+target_position = Vector3(2.08165e-12, 0.799, 2.08165e-12)
+collision_mask = 98433
+hit_from_inside = true
+debug_shape_custom_color = Color(0, 0.396078, 0.411765, 0.509804)
+debug_shape_thickness = 4
+
+[node name="FloorDetector" type="RayCast3D" parent="CrouchedBody"]
+transform = Transform3D(1, -1.21652e-31, 0, -1.21652e-31, 1, 0, 0, 0, 1, 2.08165e-12, 0.299562, -0.6)
+exclude_parent = false
+target_position = Vector3(2.08165e-12, -0.799, 2.08165e-12)
+collision_mask = 98433
+hit_from_inside = true
+debug_shape_custom_color = Color(0, 0.423529, 0.101961, 0.509804)
+debug_shape_thickness = 4
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CrouchedBody"]
+root_node = NodePath("../..")
+libraries = {
+"": SubResource("AnimationLibrary_y2bld")
+}
+
+[node name="Timer" type="Timer" parent="CrouchedBody"]
+wait_time = 2.0
+one_shot = true
+
+[node name="DebugMarker" type="Node3D" parent="CrouchedBody"]
+transform = Transform3D(1, -1.21652e-31, 0, -1.21652e-31, 1, 0, 0, 0, 1, -2.08165e-12, 0.3, -2.08165e-12)
+
+[node name="Detector" type="MeshInstance3D" parent="CrouchedBody/DebugMarker"]
+transform = Transform3D(1, -1.21652e-31, 0, -1.21652e-31, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, -0.6)
+mesh = SubResource("CylinderMesh_o3k8t")
+skeleton = NodePath("../../CeilingDetector")
+
+[node name="Top" type="MeshInstance3D" parent="CrouchedBody/DebugMarker"]
+transform = Transform3D(1, -1.21652e-31, 0, -1.21652e-31, 1, 0, 0, 0, 1, 6.24494e-12, 0.8, -0.6)
+mesh = SubResource("SphereMesh_xfkde")
+skeleton = NodePath("../../CeilingDetector")
+
+[node name="Center" type="MeshInstance3D" parent="CrouchedBody/DebugMarker"]
+transform = Transform3D(1, -1.21652e-31, 0, -1.21652e-31, 1, 0, 0, 0, 1, 6.24495e-12, -0.000438452, -0.6)
+mesh = SubResource("SphereMesh_xfkde")
+skeleton = NodePath("../../FloorDetector")
+
+[node name="Bottom" type="MeshInstance3D" parent="CrouchedBody/DebugMarker"]
+transform = Transform3D(1, -3.48787e-16, 3.48787e-16, 3.48787e-16, 1, -3.48787e-16, -3.48787e-16, 3.48787e-16, 1, 6.24495e-12, -0.800438, -0.6)
+mesh = SubResource("SphereMesh_xfkde")
+skeleton = NodePath("../../FloorDetector")
 
 [node name="Head" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.999999, 0, 0, 0, 0.999999, 2.08165e-12, 0.3, 2.08165e-12)
@@ -294,42 +382,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, -0.7, 2.08165e-1
 target_position = Vector3(2.08165e-12, -1, 2.08165e-12)
 debug_shape_custom_color = Color(0.54902, 0.0117647, 0.603922, 0.509804)
 
-[node name="DuckDetector" type="RayCast3D" parent="."]
-transform = Transform3D(1, -1.21652e-31, 0, -1.21652e-31, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, -0.6)
-exclude_parent = false
-target_position = Vector3(2.08165e-12, 0.795, 2.08165e-12)
-collision_mask = 98433
-debug_shape_custom_color = Color(0.54902, 0.0117647, 0.603922, 0.509804)
-debug_shape_thickness = 4
-
-[node name="Length" type="MeshInstance3D" parent="DuckDetector"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 0.4, 2.08165e-12)
-mesh = SubResource("CylinderMesh_o3k8t")
-
-[node name="End" type="MeshInstance3D" parent="DuckDetector"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 0.79, 2.08165e-12)
-mesh = SubResource("SphereMesh_xfkde")
-
-[node name="HoleDetector" type="RayCast3D" parent="."]
-transform = Transform3D(1, -1.21652e-31, 0, -1.21652e-31, 1, 0, 0, 0, 1, 2.08165e-12, -0.79, -0.6)
-exclude_parent = false
-target_position = Vector3(2.08165e-12, 0.975, 2.08165e-12)
-collision_mask = 98433
-debug_shape_custom_color = Color(0.54902, 0.0117647, 0.603922, 0.509804)
-debug_shape_thickness = 4
-
-[node name="Length" type="MeshInstance3D" parent="HoleDetector"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 0.488, 2.08165e-12)
-mesh = SubResource("CylinderMesh_1cdkl")
-
-[node name="End" type="MeshInstance3D" parent="HoleDetector"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
-mesh = SubResource("SphereMesh_xfkde")
-
-[node name="End2" type="MeshInstance3D" parent="HoleDetector"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 0.975, 2.08165e-12)
-mesh = SubResource("SphereMesh_xfkde")
-
 [node name="StepDetector" type="RayCast3D" parent="."]
 transform = Transform3D(1, -1.21652e-31, 0, -1.21652e-31, 1, 0, 0, 0, 1, 4.1633e-12, 4.1633e-12, -0.8)
 exclude_parent = false
@@ -343,8 +395,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, -0.4, 2.08165e-1
 mesh = SubResource("CylinderMesh_e5eph")
 
 [node name="End" type="MeshInstance3D" parent="StepDetector"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, -0.79, 2.08165e-12)
-mesh = SubResource("SphereMesh_xfkde")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, -0.795, 2.08165e-12)
+mesh = SubResource("SphereMesh_5h6w4")
 
 [node name="Canvas" type="CanvasLayer" parent="."]
 
@@ -355,15 +407,31 @@ mesh = SubResource("SphereMesh_xfkde")
 [node name="PickedUp" type="AudioStreamPlayer" parent="Audio"]
 stream = ExtResource("6_1hkb0")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, -1.21652e-31, 0, -1.21652e-31, 1, 0, 0, 0, 1, -2.81893e-16, -0.808131, 2.81893e-16)
-mesh = SubResource("CylinderMesh_rxxcc")
+[node name="BodyMarker" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, -1.21652e-31, 0, -1.21652e-31, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
+visible = false
+mesh = SubResource("CapsuleMesh_ovopj")
+skeleton = NodePath("../DebugFeetMarker")
 
-[node name="CrouchAnimation" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_y2bld")
-}
+[node name="Head" type="MeshInstance3D" parent="BodyMarker"]
+transform = Transform3D(1, -1.21652e-31, 9.31139e-24, -1.21652e-31, 0.999999, -9.31139e-24, 0, 0, 0.999999, -4.33681e-19, 0.3, 4.33681e-19)
+mesh = SubResource("SphereMesh_cbah8")
+skeleton = NodePath("../../Head")
 
-[node name="CrouchTimer" type="Timer" parent="."]
-wait_time = 2.0
-one_shot = true
+[node name="CrouchedBody" type="MeshInstance3D" parent="BodyMarker"]
+transform = Transform3D(1, -1.21652e-31, 0, -1.21652e-31, 1, 0, 0, 0, 1, 2.08165e-12, -0.3, 2.08165e-12)
+mesh = SubResource("SphereMesh_e45i5")
+skeleton = NodePath("../../DebugFeetMarker")
+
+[node name="DebugFeetMarker" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, -0.8, 2.08165e-12)
+
+[node name="Above" type="MeshInstance3D" parent="DebugFeetMarker"]
+transform = Transform3D(1, -1.21652e-31, 0, -1.21652e-31, 1, 0, 0, 0, 1, 2.08165e-12, 0.002, 2.08165e-12)
+mesh = SubResource("CylinderMesh_mac7e")
+skeleton = NodePath("../..")
+
+[node name="Below" type="MeshInstance3D" parent="DebugFeetMarker"]
+transform = Transform3D(1, -1.21652e-31, 0, -1.21652e-31, 1, 0, 0, 0, 1, 2.08165e-12, -0.002, 2.08165e-12)
+mesh = SubResource("CylinderMesh_uie4x")
+skeleton = NodePath("../..")

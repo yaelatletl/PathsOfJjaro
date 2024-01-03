@@ -3,7 +3,7 @@ extends Control
 
 func _ready():
 	Global.exit_level()
-	_on_Gameplay_test_pressed() # temporary; jump straight into test map on launch
+	#_on_Gameplay_test_pressed() # temporary; jump straight into test map on launch
 	
 
 func _on_Gameplay_test_pressed():

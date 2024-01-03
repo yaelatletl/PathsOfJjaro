@@ -19,11 +19,11 @@ extends Node
 # TO DO: decide when/how to draw automap later: redraws would probably be triggered by having Player's _physics_process emit a `player_did_move(...)` signal whenever the player turns or moves (i.e. whenever Player.global_transform changes); Radar could receive the same signal and redraw its center blip
 
 
-func set_movement_text(msg: String) -> void:
-	$Movement.text = msg
+func set_vertical_movement_text(msg: String) -> void:
+	$Debug/VerticalMovement.text = msg
 
-func set_speed_text(msg: String) -> void:
-	$Speed.text = msg
+func set_horizontal_movement_text(msg: String) -> void:
+	$Debug/HorizontalMovement.text = msg
 
 
 @onready var health := $Health
