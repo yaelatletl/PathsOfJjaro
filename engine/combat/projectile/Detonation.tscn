@@ -1,6 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://bwwv7h4vfopy"]
 
-[ext_resource type="Script" path="res://engine/actors/projectile/Detonation.gd" id="1_2uq01"]
+[ext_resource type="Script" path="res://engine/combat/projectile/Detonation.gd" id="1_2uq01"]
+
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7yulg"]
 albedo_color = Color(1, 0.278431, 0.172549, 1)

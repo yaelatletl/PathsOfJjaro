@@ -1,6 +1,7 @@
 [gd_scene load_steps=2 format=3 uid="uid://da18aaobrruwx"]
 
-[ext_resource type="Script" path="res://engine/pickables/InventoryManager.gd" id="1_1yp60"]
+[ext_resource type="Script" path="res://engine/world/pickables/InventoryManager.gd" id="1_1yp60"]
+
 
 [node name="InventoryManager" type="Node"]
 script = ExtResource("1_1yp60")

@@ -1,7 +1,7 @@
 [gd_scene load_steps=45 format=3 uid="uid://clwvs0y18jwcn"]
 
 [ext_resource type="Script" path="res://engine/level/LevelBase.gd" id="1_q5461"]
-[ext_resource type="PackedScene" uid="uid://65hdrolflc6l" path="res://engine/pickables/PickableItem.tscn" id="2_51ci0"]
+[ext_resource type="PackedScene" uid="uid://65hdrolflc6l" path="res://engine/world/pickables/PickableItem.tscn" id="2_51ci0"]
 [ext_resource type="Texture2D" uid="uid://c1f6duvpfuijb" path="res://assets/materials/T_Grid.png" id="3_y0bno"]
 [ext_resource type="PackedScene" uid="uid://32q2l6ybonnb" path="res://engine/level/TestPlatform.tscn" id="4_buiad"]
 [ext_resource type="PackedScene" uid="uid://dqfb5yf42myme" path="res://engine/level/Switch.tscn" id="5_filxt"]
