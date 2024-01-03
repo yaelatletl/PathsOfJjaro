@@ -4,12 +4,12 @@ extends WeaponInHand
 # assets/weapons/AssaultRifle/AssaultRifle.gd
 
 
-# TO DO: diegetic magazine displays for all weapons except FIST (which has infinite "ammo") and ROCKET_LAUNCHER (which should have a heads-up targeting and ammo display that appears on HUD to make long-range aiming easier)
+# TODO: diegetic magazine displays for all weapons except FIST (which has infinite "ammo") and ROCKET_LAUNCHER (which should have a heads-up targeting and ammo display that appears on HUD to make long-range aiming easier)
 #
 # https://www.youtube.com/watch?v=Xq0wgrCmnyw
 
 
-# TO DO: WeaponInHand scenes should provide muzzle-flash illuminations; these can be omnidirectional lights for simplicity and performed in "shoot" animations
+# TODO: WeaponInHand scenes should provide muzzle-flash illuminations; these can be omnidirectional lights for simplicity and performed in "shoot" animations
 #
 # Classic muzzle-flash settings for AR:
 #
@@ -18,7 +18,7 @@ extends WeaponInHand
 #	we can also add Color, e.g. yellowish-white for magnum and AR primary; bluish-white for fusion; saturated orange for flamethrower and alien gun
 
 
-# TO DO: these are from Classic weapon physics and, except for bob (which is TBD), are all superseded by model animations:
+# TODO: these are from Classic weapon physics and, except for bob (which is TBD), are all superseded by model animations:
 #"idle_height": 1.1666565,
 #"bob_amplitude": 0.028564453,
 #"idle_width": 0.5,
@@ -39,7 +39,7 @@ const WEAPON_TYPE := Enums.WeaponType.ASSAULT_RIFLE
 @onready var audio_secondary := $Weapon/SecondaryAudio
 
 const AUDIO_PRIMARY_SHOOT := [
-	preload("res://assets/audio/weapon/37 rms - Assault Rifle Firing.wav"), # TO DO: add slightly different alternative(s)?
+	preload("res://assets/audio/weapon/37 rms - Assault Rifle Firing.wav"), # TODO: add slightly different alternative(s)?
 ]
 
 const AUDIO_SECONDARY_SHOOT := [

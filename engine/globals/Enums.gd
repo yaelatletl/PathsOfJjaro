@@ -41,7 +41,7 @@ enum __SpeciesType {
 	FIGHTER_MAJOR,
 	FIGHTER_MINOR_PROJECTILE,
 	FIGHTER_MAJOR_PROJECTILE,
-	CIVILIAN_CREW, # TO DO: rename these PISTOL_CREW, etc as they are M2's armed Bobs, and use CIVILIAN_CREW for M1's unarmed crew members
+	CIVILIAN_CREW, # TODO: rename these PISTOL_CREW, etc as they are M2's armed Bobs, and use CIVILIAN_CREW for M1's unarmed crew members
 	CIVILIAN_SCIENCE,
 	CIVILIAN_SECURITY,
 	CIVILIAN_ASSIMILATED,
@@ -76,7 +76,7 @@ enum __SpeciesType {
 	FUSION_SCIENCE,
 	FUSION_SECURITY,
 	FUSION_ASSIMILATED,
-	# TO DO: M1-only types (Hulk, Wasp, Looker, MADD, and Deimos's unarmed crew; we may also add Pfhor crew on Boomer maps, which will be unarmed, unarmored, unmasked Pfhor which normally run away from SO and only use weak teeth and claws for defense when cornered; conversely we can add a few [fairly ineffectual] pistol Bobs to Deimos's Ch2 levels, with some extra Pfhor and scripted scenes so they don't affect the gameplay balance)
+	# TODO: M1-only types (Hulk, Wasp, Looker, MADD, and Deimos's unarmed crew; we may also add Pfhor crew on Boomer maps, which will be unarmed, unarmored, unmasked Pfhor which normally run away from SO and only use weak teeth and claws for defense when cornered; conversely we can add a few [fairly ineffectual] pistol Bobs to Deimos's Ch2 levels, with some extra Pfhor and scripted scenes so they don't affect the gameplay balance)
 }
 
 enum PickableFamily {
@@ -87,7 +87,7 @@ enum PickableFamily {
 	OTHER,
 }
 
-enum PickableType { # TO DO: can GDScript coerce enums to and from ints?
+enum PickableType { # TODO: can GDScript coerce enums to and from ints?
 	FIST = 0,
 	MAGNUM_PISTOL = 1, # in .sce2 files, subtype=1; BUG: MapToJSON has off-by-one error in looking up subtype names (possibly because it omits "Fist"/"Knife" item?), e.g. subtype="Plasma Pistol" should be "Magnum Magazine"
 	MAGNUM_MAGAZINE,
@@ -124,7 +124,7 @@ enum PickableType { # TO DO: can GDScript coerce enums to and from ints?
 	GREEN_BALL,
 	SUBMACHINE_GUN,
 	SUBMACHINE_GUN_CLIP,
-	# TO DO: M1/MCR items (e.g. DEFENSE_REPAIR_CHIP, ENGINEERING_PASS_KEY)
+	# TODO: M1/MCR items (e.g. DEFENSE_REPAIR_CHIP, ENGINEERING_PASS_KEY)
 	NONE,
 }
 
@@ -146,7 +146,7 @@ enum ProjectileType {
 	MINOR_FIST,
 	MAJOR_FIST,
 	
-	ROCKET, # TO DO: is this index 0 or 1? also, what are M1-only types (wasp spit, hulk slap, looker instaboom, any others)? we should append M1-only enums and remap the M1 physics definitions to those new values, which allows us to have a single bestiary for all 3 scenarios
+	ROCKET, # TODO: is this index 0 or 1? also, what are M1-only types (wasp spit, hulk slap, looker instaboom, any others)? we should append M1-only enums and remap the M1 physics definitions to those new values, which allows us to have a single bestiary for all 3 scenarios
 	GRENADE,
 	PISTOL_BULLET,
 	RIFLE_BULLET,
@@ -186,7 +186,7 @@ enum ProjectileType {
 	SEWAGE_YETI,
 	LAVA_YETI,
 	SMG_BULLET,
-	# TO DO: add M1-only hulk slap, wasp spit, looker instaboom, simulacrum instaboom projectile types after the M2 types
+	# TODO: add M1-only hulk slap, wasp spit, looker instaboom, simulacrum instaboom projectile types after the M2 types
 }
 
 
@@ -199,15 +199,15 @@ enum AnimationType { # these are visual animations, both in-flight and on-impact
 	MINOR_FIST_DETONATION,
 	MAJOR_FIST_DETONATION,
 	
-	HUMAN_BULLET_RICOCHET, # TO DO: separate Species?
+	HUMAN_BULLET_RICOCHET, # TODO: separate Species?
 	
 	MINOR_FUSION_DETONATION,
 	MAJOR_FUSION_DETONATION,
 	MAJOR_FUSION_CONTRAIL,
 	ROCKET_EXPLOSION,
-	ROCKET_CONTRAIL, # TO DO: use M2 int values
+	ROCKET_CONTRAIL, # TODO: use M2 int values
 	GRENADE_EXPLOSION,
-	GRENADE_CONTRAIL, # TO DO: use M2 int values
+	GRENADE_CONTRAIL, # TODO: use M2 int values
 	ALIEN_WEAPON_RICOCHET,
 	FLAMETHROWER_BURST, # fiery plume
 	FLAMETHROWER_IMPACT, # fiery plume hit something
@@ -235,10 +235,10 @@ enum AnimationType { # these are visual animations, both in-flight and on-impact
 	COMPILER_BOLT_MAJOR_DETONATION,
 	COMPILER_BOLT_MAJOR_CONTRAIL,
 	
-	MINOR_PFHOR_DRONE_DETONATION, # TO DO: is this exploding Pfhor drone? Q. what does Pfhor drone fire again (some sort of energy bolt)? can we make it fire same/similar projectile to Trooper bullet without affecting gameplay? it'd be nice to create some consistency in Pfhor munitions
+	MINOR_PFHOR_DRONE_DETONATION, # TODO: is this exploding Pfhor drone? Q. what does Pfhor drone fire again (some sort of energy bolt)? can we make it fire same/similar projectile to Trooper bullet without affecting gameplay? it'd be nice to create some consistency in Pfhor munitions
 	MAJOR_PFHOR_DRONE_DETONATION,
 	
-	# TO DO: change these names for clarity
+	# TODO: change these names for clarity
 	MINOR_HUMMER_PROJECTILE_DETONATION, 
 	MAJOR_HUMMER_PROJECTILE_DETONATION,
 	DURANDAL_HUMMER_PROJECTILE_DETONATION, # ?
@@ -260,14 +260,14 @@ enum AnimationType { # these are visual animations, both in-flight and on-impact
 	LARGE_JJARO_EMERGENCE,
 	
 	
-	# WATER_LAMP_BREAKING, # TO DO: should this effect be incorporated into breakable scenery's animation? or do we define general animations here, e.g. GLASS_BREAKING, bearing in mind these animations are played on top of whatever hit animation the body itself plays; we can decide once some smashable props are prototypes for in-world testing
+	# WATER_LAMP_BREAKING, # TODO: should this effect be incorporated into breakable scenery's animation? or do we define general animations here, e.g. GLASS_BREAKING, bearing in mind these animations are played on top of whatever hit animation the body itself plays; we can decide once some smashable props are prototypes for in-world testing
 	# LAVA_LAMP_BREAKING,
 	# SEWAGE_LAMP_BREAKING,
 	# ALIEN_LAMP_BREAKING,
 	
-	# TO DO: what about breakable/unbreakable glass/props? if we can keep breakables simple - e.g. small glass prop, large glass prop, glass window - we might get away with a few generic breaking-glass animations; it depends on the complexity of the asset, and whether it's a full scene with standard API and custom implementation, or if we can have a single general-purpose scene [for each Family] with standard implementation and only Species/Object-specific animations are different? table-driven is preferred as it reduces code and facilitates high-level modding tools (including GUI table editor and table validator - it is easy to check for missing relationships, provide defaults)
+	# TODO: what about breakable/unbreakable glass/props? if we can keep breakables simple - e.g. small glass prop, large glass prop, glass window - we might get away with a few generic breaking-glass animations; it depends on the complexity of the asset, and whether it's a full scene with standard API and custom implementation, or if we can have a single general-purpose scene [for each Family] with standard implementation and only Species/Object-specific animations are different? table-driven is preferred as it reduces code and facilitates high-level modding tools (including GUI table editor and table validator - it is easy to check for missing relationships, provide defaults)
 	
-	METAL_RICOCHET, # general richochet effect; TO DO: should all impacts have a default fallback, e.g. if a bullet travelling in air hits something metallic which doesn't define a specific bullet-from-air-into-metal, play a generic METAL_RICHOCHET visual? 
+	METAL_RICOCHET, # general richochet effect; TODO: should all impacts have a default fallback, e.g. if a bullet travelling in air hits something metallic which doesn't define a specific bullet-from-air-into-metal, play a generic METAL_RICHOCHET visual? 
 	#
 	# also, can we simplify the transition tables so they only need to declare general transitions from media to flesh/armor/glass/etc, with the exact visual effect determined by crossreferencing the impactees's Species (or Family), e.g. bullet + HUMAN + flesh = red, bullet + PFHOR + flesh = yellow; bullet + HUMAN + armor = bright sharp metal-on-metal spark; bullet + PFHOR + armor = dull splattery metal-on-ceramic spark; this would work more like CSS, with a basic "one-size-fits-all" definition which can be inherited and some properties overridden
 	#
@@ -310,7 +310,7 @@ enum DamageType { # this determines immunity/weakness flags for each SpeciesType
 	EXPLOSION,
 	FIGHTER_MELEE,
 	FIGHTER_BOLT,
-	PROJECTILE, # TO DO: split this into BULLET vs SHELL for non-explosive vs explosive?
+	PROJECTILE, # TODO: split this into BULLET vs SHELL for non-explosive vs explosive?
 	SHOTGUN_PROJECTILE, # need to check M3 physics to see what uses this differently to PROJECTILE
 	ABSORBED, # I think this is invincibility impacts
 	FLAME,
@@ -320,7 +320,7 @@ enum DamageType { # this determines immunity/weakness flags for each SpeciesType
 	HUNTER_BOLT,
 	TELEPORTER, # fairly sure this is only used for screen effect
 	PFHOR_DRONE, # can we use same projectile type as Trooper?
-	YETI_CLAWS, # TO DO: a single CLAWS type should be sufficient
+	YETI_CLAWS, # TODO: a single CLAWS type should be sufficient
 	YETI_PROJECTILE,
 	CRUSHING,
 	LAVA, # M2 lava (planetary, volcanic magma); this may be different to M1 lava (liquid rock used as reactor coolant)
@@ -329,7 +329,7 @@ enum DamageType { # this determines immunity/weakness flags for each SpeciesType
 	ENERGY_DRAIN,
 	OXYGEN_DRAIN,
 	HUMMER_BOLT,
-	# TO DO: M1-only damage types
+	# TODO: M1-only damage types
 	
 	HULK_SLAP,
 	HOUND_CLAWS,
@@ -385,10 +385,10 @@ enum DetonationType { # determines damage type, health delta, shrapnel radius
 	#HUMAN_RADIATION_DAMAGE,
 	PFHOR_RADIATION_DAMAGE,
 	CRUSH_DAMAGE,
-	# TO DO: do we need CRUSH_DEATH and SUFFOCATION_DEATH? i.e. is there any case where these fatalities would do shrapnel damage? (e.g. does Hunter explode into shrapnel when crushed? probably redundant, TBH)
+	# TODO: do we need CRUSH_DEATH and SUFFOCATION_DEATH? i.e. is there any case where these fatalities would do shrapnel damage? (e.g. does Hunter explode into shrapnel when crushed? probably redundant, TBH)
 	# note: oxygen depletion and suffocation death are orthogonal to health damage (e.g. a player fully under lava depletes both health and oxygen), so let's hardcode oxygen depletion separately 
 	
-	# TO DO: M1 detonations
+	# TODO: M1 detonations
 	HULK_MELEE_DETONATION,
 	WASP_PROJECTILE_DETONATION,
 	LOOKER_DETONATION,
@@ -397,7 +397,7 @@ enum DetonationType { # determines damage type, health delta, shrapnel radius
 
 
 
-# TO DO: when a projectile hits something, look up its action (detonation/effect/promotion) here:
+# TODO: when a projectile hits something, look up its action (detonation/effect/promotion) here:
 
 
 enum FamilyType {
@@ -405,7 +405,7 @@ enum FamilyType {
 	PFHOR,
 	SPHT,
 	ALIEN,
-	LEVEL, # TO DO: rename "Level" layer to "Architecture" and rename this ARCHITECTURE? (the word "Level" is ambiguous as it may refer to everything in a map or just its walls+ceilings+floors)
+	LEVEL, # TODO: rename "Level" layer to "Architecture" and rename this ARCHITECTURE? (the word "Level" is ambiguous as it may refer to everything in a map or just its walls+ceilings+floors)
 	SCENERY,
 	PROP,
 	MEDIUM,
@@ -461,7 +461,7 @@ enum BodyType {
 	METAL_GRATE, # probably destructible SCENERY
 	STONE, # wall, scenery
 	PLASTIC, # wall, scenery, prop
-	GLASS, # wall, scenery, prop; TO DO: need `"destructible":bool`
+	GLASS, # wall, scenery, prop; TODO: need `"destructible":bool`
 	AIR,
 	CRYO,
 	FLAME,
@@ -472,14 +472,14 @@ enum BodyType {
 	#FORCEFIELD,
 	
 	#CURRENT, # the projectile's current medium, usually air, which it detects itself and passes on as arg to the impact handler: projectile_impacted(from_spe,to_species)
-	# TO DO: what else?
+	# TODO: what else?
 }
 
 
 enum ZoneType { # unlike above body types, these are non-solid so must compose with them
 	NONE,
 	#HUMAN_RADIATION,
-	PFHOR_RADIATION, # Boomer's major damage polys (Area) # TO DO: Area-inflicted damage is orthogonal to the poly's content so can't be defined here, e.g. a Boomer radiation area may be in air or vacuum (Pfhor lava is presumably a separate case); it might be moved
+	PFHOR_RADIATION, # Boomer's major damage polys (Area) # TODO: Area-inflicted damage is orthogonal to the poly's content so can't be defined here, e.g. a Boomer radiation area may be in air or vacuum (Pfhor lava is presumably a separate case); it might be moved
 }
 
 enum FriendOrFoe {

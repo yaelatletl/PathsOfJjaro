@@ -3,7 +3,7 @@ extends Control
 
 # CircularMeter.gd -- unused
 
-# TO DO: let's use the radar border to indicate Repair level objective[s] (switch hunts are really tiresome without some help finding them: we'll put the switch locations, which have been already shown in the terminal, in the automap, and put dots around the radar which rotate around ring as player turns so they always point to where those switches are: red/orange for TODO, green/blue for DONE - keep the completed switches visible as when there are 2+ they also help user triangulate player's location)
+# TODO: let's use the radar border to indicate Repair level objective[s] (switch hunts are really tiresome without some help finding them: we'll put the switch locations, which have been already shown in the terminal, in the automap, and put dots around the radar which rotate around ring as player turns so they always point to where those switches are: red/orange for TODO, green/blue for DONE - keep the completed switches visible as when there are 2+ they also help user triangulate player's location)
 
 
 @export var full: Color = Color.ALICE_BLUE

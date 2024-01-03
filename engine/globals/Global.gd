@@ -6,9 +6,9 @@ extends Node
 # global state should, as a rule, go here; e.g. if Player instance persists between levels, store it in a property here and pass it to a newly instantiated Level scene when configuring that level's state; alternatively, mapmakers can position a new Player node in each map (which is probably preferable for mapmakers) and Global holds the player's level-independent state (health, inventory)
 
 
-# TO DO: for function naming convention, use single leading underscore for Godot event handlers (_ready, _on_area_foo_entered), use double underscores for private functions and vars; do NOT use leading underscores on public properies and methods
+# TODO: for function naming convention, use single leading underscore for Godot event handlers (_ready, _on_area_foo_entered), use double underscores for private functions and vars; do NOT use leading underscores on public properies and methods
 
-# TO DO:  it's possible for weapon activating animation to be reversed if the user presses previous/next_weapon key multiple times (repeatedly pressing the key quickly will step over weapons without activating any except the last-selected weapon, but pressing it a bit more slowly may cause a weapon's activating animation to start playing without allowing time for it to finish; ideally there should be a single animation that can be played either forward or backward or slowed/paused at any point so it's trivially reversible, otherwise we'll have to interpolate the model between 2 different positions, which may or may not produce a satisfactory animation)
+# TODO:  it's possible for weapon activating animation to be reversed if the user presses previous/next_weapon key multiple times (repeatedly pressing the key quickly will step over weapons without activating any except the last-selected weapon, but pressing it a bit more slowly may cause a weapon's activating animation to start playing without allowing time for it to finish; ideally there should be a single animation that can be played either forward or backward or slowed/paused at any point so it's trivially reversible, otherwise we'll have to interpolate the model between 2 different positions, which may or may not produce a satisfactory animation)
 
 
 
@@ -27,7 +27,7 @@ signal time_left_changed(value: float) # used by HUD's center counter; currently
 # Level management
 
 
-var current_level: Node # currently set by LevelBase._ready; TO DO: once Global (or LevelManager) manages level loading, this may change to SceneTree
+var current_level: Node # currently set by LevelBase._ready; TODO: once Global (or LevelManager) manages level loading, this may change to SceneTree
 
 
 # Called when the node enters the scene tree for the first time.
@@ -58,7 +58,7 @@ func enum_to_string(value: int, enum_type) -> String:
 
 func add_to_level(node: Node3D) -> void:
 	var owner: Node = current_level #.get_tree()
-	owner.add_child(node) # TO DO: the current level scene should be available on Global; Global would also handle level loading and anything else that persists across process lifetime (unless Global also ontains lots of non-level logic, in which case put level management code in a dedicated LevelManager singleton)
+	owner.add_child(node) # TODO: the current level scene should be available on Global; Global would also handle level loading and anything else that persists across process lifetime (unless Global also ontains lots of non-level logic, in which case put level management code in a dedicated LevelManager singleton)
 	node.owner = owner
 	#print("added ", node, " to ", owner)
 

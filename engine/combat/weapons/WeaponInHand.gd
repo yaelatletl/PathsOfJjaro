@@ -12,13 +12,13 @@ class_name WeaponInHand extends Node3D
 
 
 
-# TO DO: in M2, when player looks up/down the WiH visually moves down/up (M1 doesn't do this but we probably want to replicate the M2 effect - it doesn't change weapon behavior but it looks “more lifelike”); ignore this for now and figure how best to add it later (WiH may need rendered in its own viewport and overlaid via canvas layer to prevent weapon barrel clipping through walls, in which case the simplest solution is for Player to adjust its viewport positioning when vertical look angle changes)
+# TODO: in M2, when player looks up/down the WiH visually moves down/up (M1 doesn't do this but we probably want to replicate the M2 effect - it doesn't change weapon behavior but it looks “more lifelike”); ignore this for now and figure how best to add it later (WiH may need rendered in its own viewport and overlaid via canvas layer to prevent weapon barrel clipping through walls, in which case the simplest solution is for Player to adjust its viewport positioning when vertical look angle changes)
 
 
-# TO DO: define a WeaponInHand.Placeholder class which implements all WIH methods but emits print and/or HUD messages only (it won't have animations or sounds so can be RefCounted); use this placeholder scene as the initial value of Weapon's __primary_hand and __secondary_hand properties; this will allow Weapon to be tested with or without view scenes attached (using Weapon without its required WIH[s] currently raises an exception)
+# TODO: define a WeaponInHand.Placeholder class which implements all WIH methods but emits print and/or HUD messages only (it won't have animations or sounds so can be RefCounted); use this placeholder scene as the initial value of Weapon's __primary_hand and __secondary_hand properties; this will allow Weapon to be tested with or without view scenes attached (using Weapon without its required WIH[s] currently raises an exception)
 
 
-# TO DO: how best to animate weapon-in-hand bob when Player walks/runs/crawls/jumps/climbs, etc? these might be implemented on Player, using parameters from PlayerDefinitions to customize bob height, sway, etc; alternatively, they might be implemented as WIH methods which Player calls
+# TODO: how best to animate weapon-in-hand bob when Player walks/runs/crawls/jumps/climbs, etc? these might be implemented on Player, using parameters from PlayerDefinitions to customize bob height, sway, etc; alternatively, they might be implemented as WIH methods which Player calls
 #
 # similarly, if we use hand gestures to indicate when an Action can be performed (e.g. player is looking at a switch), should the WIH be responsible for animating that hand gesture or should there be separate hand animation scenes?
 #
@@ -101,7 +101,7 @@ func reset() -> void: # weapon is doing nothing and is out of sight (below camer
 func idle() -> void: # weapon is doing nothing
 	animation.play("idle")
 
-# TO DO: do not pass successfully; define emptied method instead
+# TODO: do not pass successfully; define emptied method instead
 func shoot() -> void:
 	animation.play("shoot")
 	self.__redraw_ammo_display()
@@ -114,7 +114,7 @@ func reload() -> void:
 	self.__redraw_ammo_display()
 
 
-# TO DO: alternative approach is to build the single-gun reload as one animation, since the other hand is already hidden
+# TODO: alternative approach is to build the single-gun reload as one animation, since the other hand is already hidden
 
 func reload_other() -> void: # dual-wield weapons where both hands must interact to reload one gun while holding magazine (and possibly another gun) in the other hand
 	# note: only used by pistols (fists never reload, shotguns reload one-handed, and single-wield weapons use a single model which can animate one or two hands)
@@ -123,7 +123,7 @@ func reload_other() -> void: # dual-wield weapons where both hands must interact
 
 # single-wield WIH subclasses (fusion, AR, maybe alien gun) can override some/all of these secondary trigger methods
 
-func secondary_idle() -> void: # TO DO: standardize namings: either foo_secondary OR secondary_foo
+func secondary_idle() -> void: # TODO: standardize namings: either foo_secondary OR secondary_foo
 	pass
 
 func secondary_shoot() -> void:

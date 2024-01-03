@@ -1,12 +1,12 @@
 extends Node
 
 
-# TO DO: is this needed? suggest building these animations as .tscn files; chances are everything will be done in those
+# TODO: is this needed? suggest building these animations as .tscn files; chances are everything will be done in those
 
 
 const ANIMATION_DEFINITONS := [
 	{
-		"name": Enums.AnimationType.MINOR_FIST_DETONATION, # TO DO: rename "animation_type"
+		"name": Enums.AnimationType.MINOR_FIST_DETONATION, # TODO: rename "animation_type"
 		#"collection": "Projectiles",
 		#"clut": 0,
 		#"sequence": 17,
@@ -16,7 +16,7 @@ const ANIMATION_DEFINITONS := [
 			"end_when_transfer_animation_loops": false,
 			"sound_only": true,
 			"make_twin_visible": false, # only true for TELEPORT_OBJECT_IN; probably don't need it
-			"media_effect": false, # TO DO: true for liquid splash effects only; get rid of this and use transitions
+			"media_effect": false, # TODO: true for liquid splash effects only; get rid of this and use transitions
 		},
 		"delay": 0,
 		"delay_sound": null
@@ -57,7 +57,7 @@ const ANIMATION_DEFINITONS := [
 	},
 	
 	{
-		"name": Enums.AnimationType.GRENADE_CONTRAIL, # TO DO: should contrail be part of the Projectile?
+		"name": Enums.AnimationType.GRENADE_CONTRAIL, # TODO: should contrail be part of the Projectile?
 		"collection": "Projectiles",
 		"clut": 0,
 		"sequence": 4,
@@ -274,7 +274,7 @@ const ANIMATION_DEFINITONS := [
 	},
 	
 	{
-		"name": "glass breaking", # TO DO: add this for breaking bottles
+		"name": "glass breaking", # TODO: add this for breaking bottles
 		"collection": "Scenery (Water)",
 		"clut": 0,
 		"sequence": 22,

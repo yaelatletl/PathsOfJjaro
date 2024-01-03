@@ -1,7 +1,7 @@
 extends Node
 
 
-# TO DO: weapon and other Classic Physics are currently defined as TYPEDefinitions.gd; once the final data structures are decided on, they can be replaced with external .json files, but for development this is quickest; the only proviso is that (except for enum literals) definitions should use JSON-compatible types only
+# TODO: weapon and other Classic Physics are currently defined as TYPEDefinitions.gd; once the final data structures are decided on, they can be replaced with external .json files, but for development this is quickest; the only proviso is that (except for enum literals) definitions should use JSON-compatible types only
 
 
 # final M1 weapon order should be: fist, magnum, fusion, AR, alien gun, flamethrower, rocket launcher; this ensures that when alien gun/flamethrower runs empty, the Player switches to less powerful, more general-purpose weapon (typically AR) and avoids Classic's annoying flaw of auto-switching from alien gun to SPNKR (very dangerous!)
@@ -13,7 +13,7 @@ extends Node
 # caution: if rounds_per_shot > 1, it must be possible to deplete that magazine or it will never reload
 
 
-const WEAPON_DEFINITIONS := [ # TO DO: add remaining definitions in order of previous/next weapon switching (Arrival Demo requires FIST, MAGNUM_PISTOL, and ASSAULT_RIFLE; the rest can be added later)
+const WEAPON_DEFINITIONS := [ # TODO: add remaining definitions in order of previous/next weapon switching (Arrival Demo requires FIST, MAGNUM_PISTOL, and ASSAULT_RIFLE; the rest can be added later)
 	{
 		"pickable_type": Enums.PickableType.FIST, # == Enums.WeaponType.FIST
 		"weapon_class": "FistWeapon", # for now, these names are defined in a hardcoded lookup table in WeaponManager; eventually that table should be populated dynamically
@@ -21,10 +21,10 @@ const WEAPON_DEFINITIONS := [ # TO DO: add remaining definitions in order of pre
 		"activating_time":   0.25,
 		"deactivating_time": 0.25,
 		
-		#"is_automatic": false, # true for AR, TOZT, alien gun, SMG; what is not clear is why it is needed since all weapons repeat-fire as long as trigger is held # TO DO: check AO code for behavior; all Classic weapons are automatic, except possibly SPNKR, as holding a trigger repeats firing (semi-automatic would require a fresh trigger pull for each shot)
+		#"is_automatic": false, # true for AR, TOZT, alien gun, SMG; what is not clear is why it is needed since all weapons repeat-fire as long as trigger is held # TODO: check AO code for behavior; all Classic weapons are automatic, except possibly SPNKR, as holding a trigger repeats firing (semi-automatic would require a fresh trigger pull for each shot)
 		
 		"triggers_shoot_independently": false, # allows one pistol to fire before other finishes its firing animation
-		#"triggers_reload_independently": false, # was triggers_reload_independently`; allows one shotgun to reload before the other finishes its firing animation (TO DO: if both shotguns require reloading, should they reload one at a time before either starts firing? or can the first reload and then start firing as the second reloads?)
+		#"triggers_reload_independently": false, # was triggers_reload_independently`; allows one shotgun to reload before the other finishes its firing animation (TODO: if both shotguns require reloading, should they reload one at a time before either starts firing? or can the first reload and then start firing as the second reloads?)
 		"triggers_share_magazine": false, # was `triggers_share_ammo`; true for fusion and alien gun, false for AR and other weapons
 		"disappears_when_empty": false, # true for alien gun
 		
@@ -132,11 +132,11 @@ const WEAPON_DEFINITIONS := [ # TO DO: add remaining definitions in order of pre
 			"projectile_type":      Enums.ProjectileType.RIFLE_BULLET,
 			"rounds_per_shot":      1, # how many rounds this trigger consumes per shot; this is usually 1
 			"projectiles_per_shot": 1, # how many projectiles this trigger spawns per shot; 10 for shotgun, 2 for flechette, 1 for everything else
-			"origin_delta":         [0.0, -0.01953125, 0.3], # offset from Player's center to Projectile's origin; important: a projectile MUST spawn inside the Player's capsule body, never outside it, as we don't want projectiles originating inside walls or scenery when player is in tight service corridors; TO DO: this is M2 units - update to Godot units
+			"origin_delta":         [0.0, -0.01953125, 0.3], # offset from Player's center to Projectile's origin; important: a projectile MUST spawn inside the Player's capsule body, never outside it, as we don't want projectiles originating inside walls or scenery when player is in tight service corridors; TODO: this is M2 units - update to Godot units
 			
-			"theta_error":          7.03125, # projectile's accuracy; TO DO: this is M2 units - update to Godot units
+			"theta_error":          7.03125, # projectile's accuracy; TODO: this is M2 units - update to Godot units
 			"angular_spread":       null, # for alien gun, secondary_trigger's fires projectiles in a 3-way spread, so this property will be e.g. [Vector2(0,0), Vector2(-0.3,0), Vector(0.3,0)] - pressing and holding the trigger fires first projectile straight, second to its left, third to its right, repeating the cycle until trigger is released (this replaces Classic's behavior where secondary fired 2-way only and both keys had to be held to get 3-way)
-			"recoil_magnitude":     0.0048828125, # applies backward impulse to Player; TO DO: this is M2 units - update to Godot units
+			"recoil_magnitude":     0.0048828125, # applies backward impulse to Player; TODO: this is M2 units - update to Godot units
 			
 			# timings affect Weapon/WeaponTrigger behavior so remain here; the corresponding weapon-in-hand animations should not exceed these timings to avoid visual jitters when transitioning from one animation to another
 			"shooting_time":        0.18,

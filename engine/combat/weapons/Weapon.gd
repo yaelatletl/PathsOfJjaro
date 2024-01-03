@@ -11,7 +11,7 @@ class_name Weapon extends Object
 # note: dual_wield weapons are represented by a *single* Weapon instance controlling two WIH scenes, each of which plays animations for one hand
 
 
-# TO DO: for now, treat left hand as primary trigger and right hand as secondary trigger (i.e. most mouse users use left button as primary trigger); however, key->hand mappings for dual-wield should eventually be user-configured so a user who uses the right mouse button as their primary trigger key sees that button operating the Player's right hand (since the right button operating the Player's left hand would be visually confusing!), and vice-versa
+# TODO: for now, treat left hand as primary trigger and right hand as secondary trigger (i.e. most mouse users use left button as primary trigger); however, key->hand mappings for dual-wield should eventually be user-configured so a user who uses the right mouse button as their primary trigger key sees that button operating the Player's right hand (since the right button operating the Player's left hand would be visually confusing!), and vice-versa
 
 
 # weapon state
@@ -72,7 +72,7 @@ enum State {
 	REACTIVATING = 4, # used by dual-wield: reactivating an empty gun upon picking up new ammo
 	EMPTY        = 5, # transient state immediately advances to DEACTIVATING
 	
-	# for now, reloading sequences are exclusive and non-interruptible; TO DO: shotgun reloading is non-exclusive with shooting other
+	# for now, reloading sequences are exclusive and non-interruptible; TODO: shotgun reloading is non-exclusive with shooting other
 	RELOADING_PRIMARY         = 6,
 	RELOADING_PRIMARY_ENDED   = 7,
 	
@@ -288,7 +288,7 @@ func trigger_just_released(is_primary: bool) -> void: # used by dual-wield weapo
 
 # concrete subclasses should call these functions to launch projectiles
 
-# TO DO: these two methods need to calculate projectile's origin and direction using origin offset, theta error, and angular_spread from trigger data; they also need to apply recoil_magnitude impulse to Player
+# TODO: these two methods need to calculate projectile's origin and direction using origin offset, theta error, and angular_spread from trigger data; they also need to apply recoil_magnitude impulse to Player
 
 func spawn_primary_projectile(player: Player) -> void:
 	for i in range(0, __primary_trigger_data.projectiles_per_shot):
@@ -305,7 +305,7 @@ func spawn_secondary_projectile(player: Player) -> void:
 
 class Magazine extends Object: # the magazine used by a trigger; fusion and alien gun share a single magazine between both triggers, other weapons assign a separate magazine to each trigger
 	
-	# TO DO: eventually a weapon's Magazine's class should be specified by the WeaponDefinition; this allows for other ammo management schemes, e.g. where pickable items contain a variable number of rounds which are added to a single pool of rounds from which a third-party Weapon can draw rounds individually or in batches; for now, Weapon is hardcoded to use this class for M2-style ammo management
+	# TODO: eventually a weapon's Magazine's class should be specified by the WeaponDefinition; this allows for other ammo management schemes, e.g. where pickable items contain a variable number of rounds which are added to a single pool of rounds from which a third-party Weapon can draw rounds individually or in batches; for now, Weapon is hardcoded to use this class for M2-style ammo management
 	
 	var inventory_item: InventoryManager.InventoryItem
 	var max_count:      int

@@ -2,7 +2,7 @@ extends Node3D
 class_name SpawnerBase
 
 
-# TO DO:how is this meant to be used? the current implementation looks problematic: assuming we use some M2-style teleport-in triggers for introducing Pfhor and ammo in player's line of sight (e.g. the downstairs Arrival bar could have its Pfhor party teleport in, which adds some visual interest to the encounter), we want to attach multiple Pfhor to one player-detection Area which activates them all when Player enters it
+# TODO:how is this meant to be used? the current implementation looks problematic: assuming we use some M2-style teleport-in triggers for introducing Pfhor and ammo in player's line of sight (e.g. the downstairs Arrival bar could have its Pfhor party teleport in, which adds some visual interest to the encounter), we want to attach multiple Pfhor to one player-detection Area which activates them all when Player enters it
 
 # Ideally we'd place a group of Pfhor on the map (those that teleport in would use visible=false and teleport_in=true) then add all their paths to an `@export var bodies: Array[NodePath]` on a PlayerDetectionArea which is placed in the map at the trigger location. However, need to confirm first that GDScript and Editor can handle this (its support for generic types is eccentric and limited); we could probably use the same triggering API on PickableItem so ammo can also be teleported in. Assuming this'll work, recreate this as a subclass of Area3D so it can be placed directly into maps.
 

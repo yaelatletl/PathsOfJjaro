@@ -4,13 +4,13 @@ extends WeaponInHand
 # assets/weapons/Pistol.gd -- two-handed weapon, which can show left, right, or both hands, depending on whether inventory contains 1 or 2 guns
 
 
-# TO DO: need 3 reloading animations for magnum pistol: the primary hand holding the gun to reload, the secondary hand holding the magazine only, and the secondary hand holding both magazine and other gun
+# TODO: need 3 reloading animations for magnum pistol: the primary hand holding the gun to reload, the secondary hand holding the magazine only, and the secondary hand holding both magazine and other gun
 #
 # https://youtu.be/k4oCKctbyxE
 #
 # https://www.youtube.com/watch?v=_r0ITAeCrjA
 #
-# TO DO: look for existing skeleton animations to reuse; someone else might have implemented this before
+# TODO: look for existing skeleton animations to reuse; someone else might have implemented this before
 
 @onready var secondary_animation := $SecondaryAnimation
 
@@ -27,7 +27,7 @@ const AUDIO_SHOOT := [
 const WEAPON_TYPE   := Enums.WeaponType.MAGNUM_PISTOL
 
 
-# TO DO: how best to implement magazine displays?
+# TODO: how best to implement magazine displays?
 
 func __redraw_ammo_display() -> void:
 	pass

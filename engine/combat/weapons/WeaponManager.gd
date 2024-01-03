@@ -43,7 +43,7 @@ func _ready() -> void:
 
 func __initialize_weapons(weapon_states: Array) -> void:
 	assert(__weapons.is_empty()) # for now, weapon definitions load once at launch and persist until process exits; supporting unloading/reloading is TBD when we start implementing saved game support
-	__weapons.clear() # TO DO: Weapon and Magazine classes will need explicitly freed
+	__weapons.clear() # TODO: Weapon and Magazine classes will need explicitly freed
 	for state in weapon_states:
 		var weapon: Weapon = weapon_classes[state.weapon_class].new()
 		weapon.configure(state)
@@ -108,7 +108,7 @@ func connect_weapon_in_hand(weapon_in_hand: Node3D) -> void:
 	print("Cannot find weapon for weapon-in-hand ", weapon_in_hand.WEAPON_TYPE)
 
 
-# important: must be called on entering level (weapons cannot be activated before WIH are attached) # TO DO: Player/Level should probably send an entering_level/exiting_level signal
+# important: must be called on entering level (weapons cannot be activated before WIH are attached) # TODO: Player/Level should probably send an entering_level/exiting_level signal
 func activate_current_weapon(instantly: bool = false) -> void:
 	current_weapon.activate(instantly)
 

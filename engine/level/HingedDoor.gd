@@ -1,4 +1,4 @@
-extends Node3D # TO DO: was InteractableGeneric
+extends Node3D # TODO: was InteractableGeneric
 
 
 # full physics-based door that swings on hinges

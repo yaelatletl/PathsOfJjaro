@@ -4,7 +4,7 @@ extends Container
 # Radar.gd
 
 
-# TO DO: implement; Q. should radar track active NPCs on all levels (same as in Classic)?
+# TODO: implement; Q. should radar track active NPCs on all levels (same as in Classic)?
 #
 # if so, should it use an Elite-style radar display where the circle (xz plane) is tilted and each NPC indicates its height (y-offset) above/below that plane? we should definitely try this: it's trivial to code and it'll tie in well with the improved automap display that reduces alpha on floors above and below the player's current floor (to reduce visual noise and user confusion, particularly when floors overlap)
 #

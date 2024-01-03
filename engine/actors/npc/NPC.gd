@@ -1,7 +1,7 @@
 extends RigidBody3D
 
 
-# TO DO: whether we have a single general-purpose NPC class or multiple subclasses for some (e.g. flying) or all NPC types is TBD; for now, code an all-in-one NPC class (which is how Classic M2 does it) and if it becomes unwieldy then refactor into subclasses according to behavioral category (flying vs walking vs swimming) as that's probably the biggest behavioral difference 
+# TODO: whether we have a single general-purpose NPC class or multiple subclasses for some (e.g. flying) or all NPC types is TBD; for now, code an all-in-one NPC class (which is how Classic M2 does it) and if it becomes unwieldy then refactor into subclasses according to behavioral category (flying vs walking vs swimming) as that's probably the biggest behavioral difference 
 #
 # (note: do not model friendly/neutral/hostile behaviors as subclasses: that behavior will be specified with flags same as in Classic as NPC allegiances need to change in some levels, and Bobs and beserkers can be either)
 

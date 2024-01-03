@@ -33,7 +33,7 @@ func __deactivated_primary() -> void:
 
 func spawn_primary_projectile(player: Player) -> void:
 	for i in range(0, __primary_trigger_data.projectiles_per_shot):
-		# TO DO: if Player is sprinting forward (as indicated by velocity and is_on_floor) it should spawn a MAJOR_FIST projectile (__secondary_projectile_class) instead of a MINOR_FIST projectile (__primary_projectile_class)
+		# TODO: if Player is sprinting forward (as indicated by velocity and is_on_floor) it should spawn a MAJOR_FIST projectile (__secondary_projectile_class) instead of a MINOR_FIST projectile (__primary_projectile_class)
 		__primary_projectile_class.spawn(player.global_head_position(), player.global_look_direction(), player)
 
 

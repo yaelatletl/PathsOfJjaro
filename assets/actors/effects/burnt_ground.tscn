@@ -6,7 +6,7 @@
 script/source = "extends Node3D
 
 
-# TO DO: see decal.tscn; this is just a persistent version of that with a different texture, so merge the two
+# TODO: see decal.tscn; this is just a persistent version of that with a different texture, so merge the two
 
 
 @export var ray: NodePath

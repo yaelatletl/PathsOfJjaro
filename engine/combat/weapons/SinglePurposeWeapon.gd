@@ -38,7 +38,7 @@ func __set_state(next_state: State) -> void:
 				if self.primary_magazine.try_to_refill():
 					self.__set_next_transition(Weapon.State.RELOADING_PRIMARY)
 				else:
-					# TO DO: implement __weapon_data.disappears_when_empty; or should that be done in Weapon base class or in WeaponManager?
+					# TODO: implement __weapon_data.disappears_when_empty; or should that be done in Weapon base class or in WeaponManager?
 					self.__set_next_transition(Weapon.State.EMPTY)
 		
 		Weapon.State.RELOADING_PRIMARY:

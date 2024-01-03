@@ -4,7 +4,7 @@ class_name DualPurposeWeapon extends Weapon
 # engine/weapons/DualPurposeWeapon -- fusion, AR, alien gun
 
 
-# TO DO: should AR have better accuracy in single-shot? (burst shots should be as inaccurate as Classic)
+# TODO: should AR have better accuracy in single-shot? (burst shots should be as inaccurate as Classic)
 
 
 var __triggers_shoot_independently: bool # true for AR; false for fusion and alien gun
@@ -104,7 +104,7 @@ func __set_state(next_state: State) -> void:
 		
 		
 		Weapon.State.EMPTY:
-			# TO DO: implement __weapon_data.disappears_when_empty
+			# TODO: implement __weapon_data.disappears_when_empty
 			assert(previous_state != Weapon.State.DEACTIVATING)
 			# both triggers are empty so tell WeaponManager to deactivate this weapon
 			WeaponManager.current_weapon_emptied.call_deferred(self) # important: WeaponManager must be notified *after* __set_state has returned
@@ -115,7 +115,7 @@ func __set_state(next_state: State) -> void:
 		
 		Weapon.State.DEACTIVATED:
 			self.__primary_hand.deactivated()
-			# TO DO: support weapon_data.disappears_after_use; change it to disappears_when_empty, possibly moving this flag to trigger data, which allows for optional ammo reloads
+			# TODO: support weapon_data.disappears_after_use; change it to disappears_when_empty, possibly moving this flag to trigger data, which allows for optional ammo reloads
 	WeaponManager.weapon_activity_changed.emit(self)
 
 

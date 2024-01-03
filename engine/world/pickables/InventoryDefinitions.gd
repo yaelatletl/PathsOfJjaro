@@ -2,10 +2,10 @@ extends Node
 
 
 
-# TO DO: include "plural_name" field (pluralized long_name, e.g. Magnum Pistols) for use in HUD's inventory overlay
+# TODO: include "plural_name" field (pluralized long_name, e.g. Magnum Pistols) for use in HUD's inventory overlay
 
 const INVENTORY_DEFINITIONS := [ # for now, this array is ordered same as PickableType enum and M2 map data, so we can convert map JSONs to PickableItems
-	# TO DO: fix/finish max_counts, counts, short_name, plural_[long_]name
+	# TODO: fix/finish max_counts, counts, short_name, plural_[long_]name
 	# caution: pickable_type's int value must be same as array index
 	{"pickable_type": Enums.PickableType.FIST,                  "pickable_family": Enums.PickableFamily.WEAPON,   "long_name": "Fist",                  "short_name": "FIST", "max_count":  1, "count":  1},
 	{"pickable_type": Enums.PickableType.MAGNUM_PISTOL,         "pickable_family": Enums.PickableFamily.WEAPON,   "long_name": ".44 Magnum Pistol",     "short_name": "MA44", "max_count":  2, "count":  1},
@@ -43,6 +43,6 @@ const INVENTORY_DEFINITIONS := [ # for now, this array is ordered same as Pickab
 	{"pickable_type": Enums.PickableType.GREEN_BALL,            "pickable_family": Enums.PickableFamily.OTHER,    "long_name": "Green Ball",            "short_name": "",     "max_count":  1, "count":  0},
 	{"pickable_type": Enums.PickableType.SUBMACHINE_GUN,        "pickable_family": Enums.PickableFamily.WEAPON,   "long_name": "Submachine Gun",        "short_name": "FSSM", "max_count":  1, "count":  0},
 	{"pickable_type": Enums.PickableType.SUBMACHINE_GUN_CLIP,   "pickable_family": Enums.PickableFamily.AMMO,     "long_name": "Submachine Gun Clip",   "short_name": "MGFS", "max_count":  1, "count":  0},
-	# TO DO: add M1/MCR item types (e.g. PASS_KEY, SECURITY_REPAIR_CHIP)
+	# TODO: add M1/MCR item types (e.g. PASS_KEY, SECURITY_REPAIR_CHIP)
 ]
 

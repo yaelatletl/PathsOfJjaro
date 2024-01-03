@@ -33,7 +33,7 @@ func projectile_class_for_type(projectile_type: Enums.ProjectileType) -> Project
 
 class ProjectileClass extends Object: # note: about memory management for this and other physics definition classes: these are instantiated when a scenario loads and will persist until/unless it is unloaded, so are implemented as single-owner (no need for RefCounted overheads); if/when scenario unloading is implemented, Managers will eventually need to explicitly free these objects before creating new ones, but that need is well in the future so don't worry about free-ing for now
 
-	# TO DO: this holds all information relating to a specific ProjectileType; projectiles are relatively simple so shouldn't need type-specific Projectile subclasses, although we might define a HomingProjectile subclass as that does have extra behavior which is easier iimplemented as subclass than bool flag
+	# TODO: this holds all information relating to a specific ProjectileType; projectiles are relatively simple so shouldn't need type-specific Projectile subclasses, although we might define a HomingProjectile subclass as that does have extra behavior which is easier iimplemented as subclass than bool flag
 	
 	const Projectile := preload("Projectile.tscn")
 	
@@ -42,11 +42,11 @@ class ProjectileClass extends Object: # note: about memory management for this a
 	
 	func configure(definition: Dictionary) -> void:
 		projectile_type = definition.projectile_type
-		# TO DO: this can do a partial lookup of transition table, getting all the from-into transitions that apply to this projectile type; that cuts down the amount of work that needs to be done when spawning the projectile and detonating it
+		# TODO: this can do a partial lookup of transition table, getting all the from-into transitions that apply to this projectile type; that cuts down the amount of work that needs to be done when spawning the projectile and detonating it
 
 
 	func spawn(origin: Vector3, direction: Vector3, shooter: PhysicsBody3D) -> void:
-		# TO DO: we will eventually need to check the media at origin point (the shooter's global position within the map), as e.g. firing fusion under liquid produces an immediate detonation; whether we check this here and skip the Projectile creation and destruction (since it travels 0m before exploding) or if we create the projectile anyway (which is probably cheap enough to do) and let it perform the Detonation is TBD
+		# TODO: we will eventually need to check the media at origin point (the shooter's global position within the map), as e.g. firing fusion under liquid produces an immediate detonation; whether we check this here and skip the Projectile creation and destruction (since it travels 0m before exploding) or if we create the projectile anyway (which is probably cheap enough to do) and let it perform the Detonation is TBD
 		Projectile.instantiate().configure_and_shoot(self, origin, direction, shooter)
 
 

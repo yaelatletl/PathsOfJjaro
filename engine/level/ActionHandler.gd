@@ -18,7 +18,7 @@ func _process(delta):
 
 # need to figure out how best to implement control panel mechanics; probably best to define one or more Area3D subclasses and @export its configuration options so mapmakers can connect a control panel's action detection box to a light/door/platform/etc within the 3D editor
 
-# TO DO: should the Player call do_action directly or should it call `get_interactable` to get the object to which it sends `do_action` if/when user presses ACTION? (bear in mind that ActionHandler Area != ControlPanel Node, which is typically the Area's parent); returning the object (terminal, recharger, switch, circuit, door, etc) would allow Player to intelligently modify its behavior and display different hand gestures for different panel types
+# TODO: should the Player call do_action directly or should it call `get_interactable` to get the object to which it sends `do_action` if/when user presses ACTION? (bear in mind that ActionHandler Area != ControlPanel Node, which is typically the Area's parent); returning the object (terminal, recharger, switch, circuit, door, etc) would allow Player to intelligently modify its behavior and display different hand gestures for different panel types
 
 func do_action(activating_body: Node3D) -> void: # pass the activating_body (we'll assume for now this is always the Player, as NPCs wanting to open a door will probably trigger it directly, but this might change in future); when the control panel is a recharger, it will operate directly on the activating_body
 	var platform = self.get_parent()

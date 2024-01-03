@@ -1,7 +1,7 @@
 extends CanvasLayer
 
 
-# TO DO: decide what to do with this functionality and where best to put it
+# TODO: decide what to do with this functionality and where best to put it
 
 
 # Screen variables
@@ -32,7 +32,7 @@ func _process(_delta) -> void:
 
 func _display_framerate() -> void:
 	# If you don't have the framerate label
-	if not has_node("framerate_label"): # TO DO: why? there is already a debug.tscn with a CanvasLayer, so why not just attach a Label node directly to that in editor?
+	if not has_node("framerate_label"): # TODO: why? there is already a debug.tscn with a CanvasLayer, so why not just attach a Label node directly to that in editor?
 		# Create a new label
 		var framerate_label = Label.new()
 		

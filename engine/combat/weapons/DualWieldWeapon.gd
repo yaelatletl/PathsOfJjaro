@@ -9,7 +9,7 @@ class_name DualWieldWeapon extends Weapon
 # (note: fist is a subclass of SinglePurposeWeapon: while the view displays two hands they operate as one weapon, firing at a constant rate)
 
 
-# TO DO: implement __weapon_data.disappears_when_empty
+# TODO: implement __weapon_data.disappears_when_empty
 
 
 #var __triggers_reload_independently: bool # ignore this for now; not needed for MCR
@@ -211,7 +211,7 @@ func inventory_increased(item: InventoryManager.InventoryItem) -> void: # sent b
 		__has_second_gun = true
 		self.__secondary_trigger = TriggerState.NEEDS_ENABLED
 		if self.state == Weapon.State.IDLE:
-			self.__set_state(Weapon.State.REACTIVATING) # for now, pause shooting primary while activating secondary; TO DO: check Classic, and if secondary can activate while primary is mid-shot, amend this
+			self.__set_state(Weapon.State.REACTIVATING) # for now, pause shooting primary while activating secondary; TODO: check Classic, and if secondary can activate while primary is mid-shot, amend this
 	
 	elif item == self.primary_magazine.inventory_item:
 		if self.primary_needs_reload():
