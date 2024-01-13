@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=3 uid="uid://c87vctm3qaah6"]
+[gd_scene load_steps=49 format=3 uid="uid://c87vctm3qaah6"]
 
 [ext_resource type="Script" path="res://data/actors/shared/character.gd" id="1_7385i"]
 [ext_resource type="PackedScene" uid="uid://bbjy6u80eyiv5" path="res://assets/models/player/Default_Player_Model.tscn" id="2_kj7mw"]
@@ -225,6 +225,16 @@ _data = {
 "FadeOut": SubResource("65"),
 "RESET": SubResource("64")
 }
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tjcwc"]
+transparency = 4
+blend_mode = 1
+cull_mode = 1
+shading_mode = 0
+albedo_color = Color(0, 1, 0.239216, 0.0823529)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_ttwem"]
+height = 13.65
 
 [sub_resource type="CylinderShape3D" id="72"]
 height = 2.3586
@@ -569,11 +579,17 @@ w_speed = 6.0
 c_speed = 2.0
 slide_on_crouch = true
 gravity = 9.8
-step_treshold = 0.5
+step_treshold = 0.3
 collision = NodePath("../body")
 feet_path = NodePath("../feet")
 coyote_time = 0.3
 _component_name = "movement_basic"
+
+[node name="Indicator" type="MeshInstance3D" parent="Movement"]
+transform = Transform3D(0.0906688, 0, 0, 0, 0.4728, 0, 0, 0, 0.0906688, 0, 0, 0)
+visible = false
+material_override = SubResource("StandardMaterial3D_tjcwc")
+mesh = SubResource("CylinderMesh_ttwem")
 
 [node name="MovementJump" parent="." instance=ExtResource("30_d2ndp")]
 jump_height = 10.0

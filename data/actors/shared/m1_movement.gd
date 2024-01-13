@@ -24,7 +24,7 @@ var elapsed_coyote_time : float = 0
 
 #We're gonna hardcode some names here
 @onready var minimal_collision = get_node("../minimal")
-@onready var separation_ray = get_node("../separation_ray")
+#@onready var separation_ray = get_node("../separation_ray")
 
 
 var _delta
@@ -60,7 +60,7 @@ func _movement(input : Dictionary, _delta : float) -> void:
 		actor.direction = actor.direction.normalized()
 		actor.direction = actor.direction.lerp(Vector3(), air_friction * _delta)
 #		if get_key(input, "crouch"):
-	elif elapsed_coyote_time < coyote_time and actor.direction.y <= 0:
+	elif elapsed_coyote_time < coyote_time:# and actor.direction.y <= 0:
 		elapsed_coyote_time += _delta
 	else:
 		# Applies gravity
@@ -90,11 +90,21 @@ func _movement(input : Dictionary, _delta : float) -> void:
 	#Stairs/ledge step check
 	#Do a test move, check if the character could go up a step or down a step
 	#check if the character would be stopped if going forward, then if it would be stopped if going forward and up. Then it should go up. 
-	var test_transform = Transform3D(actor.transform.basis, actor.transform.origin + Vector3(0, step_treshold, 0) + (actor.linear_velocity)* _delta)
-	var should_go_up = actor.test_move(actor.transform, actor.linear_velocity * _delta) and not actor.test_move(test_transform, actor.linear_velocity * _delta)
+	var anticipation_frames = 1 #How many frames should the character anticipate the step
+	var test_transform = Transform3D(actor.transform.basis, actor.transform.origin + Vector3(0, step_treshold, 0))
+	var should_go_up = actor.test_move(actor.transform, actor.linear_velocity * _delta * anticipation_frames) and not actor.test_move(test_transform, actor.linear_velocity * _delta * anticipation_frames)
+	$Indicator.global_transform.origin = test_transform.origin + (actor.linear_velocity * _delta * anticipation_frames)
 	#Do a test move, check if the character could go down a step, if its linear velocity on the y axis is negative 
 	#var can_move_down = actor.test_move(actor.transform, actor.linear_velocity * _delta + Vector3(0, -step_treshold, 0))
-	actor.linear_velocity = actor.linear_velocity+Vector3(0,step_treshold*_delta,0) if should_go_up else actor.linear_velocity #- Vector3(0,step_treshold,0) if can_move_down else actor.linear_velocity)
+	#OLD: actor.linear_velocity = actor.linear_velocity+Vector3(0,step_treshold*_delta,0) if should_go_up else actor.linear_velocity #- Vector3(0,step_treshold,0) if can_move_down else actor.linear_velocity)
+	
+	#NEW: Use marathon phyisics model, fall upwards. 
+
+	if should_go_up:
+		actor.linear_velocity.y += gravity * _delta *2
+		print("UP!")
+	
+	
 	#uncomment if we need to handle steps
 	# Calls the motion function by passing the linear_velocity vector
 	actor.set_velocity(actor.linear_velocity)
@@ -116,7 +126,7 @@ func _movement(input : Dictionary, _delta : float) -> void:
 	
 func _crouch(input : Dictionary, _delta :float) -> void:
 	# Inputs
-	if not col or not separation_ray:
+	if not col:
 		return
 	# Get the character's head node
 	# If the head node is not touching the ceiling
@@ -132,7 +142,7 @@ func _crouch(input : Dictionary, _delta :float) -> void:
 		# Apply the new character collision shape
 		col.shape.height = shape
 		col.shape.radius = (0.24 - 0.12*get_key(input, "crouch"))
-		separation_ray.shape.length = shape
+		#separation_ray.shape.length = shape
 		feet.target_position.y = -shape
 
 func _sprint(input : Dictionary, _delta : float) -> void:
