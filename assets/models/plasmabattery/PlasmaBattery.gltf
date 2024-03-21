@@ -1,0 +1,113 @@
+{
+    "asset" : {
+        "generator" : "Khronos glTF Blender I/O v1.8.19",
+        "version" : "2.0"
+    },
+    "scene" : 0,
+    "scenes" : [
+        {
+            "name" : "Scene",
+            "nodes" : [
+                0
+            ]
+        }
+    ],
+    "nodes" : [
+        {
+            "mesh" : 0,
+            "name" : "Solid 126"
+        }
+    ],
+    "meshes" : [
+        {
+            "name" : "Solid 126",
+            "primitives" : [
+                {
+                    "attributes" : {
+                        "POSITION" : 0,
+                        "NORMAL" : 1,
+                        "TEXCOORD_0" : 2,
+                        "COLOR_0" : 3
+                    },
+                    "indices" : 4
+                }
+            ]
+        }
+    ],
+    "accessors" : [
+        {
+            "bufferView" : 0,
+            "componentType" : 5126,
+            "count" : 1026,
+            "max" : [
+                0.15000000596046448,
+                0.8399999737739563,
+                0.15000000596046448
+            ],
+            "min" : [
+                -0.15000000596046448,
+                0,
+                -0.15000000596046448
+            ],
+            "type" : "VEC3"
+        },
+        {
+            "bufferView" : 1,
+            "componentType" : 5126,
+            "count" : 1026,
+            "type" : "VEC3"
+        },
+        {
+            "bufferView" : 2,
+            "componentType" : 5126,
+            "count" : 1026,
+            "type" : "VEC2"
+        },
+        {
+            "bufferView" : 3,
+            "componentType" : 5123,
+            "count" : 1026,
+            "normalized" : true,
+            "type" : "VEC4"
+        },
+        {
+            "bufferView" : 4,
+            "componentType" : 5123,
+            "count" : 4080,
+            "type" : "SCALAR"
+        }
+    ],
+    "bufferViews" : [
+        {
+            "buffer" : 0,
+            "byteLength" : 12312,
+            "byteOffset" : 0
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 12312,
+            "byteOffset" : 12312
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 8208,
+            "byteOffset" : 24624
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 8208,
+            "byteOffset" : 32832
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 8160,
+            "byteOffset" : 41040
+        }
+    ],
+    "buffers" : [
+        {
+            "byteLength" : 49200,
+            "uri" : "PlasmaBattery.bin"
+        }
+    ]
+}
